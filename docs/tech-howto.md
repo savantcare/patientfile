@@ -9,11 +9,11 @@ http://localhost:6060
 ### Q2) How to create a fresh DB with structure and master data?
 
 ```static
-healthbrain/db> docker stop healthbrain_mysqld_1
-healthbrain/db> rm -rf var-lib-mysql
-healthbrain/db> unzip may-22-2020.zip -d var-lib-mysql
-healthbrain/db> chmod -R 777 var-lib-mysql
-/healthbrain> docker-compose -f docker-compose-dev.yml up -d mysqld 
+patientfile/db> docker stop patientfile_mysqld_1
+patientfile/db> rm -rf var-lib-mysql
+patientfile/db> unzip may-22-2020.zip -d var-lib-mysql
+patientfile/db> chmod -R 777 var-lib-mysql
+/patientfile> docker-compose -f docker-compose-dev.yml up -d mysqld 
 ```
 
 ### Q3) How to create a new structure and master data?
@@ -27,7 +27,7 @@ var-lib-mysql> zip may-22-2020.zip * -r
 #### Step 1
 A new componet called AddRecommendationTab is created inside: 
 
-/Users/vk-tech/gt/sc-prog-repos/healthbrain/vue-client/src/components/composition-layer2/AddRecommendation.vue
+/Users/vk-tech/gt/sc-prog-repos/patientfile/vue-client/src/components/composition-layer2/AddRecommendation.vue
 
 #### Step 2
 Now there is a route defined in vue-client/src/router/index.js: 

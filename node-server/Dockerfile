@@ -4,9 +4,9 @@
 FROM node:14
 
 
-COPY ./ /gt/sc-prog-repos/healthbrain/node-server
+COPY ./ /gt/sc-prog-repos/patientfile/node-server
 
-WORKDIR /gt/sc-prog-repos/healthbrain/node-server
+WORKDIR /gt/sc-prog-repos/patientfile/node-server
 
 RUN npm install 
 

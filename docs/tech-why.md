@@ -28,7 +28,7 @@
 
     1A. So standard queries are already written.
 
-    1B. DB versioning and migrations can happen. [https://github.com/savantcare/healthbrain/blob/master/node-server/models/recommendation.model.js]
+    1B. DB versioning and migrations can happen. [https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js]
 
 3. **elelemt.io**
 
@@ -114,7 +114,7 @@ Sometimes we need to invite external developers to work on a component and we do
 
 The goal is for recommendation-panel and recommendation-card to have the same vuex store. So when the state changes in recommendation-panel the view of recommendation-card is automatically updated.
 
-[The code till 4th May](https://github.com/vikaskedia/healthbrain) implemented recommendation-panel and recommendation-card as two different npm packages. Different npm packages cannot share the same vuex store.
+[The code till 4th May](https://github.com/vikaskedia/patientfile) implemented recommendation-panel and recommendation-card as two different npm packages. Different npm packages cannot share the same vuex store.
 
 Hence recommendation-panel and recommendation-card cannot be two seperate npm packages they have to be components of the same vue app.
 

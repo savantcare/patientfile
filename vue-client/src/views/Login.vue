@@ -2,7 +2,7 @@
   <!-- <b-container>
     <b-row class="mt-4">
       <b-col style="display: flex; justify-content: center;">
-        <b-card style="width: 500px;" title="Login to HealthBrain">
+        <b-card style="width: 500px;" title="Login to PatientFile">
           <b-form @submit="onSubmit" @reset="onReset">
             <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
               <b-form-input
@@ -34,7 +34,7 @@
     <el-col :span="6">
       <el-card class="box-card" shadow="hover" style="width: 500px;">
         <div slot="header" class="clearfix">
-          <span>Login to HealthBrain</span>
+          <span>Login to PatientFile</span>
         </div>
         <el-form :model="form" status-icon :rules="rules" ref="form" label-width="120px">
           <el-form-item label="Email" prop="email">

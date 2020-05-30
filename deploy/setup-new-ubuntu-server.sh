@@ -11,7 +11,7 @@ mkdir /gt/sc-prog-repos
 
 cd /gt/sc-prog-repos/
 
-git clone https://github.com/savantcare/healthbrain.git
+git clone https://github.com/savantcare/patientfile.git
 
 # Step: Sart mysql-server
 apt install -y docker

@@ -54,7 +54,7 @@ Possible solution:
 
 To find files with Fix tag: 
 
-healthbrain> grep -ir -n --exclude-dir={node_modules,.git} ' Fix' ./
+patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' Fix' ./
 
 ## What is the code review process?
 https://www.youtube.com/watch?v=8fx-EaOUK2E
@@ -62,16 +62,16 @@ https://www.youtube.com/watch?v=8fx-EaOUK2E
 ## How to run the app locally?
 
 ```bash
-git clone https://github.com/savantcare/healthbrain.git
+git clone https://github.com/savantcare/patientfile.git
 
-/healthbrain> docker-compose -f docker-compose-dev.yml up -d
+/patientfile> docker-compose -f docker-compose-dev.yml up -d
 ```
 
 Give enough time for npm install to work:
 
 ```bash
-/healthbrain> docker logs healthbrain_vue_1 -f
-/healthbrain> docker logs healthbrain_node_1 -f
+/patientfile> docker logs patientfile_vue_1 -f
+/patientfile> docker logs patientfile_node_1 -f
 ```
 
 Once the install finishes then:
@@ -96,8 +96,8 @@ The data will come from localstorage but you will toast message saying:
 "Filed to get "component name" data"
 
 This works using try catch examples
-1. [For recommendations](file:///gt/sc-prog-repos/healthbrain/vue-client/src/store/modules/recommendation.js#221)
-1. [For reminder](file:///gt/sc-prog-repos/healthbrain/vue-client/src/store/modules/reminder.js#221)
+1. [For recommendations](file:///gt/sc-prog-repos/patientfile/vue-client/src/store/modules/recommendation.js#221)
+1. [For reminder](file:///gt/sc-prog-repos/patientfile/vue-client/src/store/modules/reminder.js#221)
 
 To put the system back:
 $ docker start [container-name-of-mysqld]

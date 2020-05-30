@@ -1,5 +1,5 @@
 {
-  "name": "healthbrain",
+  "name": "patientfile",
   "version": "1.0.0",
   "description": "![patient file](./docs/patient-file.png)",
   "main": "index.js",
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/savantcare/healthbrain.git"
+    "url": "git+https://github.com/savantcare/patientfile.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/savantcare/healthbrain/issues"
+    "url": "https://github.com/savantcare/patientfile/issues"
   },
-  "homepage": "https://github.com/savantcare/healthbrain#readme"
+  "homepage": "https://github.com/savantcare/patientfile#readme"
 }
