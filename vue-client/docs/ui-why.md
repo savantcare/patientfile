@@ -22,3 +22,5 @@ The 1st tab shows the health components and the 2nd tab shows the non-health com
 
 ![patient file](./docs/img/page-in-2nd-layer.png)
 
+
+TODO: Show image of card and a card has a card header. Inside the card there can be a table a graph or something else.

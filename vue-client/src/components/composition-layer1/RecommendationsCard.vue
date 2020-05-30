@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
-      <TableHeader
+      <CardHeader
         title="Recommendations"
         actions="A,M,F,D"
         type="card"
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import TableHeader from "@/components/common/TableHeader";
+import CardHeader from "@/components/common/CardHeader";
 import DataTable from "@/components/common/DataTable";
 export default {
   components: {
-    TableHeader,
+    CardHeader,
     DataTable
   },
   data() {

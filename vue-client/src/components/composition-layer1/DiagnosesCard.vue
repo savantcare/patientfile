@@ -36,7 +36,7 @@
 
 <script>
 
-//import TableHeader from "@/components/common/TableHeader";
+//import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 export default {
   components: {
