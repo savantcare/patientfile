@@ -146,7 +146,7 @@ export default {
       console.log("multi-discontinue");
     },
     handleSelectionChange(value) {
-      this.$refs.table_header.selected = value;
+      this.$refs.card_header.selected = value;
     }
   },
   mounted() {}

@@ -9,7 +9,7 @@
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
-        ref="table_header"
+        ref="card_header"
       />
     </div>
     <DataTable
@@ -57,7 +57,7 @@ export default {
       });
     },
     handleSelectionChange(value) {
-      this.$refs.table_header.selected = value;
+      this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
     handleEdit(data) {

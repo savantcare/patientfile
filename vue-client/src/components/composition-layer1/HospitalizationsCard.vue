@@ -8,7 +8,7 @@
         @showAddDialog="showAddDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
-        ref="table_header"
+        ref="card_header"
       />
     </div>
     <DataTable :tabData="tabData" @handleSelectionChange="handleSelectionChange" />
@@ -77,7 +77,7 @@ export default {
       console.log("mult-discontinue");
     },
     handleSelectionChange(value) {
-      this.$refs.table_header.selected = value;
+      this.$refs.card_header.selected = value;
     }
   },
 };
