@@ -1,16 +1,17 @@
 <template>
   <el-card class="box-card">
-    <div slot="header" class="clearfix">
-      <CardHeader
-        title="Hospitalizations"
-        actions="A,F,D"
-        type="card"
-        @showAddDialog="showAddDialog"
-        @focusPanel="focusPanel"
-        @multiDiscontinue="multiDiscontinue"
-        ref="card_header"
-      />
-    </div>
+      <div slot="header" class="clearfix">
+        <CardHeader
+          title="Hospitalizations"
+          actions="A,M,F,D"
+          type="card"
+          @showAddDialog="showAddDialog"
+          @showMultiChangeDialog="showMultiChangeDialog"
+          @focusPanel="focusPanel"
+          @multiDiscontinue="multiDiscontinue"
+          ref="card_header"
+        />
+      </div>
     <DataTable :tabData="tabData" @handleSelectionChange="handleSelectionChange" />
   </el-card>
 </template>

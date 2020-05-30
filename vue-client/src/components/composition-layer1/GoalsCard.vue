@@ -2,15 +2,31 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Goals</span>
+        <CardHeader
+          title="Goals"
+          actions="A,M,F,D"
+          type="card"
+          @showAddDialog="showAddDialog"
+          @showMultiChangeDialog="showMultiChangeDialog"
+          @focusPanel="focusPanel"
+          @multiDiscontinue="multiDiscontinue"
+          ref="card_header"
+        />
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
-export default {};
+import CardHeader from "@/components/common/CardHeader";
+export default {
+  components: {
+    CardHeader
+  },
+  data() {
+    return {
+      selectedRows: []
+    };
+  }
+};
 </script>
-
-<style lang="scss" scoped>
-</style>

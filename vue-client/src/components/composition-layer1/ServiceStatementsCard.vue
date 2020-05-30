@@ -2,18 +2,28 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Service statements</span>
-        <div style="float: right">
-          <el-button type="text" size="mini" @click="showAddServiceStatementsDialog">A</el-button>
-          <el-button type="text" size="mini" @click="showMultiChangeServiceStatementsDialog">C</el-button>
-        </div>
+        <CardHeader
+          title="Service statements"
+          actions="A,M,F,D"
+          type="card"
+          @showAddDialog="showAddServiceStatementsDialog"
+          @showMultiChangeDialog="showMultiChangeServiceStatementsDialog"
+          @focusPanel="focusPanel"
+          @multiDiscontinue="multiDiscontinue"
+          ref="card_header"
+        />
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import CardHeader from "@/components/common/CardHeader";
+
 export default {
+   components: {
+    CardHeader
+  },
   methods: {
     showAddServiceStatementsDialog() {
       console.log("open add dialog");
@@ -29,3 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+
+
+
+
