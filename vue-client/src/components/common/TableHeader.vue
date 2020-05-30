@@ -12,6 +12,17 @@
         <el-button type="text" size="mini" @click="$emit('showAddDialog')">A</el-button>
         <el-button type="text" size="mini" @click="$emit('showMultiChangeDialog')">M</el-button>
         <el-button type="text" size="mini" @click="$emit('focusPanel')">F</el-button>
+        
+        <!--
+        Clicking on settings icon will allow choosing which columns to display and 
+        save preferences in local storage
+        This will need to know what columns are available in the JSON. 
+        Component 1 might have 5 columns whose visibility can be turned on or off
+        and component 2 might have 2 columns whose visibility can be turned on or off
+        -->        
+        <el-popover placement="bottom" width="200" trigger="click">
+          <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
+        </el-popover>
       </div>
     </div>
   </div>
@@ -57,4 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.settingsIcon{
+  float:right; color:#409EFF; cursor:pointer; padding: 5px;
+}
 </style>

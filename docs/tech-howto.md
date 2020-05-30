@@ -58,3 +58,14 @@ The above structure is maintained because:
 Components are supposed to be kept in components folder.
 
 Views are supposed to use components but not define components.
+
+### Q5) How to get started?
+
+A new programmer should be able to write a new componet in 5 mins.
+
+Start visual studio code
+make sure vetur VSCode extension is installed.
+
+
+### Q6) What code-formatter is used?
+vetur
