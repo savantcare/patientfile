@@ -1,6 +1,14 @@
 <template>
   <div @mouseover="mouseOver = true" @mouseleave="mouseOver = false">
     <span>{{title}}</span>
+
+    <!-- 
+    TODO: Use transition effects to fade in the action items
+    Ref for beginers: 
+    https://www.youtube.com/watch?v=1GYsKWyA7LA
+    https://vuejs.org/v2/api/#transition
+    -->
+
     <div style="float: right" v-if="showActions">
       <el-button
         type="text"
@@ -12,14 +20,14 @@
         <el-button type="text" size="mini" @click="$emit('showAddDialog')">A</el-button>
         <el-button type="text" size="mini" @click="$emit('showMultiChangeDialog')">M</el-button>
         <el-button type="text" size="mini" @click="$emit('focusPanel')">F</el-button>
-        
+
         <!--
-        Clicking on settings icon will allow choosing which columns to display and 
+        TODO: Clicking on settings icon will allow choosing which columns to display and 
         save preferences in local storage
         This will need to know what columns are available in the JSON. 
         Component 1 might have 5 columns whose visibility can be turned on or off
         and component 2 might have 2 columns whose visibility can be turned on or off
-        -->        
+        -->
         <el-popover placement="bottom" width="200" trigger="click">
           <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
         </el-popover>
@@ -68,7 +76,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.settingsIcon{
-  float:right; color:#409EFF; cursor:pointer; padding: 5px;
+.settingsIcon {
+  float: right;
+  color: #409eff;
+  cursor: pointer;
+  padding: 5px;
 }
 </style>

@@ -1,15 +1,21 @@
-1. Dx is not using tableHeader.vue 
-Rex spanner is not coming at the right location.
-So table header component needs to be able to display the settings icon and choose columns.
+A. KB Interaction with the cards in layer 1 - right side.
 
-2. Should single tab and multi tab components be 2 different components.
+B. Cardheader.vue
+    1. Dx is not using CardHeader.vue 
+    In Rex card -> the spanner is not coming at the right location.
+    So card header component needs to be able to display the settings icon and choose columns.
 
-3. rex needs to save data in the correct DB and table.
+    2. recs/dx card header menu should have a slide in effect.
 
-4. Opening a patient file without a patient should redirect to login page.
+C. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top.
 
-5. Cts to load for DA and D should come from DB. @raj -> what is the table name for this?
+D. Should single tab and multi tab components be 2 different components.
 
-6. The sequence of Cts to load should also come from DB. 
+E. rex needs to save data in the correct DB and table.
 
-7. recs/dx card header menu should have a slide in effect.
+F. Opening a patient file without a patient should redirect to login page.
+
+G. Cts to load for DA and D should come from DB. @raj -> what is the table name for this?
+
+H. The sequence of Cts to load should also come from DB. 
+
