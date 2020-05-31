@@ -80,7 +80,44 @@ In the current angular app the recommendation panel was listening on socket and 
 
 Above advantages validated by, more github stars compared to angular or react. Stars are like voting from worldwide developers.
 
-## Q4) Should a table library be used or developed internally?
+## Q4) Why was expressJS chosen over laravel?
+
+Laravel: Used by 660 and Stars 59K
+
+express nodejs: used by 6.6M and Stars 49K
+
+Sequlize nodejs: Used by 190K and Stars 22K
+
+## Q5) Should each component be in its own repo?
+
+1. When recommendation a new version is released Sanjay wants to do git pull only for recommendation repo on the prod server.
+
+But the recommendation repo may depend on a specific version of the service side recommendation repo.
+
+Service side rec repo may depend on a specific version of sequlize.
+
+The dependency graph between rec UI repo and all the other repos is hard to maintain.
+
+2. **Convention over configuration:** The multi repo design takes a lot of configuration. Without configuration, During work I need to update docs, node-server and vue-client all at once. When I do a git commit I want tests to get fired and run. When multiple repo the edits take more time. The test running becomes more complicated. 
+
+Hence branching is a better idea.
+
+### Q5.1) Why not try branching concept?
+Sometimes we need to invite external developers to work on a component and we do not want to give them access to the git repo containing other components
+
+### Q5.2) Why is each component not a seperate npm package?
+
+The goal is for recommendation-panel and recommendation-card to have the same vuex store. So when the state changes in recommendation-panel the view of recommendation-card is automatically updated.
+
+[The code till 4th May](https://github.com/vikaskedia/patientfile) implemented recommendation-panel and recommendation-card as two different npm packages. Different npm packages cannot share the same vuex store.
+
+Hence recommendation-panel and recommendation-card cannot be two seperate npm packages they have to be components of the same vue app.
+
+### Future research
+How to keep these files in a seperate repo. How to run them independently. Possible solution: https://github.com/teambit/bit
+
+
+## Q6) Should a table library be used or developed internally?
 
 ![card-table-features](./images/analyzing-features-of-card-table.png)
 
@@ -96,43 +133,6 @@ For the tabs each tab can be a table component. And the tabs are displayed using
 https://vuejs.org/v2/guide/components.html#Dynamic-Components
 
 6. Drag to reorder rows
-
-
-## Q5) Why was expressJS chosen over laravel?
-
-Laravel: Used by 660 and Stars 59K
-
-express nodejs: used by 6.6M and Stars 49K
-
-Sequlize nodejs: Used by 190K and Stars 22K
-
-## Q6) Should each component be in its own repo?
-
-1. When recommendation a new version is released Sanjay wants to do git pull only for recommendation repo on the prod server.
-
-But the recommendation repo may depend on a specific version of the service side recommendation repo.
-
-Service side rec repo may depend on a specific version of sequlize.
-
-The dependency graph between rec UI repo and all the other repos is hard to maintain.
-
-2. **Convention over configuration:** The multi repo design takes a lot of configuration. Without configuration, During work I need to update docs, node-server and vue-client all at once. When I do a git commit I want tests to get fired and run. When multiple repo the edits take more time. The test running becomes more complicated. 
-
-Hence branching is a better idea.
-
-### Q6.1) Why not try branching concept?
-Sometimes we need to invite external developers to work on a component and we do not want to give them access to the git repo containing other components
-
-### Q6.2) Why is each component not a seperate npm package?
-
-The goal is for recommendation-panel and recommendation-card to have the same vuex store. So when the state changes in recommendation-panel the view of recommendation-card is automatically updated.
-
-[The code till 4th May](https://github.com/vikaskedia/patientfile) implemented recommendation-panel and recommendation-card as two different npm packages. Different npm packages cannot share the same vuex store.
-
-Hence recommendation-panel and recommendation-card cannot be two seperate npm packages they have to be components of the same vue app.
-
-### Future research
-How to keep these files in a seperate repo. How to run them independently. Possible solution: https://github.com/teambit/bit
 
 ## Q7) Why use an auto doc generator?
 

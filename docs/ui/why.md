@@ -20,3 +20,10 @@ The 1st tab shows the health components and the 2nd tab shows the non-health com
 
 
 TODO: Show image of card and a card has a card header. Inside the card there can be a table a graph or something else.
+
+
+## Q4) Why is prioritization important?
+
+Most data like recommendations made to paient. Goals of the patient etc .. have a priority to them. 
+
+![patient file](./images/rex-ordering-demo.gif)
