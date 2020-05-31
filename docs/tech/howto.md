@@ -1,4 +1,4 @@
-### Q1) How to start the documentation system?
+## Q1) How to start the documentation system?
 
 vue-client> npm run styleguide
 
@@ -6,7 +6,7 @@ And then go to:
 
 http://localhost:6060
 
-### Q2) How to create a fresh DB with structure and master data?
+## Q2) How to create a fresh DB with structure and master data?
 
 ```static
 patientfile/db> docker stop patientfile_mysqld_1
@@ -16,20 +16,20 @@ patientfile/db> chmod -R 777 var-lib-mysql
 /patientfile> docker-compose -f docker-compose-dev.yml up -d mysqld 
 ```
 
-### Q3) How to create a new structure and master data?
+## Q3) How to create a new structure and master data?
 
 ```static
 var-lib-mysql> zip may-22-2020.zip * -r
 ```
 
-### Q4) How to run same component inside  patient file component and also individually?
+## Q4) How to run same component inside  patient file component and also individually?
 
-#### Step 1
+### Step 1
 A new componet called AddRecommendationTab is created inside: 
 
 /Users/vk-tech/gt/sc-prog-repos/patientfile/vue-client/src/components/composition-layer2/AddRecommendation.vue
 
-#### Step 2
+### Step 2
 Now there is a route defined in vue-client/src/router/index.js: 
   {
     path: '/recommendation',
@@ -39,7 +39,7 @@ Now there is a route defined in vue-client/src/router/index.js:
 
 Now when ever someone comes to http://ip-address/recommendation the router sends the user to /views/Recommendation.vue
 
-#### Step 3
+### Step 3
 
 Inside views/recommendation.vue the component created in step 1 is used. By the following codes:
 
@@ -67,50 +67,6 @@ Start visual studio code
 make sure vetur VSCode extension is installed.
 
 
-### Q6) What code-formatter is used?
-vetur
-
-
-## What is the migration plan?
-We get rec and rem component to work completely in the new architecture. Once they are cerifited then 10 developers are given the responsibility of delivered 5 components each week.
-
-Within 2 weeks /p2 will get released once the architecture is finalized
-
-## What is the ideal component on which other components are based?
-Recommendation.
-
-## What is needed to write a new component?
-
-For the model component RecommendationsCard the following files needed to be created:
-
-## Client side
-1. vue-client/src/components/RecommendationsCard.vue file    -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by vue-cli
-2. vue-client/store/modules/recommendation.js               -> Vue state of this component. Mutation functions to state. Socket functions to change state.
-
-## Server side
-1. node-server/models/database/recommendation.database.js   -> Sequalize connection details
-2. node-server/models/recommendation.model.js               -> Sequalize sql structure of this component
-3. node-server/routes/recommendation.route.js               -> Routes of this component and emit socket messages
-
-**Todo** 
-
-How to keep these files in a seperate repo. How to run them independently.
-Possible solution:
-1. https://github.com/teambit/bit
-
-
-## What tags are used in code?
-
- * Todo
- * Question
- * Fix
-
-To find files with Fix tag: 
-
-patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' Fix' ./
-
-## What is the code review process?
-https://www.youtube.com/watch?v=8fx-EaOUK2E
 
 ## How to run the app locally?
 
@@ -233,3 +189,91 @@ In Vue there is a system to choose which components to load. That will be used. 
 Bug fixes or new feature requested by doctor -> Existing angular app 
 
 Remaining developer resources will be given to VUE app.
+
+
+## Q7) How to reduce boilerplate code?
+
+Have three types of components? #Todo
+
+1. UI components: Reusable across the whole app. They communicate just by using props and events, not holding any application logic.
+
+2. Layout components: App will have only 1 of these. Like header and footer.
+
+3. Domain components: 
+
+Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
+
+## Q8) How are the components structured?
+
+### Option1: A library implementation
+
+```
+<RecommendationsCard>
+
+<CardHeader Prop{Title=Recommendation}>
+</CardHeader>
+
+<DataTable Prop{row1:(a,b),row2:(c,d)}>
+</DataTable>
+
+</RecommendationsCard>
+```
+
+### Option2: A framework implementation
+
+```
+<GenericCard Prop{Title=Recommendation, row1:(a,b),row2:(c,d)} >
+
+</GenericCard>
+```
+Why is Option 1 better:
+
+Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCard is using a framework. Ref: https://www.programcreek.com/2011/09/what-is-the-difference-between-a-java-library-and-a-framework/
+
+Practical:
+1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
+
+## Q9) How to theme app while each component maintains its own scoped local context style?
+
+https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
+
+https://medium.com/maestral-solutions/coloring-your-app-implementing-live-theming-with-vue-js-and-styled-components-29e428900394
+
+https://bootstrap-vue.org/docs/reference/theming
+
+## Q10) How is the state of patient on a historical date generated?
+
+### Architecture 1
+
+Suppose doctor wants the state of the paitent on 15th Jan 2020:
+
+The query is:
+select * from recommendationsTable where patientID=1 and createdBy < "15th Jan 2020" and ( discontinuedDate > "15th Jan 2020" or discontinuedDate == NULL)
+This returns JSON A
+
+
+Suppose doctor wants the state of the paitent on 10th Mar 2020:
+The query is:
+select * from recommendationsTable where patientID=1 and createdBy < "10th Mar 2020" and ( discontinuedDate > "10th Mar 2020" or discontinuedDate == NULL)
+This returns JSON B
+
+Suppose the doctor wants to know the state of the patient on 9th March 2020:
+This requires the same API as above.
+
+Dis-Advantages of architecture 1:
+1. Too many sql queries. But the data center is big and there are read only copies of MYSQL running from RAM ready to serve these queries. It is better to offload the complexity to the hardware instead of software. Wisdom says it is better to have expensive hardware and simple software.
+
+### Architecture 2
+
+The first query is:
+select * from recommendationsTable where patientID=1;
+This returns JSON C
+
+Now all queries about the state of recommendation are made on the client side.
+
+Advantages of architecture 2:
+1. Less number of queries to server.
+
+Dis-Advantages of architecture 2:
+1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
+

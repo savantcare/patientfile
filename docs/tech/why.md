@@ -1,6 +1,3 @@
-<TOC />
-
-
 ## Q1) Why re-write the exisiting angular app?
 
 1. The current angular app was developed to discover the psychiatrists needs. The system could not have been pre-architected to deliver the discovered features.
@@ -119,95 +116,7 @@ The goal is for recommendation-panel and recommendation-card to have the same vu
 
 Hence recommendation-panel and recommendation-card cannot be two seperate npm packages they have to be components of the same vue app.
 
-
-## Q7) How to reduce boilerplate code?
-
-Have three types of components? #Todo
-
-1. UI components: Reusable across the whole app. They communicate just by using props and events, not holding any application logic.
-
-2. Layout components: App will have only 1 of these. Like header and footer.
-
-3. Domain components: 
-
-Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
-
-## Q8) How are the components structured?
-
-### Option1: A library implementation
-
-```
-<RecommendationsCard>
-
-<CardHeader Prop{Title=Recommendation}>
-</CardHeader>
-
-<DataTable Prop{row1:(a,b),row2:(c,d)}>
-</DataTable>
-
-</RecommendationsCard>
-```
-
-### Option2: A framework implementation
-
-```
-<GenericCard Prop{Title=Recommendation, row1:(a,b),row2:(c,d)} >
-
-</GenericCard>
-```
-Why is Option 1 better:
-
-Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCard is using a framework. Ref: https://www.programcreek.com/2011/09/what-is-the-difference-between-a-java-library-and-a-framework/
-
-Practical:
-1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
-
-## Q9) How to theme app while each component maintains its own scoped local context style?
-
-https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
-
-https://medium.com/maestral-solutions/coloring-your-app-implementing-live-theming-with-vue-js-and-styled-components-29e428900394
-
-https://bootstrap-vue.org/docs/reference/theming
-
-## Q10) How is the state of patient on a historical date generated?
-
-### Architecture 1
-
-Suppose doctor wants the state of the paitent on 15th Jan 2020:
-
-The query is:
-select * from recommendationsTable where patientID=1 and createdBy < "15th Jan 2020" and ( discontinuedDate > "15th Jan 2020" or discontinuedDate == NULL)
-This returns JSON A
-
-
-Suppose doctor wants the state of the paitent on 10th Mar 2020:
-The query is:
-select * from recommendationsTable where patientID=1 and createdBy < "10th Mar 2020" and ( discontinuedDate > "10th Mar 2020" or discontinuedDate == NULL)
-This returns JSON B
-
-Suppose the doctor wants to know the state of the patient on 9th March 2020:
-This requires the same API as above.
-
-Dis-Advantages of architecture 1:
-1. Too many sql queries. But the data center is big and there are read only copies of MYSQL running from RAM ready to serve these queries. It is better to offload the complexity to the hardware instead of software. Wisdom says it is better to have expensive hardware and simple software.
-
-### Architecture 2
-
-The first query is:
-select * from recommendationsTable where patientID=1;
-This returns JSON C
-
-Now all queries about the state of recommendation are made on the client side.
-
-Advantages of architecture 2:
-1. Less number of queries to server.
-
-Dis-Advantages of architecture 2:
-1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
-
-
-## Q12) Why use an auto doc generator?
+## Q7) Why use an auto doc generator?
 
  Decided not to use storybook since want something where the code is auto parsed.
 

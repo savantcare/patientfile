@@ -21,6 +21,7 @@ module.exports = {
         sidebarDepth: 1,    // optional, defaults to 1
         children: [
           ['/tech/why','Why'],
+          ['/tech/what','What'],
           ['/tech/howto','How']
         ]
       },
