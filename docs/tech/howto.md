@@ -1,6 +1,37 @@
 ## Q1) How to start the documentation system?
 
+### App level
+
+#### Prod
+
+```
+docs> npm run build            // Generate prod files in .vuepress/dist
+```
+
+Then send .vuepress/dist to repo -> [https://github.com/savantcare/savantcare.github.io](https://github.com/savantcare/savantcare.github.io)
+
+```
+savantcare.github.io> git commit -m "deploy"
+savantcare.github.io> git push
+```
+
+Then access:
+[https://savantcare.github.io/](https://savantcare.github.io/)
+
+#### Dev
+
+To see with hot reload
+```
+docs> npm run dev
+```
+Then access: [http://localhost:8080/](http://localhost:8080/)
+
+
+### Api Level
+
+```
 vue-client> npm run styleguide
+```
 
 And then go to:
 
@@ -8,7 +39,7 @@ http://localhost:6060
 
 ## Q2) How to create a fresh DB with structure and master data?
 
-```static
+```
 patientfile/db> docker stop patientfile_mysqld_1
 patientfile/db> rm -rf var-lib-mysql
 patientfile/db> unzip may-22-2020.zip -d var-lib-mysql
@@ -18,7 +49,7 @@ patientfile/db> chmod -R 777 var-lib-mysql
 
 ## Q3) How to create a new structure and master data?
 
-```static
+```
 var-lib-mysql> zip may-22-2020.zip * -r
 ```
 
@@ -150,11 +181,7 @@ pwa app does not run from localhost. So the following steps needs to be followed
 We can test PWA app by install the following chrome extension:
 https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb
 
-## Q10) How to start mysqld inside docker?
-
-Read: /docker/readme.md
-
-## Q11) How to reduce boilerplate code?
+## Q10) How to reduce boilerplate code?
 
 Have three types of components? #Todo
 
@@ -166,7 +193,7 @@ Have three types of components? #Todo
 
 Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
 
-## Q12) How are the components structured?
+## Q11) How are the components structured?
 
 ### Option1: A library implementation
 
@@ -196,7 +223,7 @@ Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCa
 Practical:
 1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
 
-## Q13) How to theme app while each component maintains its own scoped local context style?
+## Q12) How to theme app while each component maintains its own scoped local context style?
 
 https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
 
@@ -204,7 +231,7 @@ https://medium.com/maestral-solutions/coloring-your-app-implementing-live-themin
 
 https://bootstrap-vue.org/docs/reference/theming
 
-## Q14) How is the state of patient on a historical date generated?
+## Q13) How is the state of patient on a historical date generated?
 
 ### Architecture 1
 
@@ -239,4 +266,61 @@ Advantages of architecture 2:
 
 Dis-Advantages of architecture 2:
 1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
+
+
+## Q14) How to start the dev environment?
+
+Step1: Start mysqld
+
+```
+patientfile/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
+```
+
+To access phpmyadmin:
+http://[ip-address]:81/
+
+First time the root password is qwerty
+
+The admin password is given in: 
+patientfile/node-server/config/development.json
+
+To enter the docker container:
+
+```
+root@server1:/gt/sc-prog-repos/patientfile/docker# docker exec -ti docker_mariadb_1 bash
+root@c02b4fc1097e:/# 
+```
+
+Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji
+
+Step2: Start vue-client
+
+```
+cd /gt/sc-prog-repos/patientfile/vue-client
+npm install
+npm run serve
+```
+
+Step3: Start node-server
+
+```
+cd /gt/sc-prog-repos/patientfile/node-server
+npm install
+npm run start
+```
+
+Then in your browser go to: http://localhost:8080/
+
+
+## Q15) How to deploy to Heroku?
+
+```
+cd vue-client
+npm run build
+git add .
+git commit -m "....."
+git push to the Repository
+```
+
+Heroku updates the staging server automatically when the master branch is updated
 
