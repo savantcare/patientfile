@@ -59,7 +59,7 @@ Components are supposed to be kept in components folder.
 
 Views are supposed to use components but not define components.
 
-### Q5) How to get started?
+## Q5) How to get started?
 
 A new programmer should be able to write a new componet in 5 mins.
 
@@ -68,7 +68,7 @@ make sure vetur VSCode extension is installed.
 
 
 
-## How to run the app locally?
+## Q6) How to run the app locally?
 
 ```bash
 git clone https://github.com/savantcare/patientfile.git
@@ -91,7 +91,7 @@ http://localhost:8080/login          user1@gmail.com    : 123
 http://localhost:8080/login          user1@gmail.com    : 123
 ```
 
-## How to see app behavior when DB server connection is lost?
+## Q7) How to see app behavior when DB server connection is lost?
 The mysql server is run from docker (See node-server/README.md)
 
 Use the web app and then 
@@ -112,7 +112,7 @@ To put the system back:
 $ docker start [container-name-of-mysqld]
 
 
-## How to see app behavior when DB server takes 10 seconds for API response?
+## Q8) How to see app behavior when DB server takes 10 seconds for API response?
 
 ### Scenario 1:
 
@@ -144,54 +144,17 @@ The web page should show the edited recommendation.
 
 Status: Fail
 
-## How to test the PWA app?
+## Q9) How to test the PWA app?
 pwa app does not run from localhost. So the following steps needs to be followed:
 
 We can test PWA app by install the following chrome extension:
 https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb
 
-## How to start mysqld inside docker?
+## Q10) How to start mysqld inside docker?
 
 Read: /docker/readme.md
 
-## Mins of meeting
-
-### 18th May 2020
-
-1. No need to improve current scBrain, laravel and Panel code since after 2 years the app will not remain in angular 1.6 hence it makes sense to write it again in Vue. 
-
-2. UI needs to only use Bootstrap to maintain consistency. No need to bring code into bootstrap since new VUE app will do it.
-
-A. In new VUE app the left and right frame sizes will be adjustable by dragging
-
-B. Use https://phppot.com/css/automatic-column-hiding-using-css-in-responsive-table/ to change the number of columns being displayed based on priority.
-
-C. Use responsive divs so that when right side is made wider the cards can go beside each other. https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_two_columns_responsive
-
-3. When write in VUE first develop the left frame. EMR customizer shows 44 components.
-
-4. RnD needs to be done on how the panel and frame can remain seperate apps and still share vuex. Since the current angular app has many advantages of being 2 seperate app running as 1. 
-
-Whole world runs app in one frame. Hence decided to stick with conventional wisdom.
-
-5. RnD needs to be done on each component to be in its own repo. Why? So that when recommendation component code needs to be sent to prod it does not need other git repos to be updated.
-
-How to do it?
-https://github.com/teambit/bit 11K stars tutorial: https://codeburst.io/how-to-share-reusable-vue-components-between-a-c36bc775418d 
-
-
-6. I should be able to run the complete app just with one repo. So during development I have a simpler environment to develop the app.
-
-In Vue there is a system to choose which components to load. That will be used. Postponed for time being.
-
-7. Current development rule
-
-Bug fixes or new feature requested by doctor -> Existing angular app 
-
-Remaining developer resources will be given to VUE app.
-
-
-## Q7) How to reduce boilerplate code?
+## Q11) How to reduce boilerplate code?
 
 Have three types of components? #Todo
 
@@ -203,7 +166,7 @@ Have three types of components? #Todo
 
 Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
 
-## Q8) How are the components structured?
+## Q12) How are the components structured?
 
 ### Option1: A library implementation
 
@@ -233,7 +196,7 @@ Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCa
 Practical:
 1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
 
-## Q9) How to theme app while each component maintains its own scoped local context style?
+## Q13) How to theme app while each component maintains its own scoped local context style?
 
 https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
 
@@ -241,7 +204,7 @@ https://medium.com/maestral-solutions/coloring-your-app-implementing-live-themin
 
 https://bootstrap-vue.org/docs/reference/theming
 
-## Q10) How is the state of patient on a historical date generated?
+## Q14) How is the state of patient on a historical date generated?
 
 ### Architecture 1
 
