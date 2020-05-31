@@ -1,6 +1,6 @@
 ## Q1) What is needed to write a new component?
 
-For the model component Recommendations the following files needed to be created:
+For the model component Recommendations the following files are needed:
 
 Total loc: 1243
 
@@ -8,27 +8,27 @@ Total loc: 1243
 
 ### Layer 1
 
-**HTML/CSS/JS (127 loc)** -> [vue-client/src/components/composition-layer1/RecommendationsCard.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer1/RecommendationsCard.vue) -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by vue-cli
+**HTML/CSS/JS (127 loc)** -> [/components/composition-layer1/RecommendationsCard.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer1/RecommendationsCard.vue) -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by [vue-cli](https://cli.vuejs.org/)
 
 ### Layer 2
-1. **Add (123 loc)**  [src/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
+1. **Add (123 loc)**  [/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
 
-2. **Multi change (338 loc)**  [src/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
+2. **Multi change (338 loc)**  [/components/composition-layer2/recommendation/MultiChangeRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/MultiChangeRecommendation.vue)
 
-3. **Recommendation history (56 loc)**  [src/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
+3. **Recommendation history (56 loc)**  [/components/composition-layer2/recommendation/RecommendationHistoryItem.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/RecommendationHistoryItem.vue)
 
 
 ### Common between layer 1 and layer 2
 
-**Local State (267 loc)** -> [vue-client/src/store/modules/recommendation.js](https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/recommendation.js) -> State of this component. Functions to mutate state. Socket functions to change state.
+**Local State (267 loc)** -> [/store/modules/recommendation.js](https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/recommendation.js) -> State of this component. Functions to mutate state. Socket functions to change state.
 
 ## Server side
 
-1. **Connection details (27 loc)** -> [node-server/models/database/recommendation.database.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/database/recommendation.database.js)
+1. **Connection details (27 loc)** -> [/models/database/recommendation.database.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/database/recommendation.database.js)
 
-2. **Sql structure (41 loc)** -> [node-server/models/recommendation.model.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js)          
+2. **Sql structure (41 loc)** -> [/models/recommendation.model.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js)          
 
-3. **Routes (174 loc)** and emit socket messages -> [node-server/routes/recommendation.route.js](https://github.com/savantcare/patientfile/blob/master/node-server/routes/recommendation.route.js) 
+3. **Routes (174 loc)** and emit socket messages -> [/routes/recommendation.route.js](https://github.com/savantcare/patientfile/blob/master/node-server/routes/recommendation.route.js) 
 
 
 ## Q2) What code-formatter is used?

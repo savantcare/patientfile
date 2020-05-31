@@ -1,4 +1,4 @@
-There are only 2 hard things in CS
+# Out teams development philosophy
 
-1. Naming
-2. Caching
+![](./images/phil-karlton.png)
+![](./images/donald-knuth.png)
