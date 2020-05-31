@@ -4,6 +4,10 @@
 
 #### Prod
 
+:::: tabs
+ 
+::: tab Commands
+
 ```
 docs> npm run build            // Generate prod files in .vuepress/dist
 ```
@@ -14,6 +18,16 @@ Then send .vuepress/dist to repo -> [https://github.com/savantcare/savantcare.gi
 savantcare.github.io> git commit -m "deploy"
 savantcare.github.io> git push
 ```
+
+:::
+  
+::: tab Action
+
+![movie](./images/deploy-docs-to-server.gif)
+
+:::
+ 
+::::
 
 Then access:
 [https://savantcare.github.io/](https://savantcare.github.io/)
