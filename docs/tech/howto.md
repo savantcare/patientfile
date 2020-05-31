@@ -24,6 +24,9 @@ To see with hot reload
 ```
 docs> npm run dev
 ```
+
+![movie](./images/hot-reload-docs.gif)
+
 Then access: [http://localhost:8080/](http://localhost:8080/)
 
 

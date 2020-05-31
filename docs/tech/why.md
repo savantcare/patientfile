@@ -116,7 +116,7 @@ Service side rec repo may depend on a specific version of sequlize.
 
 The dependency graph between rec UI repo and all the other repos is hard to maintain.
 
-2. **Convention better then configuration:** The multi repo design takes a lot of configuration. Without configuration, During work I need to update docs, node-server and vue-client all at once. When I do a git commit I want tests to get fired and run. When multiple repo the edits take more time. The test running becomes more complicated. 
+2. **Convention over configuration:** The multi repo design takes a lot of configuration. Without configuration, During work I need to update docs, node-server and vue-client all at once. When I do a git commit I want tests to get fired and run. When multiple repo the edits take more time. The test running becomes more complicated. 
 
 Hence branching is a better idea.
 
