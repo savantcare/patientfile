@@ -4,7 +4,10 @@ module.exports = {
     sidebar: [
       '/',
       ['/todo', 'Todo'],
-      ['/tech-why','Tech why']
+      ['/tech/','Tech why'],
+      ['/ui/', 'UI'],
+      ['/components/','Components']
+
     ]
   }
 }
