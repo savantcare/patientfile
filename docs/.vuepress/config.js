@@ -20,7 +20,8 @@ module.exports = {
         collapsable: false, // optional, defaults to true
         sidebarDepth: 1,    // optional, defaults to 1
         children: [
-          ['/tech/howto','How'],
+          ['/tech/why','Why'],
+          ['/tech/howto','How']
         ]
       },
       {
