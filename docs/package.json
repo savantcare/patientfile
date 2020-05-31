@@ -7,7 +7,9 @@
     "nodemon": "^2.0.4",
     "vuepress": "^1.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "vuepress-plugin-table-of-contents": "^1.1.6"
+  },
   "resolutions": {
     "watchpack": "1.6.1"
   },

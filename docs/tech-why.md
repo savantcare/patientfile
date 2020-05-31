@@ -1,14 +1,19 @@
-# Q1) Why re-write the exisiting angular app?
+<TOC />
+
+
+## Q1) Why re-write the exisiting angular app?
 
 1. The current angular app was developed to discover the psychiatrists needs. The system could not have been pre-architected to deliver the discovered features.
 
 2. The current angular app is in 1.x and LTS ends in July 2021. Also good libraries are not being developed on Angular 1.x
 
-# Q2) What new features are built into the new architecture?
+## Q2) What new features are built into the new architecture?
 
-#### A. User experience benefits
+### A. User experience benefits
 
-1. When page is reloaded and there is no/slow connection to DB server the page should load from localstorage immediately.
+#### A1. Local storage
+
+1. When page is reloaded and there is no/slow connection to DB server the page will load from localstorage immediately.
 
 2. When a component is already on the doctor browser and the doctor gives the commanbd "rec" then the recommendations show immediately from localcache and api is fired in the back. If the api returns new data the view is updated. (lazy-read)
 
@@ -16,11 +21,15 @@
 
 4. When doctor is offline and open a patient file they see the page. #not-working
 
-5. In each table column has priorities. So when less space is available low priority columns get hidden https://phppot.com/css/automatic-column-hiding-using-css-in-responsive-table
+#### A2. Responsive
 
-6. When there is space two components can come beside each other. https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_two_columns_responsive
+1. In each table column has priorities. So when less space is available low priority columns get hidden https://phppot.com/css/automatic-column-hiding-using-css-in-responsive-table
 
-#### B. Developer benefits
+2. When there is more space available the data columns instead of breaking the paragraph into 2 lines use 1 line.
+
+### B. Developer benefits
+
+#### B1. Benefits from eco-system
 
 1. **Temporal DB**: No need to maintain created and discontinued on related fields. Each table 8 fields are replaced with 3 fields.
 
@@ -28,18 +37,22 @@
 
     1A. So standard queries are already written.
 
-    1B. DB versioning and migrations can happen. [https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js]
+    1B. [DB versioning and migrations can happen.](https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js)
 
 3. **elelemt.io**
 
-4. Maintain state on the client. When recommendation card state changes the rec panel changes its view automatically.
+#### B2. Benefits from improved development practice
+
+1. Maintain state on the client. When recommendation card state changes the rec panel changes its view automatically.
 In the current angular app the recommendation panel was listening on socket and then receiving HTML to update its view.
 
-5. No HTML is generated on server. All view is inside the .vue component. This view works on json returned by the server api. This allows different UIs to be written.
+2. No HTML is generated on server. All view is inside the .vue component. This view works on json returned by the server api. This allows different UIs to be written.
 
-6. remove fields not needed and make component DB's consistent and clean.
+3. Remove fields not needed and make component DB's consistent and clean.
 
-# Q3) Why was vue chosen over angular latest version?
+4. Code review befor making it to master branch
+
+## Q3) Why was vue chosen over angular latest version?
 1. More github stars. Take this as a voting from worldwide developers.
 
 2. Simpler to understand
@@ -62,7 +75,7 @@ In the current angular app the recommendation panel was listening on socket and 
 	7. Table: Responsive and Draggable.
 
    
-# Q4) Should a table library be used or developed internally?
+## Q4) Should a table library be used or developed internally?
 
 ![card-table-features](./images/analyzing-features-of-card-table.png)
 
@@ -97,7 +110,7 @@ Libraries used:
 2. https://bootstrap-vue.org/docs/components/table -> This gives responsive feature
 
 
-# Q5) Why was expressJS chosen over laravel?
+## Q5) Why was expressJS chosen over laravel?
 
 Laravel: Used by 660 and Stars 59K
 
@@ -105,16 +118,16 @@ express nodejs: used by 6.6M and Stars 49K
 
 Sequlize nodejs: Used by 190K and Stars 22K
 
-# Q6) Why each component should be in its own repo?
+## Q6) Why each component should be in its own repo?
 
 When recommendation a new version is released Sanjay wants to do git pull only for recommendation repo on the prod server.
 
-## Q6.1) Why not try branching concept?
+### Q6.1) Why not try branching concept?
 Sometimes we need to invite external developers to work on a component and we do not want to give them access to the git repo containing other components
 
 
 
-## Q6.2) Why is each component not a seperate npm package?
+### Q6.2) Why is each component not a seperate npm package?
 
 The goal is for recommendation-panel and recommendation-card to have the same vuex store. So when the state changes in recommendation-panel the view of recommendation-card is automatically updated.
 
@@ -123,7 +136,7 @@ The goal is for recommendation-panel and recommendation-card to have the same vu
 Hence recommendation-panel and recommendation-card cannot be two seperate npm packages they have to be components of the same vue app.
 
 
-# Q7) How to reduce boilerplate code?
+## Q7) How to reduce boilerplate code?
 
 Have three types of components? #Todo
 
@@ -135,9 +148,9 @@ Have three types of components? #Todo
 
 Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
 
-# Q8) How are the components structured?
+## Q8) How are the components structured?
 
-## Option1:
+### Option1: A library implementation
 
 ```
 <RecommendationsCard>
@@ -151,7 +164,7 @@ Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
 </RecommendationsCard>
 ```
 
-## Option2:
+### Option2: A framework implementation
 
 ```
 <GenericCard Prop{Title=Recommendation, row1:(a,b),row2:(c,d)} >
@@ -165,7 +178,7 @@ Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCa
 Practical:
 1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
 
-# Q9) How to do theming for the app while each component maintains its own scoped local context style?
+## Q9) How to theme app while each component maintains its own scoped local context style?
 
 https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
 
@@ -173,9 +186,9 @@ https://medium.com/maestral-solutions/coloring-your-app-implementing-live-themin
 
 https://bootstrap-vue.org/docs/reference/theming
 
-# Q10) How is the state of patient on a historical date generated?
+## Q10) How is the state of patient on a historical date generated?
 
-## Architecture 1
+### Architecture 1
 
 Suppose doctor wants the state of the paitent on 15th Jan 2020:
 
@@ -195,7 +208,7 @@ This requires the same API as above.
 Dis-Advantages of architecture 1:
 1. Too many sql queries. But the data center is big and there are read only copies of MYSQL running from RAM ready to serve these queries. It is better to offload the complexity to the hardware instead of software. Wisdom says it is better to have expensive hardware and simple software.
 
-## Architecture 2
+### Architecture 2
 
 The first query is:
 select * from recommendationsTable where patientID=1;
@@ -210,7 +223,7 @@ Dis-Advantages of architecture 2:
 1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
 
 
-# Q12) Why use an auto doc generator?
+## Q12) Why use an auto doc generator?
 
  Decided not to use storybook since want something where the code is auto parsed.
 
