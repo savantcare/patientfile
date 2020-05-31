@@ -20,12 +20,23 @@ Then access:
 
 #### Dev
 
-To see with hot reload
+To write the docs and see changes with hot reload:
+
+:::: tabs
+ 
+::: tab Command
 ```
 docs> npm run dev
 ```
+:::
+  
+::: tab Action
 
 ![movie](./images/hot-reload-docs.gif)
+
+:::
+ 
+::::
 
 Then access: [http://localhost:8080/](http://localhost:8080/)
 

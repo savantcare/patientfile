@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Patient file documentation',
-  plugins: ['vuepress-plugin-table-of-contents'],
+  plugins: ['vuepress-plugin-table-of-contents','tabs'],
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
