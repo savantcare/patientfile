@@ -31,7 +31,7 @@
 
 #### B1. Benefits from eco-system
 
-1. **Temporal DB**: No need to maintain created and discontinued on related fields. Each table 8 fields are replaced with 3 fields.
+1. **Temporal DB**: No need to maintain [created and discontinued related fields](https://element.eleme.io/#/en-US/component). Each table 8 fields are replaced with 3 fields.
 
 2. **ORM**: On server side interaction with DB is through ORM [sequelize](https://sequelize.org/). 
 
@@ -39,7 +39,7 @@
 
     1B. [DB versioning and migrations can happen.](https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js)
 
-3. **elelemt.io**
+3. **elelemt.io** [Pre made components](https://element.eleme.io/#/en-US/component/layout)
 
 #### B2. Benefits from improved development practice
 
@@ -50,7 +50,9 @@ In the current angular app the recommendation panel was listening on socket and 
 
 3. Remove fields not needed and make component DB's consistent and clean.
 
-4. Code review befor making it to master branch
+4. Code review before making it to master branch
+
+5. Better code quality by developing it in open and make it open source from start.
 
 ## Q3) Why was vue chosen over angular latest version?
 1. More github stars. Take this as a voting from worldwide developers.
