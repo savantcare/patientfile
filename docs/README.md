@@ -9,7 +9,3 @@
 * Correlate 
 
 Code level documentation is at: /styleguidist/
- 
-
-[todo.md](todo.md)
-[tech-why.md](tech-why.md)

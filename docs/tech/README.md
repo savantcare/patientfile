@@ -74,7 +74,6 @@ In the current angular app the recommendation panel was listening on socket and 
        H. Doing multiple adds in same form: https://element.eleme.io/#/en-US/component/form#delete-or-add-form-items-dynamically
 	7. Table: Responsive and Draggable.
 
-   
 ## Q4) Should a table library be used or developed internally?
 
 ![card-table-features](./images/analyzing-features-of-card-table.png)
@@ -91,23 +90,6 @@ For the tabs each tab can be a table component. And the tabs are displayed using
 https://vuejs.org/v2/guide/components.html#Dynamic-Components
 
 6. Drag to reorder rows
-
-7. Responsive tables https://elvery.net/demo/responsive-tables/ -> less important columns are hidden and that data is sent to tooltip. For e.g. in case of recommendations -> Created at and Actions are less important columns and they are hidden when width is less. The content of created at is sent to tooltip.
-
-| Libraries compared                           |  Responsive            |  Stars          | Size
-|--                                            |--                      |--               |--
-| https://github.com/huangshuwei/vue-easytable |                        |                 |
-| https://github.com/ratiw/vuetable-2          |                        |                 |
-| https://github.com/xaksis/vue-good-table     |                        |                 |
-
-
-# Current choice:
-
-Example of draggable and responsive table in VUE https://jsfiddle.net/d7jqtkon/
-
-Libraries used:
-1. https://sortablejs.github.io/Vue.Draggable/#/table-example -> This gives draggable feature
-2. https://bootstrap-vue.org/docs/components/table -> This gives responsive feature
 
 
 ## Q5) Why was expressJS chosen over laravel?
