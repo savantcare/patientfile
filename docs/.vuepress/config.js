@@ -3,11 +3,11 @@ module.exports = {
   themeConfig: {
     sidebar: [
       '/',
-      ['/todo', 'Todo'],
       ['/tech/','Tech why'],
       ['/ui/', 'UI'],
-      ['/components/','Components']
-
+      ['/components/','Components'],
+      ['/todo', 'Todo'],
+     
     ]
   }
 }

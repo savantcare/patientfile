@@ -1,4 +1,4 @@
-## Q1) Why does the patient app have a left side and a right side?
+## Q1) Why patient app has left side and right side?
 
 Left side shows the state of the patient on a particular date.
 
