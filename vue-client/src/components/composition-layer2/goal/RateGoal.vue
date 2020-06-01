@@ -7,47 +7,19 @@
           <el-form label-position="top" :model="recForm" ref="recForm" class="demo-dynamic">
 
             <el-card class="box-card" v-for="(domain, index) in recForm.recs" :key="index" style="margin-bottom: 20px;">
-              <el-row>
-                <el-col :span="2" :offset="24">
-                  <i class="el-icon-close" @click.prevent="removeDomain(domain)"></i>
-                </el-col>
-              </el-row>
-              <el-form-item
-                :prop="'recs.' + index + '.description'"
-                style="font-weight:bold"
-                label-position="top"
-                label="Description"
-                :rules="{
-                  required: true, message: 'Description can not be blank', trigger: 'blur'
-                }"
-              >
-                <el-input :span="8" type="textarea" v-model="domain.description" placeholder="You may enter multi line text" :autosize="{ minRows: 4}" :autofocus="true"></el-input>
+              <el-form-item style="font-weight:bold" label="Description:">
+                <el-input :span="8" v-model="domain.description" type="textarea" :disabled="true"></el-input>
               </el-form-item>
-
-              <el-form-item
-                :prop="'recs.' + index + '.start_date'"
-                style="font-weight:bold"
-                label-position="top"
-                label="Start date of goal"
-                :rules="{
-                  required: true, message: 'Start date of goal can not be blank', trigger: 'blur'
-                }"
-              >
+              <el-form-item style="font-weight:bold" label="Score:">
+                <el-slider :span="8" v-model="domain.score" :format-tooltip="formatTooltip"></el-slider>
+              </el-form-item>
+              <el-form-item style="font-weight:bold" label="Date:">
                 <el-date-picker :span="8" v-model="domain.start_date" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-              <el-form-item
-                :prop="'recs.' + index + '.score'" 
-                label-position="top" 
-                style="font-weight:bold" 
-                label="Score" 
-              >
-                <el-slider v-model="domain.score" :format-tooltip="formatTooltip"></el-slider>
               </el-form-item>
             </el-card>
 
             <el-form-item>
               <el-button type="success" @click="submitForm('recForm')" size="small">Save</el-button>
-              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -72,19 +44,6 @@ export default {
     };
   },
   methods: {
-    addDomain() {
-      this.recForm.recs.push({
-        description: "",
-        start_date: "",
-        score: ""
-      });
-    },
-    removeDomain(item) {
-      var index = this.recForm.recs.indexOf(item);
-      if (index !== -1) {
-        this.recForm.recs.splice(index, 1);
-      }
-    },
     submitForm(formName) {
       const vm = this;
       this.$refs[formName].validate(async valid => {

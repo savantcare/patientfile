@@ -65,6 +65,8 @@ module.exports = (io) => {
         patientId: req.body.patientId,
         createdByUserId: req.body.createdByUserId,
         description: req.body.description,
+        start_date: req.body.start_date,
+        score: req.body.score,
         createdAt: new Date()
       }
       await Goal.create(newData)
@@ -114,7 +116,7 @@ module.exports = (io) => {
        */
 
       const promises = histories.map(async history => {
-        const { description, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
+        const { score, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
         if (discontinuedByUserId == null) { // The case which there is no update history
           try {
             const user = await User.findOne({
@@ -124,7 +126,7 @@ module.exports = (io) => {
 
             const { name } = user
             const data = {
-              content: description,
+              content: `Score: ${score}`,
               info: `Added by ${name} on ${new Date(createdAt).toDateString()}`
             }
             console.log(data)
@@ -141,7 +143,7 @@ module.exports = (io) => {
 
             const { name } = user
             return {
-              content: description,
+              content: `Score: ${score}`,
               info: `Changed by ${name} on ${new Date(discontinueAt).toDateString()}`
             }
           } catch (err) {

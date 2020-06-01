@@ -21,7 +21,9 @@ import {
   ADD_DIAGNOSIS,
   MULTIPLE_CHANGE_ASSESSMENT,
   ADD_SERVICE_STATEMENTS, 
-  MULTIPLE_CHANGE_SERVICE_STATEMENTS
+  MULTIPLE_CHANGE_SERVICE_STATEMENTS,
+  ADD_GOAL, 
+  MULTIPLE_CHANGE_GOAL
 } from "@/const.js";
 export default {
   data() {
@@ -55,6 +57,14 @@ export default {
         {
           value: "Multi change service statements",
           key: MULTIPLE_CHANGE_SERVICE_STATEMENTS
+        },
+        {
+          value: "Add goal",
+          key: ADD_GOAL
+        },
+        {
+          value: "Multi rate goals",
+          key: MULTIPLE_CHANGE_GOAL
         }
       ]
     };
@@ -124,6 +134,20 @@ export default {
           name: "tab-multi-change-service-statements"
         };
         this.$store.commit("addNewTab", multiChangeServiceStatementsTab);
+      } else if (key == ADD_GOAL) {
+        const addGoalTab = {
+          label: "Add goal",
+          value: require("./goal/AddGoal.vue").default,
+          name: "tab-add-goal"
+        };
+        this.$store.commit("addNewTab", addGoalTab);
+      } else if (key == MULTIPLE_CHANGE_GOAL) {
+        const multiChangeGoalTab = {
+          label: "Multi rate goal",
+          value: require("./goal/MultiChangeGoal").default,
+          name: "tab-multi-change-goal"
+        };
+        this.$store.commit("addNewTab", multiChangeGoalTab);
       }
     }
   }

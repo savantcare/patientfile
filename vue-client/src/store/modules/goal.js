@@ -170,7 +170,7 @@ export default {
         } else {
           notify({
             title: "Title",
-            message: "Deleted"
+            message: "Discontinued"
           })
         }
       } catch (ex) {

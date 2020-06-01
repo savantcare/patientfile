@@ -92,20 +92,13 @@ export default {
               sortable: true
             },
             {
-              label: "Created At",
-              field: "createdAt",
+              label: "Score",
+              field: "score",
               sortable: true
-            }
-          ],
-          rowActions: ["C", "D"]
-        },
-        {
-          label: "Other's",
-          tableData: recList,
-          columns: [
+            },
             {
-              label: "Description",
-              field: "description",
+              label: "Start date",
+              field: "start_date",
               sortable: true
             },
             {
@@ -114,8 +107,7 @@ export default {
               sortable: true
             }
           ],
-          rowActions: ["C", "D"],
-          selectedColumn: ["description"]
+          rowActions: ["C", "D"]
         }
       ];
     }

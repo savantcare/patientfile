@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_CHANGE_GOAL, EDIT_GOAL } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_CHANGE_GOAL, RATE_GOAL } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -145,13 +145,13 @@ export default {
     },
     showChangeGoalsModal(state, data) {
       const tab = {
-        label: "Edit goal",
-        value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
-        name: "tab-edit-goal"
+        label: "Rate goal",
+        value: require("@/components/composition-layer2/goal/RateGoal.vue").default,
+        name: "tab-rate-goal"
       }
       state.tabList = [tab]
       state.visibility = true
-      state.goalTabType = EDIT_GOAL
+      state.goalTabType = RATE_GOAL
       state.goalData = data
       state.tabValue = tab.name
     },

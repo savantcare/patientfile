@@ -6,15 +6,6 @@
           <el-card class="box-card" shadow="hover">
             <el-form label-position="top" ref="form">
 
-              <!--<el-form-item style="font-weight: bold" label="Description">
-                <el-input
-                  :span="8"
-                  type="textarea"
-                  v-model="rec.description"
-                  :autosize="{minRows:4}"
-                ></el-input>
-              </el-form-item>-->
-
               <el-form-item style="font-weight:bold" label="Description:">
                 <el-input :span="8" v-model="rec.description" type="textarea" :disabled="true"></el-input>
               </el-form-item>
