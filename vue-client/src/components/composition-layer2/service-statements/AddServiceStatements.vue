@@ -26,7 +26,9 @@
                             <el-select
                             v-model="domain.value" 
                             filterable 
+                            remote
                             placeholder="Select from dropdown" 
+                            :remote-method="grtServiceStatementsList"
                             style="width: 100%;"> 
                                 <el-option
                                 v-for="item in serviceStatementsList"
@@ -35,6 +37,7 @@
                                 :value="item.value">
                                 </el-option>
                             </el-select>
+
                         </el-form-item>
                     </el-card>
 
@@ -67,22 +70,24 @@
             when: ''
           }]
         },
-        serviceStatementsList: [{
-          value: 'Patient is deemed low risk.',
-          label: 'Patient is deemed low risk.'
-        }, {
-          value: 'Pertinent Medical Records, Labs, and Diagnostic Tests Reviewed.',
-          label: 'Pertinent Medical Records, Labs, and Diagnostic Tests Reviewed.'
-        }, {
-          value: 'Further data and history obtained from family member as per patient’s consent.',
-          label: 'Further data and history obtained from family member as per patient’s consent.'
-        }, {
-          value: 'The risks, benefits and side effects of psychotropic medications have been discussed with the patient.',
-          label: 'The risks, benefits and side effects of psychotropic medications have been discussed with the patient.'
-        }],
+        serviceStatementsList: [],
       }
     },
     methods: {
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.options4 = this.list.filter(item => {
+              return item.label.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 200);
+        } else {
+          this.options4 = [];
+        }
+      },
       handleTabsEdit(targetName, action) {
         if (action === 'add') {
           let newTabName = ++this.tabIndex + '';

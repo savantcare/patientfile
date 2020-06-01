@@ -32,7 +32,7 @@
           >
             <el-table-column type="expand" v-if="isExpandable">
               <!-- <template slot-scope="props"> -->
-              <template>
+              <template slot-scope="scope">
                 <!-- <p
                   v-for="(column, index_expand_row) in tab.columns"
                   :key="`tab-expand-row-${index_expand_row}`"
