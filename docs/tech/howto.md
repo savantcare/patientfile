@@ -110,23 +110,8 @@ And then go to:
 
 http://localhost:6060
 
-## Q3) How to create a fresh DB with structure and master data?
 
-```
-patientfile/db> docker stop patientfile_mysqld_1
-patientfile/db> rm -rf var-lib-mysql
-patientfile/db> unzip may-22-2020.zip -d var-lib-mysql
-patientfile/db> chmod -R 777 var-lib-mysql
-/patientfile> docker-compose -f docker-compose-dev.yml up -d mysqld 
-```
-
-## Q4) How to create a new structure and master data?
-
-```
-var-lib-mysql> zip may-22-2020.zip * -r
-```
-
-## Q5) How to run same component inside  patient file component and also individually?
+## Q3) How to run same component inside  patient file component and also individually?
 
 ### Step 1
 A new componet called AddRecommendationTab is created inside: 
@@ -163,14 +148,14 @@ Components are supposed to be kept in components folder.
 
 Views are supposed to use components but not define components.
 
-## Q6) How to get started?
+## Q4) How to get started?
 
 A new programmer should be able to write a new componet in 5 mins.
 
 Start visual studio code
 make sure vetur VSCode extension is installed.
 
-## Q7) How to see app behavior when DB server connection is lost?
+## Q5) How to see app behavior when DB server connection is lost?
 The mysql server is run from docker (See node-server/README.md)
 
 Use the web app and then 
@@ -191,7 +176,7 @@ To put the system back:
 $ docker start [container-name-of-mysqld]
 
 
-## Q8) How to see app behavior when DB server takes 10 seconds for API response?
+## Q6) How to see app behavior when DB server takes 10 seconds for API response?
 
 ### Scenario 1:
 
@@ -223,13 +208,13 @@ The web page should show the edited recommendation.
 
 Status: Fail
 
-## Q9) How to test the PWA app?
+## Q7) How to test the PWA app?
 pwa app does not run from localhost. So the following steps needs to be followed:
 
 We can test PWA app by install the following chrome extension:
 https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb
 
-## Q10) How to reduce boilerplate code?
+## Q8) How to reduce boilerplate code?
 
 Have three types of components? #Todo
 
@@ -241,7 +226,7 @@ Have three types of components? #Todo
 
 Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
 
-## Q11) How are the components structured?
+## Q9) How are the components structured?
 
 ### Option1: A library implementation
 
@@ -271,7 +256,7 @@ Theory: RecommendationsCard is using libraries and in option 2 RecommendationsCa
 Practical:
 1. Under option 1 I can decide not to use the cardHeader sub component and write my own card header in some cases like "Date of birth component"
 
-## Q12) How to theme app while each component maintains its own scoped local context style?
+## Q10) How to theme app while each component maintains its own scoped local context style?
 
 https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
 
@@ -279,7 +264,7 @@ https://medium.com/maestral-solutions/coloring-your-app-implementing-live-themin
 
 https://bootstrap-vue.org/docs/reference/theming
 
-## Q13) How is the state of patient on a historical date generated?
+## Q11) How is the state of patient on a historical date generated?
 
 ### Architecture 1
 
@@ -316,7 +301,7 @@ Dis-Advantages of architecture 2:
 1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
 
 
-## Q14) How to start the dev environment?
+## Q12) How to start the dev environment?
 
 Step1: Start mysqld
 
@@ -360,7 +345,7 @@ npm run start
 Then in your browser go to: http://localhost:8080/
 
 
-## Q15) How to deploy to Heroku?
+## Q13) How to deploy to Heroku?
 
 ```
 cd vue-client
