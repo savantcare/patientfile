@@ -75,7 +75,17 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      leftPanelWidth: 70
+      leftPanelWidth: 70,
+      componentActionsList: {
+        recommendation: {
+          add: "showAddRecommendationModal",
+          multiChange: "showMultiChangeRecommendationModal"
+        },
+        reminder: {
+          add: "showAddReminderModal",
+          multiChange: "showMultiChangeReminderModal"
+        }
+      }
     };
   },
   computed: {
@@ -298,17 +308,9 @@ export default {
        * Card components <Header> actions
        */
       if (event.key == "a") {
-        if (component == "recommendation") {
-          this.$store.commit("showAddRecommendationModal");
-        } else if (component == "reminder") {
-          this.$store.commit("showAddReminderModal");
-        }
+        this.$store.commit(this.componentActionsList[component].add);
       } else if (event.key == "m") {
-        if (component == "recommendation") {
-          this.$store.commit("showMultiChangeRecommendationModal");
-        } else if (component == "reminder") {
-          this.$store.commit("showMultiChangeReminderModal");
-        }
+        this.$store.commit(this.componentActionsList[component].multiChange);
       }
     },
     renderRightPanel(action) {
@@ -346,7 +348,6 @@ export default {
       this.updateRightPanelRows();
     },
     updateRightPanelRows() {
-      console.log("updateRightPanelRows");
       this.$store.dispatch("updateRightPanelRow");
     }
   },

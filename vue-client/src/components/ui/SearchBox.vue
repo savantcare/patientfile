@@ -52,27 +52,15 @@ export default {
   },
   mounted() {
     this.$store.commit("setRightPanelWidth", "calc(30% - 4px)");
+    this.$refs.search_box.$el
+      .getElementsByTagName("input")[0]
+      .addEventListener("keydown", event => {
+        if (event.keyCode == 13) {
+          this.executeSearch();
+        }
+      });
   },
   methods: {
-    keyupHandler(event) {
-      if (event.keyCode == 13) {
-        const action = this.keywordComponents[this.selectedIndex];
-        this.$emit("renderRightPanel", action);
-        this.searchKeyword = "";
-      } else if (event.key == "ArrowDown") {
-        if (this.selectedIndex < this.keywordComponents.length - 1) {
-          this.selectedIndex += 1;
-        }
-      } else if (event.key == "ArrowUp") {
-        if (this.selectedIndex > 0) {
-          this.selectedIndex -= 1;
-        }
-      }
-      if (this.searchKeyword.length == 0) {
-        this.selectedIndex = 0;
-      }
-      this.$store.commit("setRightPanelSearchKeyword", this.searchKeyword);
-    },
     setFocus() {
       setTimeout(() => {
         this.$refs.search_box.$el.getElementsByTagName("input")[0].focus();
@@ -95,7 +83,7 @@ export default {
     },
     querySearch(queryString, cb) {
       const componentList = this.$store.state.searchComponentList;
-      console.log(componentList);
+
       let results = [];
       if (queryString.length == 0) {
         results = [];
@@ -108,6 +96,7 @@ export default {
       results = results.map(result => {
         return { value: result };
       });
+
       cb(results);
     },
 
@@ -119,6 +108,33 @@ export default {
     },
     handleInput() {
       this.$store.commit("setRightPanelSearchKeyword", this.searchKeyword);
+    },
+    executeSearch() {
+      const keywords = this.searchKeyword.split(" ");
+      const componentActionsList = {
+        rex: {
+          add: "showAddRecommendationModal",
+          multichange: "showMultiChangeRecommendationModal"
+        },
+        rem: {
+          add: "showAddReminderModal",
+          multichange: "showMultiChangeReminderModal"
+        }
+      };
+      if (keywords.length == 1) {
+        this.$emit("renderRightPanel", keywords[0]);
+      } else if (keywords.length == 2) {
+        // rex add
+        const component = keywords[0];
+        const action = keywords[1];
+        const mutation = componentActionsList[component][action];
+        if (mutation != null) {
+          this.$store.commit(componentActionsList[component][action]);
+        }
+      }
+
+      this.searchKeyword = "";
+      this.$store.commit("setRightPanelSearchKeyword", "");
     }
   }
 };
