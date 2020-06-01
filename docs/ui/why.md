@@ -1,4 +1,4 @@
-## Q1) Why patient app has left side and right side?
+## Q1) Why patient app has left side and right side in layer 1?
 
 Psychiatrist needs to be able to look at multiple historical states to make decisions and change the current state.
 
@@ -16,16 +16,13 @@ Left side is "Data as on Date X"
 
 Right side is "Current data"
 
-## Q2) Why does the left side have two tabs on the top right corner?
+## Q2) Why does the left side have two tabs on the top right corner in layer 1?
 The 1st tab shows the health components and the 2nd tab shows the non-health components. There is a master table of components. And each component is either a health component or a "not-health" component.
 ![patient file](./images/two-tabs-in-the-header.png)
 
-## Q3) Why does the 2nd page have prev and next?
+## Q3) Why does the 2nd layer multi change tabs have prev and next?
 
 ![patient file](./images/page-in-2nd-layer.png)
-
-
-TODO: Show image of card and a card has a card header. Inside the card there can be a table a graph or something else.
 
 
 ## Q4) Why is prioritization important?
