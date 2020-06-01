@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_CHANGE_GOAL, RATE_GOAL } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -139,7 +139,7 @@ export default {
         name: "tab-multi-change-goal"
       }
       state.tabList = [tab]
-      state.goalTabType = MULTIPLE_CHANGE_GOAL
+      state.goalTabType = MULTIPLE_RATE_GOAL
       state.visibility = true
       state.tabValue = tab.name
     },

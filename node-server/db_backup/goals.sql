@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Jun 01, 2020 at 07:42 AM
+-- Generation Time: Jun 01, 2020 at 11:59 AM
 -- Server version: 10.4.13-MariaDB-1:10.4.13+maria~bionic
 -- PHP Version: 7.4.5
 
@@ -31,6 +31,8 @@ CREATE TABLE `goals` (
   `id` int(11) NOT NULL,
   `goalID` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `score` int(11) NOT NULL DEFAULT 0,
   `discontinue` tinyint(1) DEFAULT 0,
   `patientId` varchar(255) DEFAULT NULL,
   `createdByUserId` varchar(255) DEFAULT NULL,

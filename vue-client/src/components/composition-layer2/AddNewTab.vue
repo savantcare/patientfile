@@ -23,7 +23,7 @@ import {
   ADD_SERVICE_STATEMENTS, 
   MULTIPLE_CHANGE_SERVICE_STATEMENTS,
   ADD_GOAL, 
-  MULTIPLE_CHANGE_GOAL
+  MULTIPLE_RATE_GOAL
 } from "@/const.js";
 export default {
   data() {
@@ -64,7 +64,7 @@ export default {
         },
         {
           value: "Multi rate goals",
-          key: MULTIPLE_CHANGE_GOAL
+          key: MULTIPLE_RATE_GOAL
         }
       ]
     };
@@ -141,7 +141,7 @@ export default {
           name: "tab-add-goal"
         };
         this.$store.commit("addNewTab", addGoalTab);
-      } else if (key == MULTIPLE_CHANGE_GOAL) {
+      } else if (key == MULTIPLE_RATE_GOAL) {
         const multiChangeGoalTab = {
           label: "Multi rate goal",
           value: require("./goal/MultiChangeGoal").default,
