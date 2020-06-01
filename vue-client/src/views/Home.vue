@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
+      <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="leftPanel">
         <left-panel-header></left-panel-header>
         <!-- <div id="leftPanelContainer">
