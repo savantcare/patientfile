@@ -168,7 +168,7 @@ export default {
         commit("setReminderList", originList)
       }
     },
-    async multidiscontinueReminder({ state, commit }, json) {
+    async multiDiscontinueReminder({ state, commit }, json) {
       const { selectedIds, toast, selectedDatas } = json
       const originList = state.list
       const newList = originList.filter(item => {

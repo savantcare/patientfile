@@ -168,7 +168,7 @@ export default {
         commit("setDiagnosisList", originList)
       }
     },
-    async multidiscontinueDiagnosis({ state, commit }, json) {
+    async multiDiscontinueDiagnosis({ state, commit }, json) {
       const { selectedIds, toast, selectedDatas } = json
       const originList = state.list
       const newList = originList.filter(item => {

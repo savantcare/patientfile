@@ -50,7 +50,7 @@ export default {
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);
       });
-      this.$store.dispatch("multidiscontinueRecommendation", {
+      this.$store.dispatch("multiDiscontinueRecommendation", {
         selectedIds: selectedIds,
         notify: this.$notify,
         selectedDatas: this.selectedRows

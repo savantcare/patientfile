@@ -182,7 +182,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async multidiscontinueRecommendation({ state, commit }, json) {
+    async multiDiscontinueRecommendation({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.list
       const newList = originList.filter(item => {
