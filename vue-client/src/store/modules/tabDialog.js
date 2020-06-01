@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREENING, MULTIPLE_CHANGE_SCREENING } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREENING, MULTIPLE_CHANGE_SCREENING } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -42,6 +42,40 @@ export default {
     },
     setReminderData(state, value) {
       state.reminderData = value
+    },
+    showAddReminderModal(state) {
+      const tab = {
+        label: "Add Reminder",
+        value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
+        name: "tab-add-reminder"
+      }
+      state.tabList = [tab]
+      state.reminderTabType = ADD_REMINDER
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showMultiChangeRemindersModal(state) {
+      const tab = {
+        label: "Multi change Reminder",
+        value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,
+        name: "tab-multi-change-reminder"
+      }
+      state.tabList = [tab]
+      state.reminderTabType = MULTIPLE_CHANGE_REMINDER
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showChangeReminderModal(state, data) {
+      const tab = {
+        label: "Change Reminder",
+        value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
+        name: "tab-change-reminder"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.reminderTabType = CHANGE_REMINDER
+      state.reminderData = data
+      state.tabValue = tab.name
     },
     showAddRecommendationModal(state) {
       const tab = {

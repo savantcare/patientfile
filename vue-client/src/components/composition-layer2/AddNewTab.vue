@@ -17,6 +17,8 @@
 import {
   ADD_RECOMMENDATION,
   MULTIPLE_CHANGE_RECOMMENDATION,
+  ADD_REMINDER,
+  MULTIPLE_CHANGE_REMINDER,
   SOCIAL_HISTORY,
   ADD_DIAGNOSIS,
   MULTIPLE_CHANGE_ASSESSMENT,
@@ -75,6 +77,14 @@ export default {
         {
           value: "Multi change screening",
           key: MULTIPLE_CHANGE_SCREENING
+        },
+        {
+          value: "Add reminder",
+          key: ADD_REMINDER
+        },
+        {
+          value: "Multi change reminder",
+          key: MULTIPLE_CHANGE_REMINDER
         }
       ]
     };

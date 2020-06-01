@@ -95,6 +95,7 @@ export default {
     },
     querySearch(queryString, cb) {
       const componentList = this.$store.state.searchComponentList;
+      console.log(componentList);
       let results = [];
       if (queryString.length == 0) {
         results = [];
