@@ -8,11 +8,13 @@ module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
       const { data, patientId } = req.body
-      const newRecommendation = await Recommendation.bulkCreate(data)       // See 
+      const newRecommendation = await Recommendation.bulkCreate(data)       // https://sequelize.org/master/class/lib/model.js~Model.html#static-method-bulkCreate
       console.log(newRecommendation)
-      /* this informs all the clients.
-       -doctor is added so that DA does not get high security messages on their socket. 
+   
+      /* io.to informs all the clients.
+       The room name has -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
+   
        Question: What is inside newRecommendation?
        */
       console.log(`room-${patientId}-Doctor`)
