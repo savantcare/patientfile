@@ -12,7 +12,8 @@ export default {
       otherMajorEvent: [],
       educationHistory: [],
       employmentHistory: []
-    }
+    },
+    list: []
   },
   mutations: {
     setSocialHistoryData(state, value) {

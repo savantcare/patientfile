@@ -79,10 +79,9 @@ export default {
       }, 50);
     },
     removeFocus() {
-      // setTimeout(() => {
-      //   this.$refs.search_box.blur();
-      // }, 50);
-      console.log("removeFocus from the searchBox");
+      setTimeout(() => {
+        this.$refs.search_box.$el.getElementsByTagName("input")[0].blur();
+      }, 50);
     },
     handleFocus() {
       const { rows } = this.$store.state.rightPanel;

@@ -177,5 +177,16 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
+    showAddReminderModal(state) {
+      const tab = {
+        label: "Add Reminder",
+        value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
+        name: "tab-add-reminder"
+      }
+      state.tabList = [tab]
+      state.recommendationTabType = ADD_RECOMMENDATION
+      state.visibility = true
+      state.tabValue = tab.name
+    }
   }
 }

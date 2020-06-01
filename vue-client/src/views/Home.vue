@@ -102,11 +102,11 @@ export default {
         value: require("../components/composition-layer1/RemindersCard").default
       },
       {
-        key: "diagnoses",
+        key: "diagnosis",
         value: require("../components/composition-layer1/DiagnosesCard").default
       },
       {
-        key: "goals",
+        key: "goal",
         value: require("../components/composition-layer1/GoalsCard").default
       },
       {
@@ -173,7 +173,8 @@ export default {
       },
       {
         key: "processNote",
-        value: require("../components/composition-layer1/ProcessNoteCard").default
+        value: require("../components/composition-layer1/ProcessNoteCard")
+          .default
       },
       {
         key: "profileCard",
@@ -185,6 +186,7 @@ export default {
           .default
       }
     ];
+
     this.$store.commit("setRightPanelList", rightPanelCards);
     // Initialize leftPanel components
     // const leftPanelList = [RecommendationsPanel, RemindersPanel];
@@ -195,7 +197,6 @@ export default {
     // Join room
     const patientId = this.$route.query.patient_id;
     const role = this.$store.state.userRole;
-    console.log(role);
 
     this.$socket.emit("CREATE_ROOM", `room-${patientId}-${role}`);
 
@@ -204,8 +205,7 @@ export default {
 
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setRightPanelFocusRowIndex", -1);
-
-    // this.updateRightPanelRows();
+    this.updateRightPanelRows();
   },
   methods: {
     onDrag(size) {
@@ -228,7 +228,6 @@ export default {
       }
       if (event.key == "`") {
         // Set focus to the <search-box>
-        console.log("set focus to the search box");
         focusRowIndex = rows.length - 1;
         this.$refs.search_box.setFocus();
         this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
@@ -338,7 +337,8 @@ export default {
         });
         newList.push({
           key: "reminder",
-          value: require("../components/composition-layer1/RemindersCard").default
+          value: require("../components/composition-layer1/RemindersCard")
+            .default
         });
 
         this.$store.commit("setRightPanelList", newList);
@@ -346,6 +346,7 @@ export default {
       this.updateRightPanelRows();
     },
     updateRightPanelRows() {
+      console.log("updateRightPanelRows");
       this.$store.dispatch("updateRightPanelRow");
     }
   },

@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
-          title="Reminders"
+          title="Reminder"
           actions="A,M,F,D"
           type="card"
           @showAddDialog="showAddDialog"

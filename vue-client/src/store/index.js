@@ -68,7 +68,7 @@ export default new Vuex.Store({
   },
   modules: {
     recommendation: recommendationModule,
-    diagnosis:diagnosisModule,
+    diagnosis: diagnosisModule,
     reminder: reminderModule,
     goal: goalModule,
     setting: settingModule,

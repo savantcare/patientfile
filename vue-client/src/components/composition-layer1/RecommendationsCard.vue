@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Recommendations"
+        title="Recommendation"
         actions="A,M,F,D"
         type="card"
         @showAddDialog="showAddDialog"
@@ -17,6 +17,7 @@
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
+      title="recommendation"
     />
   </el-card>
 </template>

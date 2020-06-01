@@ -28,15 +28,16 @@
             @selection-change="handleSelectionChange"
             @cell-mouse-enter="handleCellMouseEnter"
             @cell-mouse-leave="handleCellMouseLeave"
+            :row-class-name="tableRowClassName"
             size="mini"
           >
             <el-table-column type="expand" v-if="isExpandable">
               <!-- <template slot-scope="props"> -->
               <template slot-scope="scope">
-                <!-- <p
+                <p
                   v-for="(column, index_expand_row) in tab.columns"
                   :key="`tab-expand-row-${index_expand_row}`"
-                >{{column.label}}: {{props.row[column.field]}}</p>-->
+                >{{column.label}}: {{props.row[column.field]}}</p>
                 <div>
                   <el-button
                     size="mini"
@@ -62,7 +63,10 @@
               :sortable="column.sortable"
             ></el-table-column>
             <el-table-column>
-              <template slot-scope="scope" v-if="scope.row.id == mouseOverRowId">
+              <template
+                slot-scope="scope"
+                v-if="scope.row.id == mouseOverRowId || `${title}-${scope.$index+1}` == focusRow"
+              >
                 <el-button
                   size="mini"
                   icon="el-icon-edit"
@@ -90,7 +94,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["tabData"],
+  props: ["tabData", "title"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -162,15 +166,28 @@ export default {
           }
         });
       }
+    },
+    tableRowClassName({ rowIndex }) {
+      if (this.focusRow == `${this.title}-${rowIndex + 1}`) {
+        return "focus-row";
+      }
     }
   },
   mounted() {
     // setTimeout(() => {
     //   console.log(this.$refs.dataTable[0].$el.clientWidth);
     // }, 100);
+  },
+  computed: {
+    focusRow() {
+      return this.$store.getters.rightPanelFocusRow;
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.el-table .focus-row {
+  background: oldlace;
+}
 </style>

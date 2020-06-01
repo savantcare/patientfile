@@ -12,7 +12,11 @@
         ref="card_header"
       />
     </div>
-    <DataTable :tabData="tabData" @handleSelectionChange="handleSelectionChange" />
+    <DataTable
+      :tabData="tabData"
+      @handleSelectionChange="handleSelectionChange"
+      title="hospitalization"
+    />
   </el-card>
 </template>
 

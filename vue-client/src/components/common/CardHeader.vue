@@ -1,7 +1,6 @@
 <template>
   <div @mouseover="mouseOver = true" @mouseleave="mouseOver = false">
-    <span>{{title}}</span>
-
+    <span :style="{'color': isHeaderFocus == true ? '#409EFF' : 'black'}">{{title}}</span>
     <!-- 
     TODO: Use transition effects to fade in the action items
     Ref for beginers: 
@@ -32,29 +31,24 @@
           <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
         </el-popover>-->
 
-        <el-popover
-            placement="bottom"
-            width="200"
-            trigger="click">
-            <el-select
-              v-model="selectedColumn"
-              size="mini"
-              clearable
-              multiple
-              placeholder="Select"
-              collapse-tags
-            >
-              <el-option
-                v-for="item in availableColumns"
-                :key="item.field"
-                :label="item.label"
-                :value="item.field"
-              ></el-option>
-            </el-select>
-            <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-          </el-popover>
-
-
+        <el-popover placement="bottom" width="200" trigger="click">
+          <el-select
+            v-model="selectedColumn"
+            size="mini"
+            clearable
+            multiple
+            placeholder="Select"
+            collapse-tags
+          >
+            <el-option
+              v-for="item in availableColumns"
+              :key="item.field"
+              :label="item.label"
+              :value="item.field"
+            ></el-option>
+          </el-select>
+          <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
+        </el-popover>
       </div>
     </div>
   </div>

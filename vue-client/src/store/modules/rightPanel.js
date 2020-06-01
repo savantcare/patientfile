@@ -36,19 +36,22 @@ export default {
       let rightPanelRows = [];
       const rightPanelComponents = rootState.rightPanel.list
       rightPanelComponents.forEach(item => {
-        const componentRows = rootState[item.key]["list"].filter(
-          data => {
-            return data.discontinue != true;
-          }
-        );
-        // Set the header index as 0
-        rightPanelRows.push(`${item.key}-0`);
-        componentRows.forEach((row, index) => {
-          rightPanelRows.push(`${item.key}-${index + 1}`);
-        });
+        if (rootState[item.key] && rootState[item.key]["list"]) {
+          const componentRows = rootState[item.key]["list"].filter(
+            data => {
+              return data.discontinue != true;
+            }
+          );
+          // Set the header index as 0
+          rightPanelRows.push(`${item.key}-0`);
+          componentRows.forEach((row, index) => {
+            rightPanelRows.push(`${item.key}-${index + 1}`);
+          });
+        }
       });
       // Add search-box component at the last
       rightPanelRows.push("search-box");
+      console.log(rightPanelRows)
       commit("setRightPanelRows", rightPanelRows)
     }
   }
