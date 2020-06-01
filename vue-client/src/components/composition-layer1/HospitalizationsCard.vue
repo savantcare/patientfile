@@ -1,17 +1,17 @@
 <template>
   <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <CardHeader
-          title="Hospitalizations"
-          actions="A,M,F,D"
-          type="card"
-          @showAddDialog="showAddDialog"
-          @showMultiChangeDialog="showMultiChangeDialog"
-          @focusPanel="focusPanel"
-          @multiDiscontinue="multiDiscontinue"
-          ref="card_header"
-        />
-      </div>
+    <div slot="header" class="clearfix">
+      <CardHeader
+        title="Hospitalizations"
+        actions="A,M,F,D"
+        type="card"
+        @showAddDialog="showAddDialog"
+        @showMultiChangeDialog="showMultiChangeDialog"
+        @focusPanel="focusPanel"
+        @multiDiscontinue="multiDiscontinue"
+        ref="card_header"
+      />
+    </div>
     <DataTable :tabData="tabData" @handleSelectionChange="handleSelectionChange" />
   </el-card>
 </template>
@@ -29,13 +29,13 @@ export default {
             {
               description: "Some dummy description",
               createdAt: "Feb 9, 2017",
-              startDate: 'Jan 10, 2017',
+              startDate: "Jan 10, 2017",
               id: 1
             },
             {
               description: "Lorem ipsum dolor sit.",
               createdAt: "Mar 16, 2020",
-              startDate: 'Mar 10, 2020',
+              startDate: "Mar 10, 2020",
               id: 2
             }
           ],
@@ -60,7 +60,7 @@ export default {
           selectedColumn: ["description"]
         }
       ]
-    }
+    };
   },
   components: {
     CardHeader,
@@ -79,8 +79,9 @@ export default {
     },
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
-    }
-  },
+    },
+    showMultiChangeDialog() {}
+  }
 };
 </script>
 

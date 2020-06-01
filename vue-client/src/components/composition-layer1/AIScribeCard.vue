@@ -27,6 +27,12 @@ export default {
     return {
       selectedRows: []
     };
+  },
+  methods: {
+    showAddDialog() {},
+    showMultiChangeDialog() {},
+    focusPanel() {},
+    multiDiscontinue() {}
   }
 };
 </script>
