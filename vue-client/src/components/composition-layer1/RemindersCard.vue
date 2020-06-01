@@ -19,11 +19,11 @@
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import DataTable from "@/components/common/DataTable";
+// import DataTable from "@/components/common/DataTable";
 export default {
   components: {
-    CardHeader,
-    DataTable
+    CardHeader
+    // DataTable
   },
   data() {
     return {

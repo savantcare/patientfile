@@ -12,7 +12,7 @@
             collapse-tags
           >
             <el-option
-              v-for="item in tab.columns"
+              v-for="item in getColumns(tab.tableData)"
               :key="item.field"
               :label="item.label"
               :value="item.field"
@@ -37,7 +37,7 @@
                 <p
                   v-for="(column, index_expand_row) in tab.columns"
                   :key="`tab-expand-row-${index_expand_row}`"
-                >{{column.label}}: {{props.row[column.field]}}</p>
+                >{{column.label}}: {{scope.row[column.field]}}</p>
                 <div>
                   <el-button
                     size="mini"
@@ -56,7 +56,7 @@
             <el-table-column type="selection"></el-table-column>
 
             <el-table-column
-              v-for="(column, index_column) in getSelectedColumns(selectedColumn, tab.columns)"
+              v-for="(column, index_column) in getSelectedColumns(selectedColumn, getColumns(tab.tableData))"
               :key="`tab-${index}-column-${index_column}`"
               :label="column.label "
               :property="column.field"
@@ -68,13 +68,13 @@
                 v-if="scope.row.id == mouseOverRowId || `${title}-${scope.$index+1}` == focusRow"
               >
                 <el-button
-                  type="text" 
+                  type="text"
                   size="mini"
                   v-if="tab.rowActions.indexOf('C') > -1"
                   @click="handleChange(scope.$index, scope.row)"
                 >C</el-button>
                 <el-button
-                  type="text" 
+                  type="text"
                   size="mini"
                   v-if="tab.rowActions.indexOf('D') > -1"
                   @click="handleDiscontinue(scope.$index, scope.row)"
@@ -168,13 +168,22 @@ export default {
       if (this.focusRow == `${this.title}-${rowIndex + 1}`) {
         return "focus-row";
       }
+    },
+    getColumns(tableData) {
+      let columns = [];
+      if (tableData.length > 0) {
+        const item = tableData[0];
+        Object.keys(item).forEach(key => {
+          columns.push({
+            field: key,
+            label: key
+          });
+        });
+      }
+      return columns;
     }
   },
-  mounted() {
-    // setTimeout(() => {
-    //   console.log(this.$refs.dataTable[0].$el.clientWidth);
-    // }, 100);
-  },
+  mounted() {},
   computed: {
     focusRow() {
       return this.$store.getters.rightPanelFocusRow;
