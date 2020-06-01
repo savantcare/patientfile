@@ -1,46 +1,6 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <!-- <el-carousel-item v-for="item in sliderSet" :key="item">
-        <el-col :span="8" v-for="(recommendations, index) in item.recommendations" :key="index">
-          <el-card class="box-card" shadow="hover">
-            <el-form label-position="top" ref="form" :model="form">
-              <el-form-item style="font-weight:bold" label="Description">
-                <el-input
-                  :span="8"
-                  type="textarea"
-                  v-model="recommendations.description"
-                  :autosize="{ minRows: 4}"
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="success" @click="onSubmit" size="small">Save</el-button>
-                <el-button type="danger" @click="onSubmit" size="small">Discontinue</el-button>
-              </el-form-item>
-            </el-form>
-            <el-row>
-              <span style="font-size:14px">History:</span>
-            </el-row>
-            <br />
-            <el-row :gutter="12">
-              <div class="block">
-                <el-timeline>
-                  <el-timeline-item
-                    v-for="(history, index) in recommendations.history"
-                    :key="index"
-                    :icon="history.icon"
-                    :type="history.type"
-                    :color="history.color"
-                    :size="history.size"
-                    :timestamp="history.timestamp"
-                  >{{history.content}}</el-timeline-item>
-                </el-timeline>
-              </div>
-            </el-row>
-            <el-pagination small layout="prev, pager, next" :total="50"></el-pagination>
-          </el-card>
-        </el-col>
-      </el-carousel-item>-->
       <el-carousel-item v-for="(recList, index) in carouselList" :key="`carouse-${index}`">
         <el-col :span="8" v-for="(rec, index) in recList" :key="`rec-${index}`">
           <el-card class="box-card" shadow="hover">

@@ -106,7 +106,6 @@ savantcare.github.io> git push
 ::: tab Action
 
 
-
 <video width="560" height="240" controls>
   <source src="./images/deploy-docs-to-server.webm" type="video/mp4">
   Your browser does not support the video tag.
@@ -144,9 +143,25 @@ Then access: [http://localhost:8080/](http://localhost:8080/)
 
 ### Api Level
 
+
+:::: tabs
+ 
+::: tab Command
 ```
 vue-client> npm run styleguide
 ```
+:::
+  
+::: tab Action
+
+<video width="560" height="240" controls>
+  <source src="./images/vue-component-tech-doc.webm" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+
+:::
+ 
+::::
 
 And then go to:
 
