@@ -9,14 +9,18 @@
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
+        @updateSelectedColumns="updateSelectedColumns"
         ref="card_header"
+        :columns="columns"
       />
     </div>
     <DataTable
       :tabData="tabData"
+      :selectedColumns="selectedColumns"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
+      @handleUpdateColumns="handleUpdateColumns"
       title="recommendation"
     />
   </el-card>
@@ -32,12 +36,13 @@ export default {
   },
   data() {
     return {
-      selectedRows: []
+      selectedRows: [],
+      columns: [],
+      selectedColumns: ["description"]
     };
   },
   methods: {
     showAddDialog() {
-      console.log("show add dialog");
       this.$store.commit("showAddRecommendationModal");
     },
     showMultiChangeDialog() {
@@ -70,6 +75,12 @@ export default {
         data: data,
         toast: this.$notify
       });
+    },
+    handleUpdateColumns(value) {
+      this.columns = value;
+    },
+    updateSelectedColumns(value) {
+      this.selectedColumns = value;
     }
   },
   mounted() {
@@ -86,35 +97,11 @@ export default {
         {
           label: "Yours",
           tableData: recList,
-          columns: [
-            {
-              label: "Description",
-              field: "description",
-              sortable: true
-            },
-            {
-              label: "Created At",
-              field: "createdAt",
-              sortable: true
-            }
-          ],
           rowActions: ["C", "D"]
         },
         {
           label: "Other's",
           tableData: recList,
-          columns: [
-            {
-              label: "Description",
-              field: "description",
-              sortable: true
-            },
-            {
-              label: "Created At",
-              field: "createdAt",
-              sortable: true
-            }
-          ],
           rowActions: ["C", "D"],
           selectedColumn: ["description"]
         }

@@ -31,7 +31,13 @@
           <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
         </el-popover>-->
 
-        <el-popover placement="bottom" width="200" trigger="click">
+        <el-popover
+          placement="bottom"
+          width="200"
+          trigger="click"
+          @show="showPopover = true"
+          @hide="showPopOver = false"
+        >
           <el-select
             v-model="selectedColumn"
             size="mini"
@@ -39,9 +45,10 @@
             multiple
             placeholder="Select"
             collapse-tags
+            @change="handleChangeSelect"
           >
             <el-option
-              v-for="item in availableColumns"
+              v-for="item in columns"
               :key="item.field"
               :label="item.label"
               :value="item.field"
@@ -56,11 +63,13 @@
 
 <script>
 export default {
-  props: ["title", "actions", "type"],
+  props: ["title", "actions", "type", "columns"],
   data() {
     return {
       mouseOver: false,
-      selected: []
+      selected: [],
+      selectedColumn: ["description"],
+      showPopover: false
     };
   },
   computed: {
@@ -85,10 +94,14 @@ export default {
       return this.actions.indexOf("D") > -1 && this.$parent.selected.length > 0;
     },
     showActions() {
-      return this.mouseOver || this.isHeaderFocus;
+      return this.mouseOver || this.isHeaderFocus || this.showPopover;
     }
   },
-  methods: {},
+  methods: {
+    handleChangeSelect() {
+      this.$emit("updateSelectedColumns", this.selectedColumn);
+    }
+  },
   mounted() {}
 };
 </script>

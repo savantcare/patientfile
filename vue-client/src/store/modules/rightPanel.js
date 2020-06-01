@@ -51,7 +51,7 @@ export default {
       });
       // Add search-box component at the last
       rightPanelRows.push("search-box");
-      console.log(rightPanelRows)
+
       commit("setRightPanelRows", rightPanelRows)
     }
   }

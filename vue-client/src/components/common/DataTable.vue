@@ -2,24 +2,6 @@
   <div v-elresize @elresize="handleResize">
     <el-tabs type="card">
       <el-tab-pane v-for="(tab, index) in tabData" :key="`tab-${index}`" :label="tab.label">
-        <el-popover placement="bottom" width="200" trigger="click">
-          <el-select
-            v-model="selectedColumn"
-            size="mini"
-            clearable
-            multiple
-            placeholder="Select"
-            collapse-tags
-          >
-            <el-option
-              v-for="item in getColumns(tab.tableData)"
-              :key="item.field"
-              :label="item.label"
-              :value="item.field"
-            ></el-option>
-          </el-select>
-          <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-        </el-popover>
         <!-- Ref: https://github.com/WakuwakuP/element-ui-el-table-draggable#animate -->
         <el-table-draggable>
           <el-table
@@ -56,7 +38,7 @@
             <el-table-column type="selection"></el-table-column>
 
             <el-table-column
-              v-for="(column, index_column) in getSelectedColumns(selectedColumn, getColumns(tab.tableData))"
+              v-for="(column, index_column) in getSelectedColumns(getColumns(tab.tableData))"
               :key="`tab-${index}-column-${index_column}`"
               :label="column.label "
               :property="column.field"
@@ -91,7 +73,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["tabData", "title"],
+  props: ["tabData", "title", "selectedColumns"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -121,8 +103,7 @@ export default {
           value: "Option5",
           label: "Option5"
         }
-      ],
-      selectedColumn: ["description"]
+      ]
     };
   },
   methods: {
@@ -149,11 +130,11 @@ export default {
         this.isExpandable = false;
       }
     },
-    getSelectedColumns(selectedColumn, columns) {
-      if (selectedColumn) {
+    getSelectedColumns(columns) {
+      if (this.selectedColumns) {
         return columns.filter(column => {
           let result = false;
-          selectedColumn.forEach(selColumn => {
+          this.selectedColumns.forEach(selColumn => {
             if (column.field == selColumn) {
               result = true;
             }
@@ -180,6 +161,7 @@ export default {
           });
         });
       }
+      this.$emit("handleUpdateColumns", columns);
       return columns;
     }
   },
