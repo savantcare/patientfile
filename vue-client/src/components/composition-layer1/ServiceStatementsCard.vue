@@ -21,7 +21,7 @@
 import CardHeader from "@/components/common/CardHeader";
 
 export default {
-   components: {
+  components: {
     CardHeader
   },
   methods: {
@@ -32,7 +32,11 @@ export default {
     showMultiChangeServiceStatementsDialog() {
       console.log("open multi change dialog");
       this.$store.commit("showMultiChangeServiceStatementsModal");
-    }
+    },
+    showAddDialog() {},
+    showMultiChangeDialog() {},
+    focusPanel() {},
+    multiDiscontinue() {}
   }
 };
 </script>

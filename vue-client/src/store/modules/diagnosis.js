@@ -200,7 +200,7 @@ export default {
       })
     },
     async getDiagnoses({ commit }, json) {
-      const { patientId, toast } = json
+      const { patientId, notify } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
@@ -217,26 +217,23 @@ export default {
           commit('setDiagnosisList', json)
         } else {
           if (response.status == '401') {
-            toast.toast("Token is expired", {
+            notify({
               title: "Error",
-              variant: "danger",
-              solid: true
+              message: "Token is expired"
             })
             localStorage.removeItem("token")
             window.location = "/"
           } else {
-            toast.toast("Failed to get diagnosis data", {
+            notify({
               title: "Error",
-              variant: "danger",
-              solid: true
+              message: "Failed to get diagnosis data"
             })
           }
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error"
         })
       }
     }
