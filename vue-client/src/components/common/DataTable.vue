@@ -64,20 +64,17 @@
             <el-table-column>
               <template slot-scope="scope" v-if="scope.row.id == mouseOverRowId">
                 <el-button
+                  type="text" 
                   size="mini"
-                  icon="el-icon-edit"
-                  circle
                   v-if="tab.rowActions.indexOf('C') > -1"
                   @click="handleChange(scope.$index, scope.row)"
-                ></el-button>
+                >C</el-button>
                 <el-button
+                  type="text" 
                   size="mini"
-                  type="danger"
-                  icon="el-icon-delete"
-                  circle
                   v-if="tab.rowActions.indexOf('D') > -1"
                   @click="handleDiscontinue(scope.$index, scope.row)"
-                ></el-button>
+                >D</el-button>
               </template>
             </el-table-column>
           </el-table>

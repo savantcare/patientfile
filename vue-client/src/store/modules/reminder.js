@@ -9,8 +9,10 @@ export default {
     setReminderList(state, data) {
       state.list = data
     },
-    addNewReminder(state, data) {
-      state.list.push(data)
+    addNewReminder(state, newList) {
+      newList.forEach(item => {
+        state.list.push(item)
+      })
     },
     removeNewReminder(state) {
       state.list.pop()
@@ -25,14 +27,17 @@ export default {
     SOCKET_ON_UPDATE_REMINDERS(state, updateList) {   // Message received from socket server
       state.list = updateList
     },
-    SOCKET_ADD_REMINDER(state, newData) {         // Msg recd from node-server/routes/reminder.route.js
+    SOCKET_ADD_REMINDER(state, newDataList) {         // Msg recd from node-server/routes/reminder.route.js
       if (state.list.length > 0) {                      // At the client where this data was added it needs to be skipped
         const lastData = state.list[state.list.length - 1]
-        if (lastData.reminderID == newData.reminderID) {
+        if (lastData.reminderID == newDataList[newDataList.length - 1].reminderID) {
           return
         }
       }
-      state.list.push(newData)
+      // state.list.push(newData)
+      newDataList.forEach(item => {
+        state.list.push(item)
+      })
     },
     SOCKET_UPDATE_REMINDER(state, updateData) {
       let newList = []
@@ -54,8 +59,9 @@ export default {
     }
   },
   actions: {
-    async addReminder({ commit }, json) {
-      const { data, toast } = json
+    async addReminder({ state, commit }, json) {
+      const { data, notify, patientId } = json
+      const originList = state.list
 
       commit("addNewReminder", data)
 
@@ -66,27 +72,31 @@ export default {
             "Content-Type": "application/json;charset=utf-8",
             "Authorization": "Bearer " + TOKEN
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify({ data: data, patientId: patientId })
         })
         if (!response.ok) {
-          toast.toast("Failed to add reminder data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to add reminder data"
           })
-          commit("removeNewReminder")
+
+          commit("setReminderList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Saved!"
+          })
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error"
         })
-        commit("removeNewReminder")
+        commit("setReminderList", originList)
       }
     },
-    async updateReminder({ state, commit }, json) {
-      const { data, toast } = json
+    async changeReminder({ state, commit }, json) {
+      const { data, notify } = json
       const originList = state.list
       let newList = []
       originList.forEach(item => {
@@ -113,26 +123,28 @@ export default {
           body: JSON.stringify(data)
         });
         if (!response.ok) {
-          toast.toast("Failed to update reminder data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to update reminder data"
           })
 
           commit("setReminderList", originList)
+        } else {
+          notify({
+            title: "Title",
+            message: "Updated!"
+          })
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error"
         })
-
         commit("setReminderList", originList)
       }
     },
     async discontinueReminder({ state, commit }, json) {
-      const { data, toast } = json
+      const { data, notify } = json
       const originList = state.list
       const newList = originList.filter(item => {
         return item.id != data.id
@@ -150,26 +162,28 @@ export default {
           body: JSON.stringify(data)
         });
         if (!response.ok) {
-          toast.toast("Failed to discontinue reminder data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to discontinue reminder data"
           })
-
           commit("setReminderList", originList)
+        } else {
+          notify({
+            title: "Title",
+            message: "Deleted"
+          })
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error"
         })
 
         commit("setReminderList", originList)
       }
     },
-    async multiDiscontinueReminder({ state, commit }, json) {
-      const { selectedIds, toast, selectedDatas } = json
+    async multiDiscontinueReminders({ state, commit }, json) {
+      const { selectedIds, notify, selectedDatas } = json
       const originList = state.list
       const newList = originList.filter(item => {
         return !selectedIds.includes(item.id)
@@ -190,17 +204,16 @@ export default {
             body: JSON.stringify(item)
           });
         } catch (ex) {
-          toast.toast("Server connection error", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Server connection error"
           })
           commit('setReminderList', originList)
         }
       })
     },
     async getReminders({ commit }, json) {
-      const { patientId, toast } = json
+      const { patientId, notify } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
@@ -210,34 +223,31 @@ export default {
           headers: {
             "Authorization": "Bearer " + TOKEN
           }
-        }
-        );
+        });
         if (response.ok) {
           let json = await response.json();
           commit('setReminderList', json)
         } else {
           if (response.status == '401') {
-            toast.toast("Token is expired", {
+            notify({
               title: "Error",
-              variant: "danger",
-              solid: true
+              message: "Token is expired."
             })
             localStorage.removeItem("token")
             window.location = "/"
           } else {
-            toast.toast("Failed to get reminder data", {
+            notify({
               title: "Error",
-              variant: "danger",
-              solid: true
+              message: "Failed to get reminder data"
             })
           }
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error"
         })
+
       }
     }
   },

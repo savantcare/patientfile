@@ -7,15 +7,17 @@ const { Op } = require("sequelize")
 module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
-      const newReminder = await Reminder.create(req.body)       // See 
-
+      const { data, patientId } = req.body
+      const newReminder = await Reminder.bulkCreate(data)       // See 
+      console.log(newReminder)
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
        Question: What is inside newReminder?
        */
-      io.to(`room-${req.body.patientId}-doctor`).emit("ADD_REMINDER", newReminder)
-      io.to(`room-${req.body.patientId}-receptionist`).emit("ADD_REMINDER", newReminder)
+      console.log(`room-${patientId}-Doctor`)
+      console.log(newReminder)
+      io.to(`room-${patientId}-Doctor`).emit("ADD_REMINDER", newReminder)
 
       res.send(newReminder) /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
@@ -30,7 +32,10 @@ module.exports = (io) => {
       const { patientId } = req.query
       const queryResult = await Reminder.findAll({
         where: {
-          patientId: patientId
+          patientId: patientId,
+          discontinue: {
+            [Op.ne]: 1
+          }
         }
       })
       res.send(queryResult)
@@ -64,8 +69,7 @@ module.exports = (io) => {
       }
       await Reminder.create(newData)
 
-      io.to(`room-${req.body.patientId}-doctor`).emit("UPDATE_REMINDER", req.body)
-      io.to(`room-${req.body.patientId}-receptionist`).emit("UPDATE_REMINDER", req.body)
+      io.to(`room-${req.body.patientId}-Doctor`).emit("UPDATE_REMINDER", req.body)
       res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
@@ -84,8 +88,7 @@ module.exports = (io) => {
           id: req.params.id
         }
       })
-      io.to(`room-${req.body.patientId}-doctor`).emit("DISCONTINUE_REMINDER", req.params.id)
-      io.to(`room-${req.body.patientId}-receptionist`).emit("DISCONTINUE_REMINDER", req.params.id)
+      io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_REMINDER", req.params.id)
       res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
