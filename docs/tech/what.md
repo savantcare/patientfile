@@ -2,7 +2,7 @@
 
 For the model component Recommendations the following files are needed:
 
-Total loc: 1243
+Total loc: 991 
 
 ## Client side
 
@@ -13,7 +13,7 @@ Total loc: 1243
 ### Layer 2
 1. **Add (123 loc)**  [/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
 
-2. **Multi change (338 loc)**  [/components/composition-layer2/recommendation/MultiChangeRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/MultiChangeRecommendation.vue)
+2. **Multi change (86 loc)**  [/components/composition-layer2/recommendation/MultiChangeRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/MultiChangeRecommendation.vue)
 
 3. **Recommendation history (56 loc)**  [/components/composition-layer2/recommendation/RecommendationHistoryItem.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/RecommendationHistoryItem.vue)
 
