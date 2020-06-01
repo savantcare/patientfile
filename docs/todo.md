@@ -9,6 +9,46 @@
 
 3. dataTable the column headers are hard coded and not coming from json. This makes the system inflexible.
 
+If they were not hardcoded then approx 40 lines will be less in each component:
+      return [
+        {
+          label: "Yours",
+          tableData: recList,
+          columns: [
+            {
+              label: "Description",
+              field: "description",
+              sortable: true
+            },
+            {
+              label: "Created At",
+              field: "createdAt",
+              sortable: true
+            }
+          ],
+          rowActions: ["C", "D"]
+        },
+        {
+          label: "Other's",
+          tableData: recList,
+          columns: [
+            {
+              label: "Description",
+              field: "description",
+              sortable: true
+            },
+            {
+              label: "Created At",
+              field: "createdAt",
+              sortable: true
+            }
+          ],
+          rowActions: ["C", "D"],
+          selectedColumn: ["description"]
+        }
+      ];
+
+
 4. The search box component needs to search a list. Currently there is a if-else. Since there are 44 components. And each componet  has approx 3 actions associated. 
    So user can type:
       1. rex

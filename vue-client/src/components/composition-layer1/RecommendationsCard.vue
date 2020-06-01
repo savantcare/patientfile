@@ -15,8 +15,8 @@
     <DataTable
       :tabData="tabData"
       @handleSelectionChange="handleSelectionChange"
-      @handleEdit="handleEdit"
-      @handleDelete="handleDelete"
+      @handleChange="handleChange"
+      @handleDiscontinue="handleDiscontinue"
     />
   </el-card>
 </template>
@@ -60,11 +60,11 @@ export default {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
-    handleEdit(data) {
-      console.log("show edit dialog");
-      this.$store.commit("showEditRecommendationsModal", data);
+    handleChange(data) {
+      console.log("show change dialog");
+      this.$store.commit("showChangeRecommendationsModal", data);
     },
-    handleDelete(data) {
+    handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {
         data: data,
         toast: this.$notify

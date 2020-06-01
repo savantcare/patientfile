@@ -40,13 +40,13 @@
                   <el-button
                     size="mini"
                     v-if="tab.rowActions.indexOf('C') > -1"
-                    @click="handleEdit(scope.$index, scope.row)"
+                    @click="handleChange(scope.$index, scope.row)"
                   >Edit</el-button>
                   <el-button
                     size="mini"
                     type="danger"
                     v-if="tab.rowActions.indexOf('D') > -1"
-                    @click="handleDelete(scope.$index, scope.row)"
+                    @click="handleDiscontinue(scope.$index, scope.row)"
                   >Discontinue</el-button>
                 </div>
               </template>
@@ -67,7 +67,7 @@
                   icon="el-icon-edit"
                   circle
                   v-if="tab.rowActions.indexOf('C') > -1"
-                  @click="handleEdit(scope.$index, scope.row)"
+                  @click="handleChange(scope.$index, scope.row)"
                 ></el-button>
                 <el-button
                   size="mini"
@@ -75,7 +75,7 @@
                   icon="el-icon-delete"
                   circle
                   v-if="tab.rowActions.indexOf('D') > -1"
-                  @click="handleDelete(scope.$index, scope.row)"
+                  @click="handleDiscontinue(scope.$index, scope.row)"
                 ></el-button>
               </template>
             </el-table-column>
@@ -127,11 +127,11 @@ export default {
     handleSelectionChange(val) {
       this.$emit("handleSelectionChange", val);
     },
-    handleEdit(index, row) {
-      this.$emit("handleEdit", row);
+    handleChange(index, row) {
+      this.$emit("handleChange", row);
     },
-    handleDelete(index, row) {
-      this.$emit("handleDelete", row);
+    handleDiscontinue(index, row) {
+      this.$emit("handleDiscontinue", row);
     },
     handleCellMouseEnter(row) {
       this.mouseOverRowId = row.id;

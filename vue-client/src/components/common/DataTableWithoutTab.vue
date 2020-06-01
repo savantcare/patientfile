@@ -14,13 +14,13 @@
               <el-button
                 size="mini"
                 v-if="dataToDisplay.rowActions.indexOf('C') > -1"
-                @click="handleEdit(scope.row)"
+                @click="handleChange(scope.row)"
               >Edit</el-button>
               <el-button
                 size="mini"
                 type="danger"
                 v-if="dataToDisplay.rowActions.indexOf('D') > -1"
-                @click="handleDelete(scope.row)"
+                @click="handleDiscontinue(scope.row)"
               >Discontinue</el-button>
             </div>
           </template>
@@ -40,7 +40,7 @@
               icon="el-icon-edit"
               circle
               v-if="dataToDisplay.rowActions.indexOf('C') > -1"
-              @click="handleEdit(scope.row)"
+              @click="handleChange(scope.row)"
             ></el-button>
             <el-button
               size="mini"
@@ -48,7 +48,7 @@
               icon="el-icon-delete"
               circle
               v-if="dataToDisplay.rowActions.indexOf('D') > -1"
-              @click="handleDelete(scope.row)"
+              @click="handleDiscontinue(scope.row)"
             ></el-button>
           </template>
         </el-table-column>
@@ -97,10 +97,10 @@ export default {
     handleSelectionChange(val) {
       this.$emit("handleSelectionChange", val);
     },
-    handleEdit(row) {
+    handleChange(row) {
       console.log(row);
     },
-    handleDelete(row) {
+    handleDiscontinue(row) {
       console.log(row);
     },
     handleCellMouseEnter(row) {

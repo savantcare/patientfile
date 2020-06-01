@@ -63,7 +63,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showEditRecommendationsModal(state, data) {
+    showChangeRecommendationsModal(state, data) {
       const tab = {
         label: "Edit Recommendation",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,

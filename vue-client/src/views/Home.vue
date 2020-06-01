@@ -262,7 +262,7 @@ export default {
           if (component == "recommendation") {
             const { recommendations } = this.$store.getters;
             const selectedItem = recommendations[index - 1];
-            this.$store.commit("showEditRecommendationsModal", selectedItem);
+            this.$store.commit("showChangeRecommendationsModal", selectedItem);
           } else if (component == "reminder") {
             const { reminders } = this.$store.getters;
             const selectedItem = reminders[index - 1];
