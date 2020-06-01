@@ -23,7 +23,9 @@ import {
   ADD_SERVICE_STATEMENTS, 
   MULTIPLE_CHANGE_SERVICE_STATEMENTS,
   ADD_GOAL, 
-  MULTIPLE_RATE_GOAL
+  MULTIPLE_RATE_GOAL,
+  ADD_SCREENING, 
+  MULTIPLE_CHANGE_SCREENING
 } from "@/const.js";
 export default {
   data() {
@@ -65,6 +67,14 @@ export default {
         {
           value: "Multi rate goals",
           key: MULTIPLE_RATE_GOAL
+        },
+        {
+          value: "Add Screening",
+          key: ADD_SCREENING
+        },
+        {
+          value: "Multi change screening",
+          key: MULTIPLE_CHANGE_SCREENING
         }
       ]
     };
@@ -148,6 +158,20 @@ export default {
           name: "tab-multi-change-goal"
         };
         this.$store.commit("addNewTab", multiChangeGoalTab);
+      }else if (key == ADD_SCREENING) {
+        const addScreeningTab = {
+          label: "Add screening ",
+          value: require("./screening/AddScreening.vue").default,
+          name: "tab-add-screening"
+        };
+        this.$store.commit("addNewTab", addScreeningTab);
+      } else if (key == MULTIPLE_CHANGE_SCREENING) {
+        const multiChangeScreeningTab = {
+          label: "Multi change screening",
+          value: require("./screening/MultiChangeScreening.vue").default,
+          name: "tab-multi-screening"
+        };
+        this.$store.commit("addNewTab", multiChangeScreeningTab);
       }
     }
   }

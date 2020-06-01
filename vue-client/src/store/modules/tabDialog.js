@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREENING, MULTIPLE_CHANGE_SCREENING } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -153,6 +153,28 @@ export default {
       state.visibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
+      state.tabValue = tab.name
+    },
+    showAddScreeningModal(state) {
+      const tab = {
+        label: "Add Screening",
+        value: require("@/components/composition-layer2/screening/AddScreening.vue").default,
+        name: "tab-add-screening"
+      }
+      state.tabList = [tab]
+      state.screeningTabType = ADD_SCREENING
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showMultiChangeScreeningModal(state) {
+      const tab = {
+        label: "Multi change Screening",
+        value: require("@/components/composition-layer2/screening/MultiChangeScreening.vue").default,
+        name: "tab-multi-change-screening"
+      }
+      state.tabList = [tab]
+      state.screeningTabType = MULTIPLE_CHANGE_SCREENING
+      state.visibility = true
       state.tabValue = tab.name
     },
   }

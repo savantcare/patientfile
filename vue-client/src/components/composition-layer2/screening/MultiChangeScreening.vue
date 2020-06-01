@@ -6,7 +6,7 @@
     <br />
     <br />
     <el-col :span="8" :key="question.id" v-for="question in questionList" >
-      <el-card class="box-card" shadow="hover">
+      <el-card class="box-card" :body-style="{ padding: '3px' }" shadow="hover">
         <el-form label-position="top" ref="form" :model="form">
             <p><strong>Q</strong> {{question.name}}</p>
             <el-form-item label="">
@@ -167,8 +167,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .el-col-8 {
     padding-top: 6px;
     padding-bottom: 6px;
+}
+
+.qstn{
+  margin: 5px;
+}
+
+.el-form-item {
+  margin-bottom : 3px;
 }
 </style>

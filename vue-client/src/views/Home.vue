@@ -159,6 +159,10 @@ export default {
         value: require("../components/composition-layer1/ReferralCard").default
       },
       {
+        key: "screening",
+        value: require("../components/composition-layer1/ScreeningCard").default
+      },
+      {
         key: "substancesAbuse",
         value: require("../components/composition-layer1/SubstancesAbuseCard")
           .default
