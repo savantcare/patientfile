@@ -1,5 +1,6 @@
 <template>
   <div v-elresize @elresize="handleResize">
+   <!-- Ref: https://github.com/WakuwakuP/element-ui-el-table-draggable#animate -->
    <el-table-draggable>
       <el-table
         ref="dataTable"
@@ -58,7 +59,7 @@
 </template>
 
 <script>
-import ElTableDraggable from "element-ui-el-table-draggable";
+import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
   props: ["dataToDisplay"],
   components: { ElTableDraggable },

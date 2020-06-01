@@ -20,6 +20,7 @@
           </el-select>
           <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
         </el-popover>
+        <!-- Ref: https://github.com/WakuwakuP/element-ui-el-table-draggable#animate -->
         <el-table-draggable>
           <el-table
             ref="dataTable"
@@ -87,7 +88,7 @@
 </template>
 
 <script>
-import ElTableDraggable from "element-ui-el-table-draggable";
+import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
   props: ["tabData"],
   components: { ElTableDraggable },
