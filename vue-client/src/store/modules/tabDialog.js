@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREENING, MULTIPLE_CHANGE_SCREENING } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREENING, MULTIPLE_CHANGE_SCREENING } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -101,13 +101,13 @@ export default {
     },
     showChangeRecommendationsModal(state, data) {
       const tab = {
-        label: "Edit Recommendation",
+        label: "Change Recommendation",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
-        name: "tab-edit-recommendation"
+        name: "tab-change-recommendation"
       }
       state.tabList = [tab]
       state.visibility = true
-      state.recommendationTabType = EDIT_RECOMMENDATION
+      state.recommendationTabType = CHANGE_RECOMMENDATION
       state.recommendationData = data
       state.tabValue = tab.name
     },
