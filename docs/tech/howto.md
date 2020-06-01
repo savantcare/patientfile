@@ -8,13 +8,26 @@ VueJS talks to Nodejs running on same computer. Nodejs talks to mysql running on
  
 ::: tab Commands
 
+
+Step1: Start vue-client
+
 ```
+cd /gt/sc-prog-repos/
 git clone https://github.com/savantcare/patientfile.git
+cd vue-client
 vue-client> npm install               
 vue-client> npm run serve              # starts vue server
+```
+
+
+Step2: Start node-server
+
+```
+cd /gt/sc-prog-repos/patientfile/node-server
 node-server> npm install            
 node-server> npm run start             # start node server
 ```
+
 :::
   
 ::: tab Action
@@ -37,6 +50,35 @@ Login as doctor -> http://localhost:8080/login          user1@gmail.com    : 123
 
 Login as doctor admin assistant -> http://localhost:8080/login          user1@gmail.com    : 123
 
+### How to run a local DB?
+
+Start mysqld
+
+```
+patientfile/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
+```
+
+To access phpmyadmin:
+http://[ip-address]:81/
+
+First time the root password is qwerty
+
+The admin password is given in: 
+patientfile/node-server/config/development.json
+
+To enter the docker container:
+
+```
+root@server1:/gt/sc-prog-repos/patientfile/docker# docker exec -ti docker_mariadb_1 bash
+root@c02b4fc1097e:/# /db/design/step1-execute-in-mysql-contaier-to-init-mysqld.sh
+root@c02b4fc1097e:/# /db/design/step2-create-first-user.sh
+root@c02b4fc1097e:/# /db/design/step3-structure/drop-tables-and-then-create-structure.sh
+root@c02b4fc1097e:/# /db/design/step4-master-data/
+root@c02b4fc1097e:/# /db/design/step4-runtime-data/
+```
+
+
+Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji
 
 ## Q2) How to start the documentation system?
 
@@ -301,51 +343,7 @@ Dis-Advantages of architecture 2:
 1. How to run sql query over a JSON on the browser client side. Use https://vuex-orm.org/ with https://github.com/vuex-orm/plugin-axios and https://github.com/vuex-orm/plugin-soft-delete (bring discontinued to industry standard by calling it soft delete)
 
 
-## Q12) How to start the dev environment?
-
-Step1: Start mysqld
-
-```
-patientfile/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
-```
-
-To access phpmyadmin:
-http://[ip-address]:81/
-
-First time the root password is qwerty
-
-The admin password is given in: 
-patientfile/node-server/config/development.json
-
-To enter the docker container:
-
-```
-root@server1:/gt/sc-prog-repos/patientfile/docker# docker exec -ti docker_mariadb_1 bash
-root@c02b4fc1097e:/# 
-```
-
-Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji
-
-Step2: Start vue-client
-
-```
-cd /gt/sc-prog-repos/patientfile/vue-client
-npm install
-npm run serve
-```
-
-Step3: Start node-server
-
-```
-cd /gt/sc-prog-repos/patientfile/node-server
-npm install
-npm run start
-```
-
-Then in your browser go to: http://localhost:8080/
-
-
-## Q13) How to deploy to Heroku?
+## Q12) How to deploy to Heroku?
 
 ```
 cd vue-client
