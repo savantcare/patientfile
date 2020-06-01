@@ -10,6 +10,7 @@ module.exports = (io) => {
   const componentRoutes = require('./component.route')
   const userRoutes = require('./user.route')
   const socialHistoryRoutes = require('./socialhistory.routes')
+  const goalRoutes = require('./goal.route')(io)
 
   router.use('/auth', authRoutes)
   router.use('/recommendations', recommendationRoutes)
@@ -19,6 +20,7 @@ module.exports = (io) => {
   router.use('/components', componentRoutes)
   router.use('/users', userRoutes)
   router.use('/social-histories', socialHistoryRoutes)
+  router.use('/goals', goalRoutes)
 
   return router
 }

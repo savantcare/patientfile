@@ -6,6 +6,7 @@ Vue.use(Vuex)
 // modules
 import recommendationModule from './modules/recommendation'
 import reminderModule from './modules/reminder'
+import goalModule from './modules/goal'
 import settingModule from './modules/setting'
 import rightPanelModule from './modules/rightPanel'
 import tabDialogModule from './modules/tabDialog'
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     searchComponentList: [
       "recommendation (rex)",
       "reminder (rem)",
+      "goal (g)",
       "clear"
     ],
     focusComponent: "",
@@ -66,6 +68,7 @@ export default new Vuex.Store({
   modules: {
     recommendation: recommendationModule,
     reminder: reminderModule,
+    goal: goalModule,
     setting: settingModule,
     rightPanel: rightPanelModule,
     tabDialog: tabDialogModule,

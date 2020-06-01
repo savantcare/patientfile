@@ -12,6 +12,7 @@
   },
   "DB_RECOMMENDATION": "sc_recommendation",
   "DB_REMINDER": "sc_reminder",
+  "DB_GOAL": "sc_goal",
   "DB_USER": "sc_user",
   "DB_SETTING": "sc_setting",
   "DB_COMPONENT": "sc_component",

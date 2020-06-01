@@ -3,6 +3,7 @@ module.exports = {
   // API urls
   RECOMMENDATION_API_URL: "http://localhost:8000/recommendations",
   REMINDER_API_URL: "http://localhost:8000/reminders",
+  GOAL_API_URL: "http://localhost:8000/goals",
   SETTING_API_URL: "http://localhost:8000/settings",
   LOGIN_API_URL: "http://localhost:8000/auth/login",
   ROLE_API_URL: "http://localhost:8000/user-roles",
@@ -29,5 +30,8 @@ module.exports = {
   ADD_DIAGNOSIS: 8,
   MULTIPLE_CHANGE_ASSESSMENT: 9,
   ADD_SERVICE_STATEMENTS: 10, 
-  MULTIPLE_CHANGE_SERVICE_STATEMENTS: 11
+  MULTIPLE_CHANGE_SERVICE_STATEMENTS: 11,
+  ADD_GOAL: 12,
+  EDIT_GOAL: 13,
+  MULTIPLE_CHANGE_GOAL: 14,
 }

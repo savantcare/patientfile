@@ -193,7 +193,7 @@
       return {
         editableTabsValue: '2',
         editableTabs: [{
-          title: 'Multi change goals',
+          title: 'Multi rate goals',
           name: 'goals',
           content: 'goals'
         }, 

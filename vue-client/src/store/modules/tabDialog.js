@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, EDIT_RECOMMENDATION, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_CHANGE_GOAL, EDIT_GOAL } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -7,6 +7,8 @@ export default {
     recommendationData: null,
     reminderTabType: '',
     reminderData: null,
+    goalTabType: '',
+    goalData: null,
     tabValue: ""
   },
   mutations: {
@@ -118,6 +120,40 @@ export default {
       state.serviceStatementsTabType = MULTIPLE_CHANGE_SERVICE_STATEMENTS
       state.visibility = true
       state.tabValue = tab.name
-    }
+    },
+    showAddGoalModal(state) {
+      const tab = {
+        label: "Add goal",
+        value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
+        name: "tab-add-goal"
+      }
+      state.tabList = [tab]
+      state.goalTabType = ADD_GOAL
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showMultiChangeGoalModal(state) {
+      const tab = {
+        label: "Multi rate goal",
+        value: require("@/components/composition-layer2/goal/MultiChangeGoal.vue").default,
+        name: "tab-multi-change-goal"
+      }
+      state.tabList = [tab]
+      state.goalTabType = MULTIPLE_CHANGE_GOAL
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showChangeGoalsModal(state, data) {
+      const tab = {
+        label: "Edit goal",
+        value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
+        name: "tab-edit-goal"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.goalTabType = EDIT_GOAL
+      state.goalData = data
+      state.tabValue = tab.name
+    },
   }
 }
