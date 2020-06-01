@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 // modules
 import recommendationModule from './modules/recommendation'
+import diagnosisModule from './modules/diagnosis'
 import reminderModule from './modules/reminder'
 import goalModule from './modules/goal'
 import settingModule from './modules/setting'
@@ -67,6 +68,7 @@ export default new Vuex.Store({
   },
   modules: {
     recommendation: recommendationModule,
+    diagnosis:diagnosisModule,
     reminder: reminderModule,
     goal: goalModule,
     setting: settingModule,

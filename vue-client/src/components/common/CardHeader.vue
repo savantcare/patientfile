@@ -28,9 +28,33 @@
         Component 1 might have 5 columns whose visibility can be turned on or off
         and component 2 might have 2 columns whose visibility can be turned on or off
         -->
-        <el-popover placement="bottom" width="200" trigger="click">
+        <!--<el-popover placement="bottom" width="200" trigger="click">
           <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-        </el-popover>
+        </el-popover>-->
+
+        <el-popover
+            placement="bottom"
+            width="200"
+            trigger="click">
+            <el-select
+              v-model="selectedColumn"
+              size="mini"
+              clearable
+              multiple
+              placeholder="Select"
+              collapse-tags
+            >
+              <el-option
+                v-for="item in availableColumns"
+                :key="item.field"
+                :label="item.label"
+                :value="item.field"
+              ></el-option>
+            </el-select>
+            <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
+          </el-popover>
+
+
       </div>
     </div>
   </div>

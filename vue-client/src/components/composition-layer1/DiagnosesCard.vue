@@ -2,8 +2,24 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Diagnoses</span>
-        <div style="float: right">
+
+        <div slot="header" class="clearfix">
+        <CardHeader
+          title="Diagnoses"
+          actions="A,M,F,D"
+          type="card"
+          @showAddDialog="showAddDiagnosisDialog"
+          @showMultiChangeDialog="showMultiChangeAssessmentDialog"
+          @focusPanel="focusPanel"
+          @multiDiscontinue="multiDiscontinue"
+          :selectedColumn="diagnosesData.selectedColumn"
+          :availableColumns="diagnosesData.columns"
+          ref="card_header"
+        />
+      </div>
+
+        <!--<span>Diagnoses</span>-->
+        <!--<div style="float: right">
           <el-button type="text" size="mini" @click="showAddDiagnosisDialog">A</el-button>
           <el-button type="text" size="mini" @click="showMultiChangeAssessmentDialog">M</el-button>
           <el-popover
@@ -27,7 +43,7 @@
             </el-select>
             <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
           </el-popover>
-        </div>
+        </div>-->
       </div>
       <DataTableWithoutTab :dataToDisplay="diagnosesData" @handleSelectionChange="handleSelectionChange" />
     </el-card>
@@ -36,10 +52,11 @@
 
 <script>
 
-//import CardHeader from "@/components/common/CardHeader";
+import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 export default {
   components: {
+    CardHeader,
     DataTableWithoutTab
   },
   data() {
@@ -143,13 +160,56 @@ export default {
       console.log("focus panel");
     },
     multiDiscontinue() {
-      console.log("multi-discontinue");
+      let selectedIds = [];
+      this.selectedRows.forEach(item => {
+        selectedIds.push(item.id);
+      });
+      this.$store.dispatch("multiDiscontinueDiagnosis", {
+        selectedIds: selectedIds,
+        notify: this.$notify,
+        selectedDatas: this.selectedRows
+      });
     },
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
     }
   },
-  mounted() {}
+  mounted() {
+    const params = {
+      patientId: this.$route.query.patient_id,
+      notify: this.$notify
+    };
+    this.$store.dispatch("getDiagnoses", params);
+  },
+  computed: {
+    tabData() {
+      const dxList = this.$store.state.diagnosis.list;
+      return [
+        {
+          label: "Yours",
+          tableData: dxList,
+          columns: [
+            {
+              label: "Diagnosis",
+              field: "name",
+              sortable: true
+            },
+            {
+              label: "Added By",
+              field: "addedBy",
+              sortable: true
+            },
+            {
+              label: "Added On",
+              field: "addedOn",
+              sortable: true
+            }          ],
+          rowActions: ["C", "D"],
+          selectedColumn: ["name"]
+        }
+      ];
+    }
+  }
 };
 </script>
 

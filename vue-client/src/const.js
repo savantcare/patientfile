@@ -2,6 +2,7 @@
 module.exports = {
   // API urls
   RECOMMENDATION_API_URL: "http://localhost:8000/recommendations",
+  DIAGNOSIS_API_URL: "http://localhost:8000/diagnoses",
   REMINDER_API_URL: "http://localhost:8000/reminders",
   GOAL_API_URL: "http://localhost:8000/goals",
   SETTING_API_URL: "http://localhost:8000/settings",

@@ -256,7 +256,7 @@ export default {
       return state.list.filter(item => {
         return item.discontinue != true
       })
-    },
+    },            
     panelRecommendations(state) {
       return state.list.filter(item => {
         const itemDate = new Date(item.createdAt)
