@@ -1,4 +1,44 @@
-## Q1) How to start the documentation system?
+## Q1) How to run the app locally?
+
+The conventional method is to run the vuejs and node server locally and the mysql DB on a public server.
+
+VueJS talks to Nodejs running on same computer. Nodejs talks to mysql running on public server.
+
+:::: tabs
+ 
+::: tab Commands
+
+```
+git clone https://github.com/savantcare/patientfile.git
+vue-client> npm install               
+vue-client> npm run serve              # starts vue server
+node-server> npm install            
+node-server> npm run start             # start node server
+```
+:::
+  
+::: tab Action
+
+
+<video width="560" height="240" controls>
+  <source src="./images/run-vue-node-local-with-non-local-db.webm" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+
+:::
+ 
+::::
+
+In 3 incognito tabs open:
+
+To access phpmyadmin -> http://138.68.233.185:81/     stanford              : jaidurgama
+
+Login as doctor -> http://localhost:8080/login          user1@gmail.com    : 123
+
+Login as doctor admin assistant -> http://localhost:8080/login          user1@gmail.com    : 123
+
+
+## Q2) How to start the documentation system?
 
 ### App level
 
@@ -23,7 +63,12 @@ savantcare.github.io> git push
   
 ::: tab Action
 
-![movie](./images/deploy-docs-to-server.gif)
+
+
+<video width="560" height="240" controls>
+  <source src="./images/deploy-docs-to-server.webm" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
 
 :::
  
@@ -65,7 +110,7 @@ And then go to:
 
 http://localhost:6060
 
-## Q2) How to create a fresh DB with structure and master data?
+## Q3) How to create a fresh DB with structure and master data?
 
 ```
 patientfile/db> docker stop patientfile_mysqld_1
@@ -75,13 +120,13 @@ patientfile/db> chmod -R 777 var-lib-mysql
 /patientfile> docker-compose -f docker-compose-dev.yml up -d mysqld 
 ```
 
-## Q3) How to create a new structure and master data?
+## Q4) How to create a new structure and master data?
 
 ```
 var-lib-mysql> zip may-22-2020.zip * -r
 ```
 
-## Q4) How to run same component inside  patient file component and also individually?
+## Q5) How to run same component inside  patient file component and also individually?
 
 ### Step 1
 A new componet called AddRecommendationTab is created inside: 
@@ -118,37 +163,12 @@ Components are supposed to be kept in components folder.
 
 Views are supposed to use components but not define components.
 
-## Q5) How to get started?
+## Q6) How to get started?
 
 A new programmer should be able to write a new componet in 5 mins.
 
 Start visual studio code
 make sure vetur VSCode extension is installed.
-
-
-
-## Q6) How to run the app locally?
-
-```bash
-git clone https://github.com/savantcare/patientfile.git
-
-/patientfile> docker-compose -f docker-compose-dev.yml up -d
-```
-
-Give enough time for npm install to work:
-
-```bash
-/patientfile> docker logs patientfile_vue_1 -f
-/patientfile> docker logs patientfile_node_1 -f
-```
-
-Once the install finishes then:
-```
-In 3 incognito tabs open
-http://localhost:81/phpmyadmin/      admin              : WUy3OsU5BYMM
-http://localhost:8080/login          user1@gmail.com    : 123
-http://localhost:8080/login          user1@gmail.com    : 123
-```
 
 ## Q7) How to see app behavior when DB server connection is lost?
 The mysql server is run from docker (See node-server/README.md)
