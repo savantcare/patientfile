@@ -5,6 +5,7 @@
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="leftPanel">
         <left-panel-header></left-panel-header>
+        <Recommendation type="panel" />
         <!-- <div id="leftPanelContainer">
           <div id="leftPanelContent">
             <div v-if="leftPanelComponents.length > 0">
@@ -54,6 +55,9 @@ const SearchBox = () => import("@/components/ui/SearchBox.vue");
 // const CombinationCard = () => import("@/components/CombinationCard.vue");
 const TabDialog = () => import("./TabDialog");
 
+const Recommendation = () =>
+  import("@/components/composition-layer1/Recommendation");
+
 export default {
   name: "Home",
   components: {
@@ -67,10 +71,11 @@ export default {
     // TestPanel,
 
     // Right panel components
-    SearchBox
+    SearchBox,
     // RecommendationsCard,
     // RemindersCard,
-    // CombinationCard
+    // CombinationCard,
+    Recommendation
   },
   data() {
     return {
@@ -104,7 +109,7 @@ export default {
     const rightPanelCards = [
       {
         key: "recommendation",
-        value: require("../components/composition-layer1/RecommendationsCard")
+        value: require("../components/composition-layer1/Recommendation")
           .default
       },
       {
@@ -325,7 +330,7 @@ export default {
         });
         newList.push({
           key: "recommendation",
-          value: require("../components/composition-layer1/RecommendationsCard")
+          value: require("../components/composition-layer1/Recommendation")
             .default
         });
 

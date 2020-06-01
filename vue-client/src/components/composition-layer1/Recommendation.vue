@@ -4,7 +4,7 @@
       <CardHeader
         title="Recommendation"
         actions="A,M,F,D"
-        type="card"
+        :type="type"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
@@ -22,6 +22,7 @@
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
       title="recommendation"
+      :type="type"
     />
   </el-card>
 </template>
@@ -33,6 +34,12 @@ export default {
   components: {
     CardHeader,
     DataTable
+  },
+  props: {
+    type: {
+      type: String,
+      default: "card"
+    }
   },
   data() {
     return {
