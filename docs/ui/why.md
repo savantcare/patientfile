@@ -1,5 +1,7 @@
 ## Q1) Why patient app has left side and right side?
 
+Psychiatrist needs to be able to look at multiple historical states to make decisions and change the current state.
+
 Left side shows the state of the patient on a particular date.
 
 ![state-of-patient](./images/state-of-patient-on-a-specific-date.png)
@@ -8,7 +10,11 @@ Left side shows the state of the patient on a particular date.
 
 ![Change state of patient](./images/change-state-of-the-patient.png)
 
-Psychiatrist needs to be able to look at multiple historical states to make decisions and change the current state.
+The same componet is used on left and right hand side of layer 1. Just with different JSON data being returned from server
+
+Left side is "Data as on Date X"
+
+Right side is "Current data"
 
 ## Q2) Why does the left side have two tabs on the top right corner?
 The 1st tab shows the health components and the 2nd tab shows the non-health components. There is a master table of components. And each component is either a health component or a "not-health" component.
