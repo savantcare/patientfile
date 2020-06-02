@@ -70,7 +70,7 @@ export default {
           key: MULTIPLE_RATE_GOAL
         },
         {
-          value: "Add a screen",
+          value: "Add screen",
           key: ADD_SCREEN
         },
         {
@@ -165,7 +165,7 @@ export default {
         this.$store.commit("addNewTab", multiChangeGoalTab);
       }else if (key == ADD_SCREEN) {
         const addScreenTab = {
-          label: "Add a screen",
+          label: "Add screen",
           value: require("./screening/AddScreen.vue").default,
           name: "tab-add-screen"
         };
