@@ -103,7 +103,7 @@ export default {
     handleSelect(item) {
       const action = item.value;
 
-      this.$store.commit("updateTodayStateCards", action);
+      this.$store.commit("updateCurrentStateCards", action);
       this.$store.dispatch("updateRightPanelRow");
 
       this.searchKeyword = "";
@@ -125,7 +125,7 @@ export default {
         }
       };
       if (keywords.length == 1) {
-        this.$store.commit("updateTodayStateCards", keywords[0]);
+        this.$store.commit("updateCurrentStateCards", keywords[0]);
         this.$store.dispatch("updateRightPanelRow");
       } else if (keywords.length == 2) {
         // rex add

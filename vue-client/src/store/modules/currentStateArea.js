@@ -24,7 +24,7 @@ export default {
     setRightPanelSearchKeyword(state, keyword) {
       state.searchKeyword = keyword
     },
-    updateTodayStateCards(state, action) {
+    updateCurrentStateCards(state, action) {
       if (action == "clear") {
         state.focusRowIndex = -1
         state.list = []

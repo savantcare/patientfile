@@ -15,28 +15,14 @@ import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
 import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
+import searchCommandList from '@/searchCommandList.js'
 
 // READABLE: Take this out of index.js
 
 export default new Vuex.Store({
   state: {
     userRole: '',
-    searchCommandList: [
-      "recommendation (rex)",
-      "recommendation (rex) add",
-      "recommendation (rex) multi change",
-      "recommendation (rex) focus",
-      "recommendation (rex) download pdf",
-      "recommendation (rex) send to patient (HDR)",
-      "reminder (rem)",
-      "reminder (rex) add",
-      "reminder (rex) multi change",
-      "reminder (rex) focus",
-      "reminder (rex) download pdf",
-      "reminder (rex) send to patient (HDR)",
-      "goal (g)",
-      "clear"
-    ],
+    searchCommandList: searchCommandList,
     focusComponent: "",
     connectionStatus: true, // true: online, false: offline
     userId: -1,
