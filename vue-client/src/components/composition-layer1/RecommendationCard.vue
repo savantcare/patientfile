@@ -37,14 +37,14 @@ export default {
   props: {
     type: {
       type: String,
-      default: "stateToday"
+      default: "stateToday" // There are two possible types. stateToday and stateOnADay
     }
   },
   data() {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["description"]
+      selectedColumns: ["description"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
     };
   },
   methods: {

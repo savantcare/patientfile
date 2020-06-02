@@ -18,7 +18,7 @@
           </div>
         </div>-->
       </SplitArea>
-      <SplitArea :size="30" :minsize="100">
+      <SplitArea :size="30" :minsize="100" id="stateToday">
         <transition-group name="list" tag="div">
           <component
             v-for="(component, index) in stateTodayComponents"
