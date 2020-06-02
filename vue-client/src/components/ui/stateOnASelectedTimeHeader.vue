@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" align="middle" id="stateOnADayHeader">
+  <el-row type="flex" align="middle" id="stateOnASelectedTimeHeader">
     <el-col :span="6" class="ml-2">
       <span style="font-size: 20px;">Alexey D</span>
       <span style="font-size: 14px; margin-left: 6px;">(28 years old)</span>
@@ -34,33 +34,33 @@ export default {
       return this.$store.state.connectionStatus;
     },
     currentDate() {
-      return this.$store.state.stateOnADay.currentDate;
+      return this.$store.state.stateOnASelectedTime.currentDate;
     },
     zoomValue() {
-      return this.$store.state.stateOnADay.zoomValue;
+      return this.$store.state.stateOnASelectedTime.zoomValue;
     }
   },
   watch: {
     tabMode() {
-      // this.updatestateOnADay();
+      // this.updatestateOnASelectedTime();
     }
   },
   mounted() {
     // this.getPatientInfo();
-    // this.updatestateOnADay();
-    // this.zoomValue = this.$store.state.stateOnADay.zoomValue;
-    // this.zoomstateOnADay();
+    // this.updatestateOnASelectedTime();
+    // this.zoomValue = this.$store.state.stateOnASelectedTime.zoomValue;
+    // this.zoomstateOnASelectedTime();
   },
   methods: {
-    async updatestateOnADay() {
-      await this.$store.dispatch("getstateOnADayComponents", {
+    async updatestateOnASelectedTime() {
+      await this.$store.dispatch("getstateOnASelectedTimeComponents", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast
       });
 
       // setTimeout(() => {
-      //   var width = document.getElementById("stateOnADayContent").offsetWidth;
-      //   var height = document.getElementById("stateOnADayContent").offsetHeight;
+      //   var width = document.getElementById("stateOnASelectedTimeContent").offsetWidth;
+      //   var height = document.getElementById("stateOnASelectedTimeContent").offsetHeight;
       //   var windowWidth = $(document).outerWidth();
       //   var windowHeight = $(document).outerHeight();
       //   windowWidth = windowWidth * (70 / 100);
@@ -73,8 +73,8 @@ export default {
       //     r = Math.min(windowWidth / width, windowHeight / height);
       //   }
 
-      //   this.$store.commit("setStateOnADayZoomValue", r);
-      //   this.$store.dispatch("zoomstateOnADay");
+      //   this.$store.commit("setstateOnASelectedTimeZoomValue", r);
+      //   this.$store.dispatch("zoomstateOnASelectedTime");
       // }, 100);
     },
     async getPatientInfo() {
@@ -112,21 +112,21 @@ export default {
     zoomOut() {
       let value = this.zoomValue;
       value -= 0.1;
-      this.$store.commit("setStateOnADayZoomValue", value);
-      this.$store.dispatch("zoomstateOnADay");
+      this.$store.commit("setstateOnASelectedTimeZoomValue", value);
+      this.$store.dispatch("zoomstateOnASelectedTime");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
-      this.$store.commit("setStateOnADayZoomValue", value);
-      this.$store.dispatch("zoomstateOnADay");
+      this.$store.commit("setstateOnASelectedTimeZoomValue", value);
+      this.$store.dispatch("zoomstateOnASelectedTime");
     }
   }
 };
 </script>
 
 <style scoped>
-#stateOnADayHeader {
+#stateOnASelectedTimeHeader {
   height: 30px;
   margin-bottom: 6px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

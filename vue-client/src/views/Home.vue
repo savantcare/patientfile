@@ -3,15 +3,15 @@
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
-      <SplitArea :size="70" :minsize="100" id="stateOnADay">
-        <stateOnADayHeader></stateOnADayHeader>
-        <Recommendation type="stateOnADay" />
-        <!-- <div id="stateOnADayContainer">
-          <div id="stateOnADayContent">
-            <div v-if="stateOnADayComponents.length > 0">
+      <SplitArea :size="70" :minsize="100" id="stateOnASelectedTime">
+        <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
+        <Recommendation type="stateOnASelectedTime" />
+        <!-- <div id="stateOnASelectedTimeContainer">
+          <div id="stateOnASelectedTimeContent">
+            <div v-if="stateOnASelectedTimeComponents.length > 0">
               <component
                 :is="component"
-                v-for="(component, index) in stateOnADayComponents"
+                v-for="(component, index) in stateOnASelectedTimeComponents"
                 :key="`left-component-${index}`"
               ></component>
             </div>
@@ -43,9 +43,9 @@
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const stateOnADayHeader = () => import("@/components/ui/stateOnADayHeader.vue");
+const stateOnASelectedTimeHeader = () => import("@/components/ui/stateOnASelectedTimeHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
-// const TestPanel = () => import("@/components/stateOnADayTestComponent.vue");
+// const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
 
 // Right panel components
 const SearchBox = () => import("@/components/ui/SearchBox.vue");
@@ -68,7 +68,7 @@ export default {
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
-    stateOnADayHeader,
+    stateOnASelectedTimeHeader,
     // DateSlider,
     // TestPanel,
 
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      stateOnADayWidth: 70
+      stateOnASelectedTimeWidth: 70
     };
   },
   computed: {
@@ -93,8 +93,8 @@ export default {
     CurrentStateComponents() {
       return this.$store.state.rightPanel.list;
     },
-    stateOnADayComponents() {
-      return this.$store.getters.stateOnADayList;
+    stateOnASelectedTimeComponents() {
+      return this.$store.getters.stateOnASelectedTimeList;
     }
   },
   beforeCreate() {
@@ -196,9 +196,9 @@ export default {
     ];
 
     this.$store.commit("setRightPanelList", rightPanelCards);
-    // Initialize stateOnADay components
-    // const stateOnADayList = [RecommendationsPanel, RemindersPanel];
-    // this.$store.commit("setStateOnADayList", stateOnADayList);
+    // Initialize stateOnASelectedTime components
+    // const stateOnASelectedTimeList = [RecommendationsPanel, RemindersPanel];
+    // this.$store.commit("setstateOnASelectedTimeList", stateOnASelectedTimeList);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -216,7 +216,7 @@ export default {
     onDrag(size) {
       const rightSize = size[1];
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
-      this.stateOnADayWidth = size[0];
+      this.stateOnASelectedTimeWidth = size[0];
     },
     renderCurrentStatePanel(action) {
       if (action == "clear") {

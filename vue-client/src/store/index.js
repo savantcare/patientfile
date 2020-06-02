@@ -11,7 +11,7 @@ import goalModule from './modules/goal'
 import settingModule from './modules/setting'
 import rightPanelModule from './modules/rightPanel'
 import tabDialogModule from './modules/secondLayerTabDialogState'
-import stateOnADayModule from './modules/stateOnADaySide'
+import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
 import dialogModule from './modules/dialog'
 import socialHistoryModule from './modules/socialHistory'
 
@@ -74,7 +74,7 @@ export default new Vuex.Store({
     setting: settingModule,
     rightPanel: rightPanelModule,
     tabDialog: tabDialogModule,
-    stateOnADay: stateOnADayModule,
+    stateOnASelectedTime: stateOnASelectedTimeModule,
     dialog: dialogModule,
     socialHistory: socialHistoryModule
   },
