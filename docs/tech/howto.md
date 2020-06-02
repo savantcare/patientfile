@@ -375,23 +375,35 @@ Heroku updates the staging server automatically when the master branch is update
 If you use double floating point numbers to indicate priority you do not need to re-order:
 
 1.00 Task A
+
 2.00 Task B
+
 3.00 Task C
+
 4.00 Task D
+
 5.00 Task E
+
 If you want to place task E between A and B then:-
 
 E.priority = A.priority + ((B.priority - A.priority) / 2)
+
 So now you have:
 
 1.00 Task A
+
 1.50 Task E
+
 2.00 Task B
+
 3.00 Task C
+
 4.00 Task D
+
 If you wanted to insert D between E and B then simply set its priority to 1.75. Given the approximately 18 decimal digits in a floating point number (1.75 is really 1.7500000000000000) you should have a worst case of 53 consecutive inserts before:
 
 A.priority + ((B.priority - A.priority) / 2) = B.priority
+
 And before anyone complains about the overhead of using doubles vs. integers, its just a few hardware instructions, compared with the processing and I/O overhead of reordering the list in the database which would be several orders of magnitude greater.
 
 

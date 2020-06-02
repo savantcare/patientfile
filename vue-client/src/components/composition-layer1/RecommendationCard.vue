@@ -49,6 +49,18 @@ export default {
   },
   methods: {
     showAddDialog() {
+      /* 
+      Ref: https://vuex.vuejs.org/guide/mutations.html
+      The only way to actually change state in a Vuex store is by committing a mutation. 
+      Vuex mutations are very similar to events: each mutation has a string type and a handler. 
+      The handler function is 
+        1. Where we perform actual state modifications, 
+        2. Where we will receive the state as the first argument.
+
+      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/tabDialog.js#L80  
+
+      QUESTION: How is tabDialog getting this event.
+      */
       this.$store.commit("showAddRecommendationModal");
     },
     showMultiChangeDialog() {
@@ -89,7 +101,7 @@ export default {
       this.selectedColumns = value;
     }
   },
-  mounted() {
+  mounted() { // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify
