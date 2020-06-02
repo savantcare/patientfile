@@ -1,55 +1,29 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <div slot="header" class="clearfix">
-          <CardHeader
-            title="Diagnosis"
-            actions="A,M,F,D"
-            type="CurrentState"
-            @showAddDialog="showAddDiagnosisDialog"
-            @showMultiChangeDialog="showMultiChangeAssessmentDialog"
-            @focusPanel="focusPanel"
-            @multiDiscontinue="multiDiscontinue"
-            :selectedColumn="diagnosesData.selectedColumn"
-            :availableColumns="diagnosesData.columns"
-            ref="card_header"
-          />
-        </div>
-
-        <!--<span>Diagnoses</span>-->
-        <!--<div style="float: right">
-          <el-button type="text" size="mini" @click="showAddDiagnosisDialog">A</el-button>
-          <el-button type="text" size="mini" @click="showMultiChangeAssessmentDialog">M</el-button>
-          <el-popover
-            placement="bottom"
-            width="200"
-            trigger="click">
-            <el-select
-              v-model="diagnosesData.selectedColumn"
-              size="mini"
-              clearable
-              multiple
-              placeholder="Select"
-              collapse-tags
-            >
-              <el-option
-                v-for="item in diagnosesData.columns"
-                :key="item.field"
-                :label="item.label"
-                :value="item.field"
-              ></el-option>
-            </el-select>
-            <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-          </el-popover>
-        </div>-->
-      </div>
-      <DataTableWithoutTab
-        :dataToDisplay="diagnosesData"
-        @handleSelectionChange="handleSelectionChange"
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <CardHeader
+        title="Diagnosis"
+        actions="A,M,F,D"
+        :type="type"
+        :columns="columns"
+        @showAddDialog="showAddDialog"
+        @showMultiChangeDialog="showMultiChangeDialog"
+        @focusPanel="focusPanel"
+        @multiDiscontinue="multiDiscontinue"
+        @updateSelectedColumns="updateSelectedColumns"
       />
-    </el-card>
-  </div>
+    </div>
+    <DataTableWithoutTab
+      :tabData="tabData"
+      :selectedColumns="selectedColumns"
+      title="diagnosis"
+      :type="type"
+      @handleSelectionChange="handleSelectionChange"
+      @handleChange="handleChange"
+      @handleDiscontinue="handleDiscontinue"
+      @handleUpdateColumns="handleUpdateColumns"
+    />
+  </el-card>
 </template>
 
 <script>
@@ -60,105 +34,43 @@ export default {
     CardHeader,
     DataTableWithoutTab
   },
+  props: {
+    type: {
+      type: String,
+      default: "CurrentState" // There are two possible types. CurrentState and stateOnASelectedTime
+    }
+  },
   data() {
     return {
-      drawer: false,
-      direction: "rtl",
-      diagnosesData: {
-        label: "Yours",
-        tableData: [
-          // {
-          //   name: "Bacterial intestinal infection, unspecified",
-          //   addedBy: "Dr. Sonia P",
-          //   addedOn: "Apr 27, 2020",
-          //   currentAssessment: "Current assessment for this diagnosis",
-          //   assessments: [
-          //     {
-          //       content: "Current assessment for this diagnosis",
-          //       timestamp: "May 25, 2020",
-          //       size: "large",
-          //       type: "primary"
-          //     },
-          //     {
-          //       content: "Previous assessment for this diagnosis",
-          //       timestamp: "May 14, 2020",
-          //       type: "primary"
-          //     },
-          //     {
-          //       content: "First assessment for this diagnosis",
-          //       timestamp: "Apr 27, 2020",
-          //       type: "success"
-          //     }
-          //   ]
-          // },
-          // {
-          //   name: "Adjustment disorder, With depressed mood",
-          //   addedBy: "Dr. Sonia P",
-          //   addedOn: "Apr 22, 2020",
-          //   currentAssessment: "Current assessment for this diagnosis",
-          //   assessments: [
-          //     {
-          //       content: "Current assessment for this diagnosis",
-          //       timestamp: "May 25, 2020",
-          //       size: "large",
-          //       type: "primary"
-          //     },
-          //     {
-          //       content: "First assessment for this diagnosis",
-          //       timestamp: "Apr 22, 2020",
-          //       type: "success"
-          //     }
-          //   ]
-          // },
-          // {
-          //   name: "Generalized anxiety disorder",
-          //   addedBy: "Dr. Sonia P",
-          //   addedOn: "Mar 22, 2020",
-          //   currentAssessment: "Current assessment for this diagnosis",
-          //   assessments: [
-          //     {
-          //       content: "Current assessment for this diagnosis",
-          //       timestamp: "Apr 02, 2020",
-          //       size: "large",
-          //       type: "primary"
-          //     },
-          //     {
-          //       content: "First assessment for this diagnosis",
-          //       timestamp: "Mar 22, 2020",
-          //       type: "success"
-          //     }
-          //   ]
-          // }
-        ],
-        columns: [
-          {
-            label: "Diagnosis",
-            field: "name",
-            sortable: true
-          },
-          {
-            label: "Added By",
-            field: "addedBy",
-            sortable: true
-          },
-          {
-            label: "Added On",
-            field: "addedOn",
-            sortable: true
-          }
-        ],
-        rowActions: ["C", "D"],
-        selectedColumn: ["name"]
-      }
+      selectedRows: [],
+      columns: [],
+      selectedColumns: ["diagnosisName"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
     };
   },
   methods: {
-    showAddDiagnosisDialog() {
-      console.log("open add dialog");
+    showAddDialog() {
+      /* 
+      Ref: https://vuex.vuejs.org/guide/mutations.html
+      The only way to actually change state in a Vuex store is by committing a mutation. 
+      Vuex mutations are very similar to events: each mutation has a string type and a handler. 
+      The handler function is 
+        1. Where we perform actual state modifications, 
+        2. Where we will receive the state as the first argument.
+
+      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/secondLayerTabDialogState.js#L80  
+
+      QUESTION: How is tabDialog getting this event.
+
+      Due to using a single state tree, all state of our application is contained inside one big object. However, as our application grows in scale, the store can get really bloated.
+      To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
+      Ref: https://vuex.vuejs.org/guide/modules.html
+
+      showAddRecommendationModal is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
+
+      */
       this.$store.commit("showAddDiagnosisModal");
     },
-    showMultiChangeAssessmentDialog() {
-      console.log("open add dialog");
+    showMultiChangeDialog() {
       this.$store.commit("showMultiChangeAssessmentModal");
     },
     focusPanel() {
@@ -177,9 +89,26 @@ export default {
     },
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
+      this.selectedRows = value;
+    },
+    handleChange(data) {
+      console.log("show change dialog");
+      this.$store.commit("showChangeRecommendationsModal", data);
+    },
+    handleDiscontinue(data) {
+      this.$store.dispatch("discontinueRecommendation", {
+        data: data,
+        toast: this.$notify
+      });
+    },
+    handleUpdateColumns(value) {
+      this.columns = value;
+    },
+    updateSelectedColumns(value) {
+      this.selectedColumns = value;
     }
   },
-  mounted() {
+  mounted() { // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify
@@ -189,41 +118,18 @@ export default {
   computed: {
     tabData() {
       const dxList = this.$store.state.diagnosis.list;
-      return [
-        {
+      console.log(dxList);
+      return {
           label: "Yours",
           tableData: dxList,
-          columns: [
-            {
-              label: "Diagnosis",
-              field: "name",
-              sortable: true
-            },
-            {
-              label: "Added By",
-              field: "addedBy",
-              sortable: true
-            },
-            {
-              label: "Added On",
-              field: "addedOn",
-              sortable: true
-            }
-          ],
           rowActions: ["C", "D"],
-          selectedColumn: ["name"]
+          selectedColumn: ["diagnosisName"]
         }
-      ];
+      ;
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-.settingsIcon {
-  float: right;
-  color: #409eff;
-  cursor: pointer;
-  padding: 5px;
-}
+<style lang="css">
 </style>

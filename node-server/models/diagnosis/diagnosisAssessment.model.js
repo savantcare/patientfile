@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     diagnosisId: {
       type: Sequelize.STRING
     },
-    uid: {
+    patientUUId: {
       type: Sequelize.STRING
     },
     assessment: {
