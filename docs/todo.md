@@ -3,9 +3,7 @@
 
 2. Search 
    1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
-   2. The state searchComponentList should not be inside index.js 
-   3. The searchComponentList needs to be renamed to searchCommmandList
-   4. In searchCommmandList for each command the action needs to be stored in the 2nd column of the list.
+   2. In searchCommmandList for each command the action needs to be stored in the 2nd column of the list.
 
 3. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
