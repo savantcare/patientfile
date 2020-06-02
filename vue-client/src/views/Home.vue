@@ -282,6 +282,6 @@ body {
 .list-enter,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(970px);
+  transform: translateY(30px);
 }
 </style>
