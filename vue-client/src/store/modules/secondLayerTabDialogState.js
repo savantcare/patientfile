@@ -102,8 +102,8 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    
-    
+
+
     showMultiChangeRecommendationModal(state) {
       const tab = {
         label: "Multi change Recommendations",
@@ -124,6 +124,7 @@ export default {
       state.tabList = [tab]
       state.visibility = true
       state.recommendationTabType = CHANGE_RECOMMENDATION
+      console.log(CHANGE_RECOMMENDATION)
       state.recommendationData = data
       state.tabValue = tab.name
     },

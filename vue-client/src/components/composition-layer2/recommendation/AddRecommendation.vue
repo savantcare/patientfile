@@ -20,7 +20,8 @@
                   v-model="domain.description"
                   placeholder="You may enter multi line text"
                   :autosize="{ minRows: 4}"
-                  :autofocus="true"
+                  autofocus
+                  ref="input_box"
                 ></el-input>
               </el-card>
             </el-form-item>
@@ -42,7 +43,7 @@
  * @displayName Add Recommendation
  */
 import uniqid from "uniqid";
-import { EDIT_RECOMMENDATION } from "@/const.js";
+import { CHANGE_RECOMMENDATION } from "@/const.js";
 export default {
   data() {
     return {
@@ -60,7 +61,7 @@ export default {
       const vm = this;
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          if (this.type == EDIT_RECOMMENDATION) {
+          if (this.type == CHANGE_RECOMMENDATION) {
             this.updateData["description"] = this.recForm.recs[0].description;
             this.updateData["discontinuedByUserId"] = this.userId;
             this.updateData["createdByUserId"] = this.userId;
@@ -95,6 +96,9 @@ export default {
           return false;
         }
       });
+    },
+    focusToTheInputBox() {
+      this.$refs.input_box[0].$el.getElementsByTagName("textarea")[0].focus();
     }
   },
   computed: {
@@ -109,9 +113,12 @@ export default {
     }
   },
   mounted() {
-    if (this.type == EDIT_RECOMMENDATION) {
+    if (this.type == CHANGE_RECOMMENDATION) {
       this.recForm = { recs: [{ description: this.updateData.description }] };
     }
+    setTimeout(() => {
+      this.focusToTheInputBox();
+    }, 100);
   },
   watch: {
     updateData() {

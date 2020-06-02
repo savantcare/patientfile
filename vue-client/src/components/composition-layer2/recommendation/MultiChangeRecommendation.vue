@@ -11,6 +11,8 @@
                   type="textarea"
                   v-model="rec.description"
                   :autosize="{minRows:4}"
+                  autofocus
+                  ref="input_box"
                 ></el-input>
               </el-form-item>
               <el-form-item>
@@ -28,13 +30,13 @@
 
 <script>
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
+// import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const.js";
 export default {
   components: {
     RecommendationHistoryItem
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     onClickSave(rec) {
@@ -48,6 +50,11 @@ export default {
         data: rec,
         notify: this.$notify
       });
+    },
+    focusToTheFirstInputBox() {
+      setTimeout(() => {
+        this.$refs.input_box[0].$el.getElementsByTagName("textarea")[0].focus();
+      }, 100);
     }
   },
   computed: {
@@ -72,7 +79,11 @@ export default {
       }
       return result;
     }
-  }
+  },
+  mounted() {
+    this.focusToTheFirstInputBox();
+  },
+  watch: {}
 };
 </script>
 
