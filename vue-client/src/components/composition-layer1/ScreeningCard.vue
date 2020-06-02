@@ -10,7 +10,7 @@
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
-      <!-- @showMultiChangeDialog="showMultiChangeDialog" -->
+      <!-- @showMultiChangeDialog="showTakeAScreenDialog" -->
     </div>
 
     <!-- <DataTable
@@ -22,7 +22,15 @@
     
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="Name" width="180"> </el-table-column>
-      <!-- <el-table-column prop="address" label="Address"> </el-table-column> -->
+      <el-table-column align="right">
+        <!-- <template slot="header" >
+          <el-input v-model="search" size="mini" placeholder="search screen"/>
+        </template> -->
+        <template slot-scope="scope">
+            <el-link type="primary"
+            @click="showTakeAScreenDialog(scope.$index, scope.row)">T</el-link>
+        </template>
+    </el-table-column>
     </el-table>
 
   </el-card>
@@ -49,7 +57,8 @@ export default {
       console.log("show add dialog");
       this.$store.commit("showAddScreenModal");
     },
-    showMultiChangeDialog() {
+    showTakeAScreenDialog(index, row) {
+      console.log(index, row);
       this.$store.commit("showTakeAScreenModal");
     },
     focusPanel() {
