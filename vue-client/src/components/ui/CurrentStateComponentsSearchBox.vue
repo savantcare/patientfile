@@ -52,13 +52,13 @@ export default {
   },
   mounted() {
     this.$store.commit("setRightPanelWidth", "calc(30% - 4px)");
-    this.$refs.search_box.$el
-      .getElementsByTagName("input")[0]
-      .addEventListener("keydown", event => {
-        if (event.keyCode == 13) {
-          this.executeSearch();
-        }
-      });
+    // this.$refs.search_box.$el
+    //   .getElementsByTagName("input")[0]
+    //   .addEventListener("keydown", event => {
+    //     if (event.keyCode == 13) {
+    //       this.executeSearch();
+    //     }
+    //   });
   },
   methods: {
     setFocus() {
@@ -102,7 +102,7 @@ export default {
 
     handleSelect(item) {
       const action = item.value;
-      // this.$emit("renderCurrentStateCards", action);
+
       this.$store.commit("updateTodayStateCards", action);
       this.$store.dispatch("updateRightPanelRow");
 
@@ -125,7 +125,8 @@ export default {
         }
       };
       if (keywords.length == 1) {
-        this.$emit("renderCurrentStateCards", keywords[0]);
+        this.$store.commit("updateTodayStateCards", keywords[0]);
+        this.$store.dispatch("updateRightPanelRow");
       } else if (keywords.length == 2) {
         // rex add
         const component = keywords[0];
