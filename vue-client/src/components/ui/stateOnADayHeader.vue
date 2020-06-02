@@ -34,33 +34,33 @@ export default {
       return this.$store.state.connectionStatus;
     },
     currentDate() {
-      return this.$store.state.leftPanel.currentDate;
+      return this.$store.state.stateOnADay.currentDate;
     },
     zoomValue() {
-      return this.$store.state.leftPanel.zoomValue;
+      return this.$store.state.stateOnADay.zoomValue;
     }
   },
   watch: {
     tabMode() {
-      // this.updateLeftPanel();
+      // this.updatestateOnADay();
     }
   },
   mounted() {
     // this.getPatientInfo();
-    // this.updateLeftPanel();
-    // this.zoomValue = this.$store.state.leftPanel.zoomValue;
-    // this.zoomLeftPanel();
+    // this.updatestateOnADay();
+    // this.zoomValue = this.$store.state.stateOnADay.zoomValue;
+    // this.zoomstateOnADay();
   },
   methods: {
-    async updateLeftPanel() {
-      await this.$store.dispatch("getLeftPanelComponents", {
+    async updatestateOnADay() {
+      await this.$store.dispatch("getstateOnADayComponents", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast
       });
 
       // setTimeout(() => {
-      //   var width = document.getElementById("leftPanelContent").offsetWidth;
-      //   var height = document.getElementById("leftPanelContent").offsetHeight;
+      //   var width = document.getElementById("stateOnADayContent").offsetWidth;
+      //   var height = document.getElementById("stateOnADayContent").offsetHeight;
       //   var windowWidth = $(document).outerWidth();
       //   var windowHeight = $(document).outerHeight();
       //   windowWidth = windowWidth * (70 / 100);
@@ -74,7 +74,7 @@ export default {
       //   }
 
       //   this.$store.commit("setStateOnADayZoomValue", r);
-      //   this.$store.dispatch("zoomLeftPanel");
+      //   this.$store.dispatch("zoomstateOnADay");
       // }, 100);
     },
     async getPatientInfo() {
@@ -113,13 +113,13 @@ export default {
       let value = this.zoomValue;
       value -= 0.1;
       this.$store.commit("setStateOnADayZoomValue", value);
-      this.$store.dispatch("zoomLeftPanel");
+      this.$store.dispatch("zoomstateOnADay");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
       this.$store.commit("setStateOnADayZoomValue", value);
-      this.$store.dispatch("zoomLeftPanel");
+      this.$store.dispatch("zoomstateOnADay");
     }
   }
 };

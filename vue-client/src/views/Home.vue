@@ -3,15 +3,15 @@
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
-      <SplitArea :size="70" :minsize="100" id="leftPanel">
+      <SplitArea :size="70" :minsize="100" id="stateOnADay">
         <left-panel-header></left-panel-header>
         <Recommendation type="stateOnADay" />
-        <!-- <div id="leftPanelContainer">
-          <div id="leftPanelContent">
-            <div v-if="leftPanelComponents.length > 0">
+        <!-- <div id="stateOnADayContainer">
+          <div id="stateOnADayContent">
+            <div v-if="stateOnADayComponents.length > 0">
               <component
                 :is="component"
-                v-for="(component, index) in leftPanelComponents"
+                v-for="(component, index) in stateOnADayComponents"
                 :key="`left-component-${index}`"
               ></component>
             </div>
@@ -43,9 +43,9 @@
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const LeftPanelHeader = () => import("@/components/ui/LeftPanelHeader.vue");
+const stateOnADayHeader = () => import("@/components/ui/stateOnADayHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
-// const TestPanel = () => import("@/components/LeftPanelTestComponent.vue");
+// const TestPanel = () => import("@/components/stateOnADayTestComponent.vue");
 
 // Right panel components
 const SearchBox = () => import("@/components/ui/SearchBox.vue");
@@ -68,7 +68,7 @@ export default {
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
-    LeftPanelHeader,
+    stateOnADayHeader,
     // DateSlider,
     // TestPanel,
 
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      leftPanelWidth: 70
+      stateOnADayWidth: 70
     };
   },
   computed: {
@@ -93,8 +93,8 @@ export default {
     stateTodayComponents() {
       return this.$store.state.rightPanel.list;
     },
-    leftPanelComponents() {
-      return this.$store.getters.leftPanelList;
+    stateOnADayComponents() {
+      return this.$store.getters.stateOnADayList;
     }
   },
   beforeCreate() {
@@ -196,9 +196,9 @@ export default {
     ];
 
     this.$store.commit("setRightPanelList", rightPanelCards);
-    // Initialize leftPanel components
-    // const leftPanelList = [RecommendationsPanel, RemindersPanel];
-    // this.$store.commit("setStateOnADayList", leftPanelList);
+    // Initialize stateOnADay components
+    // const stateOnADayList = [RecommendationsPanel, RemindersPanel];
+    // this.$store.commit("setStateOnADayList", stateOnADayList);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -216,7 +216,7 @@ export default {
     onDrag(size) {
       const rightSize = size[1];
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
-      this.leftPanelWidth = size[0];
+      this.stateOnADayWidth = size[0];
     },
     renderStateTodayPanel(action) {
       if (action == "clear") {

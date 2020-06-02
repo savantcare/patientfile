@@ -20,7 +20,7 @@ export default {
     }
   },
   actions: {
-    async getLeftPanelComponents({ commit }, json) {
+    async getstateOnADayComponents({ commit }, json) {
       const { toast, type } = json
       const TOKEN = localStorage.getItem("token")
       try {
@@ -44,7 +44,7 @@ export default {
           })
 
           commit("setStateOnADayList", availableComponents)
-          // dispatch("zoomLeftPanel")
+          // dispatch("zoomstateOnADay")
         }
       } catch (ex) {
         toast.toast("Server connection error", {
@@ -54,9 +54,9 @@ export default {
         })
       }
     },
-    zoomLeftPanel() {
+    zoomstateOnADay() {
       // const r = state.zoomValue
-      // $("#leftPanelContent").css({
+      // $("#stateOnADayContent").css({
       //   "-webkit-transform": "scale(" + r + ")",
       //   "-moz-transform": "scale(" + r + ")",
       //   "-ms-transform": "scale(" + r + ")",
@@ -64,23 +64,23 @@ export default {
       //   transform: "scale(" + r + ")"
       // });
 
-      // var height = document.getElementById("leftPanelContent").offsetHeight;
+      // var height = document.getElementById("stateOnADayContent").offsetHeight;
       // var windowHeight = $(document).outerHeight() - 100;
       // height = Math.ceil(height * r)
 
       // if (height > windowHeight || r == 1) {
-      //   $("#leftPanelContent").css({
+      //   $("#stateOnADayContent").css({
       //     position: "initial"
       //   })
       // } else {
-      //   $("#leftPanelContent").css({
+      //   $("#stateOnADayContent").css({
       //     position: "fixed"
       //   })
       // }
     }
   },
   getters: {
-    leftPanelList(state) {
+    stateOnADayList(state) {
       let list = []
       state.list.forEach(item => {
         const leftComponent = STATE_ON_A_DAY_COMPONENTS.filter(component => {
