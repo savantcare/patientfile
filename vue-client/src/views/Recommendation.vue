@@ -1,35 +1,33 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" width="80%">
-    <el-tabs type="card">
-      <!--Start Multi Change recommendation-->
-      <el-tab-pane>
-        <span slot="label" style="font-size:22px">Multi change recommendation</span>
-        <MultiChangeRecommendationTab />
-      </el-tab-pane>
-      <!--End Multi Change recommendation-->
-
-      <!--Start Multi Change recommendation-->
-      <el-tab-pane>
-        <span slot="label" style="font-size:22px">Add recommendation</span>
-        <AddRecommendationTab />
-      </el-tab-pane>
-      <!--End Multi Add recommendation-->
-    </el-tabs>
-  </el-dialog>
+  <div>
+    <button @click="show = !show">Click me</button>
+    <transition name="fade">
+      <Recommendation v-if="show" />
+    </transition>
+  </div>
 </template>   
 <script>
-import AddRecommendationTab from "@/components/composition-layer2/recommendation/AddRecommendation";
-import MultiChangeRecommendationTab from "@/components/composition-layer2/recommendation/MultiChangeRecommendation";
+import Recommendation from "@/components/composition-layer1/Recommendation.vue";
 export default {
   components: {
-    AddRecommendationTab,
-    MultiChangeRecommendationTab
+    Recommendation
   },
   data() {
     return {
-      dialogVisible: true
+      show: false
     };
   },
   methods: {}
 };
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>

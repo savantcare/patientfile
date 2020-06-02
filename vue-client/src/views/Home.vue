@@ -19,13 +19,13 @@
         </div>-->
       </SplitArea>
       <SplitArea :size="30" :minsize="100">
-        <div v-if="rightPanelComponents.length > 0">
+        <transition-group name="list" tag="div">
           <component
             v-for="(component, index) in rightPanelComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
-        </div>
+        </transition-group>
 
         <search-box ref="search_box" @renderRightPanel="renderRightPanel"></search-box>
       </SplitArea>
@@ -34,7 +34,7 @@
     <tab-dialog></tab-dialog>
   </div>
 </template>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script>
 // const TabDialog = () => import("@/components/ui/TabDialog.vue");
 
@@ -372,5 +372,15 @@ body {
 }
 .ml-2 {
   margin-left: 12px;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
