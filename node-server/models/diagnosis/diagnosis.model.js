@@ -1,31 +1,30 @@
-/*
-How to model a table?
-https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
-
-id is string since we do not want it to be a auto incrementing integer.
-*/
-
 module.exports = (sequelize, Sequelize) => {
-  const Diagnosis = sequelize.define("diagnosis", {
+  const diagnosis = sequelize.define("diagnosis", {
+
     uuid: {
       type: Sequelize.STRING,
       primaryKey: true
     },
-    diagnosisID: {
+    uid: {
       type: Sequelize.STRING
     },
-    diagnosisName: {
+    name: {
+      type: Sequelize.STRING
+    },
+    icd10Code: {
+      type: Sequelize.STRING
+    },
+    notes: {
+      type: Sequelize.STRING
+    },
+    agree: {
       type: Sequelize.STRING
     },
     assessment: {
       type: Sequelize.STRING
     },
-    discontinue: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: 0
-    },
-    patientUUId: {
-      type: Sequelize.STRING
+    startDate: {
+      type: Sequelize.DATE
     },
     recordChangedByUUID: {
       type: Sequelize.STRING
@@ -36,8 +35,8 @@ module.exports = (sequelize, Sequelize) => {
     recordChangedFromIPAddress: {
       type: Sequelize.STRING
     },
-    
+    // Timestamps
   });
 
-  return Diagnosis;
+  return diagnosis;
 };

@@ -1,7 +1,7 @@
-const config = require('config');
+const config = require("config");
 
 const Sequelize = require("sequelize");
-const reminderSequelize = new Sequelize(config.DB_REMINDER, config.USER, config.PASSWORD, {
+const diagnosisSequelize = new Sequelize(config.DB_DIAGNOSIS, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.dialect,
   operatorsAliases: false,
@@ -14,13 +14,23 @@ const reminderSequelize = new Sequelize(config.DB_REMINDER, config.USER, config.
   }
 });
 
-const reminderDB = {}
+const diagnosisDB = {}
 
-reminderDB.Sequelize = Sequelize
-reminderDB.sequelize = reminderSequelize
+diagnosisDB.Sequelize = Sequelize
+diagnosisDB.sequelize = diagnosisSequelize
 
-reminderDB.reminders = require('../reminder.model.js')(reminderSequelize, Sequelize)
+diagnosisDB.diagnosis = require('../diagnosis.model.js')(diagnosisSequelize, Sequelize) //This is for test only
 
-reminderDB.sequelize.sync()
+//diagnosisDB.diagnosis = require('../diagnosis/diagnosis.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.diagnosisAssessment = require('../diagnosis/diagnosisAssessment.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.dsmMasterCodes = require('../diagnosis/dsmMasterCodes.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.icd10AndScreenMappingDetails = require('../diagnosis/icd10AndScreenMappingDetails.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.icd10MasterCodes = require('../diagnosis/icd10MasterCodes.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.patientReportedDiagnosis = require('../diagnosis/patientReportedDiagnosis.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.patientReportedDiagnosisNote = require('../diagnosis/patientReportedDiagnosisNote.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.ruledOutDiagnosis = require('../diagnosis/ruledOutDiagnosis.model.js')(diagnosisSequelize, Sequelize)
+//diagnosisDB.ruledOutNotes = require('../diagnosis/ruledOutNotes.model.js')(diagnosisSequelize, Sequelize)
 
-module.exports = reminderDB
+diagnosisDB.sequelize.sync()
+
+module.exports = diagnosisDB
