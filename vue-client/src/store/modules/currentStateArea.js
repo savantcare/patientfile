@@ -1,4 +1,4 @@
-import StateTodayCards from "@/stateTodayCards.js"
+import CurrentStateCards from "@/currentStateCards.js"
 
 export default {
   state: {
@@ -29,7 +29,7 @@ export default {
         state.focusRowIndex = -1
         state.list = []
       } else {
-        const card = StateTodayCards.filter(item => {
+        const card = CurrentStateCards.filter(item => {
           return action.search(item.key) > -1
         })
         let newList = []

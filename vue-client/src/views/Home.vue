@@ -65,7 +65,7 @@ const Recommendation = () =>
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
-import StateTodayCards from "@/stateTodayCards.js";
+import CurrentStateCards from "@/currentStateCards.js";
 
 export default {
   name: "Home",
@@ -106,7 +106,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("setRightPanelList", StateTodayCards);
+    this.$store.commit("setRightPanelList", CurrentStateCards);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
