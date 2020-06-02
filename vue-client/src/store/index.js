@@ -4,16 +4,16 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 // modules
-import recommendationModule from './modules/recommendationState'
-import diagnosisModule from './modules/diagnosisState'
-import reminderModule from './modules/reminderState'
-import goalModule from './modules/goalState'
-import settingModule from './modules/settingState'
-import rightPanelModule from './modules/rightPanelState'
-import tabDialogModule from './modules/secondLayerTabDialogState'
+import recommendationStateModule from './modules/recommendationState'
+import diagnosisStateModule from './modules/diagnosisState'
+import reminderStateModule from './modules/reminderState'
+import goalStateModule from './modules/goalState'
+import settingStateModule from './modules/settingState'
+import rightPanelStateModule from './modules/rightPanelState'
+import tabDialogStateModule from './modules/secondLayerTabDialogState'
 import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
-import dialogModule from './modules/dialogState'
-import socialHistoryModule from './modules/socialHistoryState'
+import dialogStateModule from './modules/dialogState'
+import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
 
@@ -67,16 +67,16 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    recommendation: recommendationModule,
-    diagnosis: diagnosisModule,
-    reminder: reminderModule,
-    goal: goalModule,
-    setting: settingModule,
-    rightPanel: rightPanelModule,
-    tabDialog: tabDialogModule,
+    recommendation: recommendationStateModule,
+    diagnosis: diagnosisStateModule,
+    reminder: reminderStateModule,
+    goal: goalStateModule,
+    setting: settingStateModule,
+    rightPanel: rightPanelStateModule,
+    tabDialog: tabDialogStateModule,
     stateOnASelectedTime: stateOnASelectedTimeModule,
-    dialog: dialogModule,
-    socialHistory: socialHistoryModule
+    dialog: dialogStateModule,
+    socialHistory: socialHistoryStateModule
   },
   plugins: [
     createPersistedState()
