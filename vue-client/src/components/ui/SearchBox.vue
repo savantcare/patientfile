@@ -102,7 +102,7 @@ export default {
 
     handleSelect(item) {
       const action = item.value;
-      this.$emit("renderRightPanel", action);
+      this.$emit("renderStateTodayPanel", action);
       this.searchKeyword = "";
       this.$store.commit("setRightPanelSearchKeyword", "");
     },
@@ -122,7 +122,7 @@ export default {
         }
       };
       if (keywords.length == 1) {
-        this.$emit("renderRightPanel", keywords[0]);
+        this.$emit("renderStateTodayPanel", keywords[0]);
       } else if (keywords.length == 2) {
         // rex add
         const component = keywords[0];

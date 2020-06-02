@@ -56,7 +56,7 @@ const SearchBox = () => import("@/components/ui/SearchBox.vue");
 const TabDialog = () => import("./TabDialog");
 
 const Recommendation = () =>
-  import("@/components/composition-layer1/Recommendation");
+  import("@/components/composition-layer1/RecommendationCard");
 
 export default {
   name: "Home",
@@ -109,7 +109,7 @@ export default {
     const rightPanelCards = [
       {
         key: "recommendation",
-        value: require("../components/composition-layer1/Recommendation")
+        value: require("../components/composition-layer1/RecommendationCard")
           .default
       },
       {
@@ -247,6 +247,7 @@ export default {
         this.$refs.search_box.setFocus();
         this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowDown") {
+        console.log("arrowdown");
         if (focusRowIndex == rows.length - 1) {
           focusRowIndex = 0;
         } else {
@@ -330,7 +331,7 @@ export default {
         });
         newList.push({
           key: "recommendation",
-          value: require("../components/composition-layer1/Recommendation")
+          value: require("../components/composition-layer1/RecommendationCard")
             .default
         });
 

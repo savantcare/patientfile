@@ -6,7 +6,7 @@
           <CardHeader
             title="Diagnosis"
             actions="A,M,F,D"
-            type="card"
+            type="stateToday"
             @showAddDialog="showAddDiagnosisDialog"
             @showMultiChangeDialog="showMultiChangeAssessmentDialog"
             @focusPanel="focusPanel"
