@@ -4,16 +4,16 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 // modules
-import recommendationModule from './modules/recommendation'
-import diagnosisModule from './modules/diagnosis'
-import reminderModule from './modules/reminder'
-import goalModule from './modules/goal'
-import settingModule from './modules/setting'
-import rightPanelModule from './modules/rightPanel'
+import recommendationModule from './modules/recommendationState'
+import diagnosisModule from './modules/diagnosisState'
+import reminderModule from './modules/reminderState'
+import goalModule from './modules/goalState'
+import settingModule from './modules/settingState'
+import rightPanelModule from './modules/rightPanelState'
 import tabDialogModule from './modules/secondLayerTabDialogState'
 import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
-import dialogModule from './modules/dialog'
-import socialHistoryModule from './modules/socialHistory'
+import dialogModule from './modules/dialogState'
+import socialHistoryModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
 
