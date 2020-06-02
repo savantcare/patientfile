@@ -5,6 +5,7 @@
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="stateOnASelectedTime">
         <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
+        <!-- The type can be stateOnASelectedTime or currentState -->
         <Recommendation type="stateOnASelectedTime" />
         <!-- <div id="stateOnASelectedTimeContainer">
           <div id="stateOnASelectedTimeContent">
@@ -27,7 +28,7 @@
           ></component>
         </transition-group>
 
-        <search-box ref="search_box" @renderCurrentStatePanel="renderCurrentStatePanel"></search-box>
+        <current-state-components-search-box ref="search_box" @renderCurrentStatePanel="renderCurrentStatePanel"></current-state-components-search-box>
       </SplitArea>
     </Split>
 
@@ -48,7 +49,7 @@ const stateOnASelectedTimeHeader = () => import("@/components/ui/stateOnASelecte
 // const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
 
 // Right panel components
-const SearchBox = () => import("@/components/ui/SearchBox.vue");
+const CurrentStateComponentsSearchBox = () => import("@/components/ui/CurrentStateComponentsSearchBox.vue");
 // const RecommendationsCard = () =>
 // import("@/components/domain/RecommendationsCard/Implementation.vue");
 // const RemindersCard = () =>
@@ -73,7 +74,7 @@ export default {
     // TestPanel,
 
     // Right panel components  -> On this side current state of the patient is shown. 
-    SearchBox,
+    CurrentStateComponentsSearchBox,
     // RecommendationsCard,
     // RemindersCard,
     // CombinationCard,

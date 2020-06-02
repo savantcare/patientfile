@@ -49,8 +49,8 @@ export default {
           });
         }
       });
-      // Add search-box component at the last
-      rightPanelRows.push("search-box");
+      // Add current-state-components-search-box component at the last
+      rightPanelRows.push("current-state-components-search-box");
 
       commit("setRightPanelRows", rightPanelRows)
     }

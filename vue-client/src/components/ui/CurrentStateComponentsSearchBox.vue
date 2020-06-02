@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "search-box",
+  name: "current-state-components-search-box",
   data() {
     return {
       searchKeyword: "",

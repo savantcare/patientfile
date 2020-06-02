@@ -36,7 +36,7 @@ export default {
         return;
       }
       if (event.key == "`") {
-        // Set focus to the <search-box>
+        // Set focus to the <current-state-components-search-box>
         focusRowIndex = rows.length - 1;
         this.$parent.$refs.search_box.setFocus();
         this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
