@@ -10,9 +10,8 @@ import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
 import rightPanelStateModule from './modules/rightPanelState'
-import tabDialogStateModule from './modules/secondLayerTabDialogState'
+import secondLayerTabDialogStateModule from './modules/secondLayerTabDialogState'
 import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
-import dialogStateModule from './modules/dialogState'
 import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
@@ -73,9 +72,8 @@ export default new Vuex.Store({
     goal: goalStateModule,
     setting: settingStateModule,
     rightPanel: rightPanelStateModule,
-    tabDialog: tabDialogStateModule,
+    tabDialog: secondLayerTabDialogStateModule,
     stateOnASelectedTime: stateOnASelectedTimeModule,
-    dialog: dialogStateModule,
     socialHistory: socialHistoryStateModule
   },
   plugins: [
