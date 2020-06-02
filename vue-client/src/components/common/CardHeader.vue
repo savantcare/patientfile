@@ -79,7 +79,8 @@ export default {
     },
     isHeaderFocus() {
       return (
-        this.focusRow == `${this.title.toLowerCase()}-0` && this.type == "card"
+        this.focusRow == `${this.title.toLowerCase()}-0` &&
+        this.type == "stateOnToday"
       );
     },
     showAddButton() {

@@ -5,7 +5,7 @@
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="leftPanel">
         <left-panel-header></left-panel-header>
-        <Recommendation type="panel" />
+        <Recommendation type="stateOnADay" />
         <!-- <div id="leftPanelContainer">
           <div id="leftPanelContent">
             <div v-if="leftPanelComponents.length > 0">
@@ -21,13 +21,13 @@
       <SplitArea :size="30" :minsize="100">
         <transition-group name="list" tag="div">
           <component
-            v-for="(component, index) in rightPanelComponents"
+            v-for="(component, index) in stateTodayComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
         </transition-group>
 
-        <search-box ref="search_box" @renderRightPanel="renderRightPanel"></search-box>
+        <search-box ref="search_box" @renderStateTodayPanel="renderStateTodayPanel"></search-box>
       </SplitArea>
     </Split>
 
@@ -97,7 +97,7 @@ export default {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    rightPanelComponents() {
+    stateTodayComponents() {
       return this.$store.state.rightPanel.list;
     },
     leftPanelComponents() {
@@ -318,12 +318,12 @@ export default {
         this.$store.commit(this.componentActionsList[component].multiChange);
       }
     },
-    renderRightPanel(action) {
+    renderStateTodayPanel(action) {
       if (action == "clear") {
         this.$store.commit("setRightPanelList", []);
       } else if (action.search("recommendation") > -1) {
         const newList = [];
-        this.rightPanelComponents.forEach(item => {
+        this.stateTodayComponents.forEach(item => {
           if (item.key != "recommendation") {
             newList.push(item);
           }
@@ -337,7 +337,7 @@ export default {
         this.$store.commit("setRightPanelList", newList);
       } else if (action.search("reminder") > -1) {
         const newList = [];
-        this.rightPanelComponents.forEach(item => {
+        this.stateTodayComponents.forEach(item => {
           if (item.key != "reminder") {
             newList.push(item);
           }
@@ -381,6 +381,6 @@ body {
 .list-enter,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(970px);
 }
 </style>

@@ -148,7 +148,7 @@ export default {
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.title}-${rowIndex + 1}` &&
-        this.type == "card"
+        this.type == "stateOnToday"
       ) {
         return "focus-row";
       }

@@ -38,7 +38,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "card"
+      default: "stateToday"
     }
   },
   data() {
