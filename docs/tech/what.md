@@ -55,3 +55,19 @@ patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' FIX:' ./
 
 ## Q6) What is the code review process?
 https://www.youtube.com/watch?v=8fx-EaOUK2E
+
+
+## Q7) What are the key concepts of temporal DB?
+Ref: https://mariadb.com/kb/en/temporal-data-tables/
+
+1. When doctor says change then run a edit query
+
+2. When doctor says discontinue then run a delete query
+
+### What is the DB doing internally?
+
+1. For each record a start and end time is maintained. These 2 columns are hidden from the sql query.
+
+2. So when a edit is done mysql is internally adding a new record. And marking the end time of the previous record.
+
+3. When a delete is done mysql is NOT deleting from the DB. Mysql is just marking the end time of that record.
