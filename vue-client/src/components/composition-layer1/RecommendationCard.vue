@@ -57,7 +57,7 @@ export default {
         1. Where we perform actual state modifications, 
         2. Where we will receive the state as the first argument.
 
-      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/tabDialog.js#L80  
+      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/secondLayerTabDialogState.js#L80  
 
       QUESTION: How is tabDialog getting this event.
 
@@ -65,7 +65,7 @@ export default {
       To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
       Ref: https://vuex.vuejs.org/guide/modules.html
 
-      showAddRecommendationModal is a mutation inside module -> tabDialog.js but it can be called from here.
+      showAddRecommendationModal is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
 
       */
       this.$store.commit("showAddRecommendationModal");
