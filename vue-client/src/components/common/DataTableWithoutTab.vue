@@ -1,56 +1,63 @@
 <template>
   <div v-elresize @elresize="handleResize">
    <!-- Ref: https://github.com/WakuwakuP/element-ui-el-table-draggable#animate -->
-   <el-table-draggable>
+    <el-table-draggable>
       <el-table
         ref="dataTable"
-        :data="dataToDisplay.tableData"
+        :data="tabData.tableData"
         @selection-change="handleSelectionChange"
         @cell-mouse-enter="handleCellMouseEnter"
         @cell-mouse-leave="handleCellMouseLeave"
-        size="mini">
-        <el-table-column type="expand">
-          <template>
+        :row-class-name="tableRowClassName"
+        size="mini"
+      >
+        <el-table-column type="expand" v-if="isExpandable">
+          <!-- <template slot-scope="props"> -->
+          <template slot-scope="scope">
+            <p
+              v-for="(column, index_expand_row) in tabData.columns"
+              :key="`tab-expand-row-${index_expand_row}`"
+            >{{column.label}}: {{scope.row[column.field]}}</p>
             <div>
               <el-button
                 size="mini"
-                v-if="dataToDisplay.rowActions.indexOf('C') > -1"
+                v-if="tabData.rowActions.indexOf('C') > -1"
                 @click="handleChange(scope.row)"
               >Edit</el-button>
               <el-button
                 size="mini"
                 type="danger"
-                v-if="dataToDisplay.rowActions.indexOf('D') > -1"
+                v-if="tabData.rowActions.indexOf('D') > -1"
                 @click="handleDiscontinue(scope.row)"
               >Discontinue</el-button>
             </div>
           </template>
         </el-table-column>
         <el-table-column type="selection"></el-table-column>
+
         <el-table-column
-          v-for="(column, index_column) in getSelectedColumns(dataToDisplay.selectedColumn, dataToDisplay.columns)"
+          v-for="(column, index_column) in getSelectedColumns(getColumns(tabData.tableData))"
           :key="`tab-column-${index_column}`"
           :label="column.label "
           :property="column.field"
           :sortable="column.sortable"
         ></el-table-column>
-        <el-table-column v-if="false">
-          <template slot-scope="scope" v-if="scope.row.id == mouseOverRowId">
+        <el-table-column>
+          <template
+            slot-scope="scope"
+          >
             <el-button
+              type="text"
               size="mini"
-              icon="el-icon-edit"
-              circle
-              v-if="dataToDisplay.rowActions.indexOf('C') > -1"
+              v-if="tabData.rowActions.indexOf('C') > -1"
               @click="handleChange(scope.row)"
-            ></el-button>
+            >C</el-button>
             <el-button
+              type="text"
               size="mini"
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              v-if="dataToDisplay.rowActions.indexOf('D') > -1"
+              v-if="tabData.rowActions.indexOf('D') > -1"
               @click="handleDiscontinue(scope.row)"
-            ></el-button>
+            >D</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -61,7 +68,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["dataToDisplay"],
+  props: ["tabData", "title", "selectedColumns", "type"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -98,11 +105,11 @@ export default {
     handleSelectionChange(val) {
       this.$emit("handleSelectionChange", val);
     },
-    handleChange(row) {
-      console.log(row);
+    handleChange(index, row) {
+      this.$emit("handleChange", row);
     },
-    handleDiscontinue(row) {
-      console.log(row);
+    handleDiscontinue(index, row) {
+      this.$emit("handleDiscontinue", row);
     },
     handleCellMouseEnter(row) {
       this.mouseOverRowId = row.id;
@@ -118,11 +125,11 @@ export default {
         this.isExpandable = false;
       }
     },
-    getSelectedColumns(selectedColumn, columns) {
-      if (selectedColumn) {
+    getSelectedColumns(columns) {
+      if (this.selectedColumns) {
         return columns.filter(column => {
           let result = false;
-          selectedColumn.forEach(selColumn => {
+          this.selectedColumns.forEach(selColumn => {
             if (column.field == selColumn) {
               result = true;
             }
@@ -132,12 +139,35 @@ export default {
           }
         });
       }
+    },
+    tableRowClassName({ rowIndex }) {
+      if (
+        this.focusRow == `${this.title}-${rowIndex + 1}` &&
+        this.type == "CurrentState"
+      ) {
+        return "focus-row";
+      }
+    },
+    getColumns(tableData) {
+      let columns = [];
+      if (tableData.length > 0) {
+        const item = tableData[0];
+        Object.keys(item).forEach(key => {
+          columns.push({
+            field: key,
+            label: key
+          });
+        });
+      }
+      this.$emit("handleUpdateColumns", columns);
+      return columns;
     }
   },
-  mounted() {
-    // setTimeout(() => {
-    //   console.log(this.$refs.dataTable[0].$el.clientWidth);
-    // }, 100);
+  mounted() {},
+  computed: {
+    focusRow() {
+      return this.$store.getters.rightPanelFocusRow;
+    }
   }
 };
 </script>
