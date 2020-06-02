@@ -198,7 +198,7 @@ export default {
     this.$store.commit("setRightPanelList", rightPanelCards);
     // Initialize leftPanel components
     // const leftPanelList = [RecommendationsPanel, RemindersPanel];
-    // this.$store.commit("setLeftPanelList", leftPanelList);
+    // this.$store.commit("setStateOnADayList", leftPanelList);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");

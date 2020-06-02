@@ -11,7 +11,7 @@ import goalModule from './modules/goal'
 import settingModule from './modules/setting'
 import rightPanelModule from './modules/rightPanel'
 import tabDialogModule from './modules/tabDialog'
-import leftPanelModule from './modules/leftPanel'
+import leftPanelModule from './modules/stateOnADaySide'
 import dialogModule from './modules/dialog'
 import socialHistoryModule from './modules/socialHistory'
 

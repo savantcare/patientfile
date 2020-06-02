@@ -13,7 +13,7 @@ module.exports = {
   COMPONENT_API_URL: "http://localhost:8000/components",
   SOCIALHISTORY_API_URL: "http://localhost:8000/social-histories",
 
-  LEFT_SIDE_COMPONENTS: [
+  STATE_ON_A_DAY_COMPONENTS: [
   ],
 
   // Tab constant values.

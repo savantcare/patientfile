@@ -1,4 +1,4 @@
-import { COMPONENT_API_URL, LEFT_SIDE_COMPONENTS } from '@/const.js'
+import { COMPONENT_API_URL, STATE_ON_A_DAY_COMPONENTS } from '@/const.js'
 // import $ from "jquery";
 
 export default {
@@ -9,13 +9,13 @@ export default {
     originSize: null
   },
   mutations: {
-    setLeftPanelList(state, value) {
+    setStateOnADayList(state, value) {
       state.list = value
     },
-    setLeftPanelCurrentDate(state, value) {
+    setStateOnADayCurrentDate(state, value) {
       state.currentDate = value
     },
-    setLeftPanelZoomValue(state, value) {
+    setStateOnADayZoomValue(state, value) {
       state.zoomValue = value
     }
   },
@@ -35,7 +35,7 @@ export default {
           const components = await response.json()
           let availableComponents = []
           components.forEach(item => {
-            const component = LEFT_SIDE_COMPONENTS.filter(leftComponent => {
+            const component = STATE_ON_A_DAY_COMPONENTS.filter(leftComponent => {
               return leftComponent.key == item.name
             })
             if (component != null) {
@@ -43,7 +43,7 @@ export default {
             }
           })
 
-          commit("setLeftPanelList", availableComponents)
+          commit("setStateOnADayList", availableComponents)
           // dispatch("zoomLeftPanel")
         }
       } catch (ex) {
@@ -83,7 +83,7 @@ export default {
     leftPanelList(state) {
       let list = []
       state.list.forEach(item => {
-        const leftComponent = LEFT_SIDE_COMPONENTS.filter(component => {
+        const leftComponent = STATE_ON_A_DAY_COMPONENTS.filter(component => {
           return component.key == item
         })
         list.push(leftComponent[0].value)

@@ -2,6 +2,7 @@
    1. When I give rex command and use downarrow it should go to the card header.
    2. Multi select using KB
    3. When I multi select recommendations. The only action available to me should be discontinue.
+   4. When i add a new rex it cannot be selected by KB to change.
 
 2. The search box component needs to search a list. Currently there is a if-else. Since there are 44 components. And each componet has n number of actions associated with them. 
    So user can type:

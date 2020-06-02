@@ -73,7 +73,7 @@ export default {
       //     r = Math.min(windowWidth / width, windowHeight / height);
       //   }
 
-      //   this.$store.commit("setLeftPanelZoomValue", r);
+      //   this.$store.commit("setStateOnADayZoomValue", r);
       //   this.$store.dispatch("zoomLeftPanel");
       // }, 100);
     },
@@ -112,13 +112,13 @@ export default {
     zoomOut() {
       let value = this.zoomValue;
       value -= 0.1;
-      this.$store.commit("setLeftPanelZoomValue", value);
+      this.$store.commit("setStateOnADayZoomValue", value);
       this.$store.dispatch("zoomLeftPanel");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
-      this.$store.commit("setLeftPanelZoomValue", value);
+      this.$store.commit("setStateOnADayZoomValue", value);
       this.$store.dispatch("zoomLeftPanel");
     }
   }
