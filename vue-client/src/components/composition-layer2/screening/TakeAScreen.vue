@@ -33,7 +33,7 @@ export default {
       editableTabsValue: "2",
       editableTabs: [
         {
-          title: "Multi change screening",
+          title: "Take a screen",
           name: "screening",
           content: "screening"
         },

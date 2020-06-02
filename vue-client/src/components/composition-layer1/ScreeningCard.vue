@@ -3,15 +3,16 @@
     <div slot="header" class="clearfix">
       <CardHeader
         title="Screening"
-        actions="A,M,F,D"
+        actions="A,F,D"
         type="card"
         @showAddDialog="showAddDialog"
-        @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
+      <!-- @showMultiChangeDialog="showMultiChangeDialog" -->
     </div>
+
     <!-- <DataTable
       :tabData="tabData"
       @handleSelectionChange="handleSelectionChange"
@@ -46,10 +47,10 @@ export default {
   methods: {
     showAddDialog() {
       console.log("show add dialog");
-      this.$store.commit("showAddScreeningModal");
+      this.$store.commit("showAddScreenModal");
     },
     showMultiChangeDialog() {
-      this.$store.commit("showMultiChangeScreeningModal");
+      this.$store.commit("showTakeAScreenModal");
     },
     focusPanel() {
       console.log("focus panel");
