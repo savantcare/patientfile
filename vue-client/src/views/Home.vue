@@ -28,7 +28,7 @@
           ></component>
         </transition-group>
 
-        <current-state-components-search-box ref="search_box" @renderCurrentStatePanel="renderCurrentStatePanel"></current-state-components-search-box>
+        <current-state-components-search-box ref="search_box" @renderCurrentStateCards="renderCurrentStateCards"></current-state-components-search-box>
       </SplitArea>
     </Split>
 
@@ -98,7 +98,7 @@ export default {
       return this.$store.getters.stateOnASelectedTimeList;
     }
   },
-  beforeCreate() {
+  beforeCreate() { // this is a lifecycle event https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
     // Initialize rightPanel components
     const rightPanelCards = [
       {
@@ -219,7 +219,7 @@ export default {
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
       this.stateOnASelectedTimeWidth = size[0];
     },
-    renderCurrentStatePanel(action) {
+    renderCurrentStateCards(action) {
       if (action == "clear") {
         this.$store.commit("setRightPanelFocusRowIndex", -1);
         this.$store.commit("setRightPanelList", []);
