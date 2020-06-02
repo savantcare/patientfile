@@ -31,11 +31,11 @@
       </SplitArea>
     </Split>
 
+    <!-- tab-dialog is present in home.vue but in hidden state -->
     <tab-dialog></tab-dialog>
     <KeyboardHandler />
   </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script>
 // const TabDialog = () => import("@/components/ui/TabDialog.vue");
 

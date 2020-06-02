@@ -45,7 +45,7 @@ export default {
     },
     showAddReminderModal(state) {
       const tab = {
-        label: "Add Reminder",
+        label: "Add Reminders",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
         name: "tab-add-reminder"
       }
@@ -56,7 +56,7 @@ export default {
     },
     showMultiChangeRemindersModal(state) {
       const tab = {
-        label: "Multi change Reminder",
+        label: "Multi change Reminders",
         value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,
         name: "tab-multi-change-reminder"
       }
@@ -77,20 +77,26 @@ export default {
       state.reminderData = data
       state.tabValue = tab.name
     },
+
+
+
     showAddRecommendationModal(state) {
       const tab = {
-        label: "Add Recommendation",
+        label: "Add Recommendations",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
         name: "tab-add-recommendation"
       }
+      // Once tablist is updated since it is reactive the src/views/TabDialog.vue gets activated.
       state.tabList = [tab]
       state.recommendationTabType = ADD_RECOMMENDATION
       state.visibility = true
       state.tabValue = tab.name
     },
+    
+    
     showMultiChangeRecommendationModal(state) {
       const tab = {
-        label: "Multi change Recommendation",
+        label: "Multi change Recommendations",
         value: require("@/components/composition-layer2/recommendation/MultiChangeRecommendation.vue").default,
         name: "tab-multi-change-recommendation"
       }

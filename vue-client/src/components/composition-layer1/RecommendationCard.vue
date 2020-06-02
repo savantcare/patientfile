@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Recommendations"
+        title="Recommendation"
         actions="A,M,F,D"
         :type="type"
         :columns="columns"
@@ -60,6 +60,13 @@ export default {
       The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/tabDialog.js#L80  
 
       QUESTION: How is tabDialog getting this event.
+
+      Due to using a single state tree, all state of our application is contained inside one big object. However, as our application grows in scale, the store can get really bloated.
+      To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
+      Ref: https://vuex.vuejs.org/guide/modules.html
+
+      showAddRecommendationModal is a mutation inside module -> tabDialog.js but it can be called from here.
+
       */
       this.$store.commit("showAddRecommendationModal");
     },
