@@ -3,7 +3,8 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     list: [],
-    currentDate: new Date()
+    currentDate: new Date(),
+    othersList: []
   },
   mutations: {
     setRecommendationList(state, data) {
@@ -19,6 +20,9 @@ export default {
     },
     setRecommendationCurrentDate(state, value) {
       state.currentDate = value
+    },
+    setOthersList(state, value) {
+      state.othersList = value
     },
 
     /**
@@ -212,17 +216,23 @@ export default {
         }
       })
     },
-    async getRecommendations({ commit }, json) {
-      const { patientId, notify } = json
+    async getMyRecommendations({ commit }, json) {
+      const { patientId, notify, userId } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
       try {
         const response = await fetch(
-          `${RECOMMENDATION_API_URL}?patientId=${patientId}`, {
+          `${RECOMMENDATION_API_URL}/getMyRecommendations`, {
           headers: {
-            "Authorization": "Bearer " + TOKEN
-          }
+            "Authorization": "Bearer " + TOKEN,
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            patientId: patientId,
+            userId: userId
+          })
         });
         if (response.ok) {
           let json = await response.json();
@@ -238,7 +248,7 @@ export default {
           } else {
             notify({
               title: "Error",
-              message: "Failed to get recommendation data"
+              message: "Failed to get my recommendation data"
             })
           }
         }
@@ -248,6 +258,39 @@ export default {
           message: "Server connection error"
         })
 
+      }
+    },
+    async getOtherRecommendations({ commit }, json) {
+      const { patientId, notify, userId } = json
+      if (TOKEN == null) {
+        TOKEN = localStorage.getItem("token")
+      }
+      try {
+        const response = await fetch(`${RECOMMENDATION_API_URL}/getOthersRecommendations`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN,
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            patientId: patientId,
+            userId: userId
+          })
+        })
+        if (response.ok) {
+          let json = await response.json()
+          commit("setOthersList", json)
+        } else {
+          notify({
+            title: "Error",
+            message: "Failed to get other's recommendation data"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
       }
     }
   },

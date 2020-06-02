@@ -109,22 +109,26 @@ export default {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
     const params = {
       patientId: this.$route.query.patient_id,
-      notify: this.$notify
+      notify: this.$notify,
+      userId: this.$store.state.userId
     };
-    this.$store.dispatch("getRecommendations", params);
+    this.$store.dispatch("getMyRecommendations", params);
+    this.$store.dispatch("getOtherRecommendations", params);
   },
   computed: {
     tabData() {
-      const recList = this.$store.state.recommendation.list;
+      const myList = this.$store.state.recommendation.list;
+      const othersList = this.$store.state.recommendation.othersList;
+      console.log(othersList);
       return [
         {
           label: "Yours",
-          tableData: recList,
+          tableData: myList,
           rowActions: ["C", "D"]
         },
         {
           label: "Other's",
-          tableData: recList,
+          tableData: othersList,
           rowActions: ["C", "D"],
           selectedColumn: ["description"]
         }

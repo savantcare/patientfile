@@ -10,7 +10,7 @@ module.exports = (io) => {
       const { data, patientId } = req.body
       const newRecommendation = await Recommendation.bulkCreate(data)       // https://sequelize.org/master/class/lib/model.js~Model.html#static-method-bulkCreate
       console.log(newRecommendation)
-   
+
       /* io.to informs all the clients.
        The room name has -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
@@ -31,7 +31,7 @@ module.exports = (io) => {
 
   router.get('/', async (req, res) => {
     try {
-      const { patientId } = req.query
+      const { patientId, userId } = req.query
       const queryResult = await Recommendation.findAll({
         where: {
           patientId: patientId,
@@ -44,6 +44,54 @@ module.exports = (io) => {
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occurred while fetching the Recommenation"
+      })
+    }
+  })
+
+  router.post('/getMyRecommendations', async (req, res) => {
+    try {
+      const { patientId, userId } = req.body
+      console.log("getMyRecommendations_________________")
+      console.log(patientId)
+      console.log(userId)
+      const queryResult = await Recommendation.findAll({
+        where: {
+          patientId: patientId,
+          discontinue: {
+            [Op.ne]: 1
+          },
+          createdByUserId: userId
+        }
+      })
+      res.send(queryResult)
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Recommendation"
+      })
+    }
+  })
+
+  router.post('/getOthersRecommendations', async (req, res) => {
+    try {
+      const { patientId, userId } = req.body
+      console.log("getOthersRecommendations_________________")
+      console.log(patientId)
+      console.log(userId)
+      const queryResult = await Recommendation.findAll({
+        where: {
+          patientId: patientId,
+          discontinue: {
+            [Op.ne]: 1
+          },
+          createdByUserId: {
+            [Op.ne]: userId
+          }
+        }
+      })
+      res.send(queryResult)
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Recommendation"
       })
     }
   })
