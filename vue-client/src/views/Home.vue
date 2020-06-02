@@ -247,7 +247,6 @@ export default {
         this.$refs.search_box.setFocus();
         this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowDown") {
-        console.log("arrowdown");
         if (focusRowIndex == rows.length - 1) {
           focusRowIndex = 0;
         } else {
@@ -321,6 +320,7 @@ export default {
     },
     renderStateTodayPanel(action) {
       if (action == "clear") {
+        this.$store.commit("setRightPanelFocusRowIndex", -1);
         this.$store.commit("setRightPanelList", []);
       } else if (action.search("recommendation") > -1) {
         const newList = [];

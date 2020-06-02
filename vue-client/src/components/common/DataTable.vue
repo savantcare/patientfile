@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.id == mouseOverRowId || (`${title}-${scope.$index+1}` == focusRow && type == 'card')"
+                v-if="scope.row.id == mouseOverRowId || (`${title}-${scope.$index+1}` == focusRow && type == 'stateToday')"
               >
                 <el-button
                   type="text"
