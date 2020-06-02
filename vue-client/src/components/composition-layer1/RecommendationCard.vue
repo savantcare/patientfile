@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card" :id="`recommendation-${type}`">
     <div slot="header" class="clearfix">
       <CardHeader
         title="Recommendation"
@@ -30,6 +30,7 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 import DataTable from "@/components/common/DataTable";
+
 export default {
   components: {
     CardHeader,
@@ -74,7 +75,26 @@ export default {
       this.$store.commit("showMultiChangeRecommendationModal");
     },
     focusPanel() {
-      console.log("focus panel");
+      //stateOnASelectedTime
+      var options = {
+        container: "",
+        easing: "ease-in",
+        offset: -60,
+        force: true,
+        cancelable: true,
+        x: false,
+        y: true
+      };
+      let element = "";
+      if (this.type == "CurrentState") {
+        element = "#recommendation-stateOnASelectedTime";
+        options["container"] = "#stateOnASelectedTime";
+      } else {
+        element = "#recommendation-CurrentState";
+        options["container"] = "#CurrentState";
+      }
+
+      this.$scrollTo(element, 500, options);
     },
     multiDiscontinue() {
       let selectedIds = [];
@@ -119,7 +139,6 @@ export default {
     tabData() {
       const myList = this.$store.state.recommendation.list;
       const othersList = this.$store.state.recommendation.othersList;
-      console.log(othersList);
       return [
         {
           label: "Yours",
