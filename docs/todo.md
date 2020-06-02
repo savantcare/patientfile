@@ -7,10 +7,6 @@
    3. The searchComponentList needs to be renamed to searchCommmandList
    4. In searchCommmandList for each command the action needs to be stored in the 2nd column of the list.
 
-3. The JSON that is returned makes no difference between yours and others. Maybe your and others should have 2 different API calls with 2 different JSON being returned.
-
-4. make F work in card header from selectedTime side and CurrentTime side
-
 5. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
 6. Opening a patient file without a patient should redirect to login page.
