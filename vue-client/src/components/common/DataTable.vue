@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.id == mouseOverRowId || (`${title}-${scope.$index+1}` == focusRow && type == 'CurrentState')"
+                v-if="scope.row.id == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentState')"
               >
                 <el-button
                   type="text"
@@ -73,7 +73,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["tabData", "title", "selectedColumns", "type"],
+  props: ["tabData", "title", "type", "keyId"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -147,7 +147,7 @@ export default {
     },
     tableRowClassName({ rowIndex }) {
       if (
-        this.focusRow == `${this.title}-${rowIndex + 1}` &&
+        this.focusRow == `${this.keyId}-${rowIndex + 1}` &&
         this.type == "CurrentState"
       ) {
         return "focus-row";
@@ -172,6 +172,9 @@ export default {
   computed: {
     focusRow() {
       return this.$store.getters.rightPanelFocusRow;
+    },
+    selectedColumns() {
+      return this.$store.state.selectedColumns[this.keyId];
     }
   }
 };

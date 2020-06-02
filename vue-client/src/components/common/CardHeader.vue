@@ -39,13 +39,12 @@
             @hide="showPopOver = false"
           >
             <el-select
-              v-model="selectedColumn"
+              v-model="selectedColumns"
               size="mini"
               clearable
               multiple
               placeholder="Select"
               collapse-tags
-              @change="handleChangeSelect"
             >
               <el-option
                 v-for="item in columns"
@@ -64,12 +63,11 @@
 
 <script>
 export default {
-  props: ["title", "actions", "type", "columns"],
+  props: ["title", "actions", "type", "columns", "keyId"],
   data() {
     return {
       mouseOver: false,
       selected: [],
-      selectedColumn: ["description"],
       showPopover: false
     };
   },
@@ -97,13 +95,19 @@ export default {
     },
     showActions() {
       return this.mouseOver || this.isHeaderFocus || this.showPopover;
+    },
+    selectedColumns: {
+      get() {
+        return this.$store.state.selectedColumns[this.keyId];
+      },
+      set(value) {
+        let selectedColumns = this.$store.state.selectedColumns;
+        selectedColumns[this.keyId] = value;
+        this.$store.commit("setSelectedColumns", selectedColumns);
+      }
     }
   },
-  methods: {
-    handleChangeSelect() {
-      this.$emit("updateSelectedColumns", this.selectedColumn);
-    }
-  },
+  methods: {},
   mounted() {}
 };
 </script>

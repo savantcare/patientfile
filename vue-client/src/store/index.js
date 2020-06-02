@@ -21,7 +21,7 @@ import { ROLE_API_URL } from "@/const.js"
 export default new Vuex.Store({
   state: {
     userRole: '',
-    searchComponentList: [
+    searchCommandList: [
       "recommendation (rex)",
       "recommendation (rex) add",
       "recommendation (rex) multi change",
@@ -39,7 +39,11 @@ export default new Vuex.Store({
     ],
     focusComponent: "",
     connectionStatus: true, // true: online, false: offline
-    userId: -1
+    userId: -1,
+    selectedColumns: {
+      recommendation: ["description"],
+      reminder: ["description"]
+    }
   },
   mutations: {
     setUserRole(state, data) {
@@ -48,14 +52,17 @@ export default new Vuex.Store({
     setFocusComponent(state, value) {
       state.focusComponent = value
     },
-    setSearchComponentList(state, list) {
-      state.searchComponentList = list
+    setSearchCommandList(state, list) {
+      state.searchCommandList = list
     },
     setConnectionStatus(state, value) {
       state.connectionStatus = value
     },
     setUserId(state, value) {
       state.userId = value
+    },
+    setSelectedColumns(state, value) {
+      state.selectedColumns = value
     }
   },
   actions: {
@@ -72,7 +79,7 @@ export default new Vuex.Store({
         if (json.availableComponents) {
           let componentList = json.availableComponents.split(',')
           componentList.push("clear")
-          commit("setSearchComponentList", componentList)
+          commit("setSearchCommandList", componentList)
         }
       }
     }

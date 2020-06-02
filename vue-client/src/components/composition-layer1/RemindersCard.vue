@@ -4,6 +4,7 @@
       <CardHeader
         title="Reminder"
         actions="A,M,F,D"
+        keyId="reminder"
         :type="type"
         :columns="columns"
         @showAddDialog="showAddDialog"
@@ -14,9 +15,10 @@
       />
     </div>
     <DataTable
+      title="Reminder"
+      keyId="reminder"
       :tabData="tabData"
       :selectedColumns="selectedColumns"
-      title="reminder"
       :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
@@ -44,7 +46,7 @@ export default {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["description"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
+      selectedColumns: ["description"] // The user can select there own columns. The user selected columns are saved in the local storage.
     };
   },
   methods: {
@@ -108,7 +110,8 @@ export default {
       this.selectedColumns = value;
     }
   },
-  mounted() { // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+  mounted() {
+    // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify

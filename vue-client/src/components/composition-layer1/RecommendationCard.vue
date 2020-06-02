@@ -4,20 +4,20 @@
       <CardHeader
         title="Recommendation"
         actions="A,M,F,D"
+        ref="card_header"
+        keyId="recommendation"
         :type="type"
         :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
-        @updateSelectedColumns="updateSelectedColumns"
-        ref="card_header"
       />
     </div>
     <DataTable
+      title="Recommendation"
+      keyId="recommendation"
       :tabData="tabData"
-      :selectedColumns="selectedColumns"
-      title="recommendation"
       :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
@@ -44,8 +44,7 @@ export default {
   data() {
     return {
       selectedRows: [],
-      columns: [],
-      selectedColumns: ["description"] // The user can select there own columns. The user selected columns are saved in the local storage.
+      columns: []
     };
   },
   methods: {
@@ -104,9 +103,6 @@ export default {
     },
     handleUpdateColumns(value) {
       this.columns = value;
-    },
-    updateSelectedColumns(value) {
-      this.selectedColumns = value;
     }
   },
   mounted() {

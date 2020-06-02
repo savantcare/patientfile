@@ -33,7 +33,7 @@ export default {
         return [];
       }
 
-      return this.$store.state.searchComponentList.filter(item => {
+      return this.$store.state.searchCommandList.filter(item => {
         return item.search(this.searchKeyword) > -1;
       });
     },
@@ -82,7 +82,7 @@ export default {
       }
     },
     querySearch(queryString, cb) {
-      const componentList = this.$store.state.searchComponentList;
+      const componentList = this.$store.state.searchCommandList;
 
       let results = [];
       if (queryString.length == 0) {

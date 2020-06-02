@@ -9,11 +9,15 @@ export default {
       componentActionsList: {
         recommendation: {
           add: "showAddRecommendationModal",
-          multiChange: "showMultiChangeRecommendationModal"
+          multiChange: "showMultiChangeRecommendationModal",
+          change: "showChangeRecommendationsModal",
+          discontinue: "discontinueRecommendation"
         },
         reminder: {
           add: "showAddReminderModal",
-          multiChange: "showMultiChangeReminderModal"
+          multiChange: "showMultiChangeReminderModal",
+          change: "showChangeReminderModal",
+          discontinue: "discontinueReminder"
         }
       }
     };
@@ -73,32 +77,22 @@ export default {
       }
       if (index > 0) {
         if (event.key == "c") {
-          if (component == "recommendation") {
-            const { recommendations } = this.$store.getters;
-            const selectedItem = recommendations[index - 1];
-            this.$store.commit("showChangeRecommendationsModal", selectedItem);
-          } else if (component == "reminder") {
-            const { reminders } = this.$store.getters;
-            const selectedItem = reminders[index - 1];
-            this.$store.commit("showEditReminderModal", selectedItem);
-          }
+          const list = this.$store.getters[`${component}s`];
+          const selectedItem = list[index - 1];
+          this.$store.commit(
+            this.componentActionsList[component].change,
+            selectedItem
+          );
         } else if (event.key == "d") {
-          if (component == "recommendation") {
-            const { recommendations } = this.$store.getters;
-            const selectedItem = recommendations[index - 1];
-            this.$store.dispatch("discontinueRecommendation", {
+          const list = this.$store.getters[`${component}s`];
+          const selectedItem = list[index - 1];
+          this.$store.dispatch(
+            this.componentActionsList[component].discontinue,
+            {
               data: selectedItem,
-              toast: this.$bvToast
-            });
-          } else if (component == "reminder") {
-            const { reminders } = this.$store.getters;
-            const selectedItem = reminders[index - 1];
-            this.$store.dispatch("discontinueReminder", {
-              data: selectedItem,
-              toast: this.$bvToast
-            });
-          }
-
+              notify: this.$notify
+            }
+          );
           this.$store.dispatch("updateRightPanelRow");
         }
         return;
