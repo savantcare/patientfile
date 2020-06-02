@@ -45,13 +45,13 @@ Recommendation.
 
 ## Q5) What tags are used in code?
 
- * Todo:
- * Question:
- * Fix:
+ * TODO:
+ * QUESTION:
+ * FIX:
 
 To find files with Fix tag: 
 
-patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' Fix:' ./
+patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' FIX:' ./
 
 ## Q6) What is the code review process?
 https://www.youtube.com/watch?v=8fx-EaOUK2E

@@ -2,27 +2,26 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Recommendation"
+        title="Recommendations"
         actions="A,M,F,D"
         :type="type"
+        :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
-        ref="card_header"
-        :columns="columns"
       />
     </div>
     <DataTable
       :tabData="tabData"
       :selectedColumns="selectedColumns"
+      title="recommendation"
+      :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
-      title="recommendation"
-      :type="type"
     />
   </el-card>
 </template>
