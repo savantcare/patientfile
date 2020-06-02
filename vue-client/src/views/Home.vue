@@ -18,16 +18,16 @@
           </div>
         </div>-->
       </SplitArea>
-      <SplitArea :size="30" :minsize="100" id="stateToday">
+      <SplitArea :size="30" :minsize="100" id="CurrentState">
         <transition-group name="list" tag="div">
           <component
-            v-for="(component, index) in stateTodayComponents"
+            v-for="(component, index) in CurrentStateComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
         </transition-group>
 
-        <search-box ref="search_box" @renderStateTodayPanel="renderStateTodayPanel"></search-box>
+        <search-box ref="search_box" @renderCurrentStatePanel="renderCurrentStatePanel"></search-box>
       </SplitArea>
     </Split>
 
@@ -64,7 +64,7 @@ export default {
   name: "Home",
   components: {
     SecondLayerTabDialog,
-    // Left panel components
+    // Left panel components -> On this side state of the patient on a day is shown
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
@@ -72,7 +72,7 @@ export default {
     // DateSlider,
     // TestPanel,
 
-    // Right panel components
+    // Right panel components  -> On this side current state of the patient is shown. 
     SearchBox,
     // RecommendationsCard,
     // RemindersCard,
@@ -90,7 +90,7 @@ export default {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    stateTodayComponents() {
+    CurrentStateComponents() {
       return this.$store.state.rightPanel.list;
     },
     stateOnADayComponents() {
@@ -218,13 +218,13 @@ export default {
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
       this.stateOnADayWidth = size[0];
     },
-    renderStateTodayPanel(action) {
+    renderCurrentStatePanel(action) {
       if (action == "clear") {
         this.$store.commit("setRightPanelFocusRowIndex", -1);
         this.$store.commit("setRightPanelList", []);
       } else if (action.search("recommendation") > -1) {
         const newList = [];
-        this.stateTodayComponents.forEach(item => {
+        this.CurrentStateComponents.forEach(item => {
           if (item.key != "recommendation") {
             newList.push(item);
           }
@@ -238,7 +238,7 @@ export default {
         this.$store.commit("setRightPanelList", newList);
       } else if (action.search("reminder") > -1) {
         const newList = [];
-        this.stateTodayComponents.forEach(item => {
+        this.CurrentStateComponents.forEach(item => {
           if (item.key != "reminder") {
             newList.push(item);
           }
