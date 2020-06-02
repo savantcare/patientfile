@@ -29,7 +29,7 @@
           ></component>
         </transition-group>
 
-        <current-state-components-search-box ref="search_box" @renderCurrentStateCards="renderCurrentStateCards"></current-state-components-search-box>
+        <current-state-components-search-box ref="search_box"></current-state-components-search-box>
       </SplitArea>
     </Split>
 
@@ -45,12 +45,14 @@
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const stateOnASelectedTimeHeader = () => import("@/components/ui/stateOnASelectedTimeHeader.vue");
+const stateOnASelectedTimeHeader = () =>
+  import("@/components/ui/stateOnASelectedTimeHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
 // const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
 
 // Right panel components
-const CurrentStateComponentsSearchBox = () => import("@/components/ui/CurrentStateComponentsSearchBox.vue");
+const CurrentStateComponentsSearchBox = () =>
+  import("@/components/ui/CurrentStateComponentsSearchBox.vue");
 // const RecommendationsCard = () =>
 // import("@/components/domain/RecommendationsCard/Implementation.vue");
 // const RemindersCard = () =>
@@ -60,8 +62,7 @@ const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
-const Reminder = () =>
-  import("@/components/composition-layer1/RemindersCard");  
+const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
 export default {
@@ -76,7 +77,7 @@ export default {
     // DateSlider,
     // TestPanel,
 
-    // Right panel components  -> On this side current state of the patient is shown. 
+    // Right panel components  -> On this side current state of the patient is shown.
     CurrentStateComponentsSearchBox,
     // RecommendationsCard,
     // RemindersCard,
@@ -102,7 +103,8 @@ export default {
       return this.$store.getters.stateOnASelectedTimeList;
     }
   },
-  beforeCreate() { // this is a lifecycle event https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
+  beforeCreate() {
+    // this is a lifecycle event https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
     // Initialize rightPanel components
     const rightPanelCards = [
       {
@@ -222,41 +224,6 @@ export default {
       const rightSize = size[1];
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
       this.stateOnASelectedTimeWidth = size[0];
-    },
-    renderCurrentStateCards(action) {
-      if (action == "clear") {
-        this.$store.commit("setRightPanelFocusRowIndex", -1);
-        this.$store.commit("setRightPanelList", []);
-      } else if (action.search("recommendation") > -1) {
-        const newList = [];
-        this.CurrentStateComponents.forEach(item => {
-          if (item.key != "recommendation") {
-            newList.push(item);
-          }
-        });
-        newList.push({
-          key: "recommendation",
-          value: require("../components/composition-layer1/RecommendationCard")
-            .default
-        });
-
-        this.$store.commit("setRightPanelList", newList);
-      } else if (action.search("reminder") > -1) {
-        const newList = [];
-        this.CurrentStateComponents.forEach(item => {
-          if (item.key != "reminder") {
-            newList.push(item);
-          }
-        });
-        newList.push({
-          key: "reminder",
-          value: require("../components/composition-layer1/RemindersCard")
-            .default
-        });
-
-        this.$store.commit("setRightPanelList", newList);
-      }
-      this.updateRightPanelRows();
     },
     updateRightPanelRows() {
       this.$store.dispatch("updateRightPanelRow");

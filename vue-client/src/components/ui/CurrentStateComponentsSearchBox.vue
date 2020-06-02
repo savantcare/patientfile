@@ -102,7 +102,10 @@ export default {
 
     handleSelect(item) {
       const action = item.value;
-      this.$emit("renderCurrentStateCards", action);
+      // this.$emit("renderCurrentStateCards", action);
+      this.$store.commit("updateTodayStateCards", action);
+      this.$store.dispatch("updateRightPanelRow");
+
       this.searchKeyword = "";
       this.$store.commit("setRightPanelSearchKeyword", "");
     },

@@ -21,6 +21,35 @@ export default {
     },
     setRightPanelSearchKeyword(state, keyword) {
       state.searchKeyword = keyword
+    },
+    updateTodayStateCards(state, action) {
+      const stateTodayCards = [
+        {
+          key: "recommendation",
+          value: require("@/components/composition-layer1/RecommendationCard")
+            .default
+        },
+        {
+          key: "reminder",
+          value: require("@/components/composition-layer1/RemindersCard").default
+        }
+      ]
+      if (action == "clear") {
+        state.focusRowIndex = -1
+        state.list = []
+      } else {
+        const card = stateTodayCards.filter(item => {
+          return action.search(item.key) > -1
+        })
+        let newList = []
+        state.list.forEach(item => {
+          if (item.key != card[0].key) {
+            newList.push(item)
+          }
+        })
+        newList.push(card[0])
+        state.list = newList
+      }
     }
   },
   getters: {

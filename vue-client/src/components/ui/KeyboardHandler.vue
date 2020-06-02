@@ -98,7 +98,8 @@ export default {
               toast: this.$bvToast
             });
           }
-          this.updateRightPanelRows();
+
+          this.$store.dispatch("updateRightPanelRow");
         }
         return;
       }

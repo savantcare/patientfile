@@ -91,6 +91,8 @@ export default {
             });
             this.recForm = { recs: [{ description: "" }] };
           }
+
+          this.$store.dispatch("updateRightPanelRow");
         } else {
           console.log("error submit!!");
           return false;
