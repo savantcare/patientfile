@@ -1,37 +1,27 @@
 1. KB interaction
-   1. When I give rex command and use downarrow and press M the focus should be in the right form element.
-      The same issue is there when I hit change on a data row.
-      Sometimes the focus issue is also there when I try to add a rex.
-   2. Multi select using KB
-   3. When I multi select recommendations. The only action available to me should be discontinue.
-   4. When i add a new rex it cannot be selected by KB to change.
-   5. In data row sometimes on change the old data does not come.
+   1. Multi select using KB
 
-2. renderCurrentStateCards(action) will be hard to maintain for 44 components.
-
-3. Search 
+2. Search 
    1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
-   2. The state searchComponentList needs to come out of index.js 
+   2. The state searchComponentList should not be inside index.js 
    3. The searchComponentList needs to be renamed to searchCommmandList
    4. In searchCommmandList for each command the action needs to be stored in the 2nd column of the list.
 
-4. Save the selected columns in local storage so that next load the selected columns come based on doctors selection.
+3. The JSON that is returned makes no difference between yours and others. Maybe your and others should have 2 different API calls with 2 different JSON being returned.
 
-5. The JSON that is returned makes no difference between yours and others. Maybe your and others should have 2 different API calls with 2 different JSON being returned.
+4. make F work in card header from selectedTime side and CurrentTime side
 
-6. make F work in card header from selectedTime side and CurrentTime side
+5. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
-7. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
+6. Opening a patient file without a patient should redirect to login page.
 
-8. Opening a patient file without a patient should redirect to login page.
+7. Show discontinued rex's inside a tab in the 2nd layer from the D shortcut in the header.
 
-9. Show discontinued rex's inside a tab in the 2nd layer from the D shortcut in the header.
+8. Cts to load for DA and D should come from DB.
 
-10. Cts to load for DA and D should come from DB.
+9. The sequence of Cts to load should also come from DB. 
 
-11. The sequence of Cts to load should also come from DB. 
-
-12. Give me a page where I can create a new patient 
+10. Give me a page where I can create a new patient 
 
 13. Give me a page where I can choose from a list of patients whose patient file I want to open.
 
