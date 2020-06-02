@@ -7,6 +7,7 @@
         <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
         <!-- The type can be stateOnASelectedTime or currentState -->
         <Recommendation type="stateOnASelectedTime" />
+        <Reminder type="stateOnASelectedTime" />
         <!-- <div id="stateOnASelectedTimeContainer">
           <div id="stateOnASelectedTimeContent">
             <div v-if="stateOnASelectedTimeComponents.length > 0">
@@ -59,6 +60,8 @@ const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
+const Reminder = () =>
+  import("@/components/composition-layer1/RemindersCard");  
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
 export default {
@@ -79,6 +82,7 @@ export default {
     // RemindersCard,
     // CombinationCard,
     Recommendation,
+    Reminder,
     KeyboardHandler
   },
   data() {
