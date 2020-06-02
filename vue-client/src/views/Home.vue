@@ -32,12 +32,12 @@
     </Split>
 
     <!-- tab-dialog is present in home.vue but in hidden state -->
-    <tab-dialog></tab-dialog>
+    <second-layer-tab-dialog></second-layer-tab-dialog>
     <KeyboardHandler />
   </div>
 </template>
 <script>
-// const TabDialog = () => import("@/components/ui/TabDialog.vue");
+// const TabDialog = () => import("@/components/ui/secondLayerTabDialog.vue");
 
 // Left panel components
 // const RecommendationsPanel = () =>
@@ -54,7 +54,7 @@ const SearchBox = () => import("@/components/ui/SearchBox.vue");
 // const RemindersCard = () =>
 // import("@/components/domain/RemindersCard/Implementation.vue");
 // const CombinationCard = () => import("@/components/CombinationCard.vue");
-const TabDialog = () => import("./TabDialog");
+const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
@@ -63,7 +63,7 @@ const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 export default {
   name: "Home",
   components: {
-    TabDialog,
+    SecondLayerTabDialog,
     // Left panel components
     // RecommendationsPanel,
     // RemindersPanel,
