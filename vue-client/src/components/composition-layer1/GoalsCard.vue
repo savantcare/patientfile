@@ -4,21 +4,26 @@
       <CardHeader
         title="Goal"
         actions="A,M,F,D"
-        type="card"
+        :type="type"
+        :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
-        ref="card_header"
+        @updateSelectedColumns="updateSelectedColumns"
       />
     </div>
     <DataTable
       :tabData="tabData"
+      :selectedColumns="selectedColumns"
+      :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
+      @handleUpdateColumns="handleUpdateColumns"
       title="goal"
     />
+
   </el-card>
 </template>
 
@@ -30,9 +35,17 @@ export default {
     CardHeader,
     DataTable
   },
+  props: {
+    type: {
+      type: String,
+      default: "CurrentState" // There are two possible types. CurrentState and stateOnASelectedTime
+    }
+  },
   data() {
     return {
-      selectedRows: []
+      selectedRows: [],
+      columns: [],
+      selectedColumns: ["description"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
     };
   },
   methods: {
@@ -70,6 +83,12 @@ export default {
         data: data,
         toast: this.$notify
       });
+    },
+    updateSelectedColumns(value) {
+      this.selectedColumns = value;
+    },
+    handleUpdateColumns(value) {
+      this.columns = value;
     }
   },
   mounted() {
@@ -86,28 +105,6 @@ export default {
         {
           label: "Yours",
           tableData: recList,
-          columns: [
-            {
-              label: "Description",
-              field: "description",
-              sortable: true
-            },
-            {
-              label: "Score",
-              field: "score",
-              sortable: true
-            },
-            {
-              label: "Start date",
-              field: "start_date",
-              sortable: true
-            },
-            {
-              label: "Created At",
-              field: "createdAt",
-              sortable: true
-            }
-          ],
           rowActions: ["C", "D"]
         }
       ];
