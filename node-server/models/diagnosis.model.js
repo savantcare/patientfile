@@ -1,29 +1,43 @@
+/*
+How to model a table?
+https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
+
+id is string since we do not want it to be a auto incrementing integer.
+*/
+
 module.exports = (sequelize, Sequelize) => {
-  const Reminder = sequelize.define("reminder", {
-    id: {
+  const Diagnosis = sequelize.define("diagnosis", {
+    uuid: {
       type: Sequelize.STRING,
       primaryKey: true
     },
-    description: {
+    diagnosisID: {
+      type: Sequelize.STRING
+    },
+    diagnosisName: {
+      type: Sequelize.STRING
+    },
+    assessment: {
       type: Sequelize.STRING
     },
     discontinue: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.BOOLEAN,
+      defaultValue: 0
     },
-    patientId: {
-      type: Sequelize.DECIMAL
+    patientUUId: {
+      type: Sequelize.STRING
     },
-    createdByUserId: {
-      type: Sequelize.DECIMAL
+    recordChangedByUUID: {
+      type: Sequelize.STRING
     },
-    discontinuedByUserId: {
-      type: Sequelize.DECIMAL
+    recordChangedOnDateTime: {
+      type: Sequelize.DATE
     },
-    // Timestamps
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
-    discontinueAt: Sequelize.DATE
+    recordChangedFromIPAddress: {
+      type: Sequelize.STRING
+    },
+    
   });
 
-  return Reminder;
+  return Diagnosis;
 };

@@ -4,16 +4,16 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 // modules
-import recommendationModule from './modules/recommendation'
-import diagnosisModule from './modules/diagnosis'
-import reminderModule from './modules/reminder'
-import goalModule from './modules/goal'
-import settingModule from './modules/setting'
-import rightPanelModule from './modules/rightPanel'
-import tabDialogModule from './modules/tabDialog'
-import leftPanelModule from './modules/leftPanel'
-import dialogModule from './modules/dialog'
-import socialHistoryModule from './modules/socialHistory'
+import recommendationStateModule from './modules/recommendationState'
+import diagnosisStateModule from './modules/diagnosisState'
+import reminderStateModule from './modules/reminderState'
+import goalStateModule from './modules/goalState'
+import settingStateModule from './modules/settingState'
+import rightPanelStateModule from './modules/rightPanelState'
+import tabDialogStateModule from './modules/secondLayerTabDialogState'
+import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
+import dialogStateModule from './modules/dialogState'
+import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
 
@@ -67,16 +67,16 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    recommendation: recommendationModule,
-    diagnosis: diagnosisModule,
-    reminder: reminderModule,
-    goal: goalModule,
-    setting: settingModule,
-    rightPanel: rightPanelModule,
-    tabDialog: tabDialogModule,
-    leftPanel: leftPanelModule,
-    dialog: dialogModule,
-    socialHistory: socialHistoryModule
+    recommendation: recommendationStateModule,
+    diagnosis: diagnosisStateModule,
+    reminder: reminderStateModule,
+    goal: goalStateModule,
+    setting: settingStateModule,
+    rightPanel: rightPanelStateModule,
+    tabDialog: tabDialogStateModule,
+    stateOnASelectedTime: stateOnASelectedTimeModule,
+    dialog: dialogStateModule,
+    socialHistory: socialHistoryStateModule
   },
   plugins: [
     createPersistedState()

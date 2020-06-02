@@ -80,7 +80,7 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.title.toLowerCase()}-0` &&
-        this.type == "stateToday"
+        this.type == "CurrentState"
       );
     },
     showAddButton() {

@@ -3,58 +3,59 @@
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
-      <SplitArea :size="70" :minsize="100" id="leftPanel">
-        <left-panel-header></left-panel-header>
-        <Recommendation type="stateOnADay" />
-        <!-- <div id="leftPanelContainer">
-          <div id="leftPanelContent">
-            <div v-if="leftPanelComponents.length > 0">
+      <SplitArea :size="70" :minsize="100" id="stateOnASelectedTime">
+        <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
+        <!-- The type can be stateOnASelectedTime or currentState -->
+        <Recommendation type="stateOnASelectedTime" />
+        <!-- <div id="stateOnASelectedTimeContainer">
+          <div id="stateOnASelectedTimeContent">
+            <div v-if="stateOnASelectedTimeComponents.length > 0">
               <component
                 :is="component"
-                v-for="(component, index) in leftPanelComponents"
+                v-for="(component, index) in stateOnASelectedTimeComponents"
                 :key="`left-component-${index}`"
               ></component>
             </div>
           </div>
         </div>-->
       </SplitArea>
-      <SplitArea :size="30" :minsize="100">
+      <SplitArea :size="30" :minsize="100" id="CurrentState">
         <transition-group name="list" tag="div">
           <component
-            v-for="(component, index) in stateTodayComponents"
+            v-for="(component, index) in CurrentStateComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
         </transition-group>
 
-        <search-box ref="search_box" @renderStateTodayPanel="renderStateTodayPanel"></search-box>
+        <current-state-components-search-box ref="search_box" @renderCurrentStateCards="renderCurrentStateCards"></current-state-components-search-box>
       </SplitArea>
     </Split>
 
-    <tab-dialog></tab-dialog>
+    <!-- tab-dialog is present in home.vue but in hidden state -->
+    <second-layer-tab-dialog></second-layer-tab-dialog>
     <KeyboardHandler />
   </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script>
-// const TabDialog = () => import("@/components/ui/TabDialog.vue");
+// const TabDialog = () => import("@/components/ui/secondLayerTabDialog.vue");
 
 // Left panel components
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const LeftPanelHeader = () => import("@/components/ui/LeftPanelHeader.vue");
+const stateOnASelectedTimeHeader = () => import("@/components/ui/stateOnASelectedTimeHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
-// const TestPanel = () => import("@/components/LeftPanelTestComponent.vue");
+// const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
 
 // Right panel components
-const SearchBox = () => import("@/components/ui/SearchBox.vue");
+const CurrentStateComponentsSearchBox = () => import("@/components/ui/CurrentStateComponentsSearchBox.vue");
 // const RecommendationsCard = () =>
 // import("@/components/domain/RecommendationsCard/Implementation.vue");
 // const RemindersCard = () =>
 // import("@/components/domain/RemindersCard/Implementation.vue");
 // const CombinationCard = () => import("@/components/CombinationCard.vue");
-const TabDialog = () => import("./TabDialog");
+const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
@@ -63,17 +64,17 @@ const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 export default {
   name: "Home",
   components: {
-    TabDialog,
-    // Left panel components
+    SecondLayerTabDialog,
+    // Left panel components -> On this side state of the patient on a day is shown
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
-    LeftPanelHeader,
+    stateOnASelectedTimeHeader,
     // DateSlider,
     // TestPanel,
 
-    // Right panel components
-    SearchBox,
+    // Right panel components  -> On this side current state of the patient is shown. 
+    CurrentStateComponentsSearchBox,
     // RecommendationsCard,
     // RemindersCard,
     // CombinationCard,
@@ -83,21 +84,21 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      leftPanelWidth: 70
+      stateOnASelectedTimeWidth: 70
     };
   },
   computed: {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    stateTodayComponents() {
+    CurrentStateComponents() {
       return this.$store.state.rightPanel.list;
     },
-    leftPanelComponents() {
-      return this.$store.getters.leftPanelList;
+    stateOnASelectedTimeComponents() {
+      return this.$store.getters.stateOnASelectedTimeList;
     }
   },
-  beforeCreate() {
+  beforeCreate() { // this is a lifecycle event https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
     // Initialize rightPanel components
     const rightPanelCards = [
       {
@@ -196,9 +197,9 @@ export default {
     ];
 
     this.$store.commit("setRightPanelList", rightPanelCards);
-    // Initialize leftPanel components
-    // const leftPanelList = [RecommendationsPanel, RemindersPanel];
-    // this.$store.commit("setLeftPanelList", leftPanelList);
+    // Initialize stateOnASelectedTime components
+    // const stateOnASelectedTimeList = [RecommendationsPanel, RemindersPanel];
+    // this.$store.commit("setstateOnASelectedTimeList", stateOnASelectedTimeList);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -216,15 +217,15 @@ export default {
     onDrag(size) {
       const rightSize = size[1];
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
-      this.leftPanelWidth = size[0];
+      this.stateOnASelectedTimeWidth = size[0];
     },
-    renderStateTodayPanel(action) {
+    renderCurrentStateCards(action) {
       if (action == "clear") {
         this.$store.commit("setRightPanelFocusRowIndex", -1);
         this.$store.commit("setRightPanelList", []);
       } else if (action.search("recommendation") > -1) {
         const newList = [];
-        this.stateTodayComponents.forEach(item => {
+        this.CurrentStateComponents.forEach(item => {
           if (item.key != "recommendation") {
             newList.push(item);
           }
@@ -238,7 +239,7 @@ export default {
         this.$store.commit("setRightPanelList", newList);
       } else if (action.search("reminder") > -1) {
         const newList = [];
-        this.stateTodayComponents.forEach(item => {
+        this.CurrentStateComponents.forEach(item => {
           if (item.key != "reminder") {
             newList.push(item);
           }

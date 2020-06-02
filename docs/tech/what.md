@@ -8,7 +8,7 @@ Total loc: 991
 
 ### Layer 1
 
-**HTML/CSS/JS (127 loc)** -> [/components/composition-layer1/RecommendationsCard.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer1/RecommendationsCard.vue) -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by [vue-cli](https://cli.vuejs.org/)
+**HTML/CSS/JS (122 loc)** -> [/components/composition-layer1/RecommendationsCard.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer1/RecommendationsCard.vue) -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by [vue-cli](https://cli.vuejs.org/)
 
 ### Layer 2
 1. **Add (123 loc)**  [/components/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/components/composition-layer2/recommendation/AddRecommendation.vue)
@@ -45,13 +45,13 @@ Recommendation.
 
 ## Q5) What tags are used in code?
 
- * Todo:
- * Question:
- * Fix:
+ * TODO:
+ * QUESTION:
+ * FIX:
 
 To find files with Fix tag: 
 
-patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' Fix:' ./
+patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' FIX:' ./
 
 ## Q6) What is the code review process?
 https://www.youtube.com/watch?v=8fx-EaOUK2E

@@ -5,7 +5,7 @@
         <CardHeader
           title="Reminder"
           actions="A,M,F,D"
-          type="stateToday"
+          type="CurrentState"
           @showAddDialog="showAddDialog"
           @showMultiChangeDialog="showMultiChangeDialog"
           @focusPanel="focusPanel"

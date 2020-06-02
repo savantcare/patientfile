@@ -4,35 +4,35 @@
             <el-card class="box-card">
                 <el-form 
                 label-position="top" 
-                :model="dynamicValidateForm" 
-                ref="dynamicValidateForm" 
+                :model="dxForm" 
+                ref="dxForm" 
                 class="demo-dynamic">
 
                     <el-card 
                     class="box-card" 
-                    v-for="(domain) in dynamicValidateForm.domains" 
-                    :key="domain.key" 
+                    v-for="(diagnosis,index) in dxForm.dx" 
+                    :key="index" 
                     style="margin-bottom: 20px;">
                         <el-row>
                             <el-col :span="2" :offset="24">
-                                <i class="el-icon-close" @click.prevent="removeDomain(domain)"></i>
+                                <i class="el-icon-close" @click.prevent="removeDomain(diagnosis)"></i>
                             </el-col>
                         </el-row>
                         <el-form-item 
                         style="font-weight:bold" 
                         label="Name" 
-                        :prop="'value'" 
+                        :prop="'dx.'+index+'.value'" 
                         label-position="top" 
                         :rules="{required: true, message: 'Diagnosis can not be blank', trigger: 'blur'}">
                             <el-select
-                            v-model="domain.value" 
+                            v-model="diagnosis.value" 
                             filterable 
                             placeholder="Select" 
                             style="width: 100%;"> 
                                 <el-option
                                 v-for="item in diagnosesList"
                                 :key="item.value"
-                                :label="item.label"
+                                :label="item.value"
                                 :value="item.value">
                                 </el-option>
                             </el-select>
@@ -40,13 +40,13 @@
                         <el-form-item 
                         style="font-weight:bold" 
                         label="When diagnosed" 
-                        :prop="'when'" 
+                        :prop="'dx.'+index+'.when'" 
                         label-position="top" 
                         :rules="{required: true, message: 'Date can not be blank', trigger: 'blur'}">
                             <el-date-picker 
                             type="date" 
                             placeholder="Pick a date" 
-                            v-model="domain.when" 
+                            v-model="diagnosis.when" 
                             style="width: 100%;">
                             </el-date-picker>
                         </el-form-item>
@@ -54,7 +54,7 @@
 
 
                     <el-form-item>
-                        <el-button type="success" @click="submitForm('dynamicValidateForm')" size="small">Save</el-button>
+                        <el-button type="success" @click="submitForm('dxForm')" size="small">Save</el-button>
                         <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
                     </el-form-item>
                 </el-form>
@@ -63,33 +63,20 @@
     </el-row>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        editableTabsValue: '2',
-        editableTabs: [{
-          title: 'Assessment diagnosis',
-          name: 'assessment',
-          content: 'Assessment'
-        }, 
-        {
-          title: 'Add diagnosis',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        tabIndex: 2,
-        form: {
-          desc: 'Current assessment for this diagnosis'
-        },
-        dialogVisible: true,
-        dynamicValidateForm: {
-          domains: [{
-            key: 1,
-            value: '',
-            when: ''
-          }]
-        },
-        diagnosesList: [{
+
+
+/**
+ * Multi Add Diagnosis form.
+ * @displayName Add Diagnosis
+ */
+import uniqid from "uniqid";
+
+export default {
+  data() {
+    return {
+      id: this.$route.query.patient_id,
+      dxForm: { dx: [{value: '', when: '' }] },
+      diagnosesList: [{
           value: 'Bacterial intestinal infection, unspecified',
           label: 'Bacterial intestinal infection, unspecified'
         }, {
@@ -120,68 +107,64 @@
           value: 'Child neglect or abandonment, confirmed subsequent encounter',
           label: 'Child neglect or abandonment, confirmed subsequent encounter'
         }],
-      }
+    };
+  },
+  methods: {
+    addDomain() {
+      this.dxForm.dx.push({
+        value: '', when: ''
+      });
     },
-    methods: {
-      handleTabsEdit(targetName, action) {
-        if (action === 'add') {
-          let newTabName = ++this.tabIndex + '';
-          this.editableTabs.push({
-            title: 'New Tab',
-            name: newTabName,
-            content: 'New Tab content'
-          });
-          this.editableTabsValue = newTabName;
-        }
-        if (action === 'remove') {
-          let tabs = this.editableTabs;
-          let activeName = this.editableTabsValue;
-          if (activeName === targetName) {
-            tabs.forEach((tab, index) => {
-              if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                if (nextTab) {
-                  activeName = nextTab.name;
-                }
-              }
+    submitForm(formName) {
+      const vm = this;
+      this.$refs[formName].validate(async valid => {
+        if (valid) {
+          // Add
+            let dxList = [];
+            this.dxForm.dx.forEach(item => {
+              dxList.push({
+                diagnosisName: item.value,
+                recordChangedOnDateTime: item.when,
+                patientUUId: vm.id,
+                diagnosisID: uniqid(),
+                recordChangedByUUID: this.userId
+              });
             });
-          }
-          
-          this.editableTabsValue = activeName;
-          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+            await this.$store.dispatch("addDiagnosis", {
+              data: dxList,
+              notify: this.$notify,
+              patientId: this.id
+            });
+            await this.$store.dispatch("getDiagnosis", {
+              patientId: this.id,
+              notify: this.$notify
+            });
+            this.dxForm = { dx: [{ value: "", when: "" }] };
+        } else {
+          console.log("error submit!!");
+          return false;
         }
-      },
-      onSubmit() {
-        console.log('submit!');
-      },
-      handleClose(done) {
-        done();
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item);
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1);
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          key: Date.now(),
-          value: ''
-        });
-      }
-    } 
+      });
+    }
+  },
+  computed: {
+    type() {
+      return this.$store.state.tabDialog.diagnosisTabType;
+    },
+    updateData() {
+      return this.$store.state.tabDialog.diagnosisData;
+    },
+    userId() {
+      return this.$store.state.userId;
+    }
+  },
+  mounted() {
+    
+  },
+  watch: {
+    updateData() {
+      this.dxForm = { dx: [{ value: this.updateData.description, when: this.updateData.when }] };
+    }
   }
+};
 </script>

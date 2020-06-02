@@ -2,7 +2,7 @@
 module.exports = {
   // API urls
   RECOMMENDATION_API_URL: "http://localhost:8000/recommendations",
-  DIAGNOSIS_API_URL: "http://localhost:8000/diagnoses",
+  DIAGNOSIS_API_URL: "http://localhost:8000/diagnosis",
   REMINDER_API_URL: "http://localhost:8000/reminders",
   GOAL_API_URL: "http://localhost:8000/goals",
   SETTING_API_URL: "http://localhost:8000/settings",
@@ -13,12 +13,8 @@ module.exports = {
   COMPONENT_API_URL: "http://localhost:8000/components",
   SOCIALHISTORY_API_URL: "http://localhost:8000/social-histories",
 
-  LEFT_SIDE_COMPONENTS: [
+  STATE_ON_A_DAY_COMPONENTS: [
   ],
-
-  ADD_DIALOG: 1,
-  STYLE_1: 1,
-  STYLE_2: 2,
 
   // Tab constant values.
   ADD_RECOMMENDATION: 1,

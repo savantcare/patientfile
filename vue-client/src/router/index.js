@@ -52,7 +52,7 @@ const routes = [
   {
     path: '/tab-dialog',
     name: 'tab-dialog',
-    component: () => import("@/views/TabDialog.vue")
+    component: () => import("@/views/secondLayerTabDialog.vue")
   }
 ]
 
