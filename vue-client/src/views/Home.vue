@@ -9,6 +9,7 @@
         <!-- The type can be stateAtSelectedTime or StateAtCurrentTime -->
         <Recommendation type="stateAtSelectedTime" />
         <Reminder type="stateAtSelectedTime" />
+        <Goal type="stateAtSelectedTime" />
       </SplitArea>
       <SplitArea :size="30" :minsize="100" id="StateAtCurrentTime">
         <transition-group name="list" tag="div">
@@ -54,6 +55,7 @@ const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
+const Goal = () => import("@/components/composition-layer1/GoalsCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
 import StateAtCurrentTimeCards from "@/StateAtCurrentTimeCards.js";
@@ -77,6 +79,7 @@ export default {
     // CombinationCard,
     Recommendation,
     Reminder,
+    Goal,
     KeyboardHandler
   },
   data() {

@@ -42,7 +42,7 @@ export default {
     SOCKET_UPDATE_GOAL(state, updateData) {
       let newList = []
       state.list.forEach(item => {
-        if (item.id != updateData.id) {
+        if (item.uuid != updateData.uuid) {
           newList.push(item)
         } else {
           newList.push(updateData)
@@ -53,7 +53,7 @@ export default {
     SOCKET_DISCONTINUE_GOAL(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_GOAL")
       const newList = state.list.filter(item => {
-        return item.id != dispatchId
+        return item.uuid != dispatchId
       })
       state.list = newList
     }
@@ -102,8 +102,10 @@ export default {
       originList.forEach(item => {
         if (item.uuid == data.uuid) {
           newList.push({
-            id: data.uuid,
+            uuid: data.uuid,
             description: data.description,
+            score: data.score,
+            startDate: data.startDate,
             createdAt: data.createdAt,
             patientUUID: data.patientUUID
           });
@@ -186,7 +188,7 @@ export default {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.list
       const newList = originList.filter(item => {
-        return !selectedIds.includes(item.id)
+        return !selectedIds.includes(item.uuid)
       })
 
       commit("setGoalList", newList)
@@ -195,7 +197,7 @@ export default {
       selectedDatas.forEach(async item => {
         try {
           item['discontinue'] = true
-          await fetch(`${GOAL_API_URL}/${item.id}`, {
+          await fetch(`${GOAL_API_URL}/${item.uuid}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json;charset=utf-8",
