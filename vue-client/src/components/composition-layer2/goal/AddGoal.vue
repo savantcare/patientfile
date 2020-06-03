@@ -33,7 +33,7 @@
                   required: true, message: 'Start date of goal can not be blank', trigger: 'blur'
                 }"
               >
-                <el-date-picker :span="8" v-model="domain.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
+                <el-date-picker :span="8" v-model="domain.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions" style="width: 100%;"></el-date-picker>
               </el-form-item>
               <el-form-item
                 :prop="'goals.' + index + '.score'" 
@@ -67,7 +67,29 @@ export default {
   data() {
     return {
       id: this.$route.query.patient_id,
-      goalForm: { goals: [{ description: "", startDate: "", score: "" }] }
+      goalForm: { goals: [{ description: "", startDate: "", score: "" }] },
+      pickerOptions: {
+        shortcuts: [{
+          text: 'Today',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: 'Yesterday',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: 'A week ago',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      }
     };
   },
   methods: {
@@ -127,6 +149,9 @@ export default {
           return false;
         }
       });
+    },
+    formatTooltip(val) {
+      return val ;
     }
   },
   computed: {

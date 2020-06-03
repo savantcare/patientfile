@@ -75,7 +75,7 @@ export default {
       });
     },
     formatTooltip(val) {
-      return val / 100;
+      return val;
     }
   },
   computed: {
