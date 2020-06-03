@@ -16,9 +16,14 @@
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
-          <el-button type="text" size="mini" @click="$emit('showAddDialog')">A</el-button>
-          <el-button type="text" size="mini" @click="$emit('showMultiChangeDialog')">M</el-button>
-          <el-button type="text" size="mini" @click="$emit('focusPanel')">F</el-button>
+          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showAddButton">A</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('showMultiChangeDialog')"
+            v-if="showMultiChangeButton"
+          >M</el-button>
+          <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusButton">F</el-button>
 
           <!--
         TODO: Clicking on settings icon will allow choosing which columns to display and 
@@ -82,18 +87,28 @@ export default {
       );
     },
     showAddButton() {
-      return this.actions.indexOf("A") > -1 && this.$parent.selected.length < 1;
+      return (
+        this.actions.split(",").filter(action => action == "A").length > 0 &&
+        this.$parent.$parent.selectedRows.length < 1
+      );
     },
     showMultiChangeButton() {
-      return this.actions.indexOf("M") > -1 && this.$parent.selected.length < 1;
+      return (
+        this.actions.split(",").filter(action => action == "M").length > 0 &&
+        this.$parent.$parent.selectedRows.length < 1
+      );
     },
     showFocusButton() {
-      console.log(this.title)
-      console.log(this.actions)
-      return this.actions.indexOf("F") > -1 && this.$parent.selected.length < 1;
+      return (
+        this.actions.split(",").filter(action => action == "F").length > 0 &&
+        this.$parent.$parent.selectedRows.length < 1
+      );
     },
     showDiscontinueButton() {
-      return this.actions.indexOf("D") > -1 && this.$parent.selected.length > 0;
+      return (
+        this.actions.split(",").filter(action => action == "D").length > 0 &&
+        this.$parent.$parent.selectedRows.length > 0
+      );
     },
     showActions() {
       return this.mouseOver || this.isHeaderFocus || this.showPopover;

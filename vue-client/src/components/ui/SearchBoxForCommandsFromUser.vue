@@ -21,7 +21,14 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      selectedIndex: 0
+      selectedIndex: 0,
+      items: [
+        { name: "Florida", abbr: "FL", id: 1 },
+        { name: "Georgia", abbr: "GA", id: 2 },
+        { name: "Nebraska", abbr: "NE", id: 3 },
+        { name: "California", abbr: "CA", id: 4 },
+        { name: "New York", abbr: "NY", id: 5 }
+      ]
     };
   },
   computed: {
@@ -51,7 +58,10 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("setStateAtCurrentTimeSplitAreaWidth", "calc(30% - 4px)");
+    this.$store.commit(
+      "setStateAtCurrentTimeSplitAreaWidth",
+      "calc(30% - 4px)"
+    );
     // this.$refs.search_box.$el
     //   .getElementsByTagName("input")[0]
     //   .addEventListener("keydown", event => {
@@ -110,7 +120,10 @@ export default {
       this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
     },
     handleInput() {
-      this.$store.commit("setStateAtCurrentTimeSearchKeyword", this.searchKeyword);
+      this.$store.commit(
+        "setStateAtCurrentTimeSearchKeyword",
+        this.searchKeyword
+      );
     },
     executeSearch() {
       const keywords = this.searchKeyword.split(" ");

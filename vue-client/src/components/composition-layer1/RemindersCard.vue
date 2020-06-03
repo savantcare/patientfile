@@ -3,7 +3,7 @@
     <div slot="header" class="clearfix">
       <!--   actions="A,M,F,D" if selectedTimeForShowingState from home.vue is NULL.
       If selectedTimeForShowingState is not NULL then action = "Addn" (Addendum)
-       -->
+      -->
       <CardHeader
         title="Reminder"
         :actions="selectedTimeForShowingState != null ? 'Addendum' : 'A,M,F,D'"
@@ -16,6 +16,7 @@
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
       />
+    </div>
     <DataTable
       title="Reminder"
       keyId="reminder"
@@ -27,7 +28,6 @@
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
     />
-    </div>
   </el-card>
 </template>
 
@@ -121,7 +121,7 @@ export default {
       notify: this.$notify
     };
     this.$store.dispatch("getReminders", params);
-    console.log(this.selectedTimeForShowingState)
+    console.log(this.selectedTimeForShowingState);
   },
   computed: {
     tabData() {

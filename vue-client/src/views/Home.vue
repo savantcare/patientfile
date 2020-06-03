@@ -50,7 +50,6 @@ const SearchBoxForCommandsFromUser = () =>
 // const CombinationCard = () => import("@/components/CombinationCard.vue");
 const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
-
 // TODO: Rename this to RecommendationCard
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
@@ -100,7 +99,10 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("setStateAtCurrentTimeCardsList", StateAtCurrentTimeCards);
+    this.$store.commit(
+      "setStateAtCurrentTimeCardsList",
+      StateAtCurrentTimeCards
+    );
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -119,7 +121,10 @@ export default {
   methods: {
     onDrag(size) {
       const rightSize = size[1];
-      this.$store.commit("setStateAtCurrentTimeSplitAreaWidth", `calc(${rightSize}% - 4px) `);
+      this.$store.commit(
+        "setStateAtCurrentTimeSplitAreaWidth",
+        `calc(${rightSize}% - 4px) `
+      );
       this.stateAtSelectedTimeWidth = size[0];
     },
     updateStateAtCurrentTimeRows() {
