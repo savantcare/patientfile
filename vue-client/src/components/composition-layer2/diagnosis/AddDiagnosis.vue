@@ -123,11 +123,18 @@ export default {
             let dxList = [];
             this.dxForm.dx.forEach(item => {
               dxList.push({
-                diagnosisName: item.value,
-                recordChangedOnDateTime: item.when,
+                uuid: uniqid(),
                 patientUUId: vm.id,
-                diagnosisID: uniqid(),
-                recordChangedByUUID: this.userId
+                diagnosisName: item.value,
+                icd10Code:'',
+                notes:'',
+                assessment:'',
+                agree:'',
+                discontinue:0,
+                startDate:item.when,
+                recordChangedOnDateTime: item.when,
+                recordChangedByUUID: this.userId,
+                recordChangedFromIPAddress:''
               });
             });
             await this.$store.dispatch("addDiagnosis", {

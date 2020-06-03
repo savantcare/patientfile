@@ -8,17 +8,19 @@ const { Op } = require("sequelize")
 module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
-      const { data, patientId } = req.body
+
+      const data = req.body
+      
       const newDiagnosis = await Diagnosis.bulkCreate(data)       // See 
-      console.log(newDiagnosis)
+      
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
        Question: What is inside newDiagnosis?
        */
-      console.log(`room-${patientId}-Doctor`)
+      /*console.log(`room-${patientId}-Doctor`)
       console.log(newDiagnosis)
-      io.to(`room-${patientId}-Doctor`).emit("ADD_DIAGNOSIS", newDiagnosis)
+      io.to(`room-${patientId}-Doctor`).emit("ADD_DIAGNOSIS", newDiagnosis)*/
 
       res.send(newDiagnosis) /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
