@@ -27,7 +27,7 @@ export default new Vuex.Store({
     connectionStatus: true, // true: online, false: offline
     userId: -1,
     selectedColumns: {
-      recommendation: ["description"],
+      recommendation: ["recommendationDescription"],
       reminder: ["description"]
     }
   },
