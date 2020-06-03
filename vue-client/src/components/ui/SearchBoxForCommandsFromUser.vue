@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     width() {
-      return this.$store.state.rightPanel.width;
+      return this.$store.state.StateAtCurrentTime.width;
     },
     keywordComponents() {
       if (this.searchKeyword.length == 0) {
@@ -38,7 +38,7 @@ export default {
       });
     },
     focusRow() {
-      return this.$store.getters.rightPanelFocusRow;
+      return this.$store.getters.StateAtCurrentTimeFocusRow;
     }
   },
   watch: {
@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("setRightPanelWidth", "calc(30% - 4px)");
+    this.$store.commit("setStateAtCurrentTimeWidth", "calc(30% - 4px)");
     // this.$refs.search_box.$el
     //   .getElementsByTagName("input")[0]
     //   .addEventListener("keydown", event => {
@@ -72,8 +72,8 @@ export default {
       }, 50);
     },
     handleFocus() {
-      const { rows } = this.$store.state.rightPanel;
-      this.$store.commit("setRightPanelFocusRowIndex", rows.length - 1);
+      const { rows } = this.$store.state.StateAtCurrentTime;
+      this.$store.commit("setStateAtCurrentTimeFocusRowIndex", rows.length - 1);
     },
     checkRowFocusStatus(object) {
       const { rowIndex } = object;
@@ -104,13 +104,13 @@ export default {
       const action = item.value;
 
       this.$store.commit("updateStateAtCurrentTimeCards", action);
-      this.$store.dispatch("updateRightPanelRow");
+      this.$store.dispatch("updateStateAtCurrentTimeRow");
 
       this.searchKeyword = "";
-      this.$store.commit("setRightPanelSearchKeyword", "");
+      this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
     },
     handleInput() {
-      this.$store.commit("setRightPanelSearchKeyword", this.searchKeyword);
+      this.$store.commit("setStateAtCurrentTimeSearchKeyword", this.searchKeyword);
     },
     executeSearch() {
       const keywords = this.searchKeyword.split(" ");
@@ -126,7 +126,7 @@ export default {
       };
       if (keywords.length == 1) {
         this.$store.commit("updateStateAtCurrentTimeCards", keywords[0]);
-        this.$store.dispatch("updateRightPanelRow");
+        this.$store.dispatch("updateStateAtCurrentTimeRow");
       } else if (keywords.length == 2) {
         // rex add
         const component = keywords[0];
@@ -138,7 +138,7 @@ export default {
       }
 
       this.searchKeyword = "";
-      this.$store.commit("setRightPanelSearchKeyword", "");
+      this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
     }
   }
 };

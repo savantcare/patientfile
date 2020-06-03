@@ -90,14 +90,14 @@ export default {
       return this.$store.state.focusComponent;
     },
     StateAtCurrentTimeComponents() {
-      return this.$store.state.rightPanel.list;
+      return this.$store.state.StateAtCurrentTime.list;
     },
     stateAtSelectedTimeComponents() {
       return this.$store.getters.stateAtSelectedTimeList;
     }
   },
   beforeCreate() {
-    this.$store.commit("setRightPanelList", StateAtCurrentTimeCards);
+    this.$store.commit("setStateAtCurrentTimeList", StateAtCurrentTimeCards);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -108,19 +108,19 @@ export default {
     this.$socket.emit("CREATE_ROOM", `room-${patientId}-${role}`);
 
     this.$store.commit("setFocusComponent", "");
-    this.$store.commit("setRightPanelFocusRowIndex", -1);
+    this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
 
     // TODO: This should be called updateStateAtCurrentTimeArea
-    this.updateRightPanelRows();
+    this.updateStateAtCurrentTimeRows();
   },
   methods: {
     onDrag(size) {
       const rightSize = size[1];
-      this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
+      this.$store.commit("setStateAtCurrentTimeWidth", `calc(${rightSize}% - 4px) `);
       this.stateAtSelectedTimeWidth = size[0];
     },
-    updateRightPanelRows() {
-      this.$store.dispatch("updateRightPanelRow");
+    updateStateAtCurrentTimeRows() {
+      this.$store.dispatch("updateStateAtCurrentTimeRow");
     }
   },
   beforeDestroy() {

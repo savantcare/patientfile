@@ -104,7 +104,7 @@ export default {
             this.recForm = { recs: [{ description: "" }] };
           }
 
-          this.$store.dispatch("updateRightPanelRow");
+          this.$store.dispatch("updateStateAtCurrentTimeRow");
         } else {
           console.log("error submit!!");
           return false;

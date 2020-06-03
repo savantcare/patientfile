@@ -74,7 +74,7 @@ export default new Vuex.Store({
     reminder: reminderStateModule,
     goal: goalStateModule,
     setting: settingStateModule,
-    rightPanel: StateAtCurrentTimeAreaModule,
+    StateAtCurrentTime: StateAtCurrentTimeAreaModule,
     tabDialog: secondLayerTabDialogStateModule,
     stateAtSelectedTime: stateAtSelectedTimeModule,
     socialHistory: socialHistoryStateModule

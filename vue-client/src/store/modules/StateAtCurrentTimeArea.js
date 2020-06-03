@@ -9,19 +9,19 @@ export default {
     searchKeyword: ""
   },
   mutations: {
-    setRightPanelWidth(state, value) {
+    setStateAtCurrentTimeWidth(state, value) {
       state.width = value
     },
-    setRightPanelList(state, newList) {
+    setStateAtCurrentTimeList(state, newList) {
       state.list = newList
     },
-    setRightPanelFocusRowIndex(state, index) {
+    setStateAtCurrentTimeFocusRowIndex(state, index) {
       state.focusRowIndex = index
     },
-    setRightPanelRows(state, rows) {
+    setStateAtCurrentTimeRows(state, rows) {
       state.rows = rows;
     },
-    setRightPanelSearchKeyword(state, keyword) {
+    setStateAtCurrentTimeSearchKeyword(state, keyword) {
       state.searchKeyword = keyword
     },
     updateStateAtCurrentTimeCards(state, action) {
@@ -46,18 +46,18 @@ export default {
     }
   },
   getters: {
-    rightPanelFocusRow(state) {
+    StateAtCurrentTimeFocusRow(state) {
       return state.rows[state.focusRowIndex]
     }
   },
   actions: {
-    updateRightPanelRow({ rootState, commit }) {
+    updateStateAtCurrentTimeRow({ rootState, commit }) {
       /**
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
-      let rightPanelRows = [];
-      const rightPanelComponents = rootState.rightPanel.list
-      rightPanelComponents.forEach(item => {
+      let StateAtCurrentTimeRows = [];
+      const StateAtCurrentTimeComponents = rootState.StateAtCurrentTime.list
+      StateAtCurrentTimeComponents.forEach(item => {
         if (rootState[item.key] && rootState[item.key]["list"]) {
           const componentRows = rootState[item.key]["list"].filter(
             data => {
@@ -65,16 +65,16 @@ export default {
             }
           );
           // Set the header index as 0
-          rightPanelRows.push(`${item.key}-0`);
+          StateAtCurrentTimeRows.push(`${item.key}-0`);
           componentRows.forEach((row, index) => {
-            rightPanelRows.push(`${item.key}-${index + 1}`);
+            StateAtCurrentTimeRows.push(`${item.key}-${index + 1}`);
           });
         }
       });
       // Add current-state-components-search-box component at the last
-      rightPanelRows.push("current-state-components-search-box");
+      StateAtCurrentTimeRows.push("current-state-components-search-box");
 
-      commit("setRightPanelRows", rightPanelRows)
+      commit("setStateAtCurrentTimeRows", StateAtCurrentTimeRows)
     }
   }
 }

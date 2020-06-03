@@ -30,8 +30,8 @@ export default {
       /**
        * Global Key-Handler for Right-Panel components
        */
-      let { focusRowIndex } = this.$store.state.rightPanel;
-      const { rows, searchKeyword } = this.$store.state.rightPanel;
+      let { focusRowIndex } = this.$store.state.StateAtCurrentTime;
+      const { rows, searchKeyword } = this.$store.state.StateAtCurrentTime;
 
       /**
        * Exception where make the Global key-handler not working.
@@ -43,21 +43,21 @@ export default {
         // Set focus to the <current-state-components-search-box>
         focusRowIndex = rows.length - 1;
         this.$parent.$refs.search_box.setFocus();
-        this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
+        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowDown") {
         if (focusRowIndex == rows.length - 1) {
           focusRowIndex = 0;
         } else {
           focusRowIndex += 1;
         }
-        this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
+        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowUp") {
         if (focusRowIndex == 0) {
           focusRowIndex = rows.length - 1;
         } else {
           focusRowIndex -= 1;
         }
-        this.$store.commit("setRightPanelFocusRowIndex", focusRowIndex);
+        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
       }
 
       const focusRow = rows[focusRowIndex];
@@ -93,7 +93,7 @@ export default {
               notify: this.$notify
             }
           );
-          this.$store.dispatch("updateRightPanelRow");
+          this.$store.dispatch("updateStateAtCurrentTimeRow");
         }
         return;
       }

@@ -166,7 +166,7 @@ export default {
   mounted() {},
   computed: {
     focusRow() {
-      return this.$store.getters.rightPanelFocusRow;
+      return this.$store.getters.StateAtCurrentTimeFocusRow;
     }
   }
 };
