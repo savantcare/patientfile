@@ -50,7 +50,10 @@ module.exports = (io) => {
     try {
       // Update the existing object to discontinue.
       await Goal.update({
-        score: req.body.score
+        score: req.body.score,
+        startDate: req.body.startDate,
+        recordChangedByUUID: req.body.recordChangedByUUID,
+        recordChangedOnDateTime: req.body.recordChangedOnDateTime
       }, {
         where: {
           uuid: req.body.uuid
@@ -85,11 +88,18 @@ module.exports = (io) => {
 
   router.get('/getHistory/:id', async (req, res) => {
     try {
-      const histories = await Goal.findAll({
+      /*const histories = await Goal.findAll({
         where: {
           uuid: req.params.id
         }
-      })
+      })*/
+
+      const histories = await Goal.sequelize.query('SELECT *, ROW_START, ROW_END FROM goals FOR SYSTEM_TIME ALL where uuid = :uuid ORDER BY ROW_START DESC',
+          {
+            replacements: { uuid: req.params.id },
+            type: Goal.sequelize.QueryTypes.SELECT
+          }
+      );
       /**
        * Expect result:
        *  {
@@ -99,9 +109,10 @@ module.exports = (io) => {
        * 
        */
 
-      const promises = histories.map(async history => {
-        const { score, recordChangedByUUID, discontinuedByUserId, recordChangedOnDateTime, discontinueAt } = history
-        if (discontinuedByUserId == null) { // The case which there is no update history
+      const promises = histories.map(async (history,index) => {
+        const { score, recordChangedByUUID, recordChangedOnDateTime, ROW_START } = history
+
+        if ((histories.length - 1) == index) { // The case which there is no update history
           try {
             const user = await User.findOne({
               attributes: ['name'],
@@ -111,7 +122,7 @@ module.exports = (io) => {
             const { name } = user
             const data = {
               content: `Score: ${score}`,
-              info: `Added by ${name} on ${new Date(recordChangedOnDateTime).toDateString()}`
+              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`
             }
             console.log(data)
             return data
@@ -122,13 +133,13 @@ module.exports = (io) => {
           try {
             const user = await User.findOne({
               attributes: ['name'],
-              where: { id: discontinuedByUserId }
+              where: { id: recordChangedByUUID }
             })
 
             const { name } = user
             return {
               content: `Score: ${score}`,
-              info: `Changed by ${name} on ${new Date(discontinueAt).toDateString()}`
+              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`
             }
           } catch (err) {
             return err.message || "Some error occured while get user info"

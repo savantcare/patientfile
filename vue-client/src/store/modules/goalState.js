@@ -105,7 +105,8 @@ export default {
             uuid: data.uuid,
             description: data.description,
             score: data.score,
-            startDate: data.startDate,
+            //startDate: data.startDate,
+            startDate: new Date(data.startDate).toDateString(),
             createdAt: data.createdAt,
             patientUUID: data.patientUUID
           });
