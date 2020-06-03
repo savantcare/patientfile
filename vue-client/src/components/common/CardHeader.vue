@@ -88,6 +88,8 @@ export default {
       return this.actions.indexOf("M") > -1 && this.$parent.selected.length < 1;
     },
     showFocusButton() {
+      console.log(this.title)
+      console.log(this.actions)
       return this.actions.indexOf("F") > -1 && this.$parent.selected.length < 1;
     },
     showDiscontinueButton() {

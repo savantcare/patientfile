@@ -3,7 +3,6 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     remindersList: [],
-    selectedTimeForShowingState: []      // This is used for stateAtSelectedTime. if this value is null it means stateAtCurrentTime is being shown.
   },
   mutations: {
     setReminderList(state, data) {
@@ -18,10 +17,6 @@ export default {
     removeNewReminder(state) {
       state.remindersList.pop()
     },
-    setReminderCurrentDate(state, value) {
-      state.selectedTimeForShowingState = value
-    },
-
     /**
      * Socket Listeners
      */
@@ -262,6 +257,7 @@ export default {
     panelReminders(state) {
       return state.remindersList.filter(item => {
         const itemDate = new Date(item.createdAt)
+        // state.selectedTimeForShowingState instead of this selectedTimeForShowingState should use the value set in home.vue
         return item.discontinue != true && itemDate <= state.selectedTimeForShowingState
       })
     }
