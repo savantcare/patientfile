@@ -8,17 +8,6 @@
         <!-- The type can be stateOnASelectedTime or currentState -->
         <Recommendation type="stateOnASelectedTime" />
         <Reminder type="stateOnASelectedTime" />
-        <!-- <div id="stateOnASelectedTimeContainer">
-          <div id="stateOnASelectedTimeContent">
-            <div v-if="stateOnASelectedTimeComponents.length > 0">
-              <component
-                :is="component"
-                v-for="(component, index) in stateOnASelectedTimeComponents"
-                :key="`left-component-${index}`"
-              ></component>
-            </div>
-          </div>
-        </div>-->
       </SplitArea>
       <SplitArea :size="30" :minsize="100" id="CurrentState">
         <transition-group name="list" tag="div">
@@ -29,6 +18,11 @@
           ></component>
         </transition-group>
 
+        <!-- 
+          TODO:
+          The search box is used for more than just components search. For e.g. Card header actions can be searched in the search box. 
+          So this should be called <search-box-for-typing-commands>
+        -->
         <current-state-components-search-box ref="search_box"></current-state-components-search-box>
       </SplitArea>
     </Split>
@@ -60,6 +54,8 @@ const CurrentStateComponentsSearchBox = () =>
 // const CombinationCard = () => import("@/components/CombinationCard.vue");
 const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
+
+// TODO: Rename this to RecommendationCard
 const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
@@ -118,6 +114,8 @@ export default {
 
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setRightPanelFocusRowIndex", -1);
+
+    // TODO: This should be called updateCurrentStateArea
     this.updateRightPanelRows();
   },
   methods: {

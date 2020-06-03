@@ -57,8 +57,7 @@ patientfile> grep -ir -n --exclude-dir={node_modules,.git} ' FIX:' ./
 https://www.youtube.com/watch?v=8fx-EaOUK2E
 
 
-## Q7) What are the key concepts of temporal DB?
-Ref: https://mariadb.com/kb/en/temporal-data-tables/
+## Q7) How to do discontinue and delete in temporal DB? 
 
 1. When doctor says change then run a edit query
 
@@ -71,3 +70,5 @@ Ref: https://mariadb.com/kb/en/temporal-data-tables/
 2. So when a edit is done mysql is internally adding a new record. And marking the end time of the previous record.
 
 3. When a delete is done mysql is NOT deleting from the DB. Mysql is just marking the end time of that record.
+
+Ref: https://mariadb.com/kb/en/temporal-data-tables/
