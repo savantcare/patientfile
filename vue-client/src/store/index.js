@@ -26,7 +26,8 @@ export default new Vuex.Store({
     userId: -1,
     selectedColumns: {
       recommendation: ["recommendationDescription"],
-      reminder: ["description"]
+      reminder: ["description"],
+      goal: ["description"]
     }
   },
   mutations: {
