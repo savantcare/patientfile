@@ -54,7 +54,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeRemindersModal(state) {
+    showMultiChangeReminderModal(state) {
       const tab = {
         label: "Multi change Reminders",
         value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,

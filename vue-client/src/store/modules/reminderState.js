@@ -8,6 +8,7 @@ export default {
   mutations: {
     setReminderList(state, data) {
       state.remindersList = data
+      console.log(data);
     },
     addNewReminder(state, newList) {
       newList.forEach(item => {
@@ -30,7 +31,7 @@ export default {
     SOCKET_ADD_REMINDER(state, newDataList) {         // Msg recd from node-server/routes/reminder.route.js
       if (state.remindersList.length > 0) {                      // At the client where this data was added it needs to be skipped
         const lastData = state.remindersList[state.remindersList.length - 1]
-        if (lastData.reminderID == newDataList[newDataList.length - 1].reminderID) {
+        if (lastData.uuid == newDataList[newDataList.length - 1].uuid) {
           return
         }
       }
@@ -42,7 +43,7 @@ export default {
     SOCKET_UPDATE_REMINDER(state, updateData) {
       let newList = []
       state.remindersList.forEach(item => {
-        if (item.id != updateData.id) {
+        if (item.uuid != updateData.uuid) {
           newList.push(item)
         } else {
           newList.push(updateData)
@@ -53,7 +54,7 @@ export default {
     SOCKET_DISCONTINUE_REMINDER(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_REMINDER")
       const newList = state.remindersList.filter(item => {
-        return item.id != dispatchId
+        return item.uuid != dispatchId
       })
       state.remindersList = newList
     }
@@ -98,11 +99,12 @@ export default {
     async changeReminder({ state, commit }, json) {
       const { data, notify } = json
       const originList = state.remindersList
+      console.log(originList);
       let newList = []
       originList.forEach(item => {
-        if (item.id == data.id) {
+        if (item.uuid == data.uuid) {
           newList.push({
-            id: data.id,
+            uuid: data.uuid,
             description: data.description,
             createdAt: data.createdAt,
             patientId: data.patientId
@@ -114,7 +116,7 @@ export default {
 
       commit("setReminderList", newList)
       try {
-        const response = await fetch(`${REMINDER_API_URL}/${data.id}`, {
+        const response = await fetch(`${REMINDER_API_URL}/${data.uuid}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -147,13 +149,13 @@ export default {
       const { data, notify } = json
       const originList = state.remindersList
       const newList = originList.filter(item => {
-        return item.id != data.id
+        return item.uuid != data.uuid
       })
 
       commit("setReminderList", newList)
       try {
         data["discontinue"] = true
-        const response = await fetch(`${REMINDER_API_URL}/${data.id}`, {
+        const response = await fetch(`${REMINDER_API_URL}/${data.uuid}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json;charset=utf-8",

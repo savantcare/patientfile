@@ -73,7 +73,7 @@ export default {
       this.$store.commit("showAddReminderModal");
     },
     showMultiChangeDialog() {
-      this.$store.commit("showMultiChangeRemindersModal");
+      this.$store.commit("showMultiChangeReminderModal");
     },
     focusPanel() {
       console.log("focus panel");

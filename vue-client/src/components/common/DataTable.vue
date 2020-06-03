@@ -25,7 +25,7 @@
                     size="mini"
                     v-if="tab.rowActions.indexOf('C') > -1"
                     @click="handleChange(scope.$index, scope.row)"
-                  >Edit</el-button>
+                  >Change</el-button>
                   <el-button
                     size="mini"
                     type="danger"

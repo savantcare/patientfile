@@ -74,9 +74,10 @@ export default {
             this.remForm.rems.forEach(item => {
               remList.push({
                 description: item.description,
-                patientId: vm.id,
-                reminderID: uniqid(),
-                createdByUserId: this.userId
+                patientUUID: vm.id,
+                uuid: uniqid(),
+                recordChangedByUUID: this.userId,
+                recordChangedFromIPAddress: this.userId
               });
             });
             await this.$store.dispatch("addReminder", {

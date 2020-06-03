@@ -4,7 +4,7 @@ const Reminder = db.reminderDB.reminders
 const User = db.userDB.users
 const { Op } = require("sequelize")
 
-module.exports = (io) => {
+module.exports = (io,sequelize) => {
   router.post('/', async (req, res) => {
     try {
       const { data, patientId } = req.body
@@ -32,10 +32,10 @@ module.exports = (io) => {
       const { patientId } = req.query
       const queryResult = await Reminder.findAll({
         where: {
-          patientId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          }
+          patientUUID: patientId,
+          // discontinue: {
+          //   [Op.ne]: 1
+          // }
         }
       })
       res.send(queryResult)
@@ -50,24 +50,12 @@ module.exports = (io) => {
     try {
       // Update the existing object to discontinue.
       await Reminder.update({
-        discontinue: true,
-        discontinueAt: new Date(),
-        discontinuedByUserId: req.body.discontinuedByUserId
+        description: req.body.description,
       }, {
         where: {
-          id: req.params.id
+          uuid: req.params.id
         }
       })
-
-      // Add new value
-      const newData = {
-        reminderID: req.body.reminderID,
-        patientId: req.body.patientId,
-        createdByUserId: req.body.createdByUserId,
-        description: req.body.description,
-        createdAt: new Date()
-      }
-      await Reminder.create(newData)
 
       io.to(`room-${req.body.patientId}-Doctor`).emit("UPDATE_REMINDER", req.body)
       res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
@@ -80,16 +68,13 @@ module.exports = (io) => {
 
   router.patch('/:id', async (req, res) => {
     try {
-      const queryResult = await Reminder.update({
-        discontinue: true,
-        discontinueAt: new Date()
-      }, {
+      const queryResult = await Reminder.destroy({
         where: {
-          id: req.params.id
+          uuid: req.params.id
         }
       })
       io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_REMINDER", req.params.id)
-      res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+      res.send("ok") /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while patch the Reminder"
@@ -99,11 +84,22 @@ module.exports = (io) => {
 
   router.get('/getHistory/:id', async (req, res) => {
     try {
-      const histories = await Reminder.findAll({
-        where: {
-          reminderID: req.params.id
-        }
-      })
+      //var Sequelize = require('sequelize');
+      //var sequelize = new Sequelize('sc_reminder', 'root', 'qwerty', {
+      //  host: '138.68.233.185',
+      //  dialect: 'mysql'
+      //});
+      // const histories = await Reminder.findAll({
+      //   where: {
+      //     uuid: req.params.id
+      //   }
+      // })
+      const histories = await Reminder.sequelize.query('SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid',
+                            {
+                              replacements: { uuid: req.params.id },
+                              type: Reminder.sequelize.QueryTypes.SELECT
+                            }
+                        );
       /**
        * Expect result:
        *  {
@@ -113,44 +109,54 @@ module.exports = (io) => {
        * 
        */
 
-      const promises = histories.map(async history => {
-        const { description, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
-        if (discontinuedByUserId == null) { // The case which there is no update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: createdByUserId }
-            })
+       const promises = histories.map(async(history,index) => {
+         const { description, recordChangedByUUID, ROW_START} = history
+         console.log(index)
+         console.log(description)
+         console.log(recordChangedByUUID)
+         console.log(ROW_START)
+         if (index == 0) { // The case which there is no update history
+           console.log("index 0");
+           try {
+             const user = User.findOne({
+               attributes: ['name'],
+               where: { id: recordChangedByUUID }
+             })
 
-            const { name } = user
-            const data = {
-              content: description,
-              info: `Added by ${name} on ${new Date(createdAt).toDateString()}`
-            }
-            console.log(data)
-            return data
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
-        } else { // The case which there is an update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: discontinuedByUserId }
-            })
+             const { name } = user
+             const data = {
+               content: description,
+               info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`,
+               type: 'success'
+             }
+             consol.log(data)
+             return data
+           } catch (err) {
+             return err.message || "Some error occured while get user info"
+           }
+         } else { // The case which there is an update history
+           console.log("index 1");
+           try {
+             const user = User.findOne({
+               attributes: ['name'],
+               where: { id: recordChangedByUUID }
+             })
 
-            const { name } = user
-            return {
-              content: description,
-              info: `Changed by ${name} on ${new Date(discontinueAt).toDateString()}`
-            }
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
-        }
-      })
+             const { name } = user
+             const data1 = {
+               content: description,
+               info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`,
+               type: 'success'
+             }
+             consol.log(data1)
+             return data1
+           } catch (err) {
+             return err.message || "Some error occured while get user info"
+           }
+         }
+       })
 
-      const result = await Promise.all(promises)
+       const result = Promise.all(promises)
       res.send(result)
     } catch (err) {
       res.status(500).send({

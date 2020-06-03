@@ -36,7 +36,7 @@ export default {
     async getHistory() {
       const TOKEN = localStorage.getItem("token");
       const response = await fetch(
-        `${REMINDER_API_URL}/getHistory/${this.rem.reminderID}`,
+        `${REMINDER_API_URL}/getHistory/${this.rem.uuid}`,
         {
           headers: {
             "Content-Type": "application/json;charset=utf-8",
