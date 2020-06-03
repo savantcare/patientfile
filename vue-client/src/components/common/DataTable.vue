@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.id == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentState')"
+                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentState')"
               >
                 <el-button
                   type="text"
@@ -117,7 +117,7 @@ export default {
       this.$emit("handleDiscontinue", row);
     },
     handleCellMouseEnter(row) {
-      this.mouseOverRowId = row.id;
+      this.mouseOverRowId = row.uuid;
     },
     handleCellMouseLeave() {
       this.mouseOverRowId = "";
