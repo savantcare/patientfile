@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     recList() {
-      return this.$store.state.recommendation.list;
+      return this.$store.state.recommendation.yourRecommendationsList;
     },
     carouselList() {
       let result = [];

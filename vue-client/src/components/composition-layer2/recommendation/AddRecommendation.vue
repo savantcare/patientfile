@@ -74,7 +74,7 @@ export default {
             // Add
             let recList = [];
             // Get the latest priority
-            let recommendationList = this.$store.state.recommendation.list;
+            let recommendationList = this.$store.state.recommendation.yourRecommendationsList;
             let lastPriority = 0;
             recommendationList.forEach(rec => {
               if (rec.priority > lastPriority) {

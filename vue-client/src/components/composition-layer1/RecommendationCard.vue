@@ -139,7 +139,7 @@ export default {
   },
   computed: {
     tabData() {
-      const myList = this.$store.state.recommendation.list;
+      const myList = this.$store.state.recommendation.yourRecommendationsList;
       const othersList = this.$store.state.recommendation.othersList;
       return [
         {

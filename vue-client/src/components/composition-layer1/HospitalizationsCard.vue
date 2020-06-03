@@ -92,7 +92,7 @@ export default {
   },  
   computed: {
     tabData() {
-      const recList = this.$store.state.recommendation.list; // will change later
+      const recList = this.$store.state.recommendation.yourRecommendationsList; // will change later
       return [
         {
           label: "Yours",
