@@ -54,26 +54,23 @@ module.exports = (io) => {
     try {
       // Update the existing object to discontinue.
       await Diagnosis.update({
-        discontinue: true,
-        discontinueAt: new Date(),
-        discontinuedByUserId: req.body.discontinuedByUserId
+        diagnosisName: req.body.diagnosisName,
+        icd10Code: req.body.icd10Code,
+        notes: req.body.notes,
+        assessment: req.body.assessment,
+        agree: req.body.agree,
+        startDate: req.body.startDate,
+        recordChangedByUUID: req.body.recordChangedByUUID,
+        recordChangedOnDateTime: req.body.recordChangedOnDateTime,
+        discontinue: req.body.discontinue,
+        recordChangedFromIPAddress: req.body.recordChangedFromIPAddress
       }, {
         where: {
-          id: req.params.id
+          uuid: req.params.id
         }
       })
 
-      // Add new value
-      const newData = {
-        diagnosisID: req.body.diagnosisID,
-        patientUUId: req.body.patientId,
-        createdByUserId: req.body.createdByUserId,
-        description: req.body.description,
-        createdAt: new Date()
-      }
-      await Diagnosis.create(newData)
-
-      io.to(`room-${req.body.patientId}-Doctor`).emit("UPDATE_DIAGNOSIS", req.body)
+      io.to(`room-${req.body.patientUUId}-Doctor`).emit("UPDATE_DIAGNOSIS", req.body)
       res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
@@ -84,19 +81,34 @@ module.exports = (io) => {
 
   router.patch('/:id', async (req, res) => {
     try {
-      const queryResult = await Diagnosis.update({
-        discontinue: true,
-        discontinueAt: new Date()
-      }, {
+      const queryResult = await Diagnosis.destroy({
         where: {
-          id: req.params.id
+          uuid: req.params.id
         }
       })
-      io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_DIAGNOSIS", req.params.id)
+      
+      io.to(`room-${req.body.patientUUId}-Doctor`).emit("DISCONTINUE_DIAGNOSIS", req.params.id)
+      res.send("ok")/* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+      
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while patch the Diagnosis"
+      })
+    }
+  })
+
+  router.delete('/:id', async (req, res) => {
+    try {
+      const queryResult = await Diagnosis.destroy({
+        where: {
+          uuid: req.params.id
+        }
+      })
+      io.to(`room-${req.body.patientUUId}-Doctor`).emit("DISCONTINUE_DIAGNOSIS", req.params.id)
       res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while patch the Recommendation"
+        message: err.message || "Some error occured while discontinuing diagnosis"
       })
     }
   })

@@ -2,18 +2,20 @@ import { DIAGNOSIS_API_URL } from "@/const.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    list: [],
+    diagnosisList: [],
     currentDate: new Date()
   },
   mutations: {
     setDiagnosisList(state, data) {
-      state.list = data
+      state.diagnosisList = data
     },
     addNewDiagnosis(state, data) {
-      state.list.push(data)
+      data.forEach(item => {
+        state.diagnosisList.push(item)
+      })
     },
     removeNewDiagnosis(state) {
-      state.list.pop()
+      state.diagnosisList.pop()
     },
     setDiagnosisCurrentDate(state, value) {
       state.currentDate = value
@@ -23,34 +25,34 @@ export default {
      * Socket Listeners
      */
     SOCKET_ON_UPDATE_DIAGNOSES(state, updateList) {   // Message received from socket server
-      state.list = updateList
+      state.diagnosisList = updateList
     },
     SOCKET_ADD_DIAGNOSIS(state, newData) {         // Msg recd from node-server/routes/diagnosis.route.js
-      if (state.list.length > 0) {                      // At the client where this data was added it needs to be skipped
-        const lastData = state.list[state.list.length - 1]
+      if (state.diagnosisList.length > 0) {                      // At the client where this data was added it needs to be skipped
+        const lastData = state.diagnosisList[state.diagnosisList.length - 1]
         if (lastData.diagnosisID == newData.diagnosisID) {
           return
         }
       }
-      state.list.push(newData)
+      state.diagnosisList.push(newData)
     },
     SOCKET_UPDATE_DIAGNOSIS(state, updateData) {
       let newList = []
-      state.list.forEach(item => {
-        if (item.id != updateData.id) {
+      state.diagnosisList.forEach(item => {
+        if (item.uuid != updateData.uuid) {
           newList.push(item)
         } else {
           newList.push(updateData)
         }
       })
-      state.list = newList
+      state.diagnosisList = newList
     },
     SOCKET_DISCONTINUE_DIAGNOSIS(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_DIAGNOSIS")
-      const newList = state.list.filter(item => {
-        return item.id != dispatchId
+      const newList = state.diagnosisList.filter(item => {
+        return item.uuid != dispatchId
       })
-      state.list = newList
+      state.diagnosisList = newList
     }
   },
   actions: {
@@ -85,17 +87,18 @@ export default {
         commit("removeNewDiagnosis")
       }
     },
-    async updateDiagnosis({ state, commit }, json) {
+    async changeDiagnosis({ state, commit }, json) {
       const { data, toast } = json
-      const originList = state.list
+      const originList = state.diagnosisList
       let newList = []
       originList.forEach(item => {
-        if (item.id == data.id) {
+        console.log(item,data);
+        if (item.uuid == data.uuid) {
           newList.push({
-            id: data.id,
-            description: data.description,
-            createdAt: data.createdAt,
-            patientId: data.patientId
+            uuid: data.uuid,
+            diagnosisName: data.diagnosisName,
+            startDate: data.startDate,
+            patientUUId: data.patientUUId
           });
         } else {
           newList.push(item);
@@ -104,7 +107,7 @@ export default {
 
       commit("setDiagnosisList", newList)
       try {
-        const response = await fetch(`${DIAGNOSIS_API_URL}/${data.id}`, {
+        const response = await fetch(`${DIAGNOSIS_API_URL}/${data.uuid}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -133,15 +136,15 @@ export default {
     },
     async discontinueDiagnosis({ state, commit }, json) {
       const { data, toast } = json
-      const originList = state.list
+      const originList = state.diagnosisList
       const newList = originList.filter(item => {
-        return item.id != data.id
+        return item.uuid != data.uuid
       })
 
       commit("setDiagnosisList", newList)
       try {
         data["discontinue"] = true
-        const response = await fetch(`${DIAGNOSIS_API_URL}/${data.id}`, {
+        const response = await fetch(`${DIAGNOSIS_API_URL}/${data.uuid}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -170,9 +173,9 @@ export default {
     },
     async multiDiscontinueDiagnosis({ state, commit }, json) {
       const { selectedIds, toast, selectedDatas } = json
-      const originList = state.list
+      const originList = state.diagnosisList
       const newList = originList.filter(item => {
-        return !selectedIds.includes(item.id)
+        return !selectedIds.includes(item.uuid)
       })
 
       commit("setDiagnosisList", newList)
@@ -181,7 +184,7 @@ export default {
       selectedDatas.forEach(async item => {
         try {
           item['discontinue'] = true
-          await fetch(`${DIAGNOSIS_API_URL}/${item.id}`, {
+          await fetch(`${DIAGNOSIS_API_URL}/${item.uuid}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json;charset=utf-8",
@@ -240,12 +243,12 @@ export default {
   },
   getters: {
     diagnoses(state) {
-      return state.list.filter(item => {
+      return state.diagnosisList.filter(item => {
         return item.discontinue != true
       })
     },
     panelDiagnoses(state) {
-      return state.list.filter(item => {
+      return state.diagnosisList.filter(item => {
         const itemDate = new Date(item.createdAt)
         return item.discontinue != true && itemDate <= state.currentDate
       })

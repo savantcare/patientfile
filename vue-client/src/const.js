@@ -33,4 +33,5 @@ module.exports = {
   MULTIPLE_RATE_GOAL: 14,
   ADD_SCREEN: 15,
   TAKE_A_SCREEN: 16,
+  CHANGE_DIAGNOSIS:17,
 }
