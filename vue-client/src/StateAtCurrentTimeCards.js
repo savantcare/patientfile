@@ -1,5 +1,6 @@
 export default [
   {
+    // TODO: This key should be recommendationCard since when reading code it is not clear if its a card or a store.
     key: "recommendation",
     value: require("@/components/composition-layer1/RecommendationCard")
       .default

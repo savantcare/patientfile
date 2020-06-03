@@ -9,10 +9,10 @@ export default {
     searchKeyword: ""
   },
   mutations: {
-    setStateAtCurrentTimeWidth(state, value) {
+    setStateAtCurrentTimeSplitAreaWidth(state, value) {
       state.width = value
     },
-    setStateAtCurrentTimeList(state, newList) {
+    setStateAtCurrentTimeCardsList(state, newList) {
       state.list = newList
     },
     setStateAtCurrentTimeFocusRowIndex(state, index) {

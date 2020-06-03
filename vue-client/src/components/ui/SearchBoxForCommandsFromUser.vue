@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("setStateAtCurrentTimeWidth", "calc(30% - 4px)");
+    this.$store.commit("setStateAtCurrentTimeSplitAreaWidth", "calc(30% - 4px)");
     // this.$refs.search_box.$el
     //   .getElementsByTagName("input")[0]
     //   .addEventListener("keydown", event => {

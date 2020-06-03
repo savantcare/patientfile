@@ -97,11 +97,12 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("setStateAtCurrentTimeList", StateAtCurrentTimeCards);
+    this.$store.commit("setStateAtCurrentTimeCardsList", StateAtCurrentTimeCards);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
     // Join room
+    // TODO: this should be patientUUID
     const patientId = this.$route.query.patient_id;
     const role = this.$store.state.userRole;
 
@@ -115,7 +116,7 @@ export default {
   methods: {
     onDrag(size) {
       const rightSize = size[1];
-      this.$store.commit("setStateAtCurrentTimeWidth", `calc(${rightSize}% - 4px) `);
+      this.$store.commit("setStateAtCurrentTimeSplitAreaWidth", `calc(${rightSize}% - 4px) `);
       this.stateAtSelectedTimeWidth = size[0];
     },
     updateStateAtCurrentTimeRows() {
