@@ -81,7 +81,8 @@ export default {
       isExpandable: false,
       width: 0,
       showActionColumn: false,
-      columns: []
+      columns: [],
+      originMyData: []
     };
   },
   methods: {
@@ -145,20 +146,63 @@ export default {
 
       this.$emit("handleUpdateColumns", columns);
       return columns;
+    },
+    checkChangePriority() {
+      let isChanged = false;
+      // this.originMyData.forEach((data, index) => {
+      //   const currentData = this.myData[index];
+      //   if (data.priority != currentData.priority) {
+      //     isChanged = true;
+      //   }
+      // });
+      // if (isChanged) {
+      //   console.log("the priority is changed");
+      //   this.myData.map((data, index) => {
+      //     data.priority = index + 1;
+      //   });
+      //   let changedData = []
+      //   this.$emit("updatePriority", this.myData)
+      // }
+      let changedData = [];
+      this.myData.map((data, index) => {
+        const originData = this.originMyData[index];
+        if (data.priority != originData.priority) {
+          isChanged = true;
+          data.priority = index + 1;
+          changedData.push(data);
+        }
+      });
+
+      if (isChanged) {
+        console.log("the priority is changed");
+        console.log(changedData);
+        this.$emit("updatePriority", changedData);
+      }
     }
   },
-  mounted() {},
+  mounted() {
+    // this.myData = this.tabData[0].tableData;
+    if (this.tabData.length > 0) {
+      this.originMyData = this.tabData[0].tableData;
+    }
+  },
   computed: {
     focusRow() {
       return this.$store.getters.StateAtCurrentTimeFocusRow;
     },
     selectedColumns() {
       return this.$store.state.selectedColumns[this.keyId];
+    },
+    myData() {
+      if (this.tabData.length > 0) {
+        return this.tabData[0].tableData;
+      }
+      return [];
     }
   },
   watch: {
-    tabData() {
-      console.log(this.tabData);
+    myData() {
+      this.checkChangePriority();
     }
   }
 };

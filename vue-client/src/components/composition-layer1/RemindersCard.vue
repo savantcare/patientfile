@@ -6,7 +6,7 @@
       -->
       <CardHeader
         title="Reminder"
-        :actions="selectedTimeForShowingState != null ? 'Addendum' : 'A,M,F,D'"
+        actions="A,M,F,D"
         keyId="reminder"
         :type="type"
         :columns="columns"
@@ -49,8 +49,7 @@ export default {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["description"], // The user can select there own columns. The user selected columns are saved in the local storage.
-      selectedTimeForShowingState: this.$route.query.selectedTimeForShowingState // This is used for stateAtSelectedTime. if this value is NULL it means stateAtCurrentTime is being shown.
+      selectedColumns: ["description"] // The user can select there own columns. The user selected columns are saved in the local storage.
     };
   },
   methods: {
@@ -121,7 +120,6 @@ export default {
       notify: this.$notify
     };
     this.$store.dispatch("getReminders", params);
-    console.log(this.selectedTimeForShowingState);
   },
   computed: {
     tabData() {

@@ -92,7 +92,8 @@ module.exports = (io) => {
     try {
       // Update the existing object to discontinue.
       await Recommendation.update({
-        recommendationDescription: req.body.recommendationDescription
+        recommendationDescription: req.body.recommendationDescription,
+        priority: req.body.priority
       }, {
         where: {
           uuid: req.body.uuid

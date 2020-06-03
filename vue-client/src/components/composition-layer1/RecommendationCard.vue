@@ -23,6 +23,7 @@
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
+      @updatePriority="updatePriority"
     />
   </el-card>
 </template>
@@ -30,7 +31,7 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 import DataTable from "@/components/common/DataTable";
-
+import { RECOMMENDATION_API_URL } from "@/const.js";
 export default {
   components: {
     CardHeader,
@@ -112,7 +113,6 @@ export default {
       this.selectedRows = value;
     },
     handleChange(data) {
-      console.log("show change dialog");
       this.$store.commit("showChangeRecommendationsModal", data);
     },
     handleDiscontinue(data) {
@@ -125,6 +125,37 @@ export default {
       if (value.length > 0) {
         this.columns = value;
       }
+    },
+    updatePriority(changedDatas) {
+      const TOKEN = localStorage.getItem("token");
+      changedDatas.forEach(async data => {
+        try {
+          const response = await fetch(`${RECOMMENDATION_API_URL}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              Authorization: "Bearer " + TOKEN
+            },
+            body: JSON.stringify(data)
+          });
+          if (!response.ok) {
+            this.$notify({
+              title: "Error",
+              message: "Failed to update recommendation data"
+            });
+          } else {
+            this.$notify({
+              title: "Title",
+              message: "Updated!"
+            });
+          }
+        } catch (ex) {
+          this.$notify({
+            title: "Error",
+            message: "Server connection error"
+          });
+        }
+      });
     }
   },
   mounted() {

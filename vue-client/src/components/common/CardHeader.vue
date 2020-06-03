@@ -77,7 +77,8 @@ export default {
     return {
       mouseOver: false,
       selected: [],
-      showPopover: false
+      showPopover: false,
+      selectedTimeForShowingState: this.$route.query.selectedTimeForShowingState // This is used for stateAtSelectedTime. if this value is NULL it means stateAtCurrentTime is being shown.
     };
   },
   computed: {
@@ -91,28 +92,52 @@ export default {
       );
     },
     showAddButton() {
-      return (
-        this.actions.split(",").filter(action => action == "A").length > 0 &&
-        this.$parent.$parent.selectedRows.length < 1
-      );
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "A").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
     },
     showMultiChangeButton() {
-      return (
-        this.actions.split(",").filter(action => action == "M").length > 0 &&
-        this.$parent.$parent.selectedRows.length < 1
-      );
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "M").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
     },
     showFocusButton() {
-      return (
-        this.actions.split(",").filter(action => action == "F").length > 0 &&
-        this.$parent.$parent.selectedRows.length < 1
-      );
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "F").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
     },
     showDiscontinueButton() {
-      return (
-        this.actions.split(",").filter(action => action == "D").length > 0 &&
-        this.$parent.$parent.selectedRows.length > 0
-      );
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState != null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "D").length > 0 &&
+          this.$parent.$parent.selectedRows.length > 0
+        );
+      }
+      return false;
     },
     showActions() {
       return this.mouseOver || this.isHeaderFocus || this.showPopover;
@@ -128,7 +153,13 @@ export default {
       }
     },
     showAddendum() {
-      return this.actions == "Addendum";
+      if (
+        this.type == "stateAtSelectedTime" &&
+        this.selectedTimeForShowingState != null
+      ) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {},

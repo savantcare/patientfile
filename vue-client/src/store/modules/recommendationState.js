@@ -230,7 +230,6 @@ export default {
         });
         if (response.ok) {
           let json = await response.json();
-          console.log(json)
           commit('setRecommendationList', json)
         } else {
           if (response.status == '401') {
