@@ -1,6 +1,6 @@
 export default [
   {
-    label: "recommendation (rex)", action: "",
+    label: "recommendation (rex) list", action: "",
   },
   {
     label: "recommendation (rex) add", action: "showAddRecommendationModal"
@@ -18,7 +18,7 @@ export default [
     label: "recommendation (rex) send to patient (HDR)", action: ""
   },
   {
-    label: "reminder (rem)", action: ""
+    label: "reminder (rem) list", action: ""
   },
   {
     label: "reminder (rex) add", action: "showAddReminderModal"
@@ -36,10 +36,19 @@ export default [
     label: "reminder (rex) send to patient (HDR)", action: ""
   },
   {
-    label: "goal (g)", action: ""
+    label: "goal (g) list", action: ""
   },
   {
-    label: "diagnosis (dx)", action: ""
+    label: "goal (g) add", action: "showAddGoalModal"
+  },
+    {
+    label: "diagnosis (dx) list", action: ""
+  },
+  {
+    label: "diagnosis (dx) add", action: "showAddDiagnosisModal"
+  },
+  {
+    label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal"
   },
   {
     label: "clear", action: ""
