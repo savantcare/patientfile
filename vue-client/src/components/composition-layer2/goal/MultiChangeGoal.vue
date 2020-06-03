@@ -1,27 +1,27 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item v-for="(recList, index) in carouselList" :key="`carouse-${index}`">
-        <el-col :span="8" v-for="(rec, index) in recList" :key="`rec-${index}`">
+      <el-carousel-item v-for="(goalList, index) in carouselList" :key="`carouse-${index}`">
+        <el-col :span="8" v-for="(goal, index) in goalList" :key="`goal-${index}`">
           <el-card class="box-card" shadow="hover">
             <el-form label-position="top" ref="form">
 
               <el-form-item style="font-weight:bold" label="Description:">
-                <el-input :span="8" v-model="rec.description" type="textarea" :disabled="true"></el-input>
+                <el-input :span="8" v-model="goal.description" type="textarea" :disabled="true"></el-input>
               </el-form-item>
               <el-form-item style="font-weight:bold" label="Score:">
-                <el-slider :span="8" v-model="rec.score" :format-tooltip="formatTooltip"></el-slider>
+                <el-slider :span="8" v-model="goal.score" :format-tooltip="formatTooltip"></el-slider>
               </el-form-item>
               <el-form-item style="font-weight:bold" label="Date:">
-                <el-date-picker :span="8" v-model="rec.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
+                <el-date-picker :span="8" v-model="goal.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
               </el-form-item>
 
               <el-form-item>
-                <el-button type="success" @click="onClickSave(rec)" size="small">Save</el-button>
-                <el-button type="danger" @click="onClickDiscontinue(rec)" size="small">Discontinue</el-button>
+                <el-button type="success" @click="onClickSave(goal)" size="small">Save</el-button>
+                <el-button type="danger" @click="onClickDiscontinue(goal)" size="small">Discontinue</el-button>
               </el-form-item>
             </el-form>
-            <GoalHistoryItem :rec="rec" />
+            <GoalHistoryItem :goal="goal" />
           </el-card>
         </el-col>
       </el-carousel-item>
@@ -40,28 +40,28 @@ export default {
     };
   },
   methods: {
-    onClickSave(rec) {
+    onClickSave(goal) {
       this.$store.dispatch("updateGoal", {
-        data: rec,
+        data: goal,
         notify: this.$notify
       });
     },
-    onClickDiscontinue(rec) {
+    onClickDiscontinue(goal) {
       this.$store.dispatch("discontinueGoal", {
-        data: rec,
+        data: goal,
         notify: this.$notify
       });
     }
   },
   computed: {
-    recList() {
-      return this.$store.state.goal.list;
+    goalList() {
+      return this.$store.state.goal.goalList;
     },
     carouselList() {
       let result = [];
       let temp = [];
       let idx = 0;
-      this.recList.forEach(item => {
+      this.goalList.forEach(item => {
         temp.push(item);
         idx += 1;
         if (idx == 3) {

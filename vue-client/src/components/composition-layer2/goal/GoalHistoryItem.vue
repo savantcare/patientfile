@@ -23,7 +23,7 @@
 <script>
 import { GOAL_API_URL } from "@/const.js";
 export default {
-  props: ["rec"],
+  props: ["goal"],
   data() {
     return {
       histories: []
@@ -36,7 +36,7 @@ export default {
     async getHistory() {
       const TOKEN = localStorage.getItem("token");
       const response = await fetch(
-        `${GOAL_API_URL}/getHistory/${this.rec.uuid}`,
+        `${GOAL_API_URL}/getHistory/${this.goal.uuid}`,
         {
           headers: {
             "Content-Type": "application/json;charset=utf-8",

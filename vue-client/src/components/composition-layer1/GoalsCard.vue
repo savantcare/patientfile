@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     tabData() {
-      const goalList = this.$store.state.goal.list;
+      const goalList = this.$store.state.goal.goalList;
       return [
         {
           label: "Yours",

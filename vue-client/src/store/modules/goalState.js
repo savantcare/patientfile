@@ -2,20 +2,20 @@ import { GOAL_API_URL } from "@/const.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    list: [],
+    goalList: [],
     currentDate: new Date()
   },
   mutations: {
     setGoalList(state, data) {
-      state.list = data
+      state.goalList = data
     },
     addNewGoal(state, newList) {
       newList.forEach(item => {
-        state.list.push(item)
+        state.goalList.push(item)
       })
     },
     removeNewGoal(state) {
-      state.list.pop()
+      state.goalList.pop()
     },
     setGoalCurrentDate(state, value) {
       state.currentDate = value
@@ -25,43 +25,43 @@ export default {
      * Socket Listeners
      */
     SOCKET_ON_UPDATE_GOALS(state, updateList) {   // Message received from socket server
-      state.list = updateList
+      state.goalList = updateList
     },
     SOCKET_ADD_GOAL(state, newDataList) {         // Msg recd from node-server/routes/goal.route.js
-      if (state.list.length > 0) {                      // At the client where this data was added it needs to be skipped
-        const lastData = state.list[state.list.length - 1]
+      if (state.goalList.length > 0) {                      // At the client where this data was added it needs to be skipped
+        const lastData = state.goalList[state.goalList.length - 1]
         if (lastData.uuid == newDataList[newDataList.length - 1].uuid) {
           return
         }
       }
-      // state.list.push(newData)
+      // state.goalList.push(newData)
       newDataList.forEach(item => {
-        state.list.push(item)
+        state.goalList.push(item)
       })
     },
     SOCKET_UPDATE_GOAL(state, updateData) {
       let newList = []
-      state.list.forEach(item => {
+      state.goalList.forEach(item => {
         if (item.uuid != updateData.uuid) {
           newList.push(item)
         } else {
           newList.push(updateData)
         }
       })
-      state.list = newList
+      state.goalList = newList
     },
     SOCKET_DISCONTINUE_GOAL(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_GOAL")
-      const newList = state.list.filter(item => {
+      const newList = state.goalList.filter(item => {
         return item.uuid != dispatchId
       })
-      state.list = newList
+      state.goalList = newList
     }
   },
   actions: {
     async addGoal({ state, commit }, json) {
       const { data, notify, patientUUID } = json
-      const originList = state.list
+      const originList = state.goalList
 
       commit("addNewGoal", data)
 
@@ -97,7 +97,7 @@ export default {
     },
     async updateGoal({ state, commit }, json) {
       const { data, notify } = json
-      const originList = state.list
+      const originList = state.goalList
       let newList = []
       originList.forEach(item => {
         if (item.uuid == data.uuid) {
@@ -148,7 +148,7 @@ export default {
     },
     async discontinueGoal({ state, commit }, json) {
       const { data, notify } = json
-      const originList = state.list
+      const originList = state.goalList
       const newList = originList.filter(item => {
         return item.uuid != data.uuid
       })
@@ -187,7 +187,7 @@ export default {
     },
     async multiDiscontinueGoals({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
-      const originList = state.list
+      const originList = state.goalList
       const newList = originList.filter(item => {
         return !selectedIds.includes(item.uuid)
       })
@@ -256,12 +256,12 @@ export default {
   },
   getters: {
     goals(state) {
-      return state.list.filter(item => {
+      return state.goalList.filter(item => {
         return item.discontinue != true
       })
     },
     panelGoals(state) {
-      return state.list.filter(item => {
+      return state.goalList.filter(item => {
         const itemDate = new Date(item.createdAt)
         return item.discontinue != true && itemDate <= state.currentDate
       })

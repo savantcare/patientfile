@@ -4,9 +4,9 @@
     <el-row :gutter="12">
       <el-col :span="24">
         <el-card class="box-card">
-          <el-form label-position="top" :model="recForm" ref="recForm" class="demo-dynamic">
+          <el-form label-position="top" :model="goalForm" ref="goalForm" class="demo-dynamic">
 
-            <el-card class="box-card" v-for="(domain, index) in recForm.recs" :key="index" style="margin-bottom: 20px;">
+            <el-card class="box-card" v-for="(domain, index) in goalForm.goals" :key="index" style="margin-bottom: 20px;">
               <el-form-item style="font-weight:bold" label="Description:">
                 <el-input :span="8" v-model="domain.description" type="textarea" :disabled="true"></el-input>
               </el-form-item>
@@ -19,7 +19,7 @@
             </el-card>
 
             <el-form-item>
-              <el-button type="success" @click="submitForm('recForm')" size="small">Save</el-button>
+              <el-button type="success" @click="submitForm('goalForm')" size="small">Save</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       id: this.$route.query.patient_id,
-      recForm: { recs: [{ description: "", startDate: "", score: "" }] }
+      goalForm: { goals: [{ description: "", startDate: "", score: "" }] }
     };
   },
   methods: {
@@ -49,9 +49,9 @@ export default {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           if (this.type == RATE_GOAL) {
-            this.updateData["description"] = this.recForm.recs[0].description;
-            this.updateData["startDate"] = this.recForm.recs[0].startDate;
-            this.updateData["score"] = this.recForm.recs[0].score;
+            this.updateData["description"] = this.goalForm.goals[0].description;
+            this.updateData["startDate"] = this.goalForm.goals[0].startDate;
+            this.updateData["score"] = this.goalForm.goals[0].score;
             this.updateData["discontinuedByUserId"] = this.userId;
             this.updateData["recordChangedByUUID"] = this.userId;
             this.$store.dispatch("updateGoal", {
@@ -60,9 +60,9 @@ export default {
             });
           } else {
             // Add
-            let recList = [];
-            this.recForm.recs.forEach(item => {
-              recList.push({
+            let goalList = [];
+            this.goalForm.goals.forEach(item => {
+              goalList.push({
                 description: item.description,
                 startDate: item.startDate,
                 score: item.score,
@@ -72,7 +72,7 @@ export default {
               });
             });
             await this.$store.dispatch("addGoal", {
-              data: recList,
+              data: goalList,
               notify: this.$notify,
               patientUUID: this.id
             });
@@ -80,7 +80,7 @@ export default {
               patientUUID: this.id,
               notify: this.$notify
             });
-            this.recForm = { recs: [{ description: "", startDate: "", score: "" }] };
+            this.goalForm = { goals: [{ description: "", startDate: "", score: "" }] };
           }
         } else {
           console.log("error submit!!");
@@ -102,12 +102,12 @@ export default {
   },
   mounted() {
     if (this.type == RATE_GOAL) {
-      this.recForm = { recs: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
+      this.goalForm = { goals: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
     }
   },
   watch: {
     updateData() {
-      this.recForm = { recs: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
+      this.goalForm = { goals: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
     }
   }
 };
