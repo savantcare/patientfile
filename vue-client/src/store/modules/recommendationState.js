@@ -2,21 +2,21 @@ import { RECOMMENDATION_API_URL } from "@/const.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    list: [],
+    yourRecommendationsList: [],
     currentDate: new Date(),
     othersList: []
   },
   mutations: {
     setRecommendationList(state, data) {
-      state.list = data
+      state.yourRecommendationsList = data
     },
     addNewRecommendation(state, newList) {
       newList.forEach(item => {
-        state.list.push(item)
+        state.yourRecommendationsList.push(item)
       })
     },
     removeNewRecommendation(state) {
-      state.list.pop()
+      state.yourRecommendationsList.pop()
     },
     setRecommendationCurrentDate(state, value) {
       state.currentDate = value
@@ -29,43 +29,43 @@ export default {
      * Socket Listeners
      */
     SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // Message received from socket server
-      state.list = updateList
+      state.yourRecommendationsList = updateList
     },
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js
-      if (state.list.length > 0) {                      // At the client where this data was added it needs to be skipped
-        const lastData = state.list[state.list.length - 1]
+      if (state.yourRecommendationsList.length > 0) {                      // At the client where this data was added it needs to be skipped
+        const lastData = state.yourRecommendationsList[state.yourRecommendationsList.length - 1]
         if (lastData.recommendationID == newDataList[newDataList.length - 1].recommendationID) {
           return
         }
       }
-      // state.list.push(newData)
+      // state.yourRecommendationsList.push(newData)
       newDataList.forEach(item => {
-        state.list.push(item)
+        state.yourRecommendationsList.push(item)
       })
     },
     SOCKET_UPDATE_RECOMMENDATION(state, updateData) {
       let newList = []
-      state.list.forEach(item => {
+      state.yourRecommendationsList.forEach(item => {
         if (item.id != updateData.id) {
           newList.push(item)
         } else {
           newList.push(updateData)
         }
       })
-      state.list = newList
+      state.yourRecommendationsList = newList
     },
     SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_RECOMMENDATION")
-      const newList = state.list.filter(item => {
+      const newList = state.yourRecommendationsList.filter(item => {
         return item.id != dispatchId
       })
-      state.list = newList
+      state.yourRecommendationsList = newList
     }
   },
   actions: {
     async addRecommendation({ state, commit }, json) {
       const { data, notify, patientId } = json
-      const originList = state.list
+      const originList = state.yourRecommendationsList
 
       commit("addNewRecommendation", data)
 
@@ -101,7 +101,7 @@ export default {
     },
     async updateRecommendation({ state, commit }, json) {
       const { data, notify } = json
-      const originList = state.list
+      const originList = state.yourRecommendationsList
       let newList = []
       originList.forEach(item => {
         if (item.uuid == data.uuid) {
@@ -144,7 +144,7 @@ export default {
     },
     async discontinueRecommendation({ state, commit }, json) {
       const { data, notify } = json
-      const originList = state.list
+      const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
         return item.uuid != data.uuid
       })
@@ -182,7 +182,7 @@ export default {
     },
     async multiDiscontinueRecommendations({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
-      const originList = state.list
+      const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
         return !selectedIds.includes(item.id)
       })
@@ -291,12 +291,12 @@ export default {
   },
   getters: {
     recommendations(state) {
-      return state.list.filter(item => {
+      return state.yourRecommendationsList.filter(item => {
         return item.discontinue != true
       })
     },
     panelRecommendations(state) {
-      return state.list.filter(item => {
+      return state.yourRecommendationsList.filter(item => {
         const itemDate = new Date(item.createdAt)
         return item.discontinue != true && itemDate <= state.currentDate
       })
