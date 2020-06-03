@@ -120,7 +120,7 @@ export default {
   },
   computed: {
     tabData() {
-      const remList = this.$store.state.reminder.list;
+      const remList = this.$store.state.reminder.remindersList;
       return [
         {
           label: "Yours",

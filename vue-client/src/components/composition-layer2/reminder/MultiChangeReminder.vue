@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     remList() {
-      return this.$store.state.reminder.list;
+      return this.$store.state.reminder.remindersList;
     },
     carouselList() {
       let result = [];
