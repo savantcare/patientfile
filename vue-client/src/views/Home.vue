@@ -3,12 +3,14 @@
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
+      <!-- Rename this to stateAtSelectedTime -->
       <SplitArea :size="70" :minsize="100" id="stateOnASelectedTime">
         <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
         <!-- The type can be stateOnASelectedTime or currentState -->
         <Recommendation type="stateOnASelectedTime" />
         <Reminder type="stateOnASelectedTime" />
       </SplitArea>
+      <!-- TODO: Better name StateAtCurrentTime Since it better mirrors stateAtSelectedTime -->
       <SplitArea :size="30" :minsize="100" id="CurrentState">
         <transition-group name="list" tag="div">
           <component
@@ -23,7 +25,7 @@
           The search box is used for more than just components search. For e.g. Card header actions can be searched in the search box. 
           So this should be called <search-box-for-typing-commands>
         -->
-        <current-state-components-search-box ref="search_box"></current-state-components-search-box>
+        <search-box-for-commands-from-user ref="search_box"></search-box-for-commands-from-user>
       </SplitArea>
     </Split>
 
@@ -45,8 +47,8 @@ const stateOnASelectedTimeHeader = () =>
 // const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
 
 // Right panel components
-const CurrentStateComponentsSearchBox = () =>
-  import("@/components/ui/CurrentStateComponentsSearchBox.vue");
+const SearchBoxForCommandsFromUser = () =>
+  import("@/components/ui/SearchBoxForCommandsFromUser.vue");
 // const RecommendationsCard = () =>
 // import("@/components/domain/RecommendationsCard/Implementation.vue");
 // const RemindersCard = () =>
@@ -76,7 +78,7 @@ export default {
     // TestPanel,
 
     // Right panel components  -> On this side current state of the patient is shown.
-    CurrentStateComponentsSearchBox,
+    SearchBoxForCommandsFromUser,
     // RecommendationsCard,
     // RemindersCard,
     // CombinationCard,

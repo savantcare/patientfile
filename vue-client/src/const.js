@@ -13,6 +13,7 @@ module.exports = {
   COMPONENT_API_URL: "http://localhost:8000/components",
   SOCIALHISTORY_API_URL: "http://localhost:8000/social-histories",
 
+  // TODO: Better name "STATE_AT_SELECTED_TIME_COMPONENTS see home.vue"
   STATE_ON_A_DAY_COMPONENTS: [
   ],
 

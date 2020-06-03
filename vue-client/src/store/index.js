@@ -17,8 +17,6 @@ import socialHistoryStateModule from './modules/socialHistoryState'
 import { ROLE_API_URL } from "@/const.js"
 import searchCommandList from '@/searchCommandList.js'
 
-// READABLE: Take this out of index.js
-
 export default new Vuex.Store({
   state: {
     userRole: '',

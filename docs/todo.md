@@ -42,3 +42,32 @@
 17. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
+
+
+Dr. Parikh meeting on 2nd June:
+===============================
+1. sort
+2. when there is only 1 col it wastes a lot of space.
+3. default sort is priority and inside that updated at
+4. col headers needs user friendly names
+5. on multi select the data row options still come
+6. new tab behavior is not ok
+7. How to make a card as reviewed on?
+8. "Created on" date -> shows computer time -> need to appyly a transform.
+9. no need for hospitalization / self harm / rename bodyMeasurement to Vitals.
+
+
+10. On the left for a previous date:
+
+A. All card header and data row actions are hiden. In the card header only 1 option comes and it is called "Addendum"
+(System only allows user to add a addendum. The addendum can be added to any componenet.)
+
+B. It looks like paper. 
+  e.g. Make the blue print black. So we know it is uneditable. If the note is for current time then it should look editable and it should update.
+
+Take ideas of look from https://css-tricks.com/how-to-create-a-notebook-design-with-css/
+
+C. For prev date => On left side when there is no data then it should not take space.
+
+11. The header should make it clear that left side is for current time.
+
