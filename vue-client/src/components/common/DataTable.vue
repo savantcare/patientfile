@@ -164,6 +164,7 @@ export default {
           });
         });
       }
+
       this.$emit("handleUpdateColumns", columns);
       return columns;
     }

@@ -42,8 +42,8 @@
  * Multi Add Recommendation form.
  * @displayName Add Recommendation
  */
-import uniqid from "uniqid";
 import { CHANGE_RECOMMENDATION } from "@/const.js";
+import { uuid } from "uuidv4";
 export default {
   data() {
     return {
@@ -62,9 +62,10 @@ export default {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           if (this.type == CHANGE_RECOMMENDATION) {
-            this.updateData["description"] = this.recForm.recs[0].description;
-            this.updateData["discontinuedByUserId"] = this.userId;
-            this.updateData["createdByUserId"] = this.userId;
+            this.updateData[
+              "recommendationDescription"
+            ] = this.recForm.recs[0].description;
+            this.updateData["recordChangedByUUID"] = this.userId;
             this.$store.dispatch("updateRecommendation", {
               data: this.updateData,
               notify: this.$notify
@@ -72,14 +73,25 @@ export default {
           } else {
             // Add
             let recList = [];
+            // Get the latest priority
+            let recommendationList = this.$store.state.recommendation.list;
+            let lastPriority = 0;
+            recommendationList.forEach(rec => {
+              if (rec.priority > lastPriority) {
+                lastPriority = rec.priority;
+              }
+            });
             this.recForm.recs.forEach(item => {
               recList.push({
-                description: item.description,
-                patientId: vm.id,
-                recommendationID: uniqid(),
-                createdByUserId: this.userId
+                uuid: uuid(),
+                uuidOfRecommendationMadeFor: vm.id,
+                recommendationDescription: item.description,
+                priority: ++lastPriority,
+                recordChangedByUUID: this.userId,
+                recordChangedOnDateTime: new Date()
               });
             });
+            console.log(recList);
             await this.$store.dispatch("addRecommendation", {
               data: recList,
               notify: this.$notify,
@@ -116,7 +128,9 @@ export default {
   },
   mounted() {
     if (this.type == CHANGE_RECOMMENDATION) {
-      this.recForm = { recs: [{ description: this.updateData.description }] };
+      this.recForm = {
+        recs: [{ description: this.updateData.recommendationDescription }]
+      };
     }
     setTimeout(() => {
       this.focusToTheInputBox();
@@ -124,7 +138,9 @@ export default {
   },
   watch: {
     updateData() {
-      this.recForm = { recs: [{ description: this.updateData.description }] };
+      this.recForm = {
+        recs: [{ description: this.updateData.recommendationDescription }]
+      };
     }
   }
 };

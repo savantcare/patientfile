@@ -51,17 +51,12 @@ module.exports = (io) => {
   router.post('/getMyRecommendations', async (req, res) => {
     try {
       const { patientId, userId } = req.body
-      console.log("getMyRecommendations_________________")
-      console.log(patientId)
-      console.log(userId)
       const queryResult = await Recommendation.findAll({
         where: {
-          patientId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          },
-          createdByUserId: userId
-        }
+          uuidOfRecommendationMadeFor: patientId,
+          recordChangedByUUID: userId
+        },
+        order: [['priority', 'ASC']]
       })
       res.send(queryResult)
     } catch (err) {
@@ -79,11 +74,8 @@ module.exports = (io) => {
       console.log(userId)
       const queryResult = await Recommendation.findAll({
         where: {
-          patientId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          },
-          createdByUserId: {
+          uuidOfRecommendationMadeFor: patientId,
+          recordChangedByUUID: {
             [Op.ne]: userId
           }
         }
@@ -96,30 +88,18 @@ module.exports = (io) => {
     }
   })
 
-  router.put('/:id', async (req, res) => {    // Replace existing row with new row
+  router.put('/', async (req, res) => {    // Replace existing row with new row
     try {
       // Update the existing object to discontinue.
       await Recommendation.update({
-        discontinue: true,
-        discontinueAt: new Date(),
-        discontinuedByUserId: req.body.discontinuedByUserId
+        recommendationDescription: req.body.recommendationDescription
       }, {
         where: {
-          id: req.params.id
+          uuid: req.body.uuid
         }
       })
 
-      // Add new value
-      const newData = {
-        recommendationID: req.body.recommendationID,
-        patientId: req.body.patientId,
-        createdByUserId: req.body.createdByUserId,
-        description: req.body.description,
-        createdAt: new Date()
-      }
-      await Recommendation.create(newData)
-
-      io.to(`room-${req.body.patientId}-Doctor`).emit("UPDATE_RECOMMENDATION", req.body)
+      io.to(`room-${req.body.uuidOfRecommendationMadeFor}-Doctor`).emit("UPDATE_RECOMMENDATION", req.body)
       res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
@@ -128,17 +108,14 @@ module.exports = (io) => {
     }
   })
 
-  router.patch('/:id', async (req, res) => {
+  router.delete('/:id', async (req, res) => {
     try {
-      const queryResult = await Recommendation.update({
-        discontinue: true,
-        discontinueAt: new Date()
-      }, {
+      const queryResult = await Recommendation.destroy({
         where: {
-          id: req.params.id
+          uuid: req.params.id
         }
       })
-      io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_RECOMMENDATION", req.params.id)
+      io.to(`room-${req.body.uuidOfRecommendationMadeFor}-Doctor`).emit("DISCONTINUE_RECOMMENDATION", req.params.id)
       res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({

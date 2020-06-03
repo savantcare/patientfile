@@ -122,7 +122,9 @@ export default {
       });
     },
     handleUpdateColumns(value) {
-      this.columns = value;
+      if (value.length > 0) {
+        this.columns = value;
+      }
     }
   },
   mounted() {

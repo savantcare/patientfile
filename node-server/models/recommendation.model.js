@@ -6,35 +6,35 @@ id is string since we do not want it to be a auto incrementing integer.
 */
 
 module.exports = (sequelize, Sequelize) => {
-  const Recommendation = sequelize.define("recommendation", {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+  const Recommendation = sequelize.define("doctorRecommendationsForPatient", {
+    uuid: {
+      type: Sequelize.STRING,
+      primaryKey: true
     },
-    recommendationID: {
+    uuidOfRecommendationMadeFor: {
       type: Sequelize.STRING
     },
-    description: {
+    recommendationDescription: {
       type: Sequelize.STRING
     },
-    discontinue: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: 0
+    priority: {
+      type: Sequelize.INTEGER
     },
-    patientId: {
+    recordChangedByUUID: {
       type: Sequelize.STRING
     },
-    createdByUserId: {
+    recordChangedOnDateTime: {
       type: Sequelize.STRING
     },
-    discontinuedByUserId: {
+    recordChangedFromIPAddress: {
       type: Sequelize.STRING
     },
-    // Timestamps
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
-    discontinueAt: Sequelize.DATE
+    isAutoRex: {
+      type: Sequelize.INTEGER
+    },
+    autoRecommendationsOrderId: {
+      type: Sequelize.STRING
+    }
   });
 
   return Recommendation;

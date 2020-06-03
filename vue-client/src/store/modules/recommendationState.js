@@ -104,13 +104,8 @@ export default {
       const originList = state.list
       let newList = []
       originList.forEach(item => {
-        if (item.id == data.id) {
-          newList.push({
-            id: data.id,
-            description: data.description,
-            createdAt: data.createdAt,
-            patientId: data.patientId
-          });
+        if (item.uuid == data.uuid) {
+          newList.push(data);
         } else {
           newList.push(item);
         }
@@ -118,7 +113,7 @@ export default {
 
       commit("setRecommendationList", newList)
       try {
-        const response = await fetch(`${RECOMMENDATION_API_URL}/${data.id}`, {
+        const response = await fetch(`${RECOMMENDATION_API_URL}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -151,14 +146,13 @@ export default {
       const { data, notify } = json
       const originList = state.list
       const newList = originList.filter(item => {
-        return item.id != data.id
+        return item.uuid != data.uuid
       })
 
       commit("setRecommendationList", newList)
       try {
-        data["discontinue"] = true
-        const response = await fetch(`${RECOMMENDATION_API_URL}/${data.id}`, {
-          method: "PATCH",
+        const response = await fetch(`${RECOMMENDATION_API_URL}/${data.uuid}`, {
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
             "Authorization": "Bearer " + TOKEN
@@ -236,6 +230,7 @@ export default {
         });
         if (response.ok) {
           let json = await response.json();
+          console.log(json)
           commit('setRecommendationList', json)
         } else {
           if (response.status == '401') {
