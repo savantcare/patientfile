@@ -84,17 +84,7 @@ module.exports = (io,sequelize) => {
 
   router.get('/getHistory/:id', async (req, res) => {
     try {
-      //var Sequelize = require('sequelize');
-      //var sequelize = new Sequelize('sc_reminder', 'root', 'qwerty', {
-      //  host: '138.68.233.185',
-      //  dialect: 'mysql'
-      //});
-      // const histories = await Reminder.findAll({
-      //   where: {
-      //     uuid: req.params.id
-      //   }
-      // })
-      const histories = await Reminder.sequelize.query('SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid',
+      const histories = await Reminder.sequelize.query('SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
                             {
                               replacements: { uuid: req.params.id },
                               type: Reminder.sequelize.QueryTypes.SELECT
@@ -108,55 +98,46 @@ module.exports = (io,sequelize) => {
        *  }
        * 
        */
+      const promises = histories.map(async (history,index) => {
+        const { description, recordChangedByUUID, ROW_START } = history
 
-       const promises = histories.map(async(history,index) => {
-         const { description, recordChangedByUUID, ROW_START} = history
-         console.log(index)
-         console.log(description)
-         console.log(recordChangedByUUID)
-         console.log(ROW_START)
-         if (index == 0) { // The case which there is no update history
-           console.log("index 0");
-           try {
-             const user = User.findOne({
-               attributes: ['name'],
-               where: { id: recordChangedByUUID }
-             })
+        if ((histories.length - 1) == index) { // The case which there is no update history
+          try {
+            const user = await User.findOne({
+              attributes: ['name'],
+              where: { id: recordChangedByUUID }
+            })
+            const { name } = user
+            const data = {
+              content: `${description}`,
+              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`
+            }
+            console.log(data)
+            return data
+          } catch (err) {
+            return err.message || "Some error occured while get user info"
+          }
+        } else { // The case which there is an update history
+          try {
+            const user = await User.findOne({
+              attributes: ['name'],
+              where: { id: recordChangedByUUID }
+            })
 
-             const { name } = user
-             const data = {
-               content: description,
-               info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`,
-               type: 'success'
-             }
-             consol.log(data)
-             return data
-           } catch (err) {
-             return err.message || "Some error occured while get user info"
-           }
-         } else { // The case which there is an update history
-           console.log("index 1");
-           try {
-             const user = User.findOne({
-               attributes: ['name'],
-               where: { id: recordChangedByUUID }
-             })
+            const { name } = user
+            const data = {
+              content: `${description}`,
+              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`
+            }
+            console.log(data)
+            return data
+          } catch (err) {
+            return err.message || "Some error occured while get user info"
+          }
+        }
+      })
 
-             const { name } = user
-             const data1 = {
-               content: description,
-               info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`,
-               type: 'success'
-             }
-             consol.log(data1)
-             return data1
-           } catch (err) {
-             return err.message || "Some error occured while get user info"
-           }
-         }
-       })
-
-       const result = Promise.all(promises)
+       const result = await Promise.all(promises)
       res.send(result)
     } catch (err) {
       res.status(500).send({

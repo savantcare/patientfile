@@ -37,7 +37,8 @@ module.exports = (sequelize, Sequelize) => {
 const Reminder = sequelize.define("reminder_new", {
 uuid: {
 type: Sequelize.STRING,
-primaryKey: true
+primaryKey: true,
+defaultValue: Sequelize.UUIDV4
 },
 patientUUID: {
 type: Sequelize.STRING

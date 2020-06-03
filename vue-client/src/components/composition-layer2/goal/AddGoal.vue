@@ -62,7 +62,6 @@
  * Multi Add Goal form.
  * @displayName Add Goal
  */
-import uniqid from "uniqid";
 import { RATE_GOAL } from "@/const.js";
 export default {
   data() {

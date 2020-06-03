@@ -41,7 +41,6 @@
  * Multi Add Reminder form.
  * @displayName Add Reminder
  */
-import uniqid from "uniqid";
 import { CHANGE_REMINDER } from "@/const.js";
 export default {
   data() {
@@ -75,7 +74,7 @@ export default {
               remList.push({
                 description: item.description,
                 patientUUID: vm.id,
-                uuid: uniqid(),
+                //uuid: uniqid(),
                 recordChangedByUUID: this.userId,
                 recordChangedFromIPAddress: this.userId
               });
