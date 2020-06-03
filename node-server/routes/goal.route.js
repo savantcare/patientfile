@@ -3,20 +3,31 @@ const db = require('../models')
 const Goal = db.goalDB.goals
 const User = db.userDB.users
 const { Op } = require("sequelize")
+const { uuid } = require('uuidv4');
 
 module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
       const { data, patientUUID } = req.body
-      const newGoal = await Goal.bulkCreate(data)       // See 
-      console.log(newGoal)
+      const newGoal = await Goal.bulkCreate([
+        { 
+          description: req.body.description,
+          startDate: req.body.startDate,
+          score: req.body.score,
+          patientUUID: req.body.patientUUID,
+          uuid: uuid(),
+          recordChangedByUUID: req.body.recordChangedByUUID 
+        }
+      ]);
+      //const newGoal = await Goal.bulkCreate(data)       // See 
+      //console.log(newGoal)
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
        Question: What is inside newGoal?
        */
-      console.log(`room-${patientUUID}-Doctor`)
-      console.log(newGoal)
+      //console.log(`room-${patientUUID}-Doctor`)
+      //console.log(newGoal)
       io.to(`room-${patientUUID}-Doctor`).emit("ADD_GOAL", newGoal)
 
       res.send(newGoal) /* Fix: Instead of sending the whole object only OK needs to be sent*/
