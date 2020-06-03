@@ -15,12 +15,12 @@ import stateAtSelectedTimeModule from './modules/stateAtSelectedTimeSide'
 import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
-import searchCommandList from '@/searchCommandList.js'
+import searchCommandsList from '@/searchCommandsList.js'
 
 export default new Vuex.Store({
   state: {
     userRole: '',
-    searchCommandList: searchCommandList,
+    searchCommandsList: searchCommandsList,
     focusComponent: "",
     connectionStatus: true, // true: online, false: offline
     userId: -1,
@@ -36,13 +36,14 @@ export default new Vuex.Store({
     setFocusComponent(state, value) {
       state.focusComponent = value
     },
-    setSearchCommandList(state, list) {
-      state.searchCommandList = list
+    setsearchCommandsList(state, list) {
+      state.searchCommandsList = list
     },
     setConnectionStatus(state, value) {
       state.connectionStatus = value
     },
     setUserId(state, value) {
+      // TODO: this should be userUUID
       state.userId = value
     },
     setSelectedColumns(state, value) {
@@ -63,7 +64,7 @@ export default new Vuex.Store({
         if (json.availableComponents) {
           let componentList = json.availableComponents.split(',')
           componentList.push("clear")
-          commit("setSearchCommandList", componentList)
+          commit("setsearchCommandsList", componentList)
         }
       }
     }

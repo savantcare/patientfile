@@ -12,5 +12,6 @@ export default [
   "reminder (rex) download pdf",
   "reminder (rex) send to patient (HDR)",
   "goal (g)",
+  "diagnosis (dx)",
   "clear"
 ]
