@@ -39,7 +39,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "CurrentState" // There are two possible types. CurrentState and stateOnASelectedTime
+      default: "CurrentState" // There are two possible types. CurrentState and stateAtSelectedTime
     }
   },
   data() {
@@ -75,7 +75,7 @@ export default {
       this.$store.commit("showMultiChangeRecommendationModal");
     },
     focusPanel() {
-      //stateOnASelectedTime
+      //stateAtSelectedTime
       var options = {
         container: "",
         easing: "ease-in",
@@ -87,8 +87,8 @@ export default {
       };
       let element = "";
       if (this.type == "CurrentState") {
-        element = "#recommendation-stateOnASelectedTime";
-        options["container"] = "#stateOnASelectedTime";
+        element = "#recommendation-stateAtSelectedTime";
+        options["container"] = "#stateAtSelectedTime";
       } else {
         element = "#recommendation-CurrentState";
         options["container"] = "#CurrentState";

@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" align="middle" id="stateOnASelectedTimeHeader">
+  <el-row type="flex" align="middle" id="stateAtSelectedTimeHeader">
     <el-col :span="6" class="ml-2">
       <span style="font-size: 20px;">Alexey D</span>
       <span style="font-size: 14px; margin-left: 6px;">(28 years old)</span>
@@ -34,33 +34,33 @@ export default {
       return this.$store.state.connectionStatus;
     },
     currentDate() {
-      return this.$store.state.stateOnASelectedTime.currentDate;
+      return this.$store.state.stateAtSelectedTime.currentDate;
     },
     zoomValue() {
-      return this.$store.state.stateOnASelectedTime.zoomValue;
+      return this.$store.state.stateAtSelectedTime.zoomValue;
     }
   },
   watch: {
     tabMode() {
-      // this.updatestateOnASelectedTime();
+      // this.updatestateAtSelectedTime();
     }
   },
   mounted() {
     // this.getPatientInfo();
-    // this.updatestateOnASelectedTime();
-    // this.zoomValue = this.$store.state.stateOnASelectedTime.zoomValue;
-    // this.zoomstateOnASelectedTime();
+    // this.updatestateAtSelectedTime();
+    // this.zoomValue = this.$store.state.stateAtSelectedTime.zoomValue;
+    // this.zoomstateAtSelectedTime();
   },
   methods: {
-    async updatestateOnASelectedTime() {
-      await this.$store.dispatch("getstateOnASelectedTimeComponents", {
+    async updatestateAtSelectedTime() {
+      await this.$store.dispatch("getstateAtSelectedTimeComponents", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast
       });
 
       // setTimeout(() => {
-      //   var width = document.getElementById("stateOnASelectedTimeContent").offsetWidth;
-      //   var height = document.getElementById("stateOnASelectedTimeContent").offsetHeight;
+      //   var width = document.getElementById("stateAtSelectedTimeContent").offsetWidth;
+      //   var height = document.getElementById("stateAtSelectedTimeContent").offsetHeight;
       //   var windowWidth = $(document).outerWidth();
       //   var windowHeight = $(document).outerHeight();
       //   windowWidth = windowWidth * (70 / 100);
@@ -73,8 +73,8 @@ export default {
       //     r = Math.min(windowWidth / width, windowHeight / height);
       //   }
 
-      //   this.$store.commit("setstateOnASelectedTimeZoomValue", r);
-      //   this.$store.dispatch("zoomstateOnASelectedTime");
+      //   this.$store.commit("setstateAtSelectedTimeZoomValue", r);
+      //   this.$store.dispatch("zoomstateAtSelectedTime");
       // }, 100);
     },
     async getPatientInfo() {
@@ -112,21 +112,21 @@ export default {
     zoomOut() {
       let value = this.zoomValue;
       value -= 0.1;
-      this.$store.commit("setstateOnASelectedTimeZoomValue", value);
-      this.$store.dispatch("zoomstateOnASelectedTime");
+      this.$store.commit("setstateAtSelectedTimeZoomValue", value);
+      this.$store.dispatch("zoomstateAtSelectedTime");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
-      this.$store.commit("setstateOnASelectedTimeZoomValue", value);
-      this.$store.dispatch("zoomstateOnASelectedTime");
+      this.$store.commit("setstateAtSelectedTimeZoomValue", value);
+      this.$store.dispatch("zoomstateAtSelectedTime");
     }
   }
 };
 </script>
 
 <style scoped>
-#stateOnASelectedTimeHeader {
+#stateAtSelectedTimeHeader {
   height: 30px;
   margin-bottom: 6px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

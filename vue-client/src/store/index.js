@@ -11,7 +11,7 @@ import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
 import currentStateAreaModule from './modules/currentStateArea'
 import secondLayerTabDialogStateModule from './modules/secondLayerTabDialogState'
-import stateOnASelectedTimeModule from './modules/stateOnASelectedTimeSide'
+import stateAtSelectedTimeModule from './modules/stateAtSelectedTimeSide'
 import socialHistoryStateModule from './modules/socialHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
@@ -76,7 +76,7 @@ export default new Vuex.Store({
     setting: settingStateModule,
     rightPanel: currentStateAreaModule,
     tabDialog: secondLayerTabDialogStateModule,
-    stateOnASelectedTime: stateOnASelectedTimeModule,
+    stateAtSelectedTime: stateAtSelectedTimeModule,
     socialHistory: socialHistoryStateModule
   },
   plugins: [

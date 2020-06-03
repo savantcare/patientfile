@@ -9,18 +9,18 @@ export default {
     originSize: null
   },
   mutations: {
-    setstateOnASelectedTimeList(state, value) {
+    setstateAtSelectedTimeList(state, value) {
       state.list = value
     },
-    setstateOnASelectedTimeCurrentDate(state, value) {
+    setstateAtSelectedTimeCurrentDate(state, value) {
       state.currentDate = value
     },
-    setstateOnASelectedTimeZoomValue(state, value) {
+    setstateAtSelectedTimeZoomValue(state, value) {
       state.zoomValue = value
     }
   },
   actions: {
-    async getstateOnASelectedTimeComponents({ commit }, json) {
+    async getstateAtSelectedTimeComponents({ commit }, json) {
       const { toast, type } = json
       const TOKEN = localStorage.getItem("token")
       try {
@@ -43,8 +43,8 @@ export default {
             }
           })
 
-          commit("setstateOnASelectedTimeList", availableComponents)
-          // dispatch("zoomstateOnASelectedTime")
+          commit("setstateAtSelectedTimeList", availableComponents)
+          // dispatch("zoomstateAtSelectedTime")
         }
       } catch (ex) {
         toast.toast("Server connection error", {
@@ -54,9 +54,9 @@ export default {
         })
       }
     },
-    zoomstateOnASelectedTime() {
+    zoomstateAtSelectedTime() {
       // const r = state.zoomValue
-      // $("#stateOnASelectedTimeContent").css({
+      // $("#stateAtSelectedTimeContent").css({
       //   "-webkit-transform": "scale(" + r + ")",
       //   "-moz-transform": "scale(" + r + ")",
       //   "-ms-transform": "scale(" + r + ")",
@@ -64,23 +64,23 @@ export default {
       //   transform: "scale(" + r + ")"
       // });
 
-      // var height = document.getElementById("stateOnASelectedTimeContent").offsetHeight;
+      // var height = document.getElementById("stateAtSelectedTimeContent").offsetHeight;
       // var windowHeight = $(document).outerHeight() - 100;
       // height = Math.ceil(height * r)
 
       // if (height > windowHeight || r == 1) {
-      //   $("#stateOnASelectedTimeContent").css({
+      //   $("#stateAtSelectedTimeContent").css({
       //     position: "initial"
       //   })
       // } else {
-      //   $("#stateOnASelectedTimeContent").css({
+      //   $("#stateAtSelectedTimeContent").css({
       //     position: "fixed"
       //   })
       // }
     }
   },
   getters: {
-    stateOnASelectedTimeList(state) {
+    stateAtSelectedTimeList(state) {
       let list = []
       state.list.forEach(item => {
         const leftComponent = STATE_ON_A_DAY_COMPONENTS.filter(component => {

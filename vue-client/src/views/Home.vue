@@ -4,11 +4,11 @@
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
       <!-- Rename this to stateAtSelectedTime -->
-      <SplitArea :size="70" :minsize="100" id="stateOnASelectedTime">
-        <stateOnASelectedTimeHeader></stateOnASelectedTimeHeader>
-        <!-- The type can be stateOnASelectedTime or currentState -->
-        <Recommendation type="stateOnASelectedTime" />
-        <Reminder type="stateOnASelectedTime" />
+      <SplitArea :size="70" :minsize="100" id="stateAtSelectedTime">
+        <stateAtSelectedTimeHeader></stateAtSelectedTimeHeader>
+        <!-- The type can be stateAtSelectedTime or currentState -->
+        <Recommendation type="stateAtSelectedTime" />
+        <Reminder type="stateAtSelectedTime" />
       </SplitArea>
       <!-- TODO: Better name StateAtCurrentTime Since it better mirrors stateAtSelectedTime -->
       <SplitArea :size="30" :minsize="100" id="CurrentState">
@@ -19,12 +19,6 @@
             :is="component.value"
           ></component>
         </transition-group>
-
-        <!-- 
-          TODO:
-          The search box is used for more than just components search. For e.g. Card header actions can be searched in the search box. 
-          So this should be called <search-box-for-typing-commands>
-        -->
         <search-box-for-commands-from-user ref="search_box"></search-box-for-commands-from-user>
       </SplitArea>
     </Split>
@@ -41,10 +35,10 @@
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const stateOnASelectedTimeHeader = () =>
-  import("@/components/ui/stateOnASelectedTimeHeader.vue");
+const stateAtSelectedTimeHeader = () =>
+  import("@/components/ui/stateAtSelectedTimeHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
-// const TestPanel = () => import("@/components/stateOnASelectedTimeTestComponent.vue");
+// const TestPanel = () => import("@/components/stateAtSelectedTimeTestComponent.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
@@ -73,7 +67,7 @@ export default {
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
-    stateOnASelectedTimeHeader,
+    stateAtSelectedTimeHeader,
     // DateSlider,
     // TestPanel,
 
@@ -89,7 +83,7 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      stateOnASelectedTimeWidth: 70
+      stateAtSelectedTimeWidth: 70
     };
   },
   computed: {
@@ -99,8 +93,8 @@ export default {
     CurrentStateComponents() {
       return this.$store.state.rightPanel.list;
     },
-    stateOnASelectedTimeComponents() {
-      return this.$store.getters.stateOnASelectedTimeList;
+    stateAtSelectedTimeComponents() {
+      return this.$store.getters.stateAtSelectedTimeList;
     }
   },
   beforeCreate() {
@@ -124,7 +118,7 @@ export default {
     onDrag(size) {
       const rightSize = size[1];
       this.$store.commit("setRightPanelWidth", `calc(${rightSize}% - 4px) `);
-      this.stateOnASelectedTimeWidth = size[0];
+      this.stateAtSelectedTimeWidth = size[0];
     },
     updateRightPanelRows() {
       this.$store.dispatch("updateRightPanelRow");
