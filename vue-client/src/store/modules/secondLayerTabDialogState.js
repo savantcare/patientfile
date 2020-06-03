@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREEN, TAKE_A_SCREEN } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, CHANGE_DIAGNOSIS, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREEN, TAKE_A_SCREEN } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -148,6 +148,18 @@ export default {
       state.tabList = [tab]
       state.diagnosisTabType = MULTIPLE_CHANGE_ASSESSMENT
       state.visibility = true
+      state.tabValue = tab.name
+    },
+    showChangeDiagnosisModal(state, data) {
+      const tab = {
+        label: "Change Diagnosis",
+        value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
+        name: "tab-change-diagnosis"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.diagnosisTabType = CHANGE_DIAGNOSIS
+      state.diagnosisData = data
       state.tabValue = tab.name
     },
     showAddServiceStatementsModal(state) {

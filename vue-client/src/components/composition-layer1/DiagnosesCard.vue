@@ -93,10 +93,10 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeRecommendationsModal", data);
+      this.$store.commit("showChangeDiagnosisModal", data);
     },
     handleDiscontinue(data) {
-      this.$store.dispatch("discontinueRecommendation", {
+      this.$store.dispatch("discontinueDiagnosis", {
         data: data,
         toast: this.$notify
       });
@@ -117,7 +117,7 @@ export default {
   },
   computed: {
     tabData() {
-      const dxList = this.$store.state.diagnosis.list;
+      const dxList = this.$store.state.diagnosis.diagnosisList;
       console.log(dxList);
       return {
           label: "Yours",

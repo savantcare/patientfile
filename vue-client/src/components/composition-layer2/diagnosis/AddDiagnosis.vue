@@ -70,7 +70,7 @@
  * @displayName Add Diagnosis
  */
 import uniqid from "uniqid";
-
+import { CHANGE_DIAGNOSIS } from "@/const.js";
 export default {
   data() {
     return {
@@ -119,6 +119,19 @@ export default {
       const vm = this;
       this.$refs[formName].validate(async valid => {
         if (valid) {
+          if (this.type == CHANGE_DIAGNOSIS) {
+            console.log("formdata",this.dxForm.dx[0]);
+            this.updateData["diagnosisName"] = this.dxForm.dx[0].value;
+            this.updateData["icd10Code"] = "";
+            this.updateData["startDate"] = this.dxForm.dx[0].when;
+            this.updateData["recordChangedByUUID"] = this.userId;
+            this.updateData["recordChangedFromIPAddress"] = '';
+            this.updateData["recordChangedOnDateTime"] = new Date();
+            this.$store.dispatch("changeDiagnosis", {
+              data: this.updateData,
+              notify: this.$notify
+            });
+          } else {
           // Add
             let dxList = [];
             this.dxForm.dx.forEach(item => {
@@ -132,7 +145,7 @@ export default {
                 agree:'',
                 discontinue:0,
                 startDate:item.when,
-                recordChangedOnDateTime: item.when,
+                recordChangedOnDateTime: new Date(),
                 recordChangedByUUID: this.userId,
                 recordChangedFromIPAddress:''
               });
@@ -142,11 +155,12 @@ export default {
               notify: this.$notify,
               patientId: this.id
             });
-            await this.$store.dispatch("getDiagnosis", {
+            await this.$store.dispatch("getDiagnoses", {
               patientId: this.id,
               notify: this.$notify
             });
             this.dxForm = { dx: [{ value: "", when: "" }] };
+          }
         } else {
           console.log("error submit!!");
           return false;
@@ -166,11 +180,14 @@ export default {
     }
   },
   mounted() {
-    
+    if (this.type == CHANGE_DIAGNOSIS) {
+      console.log(this.updateData);
+      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.startDate }] };
+    }
   },
   watch: {
     updateData() {
-      this.dxForm = { dx: [{ value: this.updateData.description, when: this.updateData.when }] };
+      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.startDate }] };
     }
   }
 };

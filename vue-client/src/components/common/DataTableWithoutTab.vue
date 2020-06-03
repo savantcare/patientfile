@@ -105,10 +105,10 @@ export default {
     handleSelectionChange(val) {
       this.$emit("handleSelectionChange", val);
     },
-    handleChange(index, row) {
+    handleChange(row) {
       this.$emit("handleChange", row);
     },
-    handleDiscontinue(index, row) {
+    handleDiscontinue(row) {
       this.$emit("handleDiscontinue", row);
     },
     handleCellMouseEnter(row) {
