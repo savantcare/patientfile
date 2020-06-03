@@ -9,7 +9,7 @@
                 <el-input
                   :span="8"
                   type="textarea"
-                  v-model="rec.description"
+                  v-model="rec.recommendationDescription"
                   :autosize="{minRows:4}"
                   autofocus
                   ref="input_box"
