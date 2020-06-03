@@ -110,7 +110,6 @@ export default {
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
 
-    // TODO: This should be called updateStateAtCurrentTimeArea
     this.updateStateAtCurrentTimeRows();
   },
   methods: {

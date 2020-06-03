@@ -1,4 +1,4 @@
-import { COMPONENT_API_URL, STATE_ON_A_DAY_COMPONENTS } from '@/const.js'
+import { COMPONENT_API_URL, STATE_AT_SELECTED_TIME_COMPONENTS } from '@/const.js'
 // import $ from "jquery";
 
 export default {
@@ -35,7 +35,7 @@ export default {
           const components = await response.json()
           let availableComponents = []
           components.forEach(item => {
-            const component = STATE_ON_A_DAY_COMPONENTS.filter(leftComponent => {
+            const component = STATE_AT_SELECTED_TIME_COMPONENTS.filter(leftComponent => {
               return leftComponent.key == item.name
             })
             if (component != null) {
@@ -83,7 +83,7 @@ export default {
     stateAtSelectedTimeList(state) {
       let list = []
       state.list.forEach(item => {
-        const leftComponent = STATE_ON_A_DAY_COMPONENTS.filter(component => {
+        const leftComponent = STATE_AT_SELECTED_TIME_COMPONENTS.filter(component => {
           return component.key == item
         })
         list.push(leftComponent[0].value)
