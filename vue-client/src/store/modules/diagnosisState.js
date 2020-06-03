@@ -57,7 +57,7 @@ export default {
   },
   actions: {
     async addDiagnosis({ commit }, json) {
-      const { data, toast } = json
+      const { data, notify } = json
 
       commit("addNewDiagnosis", data)
 
@@ -71,24 +71,29 @@ export default {
           body: JSON.stringify(data)
         })
         if (!response.ok) {
-          toast.toast("Failed to add diagnosis data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to add diagnosis data"
           })
+
           commit("removeNewDiagnosis")
+        } else {
+          notify({
+            title: "Success",
+            message: "Successfully added diagnosis!!"
+          })
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error!"
         })
         commit("removeNewDiagnosis")
       }
     },
     async changeDiagnosis({ state, commit }, json) {
-      const { data, toast } = json
+      const { data, notify } = json
       const originList = state.diagnosisList
       let newList = []
       originList.forEach(item => {
@@ -115,27 +120,32 @@ export default {
           },
           body: JSON.stringify(data)
         });
+        
         if (!response.ok) {
-          toast.toast("Failed to update diagnosis data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to change diagnosis data"
           })
 
           commit("setDiagnosisList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Successfully changed diagnosis!"
+          })
         }
+        
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error!"
         })
 
         commit("setDiagnosisList", originList)
       }
     },
     async discontinueDiagnosis({ state, commit }, json) {
-      const { data, toast } = json
+      const { data, notify } = json
       const originList = state.diagnosisList
       const newList = originList.filter(item => {
         return item.uuid != data.uuid
@@ -153,19 +163,23 @@ export default {
           body: JSON.stringify(data)
         });
         if (!response.ok) {
-          toast.toast("Failed to discontinue diagnosis data", {
+          notify({
             title: "Error",
-            variant: "danger",
-            solid: true
+            message: "Failed to discontinue diagnosis data"
           })
 
+
           commit("setDiagnosisList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Successfully discontinued diagnosis!"
+          })
         }
       } catch (ex) {
-        toast.toast("Server connection error", {
+        notify({
           title: "Error",
-          variant: "danger",
-          solid: true
+          message: "Server connection error!"
         })
 
         commit("setDiagnosisList", originList)

@@ -69,7 +69,6 @@
  * Multi Add Diagnosis form.
  * @displayName Add Diagnosis
  */
-import uniqid from "uniqid";
 import { CHANGE_DIAGNOSIS } from "@/const.js";
 export default {
   data() {
@@ -136,7 +135,6 @@ export default {
             let dxList = [];
             this.dxForm.dx.forEach(item => {
               dxList.push({
-                uuid: uniqid(),
                 patientUUId: vm.id,
                 diagnosisName: item.value,
                 icd10Code:'',

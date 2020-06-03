@@ -98,7 +98,7 @@ export default {
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueDiagnosis", {
         data: data,
-        toast: this.$notify
+        notify: this.$notify
       });
     },
     handleUpdateColumns(value) {

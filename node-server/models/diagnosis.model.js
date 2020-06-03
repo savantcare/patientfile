@@ -9,7 +9,8 @@ module.exports = (sequelize, Sequelize) => {
   const Diagnosis = sequelize.define("diagnoses", {
     uuid: {
       type: Sequelize.STRING,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4
     },
     diagnosisName: {
       type: Sequelize.STRING
@@ -18,10 +19,12 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     notes: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      defaultValue: null
     },
     assessment: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      defaultValue: null
     },
     agree: {
       type: Sequelize.STRING
@@ -40,7 +43,8 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     recordChangedOnDateTime: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
     recordChangedFromIPAddress: {
       type: Sequelize.STRING
