@@ -6,11 +6,10 @@
       <!-- Rename this to stateAtSelectedTime -->
       <SplitArea :size="70" :minsize="100" id="stateAtSelectedTime">
         <stateAtSelectedTimeHeader></stateAtSelectedTimeHeader>
-        <!-- The type can be stateAtSelectedTime or currentState -->
+        <!-- The type can be stateAtSelectedTime or StateAtCurrentTime -->
         <Recommendation type="stateAtSelectedTime" />
         <Reminder type="stateAtSelectedTime" />
       </SplitArea>
-      <!-- TODO: Better name StateAtCurrentTime Since it better mirrors stateAtSelectedTime -->
       <SplitArea :size="30" :minsize="100" id="StateAtCurrentTime">
         <transition-group name="list" tag="div">
           <component
@@ -57,7 +56,7 @@ const Recommendation = () =>
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
-import StateAtCurrentTimeCards from "@/currentStateCards.js";
+import StateAtCurrentTimeCards from "@/StateAtCurrentTimeCards.js";
 
 export default {
   name: "Home",
