@@ -8,7 +8,7 @@ export default {
   mutations: {
     setReminderList(state, data) {
       state.remindersList = data
-      console.log(data);
+      //console.log(data);
     },
     addNewReminder(state, newList) {
       newList.forEach(item => {
@@ -52,7 +52,7 @@ export default {
       state.remindersList = newList
     },
     SOCKET_DISCONTINUE_REMINDER(state, dispatchId) {
-      console.log("SOCKET_DISCONTINUE_REMINDER")
+      //console.log("SOCKET_DISCONTINUE_REMINDER")
       const newList = state.remindersList.filter(item => {
         return item.uuid != dispatchId
       })
@@ -99,7 +99,7 @@ export default {
     async changeReminder({ state, commit }, json) {
       const { data, notify } = json
       const originList = state.remindersList
-      console.log(originList);
+      //console.log(originList);
       let newList = []
       originList.forEach(item => {
         if (item.uuid == data.uuid) {

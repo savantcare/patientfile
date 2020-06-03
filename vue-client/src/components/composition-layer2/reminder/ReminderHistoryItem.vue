@@ -10,7 +10,7 @@
           <el-timeline-item
             v-for="(history, index) in histories"
             :key="`history-${index}`"
-            type="primary"
+            :type="history.type"
             size="large"
             :timestamp="history.info"
           >{{history.content}}</el-timeline-item>
@@ -46,7 +46,7 @@ export default {
       );
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
+        //console.log(json);
         this.histories = json;
       }
     }

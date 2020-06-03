@@ -9,14 +9,14 @@ module.exports = (io,sequelize) => {
     try {
       const { data, patientId } = req.body
       const newReminder = await Reminder.bulkCreate(data)       // See 
-      console.log(newReminder)
+      //console.log(newReminder)
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
        Question: What is inside newReminder?
        */
-      console.log(`room-${patientId}-Doctor`)
-      console.log(newReminder)
+      //console.log(`room-${patientId}-Doctor`)
+      //console.log(newReminder)
       io.to(`room-${patientId}-Doctor`).emit("ADD_REMINDER", newReminder)
 
       res.send(newReminder) /* Fix: Instead of sending the whole object only OK needs to be sent*/
@@ -110,9 +110,10 @@ module.exports = (io,sequelize) => {
             const { name } = user
             const data = {
               content: `${description}`,
-              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`
+              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`,
+              type: `success`
             }
-            console.log(data)
+            //console.log(data)
             return data
           } catch (err) {
             return err.message || "Some error occured while get user info"
@@ -127,9 +128,10 @@ module.exports = (io,sequelize) => {
             const { name } = user
             const data = {
               content: `${description}`,
-              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`
+              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`,
+              type: `primary`
             }
-            console.log(data)
+            //console.log(data)
             return data
           } catch (err) {
             return err.message || "Some error occured while get user info"

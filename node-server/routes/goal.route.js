@@ -125,7 +125,8 @@ module.exports = (io) => {
             const { name } = user
             const data = {
               content: `Score: ${score}`,
-              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`
+              info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`,
+              type: `success`
             }
             console.log(data)
             return data
@@ -142,7 +143,8 @@ module.exports = (io) => {
             const { name } = user
             return {
               content: `Score: ${score}`,
-              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`
+              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`,
+              type: `primary`
             }
           } catch (err) {
             return err.message || "Some error occured while get user info"
