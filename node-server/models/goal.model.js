@@ -9,6 +9,7 @@ module.exports = (sequelize, Sequelize) => {
   const Goal = sequelize.define("goal", {
     uuid: {
       type: Sequelize.STRING,
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true
     },
     patientUUID: {

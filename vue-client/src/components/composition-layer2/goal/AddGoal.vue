@@ -108,7 +108,7 @@ export default {
                 startDate: item.startDate,
                 score: item.score,
                 patientUUID: vm.id,
-                uuid: uniqid(),
+                //uuid: uniqid(),
                 recordChangedByUUID: this.userId
               });
             });
