@@ -36,7 +36,7 @@ export default {
     async getHistory() {
       const TOKEN = localStorage.getItem("token");
       const response = await fetch(
-        `${GOAL_API_URL}/getHistory/${this.rec.goalID}`,
+        `${GOAL_API_URL}/getHistory/${this.rec.uuid}`,
         {
           headers: {
             "Content-Type": "application/json;charset=utf-8",

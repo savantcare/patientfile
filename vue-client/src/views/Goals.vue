@@ -154,7 +154,7 @@
                   </el-form-item>
 
                   <el-form-item
-                    :prop="'start_date'"
+                    :prop="'startDate'"
                     style="font-weight:bold"
                     label-position="top"
                     label="Start date of goal"

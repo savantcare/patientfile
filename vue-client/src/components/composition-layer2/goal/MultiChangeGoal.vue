@@ -13,7 +13,7 @@
                 <el-slider :span="8" v-model="rec.score" :format-tooltip="formatTooltip"></el-slider>
               </el-form-item>
               <el-form-item style="font-weight:bold" label="Date:">
-                <el-date-picker :span="8" v-model="rec.start_date" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
+                <el-date-picker :span="8" v-model="rec.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
               </el-form-item>
 
               <el-form-item>

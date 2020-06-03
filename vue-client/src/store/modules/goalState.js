@@ -30,7 +30,7 @@ export default {
     SOCKET_ADD_GOAL(state, newDataList) {         // Msg recd from node-server/routes/goal.route.js
       if (state.list.length > 0) {                      // At the client where this data was added it needs to be skipped
         const lastData = state.list[state.list.length - 1]
-        if (lastData.goalID == newDataList[newDataList.length - 1].goalID) {
+        if (lastData.uuid == newDataList[newDataList.length - 1].uuid) {
           return
         }
       }
@@ -60,7 +60,7 @@ export default {
   },
   actions: {
     async addGoal({ state, commit }, json) {
-      const { data, notify, patientId } = json
+      const { data, notify, patientUUID } = json
       const originList = state.list
 
       commit("addNewGoal", data)
@@ -72,7 +72,7 @@ export default {
             "Content-Type": "application/json;charset=utf-8",
             "Authorization": "Bearer " + TOKEN
           },
-          body: JSON.stringify({ data: data, patientId: patientId })
+          body: JSON.stringify({ data: data, patientUUID: patientUUID })
         })
         if (!response.ok) {
           notify({
@@ -100,12 +100,12 @@ export default {
       const originList = state.list
       let newList = []
       originList.forEach(item => {
-        if (item.id == data.id) {
+        if (item.uuid == data.uuid) {
           newList.push({
-            id: data.id,
+            id: data.uuid,
             description: data.description,
             createdAt: data.createdAt,
-            patientId: data.patientId
+            patientUUID: data.patientUUID
           });
         } else {
           newList.push(item);
@@ -114,7 +114,7 @@ export default {
 
       commit("setGoalList", newList)
       try {
-        const response = await fetch(`${GOAL_API_URL}/${data.id}`, {
+        const response = await fetch(`${GOAL_API_URL}/${data.uuid}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -147,13 +147,13 @@ export default {
       const { data, notify } = json
       const originList = state.list
       const newList = originList.filter(item => {
-        return item.id != data.id
+        return item.uuid != data.uuid
       })
 
       commit("setGoalList", newList)
       try {
         data["discontinue"] = true
-        const response = await fetch(`${GOAL_API_URL}/${data.id}`, {
+        const response = await fetch(`${GOAL_API_URL}/${data.uuid}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -213,13 +213,13 @@ export default {
       })
     },
     async getGoals({ commit }, json) {
-      const { patientId, notify } = json
+      const { patientUUID, notify } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
       try {
         const response = await fetch(
-          `${GOAL_API_URL}?patientId=${patientId}`, {
+          `${GOAL_API_URL}?patientUUID=${patientUUID}`, {
           headers: {
             "Authorization": "Bearer " + TOKEN
           }

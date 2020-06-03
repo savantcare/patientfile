@@ -14,7 +14,7 @@
                 <el-slider :span="8" v-model="domain.score" :format-tooltip="formatTooltip"></el-slider>
               </el-form-item>
               <el-form-item style="font-weight:bold" label="Date:">
-                <el-date-picker :span="8" v-model="domain.start_date" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
+                <el-date-picker :span="8" v-model="domain.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-card>
 
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       id: this.$route.query.patient_id,
-      recForm: { recs: [{ description: "", start_date: "", score: "" }] }
+      recForm: { recs: [{ description: "", startDate: "", score: "" }] }
     };
   },
   methods: {
@@ -50,10 +50,10 @@ export default {
         if (valid) {
           if (this.type == RATE_GOAL) {
             this.updateData["description"] = this.recForm.recs[0].description;
-            this.updateData["start_date"] = this.recForm.recs[0].start_date;
+            this.updateData["startDate"] = this.recForm.recs[0].startDate;
             this.updateData["score"] = this.recForm.recs[0].score;
             this.updateData["discontinuedByUserId"] = this.userId;
-            this.updateData["createdByUserId"] = this.userId;
+            this.updateData["recordChangedByUUID"] = this.userId;
             this.$store.dispatch("updateGoal", {
               data: this.updateData,
               notify: this.$notify
@@ -64,23 +64,23 @@ export default {
             this.recForm.recs.forEach(item => {
               recList.push({
                 description: item.description,
-                start_date: item.start_date,
+                startDate: item.startDate,
                 score: item.score,
-                patientId: vm.id,
-                goalID: uniqid(),
-                createdByUserId: this.userId
+                patientUUID: vm.id,
+                uuid: uniqid(),
+                recordChangedByUUID: this.userId
               });
             });
             await this.$store.dispatch("addGoal", {
               data: recList,
               notify: this.$notify,
-              patientId: this.id
+              patientUUID: this.id
             });
             await this.$store.dispatch("getGoals", {
-              patientId: this.id,
+              patientUUID: this.id,
               notify: this.$notify
             });
-            this.recForm = { recs: [{ description: "", start_date: "", score: "" }] };
+            this.recForm = { recs: [{ description: "", startDate: "", score: "" }] };
           }
         } else {
           console.log("error submit!!");
@@ -102,12 +102,12 @@ export default {
   },
   mounted() {
     if (this.type == RATE_GOAL) {
-      this.recForm = { recs: [{ description: this.updateData.description, start_date: this.updateData.start_date, score: this.updateData.score }] };
+      this.recForm = { recs: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
     }
   },
   watch: {
     updateData() {
-      this.recForm = { recs: [{ description: this.updateData.description, start_date: this.updateData.start_date, score: this.updateData.score }] };
+      this.recForm = { recs: [{ description: this.updateData.description, startDate: this.updateData.startDate, score: this.updateData.score }] };
     }
   }
 };

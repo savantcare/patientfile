@@ -14,14 +14,14 @@
       />
     </div>
     <DataTable
-      title="Goal"
-      keyId="goal"
       :tabData="tabData"
+      :selectedColumns="selectedColumns"
       :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
+      title="goal"
     />
 
   </el-card>
@@ -38,7 +38,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and stateAtSelectedTime
+      default: "CurrentState" // There are two possible types. CurrentState and stateOnASelectedTime
     }
   },
   data() {

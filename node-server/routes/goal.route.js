@@ -7,7 +7,7 @@ const { Op } = require("sequelize")
 module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
-      const { data, patientId } = req.body
+      const { data, patientUUID } = req.body
       const newGoal = await Goal.bulkCreate(data)       // See 
       console.log(newGoal)
       /* this informs all the clients.
@@ -15,9 +15,9 @@ module.exports = (io) => {
        So components that DA does not have access to they will not get the message
        Question: What is inside newGoal?
        */
-      console.log(`room-${patientId}-Doctor`)
+      console.log(`room-${patientUUID}-Doctor`)
       console.log(newGoal)
-      io.to(`room-${patientId}-Doctor`).emit("ADD_GOAL", newGoal)
+      io.to(`room-${patientUUID}-Doctor`).emit("ADD_GOAL", newGoal)
 
       res.send(newGoal) /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
@@ -29,13 +29,13 @@ module.exports = (io) => {
 
   router.get('/', async (req, res) => {
     try {
-      const { patientId } = req.query
+      const { patientUUID } = req.query
       const queryResult = await Goal.findAll({
         where: {
-          patientId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          }
+          patientUUID: patientUUID,
+          //discontinue: {
+          //  [Op.ne]: 1
+          //}
         }
       })
       res.send(queryResult)
@@ -46,32 +46,18 @@ module.exports = (io) => {
     }
   })
 
-  router.put('/:id', async (req, res) => {    // Replace existing row with new row
+  router.put('/:uuid', async (req, res) => {    // Replace existing row with new row
     try {
       // Update the existing object to discontinue.
       await Goal.update({
-        discontinue: true,
-        discontinueAt: new Date(),
-        discontinuedByUserId: req.body.discontinuedByUserId
+        score: req.body.score
       }, {
         where: {
-          id: req.params.id
+          uuid: req.body.uuid
         }
       })
 
-      // Add new value
-      const newData = {
-        goalID: req.body.goalID,
-        patientId: req.body.patientId,
-        createdByUserId: req.body.createdByUserId,
-        description: req.body.description,
-        start_date: req.body.start_date,
-        score: req.body.score,
-        createdAt: new Date()
-      }
-      await Goal.create(newData)
-
-      io.to(`room-${req.body.patientId}-Doctor`).emit("UPDATE_GOAL", req.body)
+      io.to(`room-${req.body.patientUUID}-Doctor`).emit("UPDATE_GOAL", req.body)
       res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
@@ -80,18 +66,16 @@ module.exports = (io) => {
     }
   })
 
-  router.patch('/:id', async (req, res) => {
+  router.patch('/:uuid', async (req, res) => {
     try {
-      const queryResult = await Goal.update({
-        discontinue: true,
-        discontinueAt: new Date()
-      }, {
+      const queryResult = await Goal.destroy({
         where: {
-          id: req.params.id
+          uuid: req.body.uuid
         }
       })
-      io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_GOAL", req.params.id)
-      res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+
+      io.to(`room-${req.body.patientUUID}-Doctor`).emit("DISCONTINUE_GOAL", req.body.uuid)
+      res.send("ok") /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while patch the Goal"
@@ -103,7 +87,7 @@ module.exports = (io) => {
     try {
       const histories = await Goal.findAll({
         where: {
-          goalID: req.params.id
+          uuid: req.params.id
         }
       })
       /**
@@ -116,18 +100,18 @@ module.exports = (io) => {
        */
 
       const promises = histories.map(async history => {
-        const { score, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
+        const { score, recordChangedByUUID, discontinuedByUserId, recordChangedOnDateTime, discontinueAt } = history
         if (discontinuedByUserId == null) { // The case which there is no update history
           try {
             const user = await User.findOne({
               attributes: ['name'],
-              where: { id: createdByUserId }
+              where: { id: recordChangedByUUID }
             })
 
             const { name } = user
             const data = {
               content: `Score: ${score}`,
-              info: `Added by ${name} on ${new Date(createdAt).toDateString()}`
+              info: `Added by ${name} on ${new Date(recordChangedOnDateTime).toDateString()}`
             }
             console.log(data)
             return data
@@ -166,7 +150,7 @@ module.exports = (io) => {
     try {
       const history = await Goal.findAll({
         where: {
-          createdAt: {
+          recordChangedOnDateTime: {
             [Op.and]: [
               {
                 [Op.gte]: startDate

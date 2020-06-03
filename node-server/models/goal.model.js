@@ -7,40 +7,45 @@ id is string since we do not want it to be a auto incrementing integer.
 
 module.exports = (sequelize, Sequelize) => {
   const Goal = sequelize.define("goal", {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+    uuid: {
+      type: Sequelize.STRING,
+      primaryKey: true
     },
-    goalID: {
+    patientUUID: {
       type: Sequelize.STRING
     },
     description: {
       type: Sequelize.STRING
     },
-    start_date: {
+    startDate: {
       type: Sequelize.DATE
     },
     score: {
       type: Sequelize.INTEGER
     },
-    discontinue: {
-      type: Sequelize.BOOLEAN,
+    priority: {
+      type: Sequelize.INTEGER,
       defaultValue: 0
     },
-    patientId: {
+    discontinuedNotes: {
+      type: Sequelize.STRING,
+      defaultValue: null
+    },
+    recordChangedByUUID: {
       type: Sequelize.STRING
     },
-    createdByUserId: {
-      type: Sequelize.STRING
+    recordChangedOnDateTime: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
-    discontinuedByUserId: {
-      type: Sequelize.STRING
+    recordChangedFromIPAddress: {
+      type: Sequelize.STRING,
+      defaultValue: null
     },
-    // Timestamps
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
-    discontinueAt: Sequelize.DATE
+    recordChangedFromSection: {
+      type: Sequelize.STRING,
+      defaultValue: 'patientFile'
+    }
   });
 
   return Goal;
