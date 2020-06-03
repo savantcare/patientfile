@@ -46,11 +46,6 @@ export default [
       .default
   },
   {
-    key: "hospitalizations",
-    value: require("@/components/composition-layer1/HospitalizationsCard")
-      .default
-  },
-  {
     key: "AIScribe",
     value: require("@/components/composition-layer1/AIScribeCard").default
   },

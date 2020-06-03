@@ -77,19 +77,6 @@ export default {
       state.reminderData = data
       state.tabValue = tab.name
     },
-
-    showAddHospitalizationModal(state) {
-      const tab = {
-        label: "Add Hospitalizations",
-        value: require("@/components/composition-layer2/hospitalization/AddHospitalization.vue").default,
-        name: "tab-add-hospitalization"
-      }
-      state.tabList = [tab]
-      //state.recommendationTabType = ADD_RECOMMENDATION
-      state.visibility = true
-      state.tabValue = tab.name
-    },
-
     showAddRecommendationModal(state) {
       const tab = {
         label: "Add Recommendations",
