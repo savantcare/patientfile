@@ -26,7 +26,7 @@
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusButton">F</el-button>
 
           <el-popover placement="top-start" trigger="hover" content="Addendum">
-            <el-button slot="reference" type="text" size="mini" v-if="showAddendum">M</el-button>
+            <el-button slot="reference" type="text" size="mini" v-if="showAddendum">E</el-button>
           </el-popover>
 
           <!--
