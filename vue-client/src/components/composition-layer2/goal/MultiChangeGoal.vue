@@ -13,7 +13,7 @@
                 <el-slider :span="8" v-model="goal.score" :format-tooltip="formatTooltip"></el-slider>
               </el-form-item>
               <el-form-item style="font-weight:bold" label="Date:">
-                <el-date-picker :span="8" v-model="goal.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions1" style="width: 100%;"></el-date-picker>
+                <el-date-picker :span="8" v-model="goal.startDate" type="date" placeholder="Pick a day" :picker-options="pickerOptions" style="width: 100%;"></el-date-picker>
               </el-form-item>
 
               <el-form-item>
@@ -37,6 +37,28 @@ export default {
   },
   data() {
     return {
+      pickerOptions: {
+          shortcuts: [{
+            text: 'Today',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: 'Yesterday',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: 'A week ago',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
+        }
     };
   },
   methods: {
@@ -51,6 +73,9 @@ export default {
         data: goal,
         notify: this.$notify
       });
+    },
+    formatTooltip(val) {
+      return val / 100;
     }
   },
   computed: {
