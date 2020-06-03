@@ -90,7 +90,7 @@ export default {
       return this.$store.state.focusComponent;
     },
     StateAtCurrentTimeComponents() {
-      return this.$store.state.StateAtCurrentTime.list;
+      return this.$store.state.StateAtCurrentTime.CardsList;
     },
     stateAtSelectedTimeComponents() {
       return this.$store.getters.stateAtSelectedTimeList;

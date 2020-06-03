@@ -3,7 +3,7 @@ import StateAtCurrentTimeCards from "@/StateAtCurrentTimeCards.js"
 export default {
   state: {
     width: '29%',
-    list: [],
+    CardsList: [],
     rows: [],
     focusRowIndex: -1,
     searchKeyword: ""
@@ -13,7 +13,7 @@ export default {
       state.width = value
     },
     setStateAtCurrentTimeCardsList(state, newList) {
-      state.list = newList
+      state.CardsList = newList
     },
     setStateAtCurrentTimeFocusRowIndex(state, index) {
       state.focusRowIndex = index
@@ -27,21 +27,21 @@ export default {
     updateStateAtCurrentTimeCards(state, action) {
       if (action == "clear") {
         state.focusRowIndex = -1
-        state.list = []
+        state.CardsList = []
       } else {
         const card = StateAtCurrentTimeCards.filter(item => {
           return action.search(item.key) > -1
         })
         let newList = []
         if (card.length > 0) {
-          state.list.forEach(item => {
+          state.CardsList.forEach(item => {
             if (item.key != card[0].key) {
               newList.push(item)
             }
           })
           newList.push(card[0])
         }
-        state.list = newList
+        state.CardsList = newList
       }
     }
   },
@@ -56,7 +56,7 @@ export default {
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
       let StateAtCurrentTimeRows = [];
-      const StateAtCurrentTimeComponents = rootState.StateAtCurrentTime.list
+      const StateAtCurrentTimeComponents = rootState.StateAtCurrentTime.CardsList
       StateAtCurrentTimeComponents.forEach(item => {
         if (rootState[item.key] && rootState[item.key]["list"]) {
           const componentRows = rootState[item.key]["list"].filter(
