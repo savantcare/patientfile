@@ -39,7 +39,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "CurrentState" // There are two possible types. CurrentState and stateAtSelectedTime
+      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and stateAtSelectedTime
     }
   },
   data() {

@@ -78,7 +78,7 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.title.toLowerCase()}-0` &&
-        this.type == "CurrentState"
+        this.type == "StateAtCurrentTime"
       );
     },
     showAddButton() {

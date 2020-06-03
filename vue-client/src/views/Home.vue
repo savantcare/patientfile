@@ -11,10 +11,10 @@
         <Reminder type="stateAtSelectedTime" />
       </SplitArea>
       <!-- TODO: Better name StateAtCurrentTime Since it better mirrors stateAtSelectedTime -->
-      <SplitArea :size="30" :minsize="100" id="CurrentState">
+      <SplitArea :size="30" :minsize="100" id="StateAtCurrentTime">
         <transition-group name="list" tag="div">
           <component
-            v-for="(component, index) in CurrentStateComponents"
+            v-for="(component, index) in StateAtCurrentTimeComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
@@ -57,7 +57,7 @@ const Recommendation = () =>
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
-import CurrentStateCards from "@/currentStateCards.js";
+import StateAtCurrentTimeCards from "@/currentStateCards.js";
 
 export default {
   name: "Home",
@@ -90,7 +90,7 @@ export default {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    CurrentStateComponents() {
+    StateAtCurrentTimeComponents() {
       return this.$store.state.rightPanel.list;
     },
     stateAtSelectedTimeComponents() {
@@ -98,7 +98,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("setRightPanelList", CurrentStateCards);
+    this.$store.commit("setRightPanelList", StateAtCurrentTimeCards);
   },
   mounted() {
     // this.$store.dispatch("loadSetting");
@@ -111,7 +111,7 @@ export default {
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setRightPanelFocusRowIndex", -1);
 
-    // TODO: This should be called updateCurrentStateArea
+    // TODO: This should be called updateStateAtCurrentTimeArea
     this.updateRightPanelRows();
   },
   methods: {

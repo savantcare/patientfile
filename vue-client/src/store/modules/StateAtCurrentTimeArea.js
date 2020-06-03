@@ -1,4 +1,4 @@
-import CurrentStateCards from "@/currentStateCards.js"
+import StateAtCurrentTimeCards from "@/currentStateCards.js"
 
 export default {
   state: {
@@ -24,12 +24,12 @@ export default {
     setRightPanelSearchKeyword(state, keyword) {
       state.searchKeyword = keyword
     },
-    updateCurrentStateCards(state, action) {
+    updateStateAtCurrentTimeCards(state, action) {
       if (action == "clear") {
         state.focusRowIndex = -1
         state.list = []
       } else {
-        const card = CurrentStateCards.filter(item => {
+        const card = StateAtCurrentTimeCards.filter(item => {
           return action.search(item.key) > -1
         })
         let newList = []

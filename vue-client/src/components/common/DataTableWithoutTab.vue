@@ -143,7 +143,7 @@ export default {
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.title}-${rowIndex + 1}` &&
-        this.type == "CurrentState"
+        this.type == "StateAtCurrentTime"
       ) {
         return "focus-row";
       }

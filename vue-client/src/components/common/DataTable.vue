@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentState')"
+                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'StateAtCurrentTime')"
               >
                 <el-button
                   type="text"
@@ -126,7 +126,7 @@ export default {
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.keyId}-${rowIndex + 1}` &&
-        this.type == "CurrentState"
+        this.type == "StateAtCurrentTime"
       ) {
         return "focus-row";
       }

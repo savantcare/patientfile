@@ -39,7 +39,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "CurrentState" // There are two possible types. CurrentState and stateAtSelectedTime
+      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and stateAtSelectedTime
     }
   },
   data() {
@@ -86,12 +86,12 @@ export default {
         y: true
       };
       let element = "";
-      if (this.type == "CurrentState") {
+      if (this.type == "StateAtCurrentTime") {
         element = "#recommendation-stateAtSelectedTime";
         options["container"] = "#stateAtSelectedTime";
       } else {
-        element = "#recommendation-CurrentState";
-        options["container"] = "#CurrentState";
+        element = "#recommendation-StateAtCurrentTime";
+        options["container"] = "#StateAtCurrentTime";
       }
 
       this.$scrollTo(element, 500, options);
