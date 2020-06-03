@@ -4,6 +4,7 @@
       <CardHeader
         title="Goal"
         actions="A,M,F,D"
+        keyId="goal"
         :type="type"
         :columns="columns"
         @showAddDialog="showAddDialog"
@@ -17,6 +18,7 @@
       title="Goal"
       keyId="goal"
       :tabData="tabData"
+      :selectedColumns="selectedColumns"
       :type="type"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
@@ -45,7 +47,7 @@ export default {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["description"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
+      selectedColumns: ["description"] // The user can select there own columns. The user selected columns are saved in the local storage. 
     };
   },
   methods: {
@@ -84,11 +86,11 @@ export default {
         toast: this.$notify
       });
     },
-    updateSelectedColumns(value) {
-      this.selectedColumns = value;
-    },
     handleUpdateColumns(value) {
       this.columns = value;
+    },
+    updateSelectedColumns(value) {
+      this.selectedColumns = value;
     }
   },
   mounted() {
@@ -100,12 +102,13 @@ export default {
   },
   computed: {
     tabData() {
-      const recList = this.$store.state.goal.list;
+      const goalList = this.$store.state.goal.list;
       return [
         {
           label: "Yours",
-          tableData: recList,
-          rowActions: ["C", "D"]
+          tableData: goalList,
+          rowActions: ["C", "D"],
+          selectedColumn: ["description"]
         }
       ];
     }
