@@ -25,6 +25,10 @@
           >M</el-button>
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusButton">F</el-button>
 
+          <el-popover placement="top-start" trigger="hover" content="Addendum">
+            <el-button slot="reference" type="text" size="mini" v-if="showAddendum">M</el-button>
+          </el-popover>
+
           <!--
         TODO: Clicking on settings icon will allow choosing which columns to display and 
         save preferences in local storage
@@ -122,6 +126,9 @@ export default {
         selectedColumns[this.keyId] = value;
         this.$store.commit("setSelectedColumns", selectedColumns);
       }
+    },
+    showAddendum() {
+      return this.actions == "Addendum";
     }
   },
   methods: {},
