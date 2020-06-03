@@ -4,6 +4,7 @@
       v-model="searchKeyword"
       :fetch-suggestions="querySearch"
       :trigger-on-focus="false"
+      highlight-first-item
       placeholder="(Type here - use backstick to highlight)"
       prefix-icon="el-icon-search"
       style="width: 100%"
@@ -12,6 +13,7 @@
       @focus="handleFocus"
       @input="handleInput"
     ></el-autocomplete>
+    <!-- <v-autocomplete :items="items" item-text="name" filled shaped border-radius="30px" clearable></v-autocomplete> -->
   </div>
 </template>
 
@@ -21,28 +23,12 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      selectedIndex: 0,
-      items: [
-        { name: "Florida", abbr: "FL", id: 1 },
-        { name: "Georgia", abbr: "GA", id: 2 },
-        { name: "Nebraska", abbr: "NE", id: 3 },
-        { name: "California", abbr: "CA", id: 4 },
-        { name: "New York", abbr: "NY", id: 5 }
-      ]
+      selectedIndex: 0
     };
   },
   computed: {
     width() {
       return this.$store.state.StateAtCurrentTime.width;
-    },
-    keywordComponents() {
-      if (this.searchKeyword.length == 0) {
-        return [];
-      }
-
-      return this.$store.state.searchCommandsList.filter(item => {
-        return item.search(this.searchKeyword) > -1;
-      });
     },
     focusRow() {
       return this.$store.getters.StateAtCurrentTimeFocusRow;
@@ -62,13 +48,6 @@ export default {
       "setStateAtCurrentTimeSplitAreaWidth",
       "calc(30% - 4px)"
     );
-    // this.$refs.search_box.$el
-    //   .getElementsByTagName("input")[0]
-    //   .addEventListener("keydown", event => {
-    //     if (event.keyCode == 13) {
-    //       this.executeSearch();
-    //     }
-    //   });
   },
   methods: {
     setFocus() {
@@ -100,21 +79,33 @@ export default {
       }
 
       results = componentList.filter(item => {
-        return item.search(queryString) > -1;
+        const strings = queryString.split(" ");
+        let isMatchKeyword = true;
+        strings.forEach(string => {
+          if (item.label.search(string) < 0) {
+            isMatchKeyword = false;
+          }
+        });
+        return isMatchKeyword;
+        // return item.label.search(queryString) > -1;
       });
 
       results = results.map(result => {
-        return { value: result };
+        return { value: result.label, action: result.action };
       });
 
       cb(results);
     },
 
     handleSelect(item) {
-      const action = item.value;
-
-      this.$store.commit("updateStateAtCurrentTimeCards", action);
-      this.$store.dispatch("updateStateAtCurrentTimeRow");
+      const { value, action } = item;
+      if (action == "") {
+        this.$store.commit("updateStateAtCurrentTimeCards", value);
+        this.$store.dispatch("updateStateAtCurrentTimeRow");
+      } else {
+        console.log(action);
+        this.$store.commit(action);
+      }
 
       this.searchKeyword = "";
       this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
@@ -124,34 +115,6 @@ export default {
         "setStateAtCurrentTimeSearchKeyword",
         this.searchKeyword
       );
-    },
-    executeSearch() {
-      const keywords = this.searchKeyword.split(" ");
-      const componentActionsList = {
-        rex: {
-          add: "showAddRecommendationModal",
-          multichange: "showMultiChangeRecommendationModal"
-        },
-        rem: {
-          add: "showAddReminderModal",
-          multichange: "showMultiChangeReminderModal"
-        }
-      };
-      if (keywords.length == 1) {
-        this.$store.commit("updateStateAtCurrentTimeCards", keywords[0]);
-        this.$store.dispatch("updateStateAtCurrentTimeRow");
-      } else if (keywords.length == 2) {
-        // rex add
-        const component = keywords[0];
-        const action = keywords[1];
-        const mutation = componentActionsList[component][action];
-        if (mutation != null) {
-          this.$store.commit(componentActionsList[component][action]);
-        }
-      }
-
-      this.searchKeyword = "";
-      this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
     }
   }
 };
@@ -160,6 +123,7 @@ export default {
 <style lang="css">
 #search_component {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
+  z-index: 100;
 }
 </style>
