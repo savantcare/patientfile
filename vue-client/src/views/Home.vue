@@ -109,6 +109,10 @@ export default {
     // Join room
     // TODO: this should be patientUUID
     const patientId = this.$route.query.patient_id;
+    if (patientId.length < 1) {
+      this.$router.push("/login");
+    }
+
     const role = this.$store.state.userRole;
 
     this.$socket.emit("CREATE_ROOM", `room-${patientId}-${role}`);
