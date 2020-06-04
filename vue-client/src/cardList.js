@@ -78,7 +78,7 @@ export default [
   {
     key: "screening",
     value: require("@/components/composition-layer1/ScreeningCard").default,
-    abbreviation: ""
+    abbreviation: "s"
   },
   {
     key: "substancesAbuse",

@@ -54,6 +54,12 @@ export default [
     label: "family history (fh) list", action: "", abbreviation: "fh"
   },
   {
+    label: "screen (s) list ", action: "showAddScreenModal", abbreviation: "s"
+  },
+  {
+    label: "screen (s) add", action: "", abbreviation: "s"
+  },
+  {
     label: "clear", action: "", abbreviation: ""
   }
 ]
