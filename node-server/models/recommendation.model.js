@@ -5,7 +5,7 @@ https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
 id is string since we do not want it to be a auto incrementing integer.
 */
 module.exports = (sequelize, Sequelize) => {
-  const Recommendation = sequelize.define("doctorRecommendationsForPatients", {
+  const Recommendation = sequelize.define("doctorRecommendationsForPatient", {
     uuid: {
       type: Sequelize.STRING,
       primaryKey: true,
