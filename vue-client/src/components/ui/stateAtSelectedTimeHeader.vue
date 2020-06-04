@@ -1,8 +1,12 @@
 <template>
   <el-row type="flex" align="middle" id="stateAtSelectedTimeHeader">
-    <el-col :span="6" class="ml-2">
+    <el-col :span="6" class="ml-2" style="display: flex; align-items: center;">
       <span style="font-size: 20px;">Alexey D</span>
       <span style="font-size: 14px; margin-left: 6px;">(28 years old)</span>
+      <div style="margin-left: 6px;">
+        <el-tag v-if="connectionStatus" type="success" size="mini">Online</el-tag>
+        <el-tag v-else type="danger" size="mini">Offline</el-tag>
+      </div>
     </el-col>
     <el-col :span="12">
       <el-slider v-model="slider" :step="10" show-stops></el-slider>
@@ -38,6 +42,9 @@ export default {
     },
     zoomValue() {
       return this.$store.state.stateAtSelectedTime.zoomValue;
+    },
+    connectionStatus() {
+      return this.$store.state.connectionStatus;
     }
   },
   watch: {
