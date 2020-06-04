@@ -19,7 +19,7 @@ export default [
   {
     key: "goal",
     value: require("@/components/composition-layer1/GoalsCard").default,
-    abbreviation: ""
+    abbreviation: "goal"
   },
   {
     key: "socialHistory",

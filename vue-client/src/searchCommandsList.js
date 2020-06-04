@@ -36,10 +36,10 @@ export default [
     label: "reminder (rex) send to patient (HDR)", action: "", abbreviation: "rem"
   },
   {
-    label: "goal (g) list", action: "", abbreviation: ""
+    label: "goal (g) list", action: "", abbreviation: "goal"
   },
   {
-    label: "goal (g) add", action: "showAddGoalModal", abbreviation: ""
+    label: "goal (g) add", action: "showAddGoalModal", abbreviation: "goal"
   },
   {
     label: "diagnosis (dx) list", action: "", abbreviation: ""
