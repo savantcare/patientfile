@@ -13,49 +13,47 @@ Todo:
 
 3. Show discontinued rex's inside a tab in the 2nd layer from the X shortcut in the header. (See history of discontinued rex)
 
-4. Cts to load for DA and D should come from DB.
-
-5. Animation
+4. Animation
     1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
     2. remove the movement of data rows and cards on hover.
 
-6. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
+5. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
 
-7. Use temporal DB concept to show the change history for a recommendation that has been changed 
+6. Use temporal DB concept to show the change history for a recommendation that has been changed 
     1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
     2. The multichange slider needs a page number component at the bottom
     3. Regression: Multi change Ct does not show history.
 
 -- Discussed with Alexey till here.
 
-8. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
+7. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
 Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
 
 Store addendums in the DB
 apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAddress
 
-9. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
+8. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
 
-10. Size limitation of Doctors laptop
+9. Size limitation of Doctors laptop
     1. There is wasted column space in data row table.
     2. Too much space being wasted in Ct Name and then yours and others.
 
-11. Only 1 doctor gets to choose columns and not other doctors.
+10. Only 1 doctor gets to choose columns and not other doctors.
    1. The column names are not user friendly.
 
-12. When I am logged in and I go to /login/ the page does not know that I am already logged in.
+11. When I am logged in and I go to /login/ the page does not know that I am already logged in.
 
-13. How does the system know what are health and what are other components?
+12. How does the system know what are health and what are other components?
 
-14. Dx is not using CardHeader.vue
+13. Dx is not using CardHeader.vue
 
-15. Should single tab data table and multi tab data table components be 2 different components.
+14. Should single tab data table and multi tab data table components be 2 different components.
 
-16. Code repeated between components.
+15. Code repeated between components.
    1. DB  
    2. KB traverse
 
-17. Code refactor
+16. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
