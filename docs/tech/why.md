@@ -90,20 +90,26 @@ Sequlize nodejs: Used by 190K and Stars 22K
 
 ## Q5) Should each component be in its own repo?
 
+Current choice: Mono-repo https://en.wikipedia.org/wiki/Monorepo
+
+Positives of mono-repo:
+1. easier to refactor
+2. new dev can get started without dependency hell.
+3. No need to cooridate what version of node-server repo works with the current version of vue-client
+
+Negatives of mono repo:
 1. When recommendation a new version is released Sanjay wants to do git pull only for recommendation repo on the prod server.
-
-But the recommendation repo may depend on a specific version of the service side recommendation repo.
-
-Service side rec repo may depend on a specific version of sequlize.
-
-The dependency graph between rec UI repo and all the other repos is hard to maintain.
+Counterpoint:
+1. But the recommendation repo may depend on a specific version of the service side recommendation repo.
+2. Service side rec repo may depend on a specific version of sequlize.
+3. The dependency graph between rec UI repo and all the other repos is hard to maintain.
 
 2. **Convention over configuration:** The multi repo design takes a lot of configuration. Without configuration, During work I need to update docs, node-server and vue-client all at once. When I do a git commit I want tests to get fired and run. When multiple repo the edits take more time. The test running becomes more complicated. 
 
 Hence branching is a better idea.
 
 ### Q5.1) Why not try branching concept?
-Sometimes we need to invite external developers to work on a component and we do not want to give them access to the git repo containing other components
+Sometimes we need to invite external developers to work on a component and we do not want to give them access to the git repo containing other components. Counter point -> Protecting source code is not the first priority.
 
 ### Q5.2) Why is each component not a seperate npm package?
 

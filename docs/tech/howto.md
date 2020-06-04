@@ -408,3 +408,9 @@ And before anyone complains about the overhead of using doubles vs. integers, it
 
 
 Ref: https://softwareengineering.stackexchange.com/questions/95431/priority-list-of-tasks-stored-in-a-database
+
+## Q14) How to make sql code browsable?
+
+Option 1: https://github.com/k1LoW/tbls#lint-a-database
+
+Option 2: Take the model file from sequalize and then browse that.
