@@ -3,7 +3,6 @@
 
 2. Search 
    1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
-   2. In searchCommmandList for each command the action needs to be stored in the 2nd column of the list.
 
 3. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
@@ -20,12 +19,36 @@
 9. Give me a page where I can choose from a list of patients whose patient file I want to open.
 
 10. Animation
-   1. recs/dx card header menu should have a slide in effect. The illusion we want to create for the user is that the "Action menu" was on the side of the card and it just arrived when the user asked for the action menu to come. Reference example is "Try it" when I go to https://element.eleme.io/#/en-US/component/layout
-   2. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
+    1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
+    2. remove the movement of data rows and cards on hover.
 
 11. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
 
 12. Use temporal DB concept to show the change history for a recommendation that has been changed 
+    1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
+    2. The multichange slider needs a page number component at the bottom
+    3. Regression: Multi change Ct does not show history.
+
+13. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
+Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
+
+Store addendums in the DB
+apptUUID componentUUID AddendumText changedByUUID changedOn changedFromIPAddress
+
+14. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
+
+15. Size limitation of Doctors laptop
+    1. There is wasted column space in data row table.
+    2. Too much space being wasted in Ct Name and then yours and others.
+
+16. Only 1 doctor gets to choose columns and not other doctors.
+   1. The column names are not user friendly.
+
+17. When I am logged in and I go to /login/ the page does not know that I am already logged in.
+
+18. How does the system know what are health and what are other components?
+
+19. If not logged in them send to login page.
 
 -- Discussed with Alexey till here.
 

@@ -20,10 +20,10 @@ use DB_SC_Recommendation_CT_V20;
 -- Table structure for table `doctorRecommendationsForPatient`
 --
 
-DROP TABLE IF EXISTS `doctorRecommendationsForPatient`;
+DROP TABLE IF EXISTS `doctorRecommendationsForPatients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `doctorRecommendationsForPatient` (
+CREATE TABLE `doctorRecommendationsForPatients` (
   `uuid`  BINARY(16) NOT NULL,
   `uuidOfRecommendationMadeFor` BINARY(16) NOT NULL,
   `recommendationDescription` longtext,

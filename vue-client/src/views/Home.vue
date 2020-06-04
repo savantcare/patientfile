@@ -141,6 +141,16 @@ export default {
 </script>
 
 <style>
+html {
+    margin:    0 auto;
+}
+
+div#app {
+    overflow-y: scroll;
+    max-width: 1440px; /* Doctors use the app on a laptop sitting infront of a patient. The laptop is 13.3" and has a resolution of 1440x900 */
+    max-height: 900px;
+}
+
 .card .card-header {
   background-color: #343a40 !important;
   color: white;
