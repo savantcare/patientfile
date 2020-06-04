@@ -2,9 +2,6 @@ Done - need to demo:
 ====================
 1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
-2. The sequence of Cts to load should also come from DB. 
-
-3. Give me a page where I can create a new patient 
 
 Todo:
 =====
@@ -55,20 +52,36 @@ apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAd
 
 15. If not logged in them send to login page.
 
+16. Dx is not using CardHeader.vue
 
-13. Dx is not using CardHeader.vue
+17. Should single tab data table and multi tab data table components be 2 different components.
 
-14. Should single tab data table and multi tab data table components be 2 different components.
-
-15. Code repeated between components.
+18. Code repeated between components.
    1. DB  
    2. KB traverse
 
-16. Offline refresh needs to work
+19. Offline refresh needs to work
 
-17. Code refactor
+20. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
+
+
+Milestone 5:
+============
+
+1. Give me a page where I can create a new patient 
+
+2. 20 components of production quality.
+
+
+
+
+
+
+
+
+
 
 
 Dr. Parikh meeting on 2nd June:
