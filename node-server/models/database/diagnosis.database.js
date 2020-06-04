@@ -19,10 +19,10 @@ const diagnosisDB = {}
 diagnosisDB.Sequelize = Sequelize
 diagnosisDB.sequelize = diagnosisSequelize
 
-diagnosisDB.diagnosis = require('../diagnosis.model.js')(diagnosisSequelize, Sequelize) //This is for test only
+//diagnosisDB.diagnosis = require('../diagnosis.model.js')(diagnosisSequelize, Sequelize) //This is for test only
 
-//diagnosisDB.diagnosis = require('../diagnosis/diagnosis.model.js')(diagnosisSequelize, Sequelize)
-//diagnosisDB.diagnosisAssessment = require('../diagnosis/diagnosisAssessment.model.js')(diagnosisSequelize, Sequelize)
+diagnosisDB.diagnosis = require('../diagnosis/diagnosis.model.js')(diagnosisSequelize, Sequelize)
+diagnosisDB.diagnosisAssessment = require('../diagnosis/diagnosisAssessment.model.js')(diagnosisSequelize, Sequelize)
 //diagnosisDB.dsmMasterCodes = require('../diagnosis/dsmMasterCodes.model.js')(diagnosisSequelize, Sequelize)
 //diagnosisDB.icd10AndScreenMappingDetails = require('../diagnosis/icd10AndScreenMappingDetails.model.js')(diagnosisSequelize, Sequelize)
 //diagnosisDB.icd10MasterCodes = require('../diagnosis/icd10MasterCodes.model.js')(diagnosisSequelize, Sequelize)
