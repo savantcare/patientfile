@@ -101,9 +101,25 @@ export default {
       const { value, action } = item;
       if (action == "") {
         this.$store.commit("updateStateAtCurrentTimeCards", value);
+        if (value == "clear") {
+          this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
+          this.$store.commit("setStateAtCurrentTimeCardsList", []);
+        } else {
+          const componentsAllowedToAccess = this.$store.state
+            .componentsAllowedToAccess;
+          const searchComponent = componentsAllowedToAccess.filter(item => {
+            return value.search(item.toLowerCase()) > -1;
+          })[0];
+          const stateAtCurrentStateComponents = this.$store.state
+            .StateAtCurrentTime.CardsList;
+          let newList = stateAtCurrentStateComponents.filter(item => {
+            return action.search(item.toLowerCase()) > -1;
+          });
+          newList.push(searchComponent);
+          this.$store.commit("setStateAtCurrentTimeCardsList", newList);
+        }
         this.$store.dispatch("updateStateAtCurrentTimeRow");
       } else {
-        console.log(action);
         this.$store.commit(action);
       }
 

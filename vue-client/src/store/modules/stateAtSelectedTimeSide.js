@@ -1,5 +1,6 @@
 import { COMPONENT_API_URL, STATE_AT_SELECTED_TIME_COMPONENTS } from '@/const.js'
 // import $ from "jquery";
+import cardList from "@/cardList.js"
 
 export default {
   state: {
@@ -83,10 +84,12 @@ export default {
     stateAtSelectedTimeList(state) {
       let list = []
       state.list.forEach(item => {
-        const leftComponent = STATE_AT_SELECTED_TIME_COMPONENTS.filter(component => {
-          return component.key == item
+        const result = cardList.filter(card => {
+          return card.abbreviation == item.toLowerCase()
         })
-        list.push(leftComponent[0].value)
+        if (result.length > 0) {
+          list.push(result[0])
+        }
       })
       return list
     }

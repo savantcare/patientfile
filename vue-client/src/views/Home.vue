@@ -7,9 +7,16 @@
       <SplitArea :size="70" :minsize="100" id="stateAtSelectedTime">
         <stateAtSelectedTimeHeader></stateAtSelectedTimeHeader>
         <!-- The type can be stateAtSelectedTime or StateAtCurrentTime -->
-        <Recommendation type="stateAtSelectedTime" />
+        <!-- <Recommendation type="stateAtSelectedTime" />
         <Reminder type="stateAtSelectedTime" />
-        <Goal type="stateAtSelectedTime" />
+        <Goal type="stateAtSelectedTime" />-->
+
+        <component
+          v-for="(component, index) in stateAtSelectedTimeComponents"
+          :key="`state-at-selectedTime-${index}`"
+          :is="component.value"
+          v-bind="{type: 'stateAtSelectedTime'}"
+        ></component>
       </SplitArea>
       <SplitArea :size="30" :minsize="100" id="StateAtCurrentTime">
         <transition-group name="list" tag="div">
@@ -57,8 +64,6 @@ const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const Goal = () => import("@/components/composition-layer1/GoalsCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
-import StateAtCurrentTimeCards from "@/StateAtCurrentTimeCards.js";
-
 export default {
   name: "Home",
   components: {
@@ -92,18 +97,13 @@ export default {
       return this.$store.state.focusComponent;
     },
     StateAtCurrentTimeComponents() {
-      return this.$store.state.StateAtCurrentTime.CardsList;
+      return this.$store.getters.stateAtCurrentTimeList;
     },
     stateAtSelectedTimeComponents() {
       return this.$store.getters.stateAtSelectedTimeList;
     }
   },
-  beforeCreate() {
-    this.$store.commit(
-      "setStateAtCurrentTimeCardsList",
-      StateAtCurrentTimeCards
-    );
-  },
+  beforeCreate() {},
   mounted() {
     // this.$store.dispatch("loadSetting");
     // Join room
@@ -120,7 +120,9 @@ export default {
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
 
-    this.updateStateAtCurrentTimeRows();
+    setTimeout(() => {
+      this.$store.dispatch("updateStateAtCurrentTimeRow");
+    }, 1000);
   },
   methods: {
     onDrag(size) {
@@ -130,9 +132,6 @@ export default {
         `calc(${rightSize}% - 4px) `
       );
       this.stateAtSelectedTimeWidth = size[0];
-    },
-    updateStateAtCurrentTimeRows() {
-      this.$store.dispatch("updateStateAtCurrentTimeRow");
     }
   },
   beforeDestroy() {

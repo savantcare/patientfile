@@ -1,4 +1,4 @@
-import StateAtCurrentTimeCards from "@/StateAtCurrentTimeCards.js"
+import StateAtCurrentTimeCards from "@/cardList.js"
 
 export default {
   state: {
@@ -29,34 +29,52 @@ export default {
         state.focusRowIndex = -1
         state.CardsList = []
       } else {
-        const card = StateAtCurrentTimeCards.filter(item => {
-          return action.search(item.key) > -1
-        })
+        console.log(action)
         let newList = []
-        if (card.length > 0) {
-          state.CardsList.forEach(item => {
-            if (item.key != card[0].key) {
-              newList.push(item)
-            }
-          })
-          newList.push(card[0])
-        }
-        state.CardsList = newList
+        newList = state.CardsList.filter(item => {
+          return action.search(item.toLowerCase()) > -1
+        })
+        newList.push()
+        // const card = StateAtCurrentTimeCards.filter(item => {
+        //   return action.search(item.key) > -1
+        // })
+        // let newList = []
+        // if (card.length > 0) {
+        //   state.CardsList.forEach(item => {
+        //     if (item.key != card[0].key) {
+        //       newList.push(item)
+        //     }
+        //   })
+        //   newList.push(card[0])
+        // }
+        // state.CardsList = newList
       }
     }
   },
   getters: {
     StateAtCurrentTimeFocusRow(state) {
       return state.rows[state.focusRowIndex]
+    },
+    stateAtCurrentTimeList(state) {
+      let list = []
+      state.CardsList.forEach(item => {
+        const result = StateAtCurrentTimeCards.filter(card => {
+          return card.abbreviation == item.toLowerCase()
+        })
+        if (result.length > 0) {
+          list.push(result[0])
+        }
+      })
+      return list
     }
   },
   actions: {
-    updateStateAtCurrentTimeRow({ rootState, commit }) {
+    updateStateAtCurrentTimeRow({ rootState, commit, rootGetters }) {
       /**
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
       let StateAtCurrentTimeRows = [];
-      const StateAtCurrentTimeComponents = rootState.StateAtCurrentTime.CardsList
+      const StateAtCurrentTimeComponents = rootGetters.stateAtCurrentTimeList
       StateAtCurrentTimeComponents.forEach(item => {
         if (rootState[item.key] && rootState[item.key]["list"]) {
           const componentRows = rootState[item.key]["list"].filter(

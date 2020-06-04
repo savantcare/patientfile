@@ -20,7 +20,7 @@ import searchCommandsList from '@/searchCommandsList.js'
 export default new Vuex.Store({
   state: {
     userRole: '',
-    searchCommandsList: searchCommandsList,
+    searchCommandsList: [],
     focusComponent: "",
     connectionStatus: true, // true: online, false: offline
     userId: -1,
@@ -28,7 +28,8 @@ export default new Vuex.Store({
       recommendation: ["recommendationDescription"],
       reminder: ["description"],
       goal: ["description"]
-    }
+    },
+    componentsAllowedToAccess: []
   },
   mutations: {
     setUserRole(state, data) {
@@ -49,10 +50,13 @@ export default new Vuex.Store({
     },
     setSelectedColumns(state, value) {
       state.selectedColumns = value
+    },
+    setComponentsAllowedToAccess(state, value) {
+      state.componentsAllowedToAccess = value
     }
   },
   actions: {
-    async getRoleDetails({ commit }, roleId) {
+    async getRoleDetails({ commit, }, roleId) {
       const token = localStorage.getItem("token")
       const response = await fetch(`${ROLE_API_URL}/${roleId}`, {
         headers: {
@@ -61,12 +65,30 @@ export default new Vuex.Store({
       })
       if (response.ok) {
         const json = await response.json()
-        commit("setUserRole", json.name)
-        if (json.availableComponents) {
-          let componentList = json.availableComponents.split(',')
-          componentList.push("clear")
-          commit("setsearchCommandsList", componentList)
-        }
+        const { name, componentsAllowedToAccess, stateAtSelectedTimeSplitAreaComponentLoadSequence, stateAtCurrentTimeSplitAreaComponentLoadSequence } = json
+        commit("setUserRole", name)
+
+        // Get AllowAccesedComponents
+        const components = componentsAllowedToAccess.split(",")
+        commit("setComponentsAllowedToAccess", components)
+        const commandList = searchCommandsList.filter(item => {
+          return components.filter(component => {
+            return component.toLowerCase() == item.abbreviation
+          }).length > 0
+        })
+        commandList.push({
+          label: "clear", action: "", abbreviation: ""
+        })
+        commit("setsearchCommandsList", commandList)
+
+        // Get StateAtSelectedTimeSide components
+        const leftComponents = stateAtSelectedTimeSplitAreaComponentLoadSequence.split(",")
+        commit("setstateAtSelectedTimeList", leftComponents, { root: true })
+
+        // Get StateAtCurrentTimeSide components
+        const rightComponents = stateAtCurrentTimeSplitAreaComponentLoadSequence.split(",")
+        commit("setStateAtCurrentTimeCardsList", rightComponents, { root: true })
+
       }
     }
   },

@@ -7,7 +7,13 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING
     },
-    availableComponents: {
+    componentsAllowedToAccess: {
+      type: Sequelize.STRING
+    },
+    stateAtSelectedTimeSplitAreaComponentLoadSequence: {
+      type: Sequelize.STRING
+    },
+    stateAtCurrentTimeSplitAreaComponentLoadSequence: {
       type: Sequelize.STRING
     },
     // Timestamps

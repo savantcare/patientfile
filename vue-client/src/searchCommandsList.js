@@ -1,56 +1,56 @@
 export default [
   {
-    label: "recommendation (rex) list", action: "",
+    label: "recommendation (rex) list", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) add", action: "showAddRecommendationModal"
+    label: "recommendation (rex) add", action: "showAddRecommendationModal", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationModal"
+    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationModal", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) focus", action: ""
+    label: "recommendation (rex) focus", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) download pdf", action: ""
+    label: "recommendation (rex) download pdf", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) send to patient (HDR)", action: ""
+    label: "recommendation (rex) send to patient (HDR)", action: "", abbreviation: "rex"
   },
   {
-    label: "reminder (rem) list", action: ""
+    label: "reminder (rem) list", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) add", action: "showAddReminderModal"
+    label: "reminder (rex) add", action: "showAddReminderModal", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) multi change", action: "showMultiChangeReminderModal"
+    label: "reminder (rex) multi change", action: "showMultiChangeReminderModal", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) focus", action: ""
+    label: "reminder (rex) focus", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) download pdf", action: ""
+    label: "reminder (rex) download pdf", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) send to patient (HDR)", action: ""
+    label: "reminder (rex) send to patient (HDR)", action: "", abbreviation: "rem"
   },
   {
-    label: "goal (g) list", action: ""
+    label: "goal (g) list", action: "", abbreviation: ""
   },
   {
-    label: "goal (g) add", action: "showAddGoalModal"
-  },
-    {
-    label: "diagnosis (dx) list", action: ""
+    label: "goal (g) add", action: "showAddGoalModal", abbreviation: ""
   },
   {
-    label: "diagnosis (dx) add", action: "showAddDiagnosisModal"
+    label: "diagnosis (dx) list", action: "", abbreviation: ""
   },
   {
-    label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal"
+    label: "diagnosis (dx) add", action: "showAddDiagnosisModal", abbreviation: ""
   },
   {
-    label: "clear", action: ""
+    label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal", abbreviation: ""
+  },
+  {
+    label: "clear", action: "", abbreviation: ""
   }
 ]
