@@ -1,6 +1,7 @@
 const config = require('config');
 
 const Sequelize = require("sequelize");
+
 const recommendationSequelize = new Sequelize(config.DB_RECOMMENDATION, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.dialect,

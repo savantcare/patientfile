@@ -4,6 +4,7 @@ https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
 
 id is string since we do not want it to be a auto incrementing integer.
 */
+var Temporal = require('sequelize-temporal');
 
 module.exports = (sequelize, Sequelize) => {
   const Recommendation = sequelize.define("doctorRecommendationsForPatient", {
@@ -36,6 +37,8 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     }
   });
+  Temporal(Recommendation, sequelize)
+
 
   return Recommendation;
 };

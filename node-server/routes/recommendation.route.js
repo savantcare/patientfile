@@ -2,7 +2,8 @@ const router = require('express').Router()
 const db = require('../models')
 const Recommendation = db.recommendationDB.recommendations
 const User = db.userDB.users
-const { Op } = require("sequelize")
+const { Op, QueryTypes, sequelize } = require("sequelize")
+
 
 module.exports = (io) => {
   router.post('/', async (req, res) => {
@@ -126,12 +127,12 @@ module.exports = (io) => {
   })
 
   router.get('/getHistory/:id', async (req, res) => {
+
     try {
-      const histories = await Recommendation.findAll({
-        where: {
-          recommendationID: req.params.id
-        }
-      })
+
+      const histories = await Recommendation.sequelize.query('SELECT * FROM doctorRecommendationsForPatientHistories WHERE uuid=(:uuid)',
+        { replacements: { uuid: req.params.id }, type: QueryTypes.SELECT })
+
       /**
        * Expect result:
        *  {
@@ -142,40 +143,12 @@ module.exports = (io) => {
        */
 
       const promises = histories.map(async history => {
-        const { description, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
-        if (discontinuedByUserId == null) { // The case which there is no update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: createdByUserId }
-            })
-
-            const { name } = user
-            const data = {
-              content: description,
-              info: `Added by ${name} on ${new Date(createdAt).toDateString()}`
-            }
-            console.log(data)
-            return data
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
-        } else { // The case which there is an update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: discontinuedByUserId }
-            })
-
-            const { name } = user
-            return {
-              content: description,
-              info: `Changed by ${name} on ${new Date(discontinueAt).toDateString()}`
-            }
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
+        const { recommendationDescription, archivedAt } = history
+        const data = {
+          content: recommendationDescription,
+          info: `Updated on ${new Date(archivedAt).toDateString()}`
         }
+        return data
       })
 
       const result = await Promise.all(promises)

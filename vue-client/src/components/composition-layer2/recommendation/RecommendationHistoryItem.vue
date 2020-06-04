@@ -35,8 +35,9 @@ export default {
   methods: {
     async getHistory() {
       const TOKEN = localStorage.getItem("token");
+      console.log(this.rec);
       const response = await fetch(
-        `${RECOMMENDATION_API_URL}/getHistory/${this.rec.recommendationID}`,
+        `${RECOMMENDATION_API_URL}/getHistory/${this.rec.uuid}`,
         {
           headers: {
             "Content-Type": "application/json;charset=utf-8",
