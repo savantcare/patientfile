@@ -14,7 +14,7 @@ export default [
   {
     key: "diagnosis",
     value: require("@/components/composition-layer1/DiagnosesCard").default,
-    abbreviation: ""
+    abbreviation: "dx"
   },
   {
     key: "goal",

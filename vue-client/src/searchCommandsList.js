@@ -42,7 +42,7 @@ export default [
     label: "goal (g) add", action: "showAddGoalModal", abbreviation: "goal"
   },
   {
-    label: "diagnosis (dx) list", action: "", abbreviation: ""
+    label: "diagnosis (dx) list", action: "", abbreviation: "dx"
   },
   {
     label: "diagnosis (dx) add", action: "showAddDiagnosisModal", abbreviation: ""
