@@ -127,36 +127,28 @@ export default {
         this.columns = value;
       }
     },
-    updatePriority(changedDatas) {
+    async updatePriority(changedDatas) {
       const TOKEN = localStorage.getItem("token");
-      changedDatas.forEach(async data => {
-        try {
-          const response = await fetch(`${RECOMMENDATION_API_URL}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              Authorization: "Bearer " + TOKEN
-            },
-            body: JSON.stringify(data)
-          });
-          if (!response.ok) {
-            this.$notify({
-              title: "Error",
-              message: "Failed to update recommendation data"
-            });
-          } else {
-            this.$notify({
-              title: "Title",
-              message: "Updated!"
-            });
-          }
-        } catch (ex) {
-          this.$notify({
-            title: "Error",
-            message: "Server connection error"
-          });
-        }
+
+      const response = await fetch(`${RECOMMENDATION_API_URL}/updatePriority`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: "Bearer " + TOKEN
+        },
+        body: JSON.stringify(changedDatas)
       });
+      if (!response.ok) {
+        this.$notify({
+          title: "Error",
+          message: "Failed to update recommendation data"
+        });
+      } else {
+        this.$notify({
+          title: "Title",
+          message: "Updated!"
+        });
+      }
     }
   },
   mounted() {

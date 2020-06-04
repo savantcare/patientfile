@@ -4,13 +4,12 @@ https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
 
 id is string since we do not want it to be a auto incrementing integer.
 */
-var Temporal = require('sequelize-temporal');
-
 module.exports = (sequelize, Sequelize) => {
   const Recommendation = sequelize.define("doctorRecommendationsForPatient", {
     uuid: {
       type: Sequelize.STRING,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4
     },
     uuidOfRecommendationMadeFor: {
       type: Sequelize.STRING
@@ -28,17 +27,20 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     recordChangedFromIPAddress: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      defaultValue: ''
     },
     isAutoRex: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      defaultValue: 0
     },
     autoRecommendationsOrderId: {
       type: Sequelize.STRING
     }
+  }, {
+    timestamps: false,
+    freezeTableName: true
   });
-  Temporal(Recommendation, sequelize)
-
 
   return Recommendation;
 };

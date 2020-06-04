@@ -43,7 +43,6 @@
  * @displayName Add Recommendation
  */
 import { CHANGE_RECOMMENDATION } from "@/const.js";
-import { uuid } from "uuidv4";
 export default {
   data() {
     return {
@@ -74,7 +73,8 @@ export default {
             // Add
             let recList = [];
             // Get the latest priority
-            let recommendationList = this.$store.state.recommendation.yourRecommendationsList;
+            let recommendationList = this.$store.state.recommendation
+              .yourRecommendationsList;
             let lastPriority = 0;
             recommendationList.forEach(rec => {
               if (rec.priority > lastPriority) {
@@ -83,7 +83,6 @@ export default {
             });
             this.recForm.recs.forEach(item => {
               recList.push({
-                uuid: uuid(),
                 uuidOfRecommendationMadeFor: vm.id,
                 recommendationDescription: item.description,
                 priority: ++lastPriority,
@@ -91,7 +90,7 @@ export default {
                 recordChangedOnDateTime: new Date()
               });
             });
-            console.log(recList);
+
             await this.$store.dispatch("addRecommendation", {
               data: recList,
               notify: this.$notify,
@@ -99,7 +98,8 @@ export default {
             });
             await this.$store.dispatch("getMyRecommendations", {
               patientId: this.id,
-              notify: this.$notify
+              notify: this.$notify,
+              userId: this.$store.state.userId
             });
             this.recForm = { recs: [{ description: "" }] };
           }

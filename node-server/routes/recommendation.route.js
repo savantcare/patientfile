@@ -129,8 +129,8 @@ module.exports = (io) => {
   router.get('/getHistory/:id', async (req, res) => {
 
     try {
-
-      const histories = await Recommendation.sequelize.query('SELECT * FROM doctorRecommendationsForPatientHistories WHERE uuid=(:uuid)',
+      //SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc
+      const histories = await Recommendation.sequelize.query('SELECT *,ROW_START, ROW_END FROM doctorRecommendationsForPatient FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
         { replacements: { uuid: req.params.id }, type: QueryTypes.SELECT })
 
       /**
@@ -183,6 +183,26 @@ module.exports = (io) => {
         message: err.message || "Some error occured while get historical data"
       })
     }
+  })
+
+  router.post('/updatePriority', async (req, res) => {
+    const dataList = req.body
+    console.log("-------------updatePriority-------------")
+    console.log(dataList)
+    const promises = dataList.map(async data => {
+      const { uuid, priority } = data
+      const response = await Recommendation.update({
+        priority: priority
+      }, {
+        where: {
+          uuid: uuid
+        }
+      })
+      return response
+    })
+
+    const result = await Promise.all(promises)
+    res.send(result)
   })
 
   return router
