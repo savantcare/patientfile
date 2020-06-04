@@ -15,50 +15,47 @@ Todo:
 
 4. Cts to load for DA and D should come from DB.
 
-5. Give me a page where I can choose from a list of patients whose patient file I want to open.
-   1. Opening a patient file without a valid patient IDn should redirect to search page.
-
-6. Animation
+5. Animation
     1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
     2. remove the movement of data rows and cards on hover.
 
-7. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
+6. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
 
-8. Use temporal DB concept to show the change history for a recommendation that has been changed 
+7. Use temporal DB concept to show the change history for a recommendation that has been changed 
     1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
     2. The multichange slider needs a page number component at the bottom
     3. Regression: Multi change Ct does not show history.
 
 -- Discussed with Alexey till here.
 
-9. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
+8. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
 Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
 
 Store addendums in the DB
 apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAddress
 
-10. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
+9. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
 
-11. Size limitation of Doctors laptop
+10. Size limitation of Doctors laptop
     1. There is wasted column space in data row table.
     2. Too much space being wasted in Ct Name and then yours and others.
 
-12. Only 1 doctor gets to choose columns and not other doctors.
+11. Only 1 doctor gets to choose columns and not other doctors.
    1. The column names are not user friendly.
 
-13. When I am logged in and I go to /login/ the page does not know that I am already logged in.
+12. When I am logged in and I go to /login/ the page does not know that I am already logged in.
 
-14. How does the system know what are health and what are other components?
+13. How does the system know what are health and what are other components?
 
-15. Dx is not using CardHeader.vue
+14. Dx is not using CardHeader.vue
 
-16. Should single tab data table and multi tab data table components be 2 different components.
+15. Should single tab data table and multi tab data table components be 2 different components.
 
-17. Code repeated between components.
+16. Code repeated between components.
    1. DB  
    2. KB traverse
 
-18. Code refactor
+17. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
@@ -68,7 +65,10 @@ Milestone 5:
 
 1. Give me a page where I can create a new patient 
 
-2. 20 components of production quality.
+2. Give me a page where I can choose from a list of patients whose patient file I want to open.
+   1. Opening a patient file without a valid patient IDn should redirect to search page.
+
+3. 20 components of production quality.
 
 
 
