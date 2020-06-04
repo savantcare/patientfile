@@ -1,3 +1,4 @@
+<!-- TODO: Instead of Type it should be timeToShowStateOn -->
 <template>
   <el-card class="box-card" :id="`recommendation-${type}`">
     <div slot="header" class="clearfix">
@@ -40,7 +41,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and stateAtSelectedTime
+      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and StateAtSelectedTime
     }
   },
   data() {
