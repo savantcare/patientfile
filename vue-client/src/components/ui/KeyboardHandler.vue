@@ -18,6 +18,12 @@ export default {
           multiChange: "showMultiChangeReminderModal",
           change: "showChangeReminderModal",
           discontinue: "discontinueReminder"
+        },
+        goal: {
+          add: "showAddGoalModal",
+          multiChange: "showMultiChangeGoalModal",
+          change: "showChangeGoalModal",
+          discontinue: "discontinueGoal"
         }
       }
     };
