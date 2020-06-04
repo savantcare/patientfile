@@ -12,6 +12,7 @@ module.exports = {
   USER_API_URL: "http://localhost:8000/users",
   COMPONENT_API_URL: "http://localhost:8000/components",
   SOCIALHISTORY_API_URL: "http://localhost:8000/social-histories",
+  FAMILY_HISTORY_API_URL: "http://localhost:8000/family-histories",
 
   STATE_AT_SELECTED_TIME_COMPONENTS: [
   ],

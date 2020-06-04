@@ -51,6 +51,9 @@ export default [
     label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal", abbreviation: ""
   },
   {
+    label: "family history (fh) list", action: "", abbreviation: "fh"
+  },
+  {
     label: "clear", action: "", abbreviation: ""
   }
 ]

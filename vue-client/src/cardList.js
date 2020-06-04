@@ -53,7 +53,7 @@ export default [
     key: "familyHistory",
     value: require("@/components/composition-layer1/FamilyHistoryCard")
       .default,
-    abbreviation: ""
+    abbreviation: "fh"
   },
   {
     key: "AIScribe",

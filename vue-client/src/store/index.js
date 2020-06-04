@@ -13,6 +13,7 @@ import StateAtCurrentTimeSplitAreaModule from './modules/StateAtCurrentTimeSplit
 import secondLayerTabDialogStateModule from './modules/secondLayerTabDialogState'
 import stateAtSelectedTimeModule from './modules/stateAtSelectedTimeSide'
 import socialHistoryStateModule from './modules/socialHistoryState'
+import familyHistoryStateModule from './modules/familyHistoryState'
 
 import { ROLE_API_URL } from "@/const.js"
 import searchCommandsList from '@/searchCommandsList.js'
@@ -27,7 +28,8 @@ export default new Vuex.Store({
     selectedColumns: {
       recommendation: ["recommendationDescription"],
       reminder: ["description"],
-      goal: ["description"]
+      goal: ["description"],
+      familyHistory: ["value"]
     },
     componentsAllowedToAccess: []
   },
@@ -101,7 +103,8 @@ export default new Vuex.Store({
     StateAtCurrentTime: StateAtCurrentTimeSplitAreaModule,
     tabDialog: secondLayerTabDialogStateModule,
     stateAtSelectedTime: stateAtSelectedTimeModule,
-    socialHistory: socialHistoryStateModule
+    socialHistory: socialHistoryStateModule,
+    familyHistory: familyHistoryStateModule
   },
   plugins: [
     createPersistedState()
