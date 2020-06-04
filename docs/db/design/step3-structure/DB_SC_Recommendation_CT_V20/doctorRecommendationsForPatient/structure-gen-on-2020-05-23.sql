@@ -24,16 +24,16 @@ DROP TABLE IF EXISTS `doctorRecommendationsForPatients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `doctorRecommendationsForPatients` (
-  `uuid`  BINARY(16) NOT NULL,
-  `uuidOfRecommendationMadeFor` BINARY(16) NOT NULL,
+  `uuid`  VARCHAR(64) NOT NULL,
+  `uuidOfRecommendationMadeFor` VARCHAR(64) NOT NULL,
   `recommendationDescription` longtext,
   `notes` text DEFAULT NULL,
   `priority` int(11) DEFAULT NULL,
   `isAutoRex` int(11) DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `autoRecommendationsOrderId` int(11) DEFAULT NULL,
+  `recordChangedByUUID` VARCHAR(64) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
-  `autoRecommendationsOrderId` int(11) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 /*!40101 SET character_set_client = @saved_cs_client */;
