@@ -16,25 +16,15 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     icd10Code:{
-      type: Sequelize.STRING
-    },
-    notes: {
       type: Sequelize.STRING,
       defaultValue: null
     },
-    assessment: {
+    diagnosisDiscontinueNotes: {
       type: Sequelize.STRING,
       defaultValue: null
     },
-    agree: {
-      type: Sequelize.STRING
-    },
-    startDate: {
+    diagnosedOnDate: {
       type: Sequelize.DATE
-    },
-    discontinue: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: 0
     },
     patientUUId: {
       type: Sequelize.STRING
@@ -47,10 +37,9 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: Sequelize.NOW
     },
     recordChangedFromIPAddress: {
-      type: Sequelize.STRING
-    },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+      type: Sequelize.STRING,
+      defaultValue: null
+    }
   });
 
   return Diagnosis;

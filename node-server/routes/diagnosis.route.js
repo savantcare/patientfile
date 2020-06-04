@@ -36,10 +36,7 @@ module.exports = (io) => {
       console.log(patientId);
       const queryResult = await Diagnosis.findAll({
         where: {
-          patientUUId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          }
+          patientUUId: patientId
         }
       })
       res.send(queryResult)
@@ -56,13 +53,9 @@ module.exports = (io) => {
       await Diagnosis.update({
         diagnosisName: req.body.diagnosisName,
         icd10Code: req.body.icd10Code,
-        notes: req.body.notes,
-        assessment: req.body.assessment,
-        agree: req.body.agree,
-        startDate: req.body.startDate,
+        diagnosedOnDate: req.body.diagnosedOnDate,
         recordChangedByUUID: req.body.recordChangedByUUID,
         recordChangedOnDateTime: req.body.recordChangedOnDateTime,
-        discontinue: req.body.discontinue,
         recordChangedFromIPAddress: req.body.recordChangedFromIPAddress
       }, {
         where: {
@@ -89,7 +82,7 @@ module.exports = (io) => {
       
       io.to(`room-${req.body.patientUUId}-Doctor`).emit("DISCONTINUE_DIAGNOSIS", req.params.id)
       res.send("ok")/* Fix: Instead of sending the whole objefct only OK needs to be sent*/
-      
+
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while patch the Diagnosis"

@@ -122,7 +122,7 @@ export default {
             console.log("formdata",this.dxForm.dx[0]);
             this.updateData["diagnosisName"] = this.dxForm.dx[0].value;
             this.updateData["icd10Code"] = "";
-            this.updateData["startDate"] = this.dxForm.dx[0].when;
+            this.updateData["diagnosedOnDate"] = this.dxForm.dx[0].when;
             this.updateData["recordChangedByUUID"] = this.userId;
             this.updateData["recordChangedFromIPAddress"] = '';
             this.updateData["recordChangedOnDateTime"] = new Date();
@@ -138,11 +138,7 @@ export default {
                 patientUUId: vm.id,
                 diagnosisName: item.value,
                 icd10Code:'',
-                notes:'',
-                assessment:'',
-                agree:'',
-                discontinue:0,
-                startDate:item.when,
+                diagnosedOnDate:item.when,
                 recordChangedOnDateTime: new Date(),
                 recordChangedByUUID: this.userId,
                 recordChangedFromIPAddress:''
@@ -180,12 +176,12 @@ export default {
   mounted() {
     if (this.type == CHANGE_DIAGNOSIS) {
       console.log(this.updateData);
-      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.startDate }] };
+      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.diagnosedOnDate }] };
     }
   },
   watch: {
     updateData() {
-      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.startDate }] };
+      this.dxForm = { dx: [{ value: this.updateData.diagnosisName, when: this.updateData.diagnosedOnDate }] };
     }
   }
 };

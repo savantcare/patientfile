@@ -62,6 +62,7 @@ const Recommendation = () =>
   import("@/components/composition-layer1/RecommendationCard");
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const Goal = () => import("@/components/composition-layer1/GoalsCard");
+const Diagnosis = () => import("@/components/composition-layer1/DiagnosesCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
 export default {
@@ -84,6 +85,7 @@ export default {
     Recommendation,
     Reminder,
     Goal,
+    Diagnosis,
     KeyboardHandler
   },
   data() {
