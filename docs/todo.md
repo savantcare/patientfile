@@ -50,19 +50,15 @@ apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAd
 
 14. How does the system know what are health and what are other components?
 
-15. If not logged in them send to login page.
+15. Dx is not using CardHeader.vue
 
-16. Dx is not using CardHeader.vue
+16. Should single tab data table and multi tab data table components be 2 different components.
 
-17. Should single tab data table and multi tab data table components be 2 different components.
-
-18. Code repeated between components.
+17. Code repeated between components.
    1. DB  
    2. KB traverse
 
-19. Offline refresh needs to work
-
-20. Code refactor
+18. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
