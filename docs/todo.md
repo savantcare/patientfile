@@ -2,11 +2,9 @@ Done - need to demo:
 ====================
 1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
-2. Opening a patient file without logging in should redirect to login page.
+2. The sequence of Cts to load should also come from DB. 
 
-3. The sequence of Cts to load should also come from DB. 
-
-4. Give me a page where I can create a new patient 
+3. Give me a page where I can create a new patient 
 
 Todo:
 =====
@@ -21,6 +19,7 @@ Todo:
 4. Cts to load for DA and D should come from DB.
 
 5. Give me a page where I can choose from a list of patients whose patient file I want to open.
+   1. Opening a patient file without a valid patient IDn should redirect to search page.
 
 6. Animation
     1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
