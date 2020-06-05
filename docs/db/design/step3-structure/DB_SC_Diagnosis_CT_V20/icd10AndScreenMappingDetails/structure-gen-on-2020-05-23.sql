@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `icd10AndScreenMappingDetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `icd10AndScreenMappingDetails` (
-  `uuid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
   `icd10ID` int(11) NOT NULL,
   `screenID` int(11) NOT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

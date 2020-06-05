@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `policiesUploadedDocumentsTemp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `policiesUploadedDocumentsTemp` (
-  `uuid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
   `tempID` varchar(128) NOT NULL DEFAULT '0',
   `fileContent` longblob,
   `fileName` varchar(128) NOT NULL,
   `fileType` varchar(128) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
   PRIMARY KEY (`uuid`),
   KEY `uuidOfPatient` (`uuidOfPatient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;

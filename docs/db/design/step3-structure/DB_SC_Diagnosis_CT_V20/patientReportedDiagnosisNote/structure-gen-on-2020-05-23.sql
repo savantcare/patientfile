@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `patientReportedDiagnosisNote`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patientReportedDiagnosisNote` (
-  `uuid` BINARY(16)  NOT NULL,
-  `diagnosisReportedId` BINARY(16)  NOT NULL,
+  `uuid` CHAR(36)  NOT NULL,
+  `diagnosisReportedId` CHAR(36)  NOT NULL,
   `note` text NOT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

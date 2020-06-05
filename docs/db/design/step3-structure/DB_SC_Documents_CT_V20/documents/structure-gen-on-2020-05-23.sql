@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `documents` (
-  `uuid`  BINARY(16) NOT NULL,
+  `uuid`  CHAR(36) NOT NULL,
   `uploadID` int(11) unsigned NOT NULL DEFAULT '0',
   `fileContent` longblob,
   `fileName` text,
   `fileType` varchar(128) NOT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`),

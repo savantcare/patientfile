@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `policiesMaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `policiesMaster` (
-  `uuid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
   `policyName` varchar(128) DEFAULT NULL,
   `policyContent` text,
   `versionNumberOfPolicy` tinyint(3) unsigned NOT NULL,
   `createdAtDateTime` varchar(128) DEFAULT NULL,
-  `createdByUUID` BINARY(16) DEFAULT NULL,
+  `createdByUUID` CHAR(36) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 /*!40101 SET character_set_client = @saved_cs_client */;

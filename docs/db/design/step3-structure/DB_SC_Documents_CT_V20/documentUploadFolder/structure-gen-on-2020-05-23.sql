@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `documentUploadFolder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `documentUploadFolder` (
-  `uuid`  BINARY(16) NOT NULL,
+  `uuid`  CHAR(36) NOT NULL,
   `folder` varchar(512) NOT NULL DEFAULT '',
   `labelId` int(11) DEFAULT '1',
   `docStatus` varchar(50) NOT NULL,
   `uidOfUploadedBy` int(11) unsigned DEFAULT NULL,
   `uidOfPatient` int(11) unsigned DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

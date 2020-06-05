@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `MSEForPatients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MSEForPatients` (
-  `uuid` BINARY(16) NOT NULLT,
-  `uuidOfPatient` BINARY(16) NOT NULL,
-  `uuidOfDoctor` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULLT,
+  `uuidOfPatient` CHAR(36) NOT NULL,
+  `uuidOfDoctor` CHAR(36) NOT NULL,
   `isReviewed` enum('yes','no') NOT NULL DEFAULT 'no',
   `affectOptionsSelectedSumValue` int(11) unsigned NOT NULL DEFAULT '0',
   `affectExtraInfo` varchar(255) DEFAULT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `MSEForPatients` (
   `neurologicalExtraInfo` varchar(255) DEFAULT NULL,
   `moodInfo` varchar(255) DEFAULT NULL,
   `reviewedOn` date DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`),

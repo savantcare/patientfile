@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `substanceUse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `substanceUse` (
-  `uuid` BINARY(16) NOT NULL,
-  `uid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
   `substanceName` varchar(128) DEFAULT NULL,
   `quantity` double unsigned DEFAULT NULL,
   `unit` varchar(150) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `graphColor` varchar(255) DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`),

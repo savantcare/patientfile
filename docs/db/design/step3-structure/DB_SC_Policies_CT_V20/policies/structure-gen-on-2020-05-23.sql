@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `policies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `policies` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatientWhoSignedThePolicy` BINARY(16) DEFAULT NULL,
-  `policyMasterUUID` BINARY(16) DEFAULT NULL,
-  `uploadUUID` BINARY(16) DEFAULT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatientWhoSignedThePolicy` CHAR(36) DEFAULT NULL,
+  `policyMasterUUID` CHAR(36) DEFAULT NULL,
+  `uploadUUID` CHAR(36) DEFAULT NULL,
   `isThisPolicySigned` enum('Not signed','Draft','Signed') NOT NULL DEFAULT 'Not signed',
   `fillableValuesFromPolicy` text NOT NULL,
   `signature` blob NOT NULL,
