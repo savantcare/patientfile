@@ -4,7 +4,8 @@ export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     yourRecommendationsList: [],
     currentDate: new Date(),
-    othersList: []
+    othersList: [],
+    tableList: []
   },
   mutations: {
     setRecommendationList(state, data) {
@@ -23,6 +24,9 @@ export default {
     },
     setOthersList(state, value) {
       state.othersList = value
+    },
+    setRecommendationTableList(state, value) {
+      state.tableList = value
     },
 
     /**
@@ -46,7 +50,7 @@ export default {
     SOCKET_UPDATE_RECOMMENDATION(state, updateData) {
       let newList = []
       state.yourRecommendationsList.forEach(item => {
-        if (item.id != updateData.id) {
+        if (item.uuid != updateData.uuid) {
           newList.push(item)
         } else {
           newList.push(updateData)
@@ -110,7 +114,7 @@ export default {
           newList.push(item);
         }
       });
-
+      console.log(newList)
       commit("setRecommendationList", newList)
       try {
         const response = await fetch(`${RECOMMENDATION_API_URL}`, {
@@ -230,6 +234,7 @@ export default {
         });
         if (response.ok) {
           let json = await response.json();
+          console.log(json)
           commit('setRecommendationList', json)
         } else {
           if (response.status == '401') {

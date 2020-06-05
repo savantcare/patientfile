@@ -57,6 +57,8 @@ export default {
       });
     },
     submitForm(formName) {
+      const today = new Date().toISOString().split(".")[0];
+
       const vm = this;
       this.$refs[formName].validate(async valid => {
         if (valid) {
@@ -87,7 +89,7 @@ export default {
                 recommendationDescription: item.description,
                 priority: ++lastPriority,
                 recordChangedByUUID: this.userId,
-                recordChangedOnDateTime: new Date()
+                recordChangedOnDateTime: today
               });
             });
 

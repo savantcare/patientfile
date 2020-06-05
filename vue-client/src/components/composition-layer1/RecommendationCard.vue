@@ -4,7 +4,7 @@
     <div slot="header" class="clearfix">
       <CardHeader
         title="Recommendation"
-        actions="A,M,F,D"
+        actions="A,M,F,D,X"
         ref="card_header"
         keyId="recommendation"
         :type="type"
@@ -25,6 +25,7 @@
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
+      @updateTableList="updateTableList"
     />
   </el-card>
 </template>
@@ -149,6 +150,9 @@ export default {
           message: "Updated!"
         });
       }
+    },
+    updateTableList(tableList) {
+      this.$store.commit("setRecommendationTableList", tableList);
     }
   },
   mounted() {

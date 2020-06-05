@@ -25,11 +25,13 @@ export default {
           change: "showChangeGoalModal",
           discontinue: "discontinueGoal"
         }
-      }
+      },
+      shiftKeyPressed: false
     };
   },
   mounted() {
     window.addEventListener("keydown", this.keydownHandler);
+    window.addEventListener("keyup", this.keyupHandler);
   },
   methods: {
     keydownHandler(event) {
@@ -38,6 +40,10 @@ export default {
        */
       let { focusRowIndex } = this.$store.state.StateAtCurrentTime;
       const { rows, searchKeyword } = this.$store.state.StateAtCurrentTime;
+
+      if (event.key == "Shift") {
+        this.shiftKeyPressed = true;
+      }
 
       /**
        * Exception where make the Global key-handler not working.
@@ -51,6 +57,9 @@ export default {
         this.$parent.$refs.search_box.setFocus();
         this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowDown") {
+        if (this.shiftKeyPressed) {
+          console.log("Shift + down");
+        }
         if (focusRowIndex == rows.length - 1) {
           focusRowIndex = 0;
         } else {
@@ -58,6 +67,9 @@ export default {
         }
         this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowUp") {
+        if (this.shiftKeyPressed) {
+          console.log("Shift + up");
+        }
         if (focusRowIndex == 0) {
           focusRowIndex = rows.length - 1;
         } else {
@@ -112,10 +124,16 @@ export default {
       } else if (event.key == "m") {
         this.$store.commit(this.componentActionsList[component].multiChange);
       }
+    },
+    keyupHandler(event) {
+      if (event.key == "Shift") {
+        this.shiftKeyPressed = false;
+      }
     }
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.keydownHandler);
+    window.removeEventListener("keydown", this.keyupHandler);
   }
 };
 </script>

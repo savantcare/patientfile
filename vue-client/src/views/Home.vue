@@ -63,7 +63,8 @@ const Recommendation = () =>
 const Reminder = () => import("@/components/composition-layer1/RemindersCard");
 const Goal = () => import("@/components/composition-layer1/GoalsCard");
 const Diagnosis = () => import("@/components/composition-layer1/DiagnosesCard");
-const FamilyHistory = () => import("@/components/composition-layer1/FamilyHistoryCard");
+const FamilyHistory = () =>
+  import("@/components/composition-layer1/FamilyHistoryCard");
 const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 
 export default {
@@ -124,9 +125,9 @@ export default {
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
 
-    setTimeout(() => {
-      this.$store.dispatch("updateStateAtCurrentTimeRow");
-    }, 1000);
+    // setTimeout(() => {
+    //   this.$store.dispatch("updateStateAtCurrentTimeRow");
+    // }, 1000);
   },
   methods: {
     onDrag(size) {
@@ -146,16 +147,17 @@ export default {
 
 <style>
 html {
-    margin:    0 auto;
+  margin: 0 auto;
 }
 
 div#app {
-    position: relative;
-    max-width: 1440px; /* Doctors use the app on a laptop sitting infront of a patient. The laptop is 13.3" and has a resolution of 1440x900 */
-    max-height: 900px;
+  position: relative;
+  max-width: 1440px; /* Doctors use the app on a laptop sitting infront of a patient. The laptop is 13.3" and has a resolution of 1440x900 */
+  max-height: 900px;
 }
-.split.split-horizontal, .gutter.gutter-horizontal {
-    max-height: 900px;
+.split.split-horizontal,
+.gutter.gutter-horizontal {
+  max-height: 900px;
 }
 
 .card .card-header {

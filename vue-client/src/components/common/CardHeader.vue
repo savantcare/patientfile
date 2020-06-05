@@ -24,6 +24,12 @@
             v-if="showMultiChangeButton"
           >M</el-button>
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusButton">F</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('showDiscontinueHistoryDialog')"
+            v-if="showDiscontinueHistoryButton"
+          >X</el-button>
 
           <el-popover placement="top-start" trigger="hover" content="Addendum">
             <el-button slot="reference" type="text" size="mini" v-if="showAddendum">E</el-button>
@@ -45,7 +51,7 @@
             width="200"
             trigger="click"
             @show="showPopover = true"
-            @hide="showPopOver = false"
+            @hide="showPopover = false"
           >
             <el-select
               v-model="selectedColumns"
@@ -127,6 +133,18 @@ export default {
       }
       return false;
     },
+    showDiscontinueHistoryButton() {
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "X").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
+    },
     showDiscontinueButton() {
       if (
         this.type == "StateAtCurrentTime" ||
@@ -140,6 +158,9 @@ export default {
       return false;
     },
     showActions() {
+      // console.log("mouseover: " + this.mouseOver);
+      // console.log("isHeaderFocus: " + this.isHeaderFocus);
+      // console.log("showPopover: " + this.showPopover);
       return this.mouseOver || this.isHeaderFocus || this.showPopover;
     },
     selectedColumns: {

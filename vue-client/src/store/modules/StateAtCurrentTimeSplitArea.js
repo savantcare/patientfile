@@ -76,8 +76,8 @@ export default {
       let StateAtCurrentTimeRows = [];
       const StateAtCurrentTimeComponents = rootGetters.stateAtCurrentTimeList
       StateAtCurrentTimeComponents.forEach(item => {
-        if (rootState[item.key] && rootState[item.key]["list"]) {
-          const componentRows = rootState[item.key]["list"].filter(
+        if (rootState[item.key] && rootState[item.key]["tableList"]) {
+          const componentRows = rootState[item.key]["tableList"].filter(
             data => {
               return data.discontinue != true;
             }
@@ -91,7 +91,6 @@ export default {
       });
       // Add current-state-components-search-box component at the last
       StateAtCurrentTimeRows.push("current-state-components-search-box");
-
       commit("setStateAtCurrentTimeRows", StateAtCurrentTimeRows)
     }
   }

@@ -67,6 +67,7 @@ export default new Vuex.Store({
       })
       if (response.ok) {
         const json = await response.json()
+        console.log(json)
         const { name, componentsAllowedToAccess, stateAtSelectedTimeSplitAreaComponentLoadSequence, stateAtCurrentTimeSplitAreaComponentLoadSequence } = json
         commit("setUserRole", name)
 
@@ -75,7 +76,7 @@ export default new Vuex.Store({
         commit("setComponentsAllowedToAccess", components)
         const commandList = searchCommandsList.filter(item => {
           return components.filter(component => {
-            return component.toLowerCase() == item.abbreviation
+            return component.trim().toLowerCase() == item.abbreviation
           }).length > 0
         })
         commandList.push({

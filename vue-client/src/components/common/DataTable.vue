@@ -1,6 +1,6 @@
 <template>
   <div v-elresize @elresize="handleResize">
-    <el-tabs type="card">
+    <el-tabs type="card" v-model="tab">
       <el-tab-pane v-for="(tab, index) in tabData" :key="`tab-${index}`" :label="tab.label">
         <!-- Ref: https://github.com/WakuwakuP/element-ui-el-table-draggable#animate -->
         <el-table-draggable>
@@ -82,7 +82,8 @@ export default {
       width: 0,
       showActionColumn: false,
       columns: [],
-      originMyData: []
+      originMyData: [],
+      tab: 0
     };
   },
   methods: {
@@ -148,27 +149,56 @@ export default {
       return columns;
     },
     checkChangePriority() {
-      let isChanged = false;
-      this.originMyData.forEach((data, index) => {
-        const currentData = this.myData[index];
-        if (
-          currentData != null &&
-          data.priority != null &&
-          currentData.priority != null
-        ) {
-          if (data.priority != currentData.priority) {
-            isChanged = true;
+      if (
+        this.type == "StateAtCurrentTime" &&
+        this.originMyData.length == this.myData.length
+      ) {
+        let changedList = [];
+        for (var i = 0; i < this.originMyData.length; i++) {
+          const originData = this.originMyData[i];
+          const currentData = this.myData[i];
+          if (originData.priority != currentData.priority) {
+            changedList.push({
+              uuid: currentData.uuid,
+              priority: originData.priority
+            });
+            currentData.priority = originData.priority;
           }
         }
-      });
-      if (isChanged) {
-        console.log("the priority is changed");
-        this.myData.map((data, index) => {
-          data.priority = index + 1;
-        });
-        // let changedData = []
-        this.$emit("updatePriority", this.myData);
+        if (changedList.length > 0) {
+          this.$emit("updatePriority", changedList);
+          this.changedList = [];
+
+          let newList = [];
+          this.myData.forEach(item => {
+            newList.push({ priority: item.priority });
+          });
+          this.originMyData = newList;
+          // this.originMyData = this.myData;
+        }
       }
+
+      // let isChanged = false;
+      // this.originMyData.forEach((data, index) => {
+      //   const currentData = this.myData[index];
+      //   if (
+      //     currentData != null &&
+      //     data.priority != null &&
+      //     currentData.priority != null
+      //   ) {
+      //     if (data.priority != currentData.priority) {
+      //       isChanged = true;
+      //     }
+      //   }
+      // });
+      // if (isChanged) {
+      //   console.log("the priority is changed");
+      //   this.myData.map((data, index) => {
+      //     data.priority = index + 1;
+      //   });
+      //   // let changedData = []
+      //   this.$emit("updatePriority", this.myData);
+      // }
       // let changedData = [];
       // this.myData.map((data, index) => {
       //   const originData = this.originMyData[index];
@@ -188,9 +218,6 @@ export default {
   },
   mounted() {
     // this.myData = this.tabData[0].tableData;
-    if (this.tabData.length > 0) {
-      this.originMyData = this.tabData[0].tableData;
-    }
   },
   computed: {
     focusRow() {
@@ -208,7 +235,27 @@ export default {
   },
   watch: {
     myData() {
+      if (
+        this.myData.length > 0 &&
+        this.originMyData.length != this.myData.length
+      ) {
+        console.log("Initialize origin data");
+        let newPriorityList = [];
+        this.myData.forEach(data => {
+          newPriorityList.push({
+            priority: data.priority
+          });
+        });
+        this.originMyData = newPriorityList;
+      }
       this.checkChangePriority();
+    },
+    tab() {
+      if (this.type == "StateAtCurrentTime") {
+        const tableList = this.tabData[this.tab].tableData;
+        this.$emit("updateTableList", tableList);
+        this.$store.dispatch("updateStateAtCurrentTimeRow");
+      }
     }
   }
 };
