@@ -228,10 +228,10 @@ module.exports = (io) => {
        *  }
        * 
        */
-      const assessments = await Diagnosis.sequelize.query('SELECT *,ROW_START, ROW_END FROM diagnosisAssessment FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
+      const assessments = await DiagnosisAssessment.sequelize.query('SELECT *,ROW_START, ROW_END FROM diagnosisAssessment FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
                                 {
                                   replacements: { uuid: req.params.id },
-                                  type: Diagnosis.sequelize.QueryTypes.SELECT
+                                  type: DiagnosisAssessment.sequelize.QueryTypes.SELECT
                                 });
 
             const assessmentPromises = assessments.map(async (history,innerIndex) => {
@@ -405,6 +405,26 @@ module.exports = (io) => {
         message: err.message || "Some error occured while get historical data"
       })
     }
+  })
+
+  router.patch('/discontinueAssessment/:id', async (req, res) => {
+
+    try {
+      const queryResult = await DiagnosisAssessment.destroy({
+        where: {
+          uuid: req.params.id
+        }
+      })
+      
+      io.to(`room-${req.body.patientUUId}-Doctor`).emit("DISCONTINUE_DIAGNOSIS_ASSESSMENT", req.params.id)
+      res.send("ok")/* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while patch the Diagnosis"
+      })
+    }
+
   })
 
   return router

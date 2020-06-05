@@ -307,6 +307,60 @@ export default {
 
         commit("setDiagnosisList", originList)
       } 
+    },
+    async discontinueDiagnosisAssessment({state,commit}, json) {
+      const { data, notify } = json
+      const originList = state.diagnosisList
+      const assessmentUUID = data.currentAssessmentUUID
+
+      console.log(data);
+      var newList = []
+      originList.forEach(function(eachDx){
+        if(eachDx.uuid!=data.uuid) {
+          newList.push(eachDx);
+        }else {
+          eachDx.currentAssessmentUUID = ``;
+          eachDx.currentAssessment = ``;
+          newList.push(eachDx);
+        }
+      })
+      /*const newList = originList.filter(item => {
+        return item.currentAssessmentUUID != data.currentAssessmentUUID
+      })*/
+
+      commit("setDiagnosisList", newList)
+      try {
+        data["discontinue"] = true
+        const response = await fetch(`${DIAGNOSIS_API_URL}/discontinueAssessment/${assessmentUUID}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+          notify({
+            title: "Error",
+            message: "Failed to discontinue Assessment data"
+          })
+
+
+          commit("setDiagnosisList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Successfully discontinued Assessment!"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error!"
+        })
+
+        commit("setDiagnosisList", originList)
+      }
     }
   },
   getters: {

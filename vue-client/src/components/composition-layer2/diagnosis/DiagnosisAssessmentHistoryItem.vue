@@ -35,19 +35,24 @@ export default {
   methods: {
     async getAssessmentHistory() {
       const TOKEN = localStorage.getItem("token");
-      const response = await fetch(
-        `${DIAGNOSIS_API_URL}/getAssessmentHistory/${this.dx.currentAssessmentUUID}`,
-        {
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            Authorization: "Bearer " + TOKEN
+      if(this.dx.currentAssessmentUUID!=null && this.dx.currentAssessmentUUID!=``) {
+        const response = await fetch(
+          `${DIAGNOSIS_API_URL}/getAssessmentHistory/${this.dx.currentAssessmentUUID}`,
+          {
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              Authorization: "Bearer " + TOKEN
+            }
           }
+        );
+        if (response.ok) {
+          const json = await response.json();
+          //console.log(json);
+          this.histories = json;
         }
-      );
-      if (response.ok) {
-        const json = await response.json();
-        //console.log(json);
-        this.histories = json;
+      }
+      else {
+        this.histories = []
       }
     }
   }

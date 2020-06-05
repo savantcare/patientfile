@@ -66,13 +66,9 @@ export default {
         data: newAssementData,
         notify: this.$notify
       });
-
-      await this.$store.dispatch("getDiagnoses", {
-              patientId: this.$route.query.patient_id,
-              notify: this.$notify
-            });
     },
     onClickDiscontinue(dx) {
+      console.log(dx);
       this.$store.dispatch("discontinueDiagnosisAssessment", {
         data: dx,
         notify: this.$notify
