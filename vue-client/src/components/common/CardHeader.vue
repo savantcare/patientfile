@@ -159,6 +159,7 @@ export default {
     },
     // TODO: This should be called showMultiDiscontinueMenuOption
     // TODO: type should this.splitArea
+    // StateAtCurrentTime should be "AreaForStateAtCurrentTime" and the corresponding is "AreaForMultiState"
     showDiscontinueButton() {
       if (
         this.type == "StateAtCurrentTime" ||
