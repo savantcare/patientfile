@@ -13,6 +13,7 @@
         @showMultiChangeDialog="showMultiChangeDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
+        @showDiscontinueHistoryDialog="showDiscontinueHistoryDialog"
       />
     </div>
     <DataTable
@@ -153,6 +154,9 @@ export default {
     },
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
+    },
+    showDiscontinueHistoryDialog() {
+      this.$store.commit("showRecommendationDiscontinueHistoryDialog");
     }
   },
   mounted() {

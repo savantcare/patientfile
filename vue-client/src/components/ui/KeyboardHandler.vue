@@ -11,7 +11,8 @@ export default {
           add: "showAddRecommendationModal",
           multiChange: "showMultiChangeRecommendationModal",
           change: "showChangeRecommendationsModal",
-          discontinue: "discontinueRecommendation"
+          discontinue: "discontinueRecommendation",
+          discontinueHistory: "showRecommendationDiscontinueHistoryDialog"
         },
         reminder: {
           add: "showAddReminderModal",
@@ -123,6 +124,10 @@ export default {
         this.$store.commit(this.componentActionsList[component].add);
       } else if (event.key == "m") {
         this.$store.commit(this.componentActionsList[component].multiChange);
+      } else if (event.key == "x") {
+        this.$store.commit(
+          this.componentActionsList[component].discontinueHistory
+        );
       }
     },
     keyupHandler(event) {
@@ -133,7 +138,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.keydownHandler);
-    window.removeEventListener("keydown", this.keyupHandler);
+    window.removeEventListener("keyup", this.keyupHandler);
   }
 };
 </script>

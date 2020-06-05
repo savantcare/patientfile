@@ -130,7 +130,7 @@ module.exports = (io) => {
 
     try {
       //SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc
-      const histories = await Recommendation.sequelize.query('SELECT *,ROW_START, ROW_END FROM doctorRecommendationsForPatient FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
+      const histories = await Recommendation.sequelize.query('SELECT *,ROW_START, ROW_END FROM doctorRecommendationsForPatients FOR SYSTEM_TIME ALL where uuid = :uuid  AND ROW_END < NOW() order by ROW_START desc',
         { replacements: { uuid: req.params.id }, type: QueryTypes.SELECT })
 
       /**
@@ -143,10 +143,10 @@ module.exports = (io) => {
        */
 
       const promises = histories.map(async history => {
-        const { recommendationDescription, archivedAt } = history
+        const { recommendationDescription, ROW_START } = history
         const data = {
           content: recommendationDescription,
-          info: `Updated on ${new Date(archivedAt).toDateString()}`
+          info: `Updated on ${new Date(ROW_START).toDateString()}`
         }
         return data
       })
@@ -203,6 +203,41 @@ module.exports = (io) => {
 
     const result = await Promise.all(promises)
     res.send(result)
+  })
+
+  router.get('/discontinueHistory', async (req, res) => {
+    try {
+      const histories = await Recommendation.sequelize.query('SELECT *, ROW_START, ROW_END FROM doctorRecommendationsForPatients FOR SYSTEM_TIME ALL WHERE ROW_END < NOW() order by ROW_START DESC',
+        { type: QueryTypes.SELECT })
+      let uuidList = []
+      histories.forEach(history => {
+        if (uuidList.filter(item => item == history.uuid).length == 0) {
+          uuidList.push(history.uuid)
+        }
+      })
+
+      let result = []
+      uuidList.forEach(uuid => {
+        const list = histories.filter(history => history.uuid == uuid)
+        const history = []
+        if (list.length > 1) {
+          for (var i = 1; i < list.length; i++) {
+            history.push({
+              content: list[i].recommendationDescription,
+              detail: `Updated on ${new Date(list[i].ROW_START).toDateString()}`
+            })
+          }
+        }
+        result.push({
+          content: list[0].recommendationDescription,
+          history: history,
+          detail: `Deleted on ${new Date(list[0].ROW_START).toDateString()}`
+        })
+      })
+      res.send(result)
+    } catch (err) {
+      res.status(500).send(err.message)
+    }
   })
 
   return router

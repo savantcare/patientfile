@@ -1,4 +1,4 @@
-import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, CHANGE_DIAGNOSIS, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREEN, TAKE_A_SCREEN } from "@/const.js"
+import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATION, ADD_REMINDER, MULTIPLE_CHANGE_REMINDER, CHANGE_REMINDER, ADD_DIAGNOSIS, MULTIPLE_CHANGE_ASSESSMENT, CHANGE_DIAGNOSIS, ADD_SERVICE_STATEMENTS, MULTIPLE_CHANGE_SERVICE_STATEMENTS, ADD_GOAL, MULTIPLE_RATE_GOAL, RATE_GOAL, ADD_SCREEN, TAKE_A_SCREEN, RECOMMENDATION_DISCONTINUE_HISTORY } from "@/const.js"
 export default {
   state: {
     visibility: false,
@@ -102,6 +102,19 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
+
+    showRecommendationDiscontinueHistoryDialog(state) {
+      const tab = {
+        label: "Recommendation Discontinue History",
+        value: require("@/components/composition-layer2/recommendation/RecommendationDiscontinueHistory.vue").default,
+        name: "tab-recommendation-discontinue-history"
+      }
+      state.tabList = [tab]
+      state.recommendationTabType = RECOMMENDATION_DISCONTINUE_HISTORY
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+
     showChangeRecommendationsModal(state, data) {
       const tab = {
         label: "Change Recommendation",

@@ -54,12 +54,14 @@
                   size="mini"
                   v-if="tab.rowActions.indexOf('C') > -1"
                   @click="handleChange(scope.$index, scope.row)"
+                  style="padding: 0px;"
                 >C</el-button>
                 <el-button
                   type="text"
                   size="mini"
                   v-if="tab.rowActions.indexOf('D') > -1"
                   @click="handleDiscontinue(scope.$index, scope.row)"
+                  style="padding: 0px;"
                 >D</el-button>
               </template>
             </el-table-column>
