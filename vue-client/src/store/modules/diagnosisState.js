@@ -253,6 +253,60 @@ export default {
           message: "Server connection error"
         })
       }
+    },
+    async changeDiagnosisAssessment({state, commit}, json) {
+      const { data, notify } = json
+      const originList = state.diagnosisList
+      let newList = []
+      originList.forEach(item => {
+        console.log(item,data);
+        if (item.uuid == data.uuid) {
+          newList.push({
+            uuid: data.uuid,
+            diagnosisName: data.diagnosisName,
+            startDate: data.startDate,
+            patientUUId: data.patientUUId
+          });
+        } else {
+          newList.push(item);
+        }
+      });
+
+      commit("setDiagnosisList", newList)
+      try {
+
+        
+        const response = await fetch(`${DIAGNOSIS_API_URL}/changeAssessment/${data.uuid}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+          notify({
+            title: "Error",
+            message: "Failed to change diagnosis data"
+          })
+
+          commit("setDiagnosisList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Successfully changed diagnosis!"
+          })
+        }
+        
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error!"
+        })
+
+        commit("setDiagnosisList", originList)
+      } 
     }
   },
   getters: {

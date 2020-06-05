@@ -1,14 +1,14 @@
 module.exports = (sequelize, Sequelize) => {
-  const diagnosisAssessment = sequelize.define("diagnosisAssessment", {
+  const DiagnosisAssessment = sequelize.define("diagnosisAssessment", {
     uuid: {
       type: Sequelize.STRING,
       primaryKey: true,
       defaultValue: Sequelize.UUIDV4
     },
-    diagnosisUUId: {
+    diagnosisUUID: {
       type: Sequelize.STRING
     },
-    patientUUId: {
+    patientUUID: {
       type: Sequelize.STRING
     },
     diagnosisAssessment: {
@@ -18,7 +18,8 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     recordChangedOnDateTime: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
     recordChangedFromIPAddress: {
       type: Sequelize.STRING,
@@ -35,5 +36,5 @@ module.exports = (sequelize, Sequelize) => {
     freezeTableName: true,
   });
 
-  return diagnosisAssessment;
+  return DiagnosisAssessment;
 };

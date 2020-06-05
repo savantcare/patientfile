@@ -125,7 +125,6 @@ export default {
             this.updateData["diagnosedOnDate"] = this.dxForm.dx[0].when;
             this.updateData["recordChangedByUUID"] = this.userId;
             this.updateData["recordChangedFromIPAddress"] = '';
-            this.updateData["recordChangedOnDateTime"] = new Date();
             this.$store.dispatch("changeDiagnosis", {
               data: this.updateData,
               notify: this.$notify
@@ -139,7 +138,6 @@ export default {
                 diagnosisName: item.value,
                 icd10Code:'',
                 diagnosedOnDate:item.when,
-                recordChangedOnDateTime: new Date(),
                 recordChangedByUUID: this.userId,
                 recordChangedFromIPAddress:''
               });
