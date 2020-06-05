@@ -6,7 +6,7 @@
       -->
       <CardHeader
         title="Reminder"
-        actions="A,M,F,D"
+        actions="A,M,F,D,R"
         keyId="reminder"
         :type="type"
         :columns="columns"

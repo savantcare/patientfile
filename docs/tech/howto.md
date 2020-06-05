@@ -414,3 +414,25 @@ Ref: https://softwareengineering.stackexchange.com/questions/95431/priority-list
 Option 1: https://github.com/k1LoW/tbls#lint-a-database
 
 Option 2: Take the model file from sequalize and then browse that.
+
+## Q15) How to mark a component as reviewed?
+
+In each component header there is a button called "R" this button on mouse over shows the date when the component was last reviewed by the logged in user.
+
+On clicking on R the component datetime of review is updated.
+
+The table used for this is:
+
+DB_SC_Components_V20 -> componentStateReviewedOn 
+
+## Q16) What is the UI to lock an appt?
+
+The slider in header shows all the appt dates.
+
+The locked are in black color.
+
+The not locked but in future are in blue color.
+
+First not locked in past is in red color.
+
+On clicking the circle the appt can be locked. All the reviewed on dates have to be > then the previos appt that is locked.

@@ -109,6 +109,18 @@ export default {
       }
       return false;
     },
+    showReviewButton() {
+      if (
+        this.type == "StateAtCurrentTime" ||
+        this.selectedTimeForShowingState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "R").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
+    },
     showMultiChangeButton() {
       if (
         this.type == "StateAtCurrentTime" ||
@@ -145,6 +157,8 @@ export default {
       }
       return false;
     },
+    // TODO: This should be called showMultiDiscontinueMenuOption
+    // TODO: type should this.splitArea
     showDiscontinueButton() {
       if (
         this.type == "StateAtCurrentTime" ||
