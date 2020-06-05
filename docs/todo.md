@@ -29,8 +29,10 @@ Todo:
 7. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
 Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
 
+timeOfApptLock is set once the doctor locks the appt. All health components need to be reviewed.
+
 Store addendums in the DB
-apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAddress
+apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
 
 8. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
 
@@ -56,6 +58,8 @@ apptUUID, componentUUID, AddendumText, changedByUUID, changedOn, changedFromIPAd
 16. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
+
+
 
 
 Milestone 5:
