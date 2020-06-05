@@ -366,7 +366,7 @@ CREATE TABLE `userRoleTypesMaster` (
 --
 
 CREATE TABLE `users` (
-  `uuid`  BINARY(16) NOT NULL,
+  `uuid`  CHAR(36) NOT NULL,
   `facebookID` text DEFAULT NULL,
   `emailAddress` varchar(255) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,

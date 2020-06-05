@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `allergies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `allergies` (
-  `uuid` BINARY(16) NOT NULL,
-  `uid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
   `allergen` varchar(255) DEFAULT NULL,
   `reactions` varchar(255) DEFAULT NULL,
   `onset` date DEFAULT NULL,
   `discontinuedNotes` varchar(255) DEFAULT NULL,
   `typeOfSection` varchar(255) DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

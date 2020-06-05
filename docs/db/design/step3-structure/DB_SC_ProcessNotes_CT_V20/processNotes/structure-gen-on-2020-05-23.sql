@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `processNotes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `processNotes` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
-  `createdByUUID` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
+  `createdByUUID` CHAR(36) NOT NULL,
   `note` text NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `createdAtIpAddress` varchar(50) DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   `recordInsertedFromSection` varchar(255) DEFAULT NULL,

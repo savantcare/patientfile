@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `pharmacy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pharmacy` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
-  `createdByUUID` BINARY(16) DEFAULT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
+  `createdByUUID` CHAR(36) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `pharmacyName` varchar(128) DEFAULT NULL,
   `isPharmacyOnSurescripts` enum('On surescripts','Not on surescripts') DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `pharmacy` (
   `pharmacyURL` varchar(128) DEFAULT NULL,
   `pharmacyNotes` text,
   `isItPrimaryOrSecondary` tinyint(4) unsigned DEFAULT '0' COMMENT '1: primary, 2: secondary',
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   `notes` text,

@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `userDateOfBirth`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userDateOfBirth` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
   `dateOfBirth` date DEFAULT NULL,
   `dateOfBirthNotes` text,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

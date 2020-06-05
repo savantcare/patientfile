@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `diagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `diagnosis` (
-  `uuid` BINARY(16) NOT NULL,
-  `uid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `icd10Code` varchar(50) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `agree` varchar(255) DEFAULT NULL,
   `assessment` varchar(255) DEFAULT NULL,
   `startDate` datetime DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

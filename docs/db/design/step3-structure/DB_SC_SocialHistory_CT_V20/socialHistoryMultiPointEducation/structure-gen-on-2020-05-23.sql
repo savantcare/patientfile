@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `socialHistoryMultiPointEducation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `socialHistoryMultiPointEducation` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
   `value` varchar(128) DEFAULT NULL,
   `timeValueType` enum('atAge','atYear','yearsAgo','date') DEFAULT NULL,
   `timeValue` varchar(128) NOT NULL,
   `startDate` varchar(255) NOT NULL,
   `endDate` varchar(255) NOT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

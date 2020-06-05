@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `socialHistoryOtherMajorLifeEvents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `socialHistoryOtherMajorLifeEvents` (
-  `uuid` BINARY(16) NOT NULL,
-  `uuidOfPatient` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uuidOfPatient` CHAR(36) NOT NULL,
   `majorLifeEventUniqueId` varchar(36) DEFAULT NULL,
   `eventName` varchar(255) NOT NULL,
   `timeValueType` enum('atAge','atYear','yearsAgo','date') DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `socialHistoryOtherMajorLifeEvents` (
   `notes` text,
   `description` text,
   `entryCreatedFrom` enum('intake_psychiatrist','intake_therapist','intake_rehab','') DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

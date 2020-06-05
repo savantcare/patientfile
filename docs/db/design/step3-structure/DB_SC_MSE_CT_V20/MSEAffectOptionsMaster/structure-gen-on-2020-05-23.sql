@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `MSEAffectOptionsMaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MSEAffectOptionsMaster` (
-  `uuid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   `isCommon` tinyint(1) NOT NULL DEFAULT '0',
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

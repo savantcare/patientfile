@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `patientGoalRatings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patientGoalRatings` (
-  `uuid` BINARY(16) NOT NULL,
-  `goalUUID` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `goalUUID` CHAR(36) NOT NULL,
   `valueOfTheRating` tinyint(4) NOT NULL COMMENT 'Values are -3,-2,-1,0,1,2',
   `comments` varchar(255) NOT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

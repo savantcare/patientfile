@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `symptoms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `symptoms` (
-  `uuid` BINARY(16) NOT NULL,
-  `uid` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
   `symptom` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
   `severity` enum('None(0)','Mild(1)','Moderate(2)','Severe(3)') COLLATE utf8_unicode_ci DEFAULT NULL,
   `isItLocked` enum('yes','no') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'no' COMMENT 'This field decides whether the symptoms is locked or not',
@@ -33,7 +33,7 @@ CREATE TABLE `symptoms` (
   `endDate` date DEFAULT NULL,
   `discontinuedNotes` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `typeOfSection` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recordChangedByUUID` BINARY(16) NOT NULL,
+  `recordChangedByUUID` CHAR(36) NOT NULL,
   `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

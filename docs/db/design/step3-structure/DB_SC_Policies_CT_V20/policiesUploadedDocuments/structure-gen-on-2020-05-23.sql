@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `policiesUploadedDocuments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `policiesUploadedDocuments` (
-  `uuid` BINARY(16) NOT NULL,
-  `uploadUUID` BINARY(16) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `uploadUUID` CHAR(36) NOT NULL,
   `uploadedFileContent` longblob,
   `uploadedFileName` varchar(128) NOT NULL,
   `uploadedFileType` varchar(128) NOT NULL,
