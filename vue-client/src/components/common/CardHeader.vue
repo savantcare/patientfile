@@ -2,9 +2,9 @@
 For architrecture read core 3 at Home.vue 
 
 A card header needs to deal with 3 situations:
-1. stateDisplayArea == "CurrentStateDisplayArea"
-2. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=null
-3. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=value
+1. typeOfStateDisplayArea == "CurrentStateDisplayArea"
+2. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfState=null
+3. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfState=value
 
 A component needs to know whther it is being used in "MultiStateDisplayArea"  or "CurrentStateDisplayArea"
 If the component is being used in "MultiStateDisplayArea" then the component needs to know "timeOfState"
@@ -85,7 +85,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
 
 <script>
 export default {
-  props: ["ctName", "actions", "stateDisplayArea", "columns", "keyId"],
+  props: ["ctName", "actions", "typeOfStateDisplayArea", "columns", "keyId"],
   data() {
     return {
       mouseOver: false,
@@ -101,14 +101,14 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.ctName.toLowerCase()}-0` &&
-        this.stateDisplayArea == "CurrentStateDisplayArea"
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
       );
     },
     // You can data-bind to computed properties in templates just like a normal property.
     // Ref: https://vuejs.org/v2/guide/computed.html#Computed-vs-Watched-Property
     showAddChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -120,7 +120,7 @@ export default {
     },
     showReviewChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -132,7 +132,7 @@ export default {
     },
     showMultiChangeButton() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -144,7 +144,7 @@ export default {
     },
     showFocusChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -156,7 +156,7 @@ export default {
     },
     showDiscontinueHistoryChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -169,7 +169,7 @@ export default {
 
     showMultiDiscontinueChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateDisplayArea" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState != null
       ) {
         return (
@@ -197,7 +197,7 @@ export default {
     },
     showAddendumChoice() {
       if (
-        this.stateDisplayArea == "multiStateDisplayArea" &&
+        this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
         this.timeOfState != null
       ) {
         return true;

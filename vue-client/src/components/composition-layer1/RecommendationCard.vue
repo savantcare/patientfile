@@ -1,14 +1,14 @@
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
 <!-- TODO: This should be typeOfStateDisplayArea -->
-  <el-card class="box-card" :id="`recommendation-${stateDisplayArea}`">
+  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
-        :stateDisplayArea="stateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
         @showTabToAddInLayer2="showTabToAddInLayer2"
         @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
@@ -21,7 +21,7 @@
       ctName="Recommendation"
       keyId="recommendation"
       :tabData="tabData"
-      :stateDisplayArea="stateDisplayArea"
+      :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
@@ -42,7 +42,7 @@ export default {
     DataTable
   },
   props: {
-    stateDisplayArea: {
+    typeOfStateDisplayArea: {
       type: String,
       default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
     }
@@ -91,7 +91,7 @@ export default {
         y: true
       };
       let element = "";
-      if (this.stateDisplayArea == "CurrentStateDisplayArea") {
+      if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
         element = "#recommendation-multiStateDisplayArea";
         options["container"] = "#multiStateDisplayArea";
       } else {

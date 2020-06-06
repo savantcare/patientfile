@@ -10,7 +10,7 @@ Core 1. Page design
 |                                         |              |    
 |   Multi state display area              |Current state |  multiStateDisplayArea   = 16
 |                                         |display area  |  currentStateDisplayArea = 24
-|                                         |              |  stateDisplayArea =  71  
+|                                         |              |  typeOfStateDisplayArea =  71  
 |                                         |              |  (This var contains 1 of above 2)
 |This has list of compomponents. Data     |This has list |
 |of each component depends on timeOfState |of CTs        |
@@ -68,7 +68,7 @@ Core 3. Component Design
           v-for="(component, index) in stateAtSelectedTimeComponents"
           :key="`state-at-selectedTime-${index}`"
           :is="component.value"
-          v-bind="{stateDisplayArea: 'multiStateDisplayArea'}"
+          v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
         ></component>
       </SplitArea>
       <SplitArea :size="30" :minsize="100" id="currentStateDisplayArea">

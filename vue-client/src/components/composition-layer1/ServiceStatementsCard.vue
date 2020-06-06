@@ -5,7 +5,7 @@
         <CardHeader
           ctName="Service statements"
           actions="A,M,F,D"
-          :stateDisplayArea="stateDisplayArea"
+          :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @showTabToAddInLayer2="showAddServiceStatementsDialog"
           @showMultiChangeTabInLayer2="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"

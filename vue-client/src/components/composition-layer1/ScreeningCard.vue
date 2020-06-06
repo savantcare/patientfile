@@ -4,7 +4,7 @@
       <CardHeader
         ctName="Screening"
         actions="A,F,D"
-        :stateDisplayArea="stateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @showTabToAddInLayer2="showTabToAddInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"

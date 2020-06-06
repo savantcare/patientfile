@@ -8,7 +8,7 @@
         ctName="Reminder"
         actions="A,M,F,D,R"
         keyId="reminder"
-        :stateDisplayArea="stateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
         @showTabToAddInLayer2="showTabToAddInLayer2"
         @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
@@ -22,7 +22,7 @@
       keyId="reminder"
       :tabData="tabData"
       :selectedColumns="selectedColumns"
-      :stateDisplayArea="stateDisplayArea"
+      :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
@@ -40,7 +40,7 @@ export default {
     DataTable
   },
   props: {
-    stateDisplayArea: {
+    typeOfStateDisplayArea: {
       type: String,
       default: "StateAtCurrentTime" // 2 possible values. CurrentStateDisplayArea or MultiStateDisplayArea For details: Top of CardHeader.vue
     }

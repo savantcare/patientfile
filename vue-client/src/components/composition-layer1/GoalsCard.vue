@@ -5,7 +5,7 @@
         ctName="Goal"
         actions="A,M,F,D"
         keyId="goal"
-        :stateDisplayArea="stateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
         @showTabToAddInLayer2="showTabToAddInLayer2"
         @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
@@ -19,7 +19,7 @@
       keyId="goal"
       :tabData="tabData"
       :selectedColumns="selectedColumns"
-      :stateDisplayArea="stateDisplayArea"
+      :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
@@ -38,7 +38,7 @@ export default {
     DataTable
   },
   props: {
-    stateDisplayArea: {
+    typeOfStateDisplayArea: {
       type: String,
       default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
     }

@@ -5,7 +5,7 @@
         <CardHeader
           ctName="Allergies"
           actions="A,M,F,D"
-          :stateDisplayArea="stateDisplayArea"
+          :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"
           @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
           @focusPanel="focusPanel"

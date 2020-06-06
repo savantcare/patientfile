@@ -5,7 +5,7 @@
         <CardHeader
           ctName="Family history"
           actions="A,N"
-          :stateDisplayArea="stateDisplayArea"
+          :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"
           @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
           @focusPanel="focusPanel"
@@ -27,7 +27,7 @@
         keyId="familyHistory"
         :tabData="tabData"
         :selectedColumns="selectedColumns"
-        :stateDisplayArea="stateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleSelectionChange="handleSelectionChange"
         @handleChange="handleChange"
         @handleDiscontinue="handleDiscontinue"
@@ -46,7 +46,7 @@ export default {
     DataTable
   },
   props: {
-    stateDisplayArea: {
+    typeOfStateDisplayArea: {
       type: String,
       default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
     }
