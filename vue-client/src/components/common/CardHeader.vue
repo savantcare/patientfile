@@ -34,7 +34,7 @@ Explained in image: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-
           <el-button
             type="text"
             size="mini"
-            @click="$emit('showDiscontinueHistoryTabInSecondLayer')"
+            @click="$emit('showDiscontinueHistoryTabInLayer2')"
             v-if="showDiscontinueHistoryChoice"
           >X</el-button>
 
