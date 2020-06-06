@@ -17,11 +17,11 @@ export default {
   },
   computed: {
     tabList() {
-      return this.$store.state.tabDialog.tabList;
+      return this.$store.state.multiTabDialogLayer2.tabList;
     },
     tabValue: {
       get() {
-        return this.$store.state.tabDialog.tabValue;
+        return this.$store.state.multiTabDialogLayer2.tabValue;
       },
       set(value) {
         this.$store.commit("setTabValue", value);
@@ -29,7 +29,7 @@ export default {
     },
     visibility: {
       get() {
-        return this.$store.state.tabDialog.visibility;
+        return this.$store.state.multiTabDialogLayer2.visibility;
       },
       set(value) {
         this.$store.commit("setTabDialogVisibility", value);

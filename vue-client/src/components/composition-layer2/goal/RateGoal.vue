@@ -116,10 +116,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.tabDialog.goalTabType;
+      return this.$store.state.multiTabDialogLayer2.goalTabType;
     },
     updateData() {
-      return this.$store.state.tabDialog.goalData;
+      return this.$store.state.multiTabDialogLayer2.goalData;
     },
     userId() {
       return this.$store.state.userId;

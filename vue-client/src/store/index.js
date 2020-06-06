@@ -103,7 +103,7 @@ export default new Vuex.Store({
     goal: goalStateModule,
     setting: settingStateModule,
     StateAtCurrentTime: StateAtCurrentTimeSplitAreaModule,
-    tabDialog: layer2MultiTabDialogStateModule,
+    multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     stateAtSelectedTime: stateAtSelectedTimeModule,
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule

@@ -90,7 +90,7 @@ export default {
       const info = focusRow.split("-");
       const component = info[0];
       const index = info[1];
-      const { visibility } = this.$store.state.tabDialog;
+      const { visibility } = this.$store.state.multiTabDialogLayer2;
       if (visibility == true) {
         return;
       }

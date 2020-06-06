@@ -99,10 +99,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.tabDialog.reminderTabType;
+      return this.$store.state.multiTabDialogLayer2.reminderTabType;
     },
     updateData() {
-      return this.$store.state.tabDialog.reminderData;
+      return this.$store.state.multiTabDialogLayer2.reminderData;
     },
     userId() {
       return this.$store.state.userId;

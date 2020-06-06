@@ -122,10 +122,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.tabDialog.recommendationTabType;
+      return this.$store.state.multiTabDialogLayer2.recommendationTabType;
     },
     updateData() {
-      return this.$store.state.tabDialog.recommendationData;
+      return this.$store.state.multiTabDialogLayer2.recommendationData;
     },
     userId() {
       return this.$store.state.userId;

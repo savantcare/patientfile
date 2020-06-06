@@ -162,10 +162,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.tabDialog.diagnosisTabType;
+      return this.$store.state.multiTabDialogLayer2.diagnosisTabType;
     },
     updateData() {
-      return this.$store.state.tabDialog.diagnosisData;
+      return this.$store.state.multiTabDialogLayer2.diagnosisData;
     },
     userId() {
       return this.$store.state.userId;

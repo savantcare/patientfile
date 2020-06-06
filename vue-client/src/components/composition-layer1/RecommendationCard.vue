@@ -64,7 +64,7 @@ export default {
 
       The following line invokes the code in: vue-client/src/store/modules/Layer2MultiTabDialogState.js#L80  
 
-      QUESTION: How is tabDialog getting this event.
+      QUESTION: How is multiTabDialogLayer2 getting this event.
 
       Due to using a single state tree, all state of our application is contained inside one big object. However, as our application grows in scale, the store can get really bloated.
       To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
