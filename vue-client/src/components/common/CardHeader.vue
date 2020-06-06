@@ -39,7 +39,7 @@ Explained in image: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-
           >X</el-button>
 
           <el-popover placement="top-start" trigger="hover" content="Addendum">
-            <el-button slot="reference" type="text" size="mini" v-if="showAddendum">E</el-button>
+            <el-button slot="reference" type="text" size="mini" v-if="showAddendumChoice">E</el-button>
           </el-popover>
 
           <!--
@@ -195,9 +195,9 @@ export default {
         this.$store.commit("setSelectedColumns", selectedColumns);
       }
     },
-    showAddendum() {
+    showAddendumChoice() {
       if (
-        this.stateDisplayArea == "multiStateArea" &&
+        this.stateDisplayArea == "multiStateDisplayArea" &&
         this.timeOfState != null
       ) {
         return true;
