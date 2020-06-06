@@ -7,7 +7,7 @@
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
           @showAddDialog="showAddDialog"
-          @showMultiChangeDialog="showMultiChangeDialog"
+          @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     showAddDialog() {},
-    showMultiChangeDialog() {},
+    showMultiChangeTabInSecondLayer() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

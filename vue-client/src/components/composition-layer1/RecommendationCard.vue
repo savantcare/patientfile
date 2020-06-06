@@ -10,7 +10,7 @@
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
         @showAddDialog="showAddDialog"
-        @showMultiChangeDialog="showMultiChangeDialog"
+        @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @showDiscontinueHistoryDialog="showDiscontinueHistoryDialog"
@@ -75,7 +75,7 @@ export default {
       */
       this.$store.commit("showAddRecommendationTab");
     },
-    showMultiChangeDialog() {
+    showMultiChangeTabInSecondLayer() {
       this.$store.commit("showMultiChangeRecommendationTab");
     },
     focusPanel() {

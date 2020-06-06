@@ -7,7 +7,7 @@
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
         @showAddDialog="showAddDialog"
-        @showMultiChangeDialog="showMultiChangeDialog"
+        @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
@@ -52,7 +52,7 @@ export default {
       // For logic: Line 57 of RecommendationCard.vue
       this.$store.commit("showAddDiagnosisTab");
     },
-    showMultiChangeDialog() {
+    showMultiChangeTabInSecondLayer() {
       this.$store.commit("showMultiChangeAssessmentTab");
     },
     focusPanel() {

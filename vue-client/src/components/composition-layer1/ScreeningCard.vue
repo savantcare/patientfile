@@ -10,7 +10,7 @@
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
-      <!-- @showMultiChangeDialog="showTakeAScreenDialog" -->
+      <!-- @showMultiChangeTabInSecondLayer="showTakeAScreenDialog" -->
     </div>
 
     <!-- <DataTable

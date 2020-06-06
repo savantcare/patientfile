@@ -7,7 +7,7 @@
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
           @showAddDialog="showAddServiceStatementsDialog"
-          @showMultiChangeDialog="showMultiChangeServiceStatementsDialog"
+          @showMultiChangeTabInSecondLayer="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -34,7 +34,7 @@ export default {
       this.$store.commit("showMultiChangeServiceStatementsTab");
     },
     showAddDialog() {},
-    showMultiChangeDialog() {},
+    showMultiChangeTabInSecondLayer() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

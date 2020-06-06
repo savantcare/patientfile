@@ -7,7 +7,7 @@
           actions="A,N"
           :stateDisplayArea="stateDisplayArea"
           @showAddDialog="showAddDialog"
-          @showMultiChangeDialog="showMultiChangeDialog"
+          @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -63,7 +63,7 @@ export default {
       console.log("show add dialog");
       this.$store.commit("showAddFamilyHistoryModal");
     },
-    showMultiChangeDialog() {
+    showMultiChangeTabInSecondLayer() {
       this.$store.commit("showMultiChangeFamilyHistoryModal");
     },
     focusPanel() {

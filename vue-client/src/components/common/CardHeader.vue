@@ -27,7 +27,7 @@ For image see: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-patte
           <el-button
             type="text"
             size="mini"
-            @click="$emit('showMultiChangeDialog')"
+            @click="$emit('showMultiChangeTabInSecondLayer')"
             v-if="showMultiChangeButton"
           >M</el-button>
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusChoice">F</el-button>
