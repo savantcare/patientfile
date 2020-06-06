@@ -28,6 +28,7 @@ Core 1. Page design
 |                                         |user commands |
 └────────────────────────────────────────────────────────┘
 
+
 Core 2. Multi state display area header design  
 ==============================================
 
@@ -38,11 +39,6 @@ Core 2. Multi state display area header design
 └───────────────────────────────────────────────────────┘
 
 
-
-
- Core 3: Component design
- ========================
- 
  Core 3: Component design
  ========================
 
@@ -51,14 +47,14 @@ Core 2. Multi state display area header design
 │ │Component Name │               │Card header actions ││
 │ └───────────────┘               └────────────────────┘│
 ┣━━━━━━━━━━━━━━━━━━━━━Data Table━━━━━━━━━━━━━━━━━━━━━━━━┫   DataTable = 28
-│                                                       │
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │
-│  Data row 1                         Data row actions ││
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │
-│                                                       │
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │
-│  Column 1              Column 2         A M F D X R   │
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
+│                                                       │   
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   A -> Add
+│  Data row 1                         Data row actions ││   M -> MultiChange
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   F -> Focus
+│                                                       │   D -> 
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │   X -> Show discontinued
+│  Column 1              Column 2         A M F D X R   │   R -> Review
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │   Gear -> Col selection
 │                                                       │
 └───────────────────────────────────────────────────────┘                                                                      
 
