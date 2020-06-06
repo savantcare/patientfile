@@ -4,11 +4,11 @@ App architecture 3 core principles
 Core 1. Page design
 ===================
 
-+-----------------------------------------+--------------+  # of times referred:
++-----------------------------------------+--------------+  # of times referred: (case insensitive)
 |    Multi state display area header      |              |  MultiStateDisplayAreaHeader = 7 
 +-----------------------------------------+              |     
 |                                         |              |    
-|   Multi state display area              |Current state |  multiStateDisplayArea   = 18
+|   Multi state display area              |Current state |  multiStateDisplayArea   = 16
 |                                         |display area  |  currentStateDisplayArea = 24
 |                                         |              |  stateDisplayArea =  71  
 |                                         |              |  (This var contains 1 of above 2)
