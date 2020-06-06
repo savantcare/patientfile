@@ -1,10 +1,11 @@
 <!--
-There are 2 areas:
-1. Multistate area
-2. current state area
+There are 3 states:
+1. stateArea == "CurrentStateArea"
+2. stateArea == "MultiStateArea"   timeOfState=null
+3. stateArea == "MultiStateArea"   timeOfState=value
 
-A component needs to know whther it is being used in Multistate area  or Current state area
-If the component is being used in Multistate area then the component needs to know the timeofState.
+A component needs to know whther it is being used in "MultistateArea"  or "CurrentStateArea"
+If the component is being used in "MultiStateArea" then the component needs to know "timeOfState"
 
 -->
 
@@ -88,7 +89,7 @@ If the component is being used in Multistate area then the component needs to kn
 
 <script>
 export default {
-  props: ["title", "actions", "type", "columns", "keyId"],
+  props: ["title", "actions", "stateArea", "columns", "keyId"],
   data() {
     return {
       mouseOver: false,
@@ -104,12 +105,12 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.title.toLowerCase()}-0` &&
-        this.type == "CurrentStateArea"
+        this.stateArea == "CurrentStateArea"
       );
     },
     showAddButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -121,7 +122,7 @@ export default {
     },
     showReviewButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -133,7 +134,7 @@ export default {
     },
     showMultiChangeButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -145,7 +146,7 @@ export default {
     },
     showFocusButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -157,7 +158,7 @@ export default {
     },
     showDiscontinueHistoryButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -168,12 +169,10 @@ export default {
       return false;
     },
     // TODO: This should be called showMultiDiscontinueMenuOption
-    // TODO: type should this.splitArea
-    // StateAtCurrentTime should be "CurrentStateArea" and the corresponding is "MultiStateArea"
-    // this.selectedTimeForShowingState -> this.TimeForMultiStateArea
+    // this.selectedTimeForShowingState -> this.timeOfState
     showDiscontinueButton() {
       if (
-        this.type == "CurrentStateArea" ||
+        this.stateArea == "CurrentStateArea" ||
         this.selectedTimeForShowingState != null
       ) {
         return (
@@ -201,7 +200,7 @@ export default {
     },
     showAddendum() {
       if (
-        this.type == "stateAtSelectedTime" &&
+        this.stateArea == "stateAtSelectedTime" &&
         this.selectedTimeForShowingState != null
       ) {
         return true;
