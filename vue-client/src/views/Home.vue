@@ -11,8 +11,8 @@ Core 1. Page design
 |                                         |              |    
 |   Multi state display area              |Current state |  multiStateDisplayArea   = 18
 |                                         |display area  |  currentStateDisplayArea = 24
-|                                         |              |
-|                                         |              |
+|                                         |              |  stateDisplayArea =  71  
+|                                         |              |  (This variable contains 1 of above 2)
 |This has list of compomponents           |This has list |
 |Data of component depends on             |of CTs        |
 |timeOfState                              |Data is from  |  timeOfState = 41
