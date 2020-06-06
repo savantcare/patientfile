@@ -8,8 +8,6 @@ A card header needs to deal with 3 situations:
 
 A component needs to know whther it is being used in "MultiStateDisplayArea"  or "CurrentStateDisplayArea"
 If the component is being used in "MultiStateDisplayArea" then the component needs to know "timeOfState"
-
-Explained in image: Top of home.vue
 -->
 
 <template>

@@ -14,7 +14,7 @@ Core 1. Design of page
 |                              |              |
 |                              |              |
 |This has list of compomponents|This has list |
-|Data of component is from     |of CTs        |
+|Data of component depends on  |of CTs        |
 |timeOfState                   |Data is from  |
 |                              |currentTime   |
 |timeOfState has               |              |
@@ -24,8 +24,8 @@ Core 1. Design of page
 |2. timeOfState=value          |              |
 |                              |              |
 | If timeOfState==null then    |              |
-| component uses currentTime   |              |
-|                              |              |
+| data of component is from    |              |
+| currentTime                  |              |
 |                              +--------------+
 |                              |Search box for|
 |                              |user commands |
@@ -62,7 +62,7 @@ Core 3. Design of component
 <template>
   <div>
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
-    <!-- To understand how page is divided: Read app architecture at top of this file -->
+    <!-- To understand how page is divided: Read Core 1 at top of this file -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="multiStateDisplayArea">
