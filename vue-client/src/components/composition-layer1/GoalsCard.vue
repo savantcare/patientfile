@@ -5,7 +5,7 @@
         title="Goal"
         actions="A,M,F,D"
         keyId="goal"
-        :type="type"
+        :stateDisplayArea="stateDisplayArea"
         :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
@@ -19,7 +19,7 @@
       keyId="goal"
       :tabData="tabData"
       :selectedColumns="selectedColumns"
-      :type="type"
+      :stateDisplayArea="stateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
@@ -38,9 +38,9 @@ export default {
     DataTable
   },
   props: {
-    type: {
+    stateDisplayArea: {
       type: String,
-      default: "StateAtCurrentTime" // There are two possible types. StateAtCurrentTime and stateAtSelectedTime
+      default: "CurrentStateDisplayArea" // 2 possible values. CurrentStateDisplayArea or MultiStateDisplayArea For details:Top of CardHeader.vue
     }
   },
   data() {
