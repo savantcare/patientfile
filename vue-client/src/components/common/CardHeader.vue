@@ -1,4 +1,6 @@
 <!--
+For architrecture read core 3 at Home.vue 
+
 A card header needs to deal with 3 situations:
 1. stateDisplayArea == "CurrentStateDisplayArea"
 2. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=null

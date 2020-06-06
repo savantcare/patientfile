@@ -1,4 +1,4 @@
-<!-- TODO: Instead of Type it should be timeToShowStateOn -->
+<!-- For architrecture read core 3 at Home.vue -->
 <template>
   <el-card class="box-card" :id="`recommendation-${stateDisplayArea}`">
     <div slot="header" class="clearfix">
