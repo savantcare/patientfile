@@ -5,33 +5,28 @@ Core 1. Page design
 ===================
 
 +-----------------------------------------+--------------+  # of times referred:
-|Multi state displ area header            |              |  MultiStateDisplayAreaHeader = 7 
+|    Multi state display area header      |              |  MultiStateDisplayAreaHeader = 7 
 +-----------------------------------------+              |     
-|                                         |              |
 |                                         |              |    
 |   Multi state display area              |Current state |  multiStateDisplayArea   = 18
 |                                         |display area  |  currentStateDisplayArea = 24
 |                                         |              |  stateDisplayArea =  71  
-|                                         |              |  (This variable contains 1 of above 2)
-|This has list of compomponents           |This has list |
-|Data of component depends on             |of CTs        |
-|timeOfState                              |Data is from  |  timeOfState = 41
-|                                         |currentTime   |
-|timeOfState has                          |              |
-|2 possibilities                          |              |
+|                                         |              |  (This var contains 1 of above 2)
+|This has list of compomponents. Data     |This has list |
+|of each component depends on timeOfState |of CTs        |
+|                                         |Data is from  |  timeOfState = 41
+|timeOfState has 2 possibilities          |currentTime   |
 |                                         |              |
-|1. timeOfState=null                      |              |       
-|2. timeOfState=value                     |              |
+|1. timeOfState=null                      |              |
+|2. timeOfState=value                     |              |       
 |                                         |              |
-| If timeOfState==null then               |              |
-| data of component is from               |              |
-| currentTime                             |              |
+| If timeOfState==null then data of       |              |
+| component is from currentTime           |              |
+|                                         |              |
 |                                         +--------------+
 |                                         |Search box for|
 |                                         |user commands |
 +--------------------------------------------------------+
-
-
 
 Core 2. Multi state display area header design  
 ==============================================
