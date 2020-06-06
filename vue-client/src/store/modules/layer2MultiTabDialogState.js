@@ -83,7 +83,7 @@ export default {
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
         name: "tab-add-recommendation"
       }
-      // Once tablist is updated since it is reactive the src/views/secondLayerTabDialog.vue gets activated.
+      // Once tablist is updated since it is reactive the src/views/Layer2MultiTabDialog.vue gets activated.
       state.tabList = [tab]
       state.recommendationTabType = ADD_RECOMMENDATION
       state.visibility = true

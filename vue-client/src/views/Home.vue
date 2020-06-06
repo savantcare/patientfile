@@ -39,7 +39,7 @@ const MultiStateSplitAreaHeader = () =>
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/ui/SearchBoxForCommandsFromUser.vue");
 
-const Layer2TabDialog = () => import("./secondLayerTabDialog");
+const Layer2TabDialog = () => import("./Layer2MultiTabDialog.vue");
 
 // TODO: Rename this to RecommendationCard
 const Recommendation = () =>
