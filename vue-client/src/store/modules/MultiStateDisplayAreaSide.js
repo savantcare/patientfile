@@ -10,7 +10,7 @@ export default {
     originSize: null
   },
   mutations: {
-    setstateAtSelectedTimeList(state, value) {
+    setStateAtSelectedTimeList(state, value) {
       state.list = value
     },
     setstateAtSelectedTimeCurrentDate(state, value) {
@@ -44,7 +44,7 @@ export default {
             }
           })
 
-          commit("setstateAtSelectedTimeList", availableComponents)
+          commit("setStateAtSelectedTimeList", availableComponents)
           // dispatch("zoomstateAtSelectedTime")
         }
       } catch (ex) {

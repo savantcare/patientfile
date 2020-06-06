@@ -41,7 +41,7 @@ export default new Vuex.Store({
     setFocusComponent(state, value) {
       state.focusComponent = value
     },
-    setsearchCommandsList(state, list) {
+    setSearchCommandsList(state, list) {
       state.searchCommandsList = list
     },
     setConnectionStatus(state, value) {
@@ -83,11 +83,11 @@ export default new Vuex.Store({
         commandList.push({
           label: "clear", action: "", abbreviation: ""
         })
-        commit("setsearchCommandsList", commandList)
+        commit("setSearchCommandsList", commandList)
 
         // Get StateAtSelectedTimeSide components
         const leftComponents = stateAtSelectedTimeSplitAreaComponentLoadSequence.split(",")
-        commit("setstateAtSelectedTimeList", leftComponents, { root: true })
+        commit("setStateAtSelectedTimeList", leftComponents, { root: true })
 
         // Get StateAtCurrentTimeSide components
         const rightComponents = stateAtCurrentTimeSplitAreaComponentLoadSequence.split(",")
