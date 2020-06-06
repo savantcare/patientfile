@@ -7,7 +7,7 @@
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
-        :stateArea="displayArea"
+        :stateDisplayArea="displayArea"
         :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
