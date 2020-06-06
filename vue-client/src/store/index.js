@@ -69,7 +69,7 @@ export default new Vuex.Store({
       if (response.ok) {
         const json = await response.json()
         console.log(json)
-        const { name, componentsAllowedToAccess, stateAtSelectedTimeSplitAreaComponentLoadSequence, stateAtCurrentTimeSplitAreaComponentLoadSequence } = json
+        const { name, componentsAllowedToAccess, multiStateDisplayAreaComponentLoadSequence, currentStateDisplayAreaComponentLoadSequence } = json
         commit("setUserRole", name)
 
         // Get AllowAccesedComponents
@@ -86,11 +86,11 @@ export default new Vuex.Store({
         commit("setSearchCommandsList", commandList)
 
         // Get StateAtSelectedTimeSide components
-        const leftComponents = stateAtSelectedTimeSplitAreaComponentLoadSequence.split(",")
+        const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(",")
         commit("setStateAtSelectedTimeList", leftComponents, { root: true })
 
         // Get StateAtCurrentTimeSide components
-        const rightComponents = stateAtCurrentTimeSplitAreaComponentLoadSequence.split(",")
+        const rightComponents = currentStateDisplayAreaComponentLoadSequence.split(",")
         commit("setStateAtCurrentTimeCardsList", rightComponents, { root: true })
 
       }
