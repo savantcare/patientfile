@@ -50,10 +50,10 @@ export default {
   methods: {
     showAddDialog() {
       // For logic: Line 57 of RecommendationCard.vue
-      this.$store.commit("showAddDiagnosisTab");
+      this.$store.commit("showAddDiagnosisTabInSecondLayer");
     },
     showMultiChangeTabInSecondLayer() {
-      this.$store.commit("showMultiChangeAssessmentTab");
+      this.$store.commit("showMultiChangeAssessmentTabInSecondLayer");
     },
     focusPanel() {
       console.log("focus panel");
@@ -75,7 +75,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeDiagnosisTab", data);
+      this.$store.commit("showChangeDiagnosisTabInSecondLayer", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueDiagnosis", {

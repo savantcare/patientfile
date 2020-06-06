@@ -80,7 +80,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeReminderTab", data);
+      this.$store.commit("showChangeReminderTabInSecondLayer", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueReminder", {

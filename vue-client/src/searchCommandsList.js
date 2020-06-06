@@ -3,10 +3,10 @@ export default [
     label: "recommendation (rex) list", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) add", action: "showAddRecommendationTab", abbreviation: "rex"
+    label: "recommendation (rex) add", action: "showAddRecommendationTabInSecondLayer", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationTab", abbreviation: "rex"
+    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationTabInSecondLayer", abbreviation: "rex"
   },
   {
     label: "recommendation (rex) focus", action: "", abbreviation: "rex"
@@ -39,13 +39,13 @@ export default [
     label: "goal (g) list", action: "", abbreviation: "goal"
   },
   {
-    label: "goal (g) add", action: "showAddGoalTab", abbreviation: "goal"
+    label: "goal (g) add", action: "showAddGoalTabInSecondLayer", abbreviation: "goal"
   },
   {
     label: "diagnosis (dx) list", action: "", abbreviation: "dx"
   },
   {
-    label: "diagnosis (dx) add", action: "showAddDiagnosisTab", abbreviation: ""
+    label: "diagnosis (dx) add", action: "showAddDiagnosisTabInSecondLayer", abbreviation: ""
   },
   {
     label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal", abbreviation: ""
@@ -57,7 +57,7 @@ export default [
     label: "screen (s) list ", action: "", abbreviation: "s"
   },
   {
-    label: "screen (s) add", action: "showAddScreenTab", abbreviation: "s"
+    label: "screen (s) add", action: "showAddScreenTabInSecondLayer", abbreviation: "s"
   },
   {
     label: "clear", action: "", abbreviation: ""
