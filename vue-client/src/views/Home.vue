@@ -9,7 +9,7 @@
           v-for="(component, index) in stateAtSelectedTimeComponents"
           :key="`state-at-selectedTime-${index}`"
           :is="component.value"
-          v-bind="{stateDisplayArea: 'multiStateArea'}"
+          v-bind="{stateDisplayArea: 'multiStateDisplayArea'}"
         ></component>
       </SplitArea>
       <SplitArea :size="30" :minsize="100" id="currentStateDisplayArea">

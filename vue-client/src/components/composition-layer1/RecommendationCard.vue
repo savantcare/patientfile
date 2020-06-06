@@ -90,12 +90,12 @@ export default {
         y: true
       };
       let element = "";
-      if (this.type == "StateAtCurrentTime") {
-        element = "#recommendation-stateAtSelectedTime";
-        options["container"] = "#stateAtSelectedTime";
+      if (this.stateDisplayArea == "CurrentStateDisplayArea") {
+        element = "#recommendation-multiStateDisplayArea";
+        options["container"] = "#multiStateDisplayArea";
       } else {
-        element = "#recommendation-StateAtCurrentTime";
-        options["container"] = "#StateAtCurrentTime";
+        element = "#recommendation-currentStateDisplayArea";
+        options["container"] = "#currentStateDisplayArea";
       }
 
       this.$scrollTo(element, 500, options);
