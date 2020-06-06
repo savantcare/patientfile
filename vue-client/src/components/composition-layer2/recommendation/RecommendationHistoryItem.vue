@@ -15,6 +15,13 @@
             :timestamp="history.info"
           >{{history.content}}</el-timeline-item>
         </el-timeline>
+        <el-pagination
+          small
+          layout="prev, pager, next"
+          :page-size="5"
+          :total="totalCount"
+          v-if="totalCount > 5"
+        ></el-pagination>
       </div>
     </el-row>
   </div>
@@ -35,7 +42,7 @@ export default {
   methods: {
     async getHistory() {
       const TOKEN = localStorage.getItem("token");
-      console.log(this.rec);
+
       const response = await fetch(
         `${RECOMMENDATION_API_URL}/getHistory/${this.rec.uuid}`,
         {
@@ -50,6 +57,18 @@ export default {
 
         this.histories = json;
       }
+    }
+  },
+  watch: {
+    rec() {
+      if (this.rec.uuid != null) {
+        this.getHistory();
+      }
+    }
+  },
+  computed: {
+    totalCount() {
+      return this.histories.length;
     }
   }
 };

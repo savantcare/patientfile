@@ -30,6 +30,7 @@
               <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
             </el-form-item>
           </el-form>
+          <RecommendationHistoryItem :rec="historyData" v-if="isEditDialog" />
         </el-card>
       </el-col>
     </el-row>
@@ -43,11 +44,13 @@
  * @displayName Add Recommendation
  */
 import { CHANGE_RECOMMENDATION } from "@/const.js";
+import RecommendationHistoryItem from "./RecommendationHistoryItem";
 export default {
   data() {
     return {
       id: this.$route.query.patient_id,
-      recForm: { recs: [{ description: "" }] }
+      recForm: { recs: [{ description: "" }] },
+      historyData: {}
     };
   },
   methods: {
@@ -126,6 +129,9 @@ export default {
     },
     userId() {
       return this.$store.state.userId;
+    },
+    isEditDialog() {
+      return this.type == CHANGE_RECOMMENDATION;
     }
   },
   mounted() {
@@ -133,6 +139,7 @@ export default {
       this.recForm = {
         recs: [{ description: this.updateData.recommendationDescription }]
       };
+      this.historyData = this.updateData;
     }
     setTimeout(() => {
       this.focusToTheInputBox();
@@ -143,7 +150,11 @@ export default {
       this.recForm = {
         recs: [{ description: this.updateData.recommendationDescription }]
       };
+      this.historyData = this.updateData;
     }
+  },
+  components: {
+    RecommendationHistoryItem
   }
 };
 </script>

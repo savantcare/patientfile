@@ -17,25 +17,7 @@
                 ></el-input>
               </el-form-item>
             </el-form>
-            <div v-if="rec.history.length > 0">
-              <el-row>
-                <span style="font-size: 14px">History:</span>
-              </el-row>
-              <br />
-              <el-row :gutter="12">
-                <div class="block">
-                  <el-timeline>
-                    <el-timeline-item
-                      v-for="(history, index) in rec.history"
-                      :key="`history-${index}`"
-                      type="primary"
-                      size="large"
-                      :timestamp="history.detail"
-                    >{{history.content}}</el-timeline-item>
-                  </el-timeline>
-                </div>
-              </el-row>
-            </div>
+            <RecommendationDiscontinueHistoryItem :rec="rec" />
           </el-card>
         </el-col>
       </el-carousel-item>
@@ -45,8 +27,9 @@
 
 <script>
 import { RECOMMENDATION_API_URL } from "@/const.js";
+import RecommendationDiscontinueHistoryItem from "./RecommendationDiscontinueHistoryItem";
 export default {
-  components: {},
+  components: { RecommendationDiscontinueHistoryItem },
   data() {
     return {
       recList: []
@@ -65,7 +48,6 @@ export default {
       );
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
         this.recList = json;
       }
     }
@@ -76,7 +58,9 @@ export default {
       let temp = [];
       let idx = 0;
       this.recList.forEach(item => {
-        temp.push(item);
+        let data = item;
+        data["currentPage"] = 1;
+        temp.push(data);
         idx += 1;
         if (idx == 3) {
           result.push(temp);
@@ -87,6 +71,7 @@ export default {
       if (idx > 0) {
         result.push(temp);
       }
+      console.log(result);
       return result;
     }
   },
