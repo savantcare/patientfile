@@ -1,6 +1,6 @@
 module.exports = {
 	// Ref: https://vue-styleguidist.github.io/docs/GettingStarted.html
-	title: 'Docs',
+	title: 'Docs - Patient file',
 	pagePerSection: true,
 	exampleMode: 'expand',
 	sections: [
