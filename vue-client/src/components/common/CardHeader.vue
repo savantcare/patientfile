@@ -1,10 +1,10 @@
 <!--
 A card header needs to deal with 3 situations:
-1. stateDisplayArea == "CurrentStateArea"
-2. stateDisplayArea == "MultiStateArea"   timeOfState=null
-3. stateDisplayArea == "MultiStateArea"   timeOfState=value
+1. stateDisplayArea == "CurrentStateDisplayArea"
+2. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=null
+3. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=value
 
-A component needs to know whther it is being used in "MultistateArea"  or "CurrentStateArea"
+A component needs to know whther it is being used in "MultistateArea"  or "CurrentStateDisplayArea"
 If the component is being used in "MultiStateArea" then the component needs to know "timeOfState"
 
 -->
@@ -100,14 +100,14 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.title.toLowerCase()}-0` &&
-        this.stateDisplayArea == "CurrentStateArea"
+        this.stateDisplayArea == "CurrentStateDisplayArea"
       );
     },
     // You can data-bind to computed properties in templates just like a normal property.
     // Ref: https://vuejs.org/v2/guide/computed.html#Computed-vs-Watched-Property
     showAddChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -119,7 +119,7 @@ export default {
     },
     showReviewChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -131,7 +131,7 @@ export default {
     },
     showMultiChangeButton() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -143,7 +143,7 @@ export default {
     },
     showFocusChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -155,7 +155,7 @@ export default {
     },
     showDiscontinueHistoryChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
       ) {
         return (
@@ -168,7 +168,7 @@ export default {
 
     showMultiDiscontinueChoice() {
       if (
-        this.stateDisplayArea == "CurrentStateArea" ||
+        this.stateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState != null
       ) {
         return (

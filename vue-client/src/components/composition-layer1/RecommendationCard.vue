@@ -43,7 +43,7 @@ export default {
   props: {
     displayArea: {
       type: String,
-      default: "CurrentStateArea" // There are two possible values. CurrentStateArea and MultiStateArea
+      default: "CurrentStateDisplayArea" // There are two possible values. CurrentStateDisplayArea and MultiStateDisplayArea
     }
   },
   data() {
