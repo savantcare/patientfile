@@ -4,10 +4,10 @@ A card header needs to deal with 3 situations:
 2. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=null
 3. stateDisplayArea == "MultiStateDisplayArea"   timeOfState=value
 
-A component needs to know whther it is being used in "MultistateArea"  or "CurrentStateDisplayArea"
-If the component is being used in "MultiStateArea" then the component needs to know "timeOfState"
+A component needs to know whther it is being used in "MultiStateDisplayArea"  or "CurrentStateDisplayArea"
+If the component is being used in "MultiStateDisplayArea" then the component needs to know "timeOfState"
 
-For image see: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-pattern-for-the-patient-app
+Explained in image: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-pattern-for-the-patient-app
 -->
 
 <template>
