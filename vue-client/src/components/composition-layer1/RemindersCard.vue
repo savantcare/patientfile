@@ -55,7 +55,7 @@ export default {
   methods: {
     showAddDialog() {
       // For logic: Line 57 of RecommendationCard.vue
-      this.$store.commit("showAddReminderTab");
+      this.$store.commit("showAddReminderTabInSecondLayer");
     },
     showMultiChangeTabInSecondLayer() {
       this.$store.commit("showMultiChangeReminderTab");

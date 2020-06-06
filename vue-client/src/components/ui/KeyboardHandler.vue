@@ -15,7 +15,7 @@ export default {
           discontinueHistory: "showRecommendationDiscontinueHistoryTab"
         },
         reminder: {
-          add: "showAddReminderTab",
+          add: "showAddReminderTabInSecondLayer",
           multiChange: "showMultiChangeReminderTab",
           change: "showChangeReminderTab",
           discontinue: "discontinueReminder"

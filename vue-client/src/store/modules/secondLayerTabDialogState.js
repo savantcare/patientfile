@@ -43,7 +43,7 @@ export default {
     setReminderData(state, value) {
       state.reminderData = value
     },
-    showAddReminderTab(state) {
+    showAddReminderTabInSecondLayer(state) {
       const tab = {
         label: "Add Reminders",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,

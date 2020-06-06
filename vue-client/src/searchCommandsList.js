@@ -21,7 +21,7 @@ export default [
     label: "reminder (rem) list", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) add", action: "showAddReminderTab", abbreviation: "rem"
+    label: "reminder (rex) add", action: "showAddReminderTabInSecondLayer", abbreviation: "rem"
   },
   {
     label: "reminder (rex) multi change", action: "showMultiChangeReminderTab", abbreviation: "rem"
