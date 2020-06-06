@@ -58,7 +58,7 @@ export default {
       this.$store.commit("showAddReminderTabInSecondLayer");
     },
     showMultiChangeTabInSecondLayer() {
-      this.$store.commit("showMultiChangeReminderTab");
+      this.$store.commit("showMultiChangeReminderTabInSecondLayer");
     },
     focusPanel() {
       console.log("focus panel");

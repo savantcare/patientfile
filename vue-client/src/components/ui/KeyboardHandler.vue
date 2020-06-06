@@ -16,7 +16,7 @@ export default {
         },
         reminder: {
           add: "showAddReminderTabInSecondLayer",
-          multiChange: "showMultiChangeReminderTab",
+          multiChange: "showMultiChangeReminderTabInSecondLayer",
           change: "showChangeReminderTab",
           discontinue: "discontinueReminder"
         },
