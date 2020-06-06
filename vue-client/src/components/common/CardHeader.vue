@@ -1,3 +1,13 @@
+<!--
+There are 2 areas:
+1. Multistate area
+2. current state area
+
+A component needs to know whther it is being used in Multistate area  or Current state area
+If the component is being used in Multistate area then the component needs to know the timeofState.
+
+-->
+
 <template>
   <div @mouseover="mouseOver = true" @mouseleave="mouseOver = false">
     <span :style="{'color': isHeaderFocus == true ? '#409EFF' : 'black'}">{{title}}</span>
@@ -159,7 +169,8 @@ export default {
     },
     // TODO: This should be called showMultiDiscontinueMenuOption
     // TODO: type should this.splitArea
-    // StateAtCurrentTime should be "AreaForStateAtCurrentTime" and the corresponding is "AreaForMultiState"
+    // StateAtCurrentTime should be "CurrentStateArea" and the corresponding is "MultiStateArea"
+    // this.selectedTimeForShowingState -> this.TimeForMultiStateArea
     showDiscontinueButton() {
       if (
         this.type == "StateAtCurrentTime" ||
