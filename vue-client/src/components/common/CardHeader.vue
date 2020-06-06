@@ -12,12 +12,6 @@ If the component is being used in "MultiStateArea" then the component needs to k
 <template>
   <div @mouseover="mouseOver = true" @mouseleave="mouseOver = false">
     <span :style="{'color': isHeaderFocus == true ? '#409EFF' : 'black'}">{{title}}</span>
-    <!-- 
-    TODO: Use transition effects to fade in the action items
-    Ref for beginers: 
-    https://www.youtube.com/watch?v=1GYsKWyA7LA
-    https://vuejs.org/v2/api/#transition
-    -->
     <transition name="fade">
       <div style="float: right" v-if="showActions">
         <el-button

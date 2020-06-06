@@ -5,7 +5,7 @@
       <!-- Starting with 70% and 100px minimum -->
       <!-- Rename this to stateAtSelectedTime -->
       <SplitArea :size="70" :minsize="100" id="stateAtSelectedTime">
-        <stateAtSelectedTimeHeader></stateAtSelectedTimeHeader>
+        <MultiStateSplitAreaHeader></MultiStateSplitAreaHeader>
         <!-- The type can be stateAtSelectedTime or StateAtCurrentTime -->
         <!-- <Recommendation type="stateAtSelectedTime" />
         <Reminder type="stateAtSelectedTime" />
@@ -42,8 +42,8 @@
 // const RecommendationsPanel = () =>
 // const RemindersPanel = () =>
 // const DiagnosisPanel = () =>
-const stateAtSelectedTimeHeader = () =>
-  import("@/components/ui/stateAtSelectedTimeHeader.vue");
+const MultiStateSplitAreaHeader = () =>
+  import("@/components/ui/MultiStateSplitAreaHeader.vue");
 // const DateSlider = () => import("@/components/ui/DateSlider.vue");
 // const TestPanel = () => import("@/components/stateAtSelectedTimeTestComponent.vue");
 
@@ -75,7 +75,7 @@ export default {
     // RecommendationsPanel,
     // RemindersPanel,
     // DiagnosisPanel,
-    stateAtSelectedTimeHeader,
+    MultiStateSplitAreaHeader,
     // DateSlider,
     // TestPanel,
 

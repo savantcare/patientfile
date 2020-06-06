@@ -1,6 +1,7 @@
 <template>
-  <el-row type="flex" align="middle" id="stateAtSelectedTimeHeader">
+  <el-row type="flex" align="middle" id="MultiStateSplitAreaHeader">
     <el-col :span="6" class="ml-2" style="display: flex; align-items: center;">
+      <!-- TODO: This needs to come from DB -->
       <span style="font-size: 20px;">Alexey D</span>
       <span style="font-size: 14px; margin-left: 6px;">(28 years old)</span>
       <div style="margin-left: 6px;">
@@ -133,7 +134,7 @@ export default {
 </script>
 
 <style scoped>
-#stateAtSelectedTimeHeader {
+#MultiStateSplitAreaHeader {
   height: 30px;
   margin-bottom: 6px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
