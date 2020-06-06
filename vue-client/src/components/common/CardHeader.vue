@@ -22,7 +22,7 @@ Explained in image: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
-          <el-button type="text" size="mini" @click="$emit('showTabToAddInLayer2')" v-if="showReviewChoice">R</el-button>
+          <el-button type="text" size="mini" @click="$emit('showTabToRevewInLayer2')" v-if="showReviewChoice">R</el-button>
           <el-button type="text" size="mini" @click="$emit('showTabToAddInLayer2')" v-if="showAddChoice">A</el-button>
           <el-button
             type="text"
