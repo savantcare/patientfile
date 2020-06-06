@@ -6,8 +6,8 @@
           title="Allergies"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
-          @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
-          @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
+          @showTabToAddInLayer2="showTabToAddInLayer2"
+          @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -29,8 +29,8 @@ export default {
     };
   },
   methods: {
-    showTabToAddInSecondLayer() {},
-    showMultiChangeTabInSecondLayer() {},
+    showTabToAddInLayer2() {},
+    showMultiChangeTabInLayer2() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

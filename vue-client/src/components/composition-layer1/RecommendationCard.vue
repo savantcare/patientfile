@@ -9,8 +9,8 @@
         keyId="recommendation"
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
-        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
-        @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
+        @showTabToAddInLayer2="showTabToAddInLayer2"
+        @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @showDiscontinueHistoryTabInLayer2="showDiscontinueHistoryTabInLayer2"
@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInSecondLayer() {
+    showTabToAddInLayer2() {
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 
@@ -70,13 +70,13 @@ export default {
       To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
       Ref: https://vuex.vuejs.org/guide/modules.html
 
-      showAddRecommendationTabInSecondLayer is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
+      showAddRecommendationTabInLayer2 is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
 
       */
-      this.$store.commit("showAddRecommendationTabInSecondLayer");
+      this.$store.commit("showAddRecommendationTabInLayer2");
     },
-    showMultiChangeTabInSecondLayer() {
-      this.$store.commit("showMultiChangeRecommendationTabInSecondLayer");
+    showMultiChangeTabInLayer2() {
+      this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
     focusPanel() {
       //stateAtSelectedTime
@@ -116,7 +116,7 @@ export default {
       this.selectedRows = value;
     },
     handleChange(data) {
-      this.$store.commit("showChangeRecommendationsTabInSecondLayer", data);
+      this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {
@@ -156,7 +156,7 @@ export default {
       this.$store.commit("setRecommendationTableList", tableList);
     },
     showDiscontinueHistoryTabInLayer2() {
-      this.$store.commit("showRecommendationDiscontinueHistoryTabInSecondLayer");
+      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     }
   },
   mounted() {

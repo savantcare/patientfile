@@ -43,7 +43,7 @@ export default {
     setReminderData(state, value) {
       state.reminderData = value
     },
-    showAddReminderTabInSecondLayer(state) {
+    showAddReminderTabInLayer2(state) {
       const tab = {
         label: "Add Reminders",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
@@ -54,7 +54,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeReminderTabInSecondLayer(state) {
+    showMultiChangeReminderTabInLayer2(state) {
       const tab = {
         label: "Multi change Reminders",
         value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,
@@ -65,7 +65,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeReminderTabInSecondLayer(state, data) {
+    showChangeReminderTabInLayer2(state, data) {
       const tab = {
         label: "Change Reminder",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
@@ -77,7 +77,7 @@ export default {
       state.reminderData = data
       state.tabValue = tab.name
     },
-    showAddRecommendationTabInSecondLayer(state) {
+    showAddRecommendationTabInLayer2(state) {
       const tab = {
         label: "Add Recommendations",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
@@ -91,7 +91,7 @@ export default {
     },
 
 
-    showMultiChangeRecommendationTabInSecondLayer(state) {
+    showMultiChangeRecommendationTabInLayer2(state) {
       const tab = {
         label: "Multi change Recommendations",
         value: require("@/components/composition-layer2/recommendation/MultiChangeRecommendation.vue").default,
@@ -103,7 +103,7 @@ export default {
       state.tabValue = tab.name
     },
 
-    showRecommendationDiscontinueHistoryTabInSecondLayer(state) {
+    showRecommendationDiscontinueHistoryTabInLayer2(state) {
       const tab = {
         label: "Recommendation Discontinue History",
         value: require("@/components/composition-layer2/recommendation/RecommendationDiscontinueHistory.vue").default,
@@ -115,7 +115,7 @@ export default {
       state.tabValue = tab.name
     },
 
-    showChangeRecommendationsTabInSecondLayer(state, data) {
+    showChangeRecommendationsTabInLayer2(state, data) {
       const tab = {
         label: "Change Recommendation",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
@@ -128,7 +128,7 @@ export default {
       state.recommendationData = data
       state.tabValue = tab.name
     },
-    showAddDiagnosisTabInSecondLayer(state) {
+    showAddDiagnosisTabInLayer2(state) {
       const tab = {
         label: "Add Diagnosis",
         value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
@@ -139,7 +139,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeAssessmentTabInSecondLayer(state) {
+    showMultiChangeAssessmentTabInLayer2(state) {
       const tab = {
         label: "Multi change assessment diagnosis",
         value: require("@/components/composition-layer2/diagnosis/MultiChangeAssessment.vue").default,
@@ -150,7 +150,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeDiagnosisTabInSecondLayer(state, data) {
+    showChangeDiagnosisTabInLayer2(state, data) {
       const tab = {
         label: "Change Diagnosis",
         value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
@@ -162,7 +162,7 @@ export default {
       state.diagnosisData = data
       state.tabValue = tab.name
     },
-    showAddServiceStatementsTabInSecondLayer(state) {
+    showAddServiceStatementsTabInLayer2(state) {
       const tab = {
         label: "Add service statements",
         value: require("@/components/composition-layer2/service-statements/AddServiceStatements.vue").default,
@@ -173,7 +173,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeServiceStatementsTabInSecondLayer(state) {
+    showMultiChangeServiceStatementsTabInLayer2(state) {
       const tab = {
         label: "Multi change service statements",
         value: require("@/components/composition-layer2/service-statements/MultiChangeServiceStatements.vue").default,
@@ -184,7 +184,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showAddGoalTabInSecondLayer(state) {
+    showAddGoalTabInLayer2(state) {
       const tab = {
         label: "Add goal",
         value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
@@ -195,7 +195,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeGoalTabInSecondLayer(state) {
+    showMultiChangeGoalTabInLayer2(state) {
       const tab = {
         label: "Multi rate goal",
         value: require("@/components/composition-layer2/goal/MultiChangeGoal.vue").default,
@@ -206,7 +206,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeGoalsTabInSecondLayer(state, data) {
+    showChangeGoalsTabInLayer2(state, data) {
       const tab = {
         label: "Rate goal",
         value: require("@/components/composition-layer2/goal/RateGoal.vue").default,
@@ -218,7 +218,7 @@ export default {
       state.goalData = data
       state.tabValue = tab.name
     },
-    showAddScreenTabInSecondLayer(state) {
+    showAddScreenTabInLayer2(state) {
       const tab = {
         label: "Add screen",
         value: require("@/components/composition-layer2/screening/AddScreen.vue").default,
@@ -229,7 +229,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showTakeAScreenTabInSecondLayer(state) {
+    showTakeAScreenTabInLayer2(state) {
       const tab = {
         label: "Take a screen",
         value: require("@/components/composition-layer2/screening/TakeAScreen.vue").default,

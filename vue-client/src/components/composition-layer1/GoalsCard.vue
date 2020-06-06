@@ -7,8 +7,8 @@
         keyId="goal"
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
-        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
-        @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
+        @showTabToAddInLayer2="showTabToAddInLayer2"
+        @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
@@ -51,13 +51,13 @@ export default {
     };
   },
   methods: {
-    showTabToAddInSecondLayer() {
+    showTabToAddInLayer2() {
       // For logic: Line 57 of RecommendationCard.vue
       console.log("show add dialog");
-      this.$store.commit("showAddGoalTabInSecondLayer");
+      this.$store.commit("showAddGoalTabInLayer2");
     },
-    showMultiChangeTabInSecondLayer() {
-      this.$store.commit("showMultiChangeGoalTabInSecondLayer");
+    showMultiChangeTabInLayer2() {
+      this.$store.commit("showMultiChangeGoalTabInLayer2");
     },
     focusPanel() {
       console.log("focus panel");
@@ -79,7 +79,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeGoalsTabInSecondLayer", data);
+      this.$store.commit("showChangeGoalsTabInLayer2", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueGoal", {

@@ -3,10 +3,10 @@ export default [
     label: "recommendation (rex) list", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) add", action: "showAddRecommendationTabInSecondLayer", abbreviation: "rex"
+    label: "recommendation (rex) add", action: "showAddRecommendationTabInLayer2", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationTabInSecondLayer", abbreviation: "rex"
+    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationTabInLayer2", abbreviation: "rex"
   },
   {
     label: "recommendation (rex) focus", action: "", abbreviation: "rex"
@@ -21,10 +21,10 @@ export default [
     label: "reminder (rem) list", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) add", action: "showAddReminderTabInSecondLayer", abbreviation: "rem"
+    label: "reminder (rex) add", action: "showAddReminderTabInLayer2", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) multi change", action: "showMultiChangeReminderTabInSecondLayer", abbreviation: "rem"
+    label: "reminder (rex) multi change", action: "showMultiChangeReminderTabInLayer2", abbreviation: "rem"
   },
   {
     label: "reminder (rex) focus", action: "", abbreviation: "rem"
@@ -39,13 +39,13 @@ export default [
     label: "goal (g) list", action: "", abbreviation: "goal"
   },
   {
-    label: "goal (g) add", action: "showAddGoalTabInSecondLayer", abbreviation: "goal"
+    label: "goal (g) add", action: "showAddGoalTabInLayer2", abbreviation: "goal"
   },
   {
     label: "diagnosis (dx) list", action: "", abbreviation: "dx"
   },
   {
-    label: "diagnosis (dx) add", action: "showAddDiagnosisTabInSecondLayer", abbreviation: ""
+    label: "diagnosis (dx) add", action: "showAddDiagnosisTabInLayer2", abbreviation: ""
   },
   {
     label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal", abbreviation: ""
@@ -57,7 +57,7 @@ export default [
     label: "screen (s) list ", action: "", abbreviation: "s"
   },
   {
-    label: "screen (s) add", action: "showAddScreenTabInSecondLayer", abbreviation: "s"
+    label: "screen (s) add", action: "showAddScreenTabInLayer2", abbreviation: "s"
   },
   {
     label: "clear", action: "", abbreviation: ""

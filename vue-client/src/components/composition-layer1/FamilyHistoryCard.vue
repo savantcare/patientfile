@@ -6,8 +6,8 @@
           title="Family history"
           actions="A,N"
           :stateDisplayArea="stateDisplayArea"
-          @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
-          @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
+          @showTabToAddInLayer2="showTabToAddInLayer2"
+          @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -59,11 +59,11 @@ export default {
     };
   },
   methods: {
-    showTabToAddInSecondLayer() {
+    showTabToAddInLayer2() {
       console.log("show add dialog");
       this.$store.commit("showAddFamilyHistoryModal");
     },
-    showMultiChangeTabInSecondLayer() {
+    showMultiChangeTabInLayer2() {
       this.$store.commit("showMultiChangeFamilyHistoryModal");
     },
     focusPanel() {

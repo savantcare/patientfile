@@ -6,8 +6,8 @@
           title="Service statements"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
-          @showTabToAddInSecondLayer="showAddServiceStatementsDialog"
-          @showMultiChangeTabInSecondLayer="showMultiChangeServiceStatementsDialog"
+          @showTabToAddInLayer2="showAddServiceStatementsDialog"
+          @showMultiChangeTabInLayer2="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -27,14 +27,14 @@ export default {
   methods: {
     showAddServiceStatementsDialog() {
       console.log("open add dialog");
-      this.$store.commit("showAddServiceStatementsTabInSecondLayer");
+      this.$store.commit("showAddServiceStatementsTabInLayer2");
     },
     showMultiChangeServiceStatementsDialog() {
       console.log("open multi change dialog");
-      this.$store.commit("showMultiChangeServiceStatementsTabInSecondLayer");
+      this.$store.commit("showMultiChangeServiceStatementsTabInLayer2");
     },
-    showTabToAddInSecondLayer() {},
-    showMultiChangeTabInSecondLayer() {},
+    showTabToAddInLayer2() {},
+    showMultiChangeTabInLayer2() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

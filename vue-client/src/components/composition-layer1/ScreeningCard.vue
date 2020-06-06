@@ -5,12 +5,12 @@
         title="Screening"
         actions="A,F,D"
         :stateDisplayArea="stateDisplayArea"
-        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
+        @showTabToAddInLayer2="showTabToAddInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
-      <!-- @showMultiChangeTabInSecondLayer="showTakeAScreenDialog" -->
+      <!-- @showMultiChangeTabInLayer2="showTakeAScreenDialog" -->
     </div>
 
     <!-- <DataTable
@@ -53,13 +53,13 @@ export default {
     };
   },
   methods: {
-    showTabToAddInSecondLayer() {
+    showTabToAddInLayer2() {
       console.log("show add dialog");
-      this.$store.commit("showAddScreenTabInSecondLayer");
+      this.$store.commit("showAddScreenTabInLayer2");
     },
     showTakeAScreenDialog(index, row) {
       console.log(index, row);
-      this.$store.commit("showTakeAScreenTabInSecondLayer");
+      this.$store.commit("showTakeAScreenTabInLayer2");
     },
     focusPanel() {
       console.log("focus panel");
@@ -81,7 +81,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeRecommendationsTabInSecondLayer", data);
+      this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {

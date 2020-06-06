@@ -8,21 +8,21 @@ export default {
     return {
       componentActionsList: {
         recommendation: {
-          add: "showAddRecommendationTabInSecondLayer",
-          multiChange: "showMultiChangeRecommendationTabInSecondLayer",
-          change: "showChangeRecommendationsTabInSecondLayer",
+          add: "showAddRecommendationTabInLayer2",
+          multiChange: "showMultiChangeRecommendationTabInLayer2",
+          change: "showChangeRecommendationsTabInLayer2",
           discontinue: "discontinueRecommendation",
-          discontinueHistory: "showRecommendationDiscontinueHistoryTabInSecondLayer"
+          discontinueHistory: "showRecommendationDiscontinueHistoryTabInLayer2"
         },
         reminder: {
-          add: "showAddReminderTabInSecondLayer",
-          multiChange: "showMultiChangeReminderTabInSecondLayer",
-          change: "showChangeReminderTabInSecondLayer",
+          add: "showAddReminderTabInLayer2",
+          multiChange: "showMultiChangeReminderTabInLayer2",
+          change: "showChangeReminderTabInLayer2",
           discontinue: "discontinueReminder"
         },
         goal: {
-          add: "showAddGoalTabInSecondLayer",
-          multiChange: "showMultiChangeGoalTabInSecondLayer",
+          add: "showAddGoalTabInLayer2",
+          multiChange: "showMultiChangeGoalTabInLayer2",
           change: "showChangeGoalModal",
           discontinue: "discontinueGoal"
         }

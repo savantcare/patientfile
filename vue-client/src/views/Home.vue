@@ -26,7 +26,7 @@
     </Split>
 
     <!-- tab-dialog is present in home.vue but in hidden state -->
-    <second-layer-tab-dialog></second-layer-tab-dialog>
+    <layer-2-tab-dialog></layer-2-tab-dialog>
     <KeyboardHandler />
   </div>
 </template>
@@ -39,7 +39,7 @@ const MultiStateSplitAreaHeader = () =>
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/ui/SearchBoxForCommandsFromUser.vue");
 
-const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
+const Layer2TabDialog = () => import("./secondLayerTabDialog");
 
 // TODO: Rename this to RecommendationCard
 const Recommendation = () =>
@@ -54,7 +54,7 @@ const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 export default {
   name: "Home",
   components: {
-    SecondLayerTabDialog,
+    Layer2TabDialog,
 
     MultiStateSplitAreaHeader,
 
