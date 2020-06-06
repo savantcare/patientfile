@@ -3,14 +3,8 @@
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
-      <!-- Rename this to stateAtSelectedTime -->
-      <SplitArea :size="70" :minsize="100" id="stateAtSelectedTime">
+      <SplitArea :size="70" :minsize="100" id="multiStateDisplayArea">
         <MultiStateSplitAreaHeader></MultiStateSplitAreaHeader>
-        <!-- The type can be stateAtSelectedTime or StateAtCurrentTime -->
-        <!-- <Recommendation type="stateAtSelectedTime" />
-        <Reminder type="stateAtSelectedTime" />
-        <Goal type="stateAtSelectedTime" />-->
-
         <component
           v-for="(component, index) in stateAtSelectedTimeComponents"
           :key="`state-at-selectedTime-${index}`"
@@ -18,7 +12,7 @@
           v-bind="{type: 'stateAtSelectedTime'}"
         ></component>
       </SplitArea>
-      <SplitArea :size="30" :minsize="100" id="StateAtCurrentTime">
+      <SplitArea :size="30" :minsize="100" id="currentStateDisplayArea">
         <transition-group name="list" tag="div">
           <component
             v-for="(component, index) in StateAtCurrentTimeComponents"
