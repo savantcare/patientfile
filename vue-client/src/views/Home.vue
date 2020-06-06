@@ -1,4 +1,4 @@
-App architecture 3 core principles
+App architecture 3 core principles                          Total references: 194
 ==================================
 
 Core 1. Page design
