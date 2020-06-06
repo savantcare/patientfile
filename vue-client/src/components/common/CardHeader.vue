@@ -7,6 +7,7 @@ A card header needs to deal with 3 situations:
 A component needs to know whther it is being used in "MultistateArea"  or "CurrentStateDisplayArea"
 If the component is being used in "MultiStateArea" then the component needs to know "timeOfState"
 
+For image see: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-pattern-for-the-patient-app
 -->
 
 <template>

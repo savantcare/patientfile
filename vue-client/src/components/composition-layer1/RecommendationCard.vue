@@ -1,13 +1,13 @@
 <!-- TODO: Instead of Type it should be timeToShowStateOn -->
 <template>
-  <el-card class="box-card" :id="`recommendation-${displayArea}`">
+  <el-card class="box-card" :id="`recommendation-${stateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
         title="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
-        :stateDisplayArea="displayArea"
+        :stateDisplayArea="stateDisplayArea"
         :columns="columns"
         @showAddDialog="showAddDialog"
         @showMultiChangeDialog="showMultiChangeDialog"
@@ -20,7 +20,7 @@
       title="Recommendation"
       keyId="recommendation"
       :tabData="tabData"
-      :type="displayArea"
+      :stateDisplayArea="stateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
@@ -41,7 +41,7 @@ export default {
     DataTable
   },
   props: {
-    displayArea: {
+    stateDisplayArea: {
       type: String,
       default: "CurrentStateDisplayArea" // There are two possible values. CurrentStateDisplayArea and MultiStateDisplayArea
     }
