@@ -24,8 +24,6 @@ Todo:
     2. The multichange slider needs a page number component at the bottom
     3. Regression: Multi change Ct does not show history.
 
--- Discussed with Alexey till here.
-
 7. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
 Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
 
@@ -47,20 +45,6 @@ apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateT
 
 12. How does the system know what are health and what are other components?
 
-13. Dx is not using CardHeader.vue
-
-14. Should single tab data table and multi tab data table components be 2 different components.
-
-15. Code repeated between components.
-   1. DB  
-   2. KB traverse
-
-16. Code refactor
-
-   1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
-
-
-
 
 Milestone 5:
 ============
@@ -72,6 +56,17 @@ Milestone 5:
 
 3. 20 components of production quality.
 
+4. Dx is not using CardHeader.vue
+
+5. Should single tab data table and multi tab data table components be 2 different components.
+
+6. Code repeated between components.
+   1. DB  
+   2. KB traverse
+
+7. Code refactor
+
+   1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
 
 
