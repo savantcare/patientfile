@@ -8,19 +8,19 @@ Core 1. Page design
 |Multi state displ area header |              |
 +------------------------------+              |
 |                              |              |
-|                              |              |
-|   Multi state display area   |Current state |
-|                              |display area  |
+|                              |              |    # of times referred:
+|   Multi state display area   |Current state |    multiStateDisplayArea   = 18
+|                              |display area  |    currentStateDisplayArea = 24
 |                              |              |
 |                              |              |
 |This has list of compomponents|This has list |
 |Data of component depends on  |of CTs        |
-|timeOfState                   |Data is from  |
+|timeOfState                   |Data is from  |    timeOfState = 41
 |                              |currentTime   |
 |timeOfState has               |              |
 |2 possibilities               |              |
 |                              |              |
-|1. timeOfState=null           |              |
+|1. timeOfState=null           |              |       
 |2. timeOfState=value          |              |
 |                              |              |
 | If timeOfState==null then    |              |
