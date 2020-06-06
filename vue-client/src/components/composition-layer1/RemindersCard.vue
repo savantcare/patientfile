@@ -1,8 +1,8 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
-      <!--   actions="A,M,F,D" if selectedTimeForShowingState from home.vue is NULL.
-      If selectedTimeForShowingState is not NULL then action = "Addn" (Addendum)
+      <!--   actions="A,M,F,D" if timeOfState from home.vue is NULL.
+      If timeOfState is not NULL then action = "Addn" (Addendum)
       -->
       <CardHeader
         title="Reminder"

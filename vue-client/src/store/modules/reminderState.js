@@ -257,8 +257,8 @@ export default {
     panelReminders(state) {
       return state.remindersList.filter(item => {
         const itemDate = new Date(item.createdAt)
-        // state.selectedTimeForShowingState instead of this selectedTimeForShowingState should use the value set in home.vue
-        return item.discontinue != true && itemDate <= state.selectedTimeForShowingState
+        // state.timeOfState instead of this timeOfState should use the value set in home.vue
+        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }

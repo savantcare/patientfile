@@ -95,7 +95,7 @@ export default {
       mouseOver: false,
       selected: [],
       showPopover: false,
-      selectedTimeForShowingState: this.$route.query.selectedTimeForShowingState // This is used for stateAtSelectedTime. if this value is NULL it means stateAtCurrentTime is being shown.
+      timeOfState: this.$route.query.timeOfState // This is used for stateAtSelectedTime. if this value is NULL it means stateAtCurrentTime is being shown.
     };
   },
   computed: {
@@ -111,7 +111,7 @@ export default {
     showAddButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState == null
+        this.timeOfState == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "A").length > 0 &&
@@ -123,7 +123,7 @@ export default {
     showReviewButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState == null
+        this.timeOfState == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "R").length > 0 &&
@@ -135,7 +135,7 @@ export default {
     showMultiChangeButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState == null
+        this.timeOfState == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "M").length > 0 &&
@@ -147,7 +147,7 @@ export default {
     showFocusButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState == null
+        this.timeOfState == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "F").length > 0 &&
@@ -159,7 +159,7 @@ export default {
     showDiscontinueHistoryButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState == null
+        this.timeOfState == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "X").length > 0 &&
@@ -169,11 +169,11 @@ export default {
       return false;
     },
     // TODO: This should be called showMultiDiscontinueMenuOption
-    // this.selectedTimeForShowingState -> this.timeOfState
+    // this.timeOfState -> this.timeOfState
     showDiscontinueButton() {
       if (
         this.stateArea == "CurrentStateArea" ||
-        this.selectedTimeForShowingState != null
+        this.timeOfState != null
       ) {
         return (
           this.actions.split(",").filter(action => action == "D").length > 0 &&
@@ -201,7 +201,7 @@ export default {
     showAddendum() {
       if (
         this.stateArea == "stateAtSelectedTime" &&
-        this.selectedTimeForShowingState != null
+        this.timeOfState != null
       ) {
         return true;
       }
