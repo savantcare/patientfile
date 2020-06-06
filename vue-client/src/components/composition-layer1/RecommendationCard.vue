@@ -13,7 +13,7 @@
         @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
-        @showDiscontinueHistoryDialog="showDiscontinueHistoryDialog"
+        @showDiscontinueHistoryTabInSecondLayer="showDiscontinueHistoryTabInSecondLayer"
       />
     </div>
     <DataTable
@@ -155,7 +155,7 @@ export default {
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
     },
-    showDiscontinueHistoryDialog() {
+    showDiscontinueHistoryTabInSecondLayer() {
       this.$store.commit("showRecommendationDiscontinueHistoryTabInSecondLayer");
     }
   },
