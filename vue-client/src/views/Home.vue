@@ -30,25 +30,14 @@
   </div>
 </template>
 <script>
-// const TabDialog = () => import("@/components/ui/secondLayerTabDialog.vue");
 
-// Left panel components
-// const RecommendationsPanel = () =>
-// const RemindersPanel = () =>
-// const DiagnosisPanel = () =>
 const MultiStateSplitAreaHeader = () =>
   import("@/components/ui/MultiStateSplitAreaHeader.vue");
-// const DateSlider = () => import("@/components/ui/DateSlider.vue");
-// const TestPanel = () => import("@/components/stateAtSelectedTimeTestComponent.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/ui/SearchBoxForCommandsFromUser.vue");
-// const RecommendationsCard = () =>
-// import("@/components/domain/RecommendationsCard/Implementation.vue");
-// const RemindersCard = () =>
-// import("@/components/domain/RemindersCard/Implementation.vue");
-// const CombinationCard = () => import("@/components/CombinationCard.vue");
+
 const SecondLayerTabDialog = () => import("./secondLayerTabDialog");
 
 // TODO: Rename this to RecommendationCard
@@ -65,19 +54,10 @@ export default {
   name: "Home",
   components: {
     SecondLayerTabDialog,
-    // Left panel components -> On this side state of the patient on a day is shown
-    // RecommendationsPanel,
-    // RemindersPanel,
-    // DiagnosisPanel,
-    MultiStateSplitAreaHeader,
-    // DateSlider,
-    // TestPanel,
 
-    // Right panel components  -> On this side current state of the patient is shown.
+    MultiStateSplitAreaHeader,
+
     SearchBoxForCommandsFromUser,
-    // RecommendationsCard,
-    // RemindersCard,
-    // CombinationCard,
     Recommendation,
     Reminder,
     Goal,
@@ -104,8 +84,7 @@ export default {
   },
   beforeCreate() {},
   mounted() {
-    // this.$store.dispatch("loadSetting");
-    // Join room
+
     // TODO: this should be patientUUID
     const patientId = this.$route.query.patient_id;
     if (patientId.length < 1) {
