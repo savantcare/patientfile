@@ -1,7 +1,43 @@
+App architecture
+================
+
++------------------------------+--------------+
+|Multi state displ area header |              |
++------------------------------+              |
+|                              |              |
+|                              |              |
+|   Multi state display area   |Current state |
+|                              |display area  |
+|                              |              |
+|                              |              |
+|This has list of compomponents|This has list |
+|Data of component is from     |of CTs        |
+|timeOfState                   |Data is from  |
+|                              |currentTime   |
+|                              |              |
+|                              |              |
+|timeOfState has               |              |
+|2 possibilities               |              |
+|                              |              |
+|1. timeOfState=null           |              |
+|2. timeOfState=value          |              |
+|                              |              |
+| If timeOfState==null then    |              |
+| component uses currentTime   |              |
+|                              |              |
+|                              |              |
+|                              +--------------+
+|                              |Search box for|
+|                              |user commands |
++---------------------------------------------+
+
+
+
+
 <template>
   <div>
     <!-- https://github.com/bajaniyarohit/vue-split-panel -->
-    <!-- To udnerstand how page is divided: Read top of CardHeader.vue -->
+    <!-- To understand how page is divided: Read app architecture at top of this file -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="multiStateDisplayArea">
