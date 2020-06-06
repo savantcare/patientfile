@@ -6,7 +6,7 @@
           title="Service statements"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
-          @showAddDialog="showAddServiceStatementsDialog"
+          @showTabToAddInSecondLayer="showAddServiceStatementsDialog"
           @showMultiChangeTabInSecondLayer="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
@@ -33,7 +33,7 @@ export default {
       console.log("open multi change dialog");
       this.$store.commit("showMultiChangeServiceStatementsTabInSecondLayer");
     },
-    showAddDialog() {},
+    showTabToAddInSecondLayer() {},
     showMultiChangeTabInSecondLayer() {},
     focusPanel() {},
     multiDiscontinue() {}

@@ -9,7 +9,7 @@
         keyId="recommendation"
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
-        @showAddDialog="showAddDialog"
+        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
         @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    showAddDialog() {
+    showTabToAddInSecondLayer() {
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 

@@ -5,7 +5,7 @@
         title="Screening"
         actions="A,F,D"
         :stateDisplayArea="stateDisplayArea"
-        @showAddDialog="showAddDialog"
+        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    showAddDialog() {
+    showTabToAddInSecondLayer() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInSecondLayer");
     },

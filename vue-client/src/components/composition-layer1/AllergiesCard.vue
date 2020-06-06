@@ -6,7 +6,7 @@
           title="Allergies"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
-          @showAddDialog="showAddDialog"
+          @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
           @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    showAddDialog() {},
+    showTabToAddInSecondLayer() {},
     showMultiChangeTabInSecondLayer() {},
     focusPanel() {},
     multiDiscontinue() {}

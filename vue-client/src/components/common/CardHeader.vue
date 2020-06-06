@@ -22,8 +22,8 @@ Explained in image: https://savantcare.github.io/ui/what.html#q1-what-is-the-ui-
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
-          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showReviewChoice">R</el-button>
-          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showAddChoice">A</el-button>
+          <el-button type="text" size="mini" @click="$emit('showTabToAddInSecondLayer')" v-if="showReviewChoice">R</el-button>
+          <el-button type="text" size="mini" @click="$emit('showTabToAddInSecondLayer')" v-if="showAddChoice">A</el-button>
           <el-button
             type="text"
             size="mini"

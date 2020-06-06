@@ -6,7 +6,7 @@
         actions="A,M,F,D"
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
-        @showAddDialog="showAddDialog"
+        @showTabToAddInSecondLayer="showTabToAddInSecondLayer"
         @showMultiChangeTabInSecondLayer="showMultiChangeTabInSecondLayer"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
@@ -48,7 +48,7 @@ export default {
     };
   },
   methods: {
-    showAddDialog() {
+    showTabToAddInSecondLayer() {
       // For logic: Line 57 of RecommendationCard.vue
       this.$store.commit("showAddDiagnosisTabInSecondLayer");
     },
