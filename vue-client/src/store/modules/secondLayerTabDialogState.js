@@ -77,7 +77,7 @@ export default {
       state.reminderData = data
       state.tabValue = tab.name
     },
-    showAddRecommendationModal(state) {
+    showAddRecommendationTab(state) {
       const tab = {
         label: "Add Recommendations",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
@@ -91,7 +91,7 @@ export default {
     },
 
 
-    showMultiChangeRecommendationModal(state) {
+    showMultiChangeRecommendationTab(state) {
       const tab = {
         label: "Multi change Recommendations",
         value: require("@/components/composition-layer2/recommendation/MultiChangeRecommendation.vue").default,

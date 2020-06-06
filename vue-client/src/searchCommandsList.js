@@ -3,10 +3,10 @@ export default [
     label: "recommendation (rex) list", action: "", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) add", action: "showAddRecommendationModal", abbreviation: "rex"
+    label: "recommendation (rex) add", action: "showAddRecommendationTab", abbreviation: "rex"
   },
   {
-    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationModal", abbreviation: "rex"
+    label: "recommendation (rex) multi change", action: "showMultiChangeRecommendationTab", abbreviation: "rex"
   },
   {
     label: "recommendation (rex) focus", action: "", abbreviation: "rex"

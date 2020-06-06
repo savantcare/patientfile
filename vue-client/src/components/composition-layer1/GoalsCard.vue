@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     showAddDialog() {
+      // For logic: Line 57 of RecommendationCard.vue
       console.log("show add dialog");
       this.$store.commit("showAddGoalModal");
     },

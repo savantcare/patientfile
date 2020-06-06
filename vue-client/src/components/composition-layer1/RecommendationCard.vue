@@ -70,13 +70,13 @@ export default {
       To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
       Ref: https://vuex.vuejs.org/guide/modules.html
 
-      showAddRecommendationModal is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
+      showAddRecommendationTab is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
 
       */
-      this.$store.commit("showAddRecommendationModal");
+      this.$store.commit("showAddRecommendationTab");
     },
     showMultiChangeDialog() {
-      this.$store.commit("showMultiChangeRecommendationModal");
+      this.$store.commit("showMultiChangeRecommendationTab");
     },
     focusPanel() {
       //stateAtSelectedTime

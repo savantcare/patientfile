@@ -8,8 +8,8 @@ export default {
     return {
       componentActionsList: {
         recommendation: {
-          add: "showAddRecommendationModal",
-          multiChange: "showMultiChangeRecommendationModal",
+          add: "showAddRecommendationTab",
+          multiChange: "showMultiChangeRecommendationTab",
           change: "showChangeRecommendationsModal",
           discontinue: "discontinueRecommendation",
           discontinueHistory: "showRecommendationDiscontinueHistoryDialog"

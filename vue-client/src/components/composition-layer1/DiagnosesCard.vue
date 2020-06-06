@@ -49,25 +49,7 @@ export default {
   },
   methods: {
     showAddDialog() {
-      /* 
-      Ref: https://vuex.vuejs.org/guide/mutations.html
-      The only way to actually change state in a Vuex store is by committing a mutation. 
-      Vuex mutations are very similar to events: each mutation has a string type and a handler. 
-      The handler function is 
-        1. Where we perform actual state modifications, 
-        2. Where we will receive the state as the first argument.
-
-      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/secondLayerTabDialogState.js#L80  
-
-      QUESTION: How is tabDialog getting this event.
-
-      Due to using a single state tree, all state of our application is contained inside one big object. However, as our application grows in scale, the store can get really bloated.
-      To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
-      Ref: https://vuex.vuejs.org/guide/modules.html
-
-      showAddRecommendationModal is a mutation inside module -> secondLayerTabDialogState.js but it can be called from here.
-
-      */
+      // For logic: Line 57 of RecommendationCard.vue
       this.$store.commit("showAddDiagnosisModal");
     },
     showMultiChangeDialog() {
