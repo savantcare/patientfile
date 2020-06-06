@@ -4,18 +4,18 @@ App architecture 3 core principles
 Core 1. Page design
 ===================
 
-+-----------------------------------------+--------------+
-|Multi state displ area header            |              |
-+-----------------------------------------+              |
++-----------------------------------------+--------------+  # of times referred:
+|Multi state displ area header            |              |  MultiStateDisplayAreaHeader = 7 
++-----------------------------------------+              |     
 |                                         |              |
-|                                         |              |    # of times referred:
-|   Multi state display area              |Current state |    multiStateDisplayArea   = 18
-|                                         |display area  |    currentStateDisplayArea = 24
+|                                         |              |    
+|   Multi state display area              |Current state |  multiStateDisplayArea   = 18
+|                                         |display area  |  currentStateDisplayArea = 24
 |                                         |              |
 |                                         |              |
 |This has list of compomponents           |This has list |
 |Data of component depends on             |of CTs        |
-|timeOfState                              |Data is from  |    timeOfState = 41
+|timeOfState                              |Data is from  |  timeOfState = 41
 |                                         |currentTime   |
 |timeOfState has                          |              |
 |2 possibilities                          |              |
@@ -47,7 +47,7 @@ Core 3. Component Design
 
 ┌────────────────────────────────────────────────────────┐
 │ ┌────────────────┐              ┌────────────────────┐ │
-│ │ Component name │              │Card header actions │ │     ctName = 35 
+│ │ Component name │              │Card header actions │ │  ctName = 35 
 │ └────────────────┘              └────────────────────┘ │     
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 │                                                        │
@@ -68,7 +68,7 @@ Core 3. Component Design
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minsize="100" id="multiStateDisplayArea">
-        <MultiStateSplitAreaHeader></MultiStateSplitAreaHeader>
+        <MultiStateDisplayAreaHeader></MultiStateDisplayAreaHeader>
         <component
           v-for="(component, index) in stateAtSelectedTimeComponents"
           :key="`state-at-selectedTime-${index}`"
@@ -95,8 +95,8 @@ Core 3. Component Design
 </template>
 <script>
 
-const MultiStateSplitAreaHeader = () =>
-  import("@/components/ui/MultiStateSplitAreaHeader.vue");
+const MultiStateDisplayAreaHeader = () =>
+  import("@/components/ui/MultiStateDisplayAreaHeader.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
@@ -119,7 +119,7 @@ export default {
   components: {
     Layer2MultiTabDialog,
 
-    MultiStateSplitAreaHeader,
+    MultiStateDisplayAreaHeader,
 
     SearchBoxForCommandsFromUser,
     Recommendation,
