@@ -104,12 +104,12 @@ export default {
     isHeaderFocus() {
       return (
         this.focusRow == `${this.title.toLowerCase()}-0` &&
-        this.type == "StateAtCurrentTime"
+        this.type == "CurrentStateArea"
       );
     },
     showAddButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -121,7 +121,7 @@ export default {
     },
     showReviewButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -133,7 +133,7 @@ export default {
     },
     showMultiChangeButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -145,7 +145,7 @@ export default {
     },
     showFocusButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -157,7 +157,7 @@ export default {
     },
     showDiscontinueHistoryButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState == null
       ) {
         return (
@@ -173,7 +173,7 @@ export default {
     // this.selectedTimeForShowingState -> this.TimeForMultiStateArea
     showDiscontinueButton() {
       if (
-        this.type == "StateAtCurrentTime" ||
+        this.type == "CurrentStateArea" ||
         this.selectedTimeForShowingState != null
       ) {
         return (
