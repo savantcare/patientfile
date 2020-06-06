@@ -55,11 +55,11 @@ export default {
   methods: {
     showAddDialog() {
       console.log("show add dialog");
-      this.$store.commit("showAddScreenModal");
+      this.$store.commit("showAddScreenTab");
     },
     showTakeAScreenDialog(index, row) {
       console.log(index, row);
-      this.$store.commit("showTakeAScreenModal");
+      this.$store.commit("showTakeAScreenTab");
     },
     focusPanel() {
       console.log("focus panel");
@@ -81,7 +81,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeRecommendationsModal", data);
+      this.$store.commit("showChangeRecommendationsTab", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {

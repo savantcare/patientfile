@@ -27,11 +27,11 @@ export default {
   methods: {
     showAddServiceStatementsDialog() {
       console.log("open add dialog");
-      this.$store.commit("showAddServiceStatementsModal");
+      this.$store.commit("showAddServiceStatementsTab");
     },
     showMultiChangeServiceStatementsDialog() {
       console.log("open multi change dialog");
-      this.$store.commit("showMultiChangeServiceStatementsModal");
+      this.$store.commit("showMultiChangeServiceStatementsTab");
     },
     showAddDialog() {},
     showMultiChangeDialog() {},

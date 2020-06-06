@@ -10,19 +10,19 @@ export default {
         recommendation: {
           add: "showAddRecommendationTab",
           multiChange: "showMultiChangeRecommendationTab",
-          change: "showChangeRecommendationsModal",
+          change: "showChangeRecommendationsTab",
           discontinue: "discontinueRecommendation",
-          discontinueHistory: "showRecommendationDiscontinueHistoryDialog"
+          discontinueHistory: "showRecommendationDiscontinueHistoryTab"
         },
         reminder: {
-          add: "showAddReminderModal",
-          multiChange: "showMultiChangeReminderModal",
-          change: "showChangeReminderModal",
+          add: "showAddReminderTab",
+          multiChange: "showMultiChangeReminderTab",
+          change: "showChangeReminderTab",
           discontinue: "discontinueReminder"
         },
         goal: {
-          add: "showAddGoalModal",
-          multiChange: "showMultiChangeGoalModal",
+          add: "showAddGoalTab",
+          multiChange: "showMultiChangeGoalTab",
           change: "showChangeGoalModal",
           discontinue: "discontinueGoal"
         }

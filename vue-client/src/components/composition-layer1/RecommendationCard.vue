@@ -62,7 +62,7 @@ export default {
         1. Where we perform actual state modifications, 
         2. Where we will receive the state as the first argument.
 
-      The following line invokes the code in: https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/secondLayerTabDialogState.js#L80  
+      The following line invokes the code in: vue-client/src/store/modules/secondLayerTabDialogState.js#L80  
 
       QUESTION: How is tabDialog getting this event.
 
@@ -116,7 +116,7 @@ export default {
       this.selectedRows = value;
     },
     handleChange(data) {
-      this.$store.commit("showChangeRecommendationsModal", data);
+      this.$store.commit("showChangeRecommendationsTab", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {
@@ -156,7 +156,7 @@ export default {
       this.$store.commit("setRecommendationTableList", tableList);
     },
     showDiscontinueHistoryDialog() {
-      this.$store.commit("showRecommendationDiscontinueHistoryDialog");
+      this.$store.commit("showRecommendationDiscontinueHistoryTab");
     }
   },
   mounted() {

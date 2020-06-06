@@ -54,10 +54,10 @@ export default {
     showAddDialog() {
       // For logic: Line 57 of RecommendationCard.vue
       console.log("show add dialog");
-      this.$store.commit("showAddGoalModal");
+      this.$store.commit("showAddGoalTab");
     },
     showMultiChangeDialog() {
-      this.$store.commit("showMultiChangeGoalModal");
+      this.$store.commit("showMultiChangeGoalTab");
     },
     focusPanel() {
       console.log("focus panel");
@@ -79,7 +79,7 @@ export default {
     },
     handleChange(data) {
       console.log("show change dialog");
-      this.$store.commit("showChangeGoalsModal", data);
+      this.$store.commit("showChangeGoalsTab", data);
     },
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueGoal", {

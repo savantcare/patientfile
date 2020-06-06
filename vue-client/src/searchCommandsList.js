@@ -21,10 +21,10 @@ export default [
     label: "reminder (rem) list", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) add", action: "showAddReminderModal", abbreviation: "rem"
+    label: "reminder (rex) add", action: "showAddReminderTab", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) multi change", action: "showMultiChangeReminderModal", abbreviation: "rem"
+    label: "reminder (rex) multi change", action: "showMultiChangeReminderTab", abbreviation: "rem"
   },
   {
     label: "reminder (rex) focus", action: "", abbreviation: "rem"
@@ -39,13 +39,13 @@ export default [
     label: "goal (g) list", action: "", abbreviation: "goal"
   },
   {
-    label: "goal (g) add", action: "showAddGoalModal", abbreviation: "goal"
+    label: "goal (g) add", action: "showAddGoalTab", abbreviation: "goal"
   },
   {
     label: "diagnosis (dx) list", action: "", abbreviation: "dx"
   },
   {
-    label: "diagnosis (dx) add", action: "showAddDiagnosisModal", abbreviation: ""
+    label: "diagnosis (dx) add", action: "showAddDiagnosisTab", abbreviation: ""
   },
   {
     label: "diagnosis (dx) multi change", action: "showMultiChangeDiagnosisModal", abbreviation: ""
@@ -57,7 +57,7 @@ export default [
     label: "screen (s) list ", action: "", abbreviation: "s"
   },
   {
-    label: "screen (s) add", action: "showAddScreenModal", abbreviation: "s"
+    label: "screen (s) add", action: "showAddScreenTab", abbreviation: "s"
   },
   {
     label: "clear", action: "", abbreviation: ""

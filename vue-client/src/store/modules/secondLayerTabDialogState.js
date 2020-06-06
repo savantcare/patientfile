@@ -43,7 +43,7 @@ export default {
     setReminderData(state, value) {
       state.reminderData = value
     },
-    showAddReminderModal(state) {
+    showAddReminderTab(state) {
       const tab = {
         label: "Add Reminders",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
@@ -54,7 +54,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeReminderModal(state) {
+    showMultiChangeReminderTab(state) {
       const tab = {
         label: "Multi change Reminders",
         value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,
@@ -65,7 +65,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeReminderModal(state, data) {
+    showChangeReminderTab(state, data) {
       const tab = {
         label: "Change Reminder",
         value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
@@ -103,7 +103,7 @@ export default {
       state.tabValue = tab.name
     },
 
-    showRecommendationDiscontinueHistoryDialog(state) {
+    showRecommendationDiscontinueHistoryTab(state) {
       const tab = {
         label: "Recommendation Discontinue History",
         value: require("@/components/composition-layer2/recommendation/RecommendationDiscontinueHistory.vue").default,
@@ -115,7 +115,7 @@ export default {
       state.tabValue = tab.name
     },
 
-    showChangeRecommendationsModal(state, data) {
+    showChangeRecommendationsTab(state, data) {
       const tab = {
         label: "Change Recommendation",
         value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
@@ -128,7 +128,7 @@ export default {
       state.recommendationData = data
       state.tabValue = tab.name
     },
-    showAddDiagnosisModal(state) {
+    showAddDiagnosisTab(state) {
       const tab = {
         label: "Add Diagnosis",
         value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
@@ -139,7 +139,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeAssessmentModal(state) {
+    showMultiChangeAssessmentTab(state) {
       const tab = {
         label: "Multi change assessment diagnosis",
         value: require("@/components/composition-layer2/diagnosis/MultiChangeAssessment.vue").default,
@@ -150,7 +150,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeDiagnosisModal(state, data) {
+    showChangeDiagnosisTab(state, data) {
       const tab = {
         label: "Change Diagnosis",
         value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
@@ -162,7 +162,7 @@ export default {
       state.diagnosisData = data
       state.tabValue = tab.name
     },
-    showAddServiceStatementsModal(state) {
+    showAddServiceStatementsTab(state) {
       const tab = {
         label: "Add service statements",
         value: require("@/components/composition-layer2/service-statements/AddServiceStatements.vue").default,
@@ -173,7 +173,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeServiceStatementsModal(state) {
+    showMultiChangeServiceStatementsTab(state) {
       const tab = {
         label: "Multi change service statements",
         value: require("@/components/composition-layer2/service-statements/MultiChangeServiceStatements.vue").default,
@@ -184,7 +184,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showAddGoalModal(state) {
+    showAddGoalTab(state) {
       const tab = {
         label: "Add goal",
         value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
@@ -195,7 +195,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showMultiChangeGoalModal(state) {
+    showMultiChangeGoalTab(state) {
       const tab = {
         label: "Multi rate goal",
         value: require("@/components/composition-layer2/goal/MultiChangeGoal.vue").default,
@@ -206,7 +206,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showChangeGoalsModal(state, data) {
+    showChangeGoalsTab(state, data) {
       const tab = {
         label: "Rate goal",
         value: require("@/components/composition-layer2/goal/RateGoal.vue").default,
@@ -218,7 +218,7 @@ export default {
       state.goalData = data
       state.tabValue = tab.name
     },
-    showAddScreenModal(state) {
+    showAddScreenTab(state) {
       const tab = {
         label: "Add screen",
         value: require("@/components/composition-layer2/screening/AddScreen.vue").default,
@@ -229,7 +229,7 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showTakeAScreenModal(state) {
+    showTakeAScreenTab(state) {
       const tab = {
         label: "Take a screen",
         value: require("@/components/composition-layer2/screening/TakeAScreen.vue").default,
