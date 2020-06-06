@@ -1,5 +1,5 @@
 <!--
-There are 3 states:
+A card header needs to deal with 3 situations:
 1. stateArea == "CurrentStateArea"
 2. stateArea == "MultiStateArea"   timeOfState=null
 3. stateArea == "MultiStateArea"   timeOfState=value
@@ -27,6 +27,7 @@ If the component is being used in "MultiStateArea" then the component needs to k
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
+          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showReviewButton">R</el-button>
           <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showAddButton">A</el-button>
           <el-button
             type="text"
@@ -95,7 +96,7 @@ export default {
       mouseOver: false,
       selected: [],
       showPopover: false,
-      timeOfState: this.$route.query.timeOfState // This is used for stateAtSelectedTime. if this value is NULL it means stateAtCurrentTime is being shown.
+      timeOfState: this.$route.query.timeOfState // If this value is NULL it means stateAtCurrentTime is being shown.
     };
   },
   computed: {

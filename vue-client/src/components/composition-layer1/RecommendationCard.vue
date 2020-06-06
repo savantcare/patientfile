@@ -4,7 +4,7 @@
     <div slot="header" class="clearfix">
       <CardHeader
         title="Recommendation"
-        actions="A,M,F,D,X"
+        actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
         :stateArea="type"
