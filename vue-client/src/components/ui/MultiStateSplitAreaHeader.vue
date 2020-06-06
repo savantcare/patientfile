@@ -38,8 +38,8 @@ export default {
     activityStatus() {
       return this.$store.state.connectionStatus;
     },
-    currentDate() {
-      return this.$store.state.stateAtSelectedTime.currentDate;
+    timeOfState() {
+      return this.$store.state.stateAtSelectedTime.timeOfState;
     },
     zoomValue() {
       return this.$store.state.stateAtSelectedTime.zoomValue;

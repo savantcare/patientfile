@@ -3,7 +3,7 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     familyHistoryList: [],
-    currentDate: new Date()
+    timeOfState: new Date()
   },
   mutations: {
     setFamilyHistoryList(state, data) {
@@ -18,7 +18,7 @@ export default {
       state.familyHistoryList.pop()
     },
     setFamilyHistoryCurrentDate(state, value) {
-      state.currentDate = value
+      state.timeOfState = value
     },
 
     /**
@@ -263,7 +263,7 @@ export default {
     panelFamilyHistories(state) {
       return state.familyHistoryList.filter(item => {
         const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.currentDate
+        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }

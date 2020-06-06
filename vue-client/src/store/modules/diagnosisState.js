@@ -3,7 +3,7 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     diagnosisList: [],
-    currentDate: new Date()
+    timeOfState: new Date()
   },
   mutations: {
     setDiagnosisList(state, data) {
@@ -18,7 +18,7 @@ export default {
       state.diagnosisList.pop()
     },
     setDiagnosisCurrentDate(state, value) {
-      state.currentDate = value
+      state.timeOfState = value
     },
 
     /**
@@ -372,7 +372,7 @@ export default {
     panelDiagnoses(state) {
       return state.diagnosisList.filter(item => {
         const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.currentDate
+        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }

@@ -3,7 +3,7 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     yourRecommendationsList: [],
-    currentDate: new Date(),
+    timeOfState: new Date(),
     othersList: [],
     tableList: []
   },
@@ -20,7 +20,7 @@ export default {
       state.yourRecommendationsList.pop()
     },
     setRecommendationCurrentDate(state, value) {
-      state.currentDate = value
+      state.timeOfState = value
     },
     setOthersList(state, value) {
       state.othersList = value
@@ -302,7 +302,7 @@ export default {
     panelRecommendations(state) {
       return state.yourRecommendationsList.filter(item => {
         const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.currentDate
+        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }

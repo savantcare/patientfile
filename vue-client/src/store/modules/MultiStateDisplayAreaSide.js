@@ -5,7 +5,7 @@ import cardList from "@/cardList.js"
 export default {
   state: {
     list: [],
-    currentDate: "",
+    timeOfState: "",
     zoomValue: 1,
     originSize: null
   },
@@ -14,7 +14,7 @@ export default {
       state.list = value
     },
     setstateAtSelectedTimeCurrentDate(state, value) {
-      state.currentDate = value
+      state.timeOfState = value
     },
     setstateAtSelectedTimeZoomValue(state, value) {
       state.zoomValue = value

@@ -3,7 +3,7 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     list: [],
-    currentDate: new Date()
+    timeOfState: new Date()
   },
   mutations: {
     setScreeningList(state, data) {
@@ -18,7 +18,7 @@ export default {
       state.list.pop()
     },
     setScreeningCurrentDate(state, value) {
-      state.currentDate = value
+      state.timeOfState = value
     },
 
     /**
@@ -260,7 +260,7 @@ export default {
     panelScreenings(state) {
       return state.list.filter(item => {
         const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.currentDate
+        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }
