@@ -9,6 +9,7 @@ import diagnosisStateModule from './modules/diagnosisState'
 import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
+// TODO: This should be StateAtCurrentTimeSplitAreaModule -> CurrentStateDisplayAreaModule
 import StateAtCurrentTimeSplitAreaModule from './modules/CurrentStateDisplayArea'
 import secondLayerTabDialogStateModule from './modules/secondLayerTabDialogState'
 import stateAtSelectedTimeModule from './modules/MultiStateDisplayAreaSide'
