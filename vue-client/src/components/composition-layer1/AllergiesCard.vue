@@ -5,7 +5,7 @@
         <CardHeader
           title="Allergies"
           actions="A,M,F,D"
-          type="card"
+          :stateDisplayArea="stateDisplayArea"
           @showAddDialog="showAddDialog"
           @showMultiChangeDialog="showMultiChangeDialog"
           @focusPanel="focusPanel"

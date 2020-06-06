@@ -5,7 +5,7 @@
         <CardHeader
           title="Service statements"
           actions="A,M,F,D"
-          type="card"
+          :stateDisplayArea="stateDisplayArea"
           @showAddDialog="showAddServiceStatementsDialog"
           @showMultiChangeDialog="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"

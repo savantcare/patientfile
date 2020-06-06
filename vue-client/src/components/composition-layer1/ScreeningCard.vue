@@ -4,7 +4,7 @@
       <CardHeader
         title="Screening"
         actions="A,F,D"
-        type="card"
+        :stateDisplayArea="stateDisplayArea"
         @showAddDialog="showAddDialog"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"

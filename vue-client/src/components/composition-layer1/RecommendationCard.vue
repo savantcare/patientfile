@@ -43,7 +43,7 @@ export default {
   props: {
     stateDisplayArea: {
       type: String,
-      default: "CurrentStateDisplayArea" // There are two possible values. CurrentStateDisplayArea and MultiStateDisplayArea
+      default: "CurrentStateDisplayArea" // 2 possible values. CurrentStateDisplayArea or MultiStateDisplayArea For details:Top of CardHeader.vue
     }
   },
   data() {
