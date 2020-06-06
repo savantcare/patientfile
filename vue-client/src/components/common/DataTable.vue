@@ -75,7 +75,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["tabData", "title", "type", "keyId"],
+  props: ["tabData", "ctName", "type", "keyId"],
   components: { ElTableDraggable },
   data() {
     return {

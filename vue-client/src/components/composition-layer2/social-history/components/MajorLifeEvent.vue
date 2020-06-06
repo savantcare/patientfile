@@ -26,7 +26,7 @@
     </el-card>
 
     <el-dialog
-      title="Add major life event"
+      ctName="Add major life event"
       :visible.sync="dialogVisible"
       width="30%"
       append-to-body

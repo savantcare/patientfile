@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
-          title="Family history"
+          ctName="Family history"
           actions="A,N"
           :stateDisplayArea="stateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"
@@ -16,14 +16,14 @@
 
       </div>
       <!-- <DataTable
-        title="Family history"
+        ctName="Family history"
 
         :tabData="tabData"
         :type="card"
         
       /> -->
       <DataTable
-        title="Family history"
+        ctName="Family history"
         keyId="familyHistory"
         :tabData="tabData"
         :selectedColumns="selectedColumns"

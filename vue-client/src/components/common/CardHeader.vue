@@ -12,7 +12,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
 
 <template>
   <div @mouseover="mouseOver = true" @mouseleave="mouseOver = false">
-    <span :style="{'color': isHeaderFocus == true ? '#409EFF' : 'black'}">{{title}}</span>
+    <span :style="{'color': isHeaderFocus == true ? '#409EFF' : 'black'}">{{ctName}}</span>
     <transition name="fade">
       <div style="float: right" v-if="showActions">
         <el-button
@@ -85,7 +85,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
 
 <script>
 export default {
-  props: ["title", "actions", "stateDisplayArea", "columns", "keyId"],
+  props: ["ctName", "actions", "stateDisplayArea", "columns", "keyId"],
   data() {
     return {
       mouseOver: false,
@@ -100,7 +100,7 @@ export default {
     },
     isHeaderFocus() {
       return (
-        this.focusRow == `${this.title.toLowerCase()}-0` &&
+        this.focusRow == `${this.ctName.toLowerCase()}-0` &&
         this.stateDisplayArea == "CurrentStateDisplayArea"
       );
     },

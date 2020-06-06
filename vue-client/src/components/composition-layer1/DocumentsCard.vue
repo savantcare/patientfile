@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
-          title="Documents"
+          ctName="Documents"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"

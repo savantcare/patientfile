@@ -5,7 +5,7 @@
       If timeOfState is not NULL then action = "Addn" (Addendum)
       -->
       <CardHeader
-        title="Reminder"
+        ctName="Reminder"
         actions="A,M,F,D,R"
         keyId="reminder"
         :stateDisplayArea="stateDisplayArea"
@@ -18,7 +18,7 @@
       />
     </div>
     <DataTable
-      title="Reminder"
+      ctName="Reminder"
       keyId="reminder"
       :tabData="tabData"
       :selectedColumns="selectedColumns"

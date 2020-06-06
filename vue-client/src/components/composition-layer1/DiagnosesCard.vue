@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Diagnosis"
+        ctName="Diagnosis"
         actions="A,M,F,D"
         :stateDisplayArea="stateDisplayArea"
         :columns="columns"
@@ -16,7 +16,7 @@
     <DataTableWithoutTab
       :tabData="tabData"
       :selectedColumns="selectedColumns"
-      title="diagnosis"
+      ctName="diagnosis"
       :stateDisplayArea="stateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"

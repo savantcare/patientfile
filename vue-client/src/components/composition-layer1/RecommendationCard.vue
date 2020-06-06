@@ -3,7 +3,7 @@
   <el-card class="box-card" :id="`recommendation-${stateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Recommendation"
+        ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
@@ -17,7 +17,7 @@
       />
     </div>
     <DataTable
-      title="Recommendation"
+      ctName="Recommendation"
       keyId="recommendation"
       :tabData="tabData"
       :stateDisplayArea="stateDisplayArea"

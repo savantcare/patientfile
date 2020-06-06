@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
-          title="Seft harm"
+          ctName="Seft harm"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"

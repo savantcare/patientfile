@@ -26,7 +26,7 @@
     </el-card>
 
     <el-dialog
-      title="Add Employment History"
+      ctName="Add Employment History"
       :visible.sync="dialogVisible"
       width="30%"
       append-to-body

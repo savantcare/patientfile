@@ -25,7 +25,7 @@
     </el-card>
 
     <el-dialog
-      title="Add Education History"
+      ctName="Add Education History"
       :visible.sync="dialogVisible"
       width="30%"
       append-to-body

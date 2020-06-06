@@ -4,59 +4,61 @@ App architecture 3 core principles
 Core 1. Page design
 ===================
 
-+------------------------------+--------------+
-|Multi state displ area header |              |
-+------------------------------+              |
-|                              |              |
-|                              |              |    # of times referred:
-|   Multi state display area   |Current state |    multiStateDisplayArea   = 18
-|                              |display area  |    currentStateDisplayArea = 24
-|                              |              |
-|                              |              |
-|This has list of compomponents|This has list |
-|Data of component depends on  |of CTs        |
-|timeOfState                   |Data is from  |    timeOfState = 41
-|                              |currentTime   |
-|timeOfState has               |              |
-|2 possibilities               |              |
-|                              |              |
-|1. timeOfState=null           |              |       
-|2. timeOfState=value          |              |
-|                              |              |
-| If timeOfState==null then    |              |
-| data of component is from    |              |
-| currentTime                  |              |
-|                              +--------------+
-|                              |Search box for|
-|                              |user commands |
-+---------------------------------------------+
++-----------------------------------------+--------------+
+|Multi state displ area header            |              |
++-----------------------------------------+              |
+|                                         |              |
+|                                         |              |    # of times referred:
+|   Multi state display area              |Current state |    multiStateDisplayArea   = 18
+|                                         |display area  |    currentStateDisplayArea = 24
+|                                         |              |
+|                                         |              |
+|This has list of compomponents           |This has list |
+|Data of component depends on             |of CTs        |
+|timeOfState                              |Data is from  |    timeOfState = 41
+|                                         |currentTime   |
+|timeOfState has                          |              |
+|2 possibilities                          |              |
+|                                         |              |
+|1. timeOfState=null                      |              |       
+|2. timeOfState=value                     |              |
+|                                         |              |
+| If timeOfState==null then               |              |
+| data of component is from               |              |
+| currentTime                             |              |
+|                                         +--------------+
+|                                         |Search box for|
+|                                         |user commands |
++--------------------------------------------------------+
+
+
 
 Core 2. Multi state display area header design  
 ==============================================
 
-+----------------------------------------------------------------------------------------+
-|                           Time of state selection                   |    Type of       |
-| Name    Age        +--------------------------------------->        |   component      |
-|                                                                     |   selection      |
-+----------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|             Time of state selection     |   Type of   |
+| Name Age  +-------------------------->  |  component  |
+|                                         |  selection  |
++-------------------------------------------------------+
 
 Core 3. Component Design
 ========================
 
-┌─────────────────────────────────────────────────────────────────┐
-│ ┌───────┐                                ┌────────────────────┐ │
-│ │ Title │                                │Card header actions │ │
-│ └───────┘                                └────────────────────┘ │
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-│                                                                 │
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │
-│  Data row 1                                 Data row actions    │
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │
-│  Data row 2                                 Data row actions    │
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│ ┌────────────────┐              ┌────────────────────┐ │
+│ │ Component name │              │Card header actions │ │     ctName = 35 
+│ └────────────────┘              └────────────────────┘ │     
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+│                                                        │
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ── ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │
+│  Data row 1                        Data row actions    │
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ── ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ── ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │
+│  Data row 2                        Data row actions    │
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ── ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
+│                                                        │
+└────────────────────────────────────────────────────────┘
                                                                           
 
 <template>

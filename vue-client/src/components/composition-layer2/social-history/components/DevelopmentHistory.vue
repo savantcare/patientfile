@@ -25,7 +25,7 @@
     </el-card>
 
     <el-dialog
-      title="Add Development History"
+      ctName="Add Development History"
       :visible.sync="dialogVisible"
       width="30%"
       append-to-body

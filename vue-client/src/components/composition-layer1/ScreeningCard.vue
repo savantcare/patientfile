@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Screening"
+        ctName="Screening"
         actions="A,F,D"
         :stateDisplayArea="stateDisplayArea"
         @showTabToAddInLayer2="showTabToAddInLayer2"

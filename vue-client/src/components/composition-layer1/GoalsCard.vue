@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <CardHeader
-        title="Goal"
+        ctName="Goal"
         actions="A,M,F,D"
         keyId="goal"
         :stateDisplayArea="stateDisplayArea"
@@ -15,7 +15,7 @@
       />
     </div>
     <DataTable
-      title="Goal"
+      ctName="Goal"
       keyId="goal"
       :tabData="tabData"
       :selectedColumns="selectedColumns"

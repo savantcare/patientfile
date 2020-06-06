@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
-          title="AI Scribe"
+          ctName="AI Scribe"
           actions="A,M,F,D"
           :stateDisplayArea="stateDisplayArea"
           @showTabToAddInLayer2="showTabToAddInLayer2"
