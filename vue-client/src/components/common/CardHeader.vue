@@ -27,20 +27,20 @@ If the component is being used in "MultiStateArea" then the component needs to k
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
-          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showReviewButton">R</el-button>
-          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showAddButton">A</el-button>
+          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showReviewChoice">R</el-button>
+          <el-button type="text" size="mini" @click="$emit('showAddDialog')" v-if="showAddChoice">A</el-button>
           <el-button
             type="text"
             size="mini"
             @click="$emit('showMultiChangeDialog')"
             v-if="showMultiChangeButton"
           >M</el-button>
-          <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusButton">F</el-button>
+          <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusChoice">F</el-button>
           <el-button
             type="text"
             size="mini"
             @click="$emit('showDiscontinueHistoryDialog')"
-            v-if="showDiscontinueHistoryButton"
+            v-if="showDiscontinueHistoryChoice"
           >X</el-button>
 
           <el-popover placement="top-start" trigger="hover" content="Addendum">
@@ -109,7 +109,7 @@ export default {
         this.stateArea == "CurrentStateArea"
       );
     },
-    showAddButton() {
+    showAddChoice() {
       if (
         this.stateArea == "CurrentStateArea" ||
         this.timeOfState == null
@@ -121,7 +121,7 @@ export default {
       }
       return false;
     },
-    showReviewButton() {
+    showReviewChoice() {
       if (
         this.stateArea == "CurrentStateArea" ||
         this.timeOfState == null
@@ -145,7 +145,7 @@ export default {
       }
       return false;
     },
-    showFocusButton() {
+    showFocusChoice() {
       if (
         this.stateArea == "CurrentStateArea" ||
         this.timeOfState == null
@@ -157,7 +157,7 @@ export default {
       }
       return false;
     },
-    showDiscontinueHistoryButton() {
+    showDiscontinueHistoryChoice() {
       if (
         this.stateArea == "CurrentStateArea" ||
         this.timeOfState == null
@@ -169,9 +169,8 @@ export default {
       }
       return false;
     },
-    // TODO: This should be called showMultiDiscontinueMenuOption
-    // this.timeOfState -> this.timeOfState
-    showDiscontinueButton() {
+
+    showMultiDiscontinueChoice() {
       if (
         this.stateArea == "CurrentStateArea" ||
         this.timeOfState != null
