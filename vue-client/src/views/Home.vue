@@ -1,8 +1,8 @@
 App architecture 3 core principles
 ==================================
 
-Core 1. Design of page
-======================
+Core 1. Page design
+===================
 
 +------------------------------+--------------+
 |Multi state displ area header |              |
@@ -31,8 +31,8 @@ Core 1. Design of page
 |                              |user commands |
 +---------------------------------------------+
 
-Core 2. Design of header
-=========================
+Core 2. Multi state display area header design  
+==============================================
 
 +----------------------------------------------------------------------------------------+
 |                           Time of state selection                   |    Type of       |
@@ -40,8 +40,8 @@ Core 2. Design of header
 |                                                                     |   selection      |
 +----------------------------------------------------------------------------------------+
 
-Core 3. Design of component
-===========================
+Core 3. Component Design
+========================
 
 ┌─────────────────────────────────────────────────────────────────┐
 │ ┌───────┐                                ┌────────────────────┐ │
@@ -87,7 +87,7 @@ Core 3. Design of component
     </Split>
 
     <!-- tab-dialog is present in home.vue but in hidden state -->
-    <layer-2-tab-dialog></layer-2-tab-dialog>
+    <layer-2-multi-tab-dialog></layer-2-multi-tab-dialog>
     <KeyboardHandler />
   </div>
 </template>
@@ -100,7 +100,7 @@ const MultiStateSplitAreaHeader = () =>
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/ui/SearchBoxForCommandsFromUser.vue");
 
-const Layer2TabDialog = () => import("./Layer2MultiTabDialog.vue");
+const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 
 // TODO: Rename this to RecommendationCard
 const Recommendation = () =>
@@ -115,7 +115,7 @@ const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
 export default {
   name: "Home",
   components: {
-    Layer2TabDialog,
+    Layer2MultiTabDialog,
 
     MultiStateSplitAreaHeader,
 
