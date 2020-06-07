@@ -96,14 +96,14 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    StateAtCurrentTime: currentStateDisplayAreaModule,
+    stateAtSelectedTime: multiStateDisplayAreaModule,
+    multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     recommendation: recommendationStateModule,
     diagnosis: diagnosisStateModule,
     reminder: reminderStateModule,
     goal: goalStateModule,
     setting: settingStateModule,
-    StateAtCurrentTime: currentStateDisplayAreaModule,
-    multiTabDialogLayer2: layer2MultiTabDialogStateModule,
-    stateAtSelectedTime: multiStateDisplayAreaModule,
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule
   },
