@@ -13,20 +13,18 @@ Todo:
    Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
                            https://github.com/FireLemons/Abbreviation-Autocomplete
 
-3. Show discontinued rex's inside a tab in the 2nd layer from the X shortcut in the header. (See history of discontinued rex)
-
-4. Animation
+3. Animation
     1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
     2. remove the movement of data rows and cards on hover.
 
-5. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
+4. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
 
-6. Use temporal DB concept to show the change history for a recommendation that has been changed 
+5. Use temporal DB concept to show the change history for a recommendation that has been changed 
     1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
     2. The multichange slider needs a page number component at the bottom
     3. Regression: Multi change Ct does not show history.
 
-7. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
+6. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
 Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
 
 timeOfApptLock is set once the doctor locks the appt. All health components need to be reviewed.
@@ -34,18 +32,18 @@ timeOfApptLock is set once the doctor locks the appt. All health components need
 Store addendums in the DB
 apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
 
-8. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
+7. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
 
-9. Size limitation of Doctors laptop
+8. Size limitation of Doctors laptop
     1. There is wasted column space in data row table.
     2. Too much space being wasted in Ct Name and then yours and others.
 
-10. Only 1 doctor gets to choose columns and not other doctors.
+9. Only 1 doctor gets to choose columns and not other doctors.
    1. The column names are not user friendly.
 
-11. When I am logged in and I go to /login/ the page does not know that I am already logged in.
+10. When I am logged in and I go to /login/ the page does not know that I am already logged in.
 
-12. How does the system know what are health and what are other components?
+11. How does the system know what are health and what are other components?
 
 
 Milestone 5:
