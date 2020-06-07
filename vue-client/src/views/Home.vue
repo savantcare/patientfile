@@ -1,4 +1,4 @@
-App architecture 3 core principles                          Total references (case insensitive): 194
+App architecture 3 core principles                          Total references (case insensitive): 300
 ==================================
 
 Core 1. Page design

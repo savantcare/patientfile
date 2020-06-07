@@ -10,7 +10,22 @@
       </div>
     </el-col>
     <el-col :span="12">
-      <el-slider v-model="slider" :step="10" show-stops></el-slider>
+      <!-- TODO: 
+      1. The user can only click on marks and not at other locations on slider.
+        This is possible with https://element.eleme.io/#/en-US/component/steps
+        But with stepsComponent TODO on Line 52 is unknown.
+
+      2. Once the user clicks on a point on slider timeOfState needs to set and all Components should update themselves.
+      The only change in query is: Ref: https://mariadb.com/kb/en/temporal-data-tables/#querying-historical-data
+      timeOfState = '2016-10-09 08:07:06'
+      SELECT * FROM recommendations FOR SYSTEM_TIME AS OF TIMESTAMP timeOfState;
+      -->
+      <el-slider id="timeOfStateSelection" 
+                  v-model="sliderInitialValue" 
+                  :marks="apptDatesToMarkOnSlider" 
+                  :format-tooltip="formatTooltip"
+                  show-stops>
+      </el-slider>
     </el-col>
     <el-col :span="6">
       <el-switch
@@ -31,7 +46,22 @@ export default {
     return {
       tabMode: true,
       patientInfo: null,
-      slider: 0
+      sliderInitialValue: 100,
+      /* TODO: 
+      1. apptDatesToMarkOnSlider should come from DB
+      2. The first date is at 0 and todays date is at 100. The middle points need to get proprotionate space
+      */
+      apptDatesToMarkOnSlider: {
+          0: '1/5/20',
+          20: '2/15/20',
+          40: '4/25/20',
+          100: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', 'Current')
+          }
+      }
     };
   },
   computed: {
@@ -60,6 +90,18 @@ export default {
     // this.zoomstateAtSelectedTime();
   },
   methods: {
+    // TODO: This should take data from apptDatesToMarkOnSlider
+    formatTooltip(val) {
+        if (val == 0){
+          return "First appointment on 5th Jan 2020" 
+        }
+        if (val == 20){
+          return "Second appointment on 15th Feb 2020" 
+        }
+        if (val == 40){
+          return "Third appointment on 25th April 2020" 
+        }
+},
     async updatestateAtSelectedTime() {
       await this.$store.dispatch("getstateAtSelectedTimeComponents", {
         type: this.tabMode == true ? 1 : 2,
