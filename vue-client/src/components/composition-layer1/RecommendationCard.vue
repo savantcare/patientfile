@@ -79,6 +79,7 @@ export default {
     showMultiChangeTabInLayer2() {
       this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
+    // TODO: Rename this to handleFocusPanel()
     focusPanel() {
       //stateAtSelectedTime
       var options = {
@@ -101,6 +102,7 @@ export default {
 
       this.$scrollTo(element, 500, options);
     },
+    // TODO: Rename this to handleMultiDiscontinue()
     multiDiscontinue() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
@@ -130,6 +132,7 @@ export default {
         this.columns = value;
       }
     },
+    // TODO: Rename this to handleUpdatePriority()
     async updatePriority(changedDatas) {
       const TOKEN = localStorage.getItem("token");
 
@@ -156,6 +159,7 @@ export default {
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
     },
+    // TODO: Rename this to showDiscontinuedHistoryTabInLayer2()
     showDiscontinueHistoryTabInLayer2() {
       this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     }

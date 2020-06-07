@@ -1,32 +1,31 @@
-App architecture 3 core principles                          Total references: 194
+App architecture 3 core principles                          Total references (case insensitive): 194
 ==================================
 
 Core 1. Page design
 ===================
 
-┌────────────────────────────────────────────────────────┐  # of times referred: (case insensitive)
-|    Multi state display area header      |              |  MultiStateDisplayAreaHeader = 7 
-+-----------------------------------------+              |     
-|                                         |              |    
-|   Multi state display area              |Current state |  multiStateDisplayArea   = 16
-|                                         |display area  |  currentStateDisplayArea = 24
-|                                         |              |  typeOfStateDisplayArea =  71  
-|                                         |              |  (This var contains 1 of above 2)
-|This has list of compomponents. Data     |This has list |
-|of each component depends on timeOfState |of CTs        |
-|                                         |Data is from  |  timeOfState = 41
-|timeOfState has 2 possibilities          |currentTime   |
-|                                         |              |
-|1. timeOfState=null                      |              |
-|2. timeOfState=value                     |              |       
-|                                         |              |
-| If timeOfState==null then data of       |              |
-| component is from currentTime           |              |
-|                                         |              |
-|                                         +--------------+
-|                                         |Search box for|
-|                                         |user commands |
-└────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐  
+|    MultiStateDisplayAreaHeader = 7      |                              |  
++-----------------------------------------+                              |     
+|                                         |                              |    
+|   multiStateDisplayArea = 16            | currentStateDisplayArea = 24 |  
+|                                         |                              |  
+|                                         |                              |  typeOfStateDisplayArea =  71  
+|                                         |                              |  This var contains 1 of: 
+|This has list of compomponents.          |This has list of CTs          |  multiStateDisplayArea  
+|Data of each component depends on        |                              |            OR
+|timeOfState ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
+|timeOfState has 2 possibilities          |                              |
+|                                         |                              |
+|1. timeOfState=null                      |                              |
+|2. timeOfState=value                     |                              |       
+|                                         |                              |
+| If timeOfState==null then data of       |                              |
+| component is from currentTime           |                              |
+|                                         |                              |
+|                                         +------------------------------+
+|                                         |Search box for user commands  |
+└────────────────────────────────────────────────────────────────────────┘
 
 
 Core 2. Multi state display area header design  
@@ -39,24 +38,28 @@ Core 2. Multi state display area header design
 └───────────────────────────────────────────────────────┘
 
 
- Core 3: Component design
- ========================
+ Core 3: Component design                                                                              
+ ========================                                                                              
+                                                                                                       
+┌────────────────────CardHeader = 86────────────────────┐   ┌─────────────────────────────────────────┐
+│ ┌───────────────┐               ┌────────────────────┐│   │         Card header actions             │
+│ │  CtName = 35  │               │Card header actions ││   ├──┬─────────────────────────────────┬────┤
+│ └───────────────┘               └────────────────────┘│   │A │showTabToAddInLayer2()           │ 60 │
+┣━━━━━━━━━━━━━━━━━━━DataTable = 28━━━━━━━━━━━━━━━━━━━━━━┫   ├──┼─────────────────────────────────┼────┤
+│                                                       │   │M │showMultiChangeTabInLayer2()     │ 59 │
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
+│  Data row 1                         Data row actions ││   │F │focusPanel()                     │ 61 │
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
+│                                                       │   │D │multiDiscontinue()               │ 74 │
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │   ├──┼─────────────────────────────────┼────┤
+│  Column 1              Column 2         C D           │   │X │showDiscontinueHistoryTabInLayer2│ 4  │
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │   ├──┼─────────────────────────────────┼────┤
+│                                                       │   │R │Review                           │    │
+└───────────────────────────────────────────────────────┘   ├──┼─────────────────────────────────┼────┤
+                                                            │G │handleUpdateColumns()            │ 17 │
+                                                            └──┴─────────────────────────────────┴────┘
 
-┌────────────────────Card Header────────────────────────┐   CardHeader = 86
-│ ┌───────────────┐               ┌────────────────────┐│   ctName = 35
-│ │Component Name │               │Card header actions ││
-│ └───────────────┘               └────────────────────┘│
-┣━━━━━━━━━━━━━━━━━━━━━Data Table━━━━━━━━━━━━━━━━━━━━━━━━┫   DataTable = 28
-│                                                       │   
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   A -> Add
-│  Data row 1                         Data row actions ││   M -> MultiChange
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   F -> Focus
-│                                                       │   D -> 
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │   X -> Show discontinued
-│  Column 1              Column 2         A M F D X R   │   R -> Review
-│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │   Gear -> Col selection
-│                                                       │
-└───────────────────────────────────────────────────────┘                                                                      
+
 
 <template>
   <div>
