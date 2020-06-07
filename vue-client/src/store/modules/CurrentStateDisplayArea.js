@@ -1,4 +1,4 @@
-import StateAtCurrentTimeCards from "@/cardList.js"
+import StateAtCurrentTimeCards from "@/allComponentsList.js"
 
 export default {
   state: {
