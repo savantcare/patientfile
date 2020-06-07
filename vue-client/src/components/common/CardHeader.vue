@@ -91,7 +91,7 @@ export default {
       mouseOver: false,
       selected: [],
       showPopover: false,
-      timeOfState: this.$route.query.timeOfState // If this value is NULL it means stateAtCurrentTime is being shown.
+      timeOfState: this.$route.query.timeOfState // If this value is NULL it means currentStateDisplayArea is being shown.
     };
   },
   computed: {

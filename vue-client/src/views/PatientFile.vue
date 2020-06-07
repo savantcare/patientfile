@@ -140,7 +140,7 @@ export default {
       return this.$store.state.focusComponent;
     },
     StateAtCurrentTimeComponents() {
-      return this.$store.getters.stateAtCurrentTimeList;
+      return this.$store.getters.currentStateDisplayAreaList;
     },
     multiStateDisplayAreaComponents() {
       return this.$store.getters.multiStateDisplayAreaCtList;

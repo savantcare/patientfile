@@ -55,7 +55,7 @@ export default {
     StateAtCurrentTimeFocusRow(state) {
       return state.rows[state.focusRowIndex]
     },
-    stateAtCurrentTimeList(state) {
+    currentStateDisplayAreaList(state) {
       let list = []
       state.CardsList.forEach(item => {
         const result = StateAtCurrentTimeCards.filter(card => {
@@ -74,7 +74,7 @@ export default {
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
       let StateAtCurrentTimeRows = [];
-      const StateAtCurrentTimeComponents = rootGetters.stateAtCurrentTimeList
+      const StateAtCurrentTimeComponents = rootGetters.currentStateDisplayAreaList
       StateAtCurrentTimeComponents.forEach(item => {
         if (rootState[item.key] && rootState[item.key]["tableList"]) {
           const componentRows = rootState[item.key]["tableList"].filter(
