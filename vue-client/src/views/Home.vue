@@ -67,7 +67,7 @@ Core 2. Multi state display area header design
     <!-- To understand how page is divided: Read Core 1 at top of this file -->
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
-      <SplitArea :size="70" :minsize="100" id="multiStateDisplayArea">
+      <SplitArea :size="70" :minSize="100" id="multiStateDisplayArea">
         <MultiStateDisplayAreaHeader></MultiStateDisplayAreaHeader>
         <component
           v-for="(component, index) in stateAtSelectedTimeComponents"
@@ -76,7 +76,7 @@ Core 2. Multi state display area header design
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
         ></component>
       </SplitArea>
-      <SplitArea :size="30" :minsize="100" id="currentStateDisplayArea">
+      <SplitArea :size="30" :minSize="100" id="currentStateDisplayArea">
         <transition-group name="list" tag="div">
           <component
             v-for="(component, index) in StateAtCurrentTimeComponents"
