@@ -81,7 +81,7 @@ export default {
     },
     // TODO: Rename this to handleFocusPanel()
     focusPanel() {
-      //stateAtSelectedTime
+      //multiStateDisplayArea
       var options = {
         container: "",
         easing: "ease-in",
