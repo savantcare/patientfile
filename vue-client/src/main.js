@@ -39,9 +39,6 @@ Vue.use(new VueSocketIO({
 })
 );
 
-import { SliderPlugin } from "@syncfusion/ej2-vue-inputs";
-Vue.use(SliderPlugin);
-
 import './registerServiceWorker'
 
 
