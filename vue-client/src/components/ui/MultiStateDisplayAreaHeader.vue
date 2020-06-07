@@ -3,7 +3,7 @@
     <el-col :span="6" class="ml-2" style="display: flex; align-items: center;">
       <!-- TODO: This needs to come from DB -->
       <span style="font-size: 20px;">Alexey D</span>
-      <span style="font-size: 14px; margin-left: 6px;">(28 years old)</span>
+      <span style="font-size: 14px; margin-left: 6px;">(28Y)</span>
       <div style="margin-left: 6px;">
         <el-tag v-if="connectionStatus" type="success" size="mini">Online</el-tag>
         <el-tag v-else type="danger" size="mini">Offline</el-tag>
@@ -13,13 +13,15 @@
       <!-- 
       
       Q) Why use a different slider instead of slider from elemenet.io?
-      Req: The user can only click on marks and not at other locations on slider.
+      Requirement: The user can only click on marks and not at other locations on slider.
 
       I (VK in June 20) did not find a way to do it on element.io slider. 
 
       I tried using element io -> steps component (https://element.eleme.io/#/en-US/component/steps)
       But with stepsComponent I could not make 2 steps far away from each other and other 2 steps close to each other. Since each steps represents 
       an appt date. When a patient has 3 appts. The first 2 may be 100 days apaprt and the 2nd and 3rd may be 10 days apart.
+
+      Hence decided to use: https://nightcatsama.github.io/vue-slider-component/#/
 
       TODO:
       1. Once the user clicks on a point on slider timeOfState needs to set and all Components should update themselves.
@@ -31,7 +33,6 @@
         v-model="sliderInitialValue"
         :marks="apptDatesToMarkOnSlider"  
         :included="true"
-
         >
 
       </vue-slider>
