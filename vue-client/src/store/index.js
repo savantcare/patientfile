@@ -84,7 +84,7 @@ export default new Vuex.Store({
         })
         commit("setSearchCommandsList", commandList)
 
-        // Get StateAtSelectedTimeSide components
+        // Get multiStateDisplayArea Side components
         const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(",")
         commit("setMultiStateDisplayAreaCtList", leftComponents, { root: true })
 

@@ -132,7 +132,7 @@ export default {
   data() {
     return {
       searchKeyword: "",
-      stateAtSelectedTimeWidth: 70
+      multiStateDisplayAreaWidth: 70
     };
   },
   computed: {
@@ -173,7 +173,7 @@ export default {
         "setStateAtCurrentTimeSplitAreaWidth",
         `calc(${rightSize}% - 4px) `
       );
-      this.stateAtSelectedTimeWidth = size[0];
+      this.multiStateDisplayAreaWidth = size[0];
     }
   },
   beforeDestroy() {

@@ -10,10 +10,10 @@ module.exports = (sequelize, Sequelize) => {
     componentsAllowedToAccess: {
       type: Sequelize.STRING
     },
-    stateAtSelectedTimeSplitAreaComponentLoadSequence: {
+    multiStateDisplayAreaComponentLoadSequence: {
       type: Sequelize.STRING
     },
-    stateAtCurrentTimeSplitAreaComponentLoadSequence: {
+    currentStateDisplayAreaComponentLoadSequence: {
       type: Sequelize.STRING
     },
     // Timestamps

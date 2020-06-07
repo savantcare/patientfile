@@ -45,7 +45,7 @@ export default {
           })
 
           commit("setMultiStateDisplayAreaCtList", availableComponents)
-          // dispatch("zoomstateAtSelectedTime")
+          // dispatch("zoomMultiStateDisplayArea")
         }
       } catch (ex) {
         toast.toast("Server connection error", {
@@ -55,7 +55,7 @@ export default {
         })
       }
     },
-    zoomstateAtSelectedTime() {
+    zoomMultiStateDisplayArea() {
       // const r = state.zoomValue
       // $("#stateAtSelectedTimeContent").css({
       //   "-webkit-transform": "scale(" + r + ")",

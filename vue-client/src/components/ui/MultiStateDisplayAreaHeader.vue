@@ -81,10 +81,10 @@ export default {
       return this.$store.state.connectionStatus;
     },
     timeOfState() {
-      return this.$store.state.stateAtSelectedTime.timeOfState;
+      return this.$store.state.multiStateDisplayArea.timeOfState;
     },
     zoomValue() {
-      return this.$store.state.stateAtSelectedTime.zoomValue;
+      return this.$store.state.multiStateDisplayArea.zoomValue;
     },
     connectionStatus() {
       return this.$store.state.connectionStatus;
@@ -99,7 +99,7 @@ export default {
     // this.getPatientInfo();
     // this.updatestateAtSelectedTime();
     // this.zoomValue = this.$store.state.stateAtSelectedTime.zoomValue;
-    // this.zoomstateAtSelectedTime();
+    // this.zoomMultiStateDisplayArea();
   },
   methods: {
     // TODO: This should take data from apptDatesToMarkOnSlider
@@ -136,7 +136,7 @@ export default {
       //   }
 
       //   this.$store.commit("setMultiStateDisplayAreaZoomValue", r);
-      //   this.$store.dispatch("zoomstateAtSelectedTime");
+      //   this.$store.dispatch("zoomMultiStateDisplayArea");
       // }, 100);
     },
     async getPatientInfo() {
@@ -175,13 +175,13 @@ export default {
       let value = this.zoomValue;
       value -= 0.1;
       this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
-      this.$store.dispatch("zoomstateAtSelectedTime");
+      this.$store.dispatch("zoomMultiStateDisplayArea");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
       this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
-      this.$store.dispatch("zoomstateAtSelectedTime");
+      this.$store.dispatch("zoomMultiStateDisplayArea");
     }
   }
 };
