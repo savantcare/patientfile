@@ -135,7 +135,7 @@ export default {
       //     r = Math.min(windowWidth / width, windowHeight / height);
       //   }
 
-      //   this.$store.commit("setstateAtSelectedTimeZoomValue", r);
+      //   this.$store.commit("setMultiStateDisplayAreaZoomValue", r);
       //   this.$store.dispatch("zoomstateAtSelectedTime");
       // }, 100);
     },
@@ -174,13 +174,13 @@ export default {
     zoomOut() {
       let value = this.zoomValue;
       value -= 0.1;
-      this.$store.commit("setstateAtSelectedTimeZoomValue", value);
+      this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
       this.$store.dispatch("zoomstateAtSelectedTime");
     },
     zoomIn() {
       let value = this.zoomValue;
       value += 0.1;
-      this.$store.commit("setstateAtSelectedTimeZoomValue", value);
+      this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
       this.$store.dispatch("zoomstateAtSelectedTime");
     }
   }

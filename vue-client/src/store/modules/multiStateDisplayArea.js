@@ -13,10 +13,10 @@ export default {
     setMultiStateDisplayAreaCtList(state, value) {
       state.list = value
     },
-    setstateAtSelectedTimeCurrentDate(state, value) {
+    setTimeOfState(state, value) {
       state.timeOfState = value
     },
-    setstateAtSelectedTimeZoomValue(state, value) {
+    setMultiStateDisplayAreaZoomValue(state, value) {
       state.zoomValue = value
     }
   },
