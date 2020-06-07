@@ -71,7 +71,7 @@ Core 2. Multi state display area header design
         <MultiStateDisplayAreaHeader></MultiStateDisplayAreaHeader>
         <component
           v-for="(component, index) in multiStateDisplayAreaComponents"
-          :key="`state-at-selectedTime-${index}`"
+          :key="`multi-state-display-area-component-${index}`"
           :is="component.value"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
         ></component>
@@ -80,7 +80,7 @@ Core 2. Multi state display area header design
         <transition-group name="list" tag="div">
           <component
             v-for="(component, index) in CurrentStateDisplayAreaComponents"
-            :key="`right-component-${index}`"
+            :key="`current-state-display-area-component-${index}`"
             :is="component.value"
           ></component>
         </transition-group>
