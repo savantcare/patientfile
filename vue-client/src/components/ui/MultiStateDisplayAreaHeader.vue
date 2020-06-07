@@ -114,7 +114,7 @@ export default {
           return "Third appointment on 25th April 2020" 
         }
 },
-    async updatestateAtSelectedTime() {
+    async updateMultiStateDisplayArea() {
       await this.$store.dispatch("getMultiStateDisplayAreaCtList", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast

@@ -57,7 +57,7 @@ export default {
     },
     zoomMultiStateDisplayArea() {
       // const r = state.zoomValue
-      // $("#stateAtSelectedTimeContent").css({
+      // $("#multiStateDisplayAreaContent").css({
       //   "-webkit-transform": "scale(" + r + ")",
       //   "-moz-transform": "scale(" + r + ")",
       //   "-ms-transform": "scale(" + r + ")",
@@ -65,16 +65,16 @@ export default {
       //   transform: "scale(" + r + ")"
       // });
 
-      // var height = document.getElementById("stateAtSelectedTimeContent").offsetHeight;
+      // var height = document.getElementById("multiStateDisplayAreaContent").offsetHeight;
       // var windowHeight = $(document).outerHeight() - 100;
       // height = Math.ceil(height * r)
 
       // if (height > windowHeight || r == 1) {
-      //   $("#stateAtSelectedTimeContent").css({
+      //   $("#multiStateDisplayAreaContent").css({
       //     position: "initial"
       //   })
       // } else {
-      //   $("#stateAtSelectedTimeContent").css({
+      //   $("#multiStateDisplayAreaContent").css({
       //     position: "fixed"
       //   })
       // }
