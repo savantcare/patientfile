@@ -143,7 +143,7 @@ export default {
       return this.$store.getters.stateAtCurrentTimeList;
     },
     stateAtSelectedTimeComponents() {
-      return this.$store.getters.stateAtSelectedTimeList;
+      return this.$store.getters.multiStateDisplayAreaCtList;
     }
   },
   beforeCreate() {},

@@ -86,7 +86,7 @@ export default new Vuex.Store({
 
         // Get StateAtSelectedTimeSide components
         const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(",")
-        commit("setStateAtSelectedTimeList", leftComponents, { root: true })
+        commit("setMultiStateDisplayAreaCtList", leftComponents, { root: true })
 
         // Get StateAtCurrentTimeSide components
         const rightComponents = currentStateDisplayAreaComponentLoadSequence.split(",")

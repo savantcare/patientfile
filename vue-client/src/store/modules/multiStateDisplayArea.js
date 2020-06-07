@@ -10,7 +10,7 @@ export default {
     originSize: null
   },
   mutations: {
-    setStateAtSelectedTimeList(state, value) {
+    setMultiStateDisplayAreaCtList(state, value) {
       state.list = value
     },
     setstateAtSelectedTimeCurrentDate(state, value) {
@@ -21,7 +21,7 @@ export default {
     }
   },
   actions: {
-    async getstateAtSelectedTimeComponents({ commit }, json) {
+    async currentStateDisplayAreaCtList({ commit }, json) {
       const { toast, type } = json
       const TOKEN = localStorage.getItem("token")
       try {
@@ -44,7 +44,7 @@ export default {
             }
           })
 
-          commit("setStateAtSelectedTimeList", availableComponents)
+          commit("setMultiStateDisplayAreaCtList", availableComponents)
           // dispatch("zoomstateAtSelectedTime")
         }
       } catch (ex) {
@@ -81,7 +81,7 @@ export default {
     }
   },
   getters: {
-    stateAtSelectedTimeList(state) {
+    multiStateDisplayAreaCtList(state) {
       let list = []
       state.list.forEach(item => {
         const result = allComponentsList.filter(card => {

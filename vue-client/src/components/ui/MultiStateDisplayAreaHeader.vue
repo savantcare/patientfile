@@ -115,7 +115,7 @@ export default {
         }
 },
     async updatestateAtSelectedTime() {
-      await this.$store.dispatch("getstateAtSelectedTimeComponents", {
+      await this.$store.dispatch("currentStateDisplayAreaCtList", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast
       });
