@@ -76,14 +76,14 @@ Ref: https://mariadb.com/kb/en/temporal-data-tables/
 ## Q8) How the system decides which components are allowed access for each user role? Also what is the initial load sequence?
 sc_user »Table: user_roles has the following fields:
 componentsAllowedToAccess
-stateAtSelectedTimeSplitAreaComponentLoadSequence
-stateAtCurrentTimeSplitAreaComponentLoadSequence
+multiStateDisplayAreaAreaComponentLoadSequence
+currentStateDisplayAreaAreaComponentLoadSequence
 
 The data looks like this:
-| id                                   | name                   | componentsAllowedToAccess | stateAtSelectedTimeSplitAreaComponentLoadSequence | stateAtCurrentTimeSplitAreaComponentLoadSequence |
-|--------------------------------------|------------------------|---------------------------|---------------------------------------------------|--------------------------------------------------|
-| 897d25c6-2c84-47fe-9236-2c3cc9c70bdf | Doctor                 | Rex,Rem,Shx               | Rex,Rem,Shx                                       | Rem,Rex                                          |
-| ae0ae9e7-545a-4783-ac83-84786839dcc1 | Patient                | NULL                      | 0                                                 | 0                                                |
-| ae2f20c1-448b-4df0-b221-9b4c3d411f59 | Doctor admin assistant | Shx, Policies             | Shx,Rem                                           | Rex                                              |
+| id                                   | name                   | componentsAllowedToAccess | multiStateDisplayAreaAreaComponentLoadSequence | currentStateDisplayAreaAreaComponentLoadSequence |
+|--------------------------------------|------------------------|---------------------------|------------------------------------------------|--------------------------------------------------|
+| 897d25c6-2c84-47fe-9236-2c3cc9c70bdf | Doctor                 | Rex,Rem,Shx               | Rex,Rem,Shx                                    | Rem,Rex                                          |
+| ae0ae9e7-545a-4783-ac83-84786839dcc1 | Patient                | NULL                      | 0                                              | 0                                                |
+| ae2f20c1-448b-4df0-b221-9b4c3d411f59 | Doctor admin assistant | Shx, Policies             | Shx,Rem                                        | Rex                                              |
 
 ## Q9) How does the system redirect user to login if the user is not logged in?

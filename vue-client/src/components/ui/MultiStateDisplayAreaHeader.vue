@@ -92,13 +92,13 @@ export default {
   },
   watch: {
     tabMode() {
-      // this.updatestateAtSelectedTime();
+      // this.updateMultiStateDisplayArea();
     }
   },
   mounted() {
     // this.getPatientInfo();
-    // this.updatestateAtSelectedTime();
-    // this.zoomValue = this.$store.state.stateAtSelectedTime.zoomValue;
+    // this.updateMultiStateDisplayArea();
+    // this.zoomValue = this.$store.state.MultiStateDisplayArea.zoomValue;
     // this.zoomMultiStateDisplayArea();
   },
   methods: {
@@ -121,8 +121,8 @@ export default {
       });
 
       // setTimeout(() => {
-      //   var width = document.getElementById("stateAtSelectedTimeContent").offsetWidth;
-      //   var height = document.getElementById("stateAtSelectedTimeContent").offsetHeight;
+      //   var width = document.getElementById("multiStateDisplayAreaContent").offsetWidth;
+      //   var height = document.getElementById("multiStateDisplayAreaContent").offsetHeight;
       //   var windowWidth = $(document).outerWidth();
       //   var windowHeight = $(document).outerHeight();
       //   windowWidth = windowWidth * (70 / 100);
