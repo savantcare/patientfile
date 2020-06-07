@@ -1,6 +1,6 @@
 import { COMPONENT_API_URL, STATE_AT_SELECTED_TIME_COMPONENTS } from '@/const.js'
 // import $ from "jquery";
-import allComponentsList from "@/allComponentsList.js"
+import allComponentsList from "@/const/allComponentsList.js"
 
 export default {
   state: {
