@@ -6,20 +6,29 @@ import store from './store'
 import router from './router'
 
 
-// External-UI-Ct-1/4 Ref: https://github.com/NightCatSama/vue-slider-component
+// External-UI-Ct-1/5 Integrate Element.io library
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, { locale });
+
+/* External-UI-Ct-2/5 Ref: https://github.com/NightCatSama/vue-slider-component
+Q) Why use a different slider instead of slider from elemenet.io?
+Read: MultiStateDisplayAreaHeader.vue:15
+*/
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 Vue.component('VueSlider', VueSlider)
 
-// External-UI-Ct-2/4 Ref: http://vue-js-toggle-button.yev.io/
+// External-UI-Ct-3/5 Ref: http://vue-js-toggle-button.yev.io/
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
 
-// External-UI-Ct-3/4 Ref: https://github.com/bajaniyarohit/vue-split-panel
+// External-UI-Ct-4/5 Ref: https://github.com/bajaniyarohit/vue-split-panel
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
 
-// External-UI-Ct-4/4 Ref: https://github.com/rigor789/vue-scrollto
+// External-UI-Ct-5/5 Ref: https://github.com/rigor789/vue-scrollto
 const VueScrollTo = require('vue-scrollto')
 Vue.use(VueScrollTo)
 
@@ -40,16 +49,6 @@ Vue.use(new VueSocketIO({
 );
 
 import './registerServiceWorker'
-
-
-import * as ElResize from 'vue-element-resize-event'
-Vue.use(ElResize)
-
-// Integrate Element.io library
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import locale from 'element-ui/lib/locale/lang/en'
-Vue.use(ElementUI, { locale });
 
 Vue.use(require('vue-shortkey'))
 
