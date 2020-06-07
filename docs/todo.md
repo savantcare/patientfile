@@ -10,6 +10,8 @@ Todo:
 
 2. Search 
    1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
+   Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
+                           https://github.com/FireLemons/Abbreviation-Autocomplete
 
 3. Show discontinued rex's inside a tab in the 2nd layer from the X shortcut in the header. (See history of discontinued rex)
 
