@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     focusRow() {
-      return this.$store.getters.StateAtCurrentTimeFocusRow;
+      return this.$store.getters.CurrentStateDisplayAreaFocusRow;
     },
     isHeaderFocus() {
       return (

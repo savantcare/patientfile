@@ -39,8 +39,8 @@ export default {
       /**
        * Global Key-Handler for Right-Panel components
        */
-      let { focusRowIndex } = this.$store.state.StateAtCurrentTime;
-      const { rows, searchKeyword } = this.$store.state.StateAtCurrentTime;
+      let { focusRowIndex } = this.$store.state.CurrentStateDisplayArea;
+      const { rows, searchKeyword } = this.$store.state.CurrentStateDisplayArea;
 
       if (event.key == "Shift") {
         this.shiftKeyPressed = true;
@@ -56,7 +56,7 @@ export default {
         // Set focus to the <current-state-components-search-box>
         focusRowIndex = rows.length - 1;
         this.$parent.$refs.search_box.setFocus();
-        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
+        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowDown") {
         if (this.shiftKeyPressed) {
           console.log("Shift + down");
@@ -66,7 +66,7 @@ export default {
         } else {
           focusRowIndex += 1;
         }
-        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
+        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
       } else if (event.key == "ArrowUp") {
         if (this.shiftKeyPressed) {
           console.log("Shift + up");
@@ -76,7 +76,7 @@ export default {
         } else {
           focusRowIndex -= 1;
         }
-        this.$store.commit("setStateAtCurrentTimeFocusRowIndex", focusRowIndex);
+        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
       }
 
       const focusRow = rows[focusRowIndex];
@@ -112,7 +112,7 @@ export default {
               notify: this.$notify
             }
           );
-          this.$store.dispatch("updateStateAtCurrentTimeRow");
+          this.$store.dispatch("updateCurrentStateDisplayAreaRow");
         }
         return;
       }

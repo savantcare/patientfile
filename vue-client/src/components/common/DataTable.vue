@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'StateAtCurrentTime')"
+                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentStateDisplayArea')"
               >
                 <el-button
                   type="text"
@@ -130,7 +130,7 @@ export default {
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.keyId}-${rowIndex + 1}` &&
-        this.type == "StateAtCurrentTime"
+        this.type == "CurrentStateDisplayArea"
       ) {
         return "focus-row";
       }
@@ -152,7 +152,7 @@ export default {
     },
     checkChangePriority() {
       if (
-        this.type == "StateAtCurrentTime" &&
+        this.type == "CurrentStateDisplayArea" &&
         this.originMyData.length == this.myData.length
       ) {
         let changedList = [];
@@ -223,7 +223,7 @@ export default {
   },
   computed: {
     focusRow() {
-      return this.$store.getters.StateAtCurrentTimeFocusRow;
+      return this.$store.getters.CurrentStateDisplayAreaFocusRow;
     },
     selectedColumns() {
       return this.$store.state.selectedColumns[this.keyId];
@@ -253,10 +253,10 @@ export default {
       this.checkChangePriority();
     },
     tab() {
-      if (this.type == "StateAtCurrentTime") {
+      if (this.type == "CurrentStateDisplayArea") {
         const tableList = this.tabData[this.tab].tableData;
         this.$emit("updateTableList", tableList);
-        this.$store.dispatch("updateStateAtCurrentTimeRow");
+        this.$store.dispatch("updateCurrentStateDisplayAreaRow");
       }
     }
   }

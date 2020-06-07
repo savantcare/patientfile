@@ -143,7 +143,7 @@ export default {
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.title}-${rowIndex + 1}` &&
-        this.type == "StateAtCurrentTime"
+        this.type == "CurrentStateDisplayArea"
       ) {
         return "focus-row";
       }
@@ -166,7 +166,7 @@ export default {
   mounted() {},
   computed: {
     focusRow() {
-      return this.$store.getters.StateAtCurrentTimeFocusRow;
+      return this.$store.getters.CurrentStateDisplayAreaFocusRow;
     }
   }
 };

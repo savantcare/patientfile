@@ -28,10 +28,10 @@ export default {
   },
   computed: {
     width() {
-      return this.$store.state.StateAtCurrentTime.width;
+      return this.$store.state.CurrentStateDisplayArea.width;
     },
     focusRow() {
-      return this.$store.getters.StateAtCurrentTimeFocusRow;
+      return this.$store.getters.CurrentStateDisplayAreaFocusRow;
     }
   },
   watch: {
@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     this.$store.commit(
-      "setStateAtCurrentTimeSplitAreaWidth",
+      "setCurrentStateDisplayAreaSplitAreaWidth",
       "calc(30% - 4px)"
     );
   },
@@ -61,8 +61,8 @@ export default {
       }, 50);
     },
     handleFocus() {
-      const { rows } = this.$store.state.StateAtCurrentTime;
-      this.$store.commit("setStateAtCurrentTimeFocusRowIndex", rows.length - 1);
+      const { rows } = this.$store.state.CurrentStateDisplayArea;
+      this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", rows.length - 1);
     },
     checkRowFocusStatus(object) {
       const { rowIndex } = object;
@@ -100,10 +100,10 @@ export default {
     handleSelect(item) {
       const { value, action } = item;
       if (action == "") {
-        this.$store.commit("updateStateAtCurrentTimeCards", value);
+        this.$store.commit("updateCurrentStateDisplayAreaCards", value);
         if (value == "clear") {
-          this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
-          this.$store.commit("setStateAtCurrentTimeCardsList", []);
+          this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", -1);
+          this.$store.commit("setCurrentStateDisplayAreaCardsList", []);
         } else {
           const componentsAllowedToAccess = this.$store.state
             .componentsAllowedToAccess;
@@ -111,24 +111,24 @@ export default {
             return value.search(item.toLowerCase()) > -1;
           })[0];
           const stateAtCurrentStateComponents = this.$store.state
-            .StateAtCurrentTime.CardsList;
+            .CurrentStateDisplayArea.CardsList;
           let newList = stateAtCurrentStateComponents.filter(item => {
             return action.search(item.toLowerCase()) > -1;
           });
           newList.push(searchComponent);
-          this.$store.commit("setStateAtCurrentTimeCardsList", newList);
+          this.$store.commit("setCurrentStateDisplayAreaCardsList", newList);
         }
-        this.$store.dispatch("updateStateAtCurrentTimeRow");
+        this.$store.dispatch("updateCurrentStateDisplayAreaRow");
       } else {
         this.$store.commit(action);
       }
 
       this.searchKeyword = "";
-      this.$store.commit("setStateAtCurrentTimeSearchKeyword", "");
+      this.$store.commit("setCurrentStateDisplayAreaSearchKeyword", "");
     },
     handleInput() {
       this.$store.commit(
-        "setStateAtCurrentTimeSearchKeyword",
+        "setCurrentStateDisplayAreaSearchKeyword",
         this.searchKeyword
       );
     }

@@ -79,7 +79,7 @@ Core 2. Multi state display area header design
       <SplitArea :size="30" :minSize="100" id="currentStateDisplayArea">
         <transition-group name="list" tag="div">
           <component
-            v-for="(component, index) in StateAtCurrentTimeComponents"
+            v-for="(component, index) in CurrentStateDisplayAreaComponents"
             :key="`right-component-${index}`"
             :is="component.value"
           ></component>
@@ -139,7 +139,7 @@ export default {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    StateAtCurrentTimeComponents() {
+    CurrentStateDisplayAreaComponents() {
       return this.$store.getters.currentStateDisplayAreaList;
     },
     multiStateDisplayAreaComponents() {
@@ -160,17 +160,17 @@ export default {
     this.$socket.emit("CREATE_ROOM", `room-${patientId}-${role}`);
 
     this.$store.commit("setFocusComponent", "");
-    this.$store.commit("setStateAtCurrentTimeFocusRowIndex", -1);
+    this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", -1);
 
     // setTimeout(() => {
-    //   this.$store.dispatch("updateStateAtCurrentTimeRow");
+    //   this.$store.dispatch("updateCurrentStateDisplayAreaRow");
     // }, 1000);
   },
   methods: {
     onDrag(size) {
       const rightSize = size[1];
       this.$store.commit(
-        "setStateAtCurrentTimeSplitAreaWidth",
+        "setCurrentStateDisplayAreaSplitAreaWidth",
         `calc(${rightSize}% - 4px) `
       );
       this.multiStateDisplayAreaWidth = size[0];

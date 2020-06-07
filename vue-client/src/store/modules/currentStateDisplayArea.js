@@ -1,4 +1,4 @@
-import StateAtCurrentTimeCards from "@/const/allComponentsList.js"
+import CurrentStateDisplayAreaCards from "@/const/allComponentsList.js"
 
 export default {
   state: {
@@ -9,22 +9,22 @@ export default {
     searchKeyword: ""
   },
   mutations: {
-    setStateAtCurrentTimeSplitAreaWidth(state, value) {
+    setCurrentStateDisplayAreaSplitAreaWidth(state, value) {
       state.width = value
     },
-    setStateAtCurrentTimeCardsList(state, newList) {
+    setCurrentStateDisplayAreaCardsList(state, newList) {
       state.CardsList = newList
     },
-    setStateAtCurrentTimeFocusRowIndex(state, index) {
+    setCurrentStateDisplayAreaFocusRowIndex(state, index) {
       state.focusRowIndex = index
     },
-    setStateAtCurrentTimeRows(state, rows) {
+    setCurrentStateDisplayAreaRows(state, rows) {
       state.rows = rows;
     },
-    setStateAtCurrentTimeSearchKeyword(state, keyword) {
+    setCurrentStateDisplayAreaSearchKeyword(state, keyword) {
       state.searchKeyword = keyword
     },
-    updateStateAtCurrentTimeCards(state, action) {
+    updateCurrentStateDisplayAreaCards(state, action) {
       if (action == "clear") {
         state.focusRowIndex = -1
         state.CardsList = []
@@ -35,7 +35,7 @@ export default {
           return action.search(item.toLowerCase()) > -1
         })
         newList.push()
-        // const card = StateAtCurrentTimeCards.filter(item => {
+        // const card = CurrentStateDisplayAreaCards.filter(item => {
         //   return action.search(item.key) > -1
         // })
         // let newList = []
@@ -52,13 +52,13 @@ export default {
     }
   },
   getters: {
-    StateAtCurrentTimeFocusRow(state) {
+    CurrentStateDisplayAreaFocusRow(state) {
       return state.rows[state.focusRowIndex]
     },
     currentStateDisplayAreaList(state) {
       let list = []
       state.CardsList.forEach(item => {
-        const result = StateAtCurrentTimeCards.filter(card => {
+        const result = CurrentStateDisplayAreaCards.filter(card => {
           return card.abbreviation == item.toLowerCase()
         })
         if (result.length > 0) {
@@ -69,13 +69,13 @@ export default {
     }
   },
   actions: {
-    updateStateAtCurrentTimeRow({ rootState, commit, rootGetters }) {
+    updateCurrentStateDisplayAreaRow({ rootState, commit, rootGetters }) {
       /**
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
-      let StateAtCurrentTimeRows = [];
-      const StateAtCurrentTimeComponents = rootGetters.currentStateDisplayAreaList
-      StateAtCurrentTimeComponents.forEach(item => {
+      let CurrentStateDisplayAreaRows = [];
+      const CurrentStateDisplayAreaComponents = rootGetters.currentStateDisplayAreaList
+      CurrentStateDisplayAreaComponents.forEach(item => {
         if (rootState[item.key] && rootState[item.key]["tableList"]) {
           const componentRows = rootState[item.key]["tableList"].filter(
             data => {
@@ -83,15 +83,15 @@ export default {
             }
           );
           // Set the header index as 0
-          StateAtCurrentTimeRows.push(`${item.key}-0`);
+          CurrentStateDisplayAreaRows.push(`${item.key}-0`);
           componentRows.forEach((row, index) => {
-            StateAtCurrentTimeRows.push(`${item.key}-${index + 1}`);
+            CurrentStateDisplayAreaRows.push(`${item.key}-${index + 1}`);
           });
         }
       });
       // Add current-state-components-search-box component at the last
-      StateAtCurrentTimeRows.push("current-state-components-search-box");
-      commit("setStateAtCurrentTimeRows", StateAtCurrentTimeRows)
+      CurrentStateDisplayAreaRows.push("current-state-components-search-box");
+      commit("setCurrentStateDisplayAreaRows", CurrentStateDisplayAreaRows)
     }
   }
 }

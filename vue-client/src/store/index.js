@@ -88,15 +88,15 @@ export default new Vuex.Store({
         const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(",")
         commit("setMultiStateDisplayAreaCtList", leftComponents, { root: true })
 
-        // Get StateAtCurrentTimeSide components
+        // Get CurrentStateDisplayAreaSide components
         const rightComponents = currentStateDisplayAreaComponentLoadSequence.split(",")
-        commit("setStateAtCurrentTimeCardsList", rightComponents, { root: true })
+        commit("setCurrentStateDisplayAreaCardsList", rightComponents, { root: true })
 
       }
     }
   },
   modules: {
-    StateAtCurrentTime: currentStateDisplayAreaModule,
+    CurrentStateDisplayArea: currentStateDisplayAreaModule,
     // TODO: The correct name for stateAtSelectedTime is multiStateDisplayArea but when I rename the left side components do not come.
     // When I search for stateAtSelectedTime I do not see it used anywhere.
     stateAtSelectedTime: multiStateDisplayAreaModule,
