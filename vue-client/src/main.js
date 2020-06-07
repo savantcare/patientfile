@@ -6,11 +6,22 @@ import store from './store'
 import router from './router'
 
 
+// External-UI-Ct-1/4 Ref: https://github.com/NightCatSama/vue-slider-component
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
-
 Vue.component('VueSlider', VueSlider)
 
+// External-UI-Ct-2/4 Ref: http://vue-js-toggle-button.yev.io/
+import ToggleButton from 'vue-js-toggle-button'
+Vue.use(ToggleButton)
+
+// External-UI-Ct-3/4 Ref: https://github.com/bajaniyarohit/vue-split-panel
+import VueSplit from 'vue-split-panel'
+Vue.use(VueSplit)
+
+// External-UI-Ct-4/4 Ref: https://github.com/rigor789/vue-scrollto
+const VueScrollTo = require('vue-scrollto')
+Vue.use(VueScrollTo)
 
 // Initialize socket.io
 import SocketIO from 'socket.io-client'
@@ -28,12 +39,6 @@ Vue.use(new VueSocketIO({
 })
 );
 
-import VueSplit from 'vue-split-panel'
-Vue.use(VueSplit)
-
-const VueScrollTo = require('vue-scrollto')
-Vue.use(VueScrollTo)
-
 import { SliderPlugin } from "@syncfusion/ej2-vue-inputs";
 Vue.use(SliderPlugin);
 
@@ -45,10 +50,6 @@ import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 
 Vue.use(VueGoodTablePlugin);
-
-import VueTabs from 'vue-nav-tabs'
-import 'vue-nav-tabs/themes/vue-tabs.css'
-Vue.use(VueTabs)
 
 import * as ElResize from 'vue-element-resize-event'
 Vue.use(ElResize)
