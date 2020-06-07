@@ -44,12 +44,6 @@ Vue.use(SliderPlugin);
 
 import './registerServiceWorker'
 
-import VueGoodTablePlugin from 'vue-good-table';
-
-// import the styles
-import 'vue-good-table/dist/vue-good-table.css'
-
-Vue.use(VueGoodTablePlugin);
 
 import * as ElResize from 'vue-element-resize-event'
 Vue.use(ElResize)
