@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "current-state-components-search-box",
+  name: "search-box-for-commands-from-user",
   data() {
     return {
       searchKeyword: "",

@@ -89,8 +89,8 @@ export default {
           });
         }
       });
-      // Add current-state-components-search-box component at the last
-      CurrentStateDisplayAreaRows.push("current-state-components-search-box");
+      // Add search-box-for-commands-from-user component at the last
+      CurrentStateDisplayAreaRows.push("search-box-for-commands-from-user");
       commit("setCurrentStateDisplayAreaRows", CurrentStateDisplayAreaRows)
     }
   }
