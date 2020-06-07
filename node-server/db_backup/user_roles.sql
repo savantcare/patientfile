@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 15, 2020 at 07:25 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Host: mariadb
+-- Generation Time: Jun 07, 2020 at 09:22 PM
+-- Server version: 10.4.13-MariaDB-1:10.4.13+maria~bionic
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,9 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `user_roles` (
-  `id` int(11) NOT NULL,
+  `id` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `availableComponents` varchar(255) DEFAULT NULL,
+  `componentsAllowedToAccess` varchar(255) DEFAULT NULL,
+  `multiStateDisplayAreaComponentLoadSequence` varchar(255) NOT NULL,
+  `currentStateDisplayAreaComponentLoadSequence` varchar(255) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,10 +41,10 @@ CREATE TABLE `user_roles` (
 -- Dumping data for table `user_roles`
 --
 
-INSERT INTO `user_roles` (`id`, `name`, `availableComponents`, `createdAt`, `updatedAt`) VALUES
-(1, 'doctor', 'recommendation,reminder,combination', '2020-05-07 22:05:48', '2020-05-07 22:05:48'),
-(2, 'receptionist', 'reminder', '2020-05-07 22:05:58', '2020-05-07 22:05:58'),
-(3, 'patient', NULL, '2020-05-12 20:51:51', '2020-05-12 20:51:51');
+INSERT INTO `user_roles` (`id`, `name`, `componentsAllowedToAccess`, `multiStateDisplayAreaComponentLoadSequence`, `currentStateDisplayAreaComponentLoadSequence`, `createdAt`, `updatedAt`) VALUES
+('897d25c6-2c84-47fe-9236-2c3cc9c70bdf', 'Doctor', 'Rex,Rem,Shx,Goal,Dx,Fh,s', 'Rex,Rem', 'Rex', '2020-05-29 17:51:17', '2020-05-29 17:51:17'),
+('ae0ae9e7-545a-4783-ac83-84786839dcc1', 'Patient', NULL, '0', '0', '2020-05-29 18:01:00', '2020-05-29 18:01:00'),
+('ae2f20c1-448b-4df0-b221-9b4c3d411f59', 'Doctor admin assistant', 'Shx, Policies,Rem', 'Shx,Rem', 'Rex', '2020-05-29 17:51:36', '2020-05-29 17:51:36');
 
 --
 -- Indexes for dumped tables
@@ -54,16 +55,6 @@ INSERT INTO `user_roles` (`id`, `name`, `availableComponents`, `createdAt`, `upd
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `user_roles`
---
-ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

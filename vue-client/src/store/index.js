@@ -97,6 +97,8 @@ export default new Vuex.Store({
   },
   modules: {
     StateAtCurrentTime: currentStateDisplayAreaModule,
+    // TODO: The correct name for stateAtSelectedTime is multiStateDisplayArea but when I rename the left side components do not come.
+    // When I search for stateAtSelectedTime I do not see it used anywhere.
     stateAtSelectedTime: multiStateDisplayAreaModule,
     multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     recommendation: recommendationStateModule,

@@ -70,7 +70,7 @@ Core 2. Multi state display area header design
       <SplitArea :size="70" :minSize="100" id="multiStateDisplayArea">
         <MultiStateDisplayAreaHeader></MultiStateDisplayAreaHeader>
         <component
-          v-for="(component, index) in stateAtSelectedTimeComponents"
+          v-for="(component, index) in multiStateDisplayAreaComponents"
           :key="`state-at-selectedTime-${index}`"
           :is="component.value"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
@@ -142,7 +142,7 @@ export default {
     StateAtCurrentTimeComponents() {
       return this.$store.getters.stateAtCurrentTimeList;
     },
-    stateAtSelectedTimeComponents() {
+    multiStateDisplayAreaComponents() {
       return this.$store.getters.multiStateDisplayAreaCtList;
     }
   },
