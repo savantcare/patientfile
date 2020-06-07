@@ -9,7 +9,7 @@ import diagnosisStateModule from './modules/diagnosisState'
 import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
-import CurrentStateDisplayAreaModule from './modules/currentStateDisplayArea'
+import currentStateDisplayAreaModule from './modules/currentStateDisplayArea'
 import layer2MultiTabDialogStateModule from './modules/layer2MultiTabDialogState'
 import stateAtSelectedTimeModule from './modules/multiStateDisplayArea'
 import socialHistoryStateModule from './modules/socialHistoryState'
@@ -101,7 +101,7 @@ export default new Vuex.Store({
     reminder: reminderStateModule,
     goal: goalStateModule,
     setting: settingStateModule,
-    StateAtCurrentTime: CurrentStateDisplayAreaModule,
+    StateAtCurrentTime: currentStateDisplayAreaModule,
     multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     stateAtSelectedTime: stateAtSelectedTimeModule,
     socialHistory: socialHistoryStateModule,
