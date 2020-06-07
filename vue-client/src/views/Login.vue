@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { LOGIN_API_URL } from "@/const.js";
+import { LOGIN_API_URL } from "@/const/others.js";
 export default {
   data() {
     return {

@@ -43,7 +43,7 @@
  * Multi Add Recommendation form.
  * @displayName Add Recommendation
  */
-import { CHANGE_RECOMMENDATION } from "@/const.js";
+import { CHANGE_RECOMMENDATION } from "@/const/others.js";
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
 export default {
   data() {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { DIAGNOSIS_API_URL } from "@/const.js";
+import { DIAGNOSIS_API_URL } from "@/const/others.js";
 export default {
   props: ["dx"],
   data() {

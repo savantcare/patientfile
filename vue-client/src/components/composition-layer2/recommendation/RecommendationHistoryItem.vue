@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { RECOMMENDATION_API_URL } from "@/const.js";
+import { RECOMMENDATION_API_URL } from "@/const/others.js";
 export default {
   props: ["rec"],
   data() {

@@ -1,4 +1,4 @@
-import { SETTING_API_URL } from "@/const.js"
+import { SETTING_API_URL } from "@/const/others.js"
 export default {
   state: {
     style: 1

@@ -30,7 +30,7 @@
 
 <script>
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
-// import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const.js";
+// import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const/others.js";
 export default {
   components: {
     RecommendationHistoryItem

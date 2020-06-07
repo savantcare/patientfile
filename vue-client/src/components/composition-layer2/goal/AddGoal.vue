@@ -62,7 +62,7 @@
  * Multi Add Goal form.
  * @displayName Add Goal
  */
-import { RATE_GOAL } from "@/const.js";
+import { RATE_GOAL } from "@/const/others.js";
 export default {
   data() {
     return {

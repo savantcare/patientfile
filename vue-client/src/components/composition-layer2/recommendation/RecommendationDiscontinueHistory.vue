@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { RECOMMENDATION_API_URL } from "@/const.js";
+import { RECOMMENDATION_API_URL } from "@/const/others.js";
 import RecommendationDiscontinueHistoryItem from "./RecommendationDiscontinueHistoryItem";
 export default {
   components: { RecommendationDiscontinueHistoryItem },

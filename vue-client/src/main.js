@@ -45,7 +45,7 @@ Vue.use(ElResize)
 // Initialize socket.io
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io';
-import { SOCKET_API_URL } from "@/const.js";
+import { SOCKET_API_URL } from "@/const/others.js";
 
 Vue.use(new VueSocketIO({
   debug: true,

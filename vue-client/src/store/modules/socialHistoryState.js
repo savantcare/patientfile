@@ -1,4 +1,4 @@
-import { SOCIALHISTORY_API_URL } from "@/const.js"
+import { SOCIALHISTORY_API_URL } from "@/const/others.js"
 export default {
   state: {
     history: {

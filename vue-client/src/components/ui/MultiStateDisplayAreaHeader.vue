@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { USER_API_URL } from "@/const.js";
+import { USER_API_URL } from "@/const/others.js";
 
 export default {
   components: {},

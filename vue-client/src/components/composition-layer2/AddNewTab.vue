@@ -27,7 +27,7 @@ import {
   ADD_GOAL, 
   MULTIPLE_RATE_GOAL,
   ADD_SCREEN
-} from "@/const.js";
+} from "@/const/others.js";
 export default {
   data() {
     return {

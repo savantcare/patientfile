@@ -69,7 +69,7 @@
  * Multi Add Diagnosis form.
  * @displayName Add Diagnosis
  */
-import { CHANGE_DIAGNOSIS } from "@/const.js";
+import { CHANGE_DIAGNOSIS } from "@/const/others.js";
 export default {
   data() {
     return {

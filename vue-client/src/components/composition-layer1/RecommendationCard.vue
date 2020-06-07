@@ -35,7 +35,7 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 import DataTable from "@/components/common/DataTable";
-import { RECOMMENDATION_API_URL } from "@/const.js";
+import { RECOMMENDATION_API_URL } from "@/const/others.js";
 export default {
   components: {
     CardHeader,

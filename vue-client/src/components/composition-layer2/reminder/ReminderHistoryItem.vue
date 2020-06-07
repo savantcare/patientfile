@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { REMINDER_API_URL } from "@/const.js";
+import { REMINDER_API_URL } from "@/const/others.js";
 export default {
   props: ["rem"],
   data() {

@@ -35,7 +35,7 @@
  * @displayName Add Goal
  */
 import uniqid from "uniqid";
-import { RATE_GOAL } from "@/const.js";
+import { RATE_GOAL } from "@/const/others.js";
 export default {
   data() {
     return {

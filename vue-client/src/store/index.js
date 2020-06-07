@@ -15,7 +15,7 @@ import stateAtSelectedTimeModule from './modules/MultiStateDisplayAreaSide'
 import socialHistoryStateModule from './modules/socialHistoryState'
 import familyHistoryStateModule from './modules/familyHistoryState'
 
-import { ROLE_API_URL } from "@/const.js"
+import { ROLE_API_URL } from "@/const/others.js"
 import searchCommandsList from '@/const/searchCommandsList.js'
 
 export default new Vuex.Store({

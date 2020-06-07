@@ -41,7 +41,7 @@
  * Multi Add Reminder form.
  * @displayName Add Reminder
  */
-import { CHANGE_REMINDER } from "@/const.js";
+import { CHANGE_REMINDER } from "@/const/others.js";
 export default {
   data() {
     return {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { GOAL_API_URL } from "@/const.js";
+import { GOAL_API_URL } from "@/const/others.js";
 export default {
   props: ["goal"],
   data() {
