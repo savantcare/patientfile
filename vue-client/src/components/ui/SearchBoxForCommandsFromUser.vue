@@ -71,14 +71,14 @@ export default {
       }
     },
     querySearch(queryString, cb) {
-      const componentList = this.$store.state.searchCommandsList;
+      const searchCommandsList = this.$store.state.searchCommandsList;
 
       let results = [];
       if (queryString.length == 0) {
         results = [];
       }
 
-      results = componentList.filter(item => {
+      results = searchCommandsList.filter(item => {
         const strings = queryString.split(" ");
         let isMatchKeyword = true;
         strings.forEach(string => {
