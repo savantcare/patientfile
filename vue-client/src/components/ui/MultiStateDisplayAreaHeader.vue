@@ -9,7 +9,7 @@
         <el-tag v-else type="danger" size="mini">Offline</el-tag>
       </div>
     </el-col>
-    <el-col :span="12">
+    <el-col :span="16">
       <!-- 
       
       Q) Why use a different slider instead of slider from elemenet.io?
@@ -38,12 +38,13 @@
       </vue-slider>
 
     </el-col>
-    <el-col :span="6">
-      <el-switch
-        v-model="tabMode"
-        active-text="Health components"
-        style="float: right; margin-right: 12px;"
-      ></el-switch>
+    <el-col :span="2">
+      <!-- Why not use element.io inbuilt switch
+        In element.io switch the label cannot be shown on top of the switch in June 20. 
+        If a way is found to show H or O on top of the switch then this library should be removed and elemenet.io built in switch component should be used
+      -->
+      <toggle-button style="float: right;" :value="true"
+               :labels="{checked: 'H', unchecked: 'O'}"/> 
     </el-col>
   </el-row>
 </template>

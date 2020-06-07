@@ -20,15 +20,21 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 Vue.component('VueSlider', VueSlider)
 
-// External-UI-Ct-3/5 Ref: http://vue-js-toggle-button.yev.io/
+/* External-UI-Ct-3/5 Ref: http://vue-js-toggle-button.yev.io/
+   Used to toggle between Health and Other components.
+   Why not use element.io inbuilt switch?
+   Read: MultiStateDisplayAreaHeader.vue:42
+*/
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
 
 // External-UI-Ct-4/5 Ref: https://github.com/bajaniyarohit/vue-split-panel
+// Used to seperate multiStateDisplayArea and currentStateDisplayArea
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
 
 // External-UI-Ct-5/5 Ref: https://github.com/rigor789/vue-scrollto
+// Used to focus component between multiStateDisplayArea and currentStateDisplayArea 
 const VueScrollTo = require('vue-scrollto')
 Vue.use(VueScrollTo)
 
