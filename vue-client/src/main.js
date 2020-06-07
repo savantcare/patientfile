@@ -5,6 +5,13 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
+
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+
+Vue.component('VueSlider', VueSlider)
+
+
 // Initialize socket.io
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io';

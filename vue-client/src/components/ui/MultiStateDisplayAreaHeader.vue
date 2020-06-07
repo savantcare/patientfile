@@ -10,22 +10,32 @@
       </div>
     </el-col>
     <el-col :span="12">
-      <!-- TODO: 
-      1. The user can only click on marks and not at other locations on slider.
-        This is possible with https://element.eleme.io/#/en-US/component/steps
-        But with stepsComponent TODO on Line 52 is unknown.
+      <!-- 
+      
+      Q) Why use a different slider instead of slider from elemenet.io?
+      Req: The user can only click on marks and not at other locations on slider.
 
-      2. Once the user clicks on a point on slider timeOfState needs to set and all Components should update themselves.
+      I (VK in June 20) did not find a way to do it on element.io slider. 
+
+      I tried using element io -> steps component (https://element.eleme.io/#/en-US/component/steps)
+      But with stepsComponent I could not make 2 steps far away from each other and other 2 steps close to each other. Since each steps represents 
+      an appt date. When a patient has 3 appts. The first 2 may be 100 days apaprt and the 2nd and 3rd may be 10 days apart.
+
+      TODO:
+      1. Once the user clicks on a point on slider timeOfState needs to set and all Components should update themselves.
       The only change in query is: Ref: https://mariadb.com/kb/en/temporal-data-tables/#querying-historical-data
       timeOfState = '2016-10-09 08:07:06'
       SELECT * FROM recommendations FOR SYSTEM_TIME AS OF TIMESTAMP timeOfState;
       -->
-      <el-slider id="timeOfStateSelection" 
-                  v-model="sliderInitialValue" 
-                  :marks="apptDatesToMarkOnSlider" 
-                  :format-tooltip="formatTooltip"
-                  show-stops>
-      </el-slider>
+      <vue-slider 
+        v-model="sliderInitialValue"
+        :marks="apptDatesToMarkOnSlider"  
+        :included="true"
+
+        >
+
+      </vue-slider>
+
     </el-col>
     <el-col :span="6">
       <el-switch
@@ -49,7 +59,7 @@ export default {
       sliderInitialValue: 100,
       /* TODO: 
       1. apptDatesToMarkOnSlider should come from DB
-      2. The first date is at 0 and todays date is at 100. The middle points need to get proprotionate space
+      2. The first date is at 0 and todays date is at 100. The middle points need to get proprotionate space based on the distance between appts.
       */
       apptDatesToMarkOnSlider: {
           0: '1/5/20',
