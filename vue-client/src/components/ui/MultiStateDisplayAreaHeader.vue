@@ -115,7 +115,7 @@ export default {
         }
 },
     async updatestateAtSelectedTime() {
-      await this.$store.dispatch("currentStateDisplayAreaCtList", {
+      await this.$store.dispatch("getMultiStateDisplayAreaCtList", {
         type: this.tabMode == true ? 1 : 2,
         toast: this.$bvToast
       });

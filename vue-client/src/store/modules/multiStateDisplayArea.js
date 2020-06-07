@@ -21,7 +21,7 @@ export default {
     }
   },
   actions: {
-    async currentStateDisplayAreaCtList({ commit }, json) {
+    async getMultiStateDisplayAreaCtList({ commit }, json) {
       const { toast, type } = json
       const TOKEN = localStorage.getItem("token")
       try {
