@@ -38,6 +38,10 @@ Vue.use(VueSplit)
 const VueScrollTo = require('vue-scrollto')
 Vue.use(VueScrollTo)
 
+// Used by data-table
+import * as ElResize from 'vue-element-resize-event'
+Vue.use(ElResize)
+
 // Initialize socket.io
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io';
