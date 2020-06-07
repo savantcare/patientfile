@@ -11,7 +11,7 @@ import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
 import currentStateDisplayAreaModule from './modules/currentStateDisplayArea'
 import layer2MultiTabDialogStateModule from './modules/layer2MultiTabDialogState'
-import stateAtSelectedTimeModule from './modules/multiStateDisplayArea'
+import multiStateDisplayAreaModule from './modules/multiStateDisplayArea'
 import socialHistoryStateModule from './modules/socialHistoryState'
 import familyHistoryStateModule from './modules/familyHistoryState'
 
@@ -103,7 +103,7 @@ export default new Vuex.Store({
     setting: settingStateModule,
     StateAtCurrentTime: currentStateDisplayAreaModule,
     multiTabDialogLayer2: layer2MultiTabDialogStateModule,
-    stateAtSelectedTime: stateAtSelectedTimeModule,
+    stateAtSelectedTime: multiStateDisplayAreaModule,
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule
   },
