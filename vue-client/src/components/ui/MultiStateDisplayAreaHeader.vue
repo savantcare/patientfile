@@ -62,9 +62,18 @@ export default {
       /* TODO: 
       1. apptDatesToMarkOnSlider should come from DB
       2. The first date is at 0 and todays date is at 100. The middle points need to get proprotionate space based on the distance between appts.
+         make a api call to /patientAppointment/get/[paitentUUID]
+         making appts json by hand in future it will come from api call
       */
+    
+      apptDateTime:{
+              date1: "2020-06-10 09:54:17",
+              date2: "2020-05-10 09:54:17"
+      },        
+
       apptDatesToMarkOnSlider: {
-          0: '1/5/20',
+          
+          0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
           20: '2/15/20',
           40: '4/25/20',
           100: {
