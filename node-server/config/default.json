@@ -20,6 +20,6 @@
   "DB_COMPONENT": "sc_component",
   "DB_SCREENING": "sc_screen",
   "DB_SOCIALHISTORY": "DB_SC_SocialHistory_CT_V20",
-  "DB_APPOINTMENT": "sc_appointment"
+  "DB_APPOINTMENT": "sc_appointments"
 
 }
