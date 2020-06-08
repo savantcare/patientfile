@@ -1,38 +1,11 @@
 <template>
-  <!-- <b-container>
-    <b-row class="mt-4">
-      <b-col style="display: flex; justify-content: center;">
-        <b-card style="width: 500px;" title="Login to PatientFile">
-          <b-form @submit="onSubmit" @reset="onReset">
-            <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
-              <b-form-input
-                id="input-1"
-                v-model="form.email"
-                type="email"
-                required
-                placeholder="Enter email"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-              <b-form-input
-                id="input-2"
-                v-model="form.password"
-                type="password"
-                required
-                placeholder="Enter password"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-button type="submit" variant="primary">Login</b-button>
-          </b-form>
-        </b-card>
-      </b-col>
-    </b-row>
-  </b-container>-->
   <el-row type="flex" justify="center">
     <el-col :span="6">
-      <el-card class="box-card" shadow="hover" style="width: 500px;">
+      <span v-if="isLoggedIn">
+        You are already logged in. Click
+        <router-link to="/?patient_id=bfe041fa-073b-4223-8c69-0540ee678ff8">here</router-link>to search to opne a patient file
+      </span>
+      <el-card class="box-card" shadow="hover" style="width: 500px;" v-else>
         <div slot="header" class="clearfix">
           <span>Login to PatientFile</span>
         </div>
@@ -147,6 +120,15 @@ export default {
           return false;
         }
       });
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      const token = localStorage.getItem("token");
+      if (token != null) {
+        return true;
+      }
+      return false;
     }
   }
 };
