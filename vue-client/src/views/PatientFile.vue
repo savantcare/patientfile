@@ -1,5 +1,5 @@
-App architecture 3 core principles                          Total references (case insensitive): 300
-==================================
+App architecture 3 core principles      Target 1 (architecture):10 (Lines of code) 
+==================================      Total references (case insensitive): 450
 
 Core 1. Page design
 ===================
@@ -8,11 +8,11 @@ Core 1. Page design
 |    MultiStateDisplayAreaHeader = 7      |                              |  
 +-----------------------------------------+                              |     
 |                                         |                              |    
-|   multiStateDisplayArea = 16            | currentStateDisplayArea = 24 |  
+|   multiStateDisplayArea = 74            | currentStateDisplayArea = 93 |  
 |                                         |                              |  
-|                                         |                              |  typeOfStateDisplayArea =  71  
+|                                         |                              |  typeOfStateDisplayArea =  72  
 |                                         |                              |  This var contains 1 of: 
-|This has list of compomponents.          |This has list of CTs          |  multiStateDisplayArea  
+|This has list of compomponents.          |This has list of Components   |  multiStateDisplayArea  
 |Data of each component depends on        |                              |            OR
 |timeOfState ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
 |timeOfState has 2 possibilities          |                              |
@@ -24,18 +24,18 @@ Core 1. Page design
 | component is from currentTime           |                              |
 |                                         |                              |
 |                                         +------------------------------+
-|                                         |Search box for user commands  |
+|                                         |SearchBoxForCommandsFromUser=4|
 └────────────────────────────────────────────────────────────────────────┘
 
 
 Core 2. Multi state display area header design  
 ==============================================
 
-┌───────────────────────────────────────────────────────┐
-|             Time of state selection     |   Type of   |
-| Name Age  +-------------------------->  |  component  |
-|                                         |  selection  |
-└───────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────┐
+|          |           Time of state selection            |  Type of component   |
+| Name Age |         +-------------------------->         |  selection           |
+|          | Slider at start is 100  meaning current time |  health/others       |
+└────────────────────────────────────────────────────────────────────────────────┘
 
 
  Core 3: Component design                                                                              
@@ -59,6 +59,14 @@ Core 2. Multi state display area header design
                                                             │G │handleUpdateColumns()            │ 17 │
                                                             └──┴─────────────────────────────────┴────┘
 
+
+ ┌─────────────────────────────────────────┐
+ │          Data row actions               │
+ ├──┬─────────────────────────────────┬────┤
+ │C │    handleChange()               │ 26 │
+ ├──┼─────────────────────────────────┼────┤
+ │D │    handleDiscontinue()          │ 26 │
+ └──┴─────────────────────────────────┴────┘
 
 
 <template>

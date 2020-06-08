@@ -6,6 +6,7 @@ const settingDB = require("./database/setting.database.js")
 const componentDB = require('./database/component.database.js')
 const socialHistoryDB = require('./database/socialhistory.database.js')
 const diagnosisDB = require("./database/diagnosis.database.js")
+const appointmentDB = require("./database/appointment.database.js")
 
 module.exports = {
   recommendationDB: recommendationDB,
@@ -16,4 +17,5 @@ module.exports = {
   componentDB: componentDB,
   socialHistoryDB: socialHistoryDB,
   diagnosisDB: diagnosisDB,
+  appointmentDB: appointmentDB
 }
