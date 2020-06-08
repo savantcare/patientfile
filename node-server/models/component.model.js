@@ -1,19 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-  const Component = sequelize.define("component", {
-    id: {
-      type: Sequelize.INTEGER,
+  const Component = sequelize.define("componentMaster", {
+    uuid: {
+      type: Sequelize.STRING,
       primaryKey: true,
-      autoIncrement: true,
     },
-    type: { // 1: health-component, 2: other-component
-      type: Sequelize.INTEGER
+    tag: { // health | other
+      type: Sequelize.STRING
     },
     name: {
       type: Sequelize.STRING
-    },
-    // Timestamps
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
+    }
+  }, {
+    timestamps: false,
+    freezeTableName: true
   });
 
   return Component;

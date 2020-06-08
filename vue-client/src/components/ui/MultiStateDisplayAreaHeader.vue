@@ -29,22 +29,19 @@
       timeOfState = '2016-10-09 08:07:06'
       SELECT * FROM recommendations FOR SYSTEM_TIME AS OF TIMESTAMP timeOfState;
       -->
-      <vue-slider 
-        v-model="sliderInitialValue"
-        :marks="apptDatesToMarkOnSlider"  
-        :included="true"
-        >
-
-      </vue-slider>
-
+      <vue-slider v-model="sliderInitialValue" :marks="apptDatesToMarkOnSlider" :included="true"></vue-slider>
     </el-col>
     <el-col :span="2">
       <!-- Why not use element.io inbuilt switch
         In element.io switch the label cannot be shown on top of the switch in June 20. 
         If a way is found to show H or O on top of the switch then this library should be removed and elemenet.io built in switch component should be used
       -->
-      <toggle-button style="float: right;" :value="true"
-               :labels="{checked: 'H', unchecked: 'O'}"/> 
+      <toggle-button
+        style="float: right;"
+        v-model="componentType"
+        :labels="{checked: 'H', unchecked: 'O'}"
+        @change="handleChangeToggleButton"
+      />
     </el-col>
   </el-row>
 </template>
@@ -65,24 +62,24 @@ export default {
          make a api call to /patientAppointment/get/[paitentUUID]
          making appts json by hand in future it will come from api call
       */
-    
-      apptDateTime:{
-              date1: "2020-06-10 09:54:17",
-              date2: "2020-05-10 09:54:17"
-      },        
+
+      apptDateTime: {
+        date1: "2020-06-10 09:54:17",
+        date2: "2020-05-10 09:54:17"
+      },
 
       apptDatesToMarkOnSlider: {
-          
-          0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
-          20: '2/15/20',
-          40: '4/25/20',
-          100: {
-            style: {
-              color: '#1989FA'
-            },
-            label: this.$createElement('strong', 'Current')
-          }
-      }
+        0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
+        20: "2/15/20",
+        40: "4/25/20",
+        100: {
+          style: {
+            color: "#1989FA"
+          },
+          label: this.$createElement("strong", "Current")
+        }
+      },
+      componentType: true
     };
   },
   computed: {
@@ -113,16 +110,16 @@ export default {
   methods: {
     // TODO: This should take data from apptDatesToMarkOnSlider
     formatTooltip(val) {
-        if (val == 0){
-          return "First appointment on 5th Jan 2020" 
-        }
-        if (val == 20){
-          return "Second appointment on 15th Feb 2020" 
-        }
-        if (val == 40){
-          return "Third appointment on 25th April 2020" 
-        }
-},
+      if (val == 0) {
+        return "First appointment on 5th Jan 2020";
+      }
+      if (val == 20) {
+        return "Second appointment on 15th Feb 2020";
+      }
+      if (val == 40) {
+        return "Third appointment on 25th April 2020";
+      }
+    },
     async updateMultiStateDisplayArea() {
       await this.$store.dispatch("getMultiStateDisplayAreaCtList", {
         type: this.tabMode == true ? 1 : 2,
@@ -191,6 +188,10 @@ export default {
       value += 0.1;
       this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
       this.$store.dispatch("zoomMultiStateDisplayArea");
+    },
+    handleChangeToggleButton() {
+      const type = this.componentType == true ? "health" : "other";
+      this.$store.commit("setComponentType", type);
     }
   }
 };

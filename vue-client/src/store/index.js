@@ -14,6 +14,7 @@ import layer2MultiTabDialogStateModule from './modules/layer2MultiTabDialogState
 import multiStateDisplayAreaModule from './modules/multiStateDisplayArea'
 import socialHistoryStateModule from './modules/socialHistoryState'
 import familyHistoryStateModule from './modules/familyHistoryState'
+import componentModule from './modules/component'
 
 import { ROLE_API_URL } from "@/const/others.js"
 import searchCommandsList from '@/const/searchCommandsList.js'
@@ -107,7 +108,8 @@ export default new Vuex.Store({
     goal: goalStateModule,
     setting: settingStateModule,
     socialHistory: socialHistoryStateModule,
-    familyHistory: familyHistoryStateModule
+    familyHistory: familyHistoryStateModule,
+    component: componentModule
   },
   plugins: [
     createPersistedState()

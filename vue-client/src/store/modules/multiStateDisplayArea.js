@@ -7,7 +7,8 @@ export default {
     list: [],
     timeOfState: "",
     zoomValue: 1,
-    originSize: null
+    originSize: null,
+    componentType: "health"
   },
   mutations: {
     setMultiStateDisplayAreaCtList(state, value) {
@@ -18,6 +19,9 @@ export default {
     },
     setMultiStateDisplayAreaZoomValue(state, value) {
       state.zoomValue = value
+    },
+    setComponentType(state, value) {
+      state.componentType = value
     }
   },
   actions: {
@@ -87,10 +91,17 @@ export default {
         const result = allComponentsList.filter(card => {
           return card.abbreviation == item.toLowerCase()
         })
+        // const verifyComponentType = rootState.component.list.filter(component => {
+        //   return component.type.toLowerCase() == state.componentType.toLowerCase() && component.name.toLowerCase() == item.toLowerCase()
+        // }).length > 0
+
         if (result.length > 0) {
           list.push(result[0])
         }
       })
+
+      console.log(list)
+
       return list
     }
   }

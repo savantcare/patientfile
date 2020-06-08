@@ -102,7 +102,6 @@ Core 2. Multi state display area header design
   </div>
 </template>
 <script>
-
 const MultiStateDisplayAreaHeader = () =>
   import("@/components/ui/MultiStateDisplayAreaHeader.vue");
 
@@ -151,12 +150,26 @@ export default {
       return this.$store.getters.currentStateDisplayAreaList;
     },
     multiStateDisplayAreaComponents() {
-      return this.$store.getters.multiStateDisplayAreaCtList;
+      const componentType = this.$store.state.stateAtSelectedTime.componentType;
+      const components = this.$store.state.component.list.filter(
+        item => item.tag == componentType
+      );
+
+      const list = this.$store.getters.multiStateDisplayAreaCtList.filter(
+        item => {
+          const verifyComponent =
+            components.filter(
+              component =>
+                component.name.toLowerCase() == item.abbreviation.toLowerCase()
+            ).length > 0;
+          return verifyComponent;
+        }
+      );
+      return list;
     }
   },
   beforeCreate() {},
   mounted() {
-
     // TODO: this should be patientUUID
     const patientId = this.$route.query.patient_id;
     if (patientId.length < 1) {
@@ -173,6 +186,9 @@ export default {
     // setTimeout(() => {
     //   this.$store.dispatch("updateCurrentStateDisplayAreaRow");
     // }, 1000);
+    this.$store.dispatch("loadComponents", {
+      notify: this.$notify
+    });
   },
   methods: {
     onDrag(size) {

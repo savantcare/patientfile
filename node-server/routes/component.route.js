@@ -1,10 +1,17 @@
 const router = require('express').Router()
 const db = require('../models')
 const Component = db.componentDB.components
+const { uuid } = require('uuidv4');
 
 router.post('/', async (req, res) => {
   try {
-    const newComponent = await Component.create(req.body)
+    const { name, tag } = req.body
+    const newData = {
+      uuid: uuid(),
+      name: name,
+      tag: tag
+    }
+    const newComponent = await Component.create(newData)
     res.send(newComponent)
   } catch (err) {
     res.status(500).send({
@@ -13,11 +20,9 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/getByType/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const queryResult = await Component.findAll({
-      where: { type: req.params.id }
-    })
+    const queryResult = await Component.findAll()
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
