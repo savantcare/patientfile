@@ -1,12 +1,24 @@
 Todo:
 =====
-1. Table appointment -> apptUUID, patientUUID, dateAndTimeOfAppt, timeOfApptLock
-Generate slider in header based on timeOfApptLock and on dragging the slider show the correct data in the components inside stateOnSelectedTimeSplitArea
+1. Table sc_appointments -> uuid, patientUUID, providerUUID, dateAndTimeOfAppt, stateOfAppt
 
-timeOfApptLock is set once the doctor locks the appt. All health components need to be reviewed.
+Stage 1: Show historical data
 
-Store addendums in the DB
-apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
+Generate slider in header based on dateAndTimeOfAppt and on dragging the slider show the correct data in the components inside multiStateDisplayArea
+
+For e.g. the patient has appt on 1st Feb and 14th March
+The slider will have 3 points on it: 1st Feb, 14th March, Current time
+
+When I click on slider point -> 1st Feb it will show me rex from "1st Feb appt lock time"
+
+When I click on slider point -> 14th march it will show me rex from "14th march appt lock time" 
+
+The temporal DB query is:
+SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
+
+Stage 2: Lock
+Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt dateTime"
+There is a button to Lock appt when the point on the slider is clicked.
 
 2. KB interaction
    1. Multi select using KB
@@ -40,31 +52,27 @@ Done - need to demo:
     2. The multichange slider needs a page number component at the bottom
     3. Regression: Multi change Ct does not show history.
 
-4. When I am logged in and I go to /login/ the page does not know that I am already logged in.
-
-5. How does the system know what are health and what are other components?
-
-
-
 Milestone 5:
 ============
+1. Stage 3: Store addendums in the DB
+apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
 
-1. Give me a page where I can create a new patient 
+2. Give me a page where I can create a new patient 
 
-2. Give me a page where I can choose from a list of patients whose patient file I want to open.
+3. Give me a page where I can choose from a list of patients whose patient file I want to open.
    1. Opening a patient file without a valid patient IDn should redirect to search page.
 
-3. 20 components of production quality.
+4. 20 components of production quality.
 
-4. Dx is not using CardHeader.vue
+5. Dx is not using CardHeader.vue
 
-5. Should single tab data table and multi tab data table components be 2 different components.
+6. Should single tab data table and multi tab data table components be 2 different components.
 
-6. Code repeated between components.
+7. Code repeated between components.
    1. DB  
    2. KB traverse
 
-7. Code refactor
+8. Code refactor
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
