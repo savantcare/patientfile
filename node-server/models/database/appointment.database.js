@@ -19,7 +19,7 @@ const patientAppointment = {}
 patientAppointment.Sequelize = Sequelize
 patientAppointment.sequelize = patientAppointmentSequelize
 
-patientAppointment.components = require('../patientAppointments.model.js')(patientAppointmentSequelize, Sequelize)
+patientAppointment.appt = require('../patientAppointments.model.js')(patientAppointmentSequelize, Sequelize)
 
 
 patientAppointment.sequelize.sync() // see doc at recommendation.database.js
