@@ -19,5 +19,9 @@ module.exports = {
       "localeDir": "locales",
       "enableInSFC": true
     }
+  },
+  configureWebpack: {              // Ref: https://vuejs.org/v2/cookbook/debugging-in-vscode.html#Displaying-Source-Code-in-the-Browser
+    devtool: 'source-map'
   }
 }
+

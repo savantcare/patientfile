@@ -107,7 +107,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async dbUpdateRecommendation({ state, commit }, json) { // TODO: Better name updateRecommendationInDB
+    async dbUpdateRecommendation({ state, commit }, json) { 
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       let newList = []

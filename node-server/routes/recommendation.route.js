@@ -86,9 +86,8 @@ module.exports = (io) => {
     }
   })
 
-  router.put('/', async (req, res) => {    // Replace existing row with new row
+  router.put('/', async (req, res) => {    // Put => Replace existing row with new row
     try {
-      // Update the existing object to discontinue.
       await Recommendation.update({
         recommendationDescription: req.body.recommendationDescription,
         priority: req.body.priority
@@ -99,7 +98,7 @@ module.exports = (io) => {
       })
 
       io.to(`room-${req.body.uuidOfRecommendationMadeFor}-Doctor`).emit("UPDATE_RECOMMENDATION", req.body)
-      res.send("ok") /* Fix: Instead of sending the whole object only OK needs to be sent*/
+      res.send("ok") 
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while update the Recommendation"
@@ -109,16 +108,16 @@ module.exports = (io) => {
 
   router.delete('/:id', async (req, res) => {
     try {
-      const queryResult = await Recommendation.destroy({
+      const queryResult = await Recommendation.destroy({        // This just puts the current timestamp in ROW_END Ref: https://mariadb.com/kb/en/temporal-data-tables/#creating-a-system-versioned-table
         where: {
           uuid: req.params.id
         }
       })
       io.to(`room-${req.body.uuidOfRecommendationMadeFor}-Doctor`).emit("DISCONTINUE_RECOMMENDATION", req.params.id)
-      res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+      res.sendStatus(200)
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while patch the Recommendation"
+        message: err.message || "Some error occured while discontinuing the Recommendation"
       })
     }
   })

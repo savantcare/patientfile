@@ -40,25 +40,38 @@ SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
 
 Milestone 5:
 ============
-1. Lock
+1. The data for previous appts is not cached. One more dimension should be increased in recs data structure.
+
+2. Lock
 Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
 There is a button to Lock appt when the point on the slider is clicked.
 
-2. Stage 3: Store addendums in the DB
+3. Stage 3: Store addendums in the DB
 apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
 
-3. Not reverting back in case of failure to update
+4. Not reverting back in case of failure to update
 
-4. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
+5. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
 
-5. Give me a page where I can create a new patient 
+6. Give me a page where I can create a new patient 
 
-6. Give me a page where I can choose from a list of patients whose patient file I want to open.
+7. Give me a page where I can choose from a list of patients whose patient file I want to open.
    1. Opening a patient file without a valid patient IDn should redirect to search page.
+
+8. delete of rex gives a error on the console
+
+
+
+
+== Not organized
+
 
 4. 20 components of production quality.
 
 5. Dx is not using CardHeader.vue
+
+
+
 
 6. Should single tab data table and multi tab data table components be 2 different components.
 
