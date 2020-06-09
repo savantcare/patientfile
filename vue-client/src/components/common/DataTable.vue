@@ -220,7 +220,8 @@ export default {
   },
   mounted() {
     console.log(this.typeOfStateDisplayArea);
-    let apptDate = new Date().toISOString().split("T")[0];
+    let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+;
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify,

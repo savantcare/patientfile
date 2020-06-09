@@ -245,7 +245,7 @@ module.exports = (io) => {
     
      // "AS OF" is provided by Temporal DB 
     try {
-      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE uuidOfRecommendationMadeFor=:patientId FOR SYSTEM_TIME AS OF TIMESTAMP :date",{  
+      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME AS OF TIMESTAMP :date WHERE uuidOfRecommendationMadeFor=:patientId",{  
         replacements: { date: date, patientId: patientId },   
         type: QueryTypes.SELECT
       })
