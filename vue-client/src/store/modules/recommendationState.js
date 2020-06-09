@@ -3,7 +3,7 @@ let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
     yourRecommendationsList: [],
-    timeOfState: new Date(),
+    timeOfState: new Date(),     // TODO: This is not component specific. It is a global value that can be used by all components.
     othersList: [],
     tableList: [],
     multiStateList: []
@@ -20,13 +20,13 @@ export default {
     removeNewRecommendation(state) {
       state.yourRecommendationsList.pop()
     },
-    setRecommendationCurrentDate(state, value) {
+    setRecommendationCurrentDate(state, value) {   // TODO: This needs a better name.
       state.timeOfState = value
     },
     setOthersList(state, value) {
       state.othersList = value
     },
-    setRecommendationTableList(state, value) {
+    setRecommendationTableList(state, value) {    // TODO: Not clear from name what this does.
       state.tableList = value
     },
     setMultiStateList(state, value) {

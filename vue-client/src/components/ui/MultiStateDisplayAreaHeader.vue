@@ -11,7 +11,6 @@
     </el-col>
     <el-col :span="16">
       <!-- 
-      
       Q) Why use a different slider instead of slider from elemenet.io?
       Requirement: The user can only click on marks and not at other locations on slider.
 
@@ -61,29 +60,6 @@ export default {
       tabMode: true,
       patientInfo: null,
       sliderInitialValue: 100,
-      /* TODO: 
-      1. apptDatesToMarkOnSlider should come from DB
-      2. The first date is at 0 and todays date is at 100. The middle points need to get proprotionate space based on the distance between appts.
-         make a api call to /patientAppointment/get/[paitentUUID]
-         making appts json by hand in future it will come from api call
-      */
-
-      apptDateTime: {
-        date1: "2020-06-10 09:54:17",
-        date2: "2020-05-10 09:54:17"
-      },
-
-      // apptDatesToMarkOnSlider: {
-      //   0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
-      //   20: "2/15/20",
-      //   40: "4/25/20",
-      //   100: {
-      //     style: {
-      //       color: "#1989FA"
-      //     },
-      //     label: this.$createElement("strong", "Current")
-      //   }
-      // },
       componentType: true,
       apptDates: [],
       patientId: this.$route.query.patient_id
@@ -103,6 +79,26 @@ export default {
       return this.$store.state.connectionStatus;
     },
     apptDatesToMarkOnSlider() {
+
+/*
+      The first date is at 0 and todays date is at 100. 
+      
+      The middle points get proprotionate space based on the distance between appts.
+      
+      The data returned looks like
+      apptDatesToMarkOnSlider: {
+         0: "1/15/20", // Here I want to show -> this.apptDateTime.date1
+         20: "2/15/20",
+         40: "4/25/20",
+         100: {
+           style: {
+             color: "#1989FA"
+           },
+           label: this.$createElement("strong", "Current")
+         }
+      },
+*/
+
       let result = {};
       if (this.apptDates.length > 0) {
         const percent = Math.floor(100 / (this.apptDates.length + 1));
