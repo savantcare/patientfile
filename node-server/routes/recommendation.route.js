@@ -35,10 +35,7 @@ module.exports = (io) => {
       const { patientId, userId } = req.query
       const queryResult = await Recommendation.findAll({
         where: {
-          patientId: patientId,
-          discontinue: {
-            [Op.ne]: 1
-          }
+          uuidOfRecommendationMadeFor: patientId
         }
       })
       res.send(queryResult)
@@ -235,6 +232,23 @@ module.exports = (io) => {
         })
       })
       res.send(result)
+    } catch (err) {
+      res.status(500).send(err.message)
+    }
+  })
+
+  router.post('/getByDate', async (req, res) => {
+    const { date, patientId } = req.body
+    // patientId: patientId,
+    //       discontinue: {
+    //         [Op.ne]: 1
+    //       }
+    try {
+      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId", {
+        replacements: { date: date, patientId: patientId },
+        type: QueryTypes.SELECT
+      })
+      res.send(histories)
     } catch (err) {
       res.status(500).send(err.message)
     }

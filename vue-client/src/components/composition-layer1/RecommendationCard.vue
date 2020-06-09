@@ -1,6 +1,6 @@
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-<!-- TODO: This should be typeOfStateDisplayArea -->
+  <!-- TODO: This should be typeOfStateDisplayArea -->
   <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
@@ -20,7 +20,6 @@
     <DataTable
       ctName="Recommendation"
       keyId="recommendation"
-      :tabData="tabData"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
@@ -166,33 +165,8 @@ export default {
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
-    const params = {
-      patientId: this.$route.query.patient_id,
-      notify: this.$notify,
-      userId: this.$store.state.userId
-    };
-    this.$store.dispatch("getMyRecommendations", params);
-    this.$store.dispatch("getOtherRecommendations", params);
   },
-  computed: {
-    tabData() {
-      const myList = this.$store.state.recommendation.yourRecommendationsList;
-      const othersList = this.$store.state.recommendation.othersList;
-      return [
-        {
-          label: "Yours",
-          tableData: myList,
-          rowActions: ["C", "D"]
-        },
-        {
-          label: "Other's",
-          tableData: othersList,
-          rowActions: ["C", "D"],
-          selectedColumn: ["description"]
-        }
-      ];
-    }
-  }
+  computed: {}
 };
 </script>
 

@@ -29,7 +29,12 @@
       timeOfState = '2016-10-09 08:07:06'
       SELECT * FROM recommendations FOR SYSTEM_TIME AS OF TIMESTAMP timeOfState;
       -->
-      <vue-slider v-model="sliderInitialValue" :marks="apptDatesToMarkOnSlider" :included="true"></vue-slider>
+      <vue-slider
+        v-model="sliderInitialValue"
+        @change="handleSliderChange"
+        :marks="apptDatesToMarkOnSlider"
+        :included="true"
+      ></vue-slider>
     </el-col>
     <el-col :span="2">
       <!-- Why not use element.io inbuilt switch
@@ -47,7 +52,7 @@
 </template>
 
 <script>
-import { USER_API_URL } from "@/const/others.js";
+import { USER_API_URL, APPOINTMENT_API_URL } from "@/const/others.js";
 
 export default {
   components: {},
@@ -68,18 +73,20 @@ export default {
         date2: "2020-05-10 09:54:17"
       },
 
-      apptDatesToMarkOnSlider: {
-        0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
-        20: "2/15/20",
-        40: "4/25/20",
-        100: {
-          style: {
-            color: "#1989FA"
-          },
-          label: this.$createElement("strong", "Current")
-        }
-      },
-      componentType: true
+      // apptDatesToMarkOnSlider: {
+      //   0: "asdasdasasd", // Here I want to show -> this.apptDateTime.date1
+      //   20: "2/15/20",
+      //   40: "4/25/20",
+      //   100: {
+      //     style: {
+      //       color: "#1989FA"
+      //     },
+      //     label: this.$createElement("strong", "Current")
+      //   }
+      // },
+      componentType: true,
+      apptDates: [],
+      patientId: this.$route.query.patient_id
     };
   },
   computed: {
@@ -94,6 +101,23 @@ export default {
     },
     connectionStatus() {
       return this.$store.state.connectionStatus;
+    },
+    apptDatesToMarkOnSlider() {
+      let result = {};
+      if (this.apptDates.length > 0) {
+        const percent = Math.floor(100 / (this.apptDates.length + 1));
+        this.apptDates.forEach((data, index) => {
+          const { dateTimeOfAppt } = data;
+
+          result[index * percent] = dateTimeOfAppt.split("T")[0];
+        });
+      }
+      result["100"] = {
+        style: { color: "#1989FA" },
+        label: this.$createElement("strong", "Currernt")
+      };
+
+      return result;
     }
   },
   watch: {
@@ -106,6 +130,7 @@ export default {
     // this.updateMultiStateDisplayArea();
     // this.zoomValue = this.$store.state.MultiStateDisplayArea.zoomValue;
     // this.zoomMultiStateDisplayArea();
+    this.getAppointments();
   },
   methods: {
     // TODO: This should take data from apptDatesToMarkOnSlider
@@ -192,6 +217,46 @@ export default {
     handleChangeToggleButton() {
       const type = this.componentType == true ? "health" : "other";
       this.$store.commit("setComponentType", type);
+    },
+    async getAppointments() {
+      try {
+        let TOKEN = localStorage.getItem("token");
+        const response = await fetch(`${APPOINTMENT_API_URL}`, {
+          headers: {
+            Authorization: "Bearer " + TOKEN
+          }
+        });
+        if (response.ok) {
+          const json = await response.json();
+          this.apptDates = json;
+        } else {
+          this.$notify({
+            title: "Error",
+            message: "Failed to get appointments"
+          });
+        }
+      } catch (ex) {
+        this.$notify({
+          title: "Error",
+          message: "Server connection error"
+        });
+      }
+    },
+    handleSliderChange() {
+      const percent = Math.floor(100 / (this.apptDates.length + 1));
+      let index = this.sliderInitialValue / percent;
+      let apptDate = new Date().toISOString().split("T")[0];
+      if (index < this.apptDates.length + 1) {
+        apptDate = this.apptDates[index].dateTimeOfAppt.split("T")[0];
+      }
+      console.log(apptDate);
+      this.$store.dispatch("getRecommendationByDate", {
+        date: apptDate,
+        patientId: this.patientId
+      });
+    },
+    handleSliderEnd() {
+      // console.log(this.sliderInitialValue);
     }
   }
 };

@@ -12,10 +12,11 @@ module.exports = (io) => {
   const userRoutes = require('./user.route')
   const socialHistoryRoutes = require('./socialhistory.routes')
   const goalRoutes = require('./goal.route')(io)
+  const appointmentRoutes = require('./appointment.routes')
 
   router.use('/auth', authRoutes)
   router.use('/recommendations', recommendationRoutes)
-  router.use('/diagnosis',diagnosisRoutes)
+  router.use('/diagnosis', diagnosisRoutes)
   router.use('/reminders', reminderRoutes)
   router.use('/settings', settingRoutes)
   router.use('/user-roles', userRoleRoutes)
@@ -23,6 +24,7 @@ module.exports = (io) => {
   router.use('/users', userRoutes)
   router.use('/social-histories', socialHistoryRoutes)
   router.use('/goals', goalRoutes)
+  router.use('/appointments', appointmentRoutes)
 
   return router
 }

@@ -5,7 +5,8 @@ export default {
     yourRecommendationsList: [],
     timeOfState: new Date(),
     othersList: [],
-    tableList: []
+    tableList: [],
+    multiStateList: []
   },
   mutations: {
     setRecommendationList(state, data) {
@@ -27,6 +28,9 @@ export default {
     },
     setRecommendationTableList(state, value) {
       state.tableList = value
+    },
+    setMultiStateList(state, value) {
+      state.multiStateList = value
     },
 
     /**
@@ -290,6 +294,25 @@ export default {
           title: "Error",
           message: "Server connection error"
         })
+      }
+    },
+    async getRecommendationByDate({ commit }, params) {
+      const { date, patientId } = params
+      const response = await fetch(`${RECOMMENDATION_API_URL}/getByDate`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          patientId: patientId,
+          date: date
+        })
+      })
+      if (response.ok) {
+        const json = await response.json()
+        console.log(json)
+        commit("setMultiStateList", json)
       }
     }
   },

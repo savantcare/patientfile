@@ -75,7 +75,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["tabData", "ctName", "type", "keyId"],
+  props: ["ctName", "type", "keyId", "typeOfStateDisplayArea"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -219,7 +219,22 @@ export default {
     }
   },
   mounted() {
-    // this.myData = this.tabData[0].tableData;
+    console.log(this.typeOfStateDisplayArea);
+    if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+      const params = {
+        patientId: this.$route.query.patient_id,
+        notify: this.$notify,
+        userId: this.$store.state.userId
+      };
+      this.$store.dispatch("getMyRecommendations", params);
+      this.$store.dispatch("getOtherRecommendations", params);
+    } else {
+      let apptDate = new Date().toISOString().split("T")[0];
+      this.$store.dispatch("getRecommendationByDate", {
+        date: apptDate,
+        patientId: this.$route.query.patient_id
+      });
+    }
   },
   computed: {
     focusRow() {
@@ -233,6 +248,28 @@ export default {
         return this.tabData[0].tableData;
       }
       return [];
+    },
+    tabData() {
+      let myList = [];
+      if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+        myList = this.$store.state.recommendation.yourRecommendationsList;
+      } else {
+        myList = this.$store.state.recommendation.multiStateList;
+      }
+      const othersList = this.$store.state.recommendation.othersList;
+      return [
+        {
+          label: "Yours",
+          tableData: myList,
+          rowActions: ["C", "D"]
+        },
+        {
+          label: "Other's",
+          tableData: othersList,
+          rowActions: ["C", "D"],
+          selectedColumn: ["description"]
+        }
+      ];
     }
   },
   watch: {
