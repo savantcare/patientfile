@@ -160,7 +160,7 @@ export default {
       commit("setRecommendationList", newList)
       try {
         const response = await fetch(`${RECOMMENDATION_API_URL}/${data.uuid}`, {
-          method: "DELETE",
+          method: "DELETE",                             // Temporal DB!! The row is still there. Just the end time is set.
           headers: {
             "Content-Type": "application/json;charset=utf-8",
             "Authorization": "Bearer " + TOKEN
@@ -188,7 +188,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async multiDiscontinueRecommendations({ state, commit }, json) {
+    async dbMultiDiscontinueRecommendations({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
@@ -202,7 +202,7 @@ export default {
         try {
           item['discontinue'] = true
           await fetch(`${RECOMMENDATION_API_URL}/${item.id}`, {
-            method: "PATCH",
+            method: "DELETE",                                       // Temporal DB!! The row is still there. Just the end time is set.
             headers: {
               "Content-Type": "application/json;charset=utf-8",
               "Authorization": "Bearer " + TOKEN
