@@ -229,7 +229,7 @@ export default {
     };
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
       this.$store.dispatch("dbGetMyRecommendations", params);
-      this.$store.dispatch("getOtherRecommendations", params);
+      this.$store.dispatch("dbGetOtherRecommendations", params);
     } else {
       this.$store.dispatch("getMultiStateMyRecommendations", params);
       this.$store.dispatch("getMultiStateOtherRecommendations", params);
