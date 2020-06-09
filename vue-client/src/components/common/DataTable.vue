@@ -220,20 +220,19 @@ export default {
   },
   mounted() {
     console.log(this.typeOfStateDisplayArea);
+    let apptDate = new Date().toISOString().split("T")[0];
+    const params = {
+      patientId: this.$route.query.patient_id,
+      notify: this.$notify,
+      userId: this.$store.state.userId,
+      date: apptDate
+    };
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
-      const params = {
-        patientId: this.$route.query.patient_id,
-        notify: this.$notify,
-        userId: this.$store.state.userId
-      };
       this.$store.dispatch("getMyRecommendations", params);
       this.$store.dispatch("getOtherRecommendations", params);
     } else {
-      let apptDate = new Date().toISOString().split("T")[0];
-      this.$store.dispatch("getRecommendationByDate", {
-        date: apptDate,
-        patientId: this.$route.query.patient_id
-      });
+      this.$store.dispatch("getMultiStateMyRecommendations", params);
+      this.$store.dispatch("getMultiStateOtherRecommendations", params);
     }
   },
   computed: {
@@ -251,12 +250,17 @@ export default {
     },
     tabData() {
       let myList = [];
+      let othersList = [];
       if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
         myList = this.$store.state.recommendation.yourRecommendationsList;
+        othersList = this.$store.state.recommendation.othersList;
       } else {
-        myList = this.$store.state.recommendation.multiStateList;
+        myList = this.$store.state.recommendation
+          .multiStateYourRecommendationsList;
+        othersList = this.$store.state.recommendation
+          .multiStateOtherRecommendationsList;
       }
-      const othersList = this.$store.state.recommendation.othersList;
+
       return [
         {
           label: "Yours",

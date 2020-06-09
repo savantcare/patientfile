@@ -6,7 +6,8 @@ export default {
     timeOfState: new Date(),
     othersList: [],
     tableList: [],
-    multiStateList: []
+    multiStateYourRecommendationsList: [],
+    multiStateOtherRecommendationsList: []
   },
   mutations: {
     setRecommendationList(state, data) {
@@ -29,8 +30,11 @@ export default {
     setRecommendationTableList(state, value) {
       state.tableList = value
     },
-    setMultiStateList(state, value) {
-      state.multiStateList = value
+    setMultiStateYourRecommendationList(state, value) {
+      state.multiStateYourRecommendationsList = value
+    },
+    setMultiStateOtherRecommendationList(state, value) {
+      state.multiStateOtherRecommendationsList = value
     },
 
     /**
@@ -219,7 +223,7 @@ export default {
       })
     },
     async getMyRecommendations({ commit }, json) {
-      const { patientId, notify, userId } = json
+      const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
@@ -233,7 +237,8 @@ export default {
           method: "POST",
           body: JSON.stringify({
             patientId: patientId,
-            userId: userId
+            userId: userId,
+            date: date
           })
         });
         if (response.ok) {
@@ -264,7 +269,7 @@ export default {
       }
     },
     async getOtherRecommendations({ commit }, json) {
-      const { patientId, notify, userId } = json
+      const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
@@ -277,7 +282,8 @@ export default {
           method: "POST",
           body: JSON.stringify({
             patientId: patientId,
-            userId: userId
+            userId: userId,
+            date: date
           })
         })
         if (response.ok) {
@@ -296,9 +302,10 @@ export default {
         })
       }
     },
-    async getRecommendationByDate({ commit }, params) {
-      const { date, patientId } = params
-      const response = await fetch(`${RECOMMENDATION_API_URL}/getByDate`, {
+    async getMultiStateMyRecommendations({ commit }, params) {
+      const { date, patientId, userId } = params
+      const response = await fetch(
+        `${RECOMMENDATION_API_URL}/getMyRecommendations`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -306,13 +313,47 @@ export default {
         method: "POST",
         body: JSON.stringify({
           patientId: patientId,
+          userId: userId,
           date: date
         })
-      })
+      });
       if (response.ok) {
         const json = await response.json()
-        console.log(json)
-        commit("setMultiStateList", json)
+        commit("setMultiStateYourRecommendationList", json)
+      }
+    },
+    async getMultiStateOtherRecommendations({ commit }, json) {
+      const { patientId, notify, userId, date } = json
+      if (TOKEN == null) {
+        TOKEN = localStorage.getItem("token")
+      }
+      try {
+        const response = await fetch(`${RECOMMENDATION_API_URL}/getOthersRecommendations`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN,
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            patientId: patientId,
+            userId: userId,
+            date: date
+          })
+        })
+        if (response.ok) {
+          let json = await response.json()
+          commit("setMultiStateOtherRecommendationList", json)
+        } else {
+          notify({
+            title: "Error",
+            message: "Failed to get other's recommendation data"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
       }
     }
   },

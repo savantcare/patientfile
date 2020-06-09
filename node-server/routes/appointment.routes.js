@@ -5,7 +5,9 @@ const Appointment = db.appointmentDB.appt
 
 router.get('/', async (req, res) => {
   try {
-    const result = await Appointment.findAll()
+    const result = await Appointment.findAll({
+      order: [['dateTimeOfAppt', 'ASC']]
+    })
     res.send(result)
   } catch (err) {
     res.status(500).send({

@@ -228,6 +228,7 @@ export default {
         });
         if (response.ok) {
           const json = await response.json();
+          console.log(json);
           this.apptDates = json;
         } else {
           this.$notify({
@@ -249,10 +250,10 @@ export default {
       if (index < this.apptDates.length + 1) {
         apptDate = this.apptDates[index].dateTimeOfAppt.split("T")[0];
       }
-      console.log(apptDate);
-      this.$store.dispatch("getRecommendationByDate", {
+      this.$store.dispatch("getMultiStateMyRecommendations", {
         date: apptDate,
-        patientId: this.patientId
+        patientId: this.patientId,
+        userId: this.$store.state.userId
       });
     },
     handleSliderEnd() {

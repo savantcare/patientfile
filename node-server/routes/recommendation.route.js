@@ -48,13 +48,10 @@ module.exports = (io) => {
 
   router.post('/getMyRecommendations', async (req, res) => {
     try {
-      const { patientId, userId } = req.body
-      const queryResult = await Recommendation.findAll({
-        where: {
-          uuidOfRecommendationMadeFor: patientId,
-          recordChangedByUUID: userId
-        },
-        order: [['priority', 'ASC']]
+      const { patientId, userId, date } = req.body
+      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
+        replacements: { date: date, patientId: patientId, userId: userId },
+        type: QueryTypes.SELECT
       })
       res.send(queryResult)
     } catch (err) {
@@ -66,17 +63,18 @@ module.exports = (io) => {
 
   router.post('/getOthersRecommendations', async (req, res) => {
     try {
-      const { patientId, userId } = req.body
-      console.log("getOthersRecommendations_________________")
-      console.log(patientId)
-      console.log(userId)
-      const queryResult = await Recommendation.findAll({
-        where: {
-          uuidOfRecommendationMadeFor: patientId,
-          recordChangedByUUID: {
-            [Op.ne]: userId
-          }
-        }
+      const { patientId, userId, date } = req.body
+      // const queryResult = await Recommendation.findAll({
+      //   where: {
+      //     uuidOfRecommendationMadeFor: patientId,
+      //     recordChangedByUUID: {
+      //       [Op.ne]: userId
+      //     }
+      //   }
+      // })
+      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID!=:userId ORDER BY priority asc", {
+        replacements: { date: date, patientId: patientId, userId: userId },
+        type: QueryTypes.SELECT
       })
       res.send(queryResult)
     } catch (err) {
