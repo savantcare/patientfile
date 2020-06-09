@@ -1,9 +1,8 @@
 import { RECOMMENDATION_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
-  state: {                       // Cannot be changed directly. Can only be changed through mutation
-    yourRecommendationsList: [],
-    timeOfState: new Date(),     // TODO: This is not component specific. It is a global value that can be used by all components.
+  state: {                       // KT: Cannot be changed directly. Can only be changed through mutation
+    yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
     othersList: [],
     tableList: [],
     multiStateList: []
@@ -19,9 +18,6 @@ export default {
     },
     removeNewRecommendation(state) {
       state.yourRecommendationsList.pop()
-    },
-    setRecommendationCurrentDate(state, value) {   // TODO: This needs a better name.
-      state.timeOfState = value
     },
     setOthersList(state, value) {
       state.othersList = value
