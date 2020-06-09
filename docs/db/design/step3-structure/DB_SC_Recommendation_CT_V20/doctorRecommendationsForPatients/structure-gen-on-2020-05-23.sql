@@ -32,7 +32,6 @@ CREATE TABLE `doctorRecommendationsForPatients` (
   `isAutoRex` int(11) DEFAULT NULL,
   `autoRecommendationsOrderId` int(11) DEFAULT NULL,
   `recordChangedByUUID` CHAR(36) NOT NULL,
-  `recordChangedOnDateTime` datetime DEFAULT current_timestamp() NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;

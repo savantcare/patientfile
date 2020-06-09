@@ -23,9 +23,6 @@ module.exports = (sequelize, Sequelize) => {
     recordChangedByUUID: {
       type: Sequelize.STRING
     },
-    recordChangedOnDateTime: {
-      type: Sequelize.STRING
-    },
     recordChangedFromIPAddress: {
       type: Sequelize.STRING,
       defaultValue: ''
