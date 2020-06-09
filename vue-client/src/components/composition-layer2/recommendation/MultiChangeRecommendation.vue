@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     onClickSave(rec) {
-      this.$store.dispatch("updateRecommendation", {
+      this.$store.dispatch("dbUpdateRecommendation", {
         data: rec,
         notify: this.$notify
       });

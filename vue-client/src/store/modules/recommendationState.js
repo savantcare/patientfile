@@ -218,7 +218,7 @@ export default {
         }
       })
     },
-    async getMyRecommendations({ commit }, json) {
+    async dbGetMyRecommendations({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")

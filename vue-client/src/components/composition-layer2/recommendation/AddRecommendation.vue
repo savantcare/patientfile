@@ -70,7 +70,7 @@ export default {
               "recommendationDescription"
             ] = this.recForm.recs[0].description;
             this.updateData["recordChangedByUUID"] = this.userId;
-            this.$store.dispatch("updateRecommendation", {
+            this.$store.dispatch("dbUpdateRecommendation", {
               data: this.updateData,
               notify: this.$notify
             });
