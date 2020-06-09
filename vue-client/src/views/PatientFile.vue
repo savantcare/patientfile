@@ -1,5 +1,6 @@
-App architecture 3 core principles      Target 1 (architecture):10 (Lines of code) 
-==================================      Total references (case insensitive): 450
+/*
+App architecture 3 core principles      Architecture / LOC = 1/10 
+==================================      Total references (case insensitive): 605
 
 Core 1. Page design
 ===================
@@ -68,6 +69,24 @@ Core 2. Multi state display area header design
  │D │    handleDiscontinue()          │ 26 │
  └──┴─────────────────────────────────┴────┘
 
+
+vk-tech@vk-mini-layer2-3 ~/g/s/p/v/src> cloc --counted=/tmp/files-counted.txt .
+      90 text files.
+      90 unique files.                              
+       2 files ignored.
+
+github.com/AlDanial/cloc v 1.86  T=0.11 s (808.1 files/s, 96325.8 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Vuejs Component                 67            298            475           7088
+JavaScript                      19            130            105           2626
+Markdown                         3              1              0              4
+SVG                              1              0              0              1
+-------------------------------------------------------------------------------
+SUM:                            90            429            580           9719
+-------------------------------------------------------------------------------
+*/
 
 <template>
   <div>

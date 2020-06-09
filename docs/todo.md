@@ -17,7 +17,7 @@ The temporal DB query is:
 SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
 
 Stage 2: Lock
-Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt dateTime"
+Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
 There is a button to Lock appt when the point on the slider is clicked.
 
 2. KB interaction
