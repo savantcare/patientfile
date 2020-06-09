@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
+    showTabToAddInLayer2() { // TODO: Should be informToShowTabToAddInLayer2
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 

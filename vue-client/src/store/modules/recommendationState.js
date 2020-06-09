@@ -71,7 +71,7 @@ export default {
     }
   },
   actions: {
-    async addRecommendation({ state, commit }, json) {
+    async addRecommendation({ state, commit }, json) {    // TODO: Better name addRecommendationInDB
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
 
@@ -107,7 +107,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async updateRecommendation({ state, commit }, json) {
+    async updateRecommendation({ state, commit }, json) { // TODO: Better name updateRecommendationInDB
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       let newList = []
