@@ -122,7 +122,7 @@ export default {
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
     handleDiscontinue(data) {
-      this.$store.dispatch("discontinueRecommendation", {
+      this.$store.dispatch("dbDiscontinueRecommendation", {
         data: data,
         notify: this.$notify
       });

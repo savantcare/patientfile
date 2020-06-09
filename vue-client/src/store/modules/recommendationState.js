@@ -150,7 +150,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async discontinueRecommendation({ state, commit }, json) {
+    async dbDiscontinueRecommendation({ state, commit }, json) {
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {

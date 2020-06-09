@@ -46,7 +46,7 @@ export default {
       });
     },
     onClickDiscontinue(rec) {
-      this.$store.dispatch("discontinueRecommendation", {
+      this.$store.dispatch("dbDiscontinueRecommendation", {
         data: rec,
         notify: this.$notify
       });
