@@ -96,7 +96,7 @@ export default {
               });
             });
 
-            await this.$store.dispatch("addRecommendation", {
+            await this.$store.dispatch("dbAddRecommendation", {
               data: recList,
               notify: this.$notify,
               patientId: this.id

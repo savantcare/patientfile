@@ -71,7 +71,7 @@ export default {
     }
   },
   actions: {
-    async addRecommendation({ state, commit }, json) {    // TODO: Better name addRecommendationInDB
+    async dbAddRecommendation({ state, commit }, json) {    // TODO: Better name addRecommendationInDB
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
 
