@@ -1,6 +1,28 @@
 Todo:
 =====
-1. Table sc_appointments -> uuid, patientUUID, providerUUID, dateAndTimeOfAppt, stateOfAppt
+1. The left needs to look like final report that can't be changed.
+
+2. Size limitation of Doctors laptop
+    1. There is wasted column space in data row table.
+    2. Too much space being wasted in Ct Name and then yours and others.
+
+3. Only 1 doctor gets to choose columns and not other doctors.
+   1. The column names are not user friendly.
+   2. Add new columns "duty" on the "users" table. Columns editing feature is allowed to the "duty - leader" users.
+
+
+Done - need to demo:
+====================
+1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
+
+2. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
+
+3. Use temporal DB concept to show the change history for a recommendation that has been changed 
+    1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
+    2. The multichange slider needs a page number component at the bottom
+    3. Regression: Multi change Ct does not show history.
+
+4. Table sc_appointments -> uuid, patientUUID, providerUUID, dateAndTimeOfAppt, stateOfAppt
 
 Stage 1: Show historical data
 
@@ -16,46 +38,13 @@ When I click on slider point -> 14th march it will show me rex from "14th march 
 The temporal DB query is:
 SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
 
-Stage 2: Lock
-Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
-There is a button to Lock appt when the point on the slider is clicked.
-
-2. KB interaction
-   1. Multi select using KB
-
-3. Search 
-   1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
-   Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
-                           https://github.com/FireLemons/Abbreviation-Autocomplete
-
-4. Animation
-    1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
-
-5. The left needs to look like: https://www.techrepublic.com/blog/web-designer/how-to-get-the-ruled-paper-background-effect-with-css3/
-
-6. Size limitation of Doctors laptop
-    1. There is wasted column space in data row table.
-    2. Too much space being wasted in Ct Name and then yours and others.
-
-7. Only 1 doctor gets to choose columns and not other doctors.
-   1. The column names are not user friendly.
-
-
-Done - need to demo:
-====================
-1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
-
-2. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
-
-3. Use temporal DB concept to show the change history for a recommendation that has been changed 
-    1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
-    2. The multichange slider needs a page number component at the bottom
-    3. Regression: Multi change Ct does not show history.
-
 Milestone 5:
 ============
 1. Stage 3: Store addendums in the DB
 apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
+Stage 2: Lock
+Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
+There is a button to Lock appt when the point on the slider is clicked.
 
 2. Give me a page where I can create a new patient 
 
@@ -76,6 +65,16 @@ apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateT
 
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
+9. KB interaction
+   1. Multi select using KB
+
+10. Search 
+   1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
+   Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
+                           https://github.com/FireLemons/Abbreviation-Autocomplete
+
+11. Animation
+    1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
 
 
 
