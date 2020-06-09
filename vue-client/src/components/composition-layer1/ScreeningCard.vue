@@ -18,21 +18,19 @@
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
       @handleDiscontinue="handleDiscontinue"
-    /> -->
-    
+    />-->
+
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="Name" width="180"> </el-table-column>
+      <el-table-column prop="name" label="Name" width="180"></el-table-column>
       <el-table-column align="right">
         <!-- <template slot="header" >
           <el-input v-model="search" size="mini" placeholder="search screen"/>
-        </template> -->
+        </template>-->
         <template slot-scope="scope">
-            <el-link type="primary"
-            @click="showTakeAScreenDialog(scope.$index, scope.row)">T</el-link>
+          <el-link type="primary" @click="showTakeAScreenDialog(scope.$index, scope.row)">T</el-link>
         </template>
-    </el-table-column>
+      </el-table-column>
     </el-table>
-
   </el-card>
 </template>
 
@@ -47,9 +45,7 @@ export default {
   data() {
     return {
       selectedRows: [],
-      tableData: [
-          {name: '1. SPIN'}
-      ]
+      tableData: [{ name: "1. SPIN" }]
     };
   },
   methods: {
@@ -86,7 +82,7 @@ export default {
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {
         data: data,
-        toast: this.$notify
+        notify: this.$notify
       });
     }
   },

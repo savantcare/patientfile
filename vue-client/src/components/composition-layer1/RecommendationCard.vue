@@ -25,9 +25,9 @@
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
-      @updateTableList="updateTableList"              
+      @updateTableList="updateTableList"
     />
-     <!-- TODO: Not clear what updateTableList does -->
+    <!-- TODO: Not clear what updateTableList does -->
   </el-card>
 </template>
 
@@ -53,7 +53,8 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() { // TODO: Should be informToShowTabToAddInLayer2
+    showTabToAddInLayer2() {
+      // TODO: Should be informToShowTabToAddInLayer2
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 
@@ -123,7 +124,7 @@ export default {
     handleDiscontinue(data) {
       this.$store.dispatch("discontinueRecommendation", {
         data: data,
-        toast: this.$notify
+        notify: this.$notify
       });
     },
     handleUpdateColumns(value) {
