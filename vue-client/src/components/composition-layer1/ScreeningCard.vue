@@ -5,7 +5,7 @@
         ctName="Screening"
         actions="A,F,D"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
-        @showTabToAddInLayer2="showTabToAddInLayer2"
+        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
@@ -49,7 +49,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
+    informShowTabToAddInLayer2() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInLayer2");
     },

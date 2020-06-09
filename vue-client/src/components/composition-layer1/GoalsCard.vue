@@ -7,7 +7,7 @@
         keyId="goal"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
-        @showTabToAddInLayer2="showTabToAddInLayer2"
+        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
         @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
@@ -51,7 +51,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
+    informShowTabToAddInLayer2() {
       // For logic: Line 57 of RecommendationCard.vue
       console.log("show add dialog");
       this.$store.commit("showAddGoalTabInLayer2");

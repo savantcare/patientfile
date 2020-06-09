@@ -9,7 +9,7 @@
         keyId="recommendation"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
-        @showTabToAddInLayer2="showTabToAddInLayer2"
+        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
         @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
@@ -53,8 +53,8 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
-      // TODO: Should be informToShowTabToAddInLayer2
+    informShowTabToAddInLayer2() {
+      // TODO: Should be informToinformShowTabToAddInLayer2
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 

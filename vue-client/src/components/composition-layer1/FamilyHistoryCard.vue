@@ -6,7 +6,7 @@
           ctName="Family history"
           actions="A,N"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
-          @showTabToAddInLayer2="showTabToAddInLayer2"
+          @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
           @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
@@ -59,7 +59,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
+    informShowTabToAddInLayer2() {
       console.log("show add dialog");
       this.$store.commit("showAddFamilyHistoryModal");
     },
