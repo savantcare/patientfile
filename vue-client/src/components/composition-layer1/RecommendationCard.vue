@@ -158,7 +158,6 @@ export default {
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
     },
-    // TODO: Rename this to showDiscontinuedHistoryTabInLayer2()
     showDiscontinueHistoryTabInLayer2() {
       this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     }

@@ -49,7 +49,8 @@ module.exports = (io) => {
   router.post('/getMyRecommendations', async (req, res) => {
     try {
       const { patientId, userId, date } = req.body
-      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
+      // all recs that have been discontinued will not show up in the select * query
+      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
         replacements: { date: date, patientId: patientId, userId: userId },
         type: QueryTypes.SELECT
       })
@@ -72,7 +73,8 @@ module.exports = (io) => {
       //     }
       //   }
       // })
-      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID!=:userId ORDER BY priority asc", {
+      // all recs that have been discontinued will not show up in the select * query
+      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID!=:userId ORDER BY priority asc", {
         replacements: { date: date, patientId: patientId, userId: userId },
         type: QueryTypes.SELECT
       })
