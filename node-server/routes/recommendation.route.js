@@ -242,9 +242,11 @@ module.exports = (io) => {
     //       discontinue: {
     //         [Op.ne]: 1
     //       }
+    
+     // "AS OF" is provided by Temporal DB 
     try {
-      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE recordChangedOnDateTime BETWEEN :date AND DATE_ADD(:date, INTERVAL 1 DAY) AND uuidOfRecommendationMadeFor=:patientId", {
-        replacements: { date: date, patientId: patientId },
+      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE uuidOfRecommendationMadeFor=:patientId FOR SYSTEM_TIME AS OF TIMESTAMP :date",{  
+        replacements: { date: date, patientId: patientId },   
         type: QueryTypes.SELECT
       })
       res.send(histories)

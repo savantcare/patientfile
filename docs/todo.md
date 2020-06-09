@@ -40,33 +40,44 @@ SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
 
 Milestone 5:
 ============
-1. The data for previous appts is not cached. One more dimension should be increased in recs data structure.
+1. How will this work for 40 components
+    if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+      this.$store.dispatch("dbGetMyRecommendations", params);
+      this.$store.dispatch("dbGetOtherRecommendations", params);
+    } else {
+      this.$store.dispatch("dbGetMultiStateMyRecommendations", params);
+      this.$store.dispatch("dbGetMultiStateOtherRecommendations", params);
+    }
 
-2. Lock
+The data table should recv data to show instead of calling function to get the data.
+
+2. The data for previous appts is not cached. One more dimension should be increased in recs data structure.
+
+3. Lock
 Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
 There is a button to Lock appt when the point on the slider is clicked.
 
-3. Stage 3: Store addendums in the DB
+4. Stage 3: Store addendums in the DB
 apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateTime, recordChangedFromIPAddress
 
-4. Not reverting back in case of failure to update
+5. Not reverting back in case of failure to update
 
-5. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
+6. When I first load 4 queries are getting executed I could have possibly done it with 1 query.
 
-6. Give me a page where I can create a new patient 
+7. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
 
-7. Give me a page where I can choose from a list of patients whose patient file I want to open.
+8. Give me a page where I can create a new patient 
+
+9. Give me a page where I can choose from a list of patients whose patient file I want to open.
    1. Opening a patient file without a valid patient IDn should redirect to search page.
 
-8. delete of rex gives a error on the console
+10. delete of rex gives a error on the console
 
-
+11. 20 components of production quality.
 
 
 == Not organized
 
-
-4. 20 components of production quality.
 
 5. Dx is not using CardHeader.vue
 
