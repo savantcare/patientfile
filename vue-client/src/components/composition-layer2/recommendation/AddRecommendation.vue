@@ -101,7 +101,7 @@ export default {
               notify: this.$notify,
               patientId: this.id
             });
-            await this.$store.dispatch("getMyRecommendations", {
+            await this.$store.dispatch("dbGetMyRecommendations", {
               patientId: this.id,
               notify: this.$notify,
               userId: this.$store.state.userId

@@ -228,7 +228,7 @@ export default {
       date: apptDate
     };
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
-      this.$store.dispatch("getMyRecommendations", params);
+      this.$store.dispatch("dbGetMyRecommendations", params);
       this.$store.dispatch("getOtherRecommendations", params);
     } else {
       this.$store.dispatch("getMultiStateMyRecommendations", params);
