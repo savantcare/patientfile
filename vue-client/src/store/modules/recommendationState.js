@@ -301,7 +301,7 @@ export default {
     async dbGetMultiStateMyRecommendations({ commit }, params) {
       const { date, patientId, userId } = params
       const response = await fetch(
-        `${RECOMMENDATION_API_URL}/getMyRecommendations`, {
+        `${RECOMMENDATION_API_URL}/getByDate`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
