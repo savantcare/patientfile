@@ -318,7 +318,7 @@ export default {
         commit("setMultiStateYourRecommendationList", json)
       }
     },
-    async getMultiStateOtherRecommendations({ commit }, json) {
+    async dbGetMultiStateOtherRecommendations({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")

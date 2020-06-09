@@ -232,7 +232,7 @@ export default {
       this.$store.dispatch("dbGetOtherRecommendations", params);
     } else {
       this.$store.dispatch("dbGetMultiStateMyRecommendations", params);
-      this.$store.dispatch("getMultiStateOtherRecommendations", params);
+      this.$store.dispatch("dbGetMultiStateOtherRecommendations", params);
     }
   },
   computed: {
