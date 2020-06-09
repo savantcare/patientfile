@@ -6,6 +6,7 @@
 </template>
 
 <script>
+// https://github.com/vinayakkulkarni/v-offline this detects if the vue app is online or offline
 const Offline = () => import("v-offline");
 export default {
   components: {

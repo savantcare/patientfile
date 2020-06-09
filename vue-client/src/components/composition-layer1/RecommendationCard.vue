@@ -26,8 +26,9 @@
       @handleDiscontinue="handleDiscontinue"
       @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
-      @updateTableList="updateTableList"
+      @updateTableList="updateTableList"              
     />
+     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
 </template>
 
