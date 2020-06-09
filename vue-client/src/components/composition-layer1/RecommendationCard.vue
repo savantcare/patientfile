@@ -1,6 +1,5 @@
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-  <!-- TODO: This should be typeOfStateDisplayArea -->
   <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
