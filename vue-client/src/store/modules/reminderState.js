@@ -254,12 +254,5 @@ export default {
         return item.discontinue != true
       })
     },
-    panelReminders(state) {
-      return state.remindersList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        // state.timeOfState instead of this timeOfState should use the value set in home.vue
-        return item.discontinue != true && itemDate <= state.timeOfState
-      })
-    }
   }
 }

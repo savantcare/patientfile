@@ -5,7 +5,7 @@ import allComponentsList from "@/const/allComponentsList.js"
 export default {
   state: {
     list: [],
-    timeOfState: "",
+    timeOfState: "",         // All components when they render in the multiStateDisplayArea use this value.
     zoomValue: 1,
     originSize: null,
     componentType: "health"

@@ -2,8 +2,7 @@ import { SCREENING_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    list: [],
-    timeOfState: new Date()
+    list: []
   },
   mutations: {
     setScreeningList(state, data) {
@@ -17,10 +16,6 @@ export default {
     removeNewScreening(state) {
       state.list.pop()
     },
-    setScreeningCurrentDate(state, value) {
-      state.timeOfState = value
-    },
-
     /**
      * Socket Listeners
      */
@@ -256,12 +251,6 @@ export default {
       return state.list.filter(item => {
         return item.discontinue != true
       })
-    },            
-    panelScreenings(state) {
-      return state.list.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
-      })
-    }
+    },
   }
 }

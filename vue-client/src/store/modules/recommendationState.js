@@ -4,7 +4,7 @@ export default {
   state: {                       // KT: Cannot be changed directly. Can only be changed through mutation
     yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
     othersList: [],
-    tableList: [],
+    tableList: [],              // TODO: Needs better name.
     multiStateYourRecommendationsList: [],
     multiStateOtherRecommendationsList: []
   },
@@ -359,11 +359,5 @@ export default {
         return item.discontinue != true
       })
     },
-    panelRecommendations(state) {
-      return state.yourRecommendationsList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
-      })
-    }
   }
 }

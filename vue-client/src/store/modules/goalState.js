@@ -2,8 +2,7 @@ import { GOAL_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    goalList: [],
-    timeOfState: new Date()
+    goalList: []
   },
   mutations: {
     setGoalList(state, data) {
@@ -17,10 +16,6 @@ export default {
     removeNewGoal(state) {
       state.goalList.pop()
     },
-    setGoalCurrentDate(state, value) {
-      state.timeOfState = value
-    },
-
     /**
      * Socket Listeners
      */
@@ -258,12 +253,6 @@ export default {
     goals(state) {
       return state.goalList.filter(item => {
         return item.discontinue != true
-      })
-    },
-    panelGoals(state) {
-      return state.goalList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }
