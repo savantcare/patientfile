@@ -2,8 +2,7 @@ import { DIAGNOSIS_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    diagnosisList: [],
-    timeOfState: new Date()
+    diagnosisList: []
   },
   mutations: {
     setDiagnosisList(state, data) {
@@ -17,10 +16,6 @@ export default {
     removeNewDiagnosis(state) {
       state.diagnosisList.pop()
     },
-    setDiagnosisCurrentDate(state, value) {
-      state.timeOfState = value
-    },
-
     /**
      * Socket Listeners
      */
@@ -367,12 +362,6 @@ export default {
     diagnoses(state) {
       return state.diagnosisList.filter(item => {
         return item.discontinue != true
-      })
-    },
-    panelDiagnoses(state) {
-      return state.diagnosisList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
       })
     }
   }

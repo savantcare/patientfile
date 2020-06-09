@@ -4,7 +4,7 @@ export default {
   state: {                       // KT: Cannot be changed directly. Can only be changed through mutation
     yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
     othersList: [],
-    tableList: [],
+    tableList: [],              // TODO: Needs better name.
     multiStateYourRecommendationsList: [],
     multiStateOtherRecommendationsList: []
   },
@@ -71,7 +71,7 @@ export default {
     }
   },
   actions: {
-    async addRecommendation({ state, commit }, json) {
+    async addRecommendation({ state, commit }, json) {    // TODO: Better name addRecommendationInDB
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
 
@@ -107,7 +107,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async updateRecommendation({ state, commit }, json) {
+    async updateRecommendation({ state, commit }, json) { // TODO: Better name updateRecommendationInDB
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       let newList = []
@@ -359,11 +359,5 @@ export default {
         return item.discontinue != true
       })
     },
-    panelRecommendations(state) {
-      return state.yourRecommendationsList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
-      })
-    }
   }
 }

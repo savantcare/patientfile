@@ -2,8 +2,7 @@ import { FAMILY_HISTORY_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    familyHistoryList: [],
-    timeOfState: new Date()
+    familyHistoryList: []
   },
   mutations: {
     setFamilyHistoryList(state, data) {
@@ -17,10 +16,6 @@ export default {
     removeNewFamilyHistory(state) {
       state.familyHistoryList.pop()
     },
-    setFamilyHistoryCurrentDate(state, value) {
-      state.timeOfState = value
-    },
-
     /**
      * Socket Listeners
      */
@@ -259,12 +254,7 @@ export default {
       return state.familyHistoryList.filter(item => {
         return item.discontinue != true
       })
-    },
-    panelFamilyHistories(state) {
-      return state.familyHistoryList.filter(item => {
-        const itemDate = new Date(item.createdAt)
-        return item.discontinue != true && itemDate <= state.timeOfState
-      })
     }
+ 
   }
 }

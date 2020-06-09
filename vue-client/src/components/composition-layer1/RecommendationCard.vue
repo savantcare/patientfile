@@ -1,6 +1,5 @@
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-  <!-- TODO: This should be typeOfStateDisplayArea -->
   <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">
     <div slot="header" class="clearfix">
       <CardHeader
@@ -54,7 +53,7 @@ export default {
     };
   },
   methods: {
-    showTabToAddInLayer2() {
+    showTabToAddInLayer2() { // TODO: Should be informToShowTabToAddInLayer2
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 
