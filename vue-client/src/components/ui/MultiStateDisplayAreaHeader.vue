@@ -242,9 +242,10 @@ export default {
     handleSliderChange() {              // TODO: This needs to set a global variable timeOfState and all components need to react on that
       const percent = Math.floor(100 / (this.apptDates.length + 1));
       let index = this.sliderInitialValue / percent;
-      let apptDate = new Date().toISOString().split("T")[0];
+      // let apptDate = new Date().toISOString().split("T")[0];
+      let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
       if (index < this.apptDates.length + 1) {
-        apptDate = this.apptDates[index].dateTimeOfAppt.split("T")[0];
+        apptDate = this.apptDates[index].dateTimeOfAppt.slice(0, 19).replace('T', ' ');
       }
       this.$store.dispatch("dbGetMultiStateMyRecommendations", {
         date: apptDate,
