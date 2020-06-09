@@ -298,7 +298,7 @@ export default {
         })
       }
     },
-    async getMultiStateMyRecommendations({ commit }, params) {
+    async dbGetMultiStateMyRecommendations({ commit }, params) {
       const { date, patientId, userId } = params
       const response = await fetch(
         `${RECOMMENDATION_API_URL}/getMyRecommendations`, {

@@ -231,7 +231,7 @@ export default {
       this.$store.dispatch("dbGetMyRecommendations", params);
       this.$store.dispatch("dbGetOtherRecommendations", params);
     } else {
-      this.$store.dispatch("getMultiStateMyRecommendations", params);
+      this.$store.dispatch("dbGetMultiStateMyRecommendations", params);
       this.$store.dispatch("getMultiStateOtherRecommendations", params);
     }
   },

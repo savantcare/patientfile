@@ -246,7 +246,7 @@ export default {
       if (index < this.apptDates.length + 1) {
         apptDate = this.apptDates[index].dateTimeOfAppt.split("T")[0];
       }
-      this.$store.dispatch("getMultiStateMyRecommendations", {
+      this.$store.dispatch("dbGetMultiStateMyRecommendations", {
         date: apptDate,
         patientId: this.patientId,
         userId: this.$store.state.userId
