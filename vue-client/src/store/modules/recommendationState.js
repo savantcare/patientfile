@@ -88,10 +88,15 @@ export default {
 
     SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {      // For multiple discontinue each discontinue gets a different socket message. For 4 discontinue 4 api calls are made.
       console.log("SOCKET_DISCONTINUE_RECOMMENDATION")
+      console.log(dispatchId)
+      console.log(state.yourRecommendationsList)
+
+      // The filter() method creates an array filled with all array elements that pass a test (provided as a function).
       const newList = state.yourRecommendationsList.filter(item => {
-        return item.id != dispatchId
+        return item.uuid != dispatchId
       })
       state.yourRecommendationsList = newList
+      console.log(state.yourRecommendationsList)
     }
   },
   actions: {
