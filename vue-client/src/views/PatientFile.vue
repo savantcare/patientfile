@@ -148,11 +148,11 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
 </template>
 <script>
 const MultiStateDisplayAreaHeader = () =>
-  import("@/components/ui/MultiStateDisplayAreaHeader.vue");
+  import("@/components/common/MultiStateDisplayAreaHeader.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
-  import("@/components/ui/SearchBoxForCommandsFromUser.vue");
+  import("@/components/common/SearchBoxForCommandsFromUser.vue");
 
 const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 
@@ -164,7 +164,7 @@ const Goal = () => import("@/components/patient/GoalsCard");
 const Diagnosis = () => import("@/components/patient/DiagnosesCard");
 const FamilyHistory = () =>
   import("@/components/patient/FamilyHistoryCard");
-const KeyboardHandler = () => import("@/components/ui/KeyboardHandler");
+const KeyboardHandler = () => import("@/components/common/KeyboardHandler");
 
 export default {
   name: "Home",
