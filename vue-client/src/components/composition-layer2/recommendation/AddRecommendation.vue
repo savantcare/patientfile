@@ -1,3 +1,6 @@
+// Component type: Form
+// -------------- Category 1/2: User interface of a form component ---------------------
+
 <template>
   <div>
     <!-- <el-tab-pane> -->
@@ -59,6 +62,9 @@ export default {
         description: ""
       });
     },
+
+// -------------- Category 2/2: Managing form submission ---------------------
+
     submitForm(formName) {
       const today = new Date().toISOString().split(".")[0];
 
