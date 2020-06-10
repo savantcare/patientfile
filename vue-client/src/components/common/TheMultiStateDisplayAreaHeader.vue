@@ -8,7 +8,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
 
 
 <template>
-  <el-row type="flex" align="middle" id="MultiStateDisplayAreaHeader">
+  <el-row type="flex" align="middle" id="TheMultiStateDisplayAreaHeader">
     <el-col :span="6" class="ml-2" style="display: flex; align-items: center;">
       <!-- TODO: This needs to come from DB -->
       <span style="font-size: 20px;">Alexey D</span>
@@ -270,7 +270,7 @@ export default {
 </script>
 
 <style scoped>
-#MultiStateDisplayAreaHeader {
+#TheMultiStateDisplayAreaHeader {
   height: 30px;
   margin-bottom: 6px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

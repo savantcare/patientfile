@@ -15,7 +15,7 @@ Vue.use(ElementUI, { locale });
 
 /* External-UI-Ct-2/5 Ref: https://github.com/NightCatSama/vue-slider-component
 Q) Why use a different slider instead of slider from elemenet.io?
-Read: MultiStateDisplayAreaHeader.vue:15
+Read: TheMultiStateDisplayAreaHeader.vue:15
 */
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
@@ -24,7 +24,7 @@ Vue.component('VueSlider', VueSlider)
 /* External-UI-Ct-3/5 Ref: http://vue-js-toggle-button.yev.io/
    Used to toggle between Health and Other components.
    Why not use element.io inbuilt switch?
-   Read: MultiStateDisplayAreaHeader.vue:42
+   Read: TheMultiStateDisplayAreaHeader.vue:42
 */
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
