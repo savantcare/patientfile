@@ -34,7 +34,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
           <el-button
             type="text"
             size="mini"
-            @click="$emit('showDiscontinueHistoryTabInLayer2')"
+            @click="$emit('handleClickOnXInCardHeader')"
             v-if="showDiscontinueHistoryChoice"
           >X</el-button>
 

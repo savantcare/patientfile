@@ -13,7 +13,7 @@
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @multiDiscontinue="multiDiscontinue"
-        @showDiscontinueHistoryTabInLayer2="showDiscontinueHistoryTabInLayer2"
+        @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
       />
     </div>
     <DataTable
@@ -158,7 +158,7 @@ export default {
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
     },
-    showDiscontinueHistoryTabInLayer2() {
+    handleClickOnXInCardHeader() {
       this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     }
   },
