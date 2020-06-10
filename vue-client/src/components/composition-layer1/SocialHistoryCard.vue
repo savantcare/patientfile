@@ -8,7 +8,7 @@
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
           @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
-          @focusPanel="focusPanel"
+          @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
         />
@@ -31,7 +31,7 @@ export default {
   methods: {
     handleClickOnAInCardHeader() {},
     handleClickOnMInCardHeader() {},
-    focusPanel() {},
+    handleClickOnFInCardHeader() {},
     multiDiscontinue() {}
   }
 };

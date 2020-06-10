@@ -8,7 +8,7 @@
         :columns="columns"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
-        @focusPanel="focusPanel"
+        @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
       />
@@ -55,7 +55,7 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeAssessmentTabInLayer2");
     },
-    focusPanel() {
+    handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
     multiDiscontinue() {

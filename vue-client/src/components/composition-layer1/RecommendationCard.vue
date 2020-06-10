@@ -11,7 +11,7 @@
         :columns="columns"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
-        @focusPanel="focusPanel"
+        @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @multiDiscontinue="multiDiscontinue"
         @showDiscontinueHistoryTabInLayer2="showDiscontinueHistoryTabInLayer2"
       />
@@ -78,8 +78,8 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
-    // TODO: Rename this to handleFocusPanel()
-    focusPanel() {
+    // TODO: Rename this to handlehandleClickOnFInCardHeader()
+    handleClickOnFInCardHeader() {
       //multiStateDisplayArea
       var options = {
         container: "",

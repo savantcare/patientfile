@@ -30,7 +30,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
             @click="$emit('handleClickOnMInCardHeader')"
             v-if="showMultiChangeButton"
           >M</el-button>
-          <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusChoice">F</el-button>
+          <el-button type="text" size="mini" @click="$emit('handleClickOnFInCardHeader')" v-if="showFocusChoice">F</el-button>
           <el-button
             type="text"
             size="mini"

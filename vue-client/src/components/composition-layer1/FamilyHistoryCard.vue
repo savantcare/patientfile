@@ -8,7 +8,7 @@
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
           @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
-          @focusPanel="focusPanel"
+          @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
         />
@@ -66,7 +66,7 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeFamilyHistoryModal");
     },
-    focusPanel() {
+    handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
     multiDiscontinue() {

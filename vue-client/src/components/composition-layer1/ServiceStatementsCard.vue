@@ -8,7 +8,7 @@
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @handleClickOnAInCardHeader="showAddServiceStatementsDialog"
           @handleClickOnMInCardHeader="showMultiChangeServiceStatementsDialog"
-          @focusPanel="focusPanel"
+          @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
         />
@@ -35,7 +35,7 @@ export default {
     },
     handleClickOnAInCardHeader() {},
     handleClickOnMInCardHeader() {},
-    focusPanel() {},
+    handleClickOnFInCardHeader() {},
     multiDiscontinue() {}
   }
 };

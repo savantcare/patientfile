@@ -6,7 +6,7 @@
         actions="A,F,D"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
-        @focusPanel="focusPanel"
+        @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
@@ -57,7 +57,7 @@ export default {
       console.log(index, row);
       this.$store.commit("showTakeAScreenTabInLayer2");
     },
-    focusPanel() {
+    handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
     multiDiscontinue() {
