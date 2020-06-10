@@ -1,13 +1,9 @@
 Alexey Todo:
 ============
 1. Data table related
-   A. Remove custom column selection code from data table. Goal is to keep the code simple.
+   A. Remove custom column selection code from data table. Goal is to keep the code simple. Remove the settings icon.
    B. KB arrow keys are going to the header. The KB arrow keys are not going to the data rows. 
-   C. Now that the Column seletion is not needed can the KB interaction be made simpler? 
-   D. Should the table be row based instead of column based? 
-   E. A row based table may make it easier to track which row is being dragged.
 
-2. Apply background image to children for multiStateDisplayArea 
 
 Done - need to demo:
 ====================
@@ -18,6 +14,11 @@ Done - need to demo:
 
 Milestone 5:
 ============
+2. Different style for multiStateDisplayArea see how it works for recommendations/patientfile.vue. Apply background image to children for multiStateDisplayArea 
+
+   D. Should the table be row based instead of column based? -> element can only do based on column not rows.
+   E. A row based table may make it easier to track which row is being dragged. -> not applicable read D
+
 1. Inside components/common/DataTable.vue:231
 
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
