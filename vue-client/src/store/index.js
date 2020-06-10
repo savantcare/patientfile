@@ -8,7 +8,7 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 // modules
-import recommendationStateModule from './modules/recommendationState'
+import recommendationStateModule from '../components/patient/Recommendations/recommendationState'
 import diagnosisStateModule from './modules/diagnosisState'
 import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
