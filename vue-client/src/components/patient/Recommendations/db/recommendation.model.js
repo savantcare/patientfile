@@ -2,7 +2,7 @@
 How to model a table?
 https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
 
-id is string since we do not want it to be a auto incrementing integer.
+Auto increment integers are a security risk. Hence instead of id (int) uuid (string) is used. 
 */
 module.exports = (sequelize, Sequelize) => {
   const Recommendation = sequelize.define("doctorRecommendationsForPatients", {
