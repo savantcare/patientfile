@@ -1,11 +1,14 @@
 import { RECOMMENDATION_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
-  state: {                       // KT: Cannot be changed directly. Can only be changed through mutation
-    yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
+  state: {                                     // KT: Cannot be changed directly. Can only be changed through mutation
+    
+    yourRecommendationsList: [],              // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
+                                              // This needs to be a 2 dimensional array. Right now it is a one dimensional array
+
     othersList: [],
-    tableList: [],              // TODO: Needs better name.
-    multiStateYourRecommendationsList: [],
+    tableList: [],                            // TODO: Needs better name.
+    multiStateYourRecommendationsList: [],    // Suppose there are 10 historical appointments. When Docotr uses slider to go from appt A to B and then back A the data of A is not in cache.   
     multiStateOtherRecommendationsList: []
   },
   mutations: {
