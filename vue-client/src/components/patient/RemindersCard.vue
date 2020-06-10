@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     handleClickOnAInCardHeader() {
-      // For logic: Line 57 of RecommendationCard.vue
+      // For logic: Line 57 of Recommendations/Layer1Card.vue
       this.$store.commit("showAddReminderTabInLayer2");
     },
     handleClickOnMInCardHeader() {

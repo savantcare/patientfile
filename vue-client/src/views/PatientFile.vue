@@ -90,7 +90,7 @@ SUM:                            90            429            580           9719
 
 Core 4/6: How many types of component
 
-1/2: Card                                                      ideal: RecommendationCard.vue
+1/2: Card                                                      ideal: Recommendations/Layer1Card.vue
   4 categories
      User interface of a card component                        See line 2 
      Functions to manage UI changes from Card Header           See line 60     
@@ -156,9 +156,9 @@ const SearchBoxForCommandsFromUser = () =>
 
 const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 
-// TODO: Rename this to RecommendationCard
+// TODO: Rename this to Recommendations/Layer1Card
 const Recommendation = () =>
-  import("@/components/patient/RecommendationCard");
+  import("@/components/patient/Recommendations/Layer1Card");
 const Reminder = () => import("@/components/patient/RemindersCard");
 const Goal = () => import("@/components/patient/GoalsCard");
 const Diagnosis = () => import("@/components/patient/DiagnosesCard");

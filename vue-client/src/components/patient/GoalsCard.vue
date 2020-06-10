@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     handleClickOnAInCardHeader() {
-      // For logic: Line 57 of RecommendationCard.vue
+      // For logic: Line 57 of Recommendations/Layer1Card.vue
       console.log("show add dialog");
       this.$store.commit("showAddGoalTabInLayer2");
     },

@@ -1,8 +1,8 @@
 export default [
   {
-    // TODO: This key should be recommendationCard since when reading code it is not clear if its a card or a store.
+    // TODO: This key should be Recommendations/Layer1Card since when reading code it is not clear if its a card or a store.
     key: "recommendation",
-    value: require("@/components/patient/RecommendationCard")
+    value: require("@/components/patient/Recommendations/Layer1Card")
       .default,
     abbreviation: "rex"
   },
