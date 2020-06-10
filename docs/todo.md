@@ -1,10 +1,13 @@
 Alexey Todo:
 ============
-1. Remove custom column selection code. Goal is to keep the code simple.
+1. Data table related
+   A. Remove custom column selection code from data table. Goal is to keep the code simple.
+   B. KB arrow keys are going to the header. The KB arrow keys are not going to the data rows. 
+   C. Now that the Column seletion is not needed can the KB interaction be made simpler? 
+   D. Should the table be row based instead of column based? 
+   E. A row based table may make it easier to track which row is being dragged.
 
-2. KB interaction is not going to the rows. Now that the Column seletion is not needed can the KB interaction be made simpler? Should the table be row based instead of column based?
-
-3. Apply background image to children for multiStateDisplayArea
+2. Apply background image to children for multiStateDisplayArea 
 
 Done - need to demo:
 ====================
