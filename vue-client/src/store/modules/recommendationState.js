@@ -5,6 +5,7 @@ export default {
     
     yourRecommendationsList: [],              // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
                                               // This needs to be a 2 dimensional array. Right now it is a one dimensional array
+                                              // How to do it? Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations  
 
     othersList: [],
     tableList: [],                            // TODO: Needs better name.
