@@ -1,8 +1,8 @@
 /*
-App architecture 3 core principles      Architecture / LOC = 1/10 
+App architecture 4 core principles      Architecture / LOC = 1/10 
 ==================================      Total references (case insensitive): 605
 
-Core 1. Page design
+Core 1/4. Page design
 ===================
 
 ┌────────────────────────────────────────────────────────────────────────┐  
@@ -29,7 +29,7 @@ Core 1. Page design
 └────────────────────────────────────────────────────────────────────────┘
 
 
-Core 2. Multi state display area header design  
+Core 2/4. Multi state display area header design  
 ==============================================
 
 ┌────────────────────────────────────────────────────────────────────────────────┐
@@ -39,7 +39,7 @@ Core 2. Multi state display area header design
 └────────────────────────────────────────────────────────────────────────────────┘
 
 
- Core 3: Component design                                                                              
+ Core 3/4 Component design                                                                              
  ========================                                                                              
                                                                                                        
 ┌────────────────────CardHeader = 86────────────────────┐   ┌─────────────────────────────────────────┐
@@ -86,6 +86,23 @@ SVG                              1              0              0              1
 -------------------------------------------------------------------------------
 SUM:                            90            429            580           9719
 -------------------------------------------------------------------------------
+
+
+Core 4/4: How many types of component
+
+1/2: Card             ideal: RecommendationCard.vue
+  4 categories
+     User interface of a card component  
+     Functions to manage UI changes from Card Header
+     Functions to manage UI changes from data row 
+     Functions to manage DB changes
+2/2: Form             ideal: AddRecommendations.vue
+  2 categories
+     User interface of a form component 
+     Managing form submission
+
+
+
 */
 
 <template>

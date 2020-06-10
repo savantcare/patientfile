@@ -1,5 +1,5 @@
 // Component type 1/2: Card
-// -------------- Category 1/4: User interface of a card component ---------------------
+// -------------- Category 1/4: User interface of card component ---------------------
 
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
