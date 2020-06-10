@@ -52,14 +52,20 @@ export default {
       state.yourRecommendationsList = updateList
     },
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
-      if (state.yourRecommendationsList.length > 0) {       // At the client where this data was added it needs to be skipped
+      // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
+
+      // Say 10 clients are connection. Client 9 when it added the data its data-table showed the data added immediately. Now when the socket message comes back from the server. we need to find out client 9 and not insert the same row in the list maintained by client 9 
+      if (state.yourRecommendationsList.length > 0) {       
         const lastData = state.yourRecommendationsList[state.yourRecommendationsList.length - 1]
+        // TODO: How will this work if there are multiple recommendations being added?
+        // Is it a better idea to emit seperate messages for each add being done?  
         if (lastData.recommendationID == newDataList[newDataList.length - 1].recommendationID) {
-          return                                            // This return statement skips the client where this data was added by the user.
+          return                                            // This return statement skips client 9, where this data was added by the user.
         }
       }
 
-      // state.yourRecommendationsList.push(newData)
+      // If only one data could be inserted then call -> state.yourRecommendationsList.push(newData)
+      // The add form can be used to insert multiple data points.
       newDataList.forEach(item => {
         state.yourRecommendationsList.push(item)
       })
