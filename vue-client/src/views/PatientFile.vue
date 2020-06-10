@@ -160,11 +160,11 @@ const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 // TODO: Rename this to Recommendations/Layer1Card
 const Recommendation = () =>
   import("@/components/patient/Recommendations/Layer1Card");
-const Reminder = () => import("@/components/patient/RemindersCard");
-const Goal = () => import("@/components/patient/GoalsCard");
-const Diagnosis = () => import("@/components/patient/DiagnosesCard");
+const Reminder = () => import("@/components/patient/reminder/RemindersCard");
+const Goal = () => import("@/components/patient/goal/GoalsCard");
+const Diagnosis = () => import("@/components/patient/diagnosis/DiagnosesCard");
 const FamilyHistory = () =>
-  import("@/components/patient/FamilyHistoryCard");
+  import("@/components/patient/FamilyHistory/FamilyHistoryCard");
 const KeyboardHandler = () => import("@/components/common/KeyboardHandler");
 
 export default {

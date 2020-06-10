@@ -8,28 +8,28 @@ export default [
   },
   {
     key: "reminder",
-    value: require("@/components/patient/RemindersCard").default,
+    value: require("@/components/patient/reminder/RemindersCard").default,
     abbreviation: "rem"
   },
   {
     key: "diagnosis",
-    value: require("@/components/patient/DiagnosesCard").default,
+    value: require("@/components/patient/diagnosis/DiagnosesCard").default,
     abbreviation: "dx"
   },
   {
     key: "goal",
-    value: require("@/components/patient/GoalsCard").default,
+    value: require("@/components/patient/goal/GoalsCard").default,
     abbreviation: "goal"
   },
   {
     key: "socialHistory",
-    value: require("@/components/patient/SocialHistoryCard")
+    value: require("@/components/patient/social-history/SocialHistoryCard")
       .default,
     abbreviation: ""
   },
   {
     key: "serviceStatements",
-    value: require("@/components/patient/ServiceStatementsCard")
+    value: require("@/components/patient/service-statements/ServiceStatementsCard")
       .default,
     abbreviation: ""
   },
@@ -41,38 +41,38 @@ export default [
   },
   {
     key: "contacts",
-    value: require("@/components/patient/ContactsCard").default,
+    value: require("@/components/patient/Contacts/ContactsCard").default,
     abbreviation: ""
   },
   {
     key: "documents",
-    value: require("@/components/patient/DocumentsCard").default,
+    value: require("@/components/patient/Documents/DocumentsCard").default,
     abbreviation: ""
   },
   {
     key: "familyHistory",
-    value: require("@/components/patient/FamilyHistoryCard")
+    value: require("@/components/patient/FamilyHistory/FamilyHistoryCard")
       .default,
     abbreviation: "fh"
   },
   {
     key: "AIScribe",
-    value: require("@/components/patient/AIScribeCard").default,
+    value: require("@/components/patient/AIScribe/AIScribeCard").default,
     abbreviation: ""
   },
   {
     key: "allergiess",
-    value: require("@/components/patient/AllergiesCard").default,
+    value: require("@/components/patient/Allergies/AllergiesCard").default,
     abbreviation: ""
   },
   {
     key: "policies",
-    value: require("@/components/patient/PoliciesCard").default,
+    value: require("@/components/patient/Policies/PoliciesCard").default,
     abbreviation: ""
   },
   {
     key: "referral",
-    value: require("@/components/patient/ReferralCard").default,
+    value: require("@/components/patient/Referral/ReferralCard").default,
     abbreviation: ""
   },
   {
@@ -82,29 +82,29 @@ export default [
   },
   {
     key: "substancesAbuse",
-    value: require("@/components/patient/SubstancesAbuseCard")
+    value: require("@/components/patient/SubstancesAbuse/SubstancesAbuseCard")
       .default,
     abbreviation: ""
   },
   {
     key: "selfHarm",
-    value: require("@/components/patient/SelfHarmCard").default,
+    value: require("@/components/patient/SelfHarm/SelfHarmCard").default,
     abbreviation: ""
   },
   {
     key: "processNote",
-    value: require("@/components/patient/ProcessNoteCard")
+    value: require("@/components/patient/ProcessNote/ProcessNoteCard")
       .default,
     abbreviation: ""
   },
   {
     key: "profileCard",
-    value: require("@/components/patient/ProfileCard").default,
+    value: require("@/components/patient/Profile/ProfileCard").default,
     abbreviation: ""
   },
   {
     key: "pastPsychHistoryCard",
-    value: require("@/components/patient/PastPsychHistoryCard")
+    value: require("@/components/patient/PastPsychHistory/PastPsychHistoryCard")
       .default,
     abbreviation: ""
   }

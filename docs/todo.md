@@ -15,32 +15,13 @@ Done - need to demo:
 ====================
 1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13
 
-2. The correct DB to use is: DB_SC_Recommendation_CT_V20. It uses the concept of temporal database. For concept read: https://mariadb.com/kb/en/temporal-data-tables/
-
-3. Use temporal DB concept to show the change history for a recommendation that has been changed 
-    1. When I go to the tabDialog to chagne a recommendation below that show the change history for that recommendation.
-    2. The multichange slider needs a page number component at the bottom
-    3. Regression: Multi change Ct does not show history.
-
-4. Table sc_appointments -> uuid, patientUUID, providerUUID, dateAndTimeOfAppt, stateOfAppt
-
-Stage 1: Show historical data
-
-Generate slider in header based on dateAndTimeOfAppt and on dragging the slider show the correct data in the components inside multiStateDisplayArea
-
-For e.g. the patient has appt on 1st Feb and 14th March
-The slider will have 3 points on it: 1st Feb, 14th March, Current time
-
-When I click on slider point -> 1st Feb it will show me rex from "1st Feb appt lock time"
-
-When I click on slider point -> 14th march it will show me rex from "14th march appt lock time" 
-
-The temporal DB query is:
-SELECT * FROM t FOR SYSTEM_TIME AS OF TIMESTAMP'2016-10-09 08:07:06';
+2. Use temporal DB concept to show the change history for a recommendation that has been changed 
+    1. The multichange slider needs a page number component at the bottom
 
 Milestone 5:
 ============
-1. How will this work for 40 components
+1. Inside components/common/DataTable.vue:231
+
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
       this.$store.dispatch("dbGetMyRecommendations", params);
       this.$store.dispatch("dbGetOtherRecommendations", params);
@@ -49,9 +30,14 @@ Milestone 5:
       this.$store.dispatch("dbGetMultiStateOtherRecommendations", params);
     }
 
+
+How will this work for 40 components
+
 The data table should recv data to show instead of calling function to get the data.
 
 2. The data for previous appts is not cached. One more dimension should be increased in recs data structure.
+
+Ref: components/patient/Recommendations/stateDBSocket.js:6 Using apollo solves this problem without increasing the dimensions.
 
 3. Lock
 Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
@@ -62,57 +48,55 @@ apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateT
 
 5. Not reverting back in case of failure to update
 
-6. Socket for add and discontnue does not work.
+6. When I first load 4 queries are getting executed I could have possibly done it with 1 query. Using apollo solves this problem. Curretnly lot of extra data is being returned from the server.
 
-7. When I first load 4 queries are getting executed I could have possibly done it with 1 query.
+7. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
 
-8. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
+8. 10 components of production quality.
 
-9. Give me a page where I can create a new patient 
+Milestone 6:
+============
+1. Give me a page where I can create a new patient 
 
-10. Give me a page where I can choose from a list of patients whose patient file I want to open.
+2. Give me a page where I can choose from a list of patients whose patient file I want to open.
    1. Opening a patient file without a valid patient IDn should redirect to search page.
 
-11. delete of rex gives a error on the console
-
-12. 20 components of production quality.
-
-
-== Not organized
-
-
-5. Dx is not using CardHeader.vue
+3. History slider at the bottom when changing a single rec is incorrect.
 
 
 
+== Stuck
 
-6. Should single tab data table and multi tab data table components be 2 different components.
-
-7. Code repeated between components.
-   1. DB  
-   2. KB traverse
-
-8. Code refactor
-
-   1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
-
-9. KB interaction
+1. KB interaction
    1. Multi select using KB
 
-10. Search 
+2. Search 
    1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
    Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
                            https://github.com/FireLemons/Abbreviation-Autocomplete
 
-11. Animation
+3. Animation
     1. When I give the command the card should come from the bottom since that is the chat interface people are used to. Currently the card comes from the top. Reference: See how skype works.
 
 
 
 
+== Not organized
+
+1. Dx is not using CardHeader.vue
+
+2. Should single tab data table and multi tab data table components be 2 different components.
+
+3. Code repeated between components.
+   1. DB  
+   2. KB traverse
+
+4. Code refactor
+
+   1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
 
-
+== Demo to doctor notes
 
 
 Dr. Parikh meeting on 2nd June:
