@@ -190,7 +190,7 @@ Now when ever someone comes to http://ip-address/recommendation the router sends
 Inside views/recommendation.vue the component created in step 1 is used. By the following codes:
 
 1. Component is imported: 
-import AddRecommendationTab from "@/components/composition-layer2/AddRecommendation";
+import AddRecommendationTab from "@/components/patient/AddRecommendation";
 
 2. Component is displayed:
 ```

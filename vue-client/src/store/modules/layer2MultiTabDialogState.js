@@ -46,7 +46,7 @@ export default {
     showAddReminderTabInLayer2(state) {
       const tab = {
         label: "Add Reminders",
-        value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
+        value: require("@/components/patient/reminder/AddReminder.vue").default,
         name: "tab-add-reminder"
       }
       state.tabList = [tab]
@@ -57,7 +57,7 @@ export default {
     showMultiChangeReminderTabInLayer2(state) {
       const tab = {
         label: "Multi change Reminders",
-        value: require("@/components/composition-layer2/reminder/MultiChangeReminder.vue").default,
+        value: require("@/components/patient/reminder/MultiChangeReminder.vue").default,
         name: "tab-multi-change-reminder"
       }
       state.tabList = [tab]
@@ -68,7 +68,7 @@ export default {
     showChangeReminderTabInLayer2(state, data) {
       const tab = {
         label: "Change Reminder",
-        value: require("@/components/composition-layer2/reminder/AddReminder.vue").default,
+        value: require("@/components/patient/reminder/AddReminder.vue").default,
         name: "tab-change-reminder"
       }
       state.tabList = [tab]
@@ -131,7 +131,7 @@ export default {
     showAddDiagnosisTabInLayer2(state) {
       const tab = {
         label: "Add Diagnosis",
-        value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
+        value: require("@/components/patient/diagnosis/AddDiagnosis.vue").default,
         name: "tab-add-diagnosis"
       }
       state.tabList = [tab]
@@ -142,7 +142,7 @@ export default {
     showMultiChangeAssessmentTabInLayer2(state) {
       const tab = {
         label: "Multi change assessment diagnosis",
-        value: require("@/components/composition-layer2/diagnosis/MultiChangeAssessment.vue").default,
+        value: require("@/components/patient/diagnosis/MultiChangeAssessment.vue").default,
         name: "tab-multi-change-assessment"
       }
       state.tabList = [tab]
@@ -153,7 +153,7 @@ export default {
     showChangeDiagnosisTabInLayer2(state, data) {
       const tab = {
         label: "Change Diagnosis",
-        value: require("@/components/composition-layer2/diagnosis/AddDiagnosis.vue").default,
+        value: require("@/components/patient/diagnosis/AddDiagnosis.vue").default,
         name: "tab-change-diagnosis"
       }
       state.tabList = [tab]
@@ -165,7 +165,7 @@ export default {
     showAddServiceStatementsTabInLayer2(state) {
       const tab = {
         label: "Add service statements",
-        value: require("@/components/composition-layer2/service-statements/AddServiceStatements.vue").default,
+        value: require("@/components/patient/service-statements/AddServiceStatements.vue").default,
         name: "tab-service-statements"
       }
       state.tabList = [tab]
@@ -176,7 +176,7 @@ export default {
     showMultiChangeServiceStatementsTabInLayer2(state) {
       const tab = {
         label: "Multi change service statements",
-        value: require("@/components/composition-layer2/service-statements/MultiChangeServiceStatements.vue").default,
+        value: require("@/components/patient/service-statements/MultiChangeServiceStatements.vue").default,
         name: "tab-multi-change-service-statements"
       }
       state.tabList = [tab]
@@ -187,7 +187,7 @@ export default {
     showAddGoalTabInLayer2(state) {
       const tab = {
         label: "Add goal",
-        value: require("@/components/composition-layer2/goal/AddGoal.vue").default,
+        value: require("@/components/patient/goal/AddGoal.vue").default,
         name: "tab-add-goal"
       }
       state.tabList = [tab]
@@ -198,7 +198,7 @@ export default {
     showMultiChangeGoalTabInLayer2(state) {
       const tab = {
         label: "Multi rate goal",
-        value: require("@/components/composition-layer2/goal/MultiChangeGoal.vue").default,
+        value: require("@/components/patient/goal/MultiChangeGoal.vue").default,
         name: "tab-multi-change-goal"
       }
       state.tabList = [tab]
@@ -209,7 +209,7 @@ export default {
     showChangeGoalsTabInLayer2(state, data) {
       const tab = {
         label: "Rate goal",
-        value: require("@/components/composition-layer2/goal/RateGoal.vue").default,
+        value: require("@/components/patient/goal/RateGoal.vue").default,
         name: "tab-rate-goal"
       }
       state.tabList = [tab]

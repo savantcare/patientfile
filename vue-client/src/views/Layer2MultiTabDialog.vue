@@ -45,7 +45,7 @@ export default {
         const newTabName = `tab-${++this.tabIndex}`;
         const newTab = {
           label: "New tab",
-          value: require("../components/composition-layer2/AddNewTab").default,
+          value: require("../components/common/AddNewTab").default,
           name: newTabName
         };
         this.$store.commit("addNewTab", newTab);

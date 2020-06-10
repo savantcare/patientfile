@@ -117,49 +117,49 @@ export default {
       } else if (key == SOCIAL_HISTORY) {
         const socialHistoryTab = {
           label: "Social History",
-          value: require("./social-history/Index").default,
+          value: require("../patient/social-history/Index").default,
           name: "tab-social-history"
         };
         this.$store.commit("addNewTab", socialHistoryTab);
       } else if (key == ADD_DIAGNOSIS) {
         const addDiagnosisTab = {
           label: "Add Diagnosis",
-          value: require("./diagnosis/AddDiagnosis.vue").default,
+          value: require("../patient/diagnosis/AddDiagnosis.vue").default,
           name: "tab-add-diagnosis"
         };
         this.$store.commit("addNewTab", addDiagnosisTab);
       } else if (key == MULTIPLE_CHANGE_ASSESSMENT) {
         const multiChangeAssessmentTab = {
           label: "Multi change assessment diagnosis",
-          value: require("./diagnosis/MultiChangeAssessment.vue").default,
+          value: require("../patient/diagnosis/MultiChangeAssessment.vue").default,
           name: "tab-multi-change-assessment"
         };
         this.$store.commit("addNewTab", multiChangeAssessmentTab);
       } else if (key == ADD_SERVICE_STATEMENTS) {
         const addServiceStatementsTab = {
           label: "Add service statements",
-          value: require("./service-statements/AddServiceStatements.vue").default,
+          value: require("../patient/service-statements/AddServiceStatements.vue").default,
           name: "tab-add-service-statements"
         };
         this.$store.commit("addNewTab", addServiceStatementsTab);
       } else if (key == MULTIPLE_CHANGE_SERVICE_STATEMENTS) {
         const multiChangeServiceStatementsTab = {
           label: "Multi change service statements",
-          value: require("./service-statements/MultiChangeServiceStatements.vue").default,
+          value: require("../patient/service-statements/MultiChangeServiceStatements.vue").default,
           name: "tab-multi-change-service-statements"
         };
         this.$store.commit("addNewTab", multiChangeServiceStatementsTab);
       } else if (key == ADD_GOAL) {
         const addGoalTab = {
           label: "Add goal",
-          value: require("./goal/AddGoal.vue").default,
+          value: require("../patient/goal/AddGoal.vue").default,
           name: "tab-add-goal"
         };
         this.$store.commit("addNewTab", addGoalTab);
       } else if (key == MULTIPLE_RATE_GOAL) {
         const multiChangeGoalTab = {
           label: "Multi rate goal",
-          value: require("./goal/MultiChangeGoal").default,
+          value: require("../patient/goal/MultiChangeGoal").default,
           name: "tab-multi-change-goal"
         };
         this.$store.commit("addNewTab", multiChangeGoalTab);
