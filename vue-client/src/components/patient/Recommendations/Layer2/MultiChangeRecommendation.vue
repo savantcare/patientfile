@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     onClickSave(rec) {
+      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
       this.$store.dispatch("dbUpdateRecommendationInSM", {
         data: rec,
         notify: this.$notify
