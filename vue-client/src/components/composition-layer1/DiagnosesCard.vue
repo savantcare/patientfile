@@ -19,7 +19,7 @@
       ctName="diagnosis"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
-      @handleChange="handleChange"
+      @handleClickOnCInDataRow="handleClickOnCInDataRow"
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
       @handleUpdateColumns="handleUpdateColumns"
     />
@@ -73,7 +73,7 @@ export default {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
-    handleChange(data) {
+    handleClickOnCInDataRow(data) {
       console.log("show change dialog");
       this.$store.commit("showChangeDiagnosisTabInLayer2", data);
     },

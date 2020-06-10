@@ -22,7 +22,7 @@
               <el-button
                 size="mini"
                 v-if="tabData.rowActions.indexOf('C') > -1"
-                @click="handleChange(scope.row)"
+                @click="handleClickOnCInDataRow(scope.row)"
               >Edit</el-button>
               <el-button
                 size="mini"
@@ -50,7 +50,7 @@
               type="text"
               size="mini"
               v-if="tabData.rowActions.indexOf('C') > -1"
-              @click="handleChange(scope.row)"
+              @click="handleClickOnCInDataRow(scope.row)"
             >C</el-button>
             <el-button
               type="text"
@@ -105,8 +105,8 @@ export default {
     handleSelectionChange(val) {
       this.$emit("handleSelectionChange", val);
     },
-    handleChange(row) {
-      this.$emit("handleChange", row);
+    handleClickOnCInDataRow(row) {
+      this.$emit("handleClickOnCInDataRow", row);
     },
     handleClickOnDInDataRow(row) {
       this.$emit("handleClickOnDInDataRow", row);

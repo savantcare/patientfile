@@ -21,7 +21,7 @@
       keyId="recommendation"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
-      @handleChange="handleChange"
+      @handleClickOnCInDataRow="handleClickOnCInDataRow"
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
       @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
@@ -117,7 +117,7 @@ export default {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
-    handleChange(data) {
+    handleClickOnCInDataRow(data) {
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
     handleClickOnDInDataRow(data) {

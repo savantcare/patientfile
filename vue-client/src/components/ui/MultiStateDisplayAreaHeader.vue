@@ -44,7 +44,7 @@
         style="float: right;"
         v-model="componentType"
         :labels="{checked: 'H', unchecked: 'O'}"
-        @change="handleChangeToggleButtonEvent"
+        @change="handleClickOnCInDataRowToggleButtonEvent"
       />
     </el-col>
   </el-row>
@@ -210,7 +210,7 @@ export default {
       this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
       this.$store.dispatch("zoomMultiStateDisplayArea");
     },
-    handleChangeToggleButtonEvent() {
+    handleClickOnCInDataRowToggleButtonEvent() {
       const type = this.componentType == true ? "health" : "other";
       this.$store.commit("setComponentType", type);
     },

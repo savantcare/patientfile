@@ -16,7 +16,7 @@
     <!-- <DataTable
       :tabData="tabData"
       @handleSelectionChange="handleSelectionChange"
-      @handleChange="handleChange"
+      @handleClickOnCInDataRow="handleClickOnCInDataRow"
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
     />-->
 
@@ -75,7 +75,7 @@ export default {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
-    handleChange(data) {
+    handleClickOnCInDataRow(data) {
       console.log("show change dialog");
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
