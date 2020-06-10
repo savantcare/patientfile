@@ -35,7 +35,7 @@ export default [
   },
   {
     key: "bodyMeasurements",
-    value: require("@/components/composition-layer1/BodyMeasurementsCard")
+    value: require("@/components/composition-layer1/BodyMeasurements/Card")
       .default,
     abbreviation: ""
   },
