@@ -101,6 +101,10 @@ Core 4/4: How many types of component
      User interface of a form component 
      Managing form submission
 
+Core 5: How many types of socket events            ideal: recommendationState.js
+  1/3 add
+  2/3 change
+  3/3 discontinue
 
 
 */

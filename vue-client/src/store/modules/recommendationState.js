@@ -49,7 +49,8 @@ export default {
      */
 
 
-    // QUESTIOIN: Should multiple add be handled like multiple discontinue? As per VK yes.  
+     // -------- Socket event type 1/3
+     // QUESTIOIN: Should multiple add be handled like multiple discontinue? As per VK yes.  
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
       // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
 
@@ -70,6 +71,7 @@ export default {
       })
     },
 
+    // -------- Socket event type 2/3
     SOCKET_UPDATE_RECOMMENDATION(state, updateData) {         // This should be called CHANGE. Since the 3 actions are Add / Change (update query) / Discontinue (Delete query)
       let newList = []
       state.yourRecommendationsList.forEach(item => {
@@ -82,10 +84,7 @@ export default {
       state.yourRecommendationsList = newList
     },
 
-    SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // TODO: Is this function needed?
-      state.yourRecommendationsList = updateList
-    },
-
+    // ------------ Socket event type 3/3
     SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {      // For multiple discontinue each discontinue gets a different socket message. For 4 discontinue 4 api calls are made.
       console.log("SOCKET_DISCONTINUE_RECOMMENDATION")
       console.log(dispatchId)
