@@ -44,7 +44,7 @@
         style="float: right;"
         v-model="componentType"
         :labels="{checked: 'H', unchecked: 'O'}"
-        @change="handleChangeToggleButton"
+        @change="handleChangeToggleButtonEvent"
       />
     </el-col>
   </el-row>
@@ -122,7 +122,7 @@ export default {
     }
   },
   mounted() {
-    // this.getPatientInfo();
+    // this.apiGetPatientInfo();
     // this.updateMultiStateDisplayArea();
     // this.zoomValue = this.$store.state.MultiStateDisplayArea.zoomValue;
     // this.zoomMultiStateDisplayArea();
@@ -166,7 +166,7 @@ export default {
       //   this.$store.dispatch("zoomMultiStateDisplayArea");
       // }, 100);
     },
-    async getPatientInfo() {
+    async apiGetPatientInfo() {
       let TOKEN = localStorage.getItem("token");
       const searchQuery = {
         roleId: 3
@@ -210,7 +210,7 @@ export default {
       this.$store.commit("setMultiStateDisplayAreaZoomValue", value);
       this.$store.dispatch("zoomMultiStateDisplayArea");
     },
-    handleChangeToggleButton() {
+    handleChangeToggleButtonEvent() {
       const type = this.componentType == true ? "health" : "other";
       this.$store.commit("setComponentType", type);
     },
