@@ -2,7 +2,7 @@ Alexey Todo:
 ============
 1. Remove custom column selection code. Goal is to keep the code simple.
 
-2. KB interaction is not going to the rows. Now that the Column seletion is not needed can the KB interaction be made simpler?
+2. KB interaction is not going to the rows. Now that the Column seletion is not needed can the KB interaction be made simpler? Should the table be row based instead of column based?
 
 3. Apply background image to children for multiStateDisplayArea
 
