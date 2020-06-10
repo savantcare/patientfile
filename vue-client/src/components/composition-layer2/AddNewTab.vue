@@ -103,14 +103,14 @@ export default {
       if (key == ADD_RECOMMENDATION) {
         const addRecommendationTab = {
           label: "Add Recommendation",
-          value: require("./recommendation/AddRecommendation.vue").default,
+          value: require("../patient/Recommendations/Layer2/AddRecommendation.vue").default,
           name: "tab-add-recommendation"
         };
         this.$store.commit("addNewTab", addRecommendationTab);
       } else if (key == MULTIPLE_CHANGE_RECOMMENDATION) {
         const multiChangeRecommendationTab = {
           label: "Multi change recommendation",
-          value: require("./recommendation/MultiChangeRecommendation").default,
+          value: require("../patient/Recommendations/Layer2/MultiChangeRecommendation").default,
           name: "tab-multi-change-recommendation"
         };
         this.$store.commit("addNewTab", multiChangeRecommendationTab);

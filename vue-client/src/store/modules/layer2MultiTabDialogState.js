@@ -80,7 +80,7 @@ export default {
     showAddRecommendationTabInLayer2(state) {
       const tab = {
         label: "Add Recommendations",
-        value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
+        value: require("@/components/patient/Recommendations/Layer2/AddRecommendation.vue").default,
         name: "tab-add-recommendation"
       }
       // Once tablist is updated since it is reactive the src/views/Layer2MultiTabDialog.vue gets activated.
@@ -94,7 +94,7 @@ export default {
     showMultiChangeRecommendationTabInLayer2(state) {
       const tab = {
         label: "Multi change Recommendations",
-        value: require("@/components/composition-layer2/recommendation/MultiChangeRecommendation.vue").default,
+        value: require("@/components/patient/Recommendations/Layer2/MultiChangeRecommendation.vue").default,
         name: "tab-multi-change-recommendation"
       }
       state.tabList = [tab]
@@ -106,7 +106,7 @@ export default {
     showRecommendationDiscontinueHistoryTabInLayer2(state) {
       const tab = {
         label: "Recommendation Discontinue History",
-        value: require("@/components/composition-layer2/recommendation/RecommendationDiscontinueHistory.vue").default,
+        value: require("@/components/patient/Recommendations/Layer2/RecommendationDiscontinueHistory.vue").default,
         name: "tab-recommendation-discontinue-history"
       }
       state.tabList = [tab]
@@ -118,7 +118,7 @@ export default {
     showChangeRecommendationsTabInLayer2(state, data) {
       const tab = {
         label: "Change Recommendation",
-        value: require("@/components/composition-layer2/recommendation/AddRecommendation.vue").default,
+        value: require("@/components/patient/Recommendations/Layer2/AddRecommendation.vue").default,
         name: "tab-change-recommendation"
       }
       state.tabList = [tab]
