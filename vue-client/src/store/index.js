@@ -1,3 +1,7 @@
+// KT: Having an index.js file in a folder lets you perform an import from the folder implicitly without specifying the index.js in the import statement.
+
+
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
