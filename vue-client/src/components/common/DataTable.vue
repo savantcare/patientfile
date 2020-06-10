@@ -229,11 +229,11 @@ export default {
       date: apptDate
     };
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
-      this.$store.dispatch("dbGetMyRecommendations", params);
-      this.$store.dispatch("dbGetOtherRecommendations", params);
+      this.$store.dispatch("dbGetMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
     } else {
-      this.$store.dispatch("dbGetMultiStateMyRecommendations", params);
-      this.$store.dispatch("dbGetMultiStateOtherRecommendations", params);
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
     }
   },
   computed: {

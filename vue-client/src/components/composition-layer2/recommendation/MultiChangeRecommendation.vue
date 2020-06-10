@@ -40,13 +40,13 @@ export default {
   },
   methods: {
     onClickSave(rec) {
-      this.$store.dispatch("dbUpdateRecommendation", {
+      this.$store.dispatch("dbUpdateRecommendationInSM", {
         data: rec,
         notify: this.$notify
       });
     },
     onClickDiscontinue(rec) {
-      this.$store.dispatch("dbDiscontinueRecommendation", {
+      this.$store.dispatch("dbDiscontinueRecommendationInSM", {
         data: rec,
         notify: this.$notify
       });

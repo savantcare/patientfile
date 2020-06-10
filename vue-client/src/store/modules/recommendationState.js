@@ -71,7 +71,7 @@ export default {
     }
   },
   actions: {
-    async dbAddRecommendation({ state, commit }, json) {    
+    async dbAddRecommendationInSM({ state, commit }, json) {    
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
 
@@ -107,7 +107,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async dbUpdateRecommendation({ state, commit }, json) { 
+    async dbUpdateRecommendationInSM({ state, commit }, json) { 
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       let newList = []
@@ -150,7 +150,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async dbDiscontinueRecommendation({ state, commit }, json) {
+    async dbDiscontinueRecommendationInSM({ state, commit }, json) {
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
@@ -188,7 +188,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
-    async dbMultiDiscontinueRecommendations({ state, commit }, json) {
+    async dbMultiDiscontinueRecommendationsInSM({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
@@ -218,7 +218,7 @@ export default {
         }
       })
     },
-    async dbGetMyRecommendations({ commit }, json) {
+    async dbGetMyRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
@@ -264,7 +264,7 @@ export default {
 
       }
     },
-    async dbGetOtherRecommendations({ commit }, json) {
+    async dbGetOtherRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
@@ -298,7 +298,7 @@ export default {
         })
       }
     },
-    async dbGetMultiStateMyRecommendations({ commit }, params) {
+    async dbGetMultiStateMyRecommendationsInSM({ commit }, params) {
       const { date, patientId, userId } = params
       const response = await fetch(
         `${RECOMMENDATION_API_URL}/getByDate`, {
@@ -318,7 +318,7 @@ export default {
         commit("setMultiStateYourRecommendationList", json)
       }
     },
-    async dbGetMultiStateOtherRecommendations({ commit }, json) {
+    async dbGetMultiStateOtherRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")

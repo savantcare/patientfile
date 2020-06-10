@@ -11,7 +11,7 @@ export default {
           add: "showAddRecommendationTabInLayer2",
           multiChange: "showMultiChangeRecommendationTabInLayer2",
           change: "showChangeRecommendationsTabInLayer2",
-          discontinue: "dbDiscontinueRecommendation",
+          discontinue: "dbDiscontinueRecommendationInSM",
           discontinueHistory: "showRecommendationDiscontinueHistoryTabInLayer2"
         },
         reminder: {

@@ -247,7 +247,7 @@ export default {
       if (index < this.apptDates.length + 1) {
         apptDate = this.apptDates[index].dateTimeOfAppt.slice(0, 19).replace('T', ' ');
       }
-      this.$store.dispatch("dbGetMultiStateMyRecommendations", {
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
         date: apptDate,
         patientId: this.patientId,
         userId: this.$store.state.userId

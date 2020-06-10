@@ -141,7 +141,7 @@ export default {
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);
       });
-      this.$store.dispatch("dbMultiDiscontinueRecommendations", {
+      this.$store.dispatch("dbMultiDiscontinueRecommendationsInSM", {
         selectedIds: selectedIds,
         notify: this.$notify,
         selectedDatas: this.selectedRows
@@ -149,7 +149,7 @@ export default {
     },
   
     handleClickOnDInDataRow(data) {
-      this.$store.dispatch("dbDiscontinueRecommendation", {
+      this.$store.dispatch("dbDiscontinueRecommendationInSM", {
         data: data,
         notify: this.$notify
       });

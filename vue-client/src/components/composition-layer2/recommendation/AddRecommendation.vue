@@ -76,7 +76,7 @@ export default {
               "recommendationDescription"
             ] = this.recForm.recs[0].description;
             this.updateData["recordChangedByUUID"] = this.userId;
-            this.$store.dispatch("dbUpdateRecommendation", {
+            this.$store.dispatch("dbUpdateRecommendationInSM", {
               data: this.updateData,
               notify: this.$notify
             });
@@ -102,12 +102,12 @@ export default {
               });
             });
 
-            await this.$store.dispatch("dbAddRecommendation", {
+            await this.$store.dispatch("dbAddRecommendationInSM", {
               data: recList,
               notify: this.$notify,
               patientId: this.id
             });
-            await this.$store.dispatch("dbGetMyRecommendations", {
+            await this.$store.dispatch("dbGetMyRecommendationsInSM", {
               patientId: this.id,
               notify: this.$notify,
               userId: this.$store.state.userId
