@@ -45,15 +45,15 @@ Core 2/4. Multi state display area header design
 ┌────────────────────CardHeader = 86────────────────────┐   ┌─────────────────────────────────────────┐
 │ ┌───────────────┐               ┌────────────────────┐│   │         Card header actions             │
 │ │  CtName = 35  │               │Card header actions ││   ├──┬─────────────────────────────────┬────┤
-│ └───────────────┘               └────────────────────┘│   │A │handleClickOnAInCardHeader()           │ 60 │
+│ └───────────────┘               └────────────────────┘│   │A │handleClickOnAInCardHeader()     │ 60 │
 ┣━━━━━━━━━━━━━━━━━━━DataTable = 28━━━━━━━━━━━━━━━━━━━━━━┫   ├──┼─────────────────────────────────┼────┤
 │                                                       │   │M │handleClickOnMInCardHeader()     │ 59 │
 │ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
-│  Data row 1                         Data row actions ││   │F │handleClickOnFInCardHeader()                     │ 61 │
+│  Data row 1                         Data row actions ││   │F │handleClickOnFInCardHeader()     │ 61 │
 │ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
-│                                                       │   │D │handleClickOnDInCardHeader()               │ 74 │
+│                                                       │   │D │handleClickOnDInCardHeader()     │ 74 │
 │ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │   ├──┼─────────────────────────────────┼────┤
-│  Column 1              Column 2         C D           │   │X │handleClickOnXInCardHeader│ 4  │
+│  Column 1              Column 2         C D           │   │X │handleClickOnXInCardHeader       │ 4  │
 │ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │   ├──┼─────────────────────────────────┼────┤
 │                                                       │   │R │Review                           │    │
 └───────────────────────────────────────────────────────┘   ├──┼─────────────────────────────────┼────┤
@@ -64,9 +64,9 @@ Core 2/4. Multi state display area header design
  ┌─────────────────────────────────────────┐
  │          Data row actions               │
  ├──┬─────────────────────────────────┬────┤
- │C │    handleClickOnCInDataRow()               │ 26 │
+ │C │    handleClickOnCInDataRow()    │ 26 │
  ├──┼─────────────────────────────────┼────┤
- │D │    handleClickOnDInDataRow()          │ 26 │
+ │D │    handleClickOnDInDataRow()    │ 26 │
  └──┴─────────────────────────────────┴────┘
 
 
