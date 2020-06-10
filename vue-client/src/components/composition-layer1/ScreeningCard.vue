@@ -5,12 +5,12 @@
         ctName="Screening"
         actions="A,F,D"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
-        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
+        @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         ref="card_header"
       />
-      <!-- @informShowMultiChangeTabInLayer2="showTakeAScreenDialog" -->
+      <!-- @handleClickOnMInCardHeader="showTakeAScreenDialog" -->
     </div>
 
     <!-- <DataTable
@@ -49,7 +49,7 @@ export default {
     };
   },
   methods: {
-    informShowTabToAddInLayer2() {
+    handleClickOnAInCardHeader() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInLayer2");
     },

@@ -6,8 +6,8 @@
           ctName="Service statements"
           actions="A,M,F,D"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
-          @informShowTabToAddInLayer2="showAddServiceStatementsDialog"
-          @informShowMultiChangeTabInLayer2="showMultiChangeServiceStatementsDialog"
+          @handleClickOnAInCardHeader="showAddServiceStatementsDialog"
+          @handleClickOnMInCardHeader="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -33,8 +33,8 @@ export default {
       console.log("open multi change dialog");
       this.$store.commit("showMultiChangeServiceStatementsTabInLayer2");
     },
-    informShowTabToAddInLayer2() {},
-    informShowMultiChangeTabInLayer2() {},
+    handleClickOnAInCardHeader() {},
+    handleClickOnMInCardHeader() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

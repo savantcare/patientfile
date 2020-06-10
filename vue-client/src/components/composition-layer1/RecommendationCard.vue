@@ -9,8 +9,8 @@
         keyId="recommendation"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
-        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-        @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
+        @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
+        @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @showDiscontinueHistoryTabInLayer2="showDiscontinueHistoryTabInLayer2"
@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    informShowTabToAddInLayer2() {
+    handleClickOnAInCardHeader() {
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
       The only way to actually change state in a Vuex store is by committing a mutation. 
@@ -75,7 +75,7 @@ export default {
       */
       this.$store.commit("showAddRecommendationTabInLayer2");
     },
-    informShowMultiChangeTabInLayer2() {
+    handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
     // TODO: Rename this to handleFocusPanel()

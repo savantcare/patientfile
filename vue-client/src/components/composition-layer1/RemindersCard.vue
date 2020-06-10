@@ -10,8 +10,8 @@
         keyId="reminder"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
-        @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-        @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
+        @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
+        @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
@@ -53,11 +53,11 @@ export default {
     };
   },
   methods: {
-    informShowTabToAddInLayer2() {
+    handleClickOnAInCardHeader() {
       // For logic: Line 57 of RecommendationCard.vue
       this.$store.commit("showAddReminderTabInLayer2");
     },
-    informShowMultiChangeTabInLayer2() {
+    handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeReminderTabInLayer2");
     },
     focusPanel() {

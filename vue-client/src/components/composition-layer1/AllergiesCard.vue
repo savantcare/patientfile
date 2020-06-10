@@ -6,8 +6,8 @@
           ctName="Allergies"
           actions="A,M,F,D"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
-          @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-          @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
+          @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
+          @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -29,8 +29,8 @@ export default {
     };
   },
   methods: {
-    informShowTabToAddInLayer2() {},
-    informShowMultiChangeTabInLayer2() {},
+    handleClickOnAInCardHeader() {},
+    handleClickOnMInCardHeader() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

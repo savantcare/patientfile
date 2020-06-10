@@ -6,8 +6,8 @@
           ctName="Family history"
           actions="A,N"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
-          @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-          @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
+          @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
+          @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -59,11 +59,11 @@ export default {
     };
   },
   methods: {
-    informShowTabToAddInLayer2() {
+    handleClickOnAInCardHeader() {
       console.log("show add dialog");
       this.$store.commit("showAddFamilyHistoryModal");
     },
-    informShowMultiChangeTabInLayer2() {
+    handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeFamilyHistoryModal");
     },
     focusPanel() {

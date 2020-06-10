@@ -23,11 +23,11 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
         >D</el-button>
         <div v-else>
           <el-button type="text" size="mini" @click="$emit('showTabToRevewInLayer2')" v-if="showReviewChoice">R</el-button>
-          <el-button type="text" size="mini" @click="$emit('informShowTabToAddInLayer2')" v-if="showAddChoice">A</el-button>
+          <el-button type="text" size="mini" @click="$emit('handleClickOnAInCardHeader')" v-if="showAddChoice">A</el-button>
           <el-button
             type="text"
             size="mini"
-            @click="$emit('informShowMultiChangeTabInLayer2')"
+            @click="$emit('handleClickOnMInCardHeader')"
             v-if="showMultiChangeButton"
           >M</el-button>
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusChoice">F</el-button>
