@@ -1,3 +1,5 @@
+// -------------- Category 1/4: User interface of this component ---------------------
+
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
   <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">   <!-- currentStateDisplayArea or multiStateDisplayArea Ref: patientFile.vue header -->
@@ -54,7 +56,7 @@ export default {
   },
   methods: {
 
-    // -------------- Category 1/3: Functions to manage UI changes from Card Header ---------------------
+    // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
 
     handleClickOnAInCardHeader() {
       /* 
@@ -110,7 +112,7 @@ export default {
       this.$scrollTo(element, 500, options);
     },
 
-    // -------------- Category 2/3: Functions to manage UI changes from data row ---------------------
+    // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
 
     handleClickOnCInDataRow(data) {
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
@@ -131,7 +133,7 @@ export default {
       this.$store.commit("setRecommendationTableList", tableList);
     },
  
-    //-------------- Category 3/3: Functions to manage DB changes -----------------------
+    //-------------- Category 4/4: Functions to manage DB changes -----------------------
 
     handleClickOnDInCardHeader() {
       let selectedIds = [];
