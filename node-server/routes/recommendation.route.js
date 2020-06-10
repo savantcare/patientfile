@@ -16,13 +16,16 @@ module.exports = (io) => {
        The room name has -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
    
+       For each component it will be maintained which roles have access
+       if 5 user roles have access to this component then 5 emits will be done.
+
        Question: What is inside newRecommendation?
        */
       console.log(`room-${patientId}-Doctor`)
       console.log(newRecommendation)
       io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
 
-      res.send(newRecommendation) /* Fix: Instead of sending the whole object only OK needs to be sent*/
+      res.send(newRecommendation) /* TODO: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occurred while creating the Recommenation"

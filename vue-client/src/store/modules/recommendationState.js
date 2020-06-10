@@ -34,18 +34,31 @@ export default {
     },
 
     /**
-     * Socket Listeners
+      Socket Listeners: Uses library: https://github.com/MetinSeylan/Vue-Socket.io
+      main.js has:
+      Vue.use(new VueSocketIO({
+        debug: true,
+        connection: SocketIO(SOCKET_API_URL, {}),
+        vuex: {
+          store,
+          actionPrefix: "SOCKET_",
+          mutationPrefix: "SOCKET_"
+        }
+      })
+      );     
      */
+
     SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // Message received from socket server
       state.yourRecommendationsList = updateList
     },
-    SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js
-      if (state.yourRecommendationsList.length > 0) {                      // At the client where this data was added it needs to be skipped
+    SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
+      if (state.yourRecommendationsList.length > 0) {       // At the client where this data was added it needs to be skipped
         const lastData = state.yourRecommendationsList[state.yourRecommendationsList.length - 1]
         if (lastData.recommendationID == newDataList[newDataList.length - 1].recommendationID) {
-          return
+          return                                            // This return statement skips the client where this data was added by the user.
         }
       }
+
       // state.yourRecommendationsList.push(newData)
       newDataList.forEach(item => {
         state.yourRecommendationsList.push(item)
