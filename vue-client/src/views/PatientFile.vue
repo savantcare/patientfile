@@ -47,7 +47,7 @@ Core 2. Multi state display area header design
 │ │  CtName = 35  │               │Card header actions ││   ├──┬─────────────────────────────────┬────┤
 │ └───────────────┘               └────────────────────┘│   │A │informShowTabToAddInLayer2()           │ 60 │
 ┣━━━━━━━━━━━━━━━━━━━DataTable = 28━━━━━━━━━━━━━━━━━━━━━━┫   ├──┼─────────────────────────────────┼────┤
-│                                                       │   │M │showMultiChangeTabInLayer2()     │ 59 │
+│                                                       │   │M │informShowMultiChangeTabInLayer2()     │ 59 │
 │ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
 │  Data row 1                         Data row actions ││   │F │focusPanel()                     │ 61 │
 │ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤

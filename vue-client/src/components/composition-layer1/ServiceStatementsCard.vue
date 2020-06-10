@@ -7,7 +7,7 @@
           actions="A,M,F,D"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @informShowTabToAddInLayer2="showAddServiceStatementsDialog"
-          @showMultiChangeTabInLayer2="showMultiChangeServiceStatementsDialog"
+          @informShowMultiChangeTabInLayer2="showMultiChangeServiceStatementsDialog"
           @focusPanel="focusPanel"
           @multiDiscontinue="multiDiscontinue"
           ref="card_header"
@@ -34,7 +34,7 @@ export default {
       this.$store.commit("showMultiChangeServiceStatementsTabInLayer2");
     },
     informShowTabToAddInLayer2() {},
-    showMultiChangeTabInLayer2() {},
+    informShowMultiChangeTabInLayer2() {},
     focusPanel() {},
     multiDiscontinue() {}
   }

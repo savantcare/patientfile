@@ -7,7 +7,7 @@
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
         @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-        @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
+        @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
@@ -52,7 +52,7 @@ export default {
       // For logic: Line 57 of RecommendationCard.vue
       this.$store.commit("showAddDiagnosisTabInLayer2");
     },
-    showMultiChangeTabInLayer2() {
+    informShowMultiChangeTabInLayer2() {
       this.$store.commit("showMultiChangeAssessmentTabInLayer2");
     },
     focusPanel() {

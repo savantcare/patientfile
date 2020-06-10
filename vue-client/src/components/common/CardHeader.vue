@@ -27,7 +27,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
           <el-button
             type="text"
             size="mini"
-            @click="$emit('showMultiChangeTabInLayer2')"
+            @click="$emit('informShowMultiChangeTabInLayer2')"
             v-if="showMultiChangeButton"
           >M</el-button>
           <el-button type="text" size="mini" @click="$emit('focusPanel')" v-if="showFocusChoice">F</el-button>

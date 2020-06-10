@@ -8,7 +8,7 @@
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         :columns="columns"
         @informShowTabToAddInLayer2="informShowTabToAddInLayer2"
-        @showMultiChangeTabInLayer2="showMultiChangeTabInLayer2"
+        @informShowMultiChangeTabInLayer2="informShowMultiChangeTabInLayer2"
         @focusPanel="focusPanel"
         @multiDiscontinue="multiDiscontinue"
         @updateSelectedColumns="updateSelectedColumns"
@@ -56,7 +56,7 @@ export default {
       console.log("show add dialog");
       this.$store.commit("showAddGoalTabInLayer2");
     },
-    showMultiChangeTabInLayer2() {
+    informShowMultiChangeTabInLayer2() {
       this.$store.commit("showMultiChangeGoalTabInLayer2");
     },
     focusPanel() {
