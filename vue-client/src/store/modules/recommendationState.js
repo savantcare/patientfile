@@ -48,9 +48,7 @@ export default {
       );     
      */
 
-    SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // Message received from socket server
-      state.yourRecommendationsList = updateList
-    },
+
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
       // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
 
@@ -70,6 +68,7 @@ export default {
         state.yourRecommendationsList.push(item)
       })
     },
+
     SOCKET_UPDATE_RECOMMENDATION(state, updateData) {
       let newList = []
       state.yourRecommendationsList.forEach(item => {
@@ -81,6 +80,11 @@ export default {
       })
       state.yourRecommendationsList = newList
     },
+
+    SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // Message received from socket server
+      state.yourRecommendationsList = updateList
+    },
+
     SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {
       console.log("SOCKET_DISCONTINUE_RECOMMENDATION")
       const newList = state.yourRecommendationsList.filter(item => {
