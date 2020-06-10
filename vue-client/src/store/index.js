@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 // modules
 import recommendationStateModule from '../components/patient/Recommendations/stateDBSocket'
+import screeningStateModule from '../components/patient/Screening/stateDBSocket'
 import diagnosisStateModule from './modules/diagnosisState'
 import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
@@ -113,7 +114,8 @@ export default new Vuex.Store({
     setting: settingStateModule,
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule,
-    component: componentModule
+    component: componentModule.actions,
+    screeningStateModule: screeningStateModule
   },
   plugins: [
     createPersistedState()

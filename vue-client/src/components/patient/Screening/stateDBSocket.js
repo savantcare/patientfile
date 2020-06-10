@@ -6,7 +6,7 @@ export default {
   },
   mutations: {
     setScreeningList(state, data) {
-      state.list = data
+      state.screeningList = data
     },
     addNewScreening(state, newList) {
       newList.forEach(item => {
@@ -54,6 +54,55 @@ export default {
     }
   },
   actions: {
+
+    // Category 1/2: Functions to get data
+    async dbGetScreeningsInSM({ commit }, json) {
+      const { patientId, notify, userId, date } = json
+      if (TOKEN == null) {
+        TOKEN = localStorage.getItem("token")
+      }
+      try {
+        const response = await fetch(
+          `${SCREENING_API_URL}/getScreenList`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN,
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            patientId: patientId,
+            userId: userId,
+            date: date
+          })
+        });
+        if (response.ok) {
+          let json = await response.json();
+          console.log(json)
+          commit('setScreeningList', json)
+        } else {
+          if (response.status == '401') {
+            notify({
+              title: "Error",
+              message: "Token is expired."
+            })
+            localStorage.removeItem("token")
+            window.location = "/"
+          } else {
+            notify({
+              title: "Error",
+              message: "Failed to get my screening data"
+            })
+          }
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+
+      }
+    },
+
     async addScreening({ state, commit }, json) {
       const { data, notify, patientId } = json
       const originList = state.list

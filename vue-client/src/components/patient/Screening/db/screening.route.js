@@ -1,8 +1,12 @@
 const router = require('express').Router()
-const db = require('../../../../../../node-server/models')
-const Screening = db.screeningDB.screenings
+const db = require('../models')
+const screensListMaster = db.screeningDB.screensListMaster
+const screensAssignedToPatient = db.screeningDB.screensAssignedToPatient
+const phq9PatientResponse = db.screeningDB.phq9PatientResponse
 const User = db.userDB.users
 const { Op } = require("sequelize")
+
+//Screening
 
 module.exports = (io) => {
   router.post('/', async (req, res) => {
@@ -78,108 +82,23 @@ module.exports = (io) => {
     }
   })
 
-  router.patch('/:id', async (req, res) => {
+
+  router.post('/getScreenList', async (req, res) => {
     try {
-      const queryResult = await Screening.update({
-        discontinue: true,
-        discontinueAt: new Date()
-      }, {
-        where: {
-          id: req.params.id
-        }
+      const { patientId, userId, date } = req.body
+
+      const queryResult = await screensAssignedToPatient.findAll({
+        where: { patientUUID: patientId },
+        //include: [{
+        //  model: screensListMaster,
+        //    where: {year_birth: 1984}
+        // }]
       })
-      io.to(`room-${req.body.patientId}-Doctor`).emit("DISCONTINUE_SCREENING", req.params.id)
-      res.send(queryResult) /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+      res.send(queryResult)
+
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while patch the Screening"
-      })
-    }
-  })
-
-  router.get('/getHistory/:id', async (req, res) => {
-    try {
-      const histories = await Screening.findAll({
-        where: {
-          screeningID: req.params.id
-        }
-      })
-      /**
-       * Expect result:
-       *  {
-       *    "content": "History 1",
-       *    "info": "Added by {User} on {Date}" || "Updated by {User} on {Date}"
-       *  }
-       * 
-       */
-
-      const promises = histories.map(async history => {
-        const { description, createdByUserId, discontinuedByUserId, createdAt, discontinueAt } = history
-        if (discontinuedByUserId == null) { // The case which there is no update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: createdByUserId }
-            })
-
-            const { name } = user
-            const data = {
-              content: description,
-              info: `Added by ${name} on ${new Date(createdAt).toDateString()}`
-            }
-            console.log(data)
-            return data
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
-        } else { // The case which there is an update history
-          try {
-            const user = await User.findOne({
-              attributes: ['name'],
-              where: { id: discontinuedByUserId }
-            })
-
-            const { name } = user
-            return {
-              content: description,
-              info: `Changed by ${name} on ${new Date(discontinueAt).toDateString()}`
-            }
-          } catch (err) {
-            return err.message || "Some error occured while get user info"
-          }
-        }
-      })
-
-      const result = await Promise.all(promises)
-      res.send(result)
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occured while get the screening history"
-      })
-    }
-  })
-
-  router.post("/getHistoryByDate", async (req, res) => {
-    const { startDate, endDate } = req.body
-    try {
-      const history = await Screening.findAll({
-        where: {
-          createdAt: {
-            [Op.and]: [
-              {
-                [Op.gte]: startDate
-              },
-              {
-                [Op.lte]: endDate
-              }
-            ]
-          }
-        }
-      })
-      res.send(history)
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occured while get historical data"
+        message: err.message || "Some error occured while fetching the Recommendation"
       })
     }
   })

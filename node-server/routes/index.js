@@ -13,7 +13,7 @@ module.exports = (io) => {
   const socialHistoryRoutes = require('./socialhistory.routes')
   const goalRoutes = require('./goal.route')(io)
   const appointmentRoutes = require('./appointment.routes')
-  const screeningRoutes = require('./screening.routes')
+  const screeningRoutes = require('./screening.route')(io)
 
   router.use('/auth', authRoutes)
   router.use('/recommendations', recommendationRoutes)

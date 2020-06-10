@@ -5,22 +5,50 @@
     </el-tag>
     <br />
     <br />
-    <el-col :span="8" :key="question.id" v-for="question in questionList" >
-      <el-card class="box-card" :body-style="{ padding: '3px' }" shadow="hover">
-        <el-form label-position="top" ref="form" :model="form">
-            <p><strong>Q</strong> {{question.name}}</p>
-            <el-form-item label="">
-                <span><strong>Answer </strong></span>
-                <el-select v-model="question.selectedAnswer" size="mini" placeholder="Select">
-                    <el-option v-for="item in answerList" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
 
-            </el-form-item>
+<el-form label-position="top" ref="form" :model="screenForm">
 
-        </el-form>
-      </el-card>
-    </el-col>
+   <el-form-item>
+
+    <el-table :data="questionData" style="width: 100%">
+      <el-table-column prop="question" label="Patient health questionnaire" width="580"></el-table-column>
+        <el-table-column prop="option1" label="Not at all" width="180"> 
+          <template slot-scope="scope">
+            <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >0</el-radio>
+        </template>
+      
+      </el-table-column>
+      <el-table-column prop="option2" label="Several days">
+        <template slot-scope="scope">
+          <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >2</el-radio>
+        </template>
+
+      </el-table-column>
+      <el-table-column prop="option3" label="More than half the days">
+        <template slot-scope="scope">
+            <el-radio label="1" v-model="scope.row.option3"  @click="handleEdit(scope.$index, scope.row)" >3</el-radio>
+        </template>
+       </el-table-column>
+      <el-table-column prop="option4" label="Nearly every day">
+        <template slot-scope="scope">
+            <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >4</el-radio>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    </el-form-item>
+    <br />
+    <br />
+
+    <el-form-item  class="qstn-submit" body-style="{ padding: '30px' }">
+              <el-button type="success" @click="submitForm('screenForm')" size="small">Submit</el-button>
+    </el-form-item>
+
+</el-form>
+
+  <!-- <el-radio v-model="radio" label="2">Option B</el-radio> -->
+
+
 
 
   </el-row>
@@ -43,27 +71,16 @@ export default {
           content: "Tab 2 content"
         }
       ],
-       tags: [
-          { name: 'SPIN', type: 'light' }
+        tags: [
+          { name: 'PHQ9', type: 'light' }
         ],
-       questionList: [
-          { id: 1, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I am afraid of people in authority',  },
-          { id: 2, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I am bothered by blushing in front of people' },
-          { id: 3, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Parties and social events scare me' },
-          { id: 4, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I avoid talking to people I don\'t know' },
-          { id: 5, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Being criticized scares me a lot' },
-          { id: 6, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Fear of embarrassment causes me to avoid doing things or speaking to people' },
-          { id: 7, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Sweating in front of people causes me distress' },
-          { id: 8, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I avoid going to parties' },
-          { id: 9, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I avoid activities in which I am the centre of attention' },
-          { id: 10, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Talking to strangers scares me' },
-          { id: 11, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I avoid having to give speeches' },
-          { id: 12, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I would do anything to avoid being criticized' },
-          { id: 13, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Heart palpitations bother me when I am around people' },
-          { id: 14, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I am afraid of doing things when people might be watching' },
-          { id: 15, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Being embarrassed or looking stupid is among my worst fears' },
-          { id: 16, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... I avoid speaking to anyone in authority' },
-          { id: 17, selectedAnswer: '', name: 'How much the following problems have bothered you during the past week... Trembling or shaking in front of others is distressing to me' }
+        radio: '0',
+        questionData: [
+          { question: '1. Little interest or pleasure in doing things', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '2. Feeling down, depressed or hopeless.', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '3. Trouble falling or staying asleep, or sleeping too much', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '4. Feeling tired or having little energy ', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '5. Poor appetite or overeating ', option1: '0', option2: '1', option3: '2', option4: '3' }
         ],
        answerList: [
           { value: 1, label: 'Not at all',  },
@@ -103,6 +120,10 @@ export default {
     };
   },
   methods: {
+
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
     handleTabsEdit(targetName, action) {
       if (action === "add") {
         let newTabName = ++this.tabIndex + "";
@@ -173,8 +194,9 @@ export default {
     padding-bottom: 6px;
 }
 
-.qstn{
-  margin: 5px;
+.qstn-submit{
+  float: right;
+  margin: 0 20px;
 }
 
 .el-form-item {

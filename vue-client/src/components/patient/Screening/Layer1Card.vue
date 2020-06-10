@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       selectedRows: [],
-      tableData: [{ name: "1. SPIN" }]
+      tableData: [{ name: "1. PHQ9" }]
     };
   },
   methods: {
@@ -87,11 +87,15 @@ export default {
     }
   },
   mounted() {
+    let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+;
     const params = {
       patientId: this.$route.query.patient_id,
-      notify: this.$notify
+      notify: this.$notify,
+      userId: this.$store.state.userId,
+      date: apptDate
     };
-    this.$store.dispatch("getRecommendations", params);
+    this.$store.dispatch("dbGetScreeningsInSM", params);
   },
   computed: {
     tabData() {

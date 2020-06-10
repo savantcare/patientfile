@@ -5,7 +5,7 @@ https://sequelize.org/v5/manual/getting-started.html#modeling-a-table
 id is string since we do not want it to be a auto incrementing integer.
 */
 module.exports = (sequelize, Sequelize) => {
-    const phq9PatientResponse = sequelize.define("phq9PatientResponse", {
+    const phq9PatientResponse = sequelize.define("phq9PatientResponses", {
       responseUUID: {
         type: Sequelize.STRING(64),
         defaultValue: Sequelize.UUIDV4,
@@ -48,6 +48,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         defaultValue: null
       }
+    },{
+      timestamps: false,
+      freezeTableName: true
     });
   
     return phq9PatientResponse;
