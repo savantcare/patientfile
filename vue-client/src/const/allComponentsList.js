@@ -77,7 +77,7 @@ export default [
   },
   {
     key: "screening",
-    value: require("@/components/patient/Screening/Card").default,
+    value: require("@/components/patient/Screening/Layer1Card").default,
     abbreviation: "s"
   },
   {

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../models')
+const db = require('../../../../../../node-server/models')
 const Screening = db.screeningDB.screenings
 const User = db.userDB.users
 const { Op } = require("sequelize")

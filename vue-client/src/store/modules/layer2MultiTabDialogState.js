@@ -221,7 +221,8 @@ export default {
     showAddScreenTabInLayer2(state) {
       const tab = {
         label: "Add screen",
-        value: require("@/components/composition-layer2/screening/AddScreen.vue").default,
+        value: require("@/components/patient/Screening/Layer2/AddScreen.vue").default,
+
         name: "tab-add-screen"
       }
       state.tabList = [tab]
@@ -232,7 +233,7 @@ export default {
     showTakeAScreenTabInLayer2(state) {
       const tab = {
         label: "Take a screen",
-        value: require("@/components/composition-layer2/screening/TakeAScreen.vue").default,
+        value: require("@/components/patient/Screening/Layer2/TakeAScreen.vue").default,
         name: "tab-take-a-s-screen"
       }
       state.tabList = [tab]

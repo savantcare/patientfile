@@ -166,7 +166,7 @@ export default {
       }else if (key == ADD_SCREEN) {
         const addScreenTab = {
           label: "Add screen",
-          value: require("./screening/AddScreen.vue").default,
+          value: require("../patient/Screening/Layer2/AddScreen.vue").default,
           name: "tab-add-screen"
         };
         this.$store.commit("addNewTab", addScreenTab);
