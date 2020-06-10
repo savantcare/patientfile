@@ -2,7 +2,7 @@
 App architecture 4 core principles      Architecture / LOC = 1/10 
 ==================================      Total references (case insensitive): 605
 
-Core 1/4. Page design
+Core 1/6. Page design
 ===================
 
 ┌────────────────────────────────────────────────────────────────────────┐  
@@ -29,7 +29,7 @@ Core 1/4. Page design
 └────────────────────────────────────────────────────────────────────────┘
 
 
-Core 2/4. Multi state display area header design  
+Core 2/6. Multi state display area header design  
 ==============================================
 
 ┌────────────────────────────────────────────────────────────────────────────────┐
@@ -39,7 +39,7 @@ Core 2/4. Multi state display area header design
 └────────────────────────────────────────────────────────────────────────────────┘
 
 
- Core 3/4 Component design                                                                              
+ Core 3/6 Component design                                                                              
  ========================                                                                              
                                                                                                        
 ┌────────────────────CardHeader = 86────────────────────┐   ┌─────────────────────────────────────────┐
@@ -88,28 +88,29 @@ SUM:                            90            429            580           9719
 -------------------------------------------------------------------------------
 
 
-Core 4/4: How many types of component
+Core 4/6: How many types of component
 
-1/2: Card             ideal: RecommendationCard.vue
+1/2: Card                                                      ideal: RecommendationCard.vue
   4 categories
-     User interface of a card component  
-     Functions to manage UI changes from Card Header
-     Functions to manage UI changes from data row 
-     Functions to manage DB changes
-2/2: Form             ideal: AddRecommendations.vue
+     User interface of a card component                        See line 2 
+     Functions to manage UI changes from Card Header           See line 60     
+     Functions to manage UI changes from data row              See line 116  
+     Functions to manage DB changes                            See line 137       
+
+2/2: Form                                                      ideal: AddRecommendations.vue
   2 categories
-     User interface of a form component 
+     User interface of a form component                        See Line 2 
      Managing form submission
 
-Core 5: How many types of socket events            ideal: recommendationState.js
-  1/3 add
-  2/3 change
-  3/3 discontinue
+Core 5/6: How many types of socket events                      ideal: recommendationState.js
+  1/3 add                                                      See line 62 
+  2/3 change      (same as update query for temporal DB)       See line 83 
+  3/3 discontinue (same as delete query for temporal DB)       See line 96
 
 
-Core 6: What are 2 categories of DB API calls     ideal: recommendationState.js
-  1/2 Get data
-  2/2 Change data
+Core 6/6: What are 2 categories of DB API calls               ideal: recommendationState.js
+  1/2 Get data                                                See line 111
+  2/2 Change data                                             See line 248
 
 */
 
