@@ -1,7 +1,7 @@
 {
-  "HOST": "localhost",
-  "USER": "root",
-  "PASSWORD": "",
+  "HOST": "138.68.233.185",
+  "USER": "stanford2008",
+  "PASSWORD": "jaidurgama",
   "DB": "health_brain",
   "dialect": "mysql",
   "pool": {
@@ -21,5 +21,5 @@
   "DB_SCREENING": "sc_screen",
   "DB_SOCIALHISTORY": "DB_SC_SocialHistory_CT_V20",
   "DB_APPOINTMENT": "sc_appointments",
-  "artificial_delay_in_reponse_from_node_server": "1000"
+  "artificial_delay_in_reponse_from_node_server": "0"
 }
