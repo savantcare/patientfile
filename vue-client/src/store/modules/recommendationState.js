@@ -59,7 +59,7 @@ export default {
         const lastData = state.yourRecommendationsList[state.yourRecommendationsList.length - 1]
         // TODO: How will this work if there are multiple recommendations being added?
         // Is it a better idea to emit seperate messages for each add being done?  
-        if (lastData.recommendationID == newDataList[newDataList.length - 1].recommendationID) {
+        if (lastData.uuid == newDataList[newDataList.length - 1].uuid) {
           return                                            // This return statement skips client 9, where this data was added by the user.
         }
       }
