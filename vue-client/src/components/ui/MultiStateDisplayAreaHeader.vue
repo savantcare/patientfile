@@ -126,7 +126,7 @@ export default {
     // this.updateMultiStateDisplayArea();
     // this.zoomValue = this.$store.state.MultiStateDisplayArea.zoomValue;
     // this.zoomMultiStateDisplayArea();
-    this.getAppointments();
+    this.apiGetAppointments();
   },
   methods: {
     // TODO: This should take data from apptDatesToMarkOnSlider
@@ -214,7 +214,7 @@ export default {
       const type = this.componentType == true ? "health" : "other";
       this.$store.commit("setComponentType", type);
     },
-    async getAppointments() {
+    async apiGetAppointments() {
       try {
         let TOKEN = localStorage.getItem("token");
         const response = await fetch(`${APPOINTMENT_API_URL}`, {
