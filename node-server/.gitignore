@@ -2,4 +2,4 @@
 # These files are copied to the folder where sequalize expects these files
 
 models/database/recommendation.database.js
-models/recommendation.model.jsnode_modules
+models/recommendation.model.js
