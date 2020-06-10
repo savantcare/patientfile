@@ -253,7 +253,7 @@ export default {
         userId: this.$store.state.userId
       });
     },
-    handleSliderEnd() {
+    handleSliderEndEvent() {
       // console.log(this.sliderInitialValue);
     }
   }
