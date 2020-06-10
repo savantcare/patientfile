@@ -66,7 +66,7 @@ Core 2. Multi state display area header design
  ├──┬─────────────────────────────────┬────┤
  │C │    handleChange()               │ 26 │
  ├──┼─────────────────────────────────┼────┤
- │D │    handleDiscontinue()          │ 26 │
+ │D │    handleClickOnDInDataRow()          │ 26 │
  └──┴─────────────────────────────────┴────┘
 
 

@@ -30,7 +30,7 @@
                     size="mini"
                     type="danger"
                     v-if="tab.rowActions.indexOf('D') > -1"
-                    @click="handleDiscontinue(scope.$index, scope.row)"
+                    @click="handleClickOnDInDataRow(scope.$index, scope.row)"
                   >Discontinue</el-button>
                 </div>
               </template>
@@ -60,7 +60,7 @@
                   type="text"
                   size="mini"
                   v-if="tab.rowActions.indexOf('D') > -1"
-                  @click="handleDiscontinue(scope.$index, scope.row)"
+                  @click="handleClickOnDInDataRow(scope.$index, scope.row)"
                   style="padding: 0px;"
                 >D</el-button>
               </template>
@@ -95,8 +95,8 @@ export default {
     handleChange(index, row) {
       this.$emit("handleChange", row);
     },
-    handleDiscontinue(index, row) {
-      this.$emit("handleDiscontinue", row);
+    handleClickOnDInDataRow(index, row) {
+      this.$emit("handleClickOnDInDataRow", row);
     },
     handleCellMouseEnter(row) {
       this.mouseOverRowId = row.uuid;

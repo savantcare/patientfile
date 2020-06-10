@@ -28,7 +28,7 @@
                 size="mini"
                 type="danger"
                 v-if="tabData.rowActions.indexOf('D') > -1"
-                @click="handleDiscontinue(scope.row)"
+                @click="handleClickOnDInDataRow(scope.row)"
               >Discontinue</el-button>
             </div>
           </template>
@@ -56,7 +56,7 @@
               type="text"
               size="mini"
               v-if="tabData.rowActions.indexOf('D') > -1"
-              @click="handleDiscontinue(scope.row)"
+              @click="handleClickOnDInDataRow(scope.row)"
             >D</el-button>
           </template>
         </el-table-column>
@@ -108,8 +108,8 @@ export default {
     handleChange(row) {
       this.$emit("handleChange", row);
     },
-    handleDiscontinue(row) {
-      this.$emit("handleDiscontinue", row);
+    handleClickOnDInDataRow(row) {
+      this.$emit("handleClickOnDInDataRow", row);
     },
     handleCellMouseEnter(row) {
       this.mouseOverRowId = row.id;

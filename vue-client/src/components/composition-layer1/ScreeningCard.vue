@@ -17,7 +17,7 @@
       :tabData="tabData"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
-      @handleDiscontinue="handleDiscontinue"
+      @handleClickOnDInDataRow="handleClickOnDInDataRow"
     />-->
 
     <el-table :data="tableData" style="width: 100%">
@@ -79,7 +79,7 @@ export default {
       console.log("show change dialog");
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
-    handleDiscontinue(data) {
+    handleClickOnDInDataRow(data) {
       this.$store.dispatch("dbDiscontinueRecommendation", {
         data: data,
         notify: this.$notify

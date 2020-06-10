@@ -22,7 +22,7 @@
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
-      @handleDiscontinue="handleDiscontinue"
+      @handleClickOnDInDataRow="handleClickOnDInDataRow"
       @handleUpdateColumns="handleUpdateColumns"
     />
 
@@ -81,7 +81,7 @@ export default {
       console.log("show change dialog");
       this.$store.commit("showChangeGoalsTabInLayer2", data);
     },
-    handleDiscontinue(data) {
+    handleClickOnDInDataRow(data) {
       this.$store.dispatch("discontinueGoal", {
         data: data,
         toast: this.$notify

@@ -30,7 +30,7 @@
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleSelectionChange="handleSelectionChange"
         @handleChange="handleChange"
-        @handleDiscontinue="handleDiscontinue"
+        @handleClickOnDInDataRow="handleClickOnDInDataRow"
         @handleUpdateColumns="handleUpdateColumns"
       />
     </el-card>
@@ -88,7 +88,7 @@ export default {
       console.log("show change dialog");
       this.$store.commit("showChangeFamilyHistoriesModal", data);
     },
-    handleDiscontinue(data) {
+    handleClickOnDInDataRow(data) {
       this.$store.dispatch("discontinueFamilyHistory", {
         data: data,
         toast: this.$notify

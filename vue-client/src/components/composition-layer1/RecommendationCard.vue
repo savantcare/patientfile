@@ -22,7 +22,7 @@
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
       @handleChange="handleChange"
-      @handleDiscontinue="handleDiscontinue"
+      @handleClickOnDInDataRow="handleClickOnDInDataRow"
       @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
       @updateTableList="updateTableList"
@@ -120,7 +120,7 @@ export default {
     handleChange(data) {
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
-    handleDiscontinue(data) {
+    handleClickOnDInDataRow(data) {
       this.$store.dispatch("dbDiscontinueRecommendation", {
         data: data,
         notify: this.$notify
