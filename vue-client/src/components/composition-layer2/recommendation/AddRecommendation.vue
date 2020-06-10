@@ -1,4 +1,4 @@
-// Component type: Form
+// Component type 2/2: Form
 // -------------- Category 1/2: User interface of a form component ---------------------
 
 <template>
