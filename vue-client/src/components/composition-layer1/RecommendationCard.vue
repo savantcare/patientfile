@@ -1,13 +1,13 @@
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">
+  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">   <!-- currentStateDisplayArea or multiStateDisplayArea Ref: patientFile.vue header -->
     <div slot="header" class="clearfix">
       <CardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
-        :typeOfStateDisplayArea="typeOfStateDisplayArea"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"               
         :columns="columns"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
@@ -53,6 +53,9 @@ export default {
     };
   },
   methods: {
+
+    // -------------- Category 1/3: Functions to manage UI changes from Card Header ---------------------
+
     handleClickOnAInCardHeader() {
       /* 
       Ref: https://vuex.vuejs.org/guide/mutations.html
@@ -75,10 +78,15 @@ export default {
       */
       this.$store.commit("showAddRecommendationTabInLayer2");
     },
+
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
-    // TODO: Rename this to handlehandleClickOnFInCardHeader()
+    
+    handleClickOnXInCardHeader() {
+      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
+    },
+
     handleClickOnFInCardHeader() {
       //multiStateDisplayArea
       var options = {
@@ -102,6 +110,29 @@ export default {
       this.$scrollTo(element, 500, options);
     },
 
+    // -------------- Category 2/3: Functions to manage UI changes from data row ---------------------
+
+    handleClickOnCInDataRow(data) {
+      this.$store.commit("showChangeRecommendationsTabInLayer2", data);
+    },
+
+    handleUpdateColumns(value) {
+      if (value.length > 0) {
+        this.columns = value;
+      }
+    },
+
+    handleSelectionChange(value) {
+      this.$refs.card_header.selected = value;
+      this.selectedRows = value;
+    },
+   
+    updateTableList(tableList) {
+      this.$store.commit("setRecommendationTableList", tableList);
+    },
+ 
+    //-------------- Category 3/3: Functions to manage DB changes -----------------------
+
     handleClickOnDInCardHeader() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
@@ -113,24 +144,14 @@ export default {
         selectedDatas: this.selectedRows
       });
     },
-    handleSelectionChange(value) {
-      this.$refs.card_header.selected = value;
-      this.selectedRows = value;
-    },
-    handleClickOnCInDataRow(data) {
-      this.$store.commit("showChangeRecommendationsTabInLayer2", data);
-    },
+  
     handleClickOnDInDataRow(data) {
       this.$store.dispatch("dbDiscontinueRecommendation", {
         data: data,
         notify: this.$notify
       });
     },
-    handleUpdateColumns(value) {
-      if (value.length > 0) {
-        this.columns = value;
-      }
-    },
+     
     // TODO: Rename this to handleUpdatePriority()
     async updatePriority(changedDatas) {
       const TOKEN = localStorage.getItem("token");
@@ -154,13 +175,8 @@ export default {
           message: "Updated!"
         });
       }
-    },
-    updateTableList(tableList) {
-      this.$store.commit("setRecommendationTableList", tableList);
-    },
-    handleClickOnXInCardHeader() {
-      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     }
+    
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
