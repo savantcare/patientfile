@@ -62,18 +62,20 @@ apptUUID, componentUUID, AddendumText, recordChangedByUUID, recordChangedOnDateT
 
 5. Not reverting back in case of failure to update
 
-6. When I first load 4 queries are getting executed I could have possibly done it with 1 query.
+6. Socket for add and discontnue does not work.
 
-7. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
+7. When I first load 4 queries are getting executed I could have possibly done it with 1 query.
 
-8. Give me a page where I can create a new patient 
+8. In case of "Add" when I click on "Add more" and then I change my mind I want to remove the 2nd domain.
 
-9. Give me a page where I can choose from a list of patients whose patient file I want to open.
+9. Give me a page where I can create a new patient 
+
+10. Give me a page where I can choose from a list of patients whose patient file I want to open.
    1. Opening a patient file without a valid patient IDn should redirect to search page.
 
-10. delete of rex gives a error on the console
+11. delete of rex gives a error on the console
 
-11. 20 components of production quality.
+12. 20 components of production quality.
 
 
 == Not organized
