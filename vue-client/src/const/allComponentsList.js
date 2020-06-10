@@ -77,7 +77,7 @@ export default [
   },
   {
     key: "screening",
-    value: require("@/components/composition-layer1/ScreeningCard").default,
+    value: require("@/components/composition-layer1/Screening/Card").default,
     abbreviation: "s"
   },
   {
