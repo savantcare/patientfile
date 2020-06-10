@@ -1,3 +1,12 @@
+/*
+
+Single instance component names
+Components that should only ever have a single active instance should begin with the The prefix, to denote that there can be only one.
+Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly-recommended
+
+*/
+
+
 <template>
   <el-row type="flex" align="middle" id="MultiStateDisplayAreaHeader">
     <el-col :span="6" class="ml-2" style="display: flex; align-items: center;">

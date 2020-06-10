@@ -121,7 +121,7 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
     <Split style="height: 100vh;" @onDrag="onDrag">
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minSize="100" id="multiStateDisplayArea">
-        <MultiStateDisplayAreaHeader></MultiStateDisplayAreaHeader>
+        <TheMultiStateDisplayAreaHeader></TheMultiStateDisplayAreaHeader>
         <component
           v-for="(component, index) in multiStateDisplayAreaComponents"
           :key="`multi-state-display-area-component-${index}`"
@@ -147,8 +147,8 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
   </div>
 </template>
 <script>
-const MultiStateDisplayAreaHeader = () =>
-  import("@/components/common/MultiStateDisplayAreaHeader.vue");
+const TheMultiStateDisplayAreaHeader = () =>
+  import("@/components/common/TheMultiStateDisplayAreaHeader.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
@@ -171,7 +171,7 @@ export default {
   components: {
     Layer2MultiTabDialog,
 
-    MultiStateDisplayAreaHeader,
+    TheMultiStateDisplayAreaHeader,
 
     SearchBoxForCommandsFromUser,
     Recommendation,
