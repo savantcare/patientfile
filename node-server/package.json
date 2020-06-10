@@ -4,7 +4,7 @@
   "description": "Simple Fake API",
   "main": "main.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "./copy-files-in-correct-locations.sh && node server.js"
   },
   "author": "ME:)",
   "license": "ISC",
