@@ -237,7 +237,7 @@ export default {
       }
     },
 
-    // Category 2/2: Functions to add data
+    // Category 2/2: Functions to change data
     async dbAddRecommendationInSM({ state, commit }, json) {    
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
@@ -362,16 +362,18 @@ export default {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.yourRecommendationsList
       const newList = originList.filter(item => {
-        return !selectedIds.includes(item.id)
+        return !selectedIds.includes(item.uuid)
       })
 
       commit("setRecommendationList", newList)
 
+      console.log("inside")
+      console.log(selectedDatas)
 
       selectedDatas.forEach(async item => {
         try {
           item['discontinue'] = true
-          await fetch(`${RECOMMENDATION_API_URL}/${item.id}`, {
+          await fetch(`${RECOMMENDATION_API_URL}/${item.uuid}`, {
             method: "DELETE",                                       // Temporal DB!! The row is still there. Just the end time is set.
             headers: {
               "Content-Type": "application/json;charset=utf-8",

@@ -107,6 +107,10 @@ Core 5: How many types of socket events            ideal: recommendationState.js
   3/3 discontinue
 
 
+Core 6: What are 2 categories of DB API calls     ideal: recommendationState.js
+  1/2 Get data
+  2/2 Change data
+
 */
 
 <template>
