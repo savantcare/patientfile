@@ -9,7 +9,7 @@ export default {
 
     othersList: [],
     tableList: [],                            // TODO: Needs better name.
-    multiStateYourRecommendationsList: [],    // Suppose there are 10 historical appointments. When Docotr uses slider to go from appt A to B and then back A the data of A is not in cache.   
+    multiStateYourRecommendationsList: [],    // Suppose there are 10 historical appointments. When Doctor uses slider to go from appt A to B and then goes back to A the data of A is not in cache.   
     multiStateOtherRecommendationsList: []
   },
   mutations: {
@@ -31,6 +31,10 @@ export default {
       state.tableList = value
     },
     setMultiStateYourRecommendationList(state, value) {
+      /* This needs to use object-path-immutable Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations
+      psuedo code will be:
+            state.multiStateYourRecommendationsList = immutable.push(state.multiStateYourRecommendationsList, '0.children.0.children', { id, name, parent_id });
+      */
       state.multiStateYourRecommendationsList = value
     },
     setMultiStateOtherRecommendationList(state, value) {
@@ -54,7 +58,7 @@ export default {
 
 
      // -------- Socket event type 1/3
-     // QUESTIOIN: Should multiple add be handled like multiple discontinue? As per VK yes.  
+     // QUESTION:? Should multiple add be handled like multiple discontinue? As per VK yes.  
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
       // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
 
