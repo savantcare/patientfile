@@ -49,6 +49,7 @@ export default {
      */
 
 
+    // QUESTIOIN: Should multiple add be handled like multiple discontinue? As per VK yes.  
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
       // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
 
@@ -69,7 +70,7 @@ export default {
       })
     },
 
-    SOCKET_UPDATE_RECOMMENDATION(state, updateData) {
+    SOCKET_UPDATE_RECOMMENDATION(state, updateData) {         // This should be called CHANGE. Since the 3 actions are Add / Change (update query) / Discontinue (Delete query)
       let newList = []
       state.yourRecommendationsList.forEach(item => {
         if (item.uuid != updateData.uuid) {
@@ -81,11 +82,11 @@ export default {
       state.yourRecommendationsList = newList
     },
 
-    SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // Message received from socket server
+    SOCKET_ON_UPDATE_RECOMMENDATIONS(state, updateList) {   // TODO: Is this function needed?
       state.yourRecommendationsList = updateList
     },
 
-    SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {
+    SOCKET_DISCONTINUE_RECOMMENDATION(state, dispatchId) {      // For multiple discontinue each discontinue gets a different socket message. For 4 discontinue 4 api calls are made.
       console.log("SOCKET_DISCONTINUE_RECOMMENDATION")
       const newList = state.yourRecommendationsList.filter(item => {
         return item.id != dispatchId
@@ -211,6 +212,7 @@ export default {
         commit("setRecommendationList", originList)
       }
     },
+
     async dbMultiDiscontinueRecommendationsInSM({ state, commit }, json) {
       const { selectedIds, notify, selectedDatas } = json
       const originList = state.yourRecommendationsList
@@ -241,6 +243,7 @@ export default {
         }
       })
     },
+
     async dbGetMyRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
