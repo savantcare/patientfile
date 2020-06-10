@@ -90,25 +90,25 @@ SUM:                            90            429            580           9719
 
 Core 4/6: How many types of component
 
-1/2: Card                                                      ideal: Recommendations/Layer1Card.vue
+1/2: Card                                                      ideal: patient/Recommendations/Layer1Card.vue
   4 categories
      User interface of a card component                        See line 2 
      Functions to manage UI changes from Card Header           See line 60     
      Functions to manage UI changes from data row              See line 116  
      Functions to manage DB changes                            See line 137       
 
-2/2: Form                                                      ideal: AddRecommendations.vue
+2/2: Form                                                      ideal: patient/Recommendations/Layer2/AddRecommendations.vue
   2 categories
      User interface of a form component                        See Line 2 
      Managing form submission
 
-Core 5/6: How many types of socket events                      ideal: recommendationState.js
+Core 5/6: How many types of socket events                      ideal: patient/Recommendations/stateDBSocket.js
   1/3 add                                                      See line 62 
   2/3 change      (same as update query for temporal DB)       See line 83 
   3/3 discontinue (same as delete query for temporal DB)       See line 96
 
 
-Core 6/6: What are 2 categories of DB API calls               ideal: recommendationState.js
+Core 6/6: What are 2 categories of DB API calls               ideal: patient/Recommendations/stateDBSocket.js
   1/2 Get data                                                See line 111
   2/2 Change data                                             See line 248
 
