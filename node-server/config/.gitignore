@@ -1,2 +1,5 @@
-production.json
-\#*
+# Ignore everything
+*
+
+# But not these files...
+!default.json

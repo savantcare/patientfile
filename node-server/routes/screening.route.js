@@ -89,25 +89,12 @@ module.exports = (io) => {
 
       const queryResult = await screensAssignedToPatient.findAll({
         where: { patientUUID: patientId },
-        // include: [{
+        //include: [{
         //  model: screensListMaster,
-        //   where: {year_birth: 1984}
+        //    where: {year_birth: 1984}
         // }]
       })
       res.send(queryResult)
-
-
-      /*
-      const queryResult =  screensAssignedToPatient.findAll({
-        where: {patientUUID: patientId},
-        include: [{
-          model: screensListMaster,
-          //where: {year_birth: 1984}
-         }]
-      }).then(posts => {
-        //
-        res.send(queryResult)
-      });*/
 
     } catch (err) {
       res.status(500).send({

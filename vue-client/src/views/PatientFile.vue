@@ -146,6 +146,7 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
     <KeyboardHandler />
   </div>
 </template>
+
 <script>
 const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/TheMultiStateDisplayAreaHeader.vue");
@@ -181,7 +182,7 @@ export default {
     FamilyHistory,
     KeyboardHandler
   },
-  data() {
+  data() {      // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
     return {
       searchKeyword: "",
       multiStateDisplayAreaWidth: 70

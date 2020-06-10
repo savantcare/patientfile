@@ -23,6 +23,7 @@ screeningDB.screensListMaster = require('../screensListMaster.model.js')(screeni
 screeningDB.screensAssignedToPatient = require('../screensAssignedToPatient.model.js')(screeningSequelize, Sequelize)
 screeningDB.phq9PatientResponse = require('../phq9PatientResponse.model.js')(screeningSequelize, Sequelize)
 
+
 screeningDB.sequelize.sync()//  This creates the table if it doesn't exist (and does nothing if it already exists)
 // Ref: https://sequelize.org/master/manual/model-basics.html#model-synchronization
 

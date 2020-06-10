@@ -64,7 +64,7 @@ import { USER_API_URL, APPOINTMENT_API_URL } from "@/const/others.js";
 
 export default {
   components: {},
-  data() {
+  data() {                          // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
     return {
       tabMode: true,
       patientInfo: null,

@@ -5,7 +5,7 @@ const http = require('http')
 const app = require('express')()
 
 const cors = require("cors");
-
+const config = require('config');
 
 var corsOptions = {
   origin: "*"
@@ -24,7 +24,7 @@ var env = process.env.NODE_ENV || 'development'; // Ref: https://stackoverflow.c
 console.log(env);
 if (env === 'development') {
   pause = require('connect-pause');
-  app.use(pause(1000));   // Change this to change the delay time.
+  app.use(pause(config.artificial_delay_in_reponse_from_node_server));   // Change this to change the delay time.
 }
 /* End of delay section */
 

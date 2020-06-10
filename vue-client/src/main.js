@@ -1,6 +1,8 @@
 // First file of vue app
-import '@babel/polyfill'       // TODO: Is this needed since we only support chrome 83
-import 'mutationobserver-shim' // TODO: Is this needed since we only support chrome 83
+
+// import '@babel/polyfill'       // TODO: Is this needed since we only support chrome > 83
+// import 'mutationobserver-shim' // TODO: Is this needed since we only support chrome > 83
+
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
