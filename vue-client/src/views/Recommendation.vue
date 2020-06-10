@@ -7,7 +7,7 @@
   </div>
 </template>   
 <script>
-import Recommendation from "@/components/composition-layer1/RecommendationCard.vue";
+import Recommendation from "@/components/patient/RecommendationCard.vue";
 export default {
   components: {
     Recommendation
