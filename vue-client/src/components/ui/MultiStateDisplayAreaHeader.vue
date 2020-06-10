@@ -30,7 +30,7 @@
       -->
       <vue-slider
         v-model="sliderInitialValue"
-        @change="handleSliderChange"
+        @change="handleSliderChangeEvent"
         :marks="apptDatesToMarkOnSlider"
         :included="true"
       ></vue-slider>
@@ -239,7 +239,7 @@ export default {
         });
       }
     },
-    handleSliderChange() {              // TODO: This needs to set a global variable timeOfState and all components need to react on that
+    handleSliderChangeEvent() {              // TODO: This needs to set a global variable timeOfState and all components need to react on that
       const percent = Math.floor(100 / (this.apptDates.length + 1));
       let index = this.sliderInitialValue / percent;
       // let apptDate = new Date().toISOString().split("T")[0];
