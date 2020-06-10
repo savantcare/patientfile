@@ -1,15 +1,10 @@
 Todo:
 =====
-1. The left needs to look like final report that can't be changed.
+1. Remove custom column selection code.
 
-2. Size limitation of Doctors laptop
-    1. There is wasted column space in data row table.
-    2. Too much space being wasted in Ct Name and then yours and others.
+2. KB interaction is not going to the rows. Now that the Column seletion is not needed can the KB interaction be made simpler?
 
-3. Only 1 doctor gets to choose columns and not other doctors.
-   1. The column names are not user friendly.
-   2. Add new columns "duty" on the "users" table. Columns editing feature is allowed to the "duty - leader" users.
-
+3. Apply background image to children for multiStateDisplayArea
 
 Done - need to demo:
 ====================
@@ -96,7 +91,6 @@ Milestone 6:
    1. https://github.com/savantcare/patientfile/blob/62d857092560bb2770611fd9cbef4012adbca00d/vue-client/src/store/modules/recommendation.js#L181 section for "Server connection error" is missing. Why not call discontinueRecommendation() in a for loop from inside multiDiscontinueRecommendations (@jana)
 
 
-== Demo to doctor notes
 
 
 Dr. Parikh meeting on 2nd June:
@@ -125,4 +119,18 @@ Take ideas of look from https://css-tricks.com/how-to-create-a-notebook-design-w
 C. For prev date => On left side when there is no data then it should not take space.
 
 11. The header should make it clear that left side is for current time.
+
+Wait for doctor to complain
+===========================
+
+1. Size limitation of Doctors laptop (WDC)
+    1. There is wasted column space in data row table.
+    2. Too much space being wasted in Ct Name and then yours and others.
+
+
+KISS
+====
+1. Only 1 doctor gets to choose columns and not other doctors.
+-   1. The column names are not user friendly.
+-   2. Add new columns "duty" on the "users" table. Columns editing feature is allowed to the "duty - leader" users.
 

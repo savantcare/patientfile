@@ -3,8 +3,15 @@
 
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`">   <!-- currentStateDisplayArea or multiStateDisplayArea Ref: patientFile.vue header -->
-    <div slot="header" class="clearfix">
+
+  <!-- typeOfStateDisplayArea is currentStateDisplayArea or multiStateDisplayArea Ref: patientFile.vue header -->
+
+  <!-- 
+       https://stackoverflow.com/questions/54366269/how-to-properly-apply-ternary-operator-in-v-model-in-vue-js  
+       https://stackoverflow.com/questions/49493882/escaping-double-quotes-in-vue-js
+  -->
+  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`" :style=typeOfStateDisplayAreaSpecificStyleToApply>   
+    <div slot="header" class="clearfix" >
       <CardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
@@ -87,7 +94,7 @@ export default {
     },
     
     handleClickOnXInCardHeader() {
-      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
+-      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     },
 
     handleClickOnFInCardHeader() {
@@ -183,9 +190,22 @@ export default {
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+    console.log(this.typeOfStateDisplayArea)
   },
-  computed: {}
-};
+  computed: {
+
+  typeOfStateDisplayAreaSpecificStyleToApply: {
+      get() {
+        let val=this.typeOfStateDisplayArea=='multiStateDisplayArea' ? "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);" : '' ;
+        console.log("Value is" + val);
+        return val;
+      },
+      set(newValue) {
+        this.doSomethingWith(newValue);
+      },
+  }
+  }
+}
 </script>
 
 <style lang="css">
