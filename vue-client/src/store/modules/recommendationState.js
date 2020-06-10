@@ -95,155 +95,8 @@ export default {
     }
   },
   actions: {
-    async dbAddRecommendationInSM({ state, commit }, json) {    
-      const { data, notify, patientId } = json
-      const originList = state.yourRecommendationsList
 
-      commit("addNewRecommendation", data)
-
-      try {
-        const response = await fetch(RECOMMENDATION_API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
-          },
-          body: JSON.stringify({ data: data, patientId: patientId })
-        })
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to add recommendation data"
-          })
-
-          commit("setRecommendationList", originList)
-        } else {
-          notify({
-            title: "Success",
-            message: "Saved!"
-          })
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-        commit("setRecommendationList", originList)
-      }
-    },
-    async dbUpdateRecommendationInSM({ state, commit }, json) { 
-      const { data, notify } = json
-      const originList = state.yourRecommendationsList
-      let newList = []
-      originList.forEach(item => {
-        if (item.uuid == data.uuid) {
-          newList.push(data);
-        } else {
-          newList.push(item);
-        }
-      });
-      console.log(newList)
-      commit("setRecommendationList", newList)
-      try {
-        const response = await fetch(`${RECOMMENDATION_API_URL}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
-          },
-          body: JSON.stringify(data)
-        });
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to update recommendation data"
-          })
-
-          commit("setRecommendationList", originList)
-        } else {
-          notify({
-            title: "Title",
-            message: "Updated!"
-          })
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-        commit("setRecommendationList", originList)
-      }
-    },
-    async dbDiscontinueRecommendationInSM({ state, commit }, json) {
-      const { data, notify } = json
-      const originList = state.yourRecommendationsList
-      const newList = originList.filter(item => {
-        return item.uuid != data.uuid
-      })
-
-      commit("setRecommendationList", newList)
-      try {
-        const response = await fetch(`${RECOMMENDATION_API_URL}/${data.uuid}`, {
-          method: "DELETE",                             // Temporal DB!! The row is still there. Just the end time is set.
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
-          },
-          body: JSON.stringify(data)
-        });
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to discontinue recommendation data"
-          })
-          commit("setRecommendationList", originList)
-        } else {
-          notify({
-            title: "Title",
-            message: "Deleted"
-          })
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-
-        commit("setRecommendationList", originList)
-      }
-    },
-
-    async dbMultiDiscontinueRecommendationsInSM({ state, commit }, json) {
-      const { selectedIds, notify, selectedDatas } = json
-      const originList = state.yourRecommendationsList
-      const newList = originList.filter(item => {
-        return !selectedIds.includes(item.id)
-      })
-
-      commit("setRecommendationList", newList)
-
-
-      selectedDatas.forEach(async item => {
-        try {
-          item['discontinue'] = true
-          await fetch(`${RECOMMENDATION_API_URL}/${item.id}`, {
-            method: "DELETE",                                       // Temporal DB!! The row is still there. Just the end time is set.
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              "Authorization": "Bearer " + TOKEN
-            },
-            body: JSON.stringify(item)
-          });
-        } catch (ex) {
-          notify({
-            title: "Error",
-            message: "Server connection error"
-          })
-          commit('setRecommendationList', originList)
-        }
-      })
-    },
-
+    // Category 1/2: Functions to get data
     async dbGetMyRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
@@ -344,6 +197,7 @@ export default {
         commit("setMultiStateYourRecommendationList", json)
       }
     },
+
     async dbGetMultiStateOtherRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
@@ -377,7 +231,163 @@ export default {
           message: "Server connection error"
         })
       }
+    },
+
+    // Category 2/2: Functions to add data
+    async dbAddRecommendationInSM({ state, commit }, json) {    
+      const { data, notify, patientId } = json
+      const originList = state.yourRecommendationsList
+
+      commit("addNewRecommendation", data)
+
+      try {
+        const response = await fetch(RECOMMENDATION_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify({ data: data, patientId: patientId })
+        })
+        if (!response.ok) {
+          notify({
+            title: "Error",
+            message: "Failed to add recommendation data"
+          })
+
+          commit("setRecommendationList", originList)
+        } else {
+          notify({
+            title: "Success",
+            message: "Saved!"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+        commit("setRecommendationList", originList)
+      }
+    },
+
+    async dbUpdateRecommendationInSM({ state, commit }, json) { 
+      const { data, notify } = json
+      const originList = state.yourRecommendationsList
+      let newList = []
+      originList.forEach(item => {
+        if (item.uuid == data.uuid) {
+          newList.push(data);
+        } else {
+          newList.push(item);
+        }
+      });
+      console.log(newList)
+      commit("setRecommendationList", newList)
+      try {
+        const response = await fetch(`${RECOMMENDATION_API_URL}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+          notify({
+            title: "Error",
+            message: "Failed to update recommendation data"
+          })
+
+          commit("setRecommendationList", originList)
+        } else {
+          notify({
+            title: "Title",
+            message: "Updated!"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+        commit("setRecommendationList", originList)
+      }
+    },
+
+    async dbDiscontinueRecommendationInSM({ state, commit }, json) {
+      const { data, notify } = json
+      const originList = state.yourRecommendationsList
+      const newList = originList.filter(item => {
+        return item.uuid != data.uuid
+      })
+
+      commit("setRecommendationList", newList)
+      try {
+        const response = await fetch(`${RECOMMENDATION_API_URL}/${data.uuid}`, {
+          method: "DELETE",                             // Temporal DB!! The row is still there. Just the end time is set.
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+          notify({
+            title: "Error",
+            message: "Failed to discontinue recommendation data"
+          })
+          commit("setRecommendationList", originList)
+        } else {
+          notify({
+            title: "Title",
+            message: "Deleted"
+          })
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+
+        commit("setRecommendationList", originList)
+      }
+    },
+
+    async dbMultiDiscontinueRecommendationsInSM({ state, commit }, json) {
+      const { selectedIds, notify, selectedDatas } = json
+      const originList = state.yourRecommendationsList
+      const newList = originList.filter(item => {
+        return !selectedIds.includes(item.id)
+      })
+
+      commit("setRecommendationList", newList)
+
+
+      selectedDatas.forEach(async item => {
+        try {
+          item['discontinue'] = true
+          await fetch(`${RECOMMENDATION_API_URL}/${item.id}`, {
+            method: "DELETE",                                       // Temporal DB!! The row is still there. Just the end time is set.
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              "Authorization": "Bearer " + TOKEN
+            },
+            body: JSON.stringify(item)
+          });
+        } catch (ex) {
+          notify({
+            title: "Error",
+            message: "Server connection error"
+          })
+          commit('setRecommendationList', originList)
+        }
+      })
     }
+
+
+
+
   },
   getters: {
     recommendations(state) {
