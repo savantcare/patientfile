@@ -7,7 +7,7 @@
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-        @multiDiscontinue="multiDiscontinue"
+        @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         ref="card_header"
       />
       <!-- @handleClickOnMInCardHeader="showTakeAScreenDialog" -->
@@ -60,7 +60,7 @@ export default {
     handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
-    multiDiscontinue() {
+    handleClickOnDInCardHeader() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);

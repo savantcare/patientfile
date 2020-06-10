@@ -18,7 +18,7 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
         <el-button
           type="text"
           size="mini"
-          @click="$emit('multiDiscontinue')"
+          @click="$emit('handleClickOnDInCardHeader')"
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>

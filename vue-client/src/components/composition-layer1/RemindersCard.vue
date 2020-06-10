@@ -13,7 +13,7 @@
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-        @multiDiscontinue="multiDiscontinue"
+        @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @updateSelectedColumns="updateSelectedColumns"
       />
     </div>
@@ -63,7 +63,7 @@ export default {
     handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
-    multiDiscontinue() {
+    handleClickOnDInCardHeader() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);

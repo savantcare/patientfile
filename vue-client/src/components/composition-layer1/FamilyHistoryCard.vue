@@ -9,7 +9,7 @@
           @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
           @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
           @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-          @multiDiscontinue="multiDiscontinue"
+          @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
           ref="card_header"
         />
         <!-- <h5>Om Namah Sibay!!</h5> actions="A,M,F,D" -->
@@ -69,7 +69,7 @@ export default {
     handleClickOnFInCardHeader() {
       console.log("focus panel");
     },
-    multiDiscontinue() {
+    handleClickOnDInCardHeader() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);

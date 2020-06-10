@@ -12,7 +12,7 @@
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-        @multiDiscontinue="multiDiscontinue"
+        @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
       />
     </div>
@@ -101,8 +101,8 @@ export default {
 
       this.$scrollTo(element, 500, options);
     },
-    // TODO: Rename this to handleMultiDiscontinue()
-    multiDiscontinue() {
+
+    handleClickOnDInCardHeader() {
       let selectedIds = [];
       this.selectedRows.forEach(item => {
         selectedIds.push(item.id);

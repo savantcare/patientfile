@@ -9,7 +9,7 @@
           @handleClickOnAInCardHeader="showAddServiceStatementsDialog"
           @handleClickOnMInCardHeader="showMultiChangeServiceStatementsDialog"
           @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-          @multiDiscontinue="multiDiscontinue"
+          @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
           ref="card_header"
         />
       </div>
@@ -36,7 +36,7 @@ export default {
     handleClickOnAInCardHeader() {},
     handleClickOnMInCardHeader() {},
     handleClickOnFInCardHeader() {},
-    multiDiscontinue() {}
+    handleClickOnDInCardHeader() {}
   }
 };
 </script>
