@@ -1,6 +1,6 @@
-Todo:
-=====
-1. Remove custom column selection code.
+Alexey Todo:
+============
+1. Remove custom column selection code. Goal is to keep the code simple.
 
 2. KB interaction is not going to the rows. Now that the Column seletion is not needed can the KB interaction be made simpler?
 
