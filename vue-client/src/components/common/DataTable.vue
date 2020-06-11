@@ -188,7 +188,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.typeOfStateDisplayAreaOfStateDisplayArea);
     let apptDate = new Date()
       .toISOString()
       .slice(0, 19)
@@ -199,9 +198,7 @@ export default {
       userId: this.$store.state.userId,
       date: apptDate
     };
-    if (
-      this.typeOfStateDisplayAreaOfStateDisplayArea == "CurrentStateDisplayArea"
-    ) {
+    if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
       this.$store.dispatch("dbGetMyRecommendationsInSM", params);
       this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
     }
@@ -219,10 +216,7 @@ export default {
     tabData() {
       let myList = [];
       let othersList = [];
-      if (
-        this.typeOfStateDisplayAreaOfStateDisplayArea ==
-        "CurrentStateDisplayArea"
-      ) {
+      if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
         myList = this.$store.state.recommendation.yourRecommendationsList;
         othersList = this.$store.state.recommendation.othersList;
       } else {
@@ -265,10 +259,9 @@ export default {
       this.checkChangePriority();
     },
     tab() {
-      if (
-        this.typeOfStateDisplayAreaOfStateDisplayArea ==
-        "CurrentStateDisplayArea"
-      ) {
+      console.log("ABC");
+      console.log(this.typeOfStateDisplayArea);
+      if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
         const tableList = this.tabData[this.tab].tableData;
         this.$emit("updateTableList", tableList);
         this.$store.dispatch("updateCurrentStateDisplayAreaRow");
