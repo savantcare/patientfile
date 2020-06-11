@@ -33,7 +33,7 @@ Layer 1
 |                                                               +---+ |---|     |                 | Add more button.                             |
 |  Pulse                     80 bpm                             | A | <---------------------------+ Clicking on it will open add form in layer 2 |
 |                                                               +---+ |---|     |                 | and after submitting, new value will be      |
-|                                                               +---+ +---+     |                 | seen on current ^alue field of the section.  |
+|                                                               +---+ +---+     |                 | seen on current Value field of the section.  |
 |  Temperature               97 F                               | A | | G |     |                 +----------------------------------------------+
 |                                                               +---+ +---+     |
 |                                                                               |

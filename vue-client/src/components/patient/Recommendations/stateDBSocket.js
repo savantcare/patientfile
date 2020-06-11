@@ -5,10 +5,10 @@ export default {
     
     yourRecommendationsList: [],              // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
                                               // This needs to be a 2 dimensional array. Right now it is a one dimensional array
-                                              // How to do it? Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations  
+                                              // How to do it? Use object-path-immutable Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations  
 
     othersList: [],
-    tableList: [],                            // TODO: Needs better name.
+    tableList: [],                            // TODO: Needs better name. I have no idea what tableList means or does.
     multiStateYourRecommendationsList: [],    // Suppose there are 10 historical appointments. When Doctor uses slider to go from appt A to B and then goes back to A the data of A is not in cache.   
     multiStateOtherRecommendationsList: []
   },

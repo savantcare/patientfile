@@ -1,5 +1,53 @@
 Alexey Todo:
 ============
+
+1. KB focus issues
+   When I press C to invoke change "C" goes into textarea.
+   When I press M the focus is sometimes not correct.
+   When I press A to add the focus is not in the text area.
+
+2. components/recommendations/stateDBSocket.js read comments on line 6
+   Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
+      1. Caching
+      2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
+
+3. May depend on 2
+   DataTable.vue line 201 code should not be needed
+   if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+      this.$store.dispatch("dbGetMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
+    }
+    since recommendation component during mount will do a if check and call above 3 lines or following 4 lines
+
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
+      date: this.timeOfState,
+      patientId: this.patientId,
+      userId: this.userId
+    });
+
+    depending on value of typeOfStateDisplayArea
+
+4. May depend on 2
+    In layer1card.vue this reaction should only happen if the compoent has been instantiated with typeOfDisplay=multiStateDisplay
+
+   watch: {
+      timeOfState() {
+         console.log("timeOfState is changed");
+         const params = {
+         date: this.timeOfState,
+         patientId: this.patientId,
+         userId: this.userId
+         };
+         this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+         this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
+      }
+   }
+
+5. Body measurement component
+
+
+Done by Alexey:
+==============
 1. Rex change textarea should be orange if data has not been saved on server.
    So it becomes orange when user starts to type and user can go out of the popup and when user comes back it is still orange.
 
@@ -15,41 +63,8 @@ Alexey Todo:
                Data table rows do not have checkmark for row selection
         */
 
-4. Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
-   1. Caching
-   2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
 
-5. DataTable.vue line 201 code should not be needed
-   if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
-      this.$store.dispatch("dbGetMyRecommendationsInSM", params);
-      this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
-    }
-    since recommendation component during mount will do a if check and call above 3 lines or following 4 lines
 
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
-      date: this.timeOfState,
-      patientId: this.patientId,
-      userId: this.userId
-    });
-
-    depending on value of typeOfStateDisplayArea
-
-6.  
-
-In layer1card.vue this reaction should only happen if the compoent has been instantiated with typeOfDisplay=multiStateDisplay
-
-  watch: {
-    timeOfState() {
-      console.log("timeOfState is changed");
-      const params = {
-        date: this.timeOfState,
-        patientId: this.patientId,
-        userId: this.userId
-      };
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
-      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
-    }
-  }
 
 
 Done - need to demo:

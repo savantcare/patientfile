@@ -37,7 +37,7 @@ export default [
     key: "bodyMeasurements",
     value: require("@/components/patient/BodyMeasurements/Card")
       .default,
-    abbreviation: ""
+    abbreviation: "bm"
   },
   {
     key: "contacts",
