@@ -1,9 +1,19 @@
 Alexey Todo:
 ============
-1. Data table related
-   A. Remove custom column selection code from data table. Goal is to keep the code simple. Remove the settings icon.
-   B. KB arrow keys are going to the header. The KB arrow keys are not going to the data rows. 
+1. Rex change textarea should be orange if data has not been saved on server.
+   So it becomes orange when user starts to type and user can go out of the popup and when user comes back it is still orange.
 
+2. Blinking caret -> focus -> to be inside text area during change and multichange.
+
+3. Style realted patient/recommendations/layer1Card.vue line 205 typeOfStateDisplayAreaSpecificStyleToApply
+       /* things that happen when typeOfStateDisplayArea=='multiStateDisplayArea' and timeOfState != NULL then   
+            Every component should react on the state of timeOfState and make the following changes:   
+               Background paper effect is applied.
+               Data table header only get E (addendum) action item
+                  CardHeader.vue line 198 for deciding to show addendum or not is not working.
+               Data table rows do not get any action item
+               Data table rows do not have checkmark for row selection
+        */
 
 Done - need to demo:
 ====================
@@ -12,13 +22,13 @@ Done - need to demo:
 2. Use temporal DB concept to show the change history for a recommendation that has been changed 
     1. The multichange slider needs a page number component at the bottom
 
+2. Data table related
+   A. Remove custom column selection code from data table. Goal is to keep the code simple. Remove the settings icon.
+   B. KB arrow keys are going to the header. The KB arrow keys are not going to the data rows. 
+
+
 Milestone 5:
 ============
-2. Different style for multiStateDisplayArea see how it works for recommendations/patientfile.vue. Apply background image to children for multiStateDisplayArea 
-
-   D. Should the table be row based instead of column based? -> element can only do based on column not rows.
-   E. A row based table may make it easier to track which row is being dragged. -> not applicable read D
-
 1. Inside components/common/DataTable.vue:231
 
     if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
