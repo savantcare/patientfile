@@ -60,6 +60,9 @@ export default [
     label: "screen (s) add", action: "showAddScreenTabInLayer2", abbreviation: "s"
   },
   {
+    label: "Body measurement (bm) list", action: "", abbreviation: "bm"
+  },
+   {
     label: "clear", action: "", abbreviation: ""
   }
 ]

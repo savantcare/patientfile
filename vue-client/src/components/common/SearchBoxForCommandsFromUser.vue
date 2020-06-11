@@ -72,7 +72,7 @@ export default {
     },
     querySearch(queryString, cb) {
       const searchCommandsList = this.$store.state.searchCommandsList;
-
+      console.log("list" + searchCommandsList)
       let results = [];
       if (queryString.length == 0) {
         results = [];

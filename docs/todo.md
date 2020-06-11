@@ -1,25 +1,26 @@
 Alexey Todo:
 ============
-1. Rex change textarea should be orange if data has not been saved on server.
-   So it becomes orange when user starts to type and user can go out of the popup and when user comes back it is still orange.
 
-2. Blinking caret -> focus -> to be inside text area during change and multichange.
+1. KB focus issues
+   When I press C to invoke change "C" goes into textarea.
+   When I press M the focus is sometimes not correct.
+   When I press A to add the focus is not in the text area.
 
-3. Style realted patient/recommendations/layer1Card.vue line 205 typeOfStateDisplayAreaSpecificStyleToApply
-       /* things that happen when typeOfStateDisplayArea=='multiStateDisplayArea' and timeOfState != NULL then   
-            Every component should react on the state of timeOfState and make the following changes:   
-               Background paper effect is applied.
-               Data table header only get E (addendum) action item
-                  CardHeader.vue line 198 for deciding to show addendum or not is not working.
-               Data table rows do not get any action item
-               Data table rows do not have checkmark for row selection
-        */
+2. Earlier when I gave a command both the old and new card used to be there. Now the old card goes away.   
 
-4. Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
-   1. Caching
-   2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
+3. Left and right should depend on a common state.   
 
-5. DataTable.vue line 201 code should not be needed
+   components/recommendations/stateDBSocket.js read comments on line 6
+   Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
+      1. Caching
+      2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
+
+4. When I refresh with recommendation on right and left. 8 sql queries are made. Is that correct?
+
+-- discussed till here.
+
+4. May depend on 2
+   DataTable.vue line 201 code should not be needed
    if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
       this.$store.dispatch("dbGetMyRecommendationsInSM", params);
       this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
@@ -34,22 +35,23 @@ Alexey Todo:
 
     depending on value of typeOfStateDisplayArea
 
-6.  
+5. May depend on 2
+    In layer1card.vue this reaction should only happen if the compoent has been instantiated with typeOfDisplay=multiStateDisplay
 
-In layer1card.vue this reaction should only happen if the compoent has been instantiated with typeOfDisplay=multiStateDisplay
+   watch: {
+      timeOfState() {
+         console.log("timeOfState is changed");
+         const params = {
+         date: this.timeOfState,
+         patientId: this.patientId,
+         userId: this.userId
+         };
+         this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+         this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
+      }
+   }
 
-  watch: {
-    timeOfState() {
-      console.log("timeOfState is changed");
-      const params = {
-        date: this.timeOfState,
-        patientId: this.patientId,
-        userId: this.userId
-      };
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
-      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
-    }
-  }
+6. Body measurement component
 
 
 Done - need to demo:
@@ -58,11 +60,6 @@ Done - need to demo:
 
 2. Use temporal DB concept to show the change history for a recommendation that has been changed 
     1. The multichange slider needs a page number component at the bottom
-
-2. Data table related
-   A. Remove custom column selection code from data table. Goal is to keep the code simple. Remove the settings icon.
-   B. KB arrow keys are going to the header. The KB arrow keys are not going to the data rows. 
-
 
 Milestone 5:
 ============
