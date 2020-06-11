@@ -9,6 +9,7 @@ const diagnosisDB = require("./database/diagnosis.database.js")
 const appointmentDB = require("./database/appointment.database.js")
 const screeningDB = require("./database/screening.database.js")
 
+
 module.exports = {
   recommendationDB: recommendationDB,
   reminderDB: reminderDB,

@@ -2,7 +2,7 @@ import { SCREENING_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    list: []
+    screeningList: []
   },
   mutations: {
     setScreeningList(state, data) {
@@ -12,9 +12,6 @@ export default {
       newList.forEach(item => {
         state.list.push(item)
       })
-    },
-    removeNewScreening(state) {
-      state.list.pop()
     },
     /**
      * Socket Listeners
@@ -139,160 +136,6 @@ export default {
         commit("setScreeningList", originList)
       }
     },
-    async updateScreening({ state, commit }, json) {
-      const { data, notify } = json
-      const originList = state.list
-      let newList = []
-      originList.forEach(item => {
-        if (item.id == data.id) {
-          newList.push({
-            id: data.id,
-            description: data.description,
-            patientId: data.patientId
-          });
-        } else {
-          newList.push(item);
-        }
-      });
-
-      commit("setScreeningList", newList)
-      try {
-        const response = await fetch(`${SCREENING_API_URL}/${data.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
-          },
-          body: JSON.stringify(data)
-        });
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to update screening data"
-          })
-
-          commit("setScreeningList", originList)
-        } else {
-          notify({
-            title: "Title",
-            message: "Updated!"
-          })
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-        commit("setScreeningList", originList)
-      }
-    },
-    async discontinueScreening({ state, commit }, json) {
-      const { data, notify } = json
-      const originList = state.list
-      const newList = originList.filter(item => {
-        return item.id != data.id
-      })
-
-      commit("setScreeningList", newList)
-      try {
-        data["discontinue"] = true
-        const response = await fetch(`${SCREENING_API_URL}/${data.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
-          },
-          body: JSON.stringify(data)
-        });
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to discontinue screening data"
-          })
-          commit("setScreeningList", originList)
-        } else {
-          notify({
-            title: "Title",
-            message: "Deleted"
-          })
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-
-        commit("setScreeningList", originList)
-      }
-    },
-    async multiDiscontinueScreenings({ state, commit }, json) {
-      const { selectedIds, notify, selectedDatas } = json
-      const originList = state.list
-      const newList = originList.filter(item => {
-        return !selectedIds.includes(item.id)
-      })
-
-      commit("setScreeningList", newList)
-
-
-      selectedDatas.forEach(async item => {
-        try {
-          item['discontinue'] = true
-          await fetch(`${SCREENING_API_URL}/${item.id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              "Authorization": "Bearer " + TOKEN
-            },
-            body: JSON.stringify(item)
-          });
-        } catch (ex) {
-          notify({
-            title: "Error",
-            message: "Server connection error"
-          })
-          commit('setScreeningList', originList)
-        }
-      })
-    },
-    async getScreenings({ commit }, json) {
-      const { patientId, notify } = json
-      if (TOKEN == null) {
-        TOKEN = localStorage.getItem("token")
-      }
-      try {
-        const response = await fetch(
-          `${SCREENING_API_URL}?patientId=${patientId}`, {
-          headers: {
-            "Authorization": "Bearer " + TOKEN
-          }
-        });
-        if (response.ok) {
-          let json = await response.json();
-          commit('setScreeningList', json)
-        } else {
-          if (response.status == '401') {
-            notify({
-              title: "Error",
-              message: "Token is expired."
-            })
-            localStorage.removeItem("token")
-            window.location = "/"
-          } else {
-            notify({
-              title: "Error",
-              message: "Failed to get screening data"
-            })
-          }
-        }
-      } catch (ex) {
-        notify({
-          title: "Error",
-          message: "Server connection error"
-        })
-
-      }
-    }
   },
   getters: {
     screenings(state) {

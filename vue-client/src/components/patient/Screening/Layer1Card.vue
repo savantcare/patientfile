@@ -1,3 +1,5 @@
+// Component type 1/2: Card
+// -------------- Category 1/4: User interface of card component ---------------------
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
@@ -18,19 +20,18 @@
       @handleSelectionChange="handleSelectionChange"
       @handleClickOnCInDataRow="handleClickOnCInDataRow"
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
-    />-->
+    /> -->
 
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="Name" width="180"></el-table-column>
       <el-table-column align="right">
-        <!-- <template slot="header" >
-          <el-input v-model="search" size="mini" placeholder="search screen"/>
-        </template>-->
         <template slot-scope="scope">
           <el-link type="primary" @click="showTakeAScreenDialog(scope.$index, scope.row)">T</el-link>
         </template>
       </el-table-column>
     </el-table>
+
+
   </el-card>
 </template>
 
@@ -49,6 +50,14 @@ export default {
     };
   },
   methods: {
+
+     // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
+
+
+     // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
+
+      //-------------- Category 4/4: Functions to manage DB changes -----------------------
+
     handleClickOnAInCardHeader() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInLayer2");
@@ -87,42 +96,27 @@ export default {
     }
   },
   mounted() {
-    let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-;
+    // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+
+//     let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+// ;
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify,
       userId: this.$store.state.userId,
-      date: apptDate
     };
     this.$store.dispatch("dbGetScreeningsInSM", params);
   },
   computed: {
     tabData() {
-      const recList = this.$store.state.recommendation.yourRecommendationsList;
+      console.log(55555);
+      console.log(this.$store.state);
+      const screeningList = this.$store.state.screening.screeningList;
+      
       return [
         {
           label: "Yours",
-          tableData: recList,
-          columns: [
-            {
-              label: "Description",
-              field: "description",
-              sortable: true
-            }
-          ],
-          rowActions: ["C", "D"]
-        },
-        {
-          label: "Other's",
-          tableData: recList,
-          columns: [
-            {
-              label: "Description",
-              field: "description",
-              sortable: true
-            }
-          ],
+          tableData: screeningList,
           rowActions: ["C", "D"],
           selectedColumn: ["description"]
         }

@@ -25,6 +25,13 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: false,
       freezeTableName: true
     });
+
+
+    screensListMaster.associate = function(models) {
+      screensListMaster.hasMeny(models.screensAssignedToPatient, {
+        foreignKey: 'screenUUID', as: 'screens' 
+      });
+    };
   
     return screensListMaster;
   };
