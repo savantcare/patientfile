@@ -15,6 +15,43 @@ Alexey Todo:
                Data table rows do not have checkmark for row selection
         */
 
+4. Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
+   1. Caching
+   2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
+
+5. DataTable.vue line 201 code should not be needed
+   if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+      this.$store.dispatch("dbGetMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
+    }
+    since recommendation component during mount will do a if check and call above 3 lines or following 4 lines
+
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
+      date: this.timeOfState,
+      patientId: this.patientId,
+      userId: this.userId
+    });
+
+    depending on value of typeOfStateDisplayArea
+
+6.  
+
+In layer1card.vue this reaction should only happen if the compoent has been instantiated with typeOfDisplay=multiStateDisplay
+
+  watch: {
+    timeOfState() {
+      console.log("timeOfState is changed");
+      const params = {
+        date: this.timeOfState,
+        patientId: this.patientId,
+        userId: this.userId
+      };
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
+    }
+  }
+
+
 Done - need to demo:
 ====================
 1. On dragging an API needs to be fired that updates the priority in DB. How to maintain the priority in DB is explained in Q13 of howto https://savantcare.github.io/tech/howto.html#q13

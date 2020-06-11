@@ -17,8 +17,8 @@ Core 1/6. Page design
 |Data of each component depends on        |                              |            OR
 |timeOfState ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
 |timeOfState has 2 possibilities          |                              |
-|                                         |                              |
-|1. timeOfState=null                      |                              |
+|                                         |On right side I do not care   |
+|1. timeOfState=null                      |about timeOfState             |
 |2. timeOfState=value                     |                              |       
 |                                         |                              |
 | If timeOfState==null then data of       |                              |
