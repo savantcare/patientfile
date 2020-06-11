@@ -26,6 +26,7 @@
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
+        :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
       />
     </div>
     <DataTable
@@ -38,6 +39,7 @@
       @updatePriority="updatePriority"
       @updateTableList="updateTableList"
       :columns="columns"
+      :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
@@ -201,11 +203,26 @@ export default {
   computed: {
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
-        let val =
-          this.typeOfStateDisplayArea == "multiStateDisplayArea"
-            ? "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);"
-            : "";
-        console.log("Value is" + val);
+        const timeOfStateDate = new Date(this.timeOfState);
+        const today = new Date();
+        let isToday = false;
+        if (
+          timeOfStateDate.getFullYear() == today.getFullYear() &&
+          timeOfStateDate.getMonth() == today.getMonth() &&
+          timeOfStateDate.getDate() == today.getDate()
+        ) {
+          isToday = true;
+        }
+
+        let val = "";
+        if (
+          this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
+          !isToday
+        ) {
+          val =
+            "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);";
+        }
+
         return val;
       },
       set(newValue) {

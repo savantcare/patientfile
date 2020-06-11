@@ -35,7 +35,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column type="selection"></el-table-column>
+            <el-table-column type="selection" v-if="isCurrentDate"></el-table-column>
 
             <el-table-column
               v-for="(column, index_column) in columns"
@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && typeOfStateDisplayArea == 'CurrentStateDisplayArea')"
+                v-if="(scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && typeOfStateDisplayArea == 'CurrentStateDisplayArea')) && isCurrentDate"
               >
                 <el-button
                   type="text"
@@ -75,7 +75,13 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["ctName", "keyId", "typeOfStateDisplayArea", "columns"],
+  props: [
+    "ctName",
+    "keyId",
+    "typeOfStateDisplayArea",
+    "columns",
+    "typeOfStateDisplayAreaSpecificStyleToApply"
+  ],
   components: { ElTableDraggable },
   data() {
     return {
@@ -239,6 +245,15 @@ export default {
           selectedColumn: ["description"]
         }
       ];
+    },
+    isCurrentDate() {
+      if (
+        this.typeOfStateDisplayAreaSpecificStyleToApply != null &&
+        this.typeOfStateDisplayAreaSpecificStyleToApply != ""
+      ) {
+        return false;
+      }
+      return true;
     }
   },
   watch: {

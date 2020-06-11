@@ -6,6 +6,7 @@
     placeholder="Please input"
     v-model="inputValue"
     @input="updateValue"
+    ref="textarea"
   />
 </template>
 
@@ -38,6 +39,24 @@ export default {
   methods: {
     updateValue(value) {
       this.$emit("input", value);
+    },
+    resetChanges() {
+      this.originValue = this.value;
+    }
+  },
+  watch: {
+    value() {
+      if (this.originValue == "") {
+        this.originValue = this.value;
+      }
+      if (
+        this.inputValue != this.value &&
+        this.originValue != this.inputValue
+      ) {
+        this.originValue = this.value;
+      }
+      this.inputValue = this.value;
+      this.$refs.textarea.focus();
     }
   }
 };

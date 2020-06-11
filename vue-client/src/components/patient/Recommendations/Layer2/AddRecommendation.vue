@@ -17,7 +17,7 @@
               :prop="'recs.' + index + '.description'"
             >
               <el-card class="box-card" shadow="hover">
-                <el-input
+                <!-- <el-input
                   :span="8"
                   type="textarea"
                   v-model="domain.description"
@@ -25,7 +25,13 @@
                   :autosize="{ minRows: 4}"
                   autofocus
                   ref="input_box"
-                ></el-input>
+                ></el-input>-->
+                <text-area
+                  v-model="domain.description"
+                  field="description"
+                  @updateValidateChanges="updateValidateChanges"
+                  ref="description"
+                ></text-area>
               </el-card>
             </el-form-item>
             <el-form-item>
@@ -48,6 +54,7 @@
  */
 import { CHANGE_RECOMMENDATION } from "@/const/others.js";
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
+import TextArea from "@/components/common/TextArea";
 export default {
   data() {
     return {
@@ -63,7 +70,7 @@ export default {
       });
     },
 
-// -------------- Category 2/2: Managing form submission ---------------------
+    // -------------- Category 2/2: Managing form submission ---------------------
 
     submitForm(formName) {
       const today = new Date().toISOString().split(".")[0];
@@ -116,6 +123,11 @@ export default {
           }
 
           this.$store.dispatch("updateCurrentStateDisplayAreaRow");
+
+          // this.$refs.description[0].resetChanges();
+          this.$refs.description.forEach(textArea => {
+            textArea.resetChanges();
+          });
         } else {
           console.log("error submit!!");
           return false;
@@ -123,8 +135,11 @@ export default {
       });
     },
     focusToTheInputBox() {
-      this.$refs.input_box[0].$el.getElementsByTagName("textarea")[0].focus();
-    }
+      // console.log("focus to inputbox");
+      // this.$refs.description[0].$el.getElementsByTagName("textarea")[0].focus();
+      // this.$refs.input_box[0].$el.getElementsByTagName("textarea")[0].focus();
+    },
+    updateValidateChanges() {}
   },
   computed: {
     type() {
@@ -160,10 +175,15 @@ export default {
     }
   },
   components: {
-    RecommendationHistoryItem
+    RecommendationHistoryItem,
+    TextArea
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.changed .el-input__inner,
+.changed .el-textarea__inner {
+  border-color: #e6a23c;
+}
 </style>

@@ -64,7 +64,13 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
 
 <script>
 export default {
-  props: ["ctName", "actions", "typeOfStateDisplayArea", "keyId"],
+  props: [
+    "ctName",
+    "actions",
+    "typeOfStateDisplayArea",
+    "keyId",
+    "typeOfStateDisplayAreaSpecificStyleToApply"
+  ],
   data() {
     return {
       mouseOver: false,
@@ -85,6 +91,9 @@ export default {
     // You can data-bind to computed properties in templates just like a normal property.
     // Ref: https://vuejs.org/v2/guide/computed.html#Computed-vs-Watched-Property
     showAddChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
@@ -97,6 +106,9 @@ export default {
       return false;
     },
     showReviewChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
@@ -109,6 +121,9 @@ export default {
       return false;
     },
     showMultiChangeButton() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
@@ -121,6 +136,9 @@ export default {
       return false;
     },
     showFocusChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
@@ -133,6 +151,9 @@ export default {
       return false;
     },
     showDiscontinueHistoryChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState == null
@@ -146,6 +167,9 @@ export default {
     },
 
     showMultiDiscontinueChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
         this.timeOfState != null
@@ -164,11 +188,17 @@ export default {
     },
     showAddendumChoice() {
       if (
-        this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
-        this.timeOfState != null
+        this.typeOfStateDisplayAreaSpecificStyleToApply != null &&
+        this.typeOfStateDisplayAreaSpecificStyleToApply != ""
       ) {
         return true;
       }
+      // if (
+      //   this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
+      //   this.timeOfState != null
+      // ) {
+      //   return true;
+      // }
       return false;
     }
   },
