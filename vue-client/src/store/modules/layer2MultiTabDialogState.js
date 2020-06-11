@@ -90,6 +90,18 @@ export default {
       state.tabValue = tab.name
     },
 
+    showMultiChangeSocialHistoryTabInLayer2(state) {
+      const tab = {
+        label: "Change social history",
+        value: require("@/components/patient/social-history/show-change-form-in-layer2-tab").default,
+        name: "tab-change-shx"
+      }
+      // Once tablist is updated since it is reactive the src/views/Layer2MultiTabDialog.vue gets activated.
+      state.tabList = [tab]
+      state.recommendationTabType = ADD_RECOMMENDATION
+      state.visibility = true
+      state.tabValue = tab.name
+    },
 
     showMultiChangeRecommendationTabInLayer2(state) {
       const tab = {

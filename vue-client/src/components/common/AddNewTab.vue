@@ -117,7 +117,7 @@ export default {
       } else if (key == SOCIAL_HISTORY) {
         const socialHistoryTab = {
           label: "Social History",
-          value: require("../patient/social-history/Index").default,
+          value: require("../patient/social-history/show-change-form-in-layer2-tab").default,
           name: "tab-social-history"
         };
         this.$store.commit("addNewTab", socialHistoryTab);

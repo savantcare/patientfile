@@ -2,14 +2,15 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
+        <!-- 
+           There is no add in social history since SHX is made up 5 sub components and 10 data points. 
+        -->
         <CardHeader
           ctName="Social history"
-          actions="A,M,F,D"
+          actions="M,F"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
-          @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
           @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
           @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-          @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
           ref="card_header"
         />
       </div>
@@ -23,16 +24,22 @@ export default {
   components: {
     CardHeader
   },
+  props: {
+    typeOfStateDisplayArea: {
+      type: String,
+      default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
+    }
+  },
   data() {
     return {
       selectedRows: []
     };
   },
   methods: {
-    handleClickOnAInCardHeader() {},
-    handleClickOnMInCardHeader() {},
+    handleClickOnMInCardHeader() {
+      this.$store.commit("showMultiChangeSocialHistoryTabInLayer2");
+    },
     handleClickOnFInCardHeader() {},
-    handleClickOnDInCardHeader() {}
   }
 };
 </script>

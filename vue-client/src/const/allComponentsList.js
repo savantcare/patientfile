@@ -23,15 +23,15 @@ export default [
   },
   {
     key: "socialHistory",
-    value: require("@/components/patient/social-history/SocialHistoryCard")
+    value: require("@/components/patient/social-history/Layer1Card")
       .default,
-    abbreviation: ""
+    abbreviation: "shx"
   },
   {
     key: "serviceStatements",
     value: require("@/components/patient/service-statements/ServiceStatementsCard")
       .default,
-    abbreviation: ""
+    abbreviation: "ss"
   },
   {
     key: "bodyMeasurements",

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import SocialHistoryTab from "@/components/patient/social-history/Index.vue";
+import SocialHistoryTab from "@/components/patient/social-history/show-change-form-in-layer2-tab.vue";
 export default {
   components: {
     SocialHistoryTab
