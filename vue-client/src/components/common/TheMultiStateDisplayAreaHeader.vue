@@ -40,7 +40,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       <vue-slider
         v-model="sliderInitialValue"
         @change="handleSliderChangeEvent"
-        :marks="apptDatesToMarkOnSlider"
+        :marks="timeOfStatesToMarkOnSlider"
         :included="true"
       ></vue-slider>
     </el-col>
@@ -64,13 +64,14 @@ import { USER_API_URL, APPOINTMENT_API_URL } from "@/const/others.js";
 
 export default {
   components: {},
-  data() {                          // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
+  data() {
+    // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
     return {
       tabMode: true,
       patientInfo: null,
       sliderInitialValue: 100,
       componentType: true,
-      apptDates: [],
+      timeOfStates: [],
       patientId: this.$route.query.patient_id
     };
   },
@@ -87,16 +88,15 @@ export default {
     connectionStatus() {
       return this.$store.state.connectionStatus;
     },
-    apptDatesToMarkOnSlider() {
-
-/*
+    timeOfStatesToMarkOnSlider() {
+      /*
       The first date is at 0 and todays date is at 100. 
       
       The middle points get proprotionate space based on the distance between appts.
       
       The data returned looks like
-      apptDatesToMarkOnSlider: {
-         0: "1/15/20", // Here I want to show -> this.apptDateTime.date1
+      timeOfStatesToMarkOnSlider: {
+         0: "1/15/20", // Here I want to show -> this.timeOfStateTime.date1
          20: "2/15/20",
          40: "4/25/20",
          100: {
@@ -109,9 +109,9 @@ export default {
 */
 
       let result = {};
-      if (this.apptDates.length > 0) {
-        const percent = Math.floor(100 / (this.apptDates.length + 1));
-        this.apptDates.forEach((data, index) => {
+      if (this.timeOfStates.length > 0) {
+        const percent = Math.floor(100 / (this.timeOfStates.length + 1));
+        this.timeOfStates.forEach((data, index) => {
           const { dateTimeOfAppt } = data;
 
           result[index * percent] = dateTimeOfAppt.split("T")[0];
@@ -138,7 +138,7 @@ export default {
     this.apiGetAppointments();
   },
   methods: {
-    // TODO: This should take data from apptDatesToMarkOnSlider
+    // TODO: This should take data from timeOfStatesToMarkOnSlider
     formatTooltip(val) {
       if (val == 0) {
         return "First appointment on 5th Jan 2020";
@@ -234,7 +234,7 @@ export default {
         if (response.ok) {
           const json = await response.json();
           console.log(json);
-          this.apptDates = json;
+          this.timeOfStates = json;
         } else {
           this.$notify({
             title: "Error",
@@ -248,19 +248,21 @@ export default {
         });
       }
     },
-    handleSliderChangeEvent() {              // TODO: This needs to set a global variable timeOfState and all components need to react on that
-      const percent = Math.floor(100 / (this.apptDates.length + 1));
+    handleSliderChangeEvent() {
+      // TODO: This needs to set a global variable timeOfState and all components need to react on that
+      const percent = Math.floor(100 / (this.timeOfStates.length + 1));
       let index = this.sliderInitialValue / percent;
-      // let apptDate = new Date().toISOString().split("T")[0];
-      let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-      if (index < this.apptDates.length + 1) {
-        apptDate = this.apptDates[index].dateTimeOfAppt.slice(0, 19).replace('T', ' ');
+      // let timeOfState = new Date().toISOString().split("T")[0];
+      let timeOfState = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+      if (index < this.timeOfStates.length + 1) {
+        timeOfState = this.timeOfStates[index].dateTimeOfAppt
+          .slice(0, 19)
+          .replace("T", " ");
       }
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
-        date: apptDate,
-        patientId: this.patientId,
-        userId: this.$store.state.userId
-      });
+      this.$store.commit("setTimeOfState", timeOfState);
     },
     handleSliderEndEvent() {
       // console.log(this.sliderInitialValue);

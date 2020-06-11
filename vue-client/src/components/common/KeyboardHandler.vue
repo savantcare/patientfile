@@ -52,7 +52,7 @@ export default {
       if (searchKeyword.length > 0) {
         return;
       }
-      console.log(rows);
+
       if (event.key == "`") {
         // Set focus to the <current-state-components-search-box>
         focusRowIndex = rows.length - 1;

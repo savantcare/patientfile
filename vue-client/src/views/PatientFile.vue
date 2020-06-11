@@ -182,7 +182,8 @@ export default {
     FamilyHistory,
     KeyboardHandler
   },
-  data() {      // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
+  data() {
+    // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
     return {
       searchKeyword: "",
       multiStateDisplayAreaWidth: 70
@@ -235,6 +236,13 @@ export default {
     this.$store.dispatch("loadComponents", {
       notify: this.$notify
     });
+
+    // Initialize the TimeOfState
+    let timeOfState = new Date()
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+    this.$store.commit("setTimeOfState", timeOfState);
   },
   methods: {
     onDrag(size) {

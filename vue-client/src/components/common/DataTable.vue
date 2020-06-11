@@ -204,9 +204,6 @@ export default {
     ) {
       this.$store.dispatch("dbGetMyRecommendationsInSM", params);
       this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
-    } else {
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
-      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
     }
   },
   computed: {

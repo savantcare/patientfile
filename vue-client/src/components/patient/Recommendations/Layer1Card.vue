@@ -67,7 +67,9 @@ export default {
           field: "recommendationDescription",
           sortable: true
         }
-      ]
+      ],
+      patientId: this.$route.query.patient_id,
+      userId: this.$store.state.userId
     };
   },
   methods: {
@@ -190,7 +192,11 @@ export default {
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
-    console.log(this.typeOfStateDisplayArea);
+    this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
+      date: this.timeOfState,
+      patientId: this.patientId,
+      userId: this.userId
+    });
   },
   computed: {
     typeOfStateDisplayAreaSpecificStyleToApply: {
@@ -205,6 +211,21 @@ export default {
       set(newValue) {
         this.doSomethingWith(newValue);
       }
+    },
+    timeOfState() {
+      return this.$store.state.stateAtSelectedTime.timeOfState;
+    }
+  },
+  watch: {
+    timeOfState() {
+      console.log("timeOfState is changed");
+      const params = {
+        date: this.timeOfState,
+        patientId: this.patientId,
+        userId: this.userId
+      };
+      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
     }
   }
 };
