@@ -38,7 +38,7 @@
             <el-table-column type="selection"></el-table-column>
 
             <el-table-column
-              v-for="(column, index_column) in getSelectedColumns(getColumns(tab.tableData))"
+              v-for="(column, index_column) in columns"
               :key="`tab-${index}-column-${index_column}`"
               :label="column.label "
               :property="column.field"
@@ -47,7 +47,7 @@
             <el-table-column>
               <template
                 slot-scope="scope"
-                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && type == 'CurrentStateDisplayArea')"
+                v-if="scope.row.uuid == mouseOverRowId || (`${keyId}-${scope.$index+1}` == focusRow && typeOfStateDisplayArea == 'CurrentStateDisplayArea')"
               >
                 <el-button
                   type="text"
@@ -75,7 +75,7 @@
 <script>
 import ElTableDraggable from "element-ui-el-table-draggable"; // This allows rows to be dragged up or down
 export default {
-  props: ["ctName", "type", "keyId", "typeOfStateDisplayArea"],
+  props: ["ctName", "keyId", "typeOfStateDisplayArea", "columns"],
   components: { ElTableDraggable },
   data() {
     return {
@@ -83,7 +83,6 @@ export default {
       isExpandable: false,
       width: 0,
       showActionColumn: false,
-      columns: [],
       originMyData: [],
       tab: 0
     };
@@ -112,47 +111,17 @@ export default {
         this.isExpandable = false;
       }
     },
-    getSelectedColumns(columns) {
-      if (this.selectedColumns) {
-        return columns.filter(column => {
-          let result = false;
-          this.selectedColumns.forEach(selColumn => {
-            if (column.field == selColumn) {
-              result = true;
-            }
-          });
-          if (result) {
-            return column;
-          }
-        });
-      }
-    },
     tableRowClassName({ rowIndex }) {
       if (
         this.focusRow == `${this.keyId}-${rowIndex + 1}` &&
-        this.type == "CurrentStateDisplayArea"
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
       ) {
         return "focus-row";
       }
     },
-    getColumns(tableData) {
-      let columns = [];
-      if (tableData.length > 0) {
-        const item = tableData[0];
-        Object.keys(item).forEach(key => {
-          columns.push({
-            field: key,
-            label: key
-          });
-        });
-      }
-
-      this.$emit("handleUpdateColumns", columns);
-      return columns;
-    },
     checkChangePriority() {
       if (
-        this.type == "CurrentStateDisplayArea" &&
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" &&
         this.originMyData.length == this.myData.length
       ) {
         let changedList = [];
@@ -219,16 +188,20 @@ export default {
     }
   },
   mounted() {
-    console.log(this.typeOfStateDisplayArea);
-    let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-;
+    console.log(this.typeOfStateDisplayAreaOfStateDisplayArea);
+    let apptDate = new Date()
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " "); // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify,
       userId: this.$store.state.userId,
       date: apptDate
     };
-    if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+    if (
+      this.typeOfStateDisplayAreaOfStateDisplayArea == "CurrentStateDisplayArea"
+    ) {
       this.$store.dispatch("dbGetMyRecommendationsInSM", params);
       this.$store.dispatch("dbGetOtherRecommendationsInSM", params);
     } else {
@@ -240,9 +213,6 @@ export default {
     focusRow() {
       return this.$store.getters.CurrentStateDisplayAreaFocusRow;
     },
-    selectedColumns() {
-      return this.$store.state.selectedColumns[this.keyId];
-    },
     myData() {
       if (this.tabData.length > 0) {
         return this.tabData[0].tableData;
@@ -252,7 +222,10 @@ export default {
     tabData() {
       let myList = [];
       let othersList = [];
-      if (this.typeOfStateDisplayArea == "CurrentStateDisplayArea") {
+      if (
+        this.typeOfStateDisplayAreaOfStateDisplayArea ==
+        "CurrentStateDisplayArea"
+      ) {
         myList = this.$store.state.recommendation.yourRecommendationsList;
         othersList = this.$store.state.recommendation.othersList;
       } else {
@@ -295,7 +268,10 @@ export default {
       this.checkChangePriority();
     },
     tab() {
-      if (this.type == "CurrentStateDisplayArea") {
+      if (
+        this.typeOfStateDisplayAreaOfStateDisplayArea ==
+        "CurrentStateDisplayArea"
+      ) {
         const tableList = this.tabData[this.tab].tableData;
         this.$emit("updateTableList", tableList);
         this.$store.dispatch("updateCurrentStateDisplayAreaRow");

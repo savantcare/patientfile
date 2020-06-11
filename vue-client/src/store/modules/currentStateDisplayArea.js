@@ -91,6 +91,7 @@ export default {
       });
       // Add search-box-for-commands-from-user component at the last
       CurrentStateDisplayAreaRows.push("search-box-for-commands-from-user");
+      console.log(CurrentStateDisplayAreaRows)
       commit("setCurrentStateDisplayAreaRows", CurrentStateDisplayAreaRows)
     }
   }

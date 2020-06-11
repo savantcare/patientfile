@@ -3,22 +3,24 @@
 
 <!-- For architrecture read core 3 at Home.vue -->
 <template>
-
   <!-- typeOfStateDisplayArea is currentStateDisplayArea or multiStateDisplayArea Ref: patientFile.vue header -->
 
   <!-- 
        https://stackoverflow.com/questions/54366269/how-to-properly-apply-ternary-operator-in-v-model-in-vue-js  
        https://stackoverflow.com/questions/49493882/escaping-double-quotes-in-vue-js
   -->
-  <el-card class="box-card" :id="`recommendation-${typeOfStateDisplayArea}`" :style=typeOfStateDisplayAreaSpecificStyleToApply>   
-    <div slot="header" class="clearfix" >
+  <el-card
+    class="box-card"
+    :id="`recommendation-${typeOfStateDisplayArea}`"
+    :style="typeOfStateDisplayAreaSpecificStyleToApply"
+  >
+    <div slot="header" class="clearfix">
       <CardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
         keyId="recommendation"
-        :typeOfStateDisplayArea="typeOfStateDisplayArea"               
-        :columns="columns"
+        :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
@@ -33,9 +35,9 @@
       @handleSelectionChange="handleSelectionChange"
       @handleClickOnCInDataRow="handleClickOnCInDataRow"
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
-      @handleUpdateColumns="handleUpdateColumns"
       @updatePriority="updatePriority"
       @updateTableList="updateTableList"
+      :columns="columns"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
@@ -59,11 +61,16 @@ export default {
   data() {
     return {
       selectedRows: [],
-      columns: []
+      columns: [
+        {
+          label: "Descrition",
+          field: "recommendationDescription",
+          sortable: true
+        }
+      ]
     };
   },
   methods: {
-
     // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
 
     handleClickOnAInCardHeader() {
@@ -92,9 +99,9 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeRecommendationTabInLayer2");
     },
-    
+
     handleClickOnXInCardHeader() {
--      this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
+      -this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
     },
 
     handleClickOnFInCardHeader() {
@@ -126,21 +133,15 @@ export default {
       this.$store.commit("showChangeRecommendationsTabInLayer2", data);
     },
 
-    handleUpdateColumns(value) {
-      if (value.length > 0) {
-        this.columns = value;
-      }
-    },
-
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
     },
-   
+
     updateTableList(tableList) {
       this.$store.commit("setRecommendationTableList", tableList);
     },
- 
+
     //-------------- Category 4/4: Functions to manage DB changes -----------------------
 
     handleClickOnDInCardHeader() {
@@ -154,14 +155,14 @@ export default {
         selectedDatas: this.selectedRows
       });
     },
-  
+
     handleClickOnDInDataRow(data) {
       this.$store.dispatch("dbDiscontinueRecommendationInSM", {
         data: data,
         notify: this.$notify
       });
     },
-     
+
     // TODO: Rename this to handleUpdatePriority()
     async updatePriority(changedDatas) {
       const TOKEN = localStorage.getItem("token");
@@ -186,26 +187,27 @@ export default {
         });
       }
     }
-    
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
-    console.log(this.typeOfStateDisplayArea)
+    console.log(this.typeOfStateDisplayArea);
   },
   computed: {
-
-  typeOfStateDisplayAreaSpecificStyleToApply: {
+    typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
-        let val=this.typeOfStateDisplayArea=='multiStateDisplayArea' ? "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);" : '' ;
+        let val =
+          this.typeOfStateDisplayArea == "multiStateDisplayArea"
+            ? "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);"
+            : "";
         console.log("Value is" + val);
         return val;
       },
       set(newValue) {
         this.doSomethingWith(newValue);
-      },
+      }
+    }
   }
-  }
-}
+};
 </script>
 
 <style lang="css">

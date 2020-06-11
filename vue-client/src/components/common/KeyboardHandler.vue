@@ -52,21 +52,25 @@ export default {
       if (searchKeyword.length > 0) {
         return;
       }
+      console.log(rows);
       if (event.key == "`") {
         // Set focus to the <current-state-components-search-box>
         focusRowIndex = rows.length - 1;
         this.$parent.$refs.search_box.setFocus();
-        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
+        this.$store.commit(
+          "setCurrentStateDisplayAreaFocusRowIndex",
+          focusRowIndex
+        );
       } else if (event.key == "ArrowDown") {
-        if (this.shiftKeyPressed) {
-          console.log("Shift + down");
-        }
         if (focusRowIndex == rows.length - 1) {
           focusRowIndex = 0;
         } else {
           focusRowIndex += 1;
         }
-        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
+        this.$store.commit(
+          "setCurrentStateDisplayAreaFocusRowIndex",
+          focusRowIndex
+        );
       } else if (event.key == "ArrowUp") {
         if (this.shiftKeyPressed) {
           console.log("Shift + up");
@@ -76,7 +80,10 @@ export default {
         } else {
           focusRowIndex -= 1;
         }
-        this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", focusRowIndex);
+        this.$store.commit(
+          "setCurrentStateDisplayAreaFocusRowIndex",
+          focusRowIndex
+        );
       }
 
       const focusRow = rows[focusRowIndex];

@@ -22,15 +22,30 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
           v-if="selected.length > 0"
         >D</el-button>
         <div v-else>
-          <el-button type="text" size="mini" @click="$emit('showTabToRevewInLayer2')" v-if="showReviewChoice">R</el-button>
-          <el-button type="text" size="mini" @click="$emit('handleClickOnAInCardHeader')" v-if="showAddChoice">A</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('showTabToRevewInLayer2')"
+            v-if="showReviewChoice"
+          >R</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('handleClickOnAInCardHeader')"
+            v-if="showAddChoice"
+          >A</el-button>
           <el-button
             type="text"
             size="mini"
             @click="$emit('handleClickOnMInCardHeader')"
             v-if="showMultiChangeButton"
           >M</el-button>
-          <el-button type="text" size="mini" @click="$emit('handleClickOnFInCardHeader')" v-if="showFocusChoice">F</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('handleClickOnFInCardHeader')"
+            v-if="showFocusChoice"
+          >F</el-button>
           <el-button
             type="text"
             size="mini"
@@ -41,42 +56,6 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
           <el-popover placement="top-start" trigger="hover" content="Addendum">
             <el-button slot="reference" type="text" size="mini" v-if="showAddendumChoice">E</el-button>
           </el-popover>
-
-          <!--
-        TODO: Clicking on settings icon will allow choosing which columns to display and 
-        save preferences in local storage
-        This will need to know what columns are available in the JSON. 
-        Component 1 might have 5 columns whose visibility can be turned on or off
-        and component 2 might have 2 columns whose visibility can be turned on or off
-          -->
-          <!--<el-popover placement="bottom" width="200" trigger="click">
-          <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-          </el-popover>-->
-
-          <el-popover
-            placement="bottom"
-            width="200"
-            trigger="click"
-            @show="showPopover = true"
-            @hide="showPopover = false"
-          >
-            <el-select
-              v-model="selectedColumns"
-              size="mini"
-              clearable
-              multiple
-              placeholder="Select"
-              collapse-tags
-            >
-              <el-option
-                v-for="item in columns"
-                :key="item.field"
-                :label="item.label"
-                :value="item.field"
-              ></el-option>
-            </el-select>
-            <i slot="reference" class="el-icon-s-tools settingsIcon"></i>
-          </el-popover>
         </div>
       </div>
     </transition>
@@ -85,12 +64,11 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
 
 <script>
 export default {
-  props: ["ctName", "actions", "typeOfStateDisplayArea", "columns", "keyId"],
+  props: ["ctName", "actions", "typeOfStateDisplayArea", "keyId"],
   data() {
     return {
       mouseOver: false,
       selected: [],
-      showPopover: false,
       timeOfState: this.$route.query.timeOfState // If this value is NULL it means currentStateDisplayArea is being shown.
     };
   },
@@ -182,18 +160,7 @@ export default {
     showActions() {
       // console.log("mouseover: " + this.mouseOver);
       // console.log("isHeaderFocus: " + this.isHeaderFocus);
-      // console.log("showPopover: " + this.showPopover);
-      return this.mouseOver || this.isHeaderFocus || this.showPopover;
-    },
-    selectedColumns: {
-      get() {
-        return this.$store.state.selectedColumns[this.keyId];
-      },
-      set(value) {
-        let selectedColumns = this.$store.state.selectedColumns;
-        selectedColumns[this.keyId] = value;
-        this.$store.commit("setSelectedColumns", selectedColumns);
-      }
+      return this.mouseOver || this.isHeaderFocus;
     },
     showAddendumChoice() {
       if (
