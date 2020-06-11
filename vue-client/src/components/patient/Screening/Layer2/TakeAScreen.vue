@@ -11,7 +11,7 @@
    <el-form-item>
 
     <el-table :data="questionData" style="width: 100%">
-      <el-table-column prop="question" label="Patient health questionnaire" width="580"></el-table-column>
+      <el-table-column prop="question" label="Patient health questionnaire" :min-width="700"></el-table-column>
         <el-table-column prop="option1" label="Not at all" width="180"> 
           <template slot-scope="scope">
             <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >0</el-radio>
@@ -20,18 +20,18 @@
       </el-table-column>
       <el-table-column prop="option2" label="Several days">
         <template slot-scope="scope">
-          <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >2</el-radio>
+          <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >1</el-radio>
         </template>
 
       </el-table-column>
       <el-table-column prop="option3" label="More than half the days">
         <template slot-scope="scope">
-            <el-radio label="1" v-model="scope.row.option3"  @click="handleEdit(scope.$index, scope.row)" >3</el-radio>
+            <el-radio label="1" v-model="scope.row.option3"  @click="handleEdit(scope.$index, scope.row)" >2</el-radio>
         </template>
        </el-table-column>
       <el-table-column prop="option4" label="Nearly every day">
         <template slot-scope="scope">
-            <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >4</el-radio>
+            <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >3</el-radio>
         </template>
       </el-table-column>
     </el-table>
@@ -76,11 +76,15 @@ export default {
         ],
         radio: '0',
         questionData: [
-          { question: '1. Little interest or pleasure in doing things', option1: '0', option2: '1', option3: '2', option4: '3' },
-          { question: '2. Feeling down, depressed or hopeless.', option1: '0', option2: '1', option3: '2', option4: '3' },
-          { question: '3. Trouble falling or staying asleep, or sleeping too much', option1: '0', option2: '1', option3: '2', option4: '3' },
-          { question: '4. Feeling tired or having little energy ', option1: '0', option2: '1', option3: '2', option4: '3' },
-          { question: '5. Poor appetite or overeating ', option1: '0', option2: '1', option3: '2', option4: '3' }
+          { question: '1. Over the last 2 weeks how often have you been bothered by any of the following problems... Feeling down, depressed, or hopeless?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '2. Over the last 2 weeks how often have you been bothered by any of the following problems... Trouble falling or staying asleep, or sleeping too much?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '3. Over the last 2 weeks how often have you been bothered by any of the following problems... Feeling tired or having little energy?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '4. Over the last 2 weeks how often have you been bothered by any of the following problems... Poor appetite or overeating?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '5. Over the last 2 weeks how often have you been bothered by any of the following problems... Feeling bad about yourself -- or that you are a failure or have let yourself or your family down?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '6. Over the last 2 weeks how often have you been bothered by any of the following problems... Trouble concentrating on things, such as reading newspapers or watching television?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '7. Over the last 2 weeks how often have you been bothered by any of the following problems... Moving or speaking slowly that other could have noticed. Or the opposite -- being so figety or restless that you have been moving around a lot more than usual?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '8. Over the last 2 weeks how often have you been bothered by any of the following problems... Thoughts that you would be better off dead, or of hurting yourself?', option1: '0', option2: '1', option3: '2', option4: '3' },
+          { question: '9. Others ... If you have checked off any problems, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?', option1: '0', option2: '1', option3: '2', option4: '3' },
         ],
        answerList: [
           { value: 1, label: 'Not at all',  },
