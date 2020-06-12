@@ -79,6 +79,20 @@ export default {
         return { "background-color": "#ecf5ff" };
       }
     },
+
+    replaceBulk( str, findArray, replaceArray ){
+      var i, regex = [], map = {}; 
+      for( i=0; i<findArray.length; i++ ){ 
+        regex.push( findArray[i].replace(/([-[\]{}()*+?.\\^$|#,])/g,'\\$1') );
+        map[findArray[i]] = replaceArray[i]; 
+      }
+      regex = regex.join('|');
+      str = str.replace( new RegExp( regex, 'g' ), function(matched){
+        return map[matched];
+      });
+      return str;
+    },
+
     querySearch(queryString, cb) {
       const searchCommandsList = this.$store.state.searchCommandsList;
       console.log("list" + searchCommandsList);
@@ -103,15 +117,22 @@ export default {
       results = results.map(result => {
         var final_str = ""
         if (queryString.length > 0) {
-          var reg = new RegExp(queryString, 'gi');
           if(result.label == "clear"){
             final_str = result.label
           }
           else{
-            final_str = result.label.replace(reg, function(str) {return '<b>'+str+'</b>'});
+            const strings = queryString.split(" ");
+            var finderString = []
+            var replaceString = []
+            strings.forEach(string => {
+              //var reg = new RegExp(string, 'gi');
+              //final_str += result.label.replace(reg, function(str) {return '<b>'+str+'</b>'});
+              finderString.push(string)
+              replaceString.push("<b>"+string+"</b>")
+            });
+            final_str = this.replaceBulk(result.label,finderString,replaceString)
+            
           }
-          
-          
         }
         else{
           final_str = result.label
