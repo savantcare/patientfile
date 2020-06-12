@@ -119,7 +119,7 @@ export default {
       }
       result["100"] = {
         style: { color: "#1989FA" },
-        label: this.$createElement("strong", "Currernt")
+        label: this.$createElement("strong", "Current")
       };
 
       return result;
