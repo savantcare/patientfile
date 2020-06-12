@@ -152,14 +152,14 @@ export default {
       } else if (key == ADD_GOAL) {
         const addGoalTab = {
           label: "Add goal",
-          value: require("../patient/goal/AddGoal.vue").default,
+          value: require("../patient/goal/layer2/AddGoal.vue").default,
           name: "tab-add-goal"
         };
         this.$store.commit("addNewTab", addGoalTab);
       } else if (key == MULTIPLE_RATE_GOAL) {
         const multiChangeGoalTab = {
           label: "Multi rate goal",
-          value: require("../patient/goal/MultiChangeGoal").default,
+          value: require("../patient/goal/layer2/MultiChangeGoal").default,
           name: "tab-multi-change-goal"
         };
         this.$store.commit("addNewTab", multiChangeGoalTab);

@@ -18,7 +18,7 @@ export default [
   },
   {
     key: "goal",
-    value: require("@/components/patient/goal/GoalsCard").default,
+    value: require("@/components/patient/goal/Layer1Card").default,
     abbreviation: "goal"
   },
   {
@@ -104,8 +104,8 @@ export default [
   },
   {
     key: "pastPsychHistoryCard",
-    value: require("@/components/patient/PastPsychHistory/PastPsychHistoryCard")
+    value: require("@/components/patient/PastPsychHistory/Layer1Card")
       .default,
-    abbreviation: ""
+    abbreviation: "pphx"
   }
 ]

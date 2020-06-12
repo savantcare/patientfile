@@ -161,7 +161,7 @@ const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 const Recommendation = () =>
   import("@/components/patient/Recommendations/Layer1Card");
 const Reminder = () => import("@/components/patient/reminder/RemindersCard");
-const Goal = () => import("@/components/patient/goal/GoalsCard");
+const Goal = () => import("@/components/patient/goal/Layer1Card");
 const Diagnosis = () => import("@/components/patient/diagnosis/DiagnosesCard");
 const FamilyHistory = () =>
   import("@/components/patient/FamilyHistory/FamilyHistoryCard");

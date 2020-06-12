@@ -21,19 +21,13 @@ export default [
     label: "reminder (rem) list", action: "", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) add", action: "showAddReminderTabInLayer2", abbreviation: "rem"
+    label: "reminder (rem) add", action: "showAddReminderTabInLayer2", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) multi change", action: "showMultiChangeReminderTabInLayer2", abbreviation: "rem"
+    label: "reminder (rem) multi change", action: "showMultiChangeReminderTabInLayer2", abbreviation: "rem"
   },
   {
-    label: "reminder (rex) focus", action: "", abbreviation: "rem"
-  },
-  {
-    label: "reminder (rex) download pdf", action: "", abbreviation: "rem"
-  },
-  {
-    label: "reminder (rex) send to patient (HDR)", action: "", abbreviation: "rem"
+    label: "reminder (rem) focus", action: "", abbreviation: "rem"
   },
   {
     label: "goal (g) list", action: "", abbreviation: "goal"
@@ -64,6 +58,9 @@ export default [
   },
   {
     label: "social history (shx) list", action: "", abbreviation: "shx"
+  },
+  {
+    label: "past psych history (pphx) list", action: "", abbreviation: "pphx"
   },
   {
     label: "clear", action: "", abbreviation: ""

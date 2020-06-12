@@ -43,6 +43,13 @@ export default {
     CardHeader
     //DataTable
   },
+  props: {
+    typeOfStateDisplayArea: {
+      type: String,
+      default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
+    }
+  },
+
   data() {
     return {
       selectedRows: [],

@@ -1,5 +1,6 @@
 <!--
-For architrecture read core 3 at Home.vue 
+
+For architrecture read core 3 at /src/views/PatientFile.vue
 
 A card header needs to deal with 3 situations:
 1. typeOfStateDisplayArea == "CurrentStateDisplayArea"
