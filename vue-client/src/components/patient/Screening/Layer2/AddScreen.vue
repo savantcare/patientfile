@@ -71,10 +71,6 @@ export default {
   },
   methods: {
     addDomain() {
-
-      // check for the screen is pre exist
-
-
       this.screenForm.screenings.push({
         value: ""
       });
@@ -86,14 +82,11 @@ export default {
       }
     },
     submitForm(formName) {
-
-      // check for the screen is pre exist
-
       const vm = this;
       this.$refs[formName].validate(async valid => {
         if (valid) {
-            // Add
 
+            // Add screen
             let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') 
             let screenList = [];
 
