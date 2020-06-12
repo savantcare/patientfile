@@ -18,7 +18,7 @@ export default [
   },
   {
     key: "goal",
-    value: require("@/components/patient/goal/GoalsCard").default,
+    value: require("@/components/patient/goal/Layer1Card").default,
     abbreviation: "goal"
   },
   {

@@ -199,7 +199,7 @@ export default {
     showAddGoalTabInLayer2(state) {
       const tab = {
         label: "Add goal",
-        value: require("@/components/patient/goal/AddGoal.vue").default,
+        value: require("@/components/patient/goal/layer2/AddGoal.vue").default,
         name: "tab-add-goal"
       }
       state.tabList = [tab]
@@ -210,7 +210,7 @@ export default {
     showMultiChangeGoalTabInLayer2(state) {
       const tab = {
         label: "Multi rate goal",
-        value: require("@/components/patient/goal/MultiChangeGoal.vue").default,
+        value: require("@/components/patient/goal/layer2/MultiChangeGoal.vue").default,
         name: "tab-multi-change-goal"
       }
       state.tabList = [tab]
@@ -221,7 +221,7 @@ export default {
     showChangeGoalsTabInLayer2(state, data) {
       const tab = {
         label: "Rate goal",
-        value: require("@/components/patient/goal/RateGoal.vue").default,
+        value: require("@/components/patient/goal/layer2/RateGoal.vue").default,
         name: "tab-rate-goal"
       }
       state.tabList = [tab]
