@@ -1,23 +1,12 @@
 Alexey Todo:
 ============
 
-1. KB focus issues
-   When I press C to invoke change "C" goes into textarea.
-   When I press M the focus is sometimes not correct.
-   When I press A to add the focus is not in the text area.
+1. Body measurement component
 
-2. Earlier when I gave a command both the old and new card used to be there. Now the old card goes away.   
-
-3. Left and right should depend on a common state.   
-
-   components/recommendations/stateDBSocket.js read comments on line 6
-   Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
-      1. Caching
-      2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
+-- discussed till here.
 
 4. When I refresh with recommendation on right and left. 8 sql queries are made. Is that correct?
 
--- discussed till here.
 
 4. May depend on 2
    DataTable.vue line 201 code should not be needed
@@ -51,7 +40,23 @@ Alexey Todo:
       }
    }
 
-6. Body measurement component
+
+
+VK to understand and verify
+===========================
+1. KB focus issues
+   When I press C to invoke change "C" goes into textarea.
+   When I press M the focus is sometimes not correct.
+   When I press A to add the focus is not in the text area.
+
+2. Earlier when I gave a command both the old and new card used to be there. Now the old card goes away.   
+
+3. Left and right should depend on a common state.   
+
+   components/recommendations/stateDBSocket.js read comments on line 6
+   Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
+      1. Caching
+      2. Both left and right will operate on same data set. Currently they are operating on 2 different data sets.       
 
 
 Done - need to demo:

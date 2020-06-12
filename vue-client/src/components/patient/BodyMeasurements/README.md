@@ -4,9 +4,9 @@ Layer 1
 +-------------------------------------------------------------------------------+
 |                                                                     +-----+   |         +----------------------------------------------+
 |  Body Measurement                                                   |  G  | <-----------+ Graph for all.                               |
-|                                                                     +-----+   |         | Clicking on this will open a chart where all |
-+-------------------------------------------------------------------------------+         | the graphs of sub-sections can be seen.      |
-|                                                                               |         |                                              |
+|                                                                     +-----+   |         | Open a chart in 2nd layer where all the      |
++-------------------------------------------------------------------------------+         | graphs of sub-sections can be seen.          |
+|                                                                               |         | There is checkbox to uncheck some lines      |
 |                            Current Value                        Actions       |         +----------------------------------------------+
 |  +-----------------------------------------------------------------------+    |         +----------------------------------------------+
 |                                                               |---| |---|     |         | This field will show the latest data of the  |
