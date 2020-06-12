@@ -1,3 +1,8 @@
+/*
+ KT: This file is imported by src/index.js
+ Having an index.js file in a folder lets you perform an import from the folder implicitly without specifying the index.js in the import statement.
+*/
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 

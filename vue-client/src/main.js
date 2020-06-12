@@ -1,4 +1,4 @@
-// First file of vue app
+// KT: First file of vue app
 
 // import '@babel/polyfill'       // TODO: Is this needed since we only support chrome > 83
 // import 'mutationobserver-shim' // TODO: Is this needed since we only support chrome > 83
@@ -17,7 +17,7 @@ Vue.use(ElementUI, { locale });
 
 /* External-UI-Ct-2/5 Ref: https://github.com/NightCatSama/vue-slider-component
 Q) Why use a different slider instead of slider from elemenet.io?
-Read: TheMultiStateDisplayAreaHeader.vue:15
+Read: src/components/common/TheMultiStateDisplayAreaHeader.vue:15
 */
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
@@ -26,7 +26,7 @@ Vue.component('VueSlider', VueSlider)
 /* External-UI-Ct-3/5 Ref: http://vue-js-toggle-button.yev.io/
    Used to toggle between Health and Other components.
    Why not use element.io inbuilt switch?
-   Read: TheMultiStateDisplayAreaHeader.vue:42
+   Read: src/components/common/TheMultiStateDisplayAreaHeader.vue:42
 */
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
@@ -45,6 +45,9 @@ Vue.use(VueScrollTo)
 import * as ElResize from 'vue-element-resize-event'
 Vue.use(ElResize)
 
+// Used for KB shortcuts
+Vue.use(require('vue-shortkey'))
+
 // Initialize socket.io
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io';
@@ -62,8 +65,6 @@ Vue.use(new VueSocketIO({
 );
 
 import './registerServiceWorker'
-
-Vue.use(require('vue-shortkey'))
 
 Vue.config.productionTip = false
 

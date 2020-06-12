@@ -1,3 +1,5 @@
+// KT: This file is imported by src/main.js
+
 <template>
   <div id="app">
     <router-view />

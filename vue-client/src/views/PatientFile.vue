@@ -1,6 +1,7 @@
 /*
-App architecture 4 core principles      Architecture / LOC = 1/10 
-==================================      Total references (case insensitive): 605
+
+KT: App architecture 4 core principles      Architecture / LOC = 1/10 
+======================================      Total references (case insensitive): 605
 
 Core 1/6. Page design
 ===================
@@ -113,6 +114,8 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
   2/2 Change data                                             See line 248
 
 */
+
+// KT: src/router/index.js sends control here if the / route is given by the user
 
 <template>
   <div>
@@ -233,11 +236,12 @@ export default {
     // setTimeout(() => {
     //   this.$store.dispatch("updateCurrentStateDisplayAreaRow");
     // }, 1000);
+    // KT: Actions are triggered with the store.dispatch method. Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
     this.$store.dispatch("loadComponents", {
       notify: this.$notify
     });
 
-    // Initialize the TimeOfState
+    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
     let timeOfState = new Date()
       .toISOString()
       .slice(0, 19)

@@ -9,7 +9,9 @@ export default {
       state.list = value
     }
   },
-  actions: {
+  actions: {        // Question: Should all actions should begin with An so when I am readiung the code and I see loadComponents I know it is an action ?
+    // This function is only called once when / route is used for patientFile.vue to get loaded.
+    // Question: Why make this API call and not get this data from local storage?
     async loadComponents({ commit }, params) {
       const { notify } = params
       try {
