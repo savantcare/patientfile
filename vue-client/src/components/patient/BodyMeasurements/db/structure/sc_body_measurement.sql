@@ -35,7 +35,8 @@ CREATE TABLE `bloodPressure` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -52,7 +53,8 @@ CREATE TABLE `bloodSugar` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,7 +70,8 @@ CREATE TABLE `BMI` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,8 +87,9 @@ CREATE TABLE `height` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -101,8 +105,9 @@ CREATE TABLE `oxygenSaturation` (
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
   `recordChangedOnDateTime` datetime DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -117,8 +122,9 @@ CREATE TABLE `pulse` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -133,8 +139,9 @@ CREATE TABLE `temperature` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -149,8 +156,9 @@ CREATE TABLE `waistCircumference` (
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -165,68 +173,7 @@ CREATE TABLE `weight` (
   `measurementDate` date DEFAULT NULL,
   `Notes` text DEFAULT NULL,
   `recordChangedByUUID` varchar(64) DEFAULT NULL,
-  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `bodyMeasurementBloodPressure`
---
-ALTER TABLE `bloodPressure`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementBloodSugar`
---
-ALTER TABLE `bloodSugar`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementBMI`
---
-ALTER TABLE `BMI`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementHeight`
---
-ALTER TABLE `height`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementOxygenSaturation`
---
-ALTER TABLE `oxygenSaturation`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementPulse`
---
-ALTER TABLE `pulse`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementTemperature`
---
-ALTER TABLE `temperature`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementWaistCircumference`
---
-ALTER TABLE `waistCircumference`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `bodyMeasurementWeight`
---
-ALTER TABLE `weight`
-  ADD PRIMARY KEY (`uuid`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
