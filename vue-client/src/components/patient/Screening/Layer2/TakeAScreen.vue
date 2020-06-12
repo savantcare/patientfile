@@ -11,7 +11,7 @@
    <el-form-item>
 
     <el-table :data="questionData" style="width: 100%">
-      <el-table-column prop="question" label="Patient health questionnaire" :min-width="700"></el-table-column>
+      <el-table-column prop="question" label="Patient health questionnaire" :min-width="550"></el-table-column>
         <el-table-column prop="option1" label="Not at all" width="180"> 
           <template slot-scope="scope">
             <el-radio label="1"  @click="handleEdit(scope.$index, scope.row)" >0</el-radio>
@@ -58,10 +58,11 @@
 export default {
   data() {
     return {
+      screenForm: '',
       editableTabsValue: "2",
       editableTabs: [
         {
-          title: "Take a screen",
+          title: "Take  screen",
           name: "screening",
           content: "screening"
         },
@@ -86,13 +87,6 @@ export default {
           { question: '8. Over the last 2 weeks how often have you been bothered by any of the following problems... Thoughts that you would be better off dead, or of hurting yourself?', option1: '0', option2: '1', option3: '2', option4: '3' },
           { question: '9. Others ... If you have checked off any problems, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?', option1: '0', option2: '1', option3: '2', option4: '3' },
         ],
-       answerList: [
-          { value: 1, label: 'Not at all',  },
-          { value: 2, label: 'A little bit' },
-          { value: 3, label: 'Somewhat' },
-          { value: 4, label: 'Very much' },
-          { value: 5, label: 'Extremely' }
-        ],
         value: '',
       tabIndex: 2,
       form: {
@@ -107,20 +101,7 @@ export default {
             value: ""
           }
         ]
-      },
-      activities: [
-        {
-          content: "screening1",
-          timestamp: "25th May, 2020",
-          size: "large",
-          type: "primary"
-        },
-        {
-          content: "Rex1",
-          timestamp: "25th May, 2020",
-          color: "#0bbd87"
-        }
-      ]
+      }
     };
   },
   methods: {

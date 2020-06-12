@@ -5,31 +5,28 @@
     <div slot="header" class="clearfix">
       <CardHeader
         ctName="Screening"
-        actions="A,F,D"
+        actions="A,G,F,D"
+        :columns="columns"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
+        @handleClickOnGInCardHeader="handleClickOnGInCardHeader"
         ref="card_header"
       />
       <!-- @handleClickOnMInCardHeader="showTakeAScreenDialog" -->
     </div>
 
-    <!-- <DataTable
+    <DataTableWithoutTab
       :tabData="tabData"
+      :selectedColumns="selectedColumns"
+      ctName="screening"
+      :typeOfStateDisplayArea="typeOfStateDisplayArea"
       @handleSelectionChange="handleSelectionChange"
-      @handleClickOnCInDataRow="handleClickOnCInDataRow"
-      @handleClickOnDInDataRow="handleClickOnDInDataRow"
-    /> -->
-
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="Name" width="180"></el-table-column>
-      <el-table-column align="right">
-        <template slot-scope="scope">
-          <el-link type="primary" @click="showTakeAScreenDialog(scope.$index, scope.row)">T</el-link>
-        </template>
-      </el-table-column>
-    </el-table>
+      @handleClickOnTInDataRow="handleClickOnTInDataRow"
+      @handleClickOnGInDataRow="handleClickOnGInDataRow"
+      @handleUpdateColumns="handleUpdateColumns"
+    />
 
 
   </el-card>
@@ -37,11 +34,11 @@
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-//import DataTable from "@/components/common/DataTable";
+import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 export default {
   components: {
-    CardHeader
-    //DataTable
+    CardHeader,
+    DataTableWithoutTab
   },
   props: {
     typeOfStateDisplayArea: {
@@ -49,29 +46,23 @@ export default {
       default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
     }
   },
-
   data() {
     return {
       selectedRows: [],
-      tableData: [{ name: "1. PHQ9" }]
+      columns: [],
+      selectedColumns: ["scientificName"] ,
     };
   },
   methods: {
-
      // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
-
-
-     // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
-
-      //-------------- Category 4/4: Functions to manage DB changes -----------------------
-
+    
     handleClickOnAInCardHeader() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInLayer2");
     },
-    showTakeAScreenDialog(index, row) {
-      console.log(index, row);
-      this.$store.commit("showTakeAScreenTabInLayer2");
+    handleClickOnGInCardHeader() {
+      console.log("show all screen graph dialog");
+      //this.$store.commit("showGraphScreenTabInLayer2");
     },
     handleClickOnFInCardHeader() {
       console.log("focus panel");
@@ -87,9 +78,21 @@ export default {
         selectedDatas: this.selectedRows
       });
     },
+
+     // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
+
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
+    },
+
+    handleClickOnTInDataRow(value) {
+      console.log("show take a screen dialog" + value);
+      this.$store.commit("showTakeAScreenTabInLayer2");
+    },
+    handleClickOnGInDataRow(value) {
+      console.log("show screen graph dialog" + value);
+      
     },
     handleClickOnCInDataRow(data) {
       console.log("show change dialog");
@@ -100,7 +103,18 @@ export default {
         data: data,
         notify: this.$notify
       });
-    }
+    },
+    showTakeAScreenDialog(index, row) {
+      console.log(index, row);
+      this.$store.commit("showTakeAScreenTabInLayer2");
+    },
+
+    handleUpdateColumns(value) {
+      this.columns = value;
+    },
+
+      //-------------- Category 4/4: Functions to manage DB changes -----------------------
+
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
@@ -112,22 +126,17 @@ export default {
       notify: this.$notify,
       userId: this.$store.state.userId,
     };
-    this.$store.dispatch("dbGetScreeningsInSM", params);
+    this.$store.dispatch("dbGetPatientScreeningListInSM", params);
   },
   computed: {
     tabData() {
-      console.log(55555);
-      console.log(this.$store.state);
       const screeningList = this.$store.state.screening.screeningList;
-      
-      return [
-        {
+      return {
           label: "Yours",
           tableData: screeningList,
-          rowActions: ["C", "D"],
-          selectedColumn: ["description"]
-        }
-      ];
+          rowActions: ["T", "G"],
+          selectedColumn: ["sciendftificName"]
+        };
     }
   }
 };

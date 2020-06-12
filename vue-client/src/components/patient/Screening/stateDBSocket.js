@@ -5,8 +5,11 @@ export default {
     screeningList: []
   },
   mutations: {
-    setScreeningList(state, data) {
+    setPatientScreeningList(state, data) {
       state.screeningList = data
+    },
+    setMasterScreenList(state, data) {
+      state.screenMasterList = data
     },
     addNewScreening(state, newList) {
       newList.forEach(item => {
@@ -53,14 +56,14 @@ export default {
   actions: {
 
     // Category 1/2: Functions to get data
-    async dbGetScreeningsInSM({ commit }, json) {
+    async dbGetPatientScreeningListInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
       }
       try {
         const response = await fetch(
-          `${SCREENING_API_URL}/getScreenList`, {
+          `${SCREENING_API_URL}/getPatientScreenList`, {
           headers: {
             "Authorization": "Bearer " + TOKEN,
             "Content-Type": "application/json;charset=utf-8",
@@ -74,8 +77,49 @@ export default {
         });
         if (response.ok) {
           let json = await response.json();
-          console.log(json)
-          commit('setScreeningList', json)
+          //console.log(json)
+          commit('setPatientScreeningList', json)
+        } else {
+          if (response.status == '401') {
+            notify({
+              title: "Error",
+              message: "Token is expired."
+            })
+            localStorage.removeItem("token")
+            window.location = "/"
+          } else {
+            notify({
+              title: "Error",
+              message: "Failed to get my screening data"
+            })
+          }
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+
+      }
+    },
+
+    async dbGetMasterScreeningList({ commit }, json) {
+      const { patientId, notify, userId, date } = json
+      console.log(patientId, userId, date);
+      if (TOKEN == null) {
+        TOKEN = localStorage.getItem("token")
+      }
+      try {
+        const response = await fetch( // e.g. ${SCREENING_API_URL}?patientUUID=${patientUUID}
+          `${SCREENING_API_URL}/getScreenMasterList`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN
+          }
+        });
+        if (response.ok) {
+          let json = await response.json();
+          //console.log(json)
+          commit('setMasterScreenList', json)
         } else {
           if (response.status == '401') {
             notify({
@@ -138,7 +182,7 @@ export default {
     },
   },
   getters: {
-    screenings(state) {
+    screening(state) {
       return state.list.filter(item => {
         return item.discontinue != true
       })

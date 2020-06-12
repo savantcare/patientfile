@@ -58,6 +58,19 @@
               v-if="tabData.rowActions.indexOf('D') > -1"
               @click="handleClickOnDInDataRow(scope.row)"
             >D</el-button>
+
+            <el-button
+              type="text"
+              size="mini"
+              v-if="tabData.rowActions.indexOf('T') > -1"
+              @click="handleClickOnTInDataRow(scope.row)" 
+            >T</el-button>
+            <el-button
+              type="text"
+              size="mini"
+              v-if="tabData.rowActions.indexOf('G') > -1"
+              @click="handleClickOnGInDataRow(scope.row)"
+            >G</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -111,8 +124,14 @@ export default {
     handleClickOnDInDataRow(row) {
       this.$emit("handleClickOnDInDataRow", row);
     },
+    handleClickOnTInDataRow(row) {
+      this.$emit("handleClickOnTInDataRow", row);
+    },
+    handleClickOnGInDataRow(row) {
+      this.$emit("handleClickOnGInDataRow", row);
+    },
     handleCellMouseEnter(row) {
-      this.mouseOverRowId = row.id;
+      this.mouseOverRowId = row.uuid;
     },
     handleCellMouseLeave() {
       this.mouseOverRowId = "";

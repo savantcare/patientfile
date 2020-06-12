@@ -53,6 +53,12 @@ If the component is being used in "MultiStateDisplayArea" then the component nee
             @click="$emit('handleClickOnXInCardHeader')"
             v-if="showDiscontinueHistoryChoice"
           >X</el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="$emit('handleClickOnGInCardHeader')"
+            v-if="showGraphChoice"
+          >G</el-button>
 
           <el-popover placement="top-start" trigger="hover" content="Addendum">
             <el-button slot="reference" type="text" size="mini" v-if="showAddendumChoice">E</el-button>
@@ -101,6 +107,21 @@ export default {
       ) {
         return (
           this.actions.split(",").filter(action => action == "A").length > 0 &&
+          this.$parent.$parent.selectedRows.length < 1
+        );
+      }
+      return false;
+    },
+    showGraphChoice() {
+      if (this.showAddendumChoice) {
+        return false;
+      }
+      if (
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
+        this.timeOfState == null
+      ) {
+        return (
+          this.actions.split(",").filter(action => action == "G").length > 0 &&
           this.$parent.$parent.selectedRows.length < 1
         );
       }
