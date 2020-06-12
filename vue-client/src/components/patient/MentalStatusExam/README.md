@@ -226,6 +226,35 @@ Other,
 Gait and station abnormal
 
 
+Mood/Affect sub component
+------------------------
+
+Normal (Short code)
+Euthymic,  
+Dysphoric,   
+Irritable,    
+Angry,   
+Bright,   
+Euphoric,    
+Labile,    
+Stable,    
+Mood congruent,    
+Mood incongruent,    
+Expansive,    
+Constricted,     
+Blunted,     
+Flat,    
+Anxious,    
+Tearful,   
+Dysthymic,  
+Full-range,        
+Other,   
+
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Euthymic,  
+Stable,   
+Full-range, 
+Mood congruent,
 
 
 Layer 1 card
@@ -283,9 +312,9 @@ Layer 1 card
 │ │ Mental status exam  │                                        │  C  │           │
 │ └─────────────────────┘                                        └─────┘           │
 ├──────────────────┬───────────────────────────────────────────────────────────────┤
-│ ┌──────────────┐ │   ┌─────────────────────────┐                                 │
-│ │  Appearence  │ │   │ Comma seperated values  │                                 │
-│ └──────────────┘ │   └─────────────────────────┘                                 │
+│ ┌──────────────┐ │    ┌─────────────────────────┐                                │
+│ │  Appearence  │ │    │ Comma seperated values  │                                │
+│ └──────────────┘ │    └─────────────────────────┘                                │
 ├──────────────────┼───────────────────────────────────────────────────────────────┤
 │ ┌──────────────┐ │    ┌─────────────────────────┐                                │
 │ │   Attitude   │ │    │ Comma seperated values  │                                │
@@ -314,40 +343,65 @@ Layer 1 card
 
 Layer 2 in tab:
 ================
+    +---------------------------------------------------------------+
+    |                                                               |
+    |  Mental status exam                                           |
+    +---------------------------------------------------------------+     +---------------------------------+
+    |                  +--------------------------------+           |     |                                 |
++----->Appearance      | Normal (Short code)            | <---------------+ These are multi-select boxes.   |
+|   |                  | Good grooming and hygiene,     |           |     |                                 |
+|   |                  | No apparent distress,          |           |     +-+----+--------------------------+
+|   |                  | Well+de^eloped, well+nourished,|           |       |    |
+|   |                  +--------------------------------+           |       |    |
+|   |                                                               |       |    |
+|   | +-----------------------------------------------------------+ |       |    |
+|   |                                                               |       |    |
+|   |                  +--------------------------------+           |       |    |
++----->Attitude        | Normal (Short code)            |           |       |    |
+|   |                  | Pleasant and cooperative       | <-----------------+    |
+|   |                  |                                |           |            |
+|   |                  +--------------------------------+           |            |
+|   |                                                               |            |
+|   | +-----------------------------------------------------------+ |            |
+|   |                                                               |            |
+|   |                  +--------------------------------+           |            |
++----> Cognition       |                                |           |            |
+|   |                  |                                | <----------------------+
+|   |                  +--------------------------------+           |
+|   |                                                               |
+|   | +-----------------------------------------------------------+ |
++----->                                                             |
+|   | +-----------------------------------------------------------+ |
++----->                                                             |
+|   | +-----------------------------------------------------------+ |
++----->                                                             |
+|   | +-----------------------------------------------------------+ |     +------------------------------------+
+|   |                                                  +--------+   |     |                                    |
+|   |                                                  |        |   |     | Save button. Clicking on it will   |
+|   |                                                  |  Save <----------+ submit data selected for all 15    |
+|   |                                                  |        |   |     | sub sections.                      |
+|   |                                                  +--------+   |     |                                    |
+|   |                                                               |     +------------------------------------+
+|   +---------------------------------------------------------------+
+|
+|    +------------------------------------------------+
+|    |                                                |
+|    |   These are all the 15 sub-sections that are   |
++----+   mentioned above in introduction section.     |
+     |   3 of the sub sections has been shown just    |
+     |   to convey the idea. in the bottom part of    |
+     |   the diagram can be seen multiple horizontal  |
+     |   lines. these represents the remaining sub    |
+     |   sections and related multi-select boxes.     |
+     |                                                |
+     +------------------------------------------------+
 
-    +----------------------------------------------------------------+   
-    |                                                                |
-    |  Mental status exam                                            |
-    +----------------------------------------------------------------+    +---------------------------------------+
-    |                  +--------------------------------+            |    |                                       |
-+----> Appearance      | Normal (Short code)            | <---------------+  This is a multi-select box.          |
-|   |                  | Good grooming and hygiene,     |            |    |  It will show latest selected data.   |
-|   |                  | No apparent distress,          |            |    |  If user wish to alter selected data, |
-|   |                  | Well-de^eloped, well-nourished,|            |    |  he can click and edit on it.         |
-|   |                  +--------------------------------+            |    |                                       |
-|   |                                                                |    |                                       |
-|   | +-----------------------------------------------------------+  |    |  This perticular box is showing that  |
-|   |                                                                |    |  "Appearance" of the patient is:      |
-|   |                  +--------------------------------+            |    |  "Normal", "Good grooming and hygiene |
-+----> Attitude        | Normal (Short code)            |            |    |  , "No apparent distress",            |
-|   |                  | Pleasant and cooperative       |            |    |  "Well developed, well-nourished"     |
-|   |                  |                                |            |    |                                       |
-|   |                  +--------------------------------+            |    |                                       |
-|   |                                                                |    |          
-|   | +-----------------------------------------------------------+  |    |            
-|   |                                                                |    |       
-|   |                  +--------------------------------+            |    |                      
-+----> Cognition       |                                |            |    |                 
-|   |                  |                                |            |    |        
-|   |                  +--------------------------------+            |    |              
-|   |                                                                |    |    
-|   | +-----------------------------------------------------------+  |    |                
 
 
 
 Notes:
 ======
-1. Data is sent to server only when submit is clicked. Half saved form just live on the client. There is only one submit for all the 14 components combined.
+1. Data is sent to server only when submit is clicked. Half saved form just live on the client. There is only one submit for all the 15 components combined.
 
 2. Options of each multi select are hard coded in the vue file
 
