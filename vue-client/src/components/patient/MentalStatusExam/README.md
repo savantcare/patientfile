@@ -84,6 +84,8 @@ Intense,
 Fleeting,    
 Other    
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Appropriate, 
 
 Impulse Control sub component                                           
 ---------------------------
@@ -96,6 +98,9 @@ Poor,
 Impaired,    
 Limited,  
 Other  
+
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Good, 
 
 
 Insight sub component
@@ -110,6 +115,8 @@ Impaired,
 Limited,  
 Other      
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Good, 
 
 Judgement sub component
 ---------------------------
@@ -123,6 +130,8 @@ Impaired,
 Limited,  
 Other    
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Good, 
 
 Perception sub component
 ---------------------------
@@ -134,6 +143,8 @@ No AVH,
 +VH,   
 Other    
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+No AVH, 
 
 Psychomotor sub component
 ---------------------------
@@ -144,13 +155,15 @@ Agitated,
 Retarded,    
 Other
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Normal,
+
 
 Speech sub component
 ---------------------------
 
 Normal (Short code),  
-Regular,    
-rate and rhythm,   
+Regular, rate and rhythm,   
 Fluent,   
 Incoherent,   
 Talkative,   
@@ -158,16 +171,17 @@ Pressured,
 Mumbling,   
 Other   
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Regular, rate and rhythm,  
+
 
 Thought Content sub component
 ---------------------------
 
 Normal (Short code), 
-No SI,   
-intent or plan,    
+No SI, intent or plan,    
 No passive death wish,    
-No HI,    
-intent or plan,    
+No HI, intent or plan,    
 No delusional thinking observed,   
 No obsessive thinking observed,    
 +ruminations,    
@@ -180,13 +194,18 @@ No obsessive thinking observed,
 Other,    
 Passive death wish
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+No SI, intent or plan,    
+No passive death wish,    
+No HI, intent or plan,    
+No delusional thinking observed,   
+No obsessive thinking observed,
 
 Thought Process sub component
 ---------------------------
 
 Normal (Short code), 
-Linear,    
-logical and goal-directed,  
+Linear, logical and goal-directed,  
 Disorganized,   
 Circumstantial,   
 Tangential,   
@@ -194,6 +213,9 @@ Looseness of associations,
 Flight of ideas,    
 Poverty of thought,   
 Other    
+
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Linear, logical and goal-directed, 
 
 
 Neurologicalal sub component
@@ -248,7 +270,7 @@ Layer 1 card
      │            │  C -> get 2nd layer tab to submit form  │                       
      ▼            └─────────────────────────────────────────┘                       
 ┌──────────┐                                                                        
-│ 14 tabs  │                                                                        
+│ 15 tabs  │                                                                        
 └──────────┘                                                                        
                                                                                     
                                                                                     
@@ -284,7 +306,7 @@ Layer 1 card
           │                                                                         
           ▼                                                                         
      ┌──────────┐                                                                   
-     │ 14 rows  │                                                                   
+     │ 15 rows  │                                                                   
      └──────────┘                                                                   
 
 
