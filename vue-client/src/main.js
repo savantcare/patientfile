@@ -64,6 +64,7 @@ Vue.use(new VueSocketIO({
 })
 );
 
+// This is to make the app work offline.
 import './registerServiceWorker'
 
 Vue.config.productionTip = false

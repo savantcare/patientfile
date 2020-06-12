@@ -9,9 +9,12 @@ export default {
       state.list = value
     }
   },
-  actions: {        // Question: Should all actions should begin with An so when I am readiung the code and I see loadComponents I know it is an action ?
+  actions: {        // Question: Should all actions should begin with An so when I am reading the code and I see loadComponents I know it is an action ?
+    
     // This function is only called once when / route is used for patientFile.vue to get loaded.
-    // Question: Why make this API call and not get this data from local storage?
+    
+    // Question: How to put this into cache? Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
+
     async loadComponents({ commit }, params) {
       const { notify } = params
       try {

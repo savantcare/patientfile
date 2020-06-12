@@ -236,9 +236,15 @@ export default {
     // setTimeout(() => {
     //   this.$store.dispatch("updateCurrentStateDisplayAreaRow");
     // }, 1000);
+    
     // KT: Actions are triggered with the store.dispatch method. Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-    this.$store.dispatch("loadComponents", {
-      notify: this.$notify
+    // This changes only once in a long time. When this value is changed on the server DB I expect the doctor to clear their cache on the browser.
+    // store.cache.dispatch Dispatches an action if it's not cached and sets it in cache, otherwise it returns cached Promise.
+    // Ref: https://www.npmjs.com/package/vuex-cache#storecachedispatch
+    // TODO: The fn call is not getting cached.
+    this.$store.cache.dispatch("loadComponents", {
+      notify: this.$notify,
+      timeout: 1000000000           // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
     // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
