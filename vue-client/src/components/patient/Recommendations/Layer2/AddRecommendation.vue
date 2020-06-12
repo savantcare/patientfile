@@ -153,6 +153,9 @@ export default {
     },
     isEditDialog() {
       return this.type == CHANGE_RECOMMENDATION;
+    },
+    tabDialogVisibility() {
+      return this.$store.state.multiTabDialogLayer2.visibility;
     }
   },
   mounted() {
@@ -172,6 +175,11 @@ export default {
         recs: [{ description: this.updateData.recommendationDescription }]
       };
       this.historyData = this.updateData;
+    },
+    tabDialogVisibility() {
+      if (this.tabDialogVisibility) {
+        this.$refs.description[0].focusToTextArea();
+      }
     }
   },
   components: {

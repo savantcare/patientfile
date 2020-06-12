@@ -79,12 +79,21 @@ export default {
         result.push(temp);
       }
       return result;
+    },
+    tabDialogVisibility() {
+      return this.$store.state.multiTabDialogLayer2.visibility;
     }
   },
   mounted() {
     this.focusToTheFirstInputBox();
   },
-  watch: {}
+  watch: {
+    tabDialogVisibility() {
+      if (this.tabDialogVisibility) {
+        this.focusToTheFirstInputBox();
+      }
+    }
+  }
 };
 </script>
 

@@ -22,6 +22,7 @@ export default {
   mounted() {
     this.inputValue = this.value;
     this.originValue = this.value;
+    this.focusToTextArea();
   },
   computed: {
     isChanged() {
@@ -42,6 +43,11 @@ export default {
     },
     resetChanges() {
       this.originValue = this.value;
+    },
+    focusToTextArea() {
+      setTimeout(() => {
+        this.$refs.textarea.focus();
+      }, 50);
     }
   },
   watch: {
@@ -56,7 +62,7 @@ export default {
         this.originValue = this.value;
       }
       this.inputValue = this.value;
-      this.$refs.textarea.focus();
+      this.focusToTextArea();
     }
   }
 };
