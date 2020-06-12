@@ -12,7 +12,13 @@
       @select="handleSelect"
       @focus="handleFocus"
       @input="handleInput"
-    ></el-autocomplete>
+    >
+      <template slot-scope="{ item }">
+        <div class="value" v-html="item.value"></div>
+      </template>
+    </el-autocomplete>
+
+    
     <!-- <v-autocomplete :items="items" item-text="name" filled shaped border-radius="30px" clearable></v-autocomplete> -->
   </div>
 </template>
@@ -86,36 +92,49 @@ export default {
             isMatchKeyword = false;
           }
         });
+
         return isMatchKeyword;
         // return item.label.search(queryString) > -1;
       });
 
       results = results.map(result => {
-        return { value: result.label, action: result.action };
+        var final_str = ""
+        if (queryString.length > 0) {
+          var reg = new RegExp(queryString, 'gi');
+          if(result.label == "clear"){
+            final_str = result.label
+          }
+          else{
+            final_str = result.label.replace(reg, function(str) {return '<b>'+str+'</b>'});
+          }
+          
+          
+        }
+        else{
+          final_str = result.label
+        }
+        return { value: final_str, action: result.action, abbreviation: result.abbreviation };
       });
 
       cb(results);
     },
 
     handleSelect(item) {
-      const { value, action } = item;
+      const { value, action, abbreviation } = item;
+      console.log(item);
+      console.log(abbreviation);
       if (action == "") {
         this.$store.commit("updateCurrentStateDisplayAreaCards", value);
         if (value == "clear") {
           this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", -1);
           this.$store.commit("setCurrentStateDisplayAreaCardsList", []);
         } else {
-          const componentsAllowedToAccess = this.$store.state
-            .componentsAllowedToAccess;
-          const searchComponent = componentsAllowedToAccess.filter(item => {
-            return value.search(item.toLowerCase()) > -1;
-          })[0];
           const stateAtCurrentStateComponents = this.$store.state
             .CurrentStateDisplayArea.CardsList;
           let newList = stateAtCurrentStateComponents.filter(item => {
             return action.search(item.toLowerCase()) > -1;
           });
-          newList.push(searchComponent);
+          newList.push(abbreviation);
           this.$store.commit("setCurrentStateDisplayAreaCardsList", newList);
         }
         this.$store.dispatch("updateCurrentStateDisplayAreaRow");
