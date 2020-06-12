@@ -1,7 +1,7 @@
 Introdution
 ===========
 
-MSE component has 14 child components.
+MSE component has 15 child components.
 
 Mood/Affect                                               
 Appearance                                                
@@ -36,15 +36,173 @@ Disheveled, unkempt,
 Malodorous,                        
 Other    
 
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Good grooming and hygiene,         
+No apparent distress,              
+Well-developed, well-nourished,    
+Appears stated age   
 
 Attitude sub component
 ----------------------
 
+Normal (Short code)   
+Pleasant and cooperative,    
+Uncooperative,     
+Hostile or defiant,     
+Guarded,     
+Evasive,      
+Apathetic,     
+Disorganized behavior,    
+Other    
+
+Note: when user choose "Normal (Short code)", it will select following automatically:
+Pleasant and cooperative   
+
 Cognition sub component
 -----------------------
 
+Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention,    
+Impaired,    
+Fluctuating,    
+Other    
+
+
 Consitutional sub component
 ---------------------------
+
+Vitals signs stable,    
+Other    
+
+
+Eye Contact sub component
+---------------------------
+
+Normal (Short code)        
+Appropriate,   
+Downcast,    
+Intense,    
+Fleeting,    
+Other    
+
+
+Impulse Control sub component                                           
+---------------------------
+
+Normal (Short code)  
+Good,   
+Fair,    
+Questionable,    
+Poor,    
+Impaired,    
+Limited,  
+Other  
+
+
+Insight sub component
+---------------------------
+
+Normal (Short code)  
+Good,   
+Fair,    
+Questionable,   
+Poor,   
+Impaired,    
+Limited,  
+Other      
+
+
+Judgement sub component
+---------------------------
+
+Normal (Short code) , 
+Good,  
+Fair,   
+Questionable,   
+Poor,   
+Impaired,   
+Limited,  
+Other    
+
+
+Perception sub component
+---------------------------
+
+Normal (Short code),  
+No AVH,    
++AH,    
++Command AH,    
++VH,   
+Other    
+
+
+Psychomotor sub component
+---------------------------
+
+Normal (Short code),  
+Normal,   
+Agitated,    
+Retarded,    
+Other
+
+
+Speech sub component
+---------------------------
+
+Normal (Short code),  
+Regular,    
+rate and rhythm,   
+Fluent,   
+Incoherent,   
+Talkative,   
+Pressured,   
+Mumbling,   
+Other   
+
+
+Thought Content sub component
+---------------------------
+
+Normal (Short code), 
+No SI,   
+intent or plan,    
+No passive death wish,    
+No HI,    
+intent or plan,    
+No delusional thinking observed,   
+No obsessive thinking observed,    
++ruminations,    
++SI without intent or plan,    
++SI as detailed below,    
++HI as detailed below,    
++delusions,    
++IOR,    
++obsessions,   
+Other,    
+Passive death wish
+
+
+Thought Process sub component
+---------------------------
+
+Normal (Short code), 
+Linear,    
+logical and goal-directed,  
+Disorganized,   
+Circumstantial,   
+Tangential,   
+Looseness of associations,   
+Flight of ideas,    
+Poverty of thought,   
+Other    
+
+
+Neurologicalal sub component
+---------------------------
+        
+Gait and station normal,   
+Other,   
+Gait and station abnormal
+
 
 
 
