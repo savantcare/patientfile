@@ -104,8 +104,8 @@ export default [
   },
   {
     key: "pastPsychHistoryCard",
-    value: require("@/components/patient/PastPsychHistory/PastPsychHistoryCard")
+    value: require("@/components/patient/PastPsychHistory/Layer1Card")
       .default,
-    abbreviation: ""
+    abbreviation: "pphx"
   }
 ]
