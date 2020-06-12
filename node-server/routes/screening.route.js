@@ -43,6 +43,27 @@ module.exports = (io) => {
     }
   })
 
+  router.post('/addPatientScreen', async (req, res) => {
+    try {
+      const { data, patientUUID, date } = req.body
+
+      const newScreening = await screensAssignedToPatient.bulkCreate(data)
+
+
+      const queryResult = await screensListMaster.sequelize.query('SELECT * FROM screensAssignedToPatients LEFT JOIN  screensListMasters ON screensAssignedToPatients.screenUUID = screensListMasters.uuid where screensAssignedToPatients.patientUUID=:patientUUID', {
+        replacements: { patientUUID: patientUUID },
+        type: screensListMaster.sequelize.QueryTypes.SELECT
+      })
+      res.send(queryResult)
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Recommendation"
+      })
+    }
+  })
+
+  
+
   
 
   return router

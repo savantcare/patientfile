@@ -120,7 +120,6 @@ export default {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
 
 //     let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-// ;
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify,
@@ -131,6 +130,7 @@ export default {
   computed: {
     tabData() {
       const screeningList = this.$store.state.screening.screeningList;
+      console.log(screeningList);
       return {
           label: "Yours",
           tableData: screeningList,

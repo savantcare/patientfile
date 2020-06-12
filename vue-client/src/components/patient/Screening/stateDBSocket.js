@@ -144,40 +144,38 @@ export default {
       }
     },
 
-    async addScreening({ state, commit }, json) {
-      const { data, notify, patientId } = json
-      const originList = state.list
-
-      commit("addNewScreening", data)
+    // this api store all new screen in db and fetch all latest screen data from db.
+    async addPatientScreen({commit }, json) {
+      const { data, notify, patientUUID, date } = json
+      //const originList = state.list
 
       try {
-        const response = await fetch(SCREENING_API_URL, {
-          method: "POST",
+        const response = await fetch(
+          `${SCREENING_API_URL}/addPatientScreen`, {
           headers: {
+            "Authorization": "Bearer " + TOKEN,
             "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer " + TOKEN
           },
-          body: JSON.stringify({ data: data, patientId: patientId })
+          method: "POST",
+          body: JSON.stringify({
+            patientUUID: patientUUID,
+            data: data,
+            date: date
+          })
         })
-        if (!response.ok) {
-          notify({
-            title: "Error",
-            message: "Failed to add screening data"
-          })
+        if (response.ok) {
 
-          commit("setScreeningList", originList)
+          let json = await response.json();
+          commit('setPatientScreeningList', json)
+          notify({title: "Success", message: "Saved!"})
         } else {
-          notify({
-            title: "Success",
-            message: "Saved!"
-          })
+          notify({title: "Error", message: "Failed to add screening data"})
         }
       } catch (ex) {
         notify({
           title: "Error",
           message: "Server connection error"
         })
-        commit("setScreeningList", originList)
       }
     },
   },
