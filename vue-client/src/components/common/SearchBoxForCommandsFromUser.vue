@@ -68,7 +68,10 @@ export default {
     },
     handleFocus() {
       const { rows } = this.$store.state.CurrentStateDisplayArea;
-      this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", rows.length - 1);
+      this.$store.commit(
+        "setCurrentStateDisplayAreaFocusRowIndex",
+        rows.length - 1
+      );
     },
     checkRowFocusStatus(object) {
       const { rowIndex } = object;
@@ -78,7 +81,7 @@ export default {
     },
     querySearch(queryString, cb) {
       const searchCommandsList = this.$store.state.searchCommandsList;
-      console.log("list" + searchCommandsList)
+      console.log("list" + searchCommandsList);
       let results = [];
       if (queryString.length == 0) {
         results = [];
@@ -132,7 +135,7 @@ export default {
           const stateAtCurrentStateComponents = this.$store.state
             .CurrentStateDisplayArea.CardsList;
           let newList = stateAtCurrentStateComponents.filter(item => {
-            return action.search(item.toLowerCase()) > -1;
+            return value.search(item.toLowerCase()) == -1;
           });
           newList.push(abbreviation);
           this.$store.commit("setCurrentStateDisplayAreaCardsList", newList);

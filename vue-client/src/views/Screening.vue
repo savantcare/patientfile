@@ -3,7 +3,7 @@
     <el-tabs type="card">
       <!--Start Take a screen-->
       <el-tab-pane>
-        <span slot="label" style="font-size:22px">Take a screen</span>
+        <span slot="label" style="font-size:22px">Take PHQ9 screen</span>
         <TakeAScreenTab />
       </el-tab-pane>
       <!--End Take a screen-->

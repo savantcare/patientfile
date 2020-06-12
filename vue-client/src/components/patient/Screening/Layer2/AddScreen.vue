@@ -10,19 +10,13 @@
               :key="domain.key"
               :prop="'desc'"
               label-position="top"
-              :rules="{
-                    required: true, message: 'Description can not be blank', trigger: 'blur'
-                  }"
+              :rules="{required: true, message: 'Description can not be blank', trigger: 'blur'}"
             >
-              <!-- <el-row>
-                <el-col :span="2" :offset="24">
-                  <i class="el-icon-close" @click.prevent="removeDomain(domain)"></i>
-                </el-col>
-              </el-row> -->
               <p class="lbl-screen">Select screen:</p>
               <el-select v-model="domain.value" filterable placeholder="Select">
                 <el-option
-                  v-for="item in options"
+                  
+                  v-for="item in getMasterScreenList"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -54,23 +48,26 @@ export default {
           }
         ]
       },
-      options: [
-        { value: 1, label: 'Bipolar' }, 
-        { value: 2, label: 'Schizophrenia' }, 
-        { value: 3, label: 'Anxiety (GAD-7)' }, 
-        { value: 4, label: 'ADHD' }, 
-        { value: 5, label: 'Substance Abuse' },
-        { value: 6, label: 'Alcoholism screening' },
-        { value: 7, label: 'Depression' },
-        { value: 8, label: 'Schizophrenia' },
-        { value: 9, label: 'PTSD' },
-        { value: 10, label: 'Substance Abuse' },
-        { value: 11, label: 'PTSD' },
-        { value: 12, label: 'Drug Use' }
-      ],
+      masterScreenList: [],
     };
   },
+  mounted() {
+    // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+
+    const params = {
+      patientId: this.$route.query.patient_id,
+      notify: this.$notify,
+      userId: this.$store.state.userId,
+    };
+    this.$store.dispatch("dbGetMasterScreeningList", params);
+
+    // 'Bipolar' 'Schizophrenia' 'Anxiety (GAD-7)' 'ADHD' 'Substance Abuse' 'Alcoholism screening' 
+    // 'Depression' 'Schizophrenia' 'PTSD' 'Substance Abuse' 'PTSD' 'Drug Use'
+    
+  },
   methods: {
+
+    
     removeDomain(item) {
       var index = this.dynamicValidateForm.domains.indexOf(item);
       if (index !== -1) {
@@ -83,7 +80,25 @@ export default {
         value: ""
       });
     }
-  }
+  },
+  computed: {
+    getMasterScreenList() {
+      let masterScreenList = [];
+      const dbScreenList = this.$store.state.screening.screenMasterList;
+      console.log(dbScreenList);
+      dbScreenList.forEach(list => {
+        masterScreenList.push({
+           value: list.uuid, 
+           label: list.scientificName
+        })
+      });
+      return masterScreenList;
+    }
+  },
+  /*created: function() {
+      // imagine getDataFor calls some API via AJAX
+      this.masterScreenList = this.getMasterScreenList
+  },*/
 };
 </script>
 

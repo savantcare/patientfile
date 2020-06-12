@@ -10,7 +10,7 @@ const { Op } = require("sequelize")
 
 module.exports = (io) => {
 
-  router.post('/getScreenList', async (req, res) => {
+  router.post('/getPatientScreenList', async (req, res) => {
     try {
       const { patientId, userId, date } = req.body
 
@@ -18,25 +18,32 @@ module.exports = (io) => {
         replacements: { patientUUID: patientId },
         type: screensListMaster.sequelize.QueryTypes.SELECT
       })
-     
-
-
-      /*const queryResult = await screensAssignedToPatient.findAll({
-        where: { patientUUID: patientId },
-        include: [{
-          model: screensAssignedToPatient,
-            where: { patientUUID: patientId }
-        }]
-      })*/
-      
-    res.send(queryResult)
-
+      res.send(queryResult)
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while fetching the Recommendation"
       })
     }
   })
+
+  router.get('/getScreenMasterList', async (req, res) => {
+    try {
+
+      //const { patientUUID } = req.query
+      const queryResult = await screensListMaster.sequelize.query(
+        'SELECT * FROM  screensListMasters where 1', {
+        //replacements: { patientUUID: patientId },
+        type: screensListMaster.sequelize.QueryTypes.SELECT
+      })
+      res.send(queryResult)
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Recommendation"
+      })
+    }
+  })
+
+  
 
   return router
 }

@@ -235,14 +235,21 @@ export default {
   },
   watch: {
     timeOfState() {
-      console.log("timeOfState is changed");
-      const params = {
-        date: this.timeOfState,
-        patientId: this.patientId,
-        userId: this.userId
-      };
-      this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
-      this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
+      const timeOfState = this.timeOfState.split(" ")[0];
+      if (
+        this.$store.state.recommendation.multiStateYourRecommendationsList[
+          timeOfState
+        ] == null
+      ) {
+        const params = {
+          date: this.timeOfState,
+          patientId: this.patientId,
+          userId: this.userId
+        };
+
+        this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
+        this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
+      }
     }
   }
 };

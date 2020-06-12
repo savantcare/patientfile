@@ -2,14 +2,14 @@ import { RECOMMENDATION_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                                     // KT: Cannot be changed directly. Can only be changed through mutation
-    
+
     yourRecommendationsList: [],              // TODO: This should be stored with the key of timeOfState. When timeOfState is null that indicates current state.
-                                              // This needs to be a 2 dimensional array. Right now it is a one dimensional array
-                                              // How to do it? Use object-path-immutable Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations  
-                                              // Only addendums need to be reactive the remaining old data does not need to be reactive.
+    // This needs to be a 2 dimensional array. Right now it is a one dimensional array
+    // How to do it? Use object-path-immutable Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations  
+    // Only addendums need to be reactive the remaining old data does not need to be reactive.
     othersList: [],
     tableList: [],                            // TODO: Needs better name. I have no idea what tableList means or does.
-    multiStateYourRecommendationsList: [],    // Suppose there are 10 historical appointments. When Doctor uses slider to go from appt A to B and then goes back to A the data of A is not in cache.   
+    multiStateYourRecommendationsList: {},    // Suppose there are 10 historical appointments. When Doctor uses slider to go from appt A to B and then goes back to A the data of A is not in cache.   
     multiStateOtherRecommendationsList: []
   },
 
@@ -39,7 +39,8 @@ export default {
       psuedo code will be:
             state.multiStateYourRecommendationsList = immutable.push(state.multiStateYourRecommendationsList, '0.children.0.children', { id, name, parent_id });
       */
-      state.multiStateYourRecommendationsList = value
+      const { data, timeOfState } = value
+      state.multiStateYourRecommendationsList[timeOfState] = data
     },
     setMultiStateOtherRecommendationList(state, value) {
       state.multiStateOtherRecommendationsList = value
@@ -61,13 +62,13 @@ export default {
      */
 
 
-     // -------- Socket event type 1/3
-     // QUESTION:? Should multiple add be handled like multiple discontinue? As per VK yes.  
+    // -------- Socket event type 1/3
+    // QUESTION:? Should multiple add be handled like multiple discontinue? As per VK yes.  
     SOCKET_ADD_RECOMMENDATION(state, newDataList) {         // Msg recd from node-server/routes/recommendation.route.js:26  io.to(`room-${patientId}-Doctor`).emit("ADD_RECOMMENDATION", newRecommendation)
       // The message emitted on the server is ADD_RECOMMENDATION. The library vue-socket.io adds the word SOCKET_ to the event name and sends the event here  
 
       // Say 10 clients are connection. Client 9 when it added the data its data-table showed the data added immediately. Now when the socket message comes back from the server. we need to find out client 9 and not insert the same row in the list maintained by client 9 
-      if (state.yourRecommendationsList.length > 0) {       
+      if (state.yourRecommendationsList.length > 0) {
         const lastData = state.yourRecommendationsList[state.yourRecommendationsList.length - 1]
         // TODO: How will this work if there are multiple recommendations being added?
         // Is it a better idea to emit seperate messages for each add being done?  
@@ -193,7 +194,7 @@ export default {
         })
       }
     },
-    async dbGetMultiStateMyRecommendationsInSM({ commit }, params) {
+    async dbGetMultiStateMyRecommendationsInSM({ commit, rootState }, params) {
       const { date, patientId, userId } = params
       const response = await fetch(
         `${RECOMMENDATION_API_URL}/getByDate`, {
@@ -210,7 +211,12 @@ export default {
       });
       if (response.ok) {
         const json = await response.json()
-        commit("setMultiStateYourRecommendationList", json)
+        const timeOfState = rootState.stateAtSelectedTime.timeOfState.split(" ")[0]
+        const params = {
+          timeOfState: timeOfState,
+          data: json
+        }
+        commit("setMultiStateYourRecommendationList", params)
       }
     },
 
@@ -250,7 +256,7 @@ export default {
     },
 
     // Category 2/2: Functions to change data
-    async dbAddRecommendationInSM({ state, commit }, json) {    
+    async dbAddRecommendationInSM({ state, commit }, json) {
       const { data, notify, patientId } = json
       const originList = state.yourRecommendationsList
 
@@ -287,7 +293,7 @@ export default {
       }
     },
 
-    async dbUpdateRecommendationInSM({ state, commit }, json) { 
+    async dbUpdateRecommendationInSM({ state, commit }, json) {
       const { data, notify } = json
       const originList = state.yourRecommendationsList
       let newList = []

@@ -115,7 +115,7 @@ export default new Vuex.Store({
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule,
     component: componentModule,
-    screeningStateModule: screeningStateModule
+    screening: screeningStateModule
   },
   plugins: [
     createPersistedState()
