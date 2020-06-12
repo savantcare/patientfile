@@ -71,6 +71,10 @@ export default {
   },
   methods: {
     addDomain() {
+
+      // check for the screen is pre exist
+
+
       this.screenForm.screenings.push({
         value: ""
       });
@@ -82,6 +86,9 @@ export default {
       }
     },
     submitForm(formName) {
+
+      // check for the screen is pre exist
+
       const vm = this;
       this.$refs[formName].validate(async valid => {
         if (valid) {
@@ -125,16 +132,21 @@ export default {
     getUserId() {
       return this.$store.state.userId;
     },
+    userScreenList() {
+      return this.$store.state.screening.screeningList;
+    },
     getMasterScreenList() {
       let masterScreenList = [];
-      const dbScreenList = this.$store.state.screening.screenMasterList;
-      console.log(dbScreenList);
-      dbScreenList.forEach(list => {
-        masterScreenList.push({
-           value: list.uuid, 
-           label: list.scientificName
-        })
-      });
+      const dbMasterScreenList = this.$store.state.screening.screenMasterList;
+      const currentScreenList  = this.$store.state.screening.screeningList;
+      dbMasterScreenList.forEach(list => {
+        if (currentScreenList.filter(item => item.scientificName == list.scientificName).length == 0) {
+          masterScreenList.push({
+            value: list.uuid, 
+            label: list.scientificName
+          });
+        }
+      })
       return masterScreenList;
     }
   },
