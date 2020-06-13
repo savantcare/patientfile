@@ -6,7 +6,7 @@ module.exports = {
     URL: "http://localhost:8080"
   },
   testMatch: [
-    "**/test/**/*.test.js"
+    "**/*.test.js"
   ],
   verbose: true
 }
