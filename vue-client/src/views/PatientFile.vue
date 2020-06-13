@@ -166,7 +166,7 @@ const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
 // TODO: Rename this to Recommendations/Layer1Card
 const Recommendation = () =>
   import("@/components/patient/Recommendations/Layer1Card");
-const Reminder = () => import("@/components/patient/reminder/RemindersCard");
+const Reminder = () => import("@/components/patient/reminder/Layer1Card");
 const Goal = () => import("@/components/patient/goal/Layer1Card");
 const Diagnosis = () => import("@/components/patient/diagnosis/Layer1Card");
 const FamilyHistory = () =>

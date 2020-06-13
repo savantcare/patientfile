@@ -16,7 +16,7 @@ Vue.use(Vuex)
 import recommendationStateModule from '../components/patient/Recommendations/stateDBSocket'
 import screeningStateModule from '../components/patient/Screening/stateDBSocket'
 import diagnosisStateModule from '../components/patient/diagnosis/stateDBSocket'
-import reminderStateModule from './modules/reminderState'
+import reminderStateModule from '../components/patient/reminder/stateDBSocket'
 import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'
 import currentStateDisplayAreaModule from './modules/currentStateDisplayArea'

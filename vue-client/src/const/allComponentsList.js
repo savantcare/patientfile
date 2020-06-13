@@ -8,7 +8,7 @@ export default [
   },
   {
     key: "reminder",
-    value: require("@/components/patient/reminder/RemindersCard").default,
+    value: require("@/components/patient/reminder/Layer1Card").default,
     abbreviation: "rem"
   },
   {

@@ -46,7 +46,7 @@ export default {
     showAddReminderTabInLayer2(state) {
       const tab = {
         label: "Add Reminders",
-        value: require("@/components/patient/reminder/AddReminder.vue").default,
+        value: require("@/components/patient/reminder/layer2/AddReminder.vue").default,
         name: "tab-add-reminder"
       }
       state.tabList = [tab]
@@ -57,7 +57,7 @@ export default {
     showMultiChangeReminderTabInLayer2(state) {
       const tab = {
         label: "Multi change Reminders",
-        value: require("@/components/patient/reminder/MultiChangeReminder.vue").default,
+        value: require("@/components/patient/reminder/layer2/MultiChangeReminder.vue").default,
         name: "tab-multi-change-reminder"
       }
       state.tabList = [tab]
@@ -68,7 +68,7 @@ export default {
     showChangeReminderTabInLayer2(state, data) {
       const tab = {
         label: "Change Reminder",
-        value: require("@/components/patient/reminder/AddReminder.vue").default,
+        value: require("@/components/patient/reminder/layer2/AddReminder.vue").default,
         name: "tab-change-reminder"
       }
       state.tabList = [tab]
