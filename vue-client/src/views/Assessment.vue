@@ -23,8 +23,8 @@
   </el-dialog>
 </template>   
 <script>
-import AddDiagnosisTab from "@/components/patient/diagnosis/AddDiagnosis";
-import MultiChangeAssessmentTab from "@/components/patient/diagnosis/MultiChangeAssessment";
+import AddDiagnosisTab from "@/components/patient/diagnosis/layer2/AddDiagnosis";
+import MultiChangeAssessmentTab from "@/components/patient/diagnosis/layer2/MultiChangeAssessment";
 export default {
   components: {
     AddDiagnosisTab,

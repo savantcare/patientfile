@@ -49,7 +49,6 @@ module.exports = (io) => {
 
       const newScreening = await screensAssignedToPatient.bulkCreate(data)
 
-
       const queryResult = await screensListMaster.sequelize.query('SELECT * FROM screensAssignedToPatients LEFT JOIN  screensListMasters ON screensAssignedToPatients.screenUUID = screensListMasters.uuid where screensAssignedToPatients.patientUUID=:patientUUID', {
         replacements: { patientUUID: patientUUID },
         type: screensListMaster.sequelize.QueryTypes.SELECT

@@ -13,7 +13,7 @@ export default [
   },
   {
     key: "diagnosis",
-    value: require("@/components/patient/diagnosis/DiagnosesCard").default,
+    value: require("@/components/patient/diagnosis/Layer1Card").default,
     abbreviation: "dx"
   },
   {

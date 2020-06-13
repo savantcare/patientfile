@@ -1,5 +1,5 @@
 /*
- KT: This file is imported by src/index.js
+ KT: This is 2nd file imported by src/index.js
  Having an index.js file in a folder lets you perform an import from the folder implicitly without specifying the index.js in the import statement.
 */
 
@@ -15,7 +15,7 @@ Vue.use(Vuex)
 // modules
 import recommendationStateModule from '../components/patient/Recommendations/stateDBSocket'
 import screeningStateModule from '../components/patient/Screening/stateDBSocket'
-import diagnosisStateModule from './modules/diagnosisState'
+import diagnosisStateModule from '../components/patient/diagnosis/stateDBSocket'
 import reminderStateModule from './modules/reminderState'
 import goalStateModule from './modules/goalState'
 import settingStateModule from './modules/settingState'

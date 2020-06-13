@@ -115,7 +115,10 @@ Core 6/6: What are 2 categories of DB API calls               ideal: patient/Rec
 
 */
 
-// KT: src/router/index.js sends control here if the / route is given by the user
+/* KT: 
+This file is included by src/router/index.js
+src/router/index.js sends control here if the / route is given by the user
+*/
 
 <template>
   <div>
@@ -165,7 +168,7 @@ const Recommendation = () =>
   import("@/components/patient/Recommendations/Layer1Card");
 const Reminder = () => import("@/components/patient/reminder/RemindersCard");
 const Goal = () => import("@/components/patient/goal/Layer1Card");
-const Diagnosis = () => import("@/components/patient/diagnosis/DiagnosesCard");
+const Diagnosis = () => import("@/components/patient/diagnosis/Layer1Card");
 const FamilyHistory = () =>
   import("@/components/patient/FamilyHistory/FamilyHistoryCard");
 const KeyboardHandler = () => import("@/components/common/KeyboardHandler");

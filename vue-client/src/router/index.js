@@ -1,5 +1,5 @@
 /*
- KT: This file is imported by src/main.js
+ KT: This is 3rd file imported by src/main.js
  Having an index.js file in a folder lets you perform an import from the folder implicitly without specifying the index.js in the import statement.
 */
 

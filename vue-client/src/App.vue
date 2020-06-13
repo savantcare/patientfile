@@ -1,4 +1,6 @@
-// KT: This file is imported by src/main.js
+/* 
+ KT: This is first file imported by src/main.js
+*/
 
 <template>
   <div id="app">

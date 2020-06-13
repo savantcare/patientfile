@@ -143,7 +143,7 @@ export default {
     showAddDiagnosisTabInLayer2(state) {
       const tab = {
         label: "Add Diagnosis",
-        value: require("@/components/patient/diagnosis/AddDiagnosis.vue").default,
+        value: require("@/components/patient/diagnosis/layer2/AddDiagnosis.vue").default,
         name: "tab-add-diagnosis"
       }
       state.tabList = [tab]
@@ -154,7 +154,7 @@ export default {
     showMultiChangeAssessmentTabInLayer2(state) {
       const tab = {
         label: "Multi change assessment diagnosis",
-        value: require("@/components/patient/diagnosis/MultiChangeAssessment.vue").default,
+        value: require("@/components/patient/diagnosis/layer2/MultiChangeAssessment.vue").default,
         name: "tab-multi-change-assessment"
       }
       state.tabList = [tab]
@@ -165,7 +165,7 @@ export default {
     showChangeDiagnosisTabInLayer2(state, data) {
       const tab = {
         label: "Change Diagnosis",
-        value: require("@/components/patient/diagnosis/AddDiagnosis.vue").default,
+        value: require("@/components/patient/diagnosis/layer2/AddDiagnosis.vue").default,
         name: "tab-change-diagnosis"
       }
       state.tabList = [tab]

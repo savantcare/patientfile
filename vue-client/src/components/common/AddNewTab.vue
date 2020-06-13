@@ -124,14 +124,14 @@ export default {
       } else if (key == ADD_DIAGNOSIS) {
         const addDiagnosisTab = {
           label: "Add Diagnosis",
-          value: require("../patient/diagnosis/AddDiagnosis.vue").default,
+          value: require("../patient/diagnosis/layer2/AddDiagnosis.vue").default,
           name: "tab-add-diagnosis"
         };
         this.$store.commit("addNewTab", addDiagnosisTab);
       } else if (key == MULTIPLE_CHANGE_ASSESSMENT) {
         const multiChangeAssessmentTab = {
           label: "Multi change assessment diagnosis",
-          value: require("../patient/diagnosis/MultiChangeAssessment.vue").default,
+          value: require("../patient/diagnosis/layer2/MultiChangeAssessment.vue").default,
           name: "tab-multi-change-assessment"
         };
         this.$store.commit("addNewTab", multiChangeAssessmentTab);
