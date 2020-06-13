@@ -1,3 +1,5 @@
-Docuemntation is maintained in viewpress and can be accessed at https://savantcare.github.io/
+![Patient file](./docs/ui/images/patient-file.png)
 
-Detailed code documentation is at: /styleguidist/
+Docuemntation: https://savantcare.github.io/
+
+Code documentation is in: /styleguidist/
