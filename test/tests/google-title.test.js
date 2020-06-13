@@ -1,5 +1,3 @@
-// import expect from  'expect-puppeteer';
-
 describe('Google', () => {
   beforeAll(async () => {
     await page.goto('https://google.com');

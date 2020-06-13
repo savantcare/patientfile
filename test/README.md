@@ -1,7 +1,10 @@
 Q1) How to run the test?
 npm run test
 
-Q2) How to install?
+Q2) How to run a single test?
+npx jest tests/google-title.test.js 
+
+Q3) How to install?
 
 Ref: 
 https://github.com/smooth-code/jest-puppeteer
