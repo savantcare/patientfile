@@ -1,1 +1,4 @@
-Ref: https://github.com/smooth-code/jest-puppeteer
+Ref: 
+https://github.com/smooth-code/jest-puppeteer
+https://medium.com/touch4it/end-to-end-testing-with-puppeteer-and-jest-ec8198145321
+https://github.com/Zovi343/E2E_Testing_with_Puppeteer_Final

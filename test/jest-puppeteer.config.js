@@ -1,19 +1,8 @@
+// Ref: https://medium.com/touch4it/end-to-end-testing-with-puppeteer-and-jest-ec8198145321
 module.exports = {
-  launch: {
-    dumpio: true,
-    headless: process.env.HEADLESS !== 'false',
-  },
-  server: {
-    command: 'node server.js',
-    port: 4444,
-    launchTimeout: 10000,
-    debug: true,
-  },
-preset: {
-  "preset": "jest-puppeteer"
-},
- "setupFilesAfterEnv": 
-  {
-     "expect-puppeteer"
-  }
+    launch: {
+        headless: process.env.HEADLESS !== 'false',
+        slowMo: process.env.SLOWMO ? process.env.SLOWMO : 0,
+        devtools: true
+    }
 }
