@@ -9,7 +9,8 @@
     "_comment": "VK added npx in may 20 since Ubuntu was not finding vue-cli-service in command line",
     "styleguide": "vue-cli-service styleguidist",
     "styleguide:build": "vue-cli-service styleguidist:build",
-    "test": "npx jest"
+    "test-inside-cli": "npx jest",
+    "test-inside-gui": "npx majestic"
   },
   "dependencies": {
     "@syncfusion/ej2-vue-inputs": "^18.1.52",

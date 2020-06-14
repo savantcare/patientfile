@@ -42,16 +42,14 @@ For Change of individual row:
    1. History is shown. 
 
 Q1) How to run the test? 
-vue-client> npm run test
+vue-client> npm run test-inside-cli
 
 Q2) How to run a single test? 
 vue-client> npx jest tests/google-title.test.js
 
 Q3) How to run with GUI?
-vue-client> npx majestic
+vue-client> npm run test-inside-gui
 
-Q4) How to install?
-
-Ref:  
-https://medium.com/touch4it/end-to-end-testing-with-puppeteer-and-jest-ec8198145321 
+Q4) How to install and use?
+Tutorial -> https://medium.com/touch4it/end-to-end-testing-with-puppeteer-and-jest-ec8198145321 
 https://github.com/smooth-code/jest-puppeteer
