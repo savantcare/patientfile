@@ -17,13 +17,13 @@ import recommendationStateModule from '../components/patient/Recommendations/sta
 import screeningStateModule from '../components/patient/Screening/stateDBSocket'
 import diagnosisStateModule from '../components/patient/diagnosis/stateDBSocket'
 import reminderStateModule from '../components/patient/reminder/stateDBSocket'
-import goalStateModule from './modules/goalState'
+import goalStateModule from '../components/patient/goal/stateDBSocket'
 import settingStateModule from './modules/settingState'
 import currentStateDisplayAreaModule from './modules/currentStateDisplayArea'
 import layer2MultiTabDialogStateModule from './modules/layer2MultiTabDialogState'
 import multiStateDisplayAreaModule from './modules/multiStateDisplayArea'
-import socialHistoryStateModule from './modules/socialHistoryState'
-import familyHistoryStateModule from './modules/familyHistoryState'
+import socialHistoryStateModule from '../components/patient/social-history/stateDBSocket'
+import familyHistoryStateModule from '../components/patient/FamilyHistory/stateDBSocket'
 import componentModule from './modules/component'
 
 import { ROLE_API_URL } from "@/const/others.js"
