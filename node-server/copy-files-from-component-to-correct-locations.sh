@@ -13,3 +13,7 @@ printf "." && cp ../vue-client/src/components/patient/Screening/db/screensListMa
 printf "." && cp ../vue-client/src/components/patient/Screening/db/phq9PatientResponse.model.js ./models/
 printf "." && cp ../vue-client/src/components/patient/Screening/db/screening.route.js ./routes/ 
 echo " Done"
+
+printf "== Copying 1 file from dx component "
+printf "." && cp ../vue-client/src/components/patient/diagnosis/db/diagnosis.route.js ./routes/ 
+echo " Done"
