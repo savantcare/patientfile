@@ -56,12 +56,57 @@ module.exports = (io) => {
       res.send(queryResult)
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while fetching the Recommendation"
+        message: err.message || "Some error occured while fetching the Screening"
       })
     }
   })
 
-  
+
+  router.get('/getScreeningDetail', async (req, res) => {
+    try {
+    
+       const { screentype, patientUUID } = req.query
+
+      if(screentype == 'PHQ9') {
+
+        queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses  where patientUUID=:patientUUID', {
+          replacements: { patientUUID: patientUUID },
+          type: phq9PatientResponse.sequelize.QueryTypes.SELECT
+        })
+        
+      res.send(newScreening)
+      }
+
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Screening"
+      })
+    }
+  })
+
+  router.post('/addScreeningDetail', async (req, res) => {
+    try {
+      const { data, screentype, date } = req.body
+
+
+      if(screentype == 'PHQ9') {
+
+        const newScreening = await phq9PatientResponse.bulkCreate(data)
+
+        /*queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses   where patientUUID=:patientUUID', {
+          replacements: { patientUUID: data.patientUUID },
+          type: phq9PatientResponse.sequelize.QueryTypes.SELECT
+        })*/
+        
+      res.send(newScreening)
+      }
+
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Screening"
+      })
+    }
+  })
 
   
 

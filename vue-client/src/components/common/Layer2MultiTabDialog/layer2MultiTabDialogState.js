@@ -242,10 +242,12 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showTakeAScreenTabInLayer2(state) {
+    showTakeAScreenTabInLayer2(state, data) {
+      let screenName = data.scientificName.toUpperCase() ;
+      let componentName = "Take"+ screenName + 'Screen';
       const tab = {
-        label: "Take a screen",
-        value: require("@/components/patient/Screening/Layer2/TakeAScreen.vue").default,
+        label: "Take " + screenName + " screen",
+        value: require("@/components/patient/Screening/components/" + componentName + ".vue").default,
         name: "tab-take-a-s-screen"
       }
       state.tabList = [tab]

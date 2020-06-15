@@ -16,6 +16,11 @@ export default {
         state.list.push(item)
       })
     },
+    setScreeningDetail(state, data) {
+      if(data.screentype == 'PHQ9') {
+        state.screenPHQ9AnswerDetail = data
+      }
+    },
     /**
      * Socket Listeners
      */
@@ -102,7 +107,7 @@ export default {
 
       }
     },
-
+    
     async dbGetMasterScreeningList({ commit }, json) {
       const { patientId, notify, userId, date } = json
       console.log(patientId, userId, date);
@@ -159,6 +164,83 @@ export default {
           method: "POST",
           body: JSON.stringify({
             patientUUID: patientUUID,
+            data: data,
+            date: date
+          })
+        })
+        if (response.ok) {
+
+          let json = await response.json();
+          commit('setPatientScreeningList', json)
+          notify({title: "Success", message: "Saved!"})
+        } else {
+          notify({title: "Error", message: "Failed to add screening data"})
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+      }
+    },
+
+
+    async getScreeningDetail({ commit }, json) {
+      const { patientUUID, screentype, notify  } = json
+      console.log(patientUUID);
+      if (TOKEN == null) {
+        TOKEN = localStorage.getItem("token")
+      }
+      try {
+        const response = await fetch( // e.g. ${SCREENING_API_URL}?patientUUID=${patientUUID}
+          `${SCREENING_API_URL}/getScreeningDetail?patientUUID=${patientUUID}&screentype=${screentype}`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN
+          }
+        });
+        if (response.ok) {
+          let json = await response.json();
+          //console.log(json)
+          commit('setScreeningDetail', json)
+        } else {
+          if (response.status == '401') {
+            notify({
+              title: "Error",
+              message: "Token is expired."
+            })
+            localStorage.removeItem("token")
+            window.location = "/"
+          } else {
+            notify({
+              title: "Error",
+              message: "Failed to get my screening data"
+            })
+          }
+        }
+      } catch (ex) {
+        notify({
+          title: "Error",
+          message: "Server connection error"
+        })
+
+      }
+    },
+
+     // this api store all new screen in db and fetch all latest screen data from db.
+     async addScreeningDetail({commit }, json) {
+      const { data, notify, screentype, date } = json
+      //const originList = state.list
+
+      try {
+        const response = await fetch(
+          `${SCREENING_API_URL}/addScreeningDetail`, {
+          headers: {
+            "Authorization": "Bearer " + TOKEN,
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            screentype: screentype,
             data: data,
             date: date
           })

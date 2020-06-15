@@ -14,7 +14,6 @@
         @handleClickOnGInCardHeader="handleClickOnGInCardHeader"
         ref="card_header"
       />
-      <!-- @handleClickOnMInCardHeader="showTakeAScreenDialog" -->
     </div>
 
     <DataTableWithoutTab
@@ -86,9 +85,10 @@ export default {
       this.selectedRows = value;
     },
 
-    handleClickOnTInDataRow(value) {
-      console.log("show take a screen dialog" + value);
-      this.$store.commit("showTakeAScreenTabInLayer2");
+    handleClickOnTInDataRow(data) {
+      console.log("show take a screen dialog");
+      console.log(data);
+      this.$store.commit("showTakeAScreenTabInLayer2", data);
     },
     handleClickOnGInDataRow(value) {
       console.log("show screen graph dialog" + value);
@@ -104,11 +104,6 @@ export default {
         notify: this.$notify
       });
     },
-    showTakeAScreenDialog(index, row) {
-      console.log(index, row);
-      this.$store.commit("showTakeAScreenTabInLayer2");
-    },
-
     handleUpdateColumns(value) {
       this.columns = value;
     },
@@ -130,7 +125,7 @@ export default {
   computed: {
     tabData() {
       const screeningList = this.$store.state.screening.screeningList;
-      console.log(screeningList);
+      //console.log(screeningList);
       return {
           label: "Yours",
           tableData: screeningList,

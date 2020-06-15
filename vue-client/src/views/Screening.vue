@@ -18,8 +18,9 @@
   </el-dialog>
 </template>
 <script>
+
 import AddScreenTab from "@/components/patient/Screening/Layer2/AddScreen";
-import TakeAScreenTab from "@/components/patient/Screening/Layer2/TakeAScreen";
+import TakeAScreenTab from "@/components/patient/Screening/components/TakePHQ9Screen";
 export default {
   components: {
     AddScreenTab,
