@@ -1,3 +1,13 @@
+/*
+Is Layer2MultiTab a component or a view?
+
+View is actually intended to be accessed by navigation url
+Ref: https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
+
+Layer2MultiTabDialog is not expected to be accessed by a URL. 
+*/
+
+
 <template>
   <el-dialog :visible.sync="visibility" custom-class="multi-tab-dialog" width="90%" top="5vh">
     <el-tabs v-model="tabValue" type="card" editable @edit="handleTabsEdit">
@@ -45,7 +55,7 @@ export default {
         const newTabName = `tab-${++this.tabIndex}`;
         const newTab = {
           label: "New tab",
-          value: require("../components/common/AddNewTab").default,
+          value: require("../AddNewTab").default,
           name: newTabName
         };
         this.$store.commit("addNewTab", newTab);

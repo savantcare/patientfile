@@ -2,7 +2,7 @@ import { ADD_RECOMMENDATION, MULTIPLE_CHANGE_RECOMMENDATION, CHANGE_RECOMMENDATI
 export default {
   state: {
     visibility: false,
-    tabList: [],
+    tabList: [],                // Template has a for loop running on this.
     recommendationTabType: '',
     recommendationData: null,
     reminderTabType: '',

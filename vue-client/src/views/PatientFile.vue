@@ -147,7 +147,7 @@ src/router/index.js sends control here if the / route is given by the user
       </SplitArea>
     </Split>
 
-    <!-- tab-dialog is present in home.vue but in hidden state -->
+    <!-- tab-dialog is present in patientFile.vue but in hidden state -->
     <layer-2-multi-tab-dialog></layer-2-multi-tab-dialog>
     <KeyboardHandler />
   </div>
@@ -161,7 +161,7 @@ const TheMultiStateDisplayAreaHeader = () =>
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/common/SearchBoxForCommandsFromUser.vue");
 
-const Layer2MultiTabDialog = () => import("./Layer2MultiTabDialog.vue");
+const Layer2MultiTabDialog = () => import("@/components/common/Layer2MultiTabDialog/");
 
 // TODO: Rename this to Recommendations/Layer1Card
 const Recommendation = () =>

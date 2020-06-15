@@ -57,7 +57,7 @@ const routes = [
   {
     path: '/tab-dialog',
     name: 'tab-dialog',
-    component: () => import("@/views/Layer2MultiTabDialog.vue")
+    component: () => import("@/components/common/Layer2MultiTabDialog/")
   },
   {
     path: '/search-box',
