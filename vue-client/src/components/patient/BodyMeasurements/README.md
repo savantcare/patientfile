@@ -1,9 +1,9 @@
 Layer 1 - Currentstate
 ======================
 
-+-------------------------------------------------------------------------------+  M -> doctor can add all the 9 data together                                                             
++-------------------------------------------------------------------------------+  A -> doctor can add all the 9 data together                                                             
 |                                                             +-----+ +-----+   |  +----------------------------------------------+            
-|  Body Measurement                                           |  M  | |  G  | <----+ Graph for all.                               |            
+|  Body Measurement                                           |  A  | |  G  | <----+ Graph for all.                               |            
 |                                                             +-----+ +-----+   |  | Open a chart in 2nd layer where all the      |            
 +-------------------------------------------------------------------------------+  | graphs of sub-sections can be seen.          |            
 |                                                                               |  | There is checkbox to uncheck some lines      |            
@@ -44,7 +44,12 @@ Layer 1 - Currentstate
 
 
 
+How does the KB interaction work?
+First down arrow -> Card header is highlighted. I can press A or G. On pressing A give me a form where I can allo the 9 data points together.
+2nd down arrow -> The weight tab is active and I see the weight graph. I can press A to add a new weight.
+3rt down arrow -> The "waist circumference" tab is active and I see the "waist circumference" graph. I can press A to add a new "waist circumference"
 
+When doing data entry always show the old data that the doctor can change and then save. Since the new data is usually close to old data it is better to have the old data.
 
 
 
