@@ -6,7 +6,7 @@
       class="bm-element-body-add-button"
       @click="handleClickAddButton"
     >Add</el-button>
-    <ve-line :data="chartData" :legend-visible="false"></ve-line>
+    <ve-line :data="chartData" :legend-visible="false" log ref="chart"></ve-line>
   </div>
 </template>
 
@@ -14,24 +14,44 @@
 export default {
   components: {},
   data() {
-    return {
-      chartData: {
-        columns: ["date", "value"],
-        rows: []
-      }
-    };
+    return {};
+  },
+  computed: {
+    chartData() {
+      let chartData = this.$store.state.bodyMeasurement.chartData;
+      chartData = chartData.sort((data1, data2) => {
+        return (
+          new Date(data1.measurementDate) - new Date(data2.measurementDate)
+        );
+      });
+
+      const columns = ["date", "value"];
+      let rows = [];
+      chartData.forEach(data => {
+        rows.push({
+          date: data.measurementDate,
+          value: data.weightInPounds
+        });
+      });
+      this.$nextTick(() => {
+        this.$refs["chart"].echarts.resize();
+      });
+      return {
+        columns: columns,
+        rows: rows
+      };
+    }
   },
   mounted() {
-    this.chartData.rows = [
-      { date: "01-01", value: 1231 },
-      { date: "01-02", value: 1223 },
-      { date: "01-03", value: 2123 }
-    ];
+    this.getWeightInfomation();
+    console.log(this.chartData);
   },
   methods: {
     handleClickAddButton() {
-      console.log("handleClickAddButton");
       this.$store.commit("showAddBMElementTabInLayer2");
+    },
+    getWeightInfomation() {
+      this.$store.dispatch("bodyMeasurement/getWeight");
     }
   }
 };

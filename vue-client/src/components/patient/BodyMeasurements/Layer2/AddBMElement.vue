@@ -38,12 +38,10 @@
 </template>
 
 <script>
-import { CHANGE_RECOMMENDATION } from "@/const/others.js";
 export default {
   data() {
     return {
-      bmElementForm: { elements: [{ value: 1, date: new Date(), notes: "" }] },
-      historyData: {}
+      bmElementForm: { elements: [{ value: 1, date: new Date(), notes: "" }] }
     };
   },
   methods: {
@@ -55,14 +53,9 @@ export default {
       });
     },
 
-    // -------------- Category 2/2: Managing form submission ---------------------
-
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          console.log("valid");
-          console.log(this.bmElementForm);
-
           const ipResponse = await fetch("https://api.ipify.org?format=json");
           const ipJson = await ipResponse.json();
           const ipAddress = ipJson.ip;
@@ -71,10 +64,7 @@ export default {
           const patientId = this.$route.query.patient_id;
           const myId = this.$store.state.userId;
           this.bmElementForm.elements.forEach(element => {
-            const measurementDate = new Date(element.date)
-              .toISOString()
-              .slice(0, 19)
-              .replace("T", " ");
+            const measurementDate = new Date(element.date).toDateString();
             elementList.push({
               patientUUID: patientId,
               weightInPounds: element.value,
@@ -85,7 +75,7 @@ export default {
             });
           });
 
-          await this.$store.dispatch("bodyMeasurement/dbAddWeight", {
+          await this.$store.dispatch("bodyMeasurement/dbAddWeightInSM", {
             data: elementList,
             notify: this.$notify
           });
@@ -97,55 +87,11 @@ export default {
           return false;
         }
       });
-    },
-    focusToTheInputBox() {
-      // console.log("focus to inputbox");
-      // this.$refs.description[0].$el.getElementsByTagName("textarea")[0].focus();
-      // this.$refs.input_box[0].$el.getElementsByTagName("textarea")[0].focus();
-    },
-    updateValidateChanges() {}
-  },
-  computed: {
-    type() {
-      return this.$store.state.multiTabDialogLayer2.recommendationTabType;
-    },
-    updateData() {
-      return this.$store.state.multiTabDialogLayer2.recommendationData;
-    },
-    userId() {
-      return this.$store.state.userId;
-    },
-    isEditDialog() {
-      return this.type == CHANGE_RECOMMENDATION;
-    },
-    tabDialogVisibility() {
-      return this.$store.state.multiTabDialogLayer2.visibility;
     }
   },
-  mounted() {
-    if (this.type == CHANGE_RECOMMENDATION) {
-      this.bmElementForm = {
-        elements: [{ description: this.updateData.recommendationDescription }]
-      };
-      this.historyData = this.updateData;
-    }
-    setTimeout(() => {
-      this.focusToTheInputBox();
-    }, 100);
-  },
-  watch: {
-    updateData() {
-      this.bmElementForm = {
-        elements: [{ description: this.updateData.recommendationDescription }]
-      };
-      this.historyData = this.updateData;
-    },
-    tabDialogVisibility() {
-      if (this.tabDialogVisibility) {
-        this.$refs.description[0].focusToTextArea();
-      }
-    }
-  },
+  computed: {},
+  mounted() {},
+  watch: {},
   components: {}
 };
 </script>

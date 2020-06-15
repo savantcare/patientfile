@@ -16,7 +16,7 @@ router.post('/addWeight', async (req, res) => {
   }
 })
 
-router.get('/weight', async (req, res) => {
+router.get('/getWeight', async (req, res) => {
   try {
     const queryResult = await Weight.findAll()
     res.send(queryResult)

@@ -68,8 +68,10 @@ Vue.use(new VueSocketIO({
 import './registerServiceWorker'
 
 // v-chartjs
-import VeLine from 'v-charts/lib/line.common'
-Vue.component(VeLine.name, VeLine)
+// import VeLine from 'v-charts/lib/line.common'
+// Vue.component(VeLine.name, VeLine)
+import VCharts from 'v-charts'
+Vue.use(VCharts)
 
 Vue.config.productionTip = false
 
