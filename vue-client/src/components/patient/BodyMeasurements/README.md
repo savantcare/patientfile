@@ -1,16 +1,16 @@
 Layer 1 - Currentstate
 ======================
-
+                                                                                   F -> Bring left hand side component in focus 
 +-------------------------------------------------------------------------------+  A -> doctor can add all the 9 data together                                                             
-|                                                             +-----+ +-----+   |  +----------------------------------------------+            
-|  Body Measurement                                           |  A  | |  G  | <----+ Graph for all.                               |            
-|                                                             +-----+ +-----+   |  | Open a chart in 2nd layer where all the      |            
+|                                                     +-----+ +-----+ +-----+   |  +----------------------------------------------+            
+|  Body Measurement                                   |  F  | |  A  | |  G  | <----+ Graph for all.                               |            
+|                                                     +-----+ +-----+ +-----+   |  | Open a chart in 2nd layer where all the      |            
 +-------------------------------------------------------------------------------+  | graphs of sub-sections can be seen.          |            
 |                                                                               |  | There is checkbox to uncheck some lines      |            
 |                                                                               |  +----------------------------------------------+            
 |───────────────────────┐                                             ┌────┐    |    ┌──────────────────────────────────────────────┐          
 |                       │        ▲                                    │Add │◀────────│Add more button.                              │          
-|  Weight ══════════════│        │                                    └────┘    |    │Clicking on it will open add form in layer 2  │          
+|  Weight ══════════════│        │                                    └────┘    |    │This opens add form in layer 2 for current tab│          
 |───────────────────────┤        │                                              |    │and after submitting, new value will be       │          
 |                       │        │                                              |    │seen on the graph                             │          
 |  BMI                  │        │                                              |    └──────────────────────────────────────────────┘          

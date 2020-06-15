@@ -107,5 +107,11 @@ export default [
     value: require("@/components/patient/PastPsychHistory/Layer1Card")
       .default,
     abbreviation: "pphx"
+  },
+  {
+    key: "mentalStatusExamCard",
+    value: require("@/components/patient/MentalStatusExam/Layer1Card")
+      .default,
+    abbreviation: "mse"
   }
 ]

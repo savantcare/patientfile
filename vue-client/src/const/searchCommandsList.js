@@ -63,6 +63,9 @@ export default [
     label: "past psych history (pphx) list", action: "", abbreviation: "pphx"
   },
   {
+    label: "mental status exam (mse) list", action: "", abbreviation: "mse"
+  },
+  {
     label: "clear", action: "", abbreviation: ""
   }
 ]
