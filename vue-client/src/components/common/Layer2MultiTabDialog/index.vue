@@ -10,6 +10,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL.
 
 <template>
   <el-dialog :visible.sync="visibility" custom-class="multi-tab-dialog" width="90%" top="5vh">
+    <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs v-model="tabValue" type="card" editable @edit="handleTabsEdit">
       <el-tab-pane v-for="(tab) in tabList" :key="tab.name" :label="tab.label" :name="tab.name">
         <component :is="tab.value" />
