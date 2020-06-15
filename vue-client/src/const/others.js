@@ -15,6 +15,7 @@ module.exports = {
   FAMILY_HISTORY_API_URL: "http://localhost:8000/family-histories",
   APPOINTMENT_API_URL: "http://localhost:8000/appointments",
   SCREENING_API_URL: "http://localhost:8000/screening",
+  BODY_MEASUREMENT_API_URL: "http://localhost:8000/body-measurements",
 
   STATE_AT_SELECTED_TIME_COMPONENTS: [
   ],

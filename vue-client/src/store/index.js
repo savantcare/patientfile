@@ -25,6 +25,7 @@ import multiStateDisplayAreaModule from './modules/multiStateDisplayArea'
 import socialHistoryStateModule from '../components/patient/social-history/stateDBSocket'
 import familyHistoryStateModule from '../components/patient/FamilyHistory/stateDBSocket'
 import componentModule from './modules/component'
+import bodyMeasurementModule from '../components/patient/BodyMeasurements/stateDBSocket'
 
 import { ROLE_API_URL } from "@/const/others.js"
 import searchCommandsList from '@/const/searchCommandsList.js'
@@ -120,7 +121,8 @@ export default new Vuex.Store({
     socialHistory: socialHistoryStateModule,
     familyHistory: familyHistoryStateModule,
     component: componentModule,
-    screening: screeningStateModule
+    screening: screeningStateModule,
+    bodyMeasurement: bodyMeasurementModule
   },
   plugins: [
     createPersistedState(),

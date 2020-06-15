@@ -8,6 +8,7 @@ const socialHistoryDB = require('./database/socialhistory.database.js')
 const diagnosisDB = require("./database/diagnosis.database.js")
 const appointmentDB = require("./database/appointment.database.js")
 const screeningDB = require("./database/screening.database.js")
+const bodyMeasurementDB = require("./database/bodymeasurement.database.js")
 
 
 module.exports = {
@@ -20,5 +21,6 @@ module.exports = {
   socialHistoryDB: socialHistoryDB,
   diagnosisDB: diagnosisDB,
   appointmentDB: appointmentDB,
-  screeningDB: screeningDB
+  screeningDB: screeningDB,
+  bodyMeasurementDB: bodyMeasurementDB
 }

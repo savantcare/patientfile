@@ -243,8 +243,8 @@ export default {
       state.tabValue = tab.name
     },
     showTakeAScreenTabInLayer2(state, data) {
-      let screenName = data.scientificName.toUpperCase() ;
-      let componentName = "Take"+ screenName + 'Screen';
+      let screenName = data.scientificName.toUpperCase();
+      let componentName = "Take" + screenName + 'Screen';
       const tab = {
         label: "Take " + screenName + " screen",
         value: require("@/components/patient/Screening/components/" + componentName + ".vue").default,
@@ -252,6 +252,16 @@ export default {
       }
       state.tabList = [tab]
       state.screeningTabType = TAKE_A_SCREEN
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showAddBMElementTabInLayer2(state) {
+      const tab = {
+        label: "Add Weight",
+        value: require("@/components/patient/BodyMeasurements/Layer2/AddBMElement.vue").default,
+        name: "tab-add-bm-element"
+      }
+      state.tabList = [tab]
       state.visibility = true
       state.tabValue = tab.name
     }

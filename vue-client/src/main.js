@@ -67,6 +67,10 @@ Vue.use(new VueSocketIO({
 // This is to make the app work offline.
 import './registerServiceWorker'
 
+// v-chartjs
+import VeLine from 'v-charts/lib/line.common'
+Vue.component(VeLine.name, VeLine)
+
 Vue.config.productionTip = false
 
 new Vue({
