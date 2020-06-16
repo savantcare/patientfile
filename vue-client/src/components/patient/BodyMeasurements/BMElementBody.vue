@@ -24,7 +24,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.weights];
       } else if (this.type == "bmi") {
         chartData = [...this.$store.state.bodyMeasurement.bmis];
-        console.log(chartData);
+      } else if (this.type == "waistCircumference") {
+        chartData = [...this.$store.state.bodyMeasurement.waistCircumferences];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -44,6 +45,8 @@ export default {
           value = item.weightInPounds;
         } else if (this.type == "bmi") {
           value = item.bmiValue;
+        } else if (this.type == "waistCircumference") {
+          value = item.waistCircumferenceInInches;
         }
         rows.push({
           date: formatDate,
@@ -62,6 +65,8 @@ export default {
       this.getWeightInfomation();
     } else if (this.type == "bmi") {
       this.getBMIInformation();
+    } else if (this.type == "waistCircumference") {
+      this.getWaistCircumference();
     }
   },
   methods: {
@@ -76,6 +81,9 @@ export default {
     },
     getBMIInformation() {
       this.$store.dispatch("bodyMeasurement/getBmi");
+    },
+    getWaistCircumference() {
+      this.$store.dispatch("bodyMeasurement/getWaistCircumferences");
     }
   },
   watch: {

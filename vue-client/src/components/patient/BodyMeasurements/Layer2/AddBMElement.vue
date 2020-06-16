@@ -76,6 +76,8 @@ export default {
               data["weightInPounds"] = element.value;
             } else if (this.type == "bmi") {
               data["bmiValue"] = element.value;
+            } else if (this.type == "waistCircumference") {
+              data["waistCircumferenceInInches"] = element.value;
             }
             elementList.push(data);
           });
@@ -85,6 +87,8 @@ export default {
             dispatchName = "bodyMeasurement/dbAddWeightInSM";
           } else if (this.type == "bmi") {
             dispatchName = "bodyMeasurement/dbAddBmiInSM";
+          } else if (this.type == "waistCircumference") {
+            dispatchName = "bodyMeasurement/dbAddWaistCircumferenceInSM";
           }
 
           await this.$store.dispatch(dispatchName, {

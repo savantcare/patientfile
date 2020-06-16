@@ -2,19 +2,19 @@ const TOKEN = localStorage.getItem("token")
 import { BODY_MEASUREMENT_API_URL } from "@/const/others.js"
 
 const state = {
-  chartData: [],
   weights: [],
-  bmis: []
+  bmis: [],
+  waistCircumferences: []
 }
 const mutations = {
   setWeights(state, value) {
     state.weights = value
   },
-  setChartData(state, value) {
-    state.chartData = value
-  },
   setBmis(state, value) {
     state.bmis = value
+  },
+  setWaistCircumferences(state, value) {
+    state.waistCircumferences = value
   }
 }
 const actions = {
@@ -34,10 +34,7 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let weights = state.weights
-        data.forEach(item => {
-          weights.push(item)
-        })
+        let weights = [...state.weights, ...data]
         commit("setWeights", weights)
       } else {
         notify({
@@ -60,7 +57,6 @@ const actions = {
       if (response.ok) {
         const json = await response.json()
         commit("setWeights", json)
-        commit("setChartData", json)
       } else {
         console.log("Failed to fetch weight")
       }
@@ -113,7 +109,53 @@ const actions = {
     } catch (ex) {
       console.log("Server connection error")
     }
-  }
+  },
+  async dbAddWaistCircumferenceInSM({ state, commit }, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addWaistCircumference`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+        let waistCircumferences = [...state.waistCircumferences, ...data]
+        commit("setWaistCircumferences", waistCircumferences)
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add waist circumferences"
+        })
+      }
+    } catch (ex) {
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getWaistCircumferences({ commit },) {
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getWaistCircumferences`, {
+        headers: { "Authorization": "Bearer " + TOKEN, }
+      })
+      if (response.ok) {
+        const json = await response.json()
+        commit("setWaistCircumferences", json)
+      } else {
+        console.log("Failed to fetch waist circumferences")
+      }
+    } catch (ex) {
+      console.log("Server connection error")
+    }
+  },
 }
 
 export default {

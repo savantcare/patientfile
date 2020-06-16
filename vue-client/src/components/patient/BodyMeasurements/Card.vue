@@ -12,11 +12,9 @@
       </div>
 
       <el-tabs tab-position="left" v-model="tab">
-        <el-tab-pane
-          v-for="(element, index) in bmElements"
-          :key="`bm-element-${index}`"
-          :label="element.label"
-        >
+        <el-tab-pane v-for="(element, index) in bmElements" :key="`bm-element-${index}`">
+          <span slot="label">{{element.label}}</span>
+
           <BMElementBody :type="element.value" :label="element.label" :tab="tab" />
         </el-tab-pane>
       </el-tabs>
@@ -43,7 +41,8 @@ export default {
       selectedRows: [],
       bmElements: [
         { label: "Weight", value: "weight" },
-        { label: "BMI", value: "bmi" }
+        { label: "BMI", value: "bmi" },
+        { label: "Waist Circumference", value: "waistCircumference" }
       ],
       tab: ""
     };
