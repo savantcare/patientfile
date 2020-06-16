@@ -7,7 +7,8 @@ const state = {
   waistCircumferences: [],
   bloodSugars: [],
   heights: [],
-  bloodPressures: []
+  bloodPressures: [],
+  oxygenSaturations: []
 }
 const mutations = {
   setWeights(state, value) {
@@ -27,6 +28,9 @@ const mutations = {
   },
   setBloodPressures(state, value) {
     state.bloodPressures = value
+  },
+  setOxygenSaturations(state, value) {
+    state.oxygenSaturations = value
   }
 }
 const actions = {
@@ -301,6 +305,52 @@ const actions = {
         commit("setBloodPressures", json)
       } else {
         console.log("Failed to fetch blood pressure")
+      }
+    } catch (ex) {
+      console.log("Server connection error")
+    }
+  },
+  async dbAddOxygenSaturationInSM({ state, commit }, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addOxygenSaturation`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+        let oxygenSaturations = [...state.oxygenSaturations, ...data]
+        commit("setOxygenSaturations", oxygenSaturations)
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add oxygen saturations"
+        })
+      }
+    } catch (ex) {
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getOxygenSaturation({ commit },) {
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getOxygenSaturation`, {
+        headers: { "Authorization": "Bearer " + TOKEN, }
+      })
+      if (response.ok) {
+        const json = await response.json()
+        commit("setOxygenSaturations", json)
+      } else {
+        console.log("Failed to fetch oxygen saturation")
       }
     } catch (ex) {
       console.log("Server connection error")

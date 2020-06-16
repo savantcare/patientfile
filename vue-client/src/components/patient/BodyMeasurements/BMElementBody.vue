@@ -32,6 +32,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.heights];
       } else if (this.type == "bloodPressure") {
         chartData = [...this.$store.state.bodyMeasurement.bloodPressures];
+      } else if (this.type == "oxygenSaturation") {
+        chartData = [...this.$store.state.bodyMeasurement.oxygenSaturations];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -70,6 +72,8 @@ export default {
             systolicValue: systolicValue,
             diastolicValue: diastolicValue
           });
+        } else if (this.type == "oxygenSaturation") {
+          value = item.oxygenSaturation;
         }
 
         if (this.type != "bloodPressure") {
@@ -99,6 +103,8 @@ export default {
       this.getHeight();
     } else if (this.type == "bloodPressure") {
       this.getBloodPressure();
+    } else if (this.type == "oxygenSaturation") {
+      this.getOxygenSaturation();
     }
   },
   methods: {
@@ -125,6 +131,9 @@ export default {
     },
     getBloodPressure() {
       this.$store.dispatch("bodyMeasurement/getBloodPressure");
+    },
+    getOxygenSaturation() {
+      this.$store.dispatch("bodyMeasurement/getOxygenSaturation");
     }
   },
   watch: {

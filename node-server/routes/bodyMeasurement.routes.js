@@ -6,6 +6,7 @@ const WaistCircumference = db.bodyMeasurementDB.waistCircumference
 const BloodSugar = db.bodyMeasurementDB.bloodSugar
 const Height = db.bodyMeasurementDB.height
 const BloodPressure = db.bodyMeasurementDB.bloodPressure
+const OxygenSaturation = db.bodyMeasurementDB.oxygenSaturation
 
 router.post('/addWeight', async (req, res) => {
   try {
@@ -153,6 +154,31 @@ router.get('/getBloodPressure', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while fetching the bloodPressure"
+    })
+  }
+})
+
+router.post('/addOxygenSaturation', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Add OxygenSaturation Data____')
+    console.log(data)
+    const newOxygenSaturation = await OxygenSaturation.bulkCreate(data)
+    res.send(newOxygenSaturation)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the oxygen saturation"
+    })
+  }
+})
+
+router.get('/getOxygenSaturation', async (req, res) => {
+  try {
+    const queryResult = await OxygenSaturation.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the oxygenSaturation"
     })
   }
 })
