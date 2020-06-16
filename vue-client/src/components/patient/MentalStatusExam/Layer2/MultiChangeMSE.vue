@@ -37,6 +37,9 @@
         <span>Constitutional</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
+      <el-checkbox-group v-model="checkboxGroup4" size="mini">
+        <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
+      </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
 
@@ -64,6 +67,9 @@
         <span>Eye-contact</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
+      <el-checkbox-group v-model="checkboxGroup4" size="mini">
+        <el-checkbox-button v-for="app in eyeContact" :label="app" :key="app">{{app}}</el-checkbox-button>
+      </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
 
@@ -162,6 +168,21 @@ const cognitionOptions = [
   "Fluctuating"
 ];
 
+
+const constitutionalOptions = [
+  "Vitals signs stable"
+];
+
+
+const eyeContactOptions = [
+"Appropriate",   
+"Downcast",    
+"Intense",    
+"Fleeting"  
+];
+
+
+
 export default {
   data() {
     return {
@@ -170,6 +191,8 @@ export default {
       thoughtProcess: thoughtProcessOptions,
       attitude: attitudeOptions,
       cognition: cognitionOptions,
+      consitutional: constitutionalOptions,
+      eyeContact: eyeContactOptions,
       textarea: ""
     };
   },
