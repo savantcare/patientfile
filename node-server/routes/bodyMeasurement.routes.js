@@ -63,7 +63,7 @@ router.post('/updateBmi', async (req, res) => {
     res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the BMI"
+      message: err.message || "Some error occurred while update the BMI"
     })
   }
 })
@@ -79,23 +79,32 @@ router.get('/getBmi', async (req, res) => {
   }
 })
 
-router.post('/addWaistCircumference', async (req, res) => {
+router.post('/updateWaistCircumference', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add waistCircumference Data____')
+    console.log('___Update waistCircumference Data____')
     console.log(data)
-    const newWaistCircumference = await WaistCircumference.bulkCreate(data)
-    res.send(newWaistCircumference)
+    const waistCircumferences = await WaistCircumference.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (waistCircumferences.length > 0) {
+      result = await WaistCircumference.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await WaistCircumference.create(data)
+    }
+    res.send(result)
+
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the waist circumference"
+      message: err.message || "Some error occurred while update the waist circumference"
     })
   }
 })
 
 router.get('/getWaistCircumferences', async (req, res) => {
   try {
-    const queryResult = await WaistCircumference.findAll()
+    const queryResult = await WaistCircumference.sequelize.query('SELECT * FROM waistCircumference FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({

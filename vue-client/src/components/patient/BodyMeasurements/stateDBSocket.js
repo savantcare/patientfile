@@ -138,10 +138,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddWaistCircumferenceInSM({ state, commit }, params) {
+  async dbUpdateWaistCircumferenceInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addWaistCircumference`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateWaistCircumference`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -154,7 +154,8 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let waistCircumferences = [...state.waistCircumferences, ...data]
+        let waistCircumferences = state.waistCircumferences
+        waistCircumferences.push(data)
         commit("setWaistCircumferences", waistCircumferences)
       } else {
         notify({
