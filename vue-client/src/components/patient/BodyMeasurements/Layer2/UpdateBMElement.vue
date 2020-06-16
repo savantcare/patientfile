@@ -106,7 +106,7 @@ export default {
           } else if (this.type == "height") {
             dispatchName = "bodyMeasurement/dbUpdateHeightInSM";
           } else if (this.type == "bloodPressure") {
-            dispatchName = "bodyMeasurement/dbAddBloodPressureInSM";
+            dispatchName = "bodyMeasurement/dbUpdateBloodPressureInSM";
           } else if (this.type == "oxygenSaturation") {
             dispatchName = "bodyMeasurement/dbAddOxygenSaturationInSM";
           } else if (this.type == "pulse") {

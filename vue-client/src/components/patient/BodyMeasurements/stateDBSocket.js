@@ -279,10 +279,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddBloodPressureInSM({ state, commit }, params) {
+  async dbUpdateBloodPressureInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addBloodPressure`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateBloodPressure`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -295,7 +295,9 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let bloodPressures = [...state.bloodPressures, ...data]
+
+        let bloodPressures = state.bloodPressures
+        bloodPressures.push(data)
         commit("setBloodPressures", bloodPressures)
       } else {
         notify({
