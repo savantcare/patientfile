@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bloodPressure` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `systolicValue` int(11) NOT NULL COMMENT 'mm Hg',
   `diastolicValue` int(11) NOT NULL COMMENT 'mm Hg',
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -46,13 +46,13 @@ CREATE TABLE `bloodPressure` (
 --
 
 CREATE TABLE `bloodSugar` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `bloodSugar` int(11) NOT NULL,
   `relationToMeal` enum('Before breakfast','After breakfast','Before lunch','After lunch','Before dinner','After dinner','Bed time','Other') NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
    PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,12 +64,12 @@ CREATE TABLE `bloodSugar` (
 --
 
 CREATE TABLE `BMI` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `bmiValue` decimal(10,2) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -81,12 +81,12 @@ CREATE TABLE `BMI` (
 --
 
 CREATE TABLE `height` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `heightInInch` int(4) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
@@ -98,12 +98,12 @@ CREATE TABLE `height` (
 --
 
 CREATE TABLE `oxygenSaturation` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `oxygenSaturation` int(11) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedOnDateTime` datetime DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
@@ -116,12 +116,12 @@ CREATE TABLE `oxygenSaturation` (
 --
 
 CREATE TABLE `pulse` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `beatsPerMinuteValue` int(4) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
@@ -133,12 +133,12 @@ CREATE TABLE `pulse` (
 --
 
 CREATE TABLE `temperature` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `temperatureInFarehnite` decimal(10,0) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
    PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
@@ -150,12 +150,12 @@ CREATE TABLE `temperature` (
 --
 
 CREATE TABLE `waistCircumference` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `waistCircumferenceInInches` decimal(10,2) NOT NULL,
   `measurementDate` date NOT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
@@ -167,12 +167,12 @@ CREATE TABLE `waistCircumference` (
 --
 
 CREATE TABLE `weight` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) DEFAULT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `patientUUID` varchar(36) DEFAULT NULL,
   `weightInPounds` decimal(10,2) NOT NULL,
   `measurementDate` date DEFAULT NULL,
   `Notes` text DEFAULT NULL,
-  `recordChangedByUUID` varchar(64) DEFAULT NULL,
+  `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
