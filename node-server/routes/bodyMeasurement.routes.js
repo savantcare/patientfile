@@ -7,6 +7,7 @@ const BloodSugar = db.bodyMeasurementDB.bloodSugar
 const Height = db.bodyMeasurementDB.height
 const BloodPressure = db.bodyMeasurementDB.bloodPressure
 const OxygenSaturation = db.bodyMeasurementDB.oxygenSaturation
+const Pulse = db.bodyMeasurementDB.pulse
 
 router.post('/addWeight', async (req, res) => {
   try {
@@ -179,6 +180,31 @@ router.get('/getOxygenSaturation', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while fetching the oxygenSaturation"
+    })
+  }
+})
+
+router.post('/addPulse', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Add Pulse Data____')
+    console.log(data)
+    const newPulse = await Pulse.bulkCreate(data)
+    res.send(newPulse)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the pulse"
+    })
+  }
+})
+
+router.get('/getPulse', async (req, res) => {
+  try {
+    const queryResult = await Pulse.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the pulse"
     })
   }
 })

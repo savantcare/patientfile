@@ -46,7 +46,8 @@ export default {
         { label: "Blood Sugar", value: "bloodSugar" },
         { label: "Height", value: "height" },
         { label: "Blood Pressure", value: "bloodPressure" },
-        { label: "Oxygen Saturation", value: "oxygenSaturation" }
+        { label: "Oxygen Saturation", value: "oxygenSaturation" },
+        { label: "Pulse", value: "pulse" }
       ],
       tab: ""
     };

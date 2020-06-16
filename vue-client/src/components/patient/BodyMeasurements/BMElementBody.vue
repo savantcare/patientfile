@@ -34,6 +34,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.bloodPressures];
       } else if (this.type == "oxygenSaturation") {
         chartData = [...this.$store.state.bodyMeasurement.oxygenSaturations];
+      } else if (this.type == "pulse") {
+        chartData = [...this.$store.state.bodyMeasurement.pulse];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -74,6 +76,8 @@ export default {
           });
         } else if (this.type == "oxygenSaturation") {
           value = item.oxygenSaturation;
+        } else if (this.type == "pulse") {
+          value = item.beatsPerMinuteValue;
         }
 
         if (this.type != "bloodPressure") {
@@ -105,6 +109,8 @@ export default {
       this.getBloodPressure();
     } else if (this.type == "oxygenSaturation") {
       this.getOxygenSaturation();
+    } else if (this.type == "pulse") {
+      this.getPulse();
     }
   },
   methods: {
@@ -134,6 +140,9 @@ export default {
     },
     getOxygenSaturation() {
       this.$store.dispatch("bodyMeasurement/getOxygenSaturation");
+    },
+    getPulse() {
+      this.$store.dispatch("bodyMeasurement/getPulse");
     }
   },
   watch: {

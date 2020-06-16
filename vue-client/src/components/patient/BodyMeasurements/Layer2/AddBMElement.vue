@@ -95,6 +95,8 @@ export default {
               data["diastolicValue"] = element.diastolicValue;
             } else if (this.type == "oxygenSaturation") {
               data["oxygenSaturation"] = element.value;
+            } else if (this.type == "pulse") {
+              data["beatsPerMinuteValue"] = element.value;
             }
             elementList.push(data);
           });
@@ -114,6 +116,8 @@ export default {
             dispatchName = "bodyMeasurement/dbAddBloodPressureInSM";
           } else if (this.type == "oxygenSaturation") {
             dispatchName = "bodyMeasurement/dbAddOxygenSaturationInSM";
+          } else if (this.type == "pulse") {
+            dispatchName = "bodyMeasurement/dbAddPulseInSM";
           }
 
           await this.$store.dispatch(dispatchName, {
