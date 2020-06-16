@@ -22,8 +22,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `affect` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `euthymic` tinyint(1) NOT NULL,
   `dysphoric` tinyint(1) NOT NULL,
   `irritable` tinyint(1) NOT NULL,
@@ -43,9 +42,10 @@ CREATE TABLE `affect` (
   `tearful` tinyint(1) NOT NULL,
   `other` text NOT NULL,
   `dysthymic` tinyint(1) NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -54,8 +54,7 @@ CREATE TABLE `affect` (
 --
 
 CREATE TABLE `appearence` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `good-grooming-and-hygiene` tinyint(1) NOT NULL,
   `no-apparent-distress` tinyint(1) NOT NULL,
   `well-developed-well-nourished` tinyint(1) NOT NULL,
@@ -67,9 +66,10 @@ CREATE TABLE `appearence` (
   `disheveled-unkempt` tinyint(1) NOT NULL,
   `malodorus` tinyint(1) NOT NULL,
   `others` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -78,8 +78,7 @@ CREATE TABLE `appearence` (
 --
 
 CREATE TABLE `attitude` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `pleasant-and-cooperative` tinyint(1) NOT NULL,
   `uncooperative` tinyint(1) NOT NULL,
   `hostile-or-defiant` tinyint(1) NOT NULL,
@@ -88,9 +87,10 @@ CREATE TABLE `attitude` (
   `apathetic` tinyint(1) NOT NULL,
   `disorganized-behavior` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -99,15 +99,15 @@ CREATE TABLE `attitude` (
 --
 
 CREATE TABLE `cognition` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n` tinyint(1) NOT NULL,
   `impaired` tinyint(1) NOT NULL,
   `fluctuating` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -116,13 +116,13 @@ CREATE TABLE `cognition` (
 --
 
 CREATE TABLE `constituional` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `vitals-signs-stable` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -131,16 +131,16 @@ CREATE TABLE `constituional` (
 --
 
 CREATE TABLE `eye-contact` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `appropriate` tinyint(1) NOT NULL,
   `downcast` tinyint(1) NOT NULL,
   `intense` tinyint(1) NOT NULL,
   `fleeting` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -149,8 +149,7 @@ CREATE TABLE `eye-contact` (
 --
 
 CREATE TABLE `impulse-control` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `good` tinyint(1) NOT NULL,
   `fair` tinyint(1) NOT NULL,
   `questionable` tinyint(1) NOT NULL,
@@ -158,9 +157,10 @@ CREATE TABLE `impulse-control` (
   `impaired` tinyint(1) NOT NULL,
   `limited` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -169,8 +169,7 @@ CREATE TABLE `impulse-control` (
 --
 
 CREATE TABLE `insight` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `good` tinyint(1) NOT NULL,
   `fair` tinyint(1) NOT NULL,
   `questionable` tinyint(1) NOT NULL,
@@ -178,9 +177,10 @@ CREATE TABLE `insight` (
   `impaired` tinyint(1) NOT NULL,
   `limited` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -189,8 +189,7 @@ CREATE TABLE `insight` (
 --
 
 CREATE TABLE `judgement` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `good` tinyint(1) NOT NULL,
   `fair` tinyint(1) NOT NULL,
   `questionable` tinyint(1) NOT NULL,
@@ -198,9 +197,10 @@ CREATE TABLE `judgement` (
   `impaired` tinyint(1) NOT NULL,
   `limited` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -209,14 +209,14 @@ CREATE TABLE `judgement` (
 --
 
 CREATE TABLE `neurological` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `gait-and-station-normal` tinyint(1) NOT NULL,
   `gait-and-station-abnormal` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -225,16 +225,16 @@ CREATE TABLE `neurological` (
 --
 
 CREATE TABLE `perception` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `no-avh` tinyint(1) NOT NULL,
   `ah` tinyint(1) NOT NULL,
   `command-ah` tinyint(1) NOT NULL,
   `vh` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -243,15 +243,15 @@ CREATE TABLE `perception` (
 --
 
 CREATE TABLE `psychomotor` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `normal` tinyint(1) NOT NULL,
   `agitated` tinyint(1) NOT NULL,
   `retarded` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -260,8 +260,7 @@ CREATE TABLE `psychomotor` (
 --
 
 CREATE TABLE `speech` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `regular-rate-and-rhythm` tinyint(1) NOT NULL,
   `fluent` tinyint(1) NOT NULL,
   `incoherent` tinyint(1) NOT NULL,
@@ -269,9 +268,10 @@ CREATE TABLE `speech` (
   `pressured` tinyint(1) NOT NULL,
   `mumbling` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -280,8 +280,7 @@ CREATE TABLE `speech` (
 --
 
 CREATE TABLE `thaught-content` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `no-si-intent-or-plan` tinyint(1) NOT NULL,
   `no-passive-death-wish` tinyint(1) NOT NULL,
   `no-hi-intent-or-plan` tinyint(1) NOT NULL,
@@ -296,9 +295,10 @@ CREATE TABLE `thaught-content` (
   `obsessions` tinyint(1) NOT NULL,
   `passive-death-wish` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -307,8 +307,7 @@ CREATE TABLE `thaught-content` (
 --
 
 CREATE TABLE `thaught-process` (
-  `uuid` varchar(64) NOT NULL,
-  `patientUUID` varchar(64) NOT NULL,
+  `patientUUID` varchar(36) NOT NULL,
   `linear-logical-and-goal-directed` tinyint(1) NOT NULL,
   `disorganized` tinyint(1) NOT NULL,
   `circumstantial` tinyint(1) NOT NULL,
@@ -317,101 +316,8 @@ CREATE TABLE `thaught-process` (
   `flight-of-ideas` tinyint(1) NOT NULL,
   `poverty-of-thought` tinyint(1) NOT NULL,
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar(64) NOT NULL,
-  `recordChangedFromIPAddress` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `affect`
---
-ALTER TABLE `affect`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `appearence`
---
-ALTER TABLE `appearence`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `attitude`
---
-ALTER TABLE `attitude`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `cognition`
---
-ALTER TABLE `cognition`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `constituional`
---
-ALTER TABLE `constituional`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `eye-contact`
---
-ALTER TABLE `eye-contact`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `impulse-control`
---
-ALTER TABLE `impulse-control`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `insight`
---
-ALTER TABLE `insight`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `judgement`
---
-ALTER TABLE `judgement`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `neurological`
---
-ALTER TABLE `neurological`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `perception`
---
-ALTER TABLE `perception`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `psychomotor`
---
-ALTER TABLE `psychomotor`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `speech`
---
-ALTER TABLE `speech`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `thaught-content`
---
-ALTER TABLE `thaught-content`
-  ADD PRIMARY KEY (`uuid`);
-
---
--- Indexes for table `thaught-process`
---
-ALTER TABLE `thaught-process`
-  ADD PRIMARY KEY (`uuid`);
+  `recordChangedByUUID` varchar(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`patientUUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
