@@ -98,7 +98,7 @@ export default {
           if (this.type == "weight") {
             dispatchName = "bodyMeasurement/dbUpdateWeightInSM";
           } else if (this.type == "bmi") {
-            dispatchName = "bodyMeasurement/dbAddBmiInSM";
+            dispatchName = "bodyMeasurement/dbUpdateBmiInSM";
           } else if (this.type == "waistCircumference") {
             dispatchName = "bodyMeasurement/dbAddWaistCircumferenceInSM";
           } else if (this.type == "bloodSugar") {

@@ -36,7 +36,7 @@ CREATE TABLE `bloodPressure` (
   `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`patientUUID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE `bloodSugar` (
   `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
    PRIMARY KEY (`patientUUID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE `BMI` (
   `recordChangedByUUID` varchar(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`patientUUID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 -- --------------------------------------------------------
 

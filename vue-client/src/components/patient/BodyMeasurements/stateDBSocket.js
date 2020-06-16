@@ -91,10 +91,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddBmiInSM({ state, commit }, params) {
+  async dbUpdateBmiInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addBmi`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateBmi`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -107,7 +107,8 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let bmis = [...state.bmis, ...data]
+        let bmis = state.bmis
+        bmis.push(data)
         commit("setBmis", bmis)
       } else {
         notify({

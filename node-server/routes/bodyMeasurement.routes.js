@@ -46,13 +46,21 @@ router.get('/getWeight', async (req, res) => {
   }
 })
 
-router.post('/addBmi', async (req, res) => {
+router.post('/updateBmi', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add BMI Data____')
+    console.log('___Update BMI Data____')
     console.log(data)
-    const newBmi = await BMI.bulkCreate(data)
-    res.send(newBmi)
+    const bmis = await BMI.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (bmis.length > 0) {
+      result = await BMI.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await BMI.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while creating the BMI"
@@ -62,7 +70,7 @@ router.post('/addBmi', async (req, res) => {
 
 router.get('/getBmi', async (req, res) => {
   try {
-    const queryResult = await BMI.findAll()
+    const queryResult = await BMI.sequelize.query('SELECT * FROM BMI FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
