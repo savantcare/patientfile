@@ -146,23 +146,31 @@ router.get('/getBloodSugar', async (req, res) => {
   }
 })
 
-router.post('/addHeight', async (req, res) => {
+router.post('/updateHeight', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add Height Data____')
+    console.log('___Update Height Data____')
     console.log(data)
-    const newHeight = await Height.bulkCreate(data)
-    res.send(newHeight)
+    const heights = await Height.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (heights.length > 0) {
+      result = await Height.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Height.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the Height"
+      message: err.message || "Some error occurred while update the Height"
     })
   }
 })
 
 router.get('/getHeight', async (req, res) => {
   try {
-    const queryResult = await Height.findAll()
+    const queryResult = await Height.sequelize.query('SELECT * FROM height FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({

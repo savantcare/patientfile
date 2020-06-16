@@ -232,10 +232,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddHeightInSM({ state, commit }, params) {
+  async dbUpdateHeightInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addHeight`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateHeight`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -248,7 +248,8 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let heights = [...state.heights, ...data]
+        let heights = state.heights
+        heights.push(data)
         commit("setHeights", heights)
       } else {
         notify({
