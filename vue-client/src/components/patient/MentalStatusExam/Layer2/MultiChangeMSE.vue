@@ -1,134 +1,271 @@
 <template>
-  <el-row :gutter="12">
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Appearence</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+<div>
+    <el-row :gutter="12">
+      
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Appearence</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Thought process</span>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Thought process</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+    </el-row>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Attitude</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in attitude" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+    <el-row>
+    
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Attitude</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in attitude" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Constitutional</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+    </el-row>
+    
+    <el-row>
+    
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Psychomotor</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Cognition</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in cognition" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    </el-row>
+    
+    <el-row>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Eye-contact</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-checkbox-group v-model="checkboxGroup4" size="mini">
+            <el-checkbox-button v-for="app in eyeContact" :label="app" :key="app">{{app}}</el-checkbox-button>
+          </el-checkbox-group>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Insight</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+    
+    </el-row>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Constitutional</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+    <el-row>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Psychomotor</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Judgement</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Cognition</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in cognition" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Mood / affect</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Eye-contact</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in eyeContact" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+    </el-row>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Insight</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+    <el-row>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Impulse control</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Judgement</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Thought content</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Mood / affect</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Neurological</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Impulse control</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
+    </el-row>
 
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Thought content</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
-
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Neurological</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
-
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Preception</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
-    </el-card>
-  </el-row>
+    <el-row>
+      <el-col>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>Preception</span>
+            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
+          </div>
+          <el-input
+            type="textarea"
+            autosize
+            :rows="2"
+            placeholder="Please input"
+            v-model="textarea"
+          ></el-input>
+        </el-card>
+      </el-col>
+      <el-col></el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -168,20 +305,9 @@ const cognitionOptions = [
   "Fluctuating"
 ];
 
+const constitutionalOptions = ["Vitals signs stable"];
 
-const constitutionalOptions = [
-  "Vitals signs stable"
-];
-
-
-const eyeContactOptions = [
-"Appropriate",   
-"Downcast",    
-"Intense",    
-"Fleeting"  
-];
-
-
+const eyeContactOptions = ["Appropriate", "Downcast", "Intense", "Fleeting"];
 
 export default {
   data() {
