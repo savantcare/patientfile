@@ -128,6 +128,19 @@ export default {
       state.tabValue = tab.name
     },
 
+    showChangeMSEElementTabInLayer2(state) {
+      const tab = {
+        label: "Change MSE",
+        value: require("@/components/patient/MentalStatusExam/components/Appearance.vue").default,
+        name: "tab-change-mse"
+      }
+      state.tabList = [tab]
+      state.recommendationTabType = MULTIPLE_CHANGE_RECOMMENDATION
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+
+
     showRecommendationDiscontinueHistoryTabInLayer2(state) {
       const tab = {
         label: "Recommendation Discontinue History",

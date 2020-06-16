@@ -16,25 +16,111 @@
         :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
       />
     </div>
- <el-tabs tab-position="left">
-    <el-tab-pane label="Appearence">Good grooming and heigine</el-tab-pane>
-    <el-tab-pane label="Thought process">Lniear, logical and goal directed</el-tab-pane>
-    <el-tab-pane label="Attitude">Attitude</el-tab-pane>
-    <el-tab-pane label="Constitutional">Constitutional</el-tab-pane>
-    <el-tab-pane label="Psychomotor">Psychomotor</el-tab-pane>
-    <el-tab-pane label="Cognition">Cognition</el-tab-pane>
-    <el-tab-pane label="Eye-contact">Eye-contact</el-tab-pane>
-    <el-tab-pane label="Insight">Insight</el-tab-pane>
-    <el-tab-pane label="Speech">Speech</el-tab-pane>
-    <el-tab-pane label="Judgement">Judgement</el-tab-pane>
-    <el-tab-pane label="Mood / affect">Mood / affect</el-tab-pane>
-    <el-tab-pane label="Impulse control">Impulse control</el-tab-pane>
-    <el-tab-pane label="Thought content">Thought content</el-tab-pane>
-    <el-tab-pane label="Neurological">Neurological</el-tab-pane>
-    <el-tab-pane label="Perception">Perception</el-tab-pane>
+    <el-tabs tab-position="left">
+      <el-tab-pane label="Appearence">
+        Good grooming and heigine
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="Thought process">
+        Lniear, logical and goal directed
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
 
-  </el-tabs>
+      <el-tab-pane label="Attitude">
+        Attitude
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
 
+      <el-tab-pane label="Constitutional">
+        Constitutional
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Psychomotor">
+        Psychomotor
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Cognition">
+        Cognition
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Eye-contact">
+        Eye-contact
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Insight">
+        Insight
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Speech">
+        Speech
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Judgement">
+        Judgement
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Mood / affect">
+        Mood / affect
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Impulse control">
+        Impulse control
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Thought content">
+        Thought content
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Neurological">
+        Neurological
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Perception">
+        Perception
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
   </el-card>
 </template>
 
@@ -69,7 +155,12 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeMSETabInLayer2");
     },
-
+   handleClickChangeButton() {
+      this.$store.commit("showChangeMSEElementTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
     handleClickOnFInCardHeader() {
       //multiStateDisplayArea
       var options = {
