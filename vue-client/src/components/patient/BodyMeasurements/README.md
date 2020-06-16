@@ -1,127 +1,58 @@
-Layer 1 - Currentstate
-======================
-                                                                                   F -> Bring left hand side component in focus 
-+-------------------------------------------------------------------------------+  A -> doctor can add all the 9 data together                                                             
-|                                                     +-----+ +-----+ +-----+   |  +----------------------------------------------+            
-|  Body Measurement                                   |  F  | |  A  | |  G  | <----+ Graph for all.                               |            
-|                                                     +-----+ +-----+ +-----+   |  | Open a chart in 2nd layer where all the      |            
-+-------------------------------------------------------------------------------+  | graphs of sub-sections can be seen.          |            
-|                                                                               |  | There is checkbox to uncheck some lines      |            
-|                                                                               |  +----------------------------------------------+            
-|───────────────────────┐                                             ┌────┐    |    ┌──────────────────────────────────────────────┐          
-|                       │        ▲                                    │Add │◀────────│Add more button.                              │          
-|  Weight ══════════════│        │                                    └────┘    |    │This opens add form in layer 2 for current tab│          
-|───────────────────────┤        │                                              |    │and after submitting, new value will be       │          
-|                       │        │                                              |    │seen on the graph                             │          
-|  BMI                  │        │                                              |    └──────────────────────────────────────────────┘          
-|───────────────────────┤        │ ────────────────┐                            |                                                              
-|                       │        │                 │                            |                                                              
-|  Waist circumference  │        │                 │                            |                                                              
-|───────────────────────┤        │                 │                            |                                                              
-|                       │        │                 │                            |                                                              
-|  Blood sugar          │┌──────┐│                 │                            |                                                              
-|───────────────────────┤│Weight││                 └────────────────▶           |                                                              
-|                       │└──────┘│                                              |                                                              
-|  Height               │        │                                              |                                                              
-|───────────────────────┤        │                                              |                                                              
-|                       │        │                                              |                                                              
-|  Blood pressure       │        │                                              |                                                              
-|───────────────────────┤        │                                              |                                                              
-|                       │        │                                              |                                                              
-|  Oxygen saturation    │        │                                              |                                                              
-|───────────────────────┤        │                                              |                                                              
-|                       │        │                                              |                                                              
-|  Pulse                │        │                                              |                                                              
-|                       │        │                                              |                                                              
-|───────────────────────┤        └───────────────────────────────────────────▶  |                                                              
-|  Temperature          │                         ┌────┐                        |                                                              
-|                       │                         │Time│                        |                                                              
-|                       │                         └────┘                        |                                                              
-+-------------------------------------------------------------------------------+                                                              
-     Each tab on the left is Graph for that individual section.                                                                                
-     Clicking on it will open chart consisting only that sections graph.                                                                       
-                                                                                                                                               
+Q) A user adds a new weight should existing row be edited or a new row is inserted? 
+(In both cases system verisoning table is used)
+
+Data row options -> A (Add), D (Discontinue)
+D is used when a wrong data has been entered.
+If user chooses D then run the "delete query". When delete query is run the temporal DB of mariadb does not delete the data. MariaDB only enters the current timestamp in ROW_END
+
+Option 1: Edit of same row
+    Positives:
+        "as of" query is easier. So -> select weight from weight where paitentUUID='asdasd' as of 1st Jan 2020
+        "as of" is a new sql term introduced with temporal DB https://mariadb.com/kb/en/temporal-data-tables/#querying-historical-data
+    Negatives:
+        Make a time series graph.
+        Some data needs to be ignored. Doctor entered it by mistake.
+        This cannot be done.
+
+Option 2: Each weight is a new row
+    Negatives:
+        To get data "as of" a particular day the query is a bit complicated.
+        Suppose I want to know the weight on 1st Jan 2020.
+        So the query has to be "select weight from weight where ROW_START < 1st Jan 2020 and ROW_START is max"
 
 
+# Q)What is the common principle to apply?
+At any point T 
+    only 1 weight is valid.
+    More then 1 dx is possible.
 
-How does the KB interaction work?
-First down arrow -> Card header is highlighted. I can press A or G. On pressing A give me a form where I can allo the 9 data points together.
-2nd down arrow -> The weight tab is active and I see the weight graph. I can press A to add a new weight.
-3rt down arrow -> The "waist circumference" tab is active and I see the "waist circumference" graph. I can press A to add a new "waist circumference"
+Hence,   
+    For each new weight keep editing the same row
+    For each new dx use different row.
 
-When doing data entry always show the old data that the doctor can change and then save. Since the new data is usually close to old data it is better to have the old data.
+## How to deal with assessment given the common principle?
+    At a given point T
+        Below a DX only 1 asssemment is possible
+        Hence each assessment is edit of an existing row.
 
+## How to deal with appearence section of MSE given the common principle?
+    At a given point T
+        Only one apperence is possible.
+        Hence each appearence is edit of an existing row.
 
+## How to deal with email address given the common principle?
+    At a given point T
+        A person can have many email addresses.
+        Hence each email address is a new row.
 
+# Q) How is single row vs multiple row distinguoished in UI?
 
-Layer 1 - Multistate
-====================
+Single row is called "C (Change)". 
+    Weight does not have a add. Weight only has change.
+    Assessment does not have add. Assessment only has change.
+    Existing RX has change.
 
-+-------------------------------------------------------------------------------+
-|                                                                     +-----+   |         +----------------------------------------------+
-|  Body Measurement                                                   |  G  | <-----------+ Graph for all.                               |
-|                                                                     +-----+   |         | Open a chart in 2nd layer where all the      |
-+-------------------------------------------------------------------------------+         | graphs of sub-sections can be seen.          |
-|                                                                               |         | There is checkbox to uncheck some lines      |
-|                            Current Value                        Actions       |         +----------------------------------------------+
-|  +-----------------------------------------------------------------------+    |         +----------------------------------------------+
-|                                                               |---| |---|     |         | This field will show the latest data of the  |
-|  Weight                    160 lb <-----------------------------------------------------+ section. If there is no data found then the  |
-|                                                               |---| |---|     |         | field should indicate that also.             |
-|                                                               +---+ +---+     |         +----------------------------------------------+
-|  BMI                       28                                 | A | | G |     |
-|                                                               +---+ +---+     |
-|                                                               +---+ +---+     |
-|  Waist circumference       35 in                              | A | | G |     |
-|                                                               +---+ +---+     |
-|                                                               +---+ +---+     |
-|  Blood sugar               135 mg/dL                          | A | | G |     |
-|                                                               +---+ +---+     |
-|                                                               +---+ +---+     |
-|  Height                    5 feet 9 inches                    | A | | G |     |
-|                                                               +---+ +---+     |         +----------------------------------------------+
-|                                                               +---+ +---+     |         | Graph for this individual section.           |
-|  Blood pressure            132/88 mmHg                        | A | | G | <-------------+ Clicking on it will open chart consisting    |
-|                                                               +---+ +---+     |         | only this sections graph.                    |
-|                                                               +---+ +---+     |         +----------------------------------------------+
-|  Oxygen saturation         75 mmHg                            | A | | G |     |
-|                                                               +---+ +---+     |          +----------------------------------------------+
-|                                                               +---+ |---|     |          | Add more button.                             |
-|  Pulse                     80 bpm                             | A | <--------------------+ Clicking on it will open add form in layer 2 |
-|                                                               +---+ |---|     |          | and after submitting, new value will be      |
-|                                                               +---+ +---+     |          | seen on current Value field of the section.  |
-|  Temperature               97 F                               | A | | G |     |          +----------------------------------------------+
-|                                                               +---+ +---+     |
-|                                                                               |
-+-------------------------------------------------------------------------------+
-
-
-Layer 2
-=======
-Add form:
---------
-+-----------------------------------------------------------------------------------------------+
-|                                                                                               |
-| +-------------+                                                                               |
-| | Add Weight  |                                                                               |
-| +             +-------------------------------------------------------------------+           |
-|                                                                                               |
-|                                                                                               |
-|                         +-------------------------------------------------+                   |
-|              Value *    |                                                 |                   |
-|                         +-------------------------------------------------+                   |
-|                                                                                               |
-|                         +-------------------------------------------------+                   |
-|               Date *    |  Default value of today                         |                   |
-|                         +-------------------------------------------------+                   |
-|                                                                                               |
-|                         +-------------------------------------------------+                   |
-|               Notes     |                                                 |                   |
-|                         +-------------------------------------------------+                   |
-|                                                                                               |
-|               +---------+  +--------------+                                                   |
-|               |  Save   |  | Add one more |                                                   |
-|               +---------+  +--------------+                                                   |
-|                                                                                               |
-|                                                                                               |
-+-----------------------------------------------------------------------------------------------+
+Multi row is called "A (Add a new row)"
+    Dx has add.
+        DX does not have change since DX has child data of assessment.
+    Rx has add.
