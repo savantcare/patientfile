@@ -12,7 +12,7 @@ Layer 1 interaction
 ├──────────┤     │                              └─────┘ │  │              └─────────────────────┘                │
 │   PHQ9 ──┼────▶│                                      │  │A -> Add a new screen                                │
 ├──────────┤     │                                      │  │                                                     │
-│          │     │            ┌─────────▶               │  │G -> Graph all screens together                      │
+│          │     │            ┌─────────▶               │  │G -> Graph all screens together shown in 2nd layer   │
 ├──────────┤     │            │                         │  │                                                     │
 │   ADHD   │     │            │                         │  │                                                     │
 ├──────────┤     │            │                         │  └─────────────────────────────────────────────────────┘
