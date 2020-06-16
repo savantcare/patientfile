@@ -167,6 +167,12 @@ export default {
         type: this.type
       });
     },
+    handleThoughtProcessChangeButton() {
+      this.$store.commit("showChangeMSEThoughtProcessTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
     handleClickOnFInCardHeader() {
       //multiStateDisplayArea
       var options = {

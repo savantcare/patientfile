@@ -165,6 +165,18 @@ export default {
       state.tabValue = tab.name;
     },
 
+    showChangeMSEThoughtProcessTabInLayer2(state) {
+      const tab = {
+        label: "Change Thought Process (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/ThoughtProcess.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+
     showRecommendationDiscontinueHistoryTabInLayer2(state) {
       const tab = {
         label: "Recommendation Discontinue History",
