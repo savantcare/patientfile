@@ -113,23 +113,31 @@ router.get('/getWaistCircumferences', async (req, res) => {
   }
 })
 
-router.post('/addBloodSugar', async (req, res) => {
+router.post('/updateBloodSugar', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add BloodSugar Data____')
+    console.log('___Update BloodSugar Data____')
     console.log(data)
-    const newBloodSugar = await BloodSugar.bulkCreate(data)
-    res.send(newBloodSugar)
+    const bloodSugars = await BloodSugar.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (bloodSugars.length > 0) {
+      result = await BloodSugar.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await BloodSugar.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the blood sugar"
+      message: err.message || "Some error occurred while update the blood sugar"
     })
   }
 })
 
 router.get('/getBloodSugar', async (req, res) => {
   try {
-    const queryResult = await BloodSugar.findAll()
+    const queryResult = await BloodSugar.sequelize.query('SELECT * FROM bloodSugar FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
