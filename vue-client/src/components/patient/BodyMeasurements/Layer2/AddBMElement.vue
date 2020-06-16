@@ -13,8 +13,16 @@
               :prop="'elements.' + index + '.value'"
             >
               <el-card class="box-card" shadow="hover">
-                <div>Value</div>
-                <el-input-number v-model="element.value" :min="1"></el-input-number>
+                <div v-if="type == 'bloodPressure'">
+                  <div>Systolic Value</div>
+                  <el-input-number v-model="element.systolicValue" :min="1"></el-input-number>
+                  <div>Diastolic Value</div>
+                  <el-input-number v-model="element.diastolicValue" :min="1"></el-input-number>
+                </div>
+                <div v-else>
+                  <div>Value</div>
+                  <el-input-number v-model="element.value" :min="1"></el-input-number>
+                </div>
                 <div>Date</div>
                 <el-date-picker v-model="element.date" type="date" placeholder="Pick a day"></el-date-picker>
                 <div>Notes</div>
@@ -82,6 +90,9 @@ export default {
               data["bloodSugar"] = element.value;
             } else if (this.type == "height") {
               data["heightInInch"] = element.value;
+            } else if (this.type == "bloodPressure") {
+              data["systolicValue"] = element.systolicValue;
+              data["diastolicValue"] = element.diastolicValue;
             }
             elementList.push(data);
           });
@@ -97,6 +108,8 @@ export default {
             dispatchName = "bodyMeasurement/dbAddBloodSugarInSM";
           } else if (this.type == "height") {
             dispatchName = "bodyMeasurement/dbAddHeightInSM";
+          } else if (this.type == "bloodPressure") {
+            dispatchName = "bodyMeasurement/dbAddBloodPressureInSM";
           }
 
           await this.$store.dispatch(dispatchName, {

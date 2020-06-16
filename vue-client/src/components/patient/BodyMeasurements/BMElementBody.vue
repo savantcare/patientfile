@@ -30,6 +30,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.bloodSugars];
       } else if (this.type == "height") {
         chartData = [...this.$store.state.bodyMeasurement.heights];
+      } else if (this.type == "bloodPressure") {
+        chartData = [...this.$store.state.bodyMeasurement.bloodPressures];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -38,13 +40,18 @@ export default {
         );
       });
 
-      const columns = ["date", "value"];
+      let columns = ["date", "value"];
+      if (this.type == "bloodPressure") {
+        columns = ["date", "systolicValue", "diastolicValue"];
+      }
+
       let rows = [];
       chartData.forEach(item => {
         let date = new Date(item.measurementDate);
         const formatDate = date.getMonth() + 1 + "-" + date.getDate();
 
         let value = 0;
+
         if (this.type == "weight") {
           value = item.weightInPounds;
         } else if (this.type == "bmi") {
@@ -55,12 +62,22 @@ export default {
           value = item.bloodSugar;
         } else if (this.type == "height") {
           value = item.heightInInch;
+        } else if (this.type == "bloodPressure") {
+          const systolicValue = item.systolicValue;
+          const diastolicValue = item.diastolicValue;
+          rows.push({
+            date: formatDate,
+            systolicValue: systolicValue,
+            diastolicValue: diastolicValue
+          });
         }
 
-        rows.push({
-          date: formatDate,
-          value: value
-        });
+        if (this.type != "bloodPressure") {
+          rows.push({
+            date: formatDate,
+            value: value
+          });
+        }
       });
 
       return {
@@ -80,6 +97,8 @@ export default {
       this.getBloodSugar();
     } else if (this.type == "height") {
       this.getHeight();
+    } else if (this.type == "bloodPressure") {
+      this.getBloodPressure();
     }
   },
   methods: {
@@ -103,6 +122,9 @@ export default {
     },
     getHeight() {
       this.$store.dispatch("bodyMeasurement/getHeight");
+    },
+    getBloodPressure() {
+      this.$store.dispatch("bodyMeasurement/getBloodPressure");
     }
   },
   watch: {

@@ -24,6 +24,7 @@ bodyMeasurement.bmi = require('../bodyMeasurement/bmi.model')(bodyMeasurementSeq
 bodyMeasurement.waistCircumference = require('../bodyMeasurement/waistCircumference.model')(bodyMeasurementSequelize, Sequelize)
 bodyMeasurement.bloodSugar = require('../bodyMeasurement/bloodSugar.model')(bodyMeasurementSequelize, Sequelize)
 bodyMeasurement.height = require('../bodyMeasurement/height.model')(bodyMeasurementSequelize, Sequelize)
+bodyMeasurement.bloodPressure = require('../bodyMeasurement/bloodPressure.model')(bodyMeasurementSequelize, Sequelize)
 
 bodyMeasurement.sequelize.sync() // see doc at recommendation.database.js
 

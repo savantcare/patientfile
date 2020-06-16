@@ -6,7 +6,8 @@ const state = {
   bmis: [],
   waistCircumferences: [],
   bloodSugars: [],
-  heights: []
+  heights: [],
+  bloodPressures: []
 }
 const mutations = {
   setWeights(state, value) {
@@ -23,6 +24,9 @@ const mutations = {
   },
   setHeights(state, value) {
     state.heights = value
+  },
+  setBloodPressures(state, value) {
+    state.bloodPressures = value
   }
 }
 const actions = {
@@ -251,6 +255,52 @@ const actions = {
         commit("setHeights", json)
       } else {
         console.log("Failed to fetch heights")
+      }
+    } catch (ex) {
+      console.log("Server connection error")
+    }
+  },
+  async dbAddBloodPressureInSM({ state, commit }, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addBloodPressure`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+        let bloodPressures = [...state.bloodPressures, ...data]
+        commit("setBloodPressures", bloodPressures)
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add blood pressure"
+        })
+      }
+    } catch (ex) {
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getBloodPressure({ commit },) {
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getBloodPressure`, {
+        headers: { "Authorization": "Bearer " + TOKEN, }
+      })
+      if (response.ok) {
+        const json = await response.json()
+        commit("setBloodPressures", json)
+      } else {
+        console.log("Failed to fetch blood pressure")
       }
     } catch (ex) {
       console.log("Server connection error")
