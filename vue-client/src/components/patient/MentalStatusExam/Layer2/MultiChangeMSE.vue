@@ -11,48 +11,13 @@
       </el-col>
 
       <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Thought process</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
+           <Attitude></Attitude>
       </el-col>
     
     </el-row>
 
     <el-row>
-    
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Attitude</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in attitude" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-    
-      <el-col>
+          <el-col>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>Constitutional</span>
@@ -258,15 +223,7 @@
 </template>
 
 <script>
-const attitudeOptions = [
-  "Pleasant and cooperative",
-  "Uncooperative",
-  "Hostile or defiant",
-  "Guarded",
-  "Evasive",
-  "Apathetic",
-  "Disorganized behavior"
-];
+
 
 const cognitionOptions = [
   "Grossly intact",
@@ -284,11 +241,11 @@ const eyeContactOptions = ["Appropriate", "Downcast", "Intense", "Fleeting"];
 
 import Appearance from "@/components/patient/MentalStatusExam/components/Appearance";
 import ThoughtProcess from "@/components/patient/MentalStatusExam/components/ThoughtProcess";
+import Attitude from "@/components/patient/MentalStatusExam/components/Attitude";
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      attitude: attitudeOptions,
       cognition: cognitionOptions,
       consitutional: constitutionalOptions,
       eyeContact: eyeContactOptions,
@@ -297,7 +254,8 @@ export default {
   },
   components: {
     Appearance,
-    ThoughtProcess
+    ThoughtProcess,
+    Attitude
   },
   methods: {
     onClickSave(rec) {
