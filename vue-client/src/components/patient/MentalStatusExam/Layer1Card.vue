@@ -1,4 +1,4 @@
-<template>
+ <template>
   <el-card
     class="box-card"
     :id="`recommendation-${typeOfStateDisplayArea}`"
@@ -20,13 +20,13 @@
       <el-tab-pane label="Appearence">
         Good grooming and heigine
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleAppearenceChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
       <el-tab-pane label="Thought process">
         Lniear, logical and goal directed
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleThoughtProcessChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
@@ -155,8 +155,14 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeMSETabInLayer2");
     },
-   handleClickChangeButton() {
+    handleClickChangeButton() {
       this.$store.commit("showChangeMSEElementTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleAppearenceChangeButton() {
+      this.$store.commit("showChangeMSEAppearenceTabInLayer2", {
         label: this.label,
         type: this.type
       });
