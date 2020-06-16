@@ -59,9 +59,9 @@ Layer 1 - Multistate
 ====================
 
 +-------------------------------------------------------------------------------+
-|                                                                     +-----+   |         +----------------------------------------------+
-|  Body Measurement                                                   |  G  | <-----------+ Graph for all.                               |
-|                                                                     +-----+   |         | Open a chart in 2nd layer where all the      |
+|                                                                               |         +----------------------------------------------+
+|  Body Measurement                                              F  M    G                | G ->  Graph for all.                         |
+|                                                                               |         | Open a chart in 2nd layer where all the      |
 +-------------------------------------------------------------------------------+         | graphs of sub-sections can be seen.          |
 |                                                                               |         | There is checkbox to uncheck some lines      |
 |                            Current Value                        Actions       |         +----------------------------------------------+
@@ -70,28 +70,28 @@ Layer 1 - Multistate
 |  Weight                    160 lb <-----------------------------------------------------+ section. If there is no data found then the  |
 |                                                               |---| |---|     |         | field should indicate that also.             |
 |                                                               +---+ +---+     |         +----------------------------------------------+
-|  BMI                       28                                 | A | | G |     |
+|  BMI                       28                                 | C | | G |     |
 |                                                               +---+ +---+     |
 |                                                               +---+ +---+     |
-|  Waist circumference       35 in                              | A | | G |     |
+|  Waist circumference       35 in                              | C | | G |     |
 |                                                               +---+ +---+     |
 |                                                               +---+ +---+     |
-|  Blood sugar               135 mg/dL                          | A | | G |     |
+|  Blood sugar               135 mg/dL                          | C | | G |     |
 |                                                               +---+ +---+     |
 |                                                               +---+ +---+     |
-|  Height                    5 feet 9 inches                    | A | | G |     |
+|  Height                    5 feet 9 inches                    | C | | G |     |
 |                                                               +---+ +---+     |         +----------------------------------------------+
 |                                                               +---+ +---+     |         | Graph for this individual section.           |
-|  Blood pressure            132/88 mmHg                        | A | | G | <-------------+ Clicking on it will open chart consisting    |
+|  Blood pressure            132/88 mmHg                        | C | | G | <-------------+ Clicking on it will open chart consisting    |
 |                                                               +---+ +---+     |         | only this sections graph.                    |
 |                                                               +---+ +---+     |         +----------------------------------------------+
-|  Oxygen saturation         75 mmHg                            | A | | G |     |
+|  Oxygen saturation         75 mmHg                            | C | | G |     |
 |                                                               +---+ +---+     |          +----------------------------------------------+
-|                                                               +---+ |---|     |          | Add more button.                             |
-|  Pulse                     80 bpm                             | A | <--------------------+ Clicking on it will open add form in layer 2 |
+|                                                               +---+ |---|     |          | Change button.                               |
+|  Pulse                     80 bpm                             | C | <--------------------+ Clicking will open change form in layer 2    |
 |                                                               +---+ |---|     |          | and after submitting, new value will be      |
 |                                                               +---+ +---+     |          | seen on current Value field of the section.  |
-|  Temperature               97 F                               | A | | G |     |          +----------------------------------------------+
+|  Temperature               97 F                               | C | | G |     |          +----------------------------------------------+
 |                                                               +---+ +---+     |
 |                                                                               |
 +-------------------------------------------------------------------------------+
@@ -99,12 +99,12 @@ Layer 1 - Multistate
 
 Layer 2
 =======
-Add form:
---------
+Change form:
+------------
 +-----------------------------------------------------------------------------------------------+
 |                                                                                               |
 | +-------------+                                                                               |
-| | Add Weight  |                                                                               |
+| |Change Weight|                                                                               |
 | +             +-------------------------------------------------------------------+           |
 |                                                                                               |
 |                                                                                               |
@@ -120,9 +120,9 @@ Add form:
 |               Notes     |                                                 |                   |
 |                         +-------------------------------------------------+                   |
 |                                                                                               |
-|               +---------+  +--------------+                                                   |
-|               |  Save   |  | Add one more |                                                   |
-|               +---------+  +--------------+                                                   |
+|               +---------+                                                                     |
+|               |  Save   |                                                                     |
+|               +---------+                                                                     |
 |                                                                                               |
 |                                                                                               |
 +-----------------------------------------------------------------------------------------------+
