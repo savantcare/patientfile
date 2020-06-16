@@ -3,22 +3,11 @@
     <el-row :gutter="12">
       
       <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Appearence</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
+          <Appearance></Appearance>
+      </el-col>
+
+      <el-col>
+          <ThoughtProcess></ThoughtProcess>
       </el-col>
 
       <el-col>
@@ -269,22 +258,6 @@
 </template>
 
 <script>
-const appearenceOptions = [
-  "Good grooming and hyegine",
-  "No apparent distree",
-  "Well developed, well nourished",
-  "appears stated age",
-  "Appears younger than stated age",
-  "Appears older than stated age",
-  "obese",
-  "Thin or cachetic",
-  "Disheveled, unkempt",
-  "Malodorous"
-];
-const thoughtProcessOptions = [
-  "Linear Logical and gaol oriented",
-  "Poverty of thought"
-];
 const attitudeOptions = [
   "Pleasant and cooperative",
   "Uncooperative",
@@ -309,18 +282,22 @@ const constitutionalOptions = ["Vitals signs stable"];
 
 const eyeContactOptions = ["Appropriate", "Downcast", "Intense", "Fleeting"];
 
+import Appearance from "@/components/patient/MentalStatusExam/components/Appearance";
+import ThoughtProcess from "@/components/patient/MentalStatusExam/components/ThoughtProcess";
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      appearence: appearenceOptions,
-      thoughtProcess: thoughtProcessOptions,
       attitude: attitudeOptions,
       cognition: cognitionOptions,
       consitutional: constitutionalOptions,
       eyeContact: eyeContactOptions,
       textarea: ""
     };
+  },
+  components: {
+    Appearance,
+    ThoughtProcess
   },
   methods: {
     onClickSave(rec) {
