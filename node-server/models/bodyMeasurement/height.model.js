@@ -1,12 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Component = sequelize.define("height", {
-    uuid: {
+    patientUUID: {
       type: Sequelize.STRING,
       primaryKey: true,
-      defaultValue: Sequelize.UUIDV4
-    },
-    patientUUID: {
-      type: Sequelize.STRING
     },
     heightInInch: {
       type: Sequelize.INTEGER

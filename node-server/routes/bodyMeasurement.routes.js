@@ -1,4 +1,5 @@
 const router = require('express').Router()
+
 const db = require('../models')
 const Weight = db.bodyMeasurementDB.weight
 const BMI = db.bodyMeasurementDB.bmi
@@ -10,23 +11,33 @@ const OxygenSaturation = db.bodyMeasurementDB.oxygenSaturation
 const Pulse = db.bodyMeasurementDB.pulse
 const Temperature = db.bodyMeasurementDB.temperature
 
-router.post('/addWeight', async (req, res) => {
+const { QueryTypes } = require('sequelize')
+
+router.post('/updateWeight', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add Weight Data____')
+    console.log('___Update Weight Data____')
     console.log(data)
-    const newWeight = await Weight.bulkCreate(data)
-    res.send(newWeight)
+    const weights = await Weight.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (weights.length > 0) {
+      result = await Weight.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Weight.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the Weight"
+      message: err.message || "Some error occurred while update the Weight"
     })
   }
 })
 
 router.get('/getWeight', async (req, res) => {
   try {
-    const queryResult = await Weight.findAll()
+    const queryResult = await Weight.sequelize.query('SELECT * FROM weight FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({

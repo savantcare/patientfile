@@ -1,11 +1,8 @@
 <template>
   <div>
-    <el-button
-      type="text"
-      size="mini"
-      class="bm-element-body-add-button"
-      @click="handleClickAddButton"
-    >Add</el-button>
+    <div style="text-align: right;">
+      <el-button type="text" size="mini" @click="handleClickAddButton">Add</el-button>
+    </div>
     <ve-line :data="chartData" :legend-visible="false" ref="chart"></ve-line>
   </div>
 </template>
@@ -166,8 +163,6 @@ export default {
 
 <style lang="scss" scoped>
 .bm-element-body-add-button {
-  position: fixed;
-  right: 30px;
-  z-index: 100;
+  float: right;
 }
 </style>

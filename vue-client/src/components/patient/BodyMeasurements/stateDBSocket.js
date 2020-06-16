@@ -42,10 +42,10 @@ const mutations = {
   }
 }
 const actions = {
-  async dbAddWeightInSM({ state, commit }, params) {
+  async dbUpdateWeightInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addWeight`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateWeight`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -53,12 +53,14 @@ const actions = {
         method: "POST",
         body: JSON.stringify({ data: data })
       })
+      console.log(response)
       if (response.ok) {
         notify({
           title: "Success",
           message: "Saved!"
         })
-        let weights = [...state.weights, ...data]
+        let weights = state.weights
+        weights.push(data)
         commit("setWeights", weights)
       } else {
         notify({
@@ -67,6 +69,7 @@ const actions = {
         })
       }
     } catch (ex) {
+      console.log(ex)
       notify({
         title: "Error",
         message: "Server connection error"

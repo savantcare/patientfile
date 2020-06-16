@@ -271,8 +271,8 @@ export default {
     showAddBMElementTabInLayer2(state, params) {
       const { type, label } = params
       const tab = {
-        label: `Add ${label}`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/AddBMElement.vue").default,
+        label: `Change ${label}`,
+        value: require("@/components/patient/BodyMeasurements/Layer2/UpdateBMElement.vue").default,
         name: "tab-add-bm-element"
       }
       state.tabList = [tab]
