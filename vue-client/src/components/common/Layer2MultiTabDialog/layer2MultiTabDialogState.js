@@ -9,7 +9,8 @@ export default {
     reminderData: null,
     goalTabType: '',
     goalData: null,
-    tabValue: ""
+    tabValue: "",
+    bmElementType: ""
   },
   mutations: {
     setTabDialogVisibility(state, value) {
@@ -255,14 +256,16 @@ export default {
       state.visibility = true
       state.tabValue = tab.name
     },
-    showAddBMElementTabInLayer2(state) {
+    showAddBMElementTabInLayer2(state, params) {
+      const { type, label } = params
       const tab = {
-        label: "Add Weight",
+        label: `Add ${label}`,
         value: require("@/components/patient/BodyMeasurements/Layer2/AddBMElement.vue").default,
         name: "tab-add-bm-element"
       }
       state.tabList = [tab]
       state.visibility = true
+      state.bmElementType = type
       state.tabValue = tab.name
     }
   }

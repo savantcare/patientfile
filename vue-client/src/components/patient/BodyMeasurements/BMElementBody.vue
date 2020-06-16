@@ -6,19 +6,27 @@
       class="bm-element-body-add-button"
       @click="handleClickAddButton"
     >Add</el-button>
-    <ve-line :data="chartData" :legend-visible="false" log ref="chart"></ve-line>
+    <ve-line :data="chartData" :legend-visible="false" ref="chart"></ve-line>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["type", "label", "tab"],
   components: {},
   data() {
     return {};
   },
   computed: {
     chartData() {
-      let chartData = this.$store.state.bodyMeasurement.chartData;
+      let chartData = [];
+      if (this.type == "weight") {
+        chartData = [...this.$store.state.bodyMeasurement.weights];
+      } else if (this.type == "bmi") {
+        chartData = [...this.$store.state.bodyMeasurement.bmis];
+        console.log(chartData);
+      }
+
       chartData = chartData.sort((data1, data2) => {
         return (
           new Date(data1.measurementDate) - new Date(data2.measurementDate)
@@ -27,15 +35,22 @@ export default {
 
       const columns = ["date", "value"];
       let rows = [];
-      chartData.forEach(data => {
+      chartData.forEach(item => {
+        let date = new Date(item.measurementDate);
+        const formatDate = date.getMonth() + 1 + "-" + date.getDate();
+
+        let value = 0;
+        if (this.type == "weight") {
+          value = item.weightInPounds;
+        } else if (this.type == "bmi") {
+          value = item.bmiValue;
+        }
         rows.push({
-          date: data.measurementDate,
-          value: data.weightInPounds
+          date: formatDate,
+          value: value
         });
       });
-      this.$nextTick(() => {
-        this.$refs["chart"].echarts.resize();
-      });
+
       return {
         columns: columns,
         rows: rows
@@ -43,15 +58,31 @@ export default {
     }
   },
   mounted() {
-    this.getWeightInfomation();
-    console.log(this.chartData);
+    if (this.type == "weight") {
+      this.getWeightInfomation();
+    } else if (this.type == "bmi") {
+      this.getBMIInformation();
+    }
   },
   methods: {
     handleClickAddButton() {
-      this.$store.commit("showAddBMElementTabInLayer2");
+      this.$store.commit("showAddBMElementTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
     },
     getWeightInfomation() {
       this.$store.dispatch("bodyMeasurement/getWeight");
+    },
+    getBMIInformation() {
+      this.$store.dispatch("bodyMeasurement/getBmi");
+    }
+  },
+  watch: {
+    tab() {
+      this.$nextTick(() => {
+        this.$refs["chart"].echarts.resize();
+      });
     }
   }
 };
