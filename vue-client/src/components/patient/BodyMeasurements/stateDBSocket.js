@@ -423,10 +423,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddTemperatureInSM({ state, commit }, params) {
+  async dbUpdateTemperatureInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addTemperature`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateTemperature`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -439,7 +439,8 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let temperature = [...state.temperature, ...data]
+        let temperature = state.temperature
+        temperature.push(data)
         commit("setTemperature", temperature)
       } else {
         notify({

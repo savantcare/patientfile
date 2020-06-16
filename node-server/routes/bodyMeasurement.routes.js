@@ -281,23 +281,32 @@ router.get('/getPulse', async (req, res) => {
   }
 })
 
-router.post('/addTemperature', async (req, res) => {
+router.post('/updateTemperature', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add Temperature Data____')
+    console.log('___Update Temperature Data____')
     console.log(data)
-    const newTemperature = await Temperature.bulkCreate(data)
-    res.send(newTemperature)
+
+    const temperature = await Temperature.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (temperature.length > 0) {
+      result = await Temperature.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Temperature.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the temperature"
+      message: err.message || "Some error occurred while update the temperature"
     })
   }
 })
 
 router.get('/getTemperature', async (req, res) => {
   try {
-    const queryResult = await Temperature.findAll()
+    const queryResult = await Temperature.sequelize.query('SELECT * FROM temperature FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({

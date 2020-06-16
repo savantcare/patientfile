@@ -112,7 +112,7 @@ export default {
           } else if (this.type == "pulse") {
             dispatchName = "bodyMeasurement/dbUpdatePulseInSM";
           } else if (this.type == "temperature") {
-            dispatchName = "bodyMeasurement/dbAddTemperatureInSM";
+            dispatchName = "bodyMeasurement/dbUpdateTemperatureInSM";
           }
 
           await this.$store.dispatch(dispatchName, {
