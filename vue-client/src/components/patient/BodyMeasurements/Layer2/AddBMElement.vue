@@ -97,6 +97,8 @@ export default {
               data["oxygenSaturation"] = element.value;
             } else if (this.type == "pulse") {
               data["beatsPerMinuteValue"] = element.value;
+            } else if (this.type == "temperature") {
+              data["temperatureInFarehnite"] = element.value;
             }
             elementList.push(data);
           });
@@ -118,6 +120,8 @@ export default {
             dispatchName = "bodyMeasurement/dbAddOxygenSaturationInSM";
           } else if (this.type == "pulse") {
             dispatchName = "bodyMeasurement/dbAddPulseInSM";
+          } else if (this.type == "temperature") {
+            dispatchName = "bodyMeasurement/dbAddTemperatureInSM";
           }
 
           await this.$store.dispatch(dispatchName, {

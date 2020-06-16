@@ -47,7 +47,8 @@ export default {
         { label: "Height", value: "height" },
         { label: "Blood Pressure", value: "bloodPressure" },
         { label: "Oxygen Saturation", value: "oxygenSaturation" },
-        { label: "Pulse", value: "pulse" }
+        { label: "Pulse", value: "pulse" },
+        { label: "Temperature", value: "temperature" }
       ],
       tab: ""
     };

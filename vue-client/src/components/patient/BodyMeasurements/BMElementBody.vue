@@ -36,6 +36,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.oxygenSaturations];
       } else if (this.type == "pulse") {
         chartData = [...this.$store.state.bodyMeasurement.pulse];
+      } else if (this.type == "temperature") {
+        chartData = [...this.$store.state.bodyMeasurement.temperature];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -78,6 +80,8 @@ export default {
           value = item.oxygenSaturation;
         } else if (this.type == "pulse") {
           value = item.beatsPerMinuteValue;
+        } else if (this.type == "temperature") {
+          value = item.temperatureInFarehnite;
         }
 
         if (this.type != "bloodPressure") {
@@ -111,6 +115,8 @@ export default {
       this.getOxygenSaturation();
     } else if (this.type == "pulse") {
       this.getPulse();
+    } else if (this.type == "temperature") {
+      this.getTemperature();
     }
   },
   methods: {
@@ -143,6 +149,9 @@ export default {
     },
     getPulse() {
       this.$store.dispatch("bodyMeasurement/getPulse");
+    },
+    getTemperature() {
+      this.$store.dispatch("bodyMeasurement/getTemperature");
     }
   },
   watch: {

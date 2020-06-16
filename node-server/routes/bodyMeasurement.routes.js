@@ -8,6 +8,7 @@ const Height = db.bodyMeasurementDB.height
 const BloodPressure = db.bodyMeasurementDB.bloodPressure
 const OxygenSaturation = db.bodyMeasurementDB.oxygenSaturation
 const Pulse = db.bodyMeasurementDB.pulse
+const Temperature = db.bodyMeasurementDB.temperature
 
 router.post('/addWeight', async (req, res) => {
   try {
@@ -205,6 +206,31 @@ router.get('/getPulse', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while fetching the pulse"
+    })
+  }
+})
+
+router.post('/addTemperature', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Add Temperature Data____')
+    console.log(data)
+    const newTemperature = await Temperature.bulkCreate(data)
+    res.send(newTemperature)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the temperature"
+    })
+  }
+})
+
+router.get('/getTemperature', async (req, res) => {
+  try {
+    const queryResult = await Temperature.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the temperature"
     })
   }
 })
