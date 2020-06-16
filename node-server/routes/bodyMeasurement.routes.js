@@ -315,5 +315,4 @@ router.get('/getTemperature', async (req, res) => {
   }
 })
 
-
 module.exports = router

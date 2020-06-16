@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     handleClickOnGInCardHeader() {
-      console.log("handleClickOnGInCardHeader");
+      this.$store.commit("showGraphAllBMTabInLayer2");
     }
   }
 };

@@ -88,15 +88,20 @@ export default {
     multiStateDisplayAreaCtList(state) {
       let list = []
       state.list.forEach(item => {
-        const result = allComponentsList.filter(card => {
-          return card.abbreviation == item.toLowerCase()
-        })
-        // const verifyComponentType = rootState.component.list.filter(component => {
-        //   return component.type.toLowerCase() == state.componentType.toLowerCase() && component.name.toLowerCase() == item.toLowerCase()
-        // }).length > 0
-
-        if (result.length > 0) {
-          list.push(result[0])
+        console.log(item)
+        if (item == "Bm") {
+          list.push({
+            key: "bodyMeasurements",
+            value: require("@/components/patient/BodyMeasurements/MultiStateCard").default,
+            abbreviation: "Bm"
+          })
+        } else {
+          const result = allComponentsList.filter(card => {
+            return card.abbreviation == item.toLowerCase()
+          })
+          if (result.length > 0) {
+            list.push(result[0])
+          }
         }
       })
 

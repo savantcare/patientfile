@@ -10,7 +10,8 @@ export default {
     goalTabType: '',
     goalData: null,
     tabValue: "",
-    bmElementType: ""
+    bmElementType: "",
+    bmElement: null
   },
   mutations: {
     setTabDialogVisibility(state, value) {
@@ -273,11 +274,32 @@ export default {
       const tab = {
         label: `Change ${label}`,
         value: require("@/components/patient/BodyMeasurements/Layer2/UpdateBMElement.vue").default,
-        name: "tab-add-bm-element"
+        name: "tab-change-bm-element"
       }
       state.tabList = [tab]
       state.visibility = true
       state.bmElementType = type
+      state.tabValue = tab.name
+    },
+    showGraphBMElementTabInLayer2(state, params) {
+      state.bmElement = params
+      const tab = {
+        label: `Graph of ${params.label}`,
+        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMElement.vue").default,
+        name: "tab-graph-bm-element"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.tabValue = tab.name
+    },
+    showGraphAllBMTabInLayer2(state) {
+      const tab = {
+        label: `Body Measurement Graph`,
+        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMAll.vue").default,
+        name: "tab-graph-bm-all"
+      }
+      state.tabList = [tab]
+      state.visibility = true
       state.tabValue = tab.name
     }
   }

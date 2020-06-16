@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="text-align: right;">
-      <el-button type="text" size="mini" @click="handleClickAddButton">Add</el-button>
+      <el-button type="text" size="mini" @click="handleClickAddButton">C</el-button>
     </div>
     <ve-line :data="chartData" :legend-visible="false" ref="chart"></ve-line>
   </div>
