@@ -7,42 +7,43 @@
     <div slot="header" class="clearfix">
       <CardHeader
         ctName="Mental status exam"
-        actions="A,M,F,D,X,R"
+        actions="M,F,R"
         ref="card_header"
         keyId="mental_status_exam"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
-        @handleClickOnAInCardHeader="handleClickOnAInCardHeader"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
-        @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
-        @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
         :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
       />
     </div>
-    <DataTable
-      ctName="Mental status exam"
-      keyId="mental_status_exam"
-      :typeOfStateDisplayArea="typeOfStateDisplayArea"
-      @handleSelectionChange="handleSelectionChange"
-      @handleClickOnCInDataRow="handleClickOnCInDataRow"
-      @handleClickOnDInDataRow="handleClickOnDInDataRow"
-      @updatePriority="updatePriority"
-      @updateTableList="updateTableList"
-      :columns="columns"
-      :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
-    />
-    <!-- TODO: Not clear what updateTableList does -->
+ <el-tabs tab-position="left">
+    <el-tab-pane label="Appearence">Good grooming and heigine</el-tab-pane>
+    <el-tab-pane label="Thought process">Lniear, logical and goal directed</el-tab-pane>
+    <el-tab-pane label="Attitude">Attitude</el-tab-pane>
+    <el-tab-pane label="Constitutional">Constitutional</el-tab-pane>
+    <el-tab-pane label="Psychomotor">Psychomotor</el-tab-pane>
+    <el-tab-pane label="Cognition">Cognition</el-tab-pane>
+    <el-tab-pane label="Eye-contact">Eye-contact</el-tab-pane>
+    <el-tab-pane label="Insight">Insight</el-tab-pane>
+    <el-tab-pane label="Speech">Speech</el-tab-pane>
+    <el-tab-pane label="Judgement">Judgement</el-tab-pane>
+    <el-tab-pane label="Mood / affect">Mood / affect</el-tab-pane>
+    <el-tab-pane label="Impulse control">Impulse control</el-tab-pane>
+    <el-tab-pane label="Thought content">Thought content</el-tab-pane>
+    <el-tab-pane label="Neurological">Neurological</el-tab-pane>
+    <el-tab-pane label="Perception">Perception</el-tab-pane>
+
+  </el-tabs>
+
   </el-card>
 </template>
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import DataTable from "@/components/common/DataTable";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
 export default {
   components: {
-    CardHeader,
-    DataTable
+    CardHeader
   },
   props: {
     typeOfStateDisplayArea: {
@@ -65,37 +66,8 @@ export default {
     };
   },
   methods: {
-    // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
-
-    handleClickOnAInCardHeader() {
-      /* 
-      Ref: https://vuex.vuejs.org/guide/mutations.html
-      The only way to actually change state in a Vuex store is by committing a mutation. 
-      Vuex mutations are very similar to events: each mutation has a string type and a handler. 
-      The handler function is 
-        1. Where we perform actual state modifications, 
-        2. Where we will receive the state as the first argument.
-
-      The following line invokes the code in: vue-client/src/store/modules/Layer2MultiTabDialogState.js#L80  
-
-      QUESTION: How is multiTabDialogLayer2 getting this event.
-
-      Due to using a single state tree, all state of our application is contained inside one big object. However, as our application grows in scale, the store can get really bloated.
-      To help with that, Vuex allows us to divide our store into modules. Each module can contain its own state, mutations, actions, getters, and even nested modules
-      Ref: https://vuex.vuejs.org/guide/modules.html
-
-      showAddRecommendationTabInLayer2 is a mutation inside module -> Layer2MultiTabDialogState.js but it can be called from here.
-
-      */
-      this.$store.commit("showAddRecommendationTabInLayer2");
-    },
-
     handleClickOnMInCardHeader() {
-      this.$store.commit("showMultiChangeRecommendationTabInLayer2");
-    },
-
-    handleClickOnXInCardHeader() {
-      -this.$store.commit("showRecommendationDiscontinueHistoryTabInLayer2");
+      this.$store.commit("showMultiChangeMSETabInLayer2");
     },
 
     handleClickOnFInCardHeader() {
@@ -123,10 +95,6 @@ export default {
 
     // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
 
-    handleClickOnCInDataRow(data) {
-      this.$store.commit("showChangeRecommendationsTabInLayer2", data);
-    },
-
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
       this.selectedRows = value;
@@ -138,26 +106,6 @@ export default {
 
     //-------------- Category 4/4: Functions to manage DB changes -----------------------
 
-    handleClickOnDInCardHeader() {
-      let selectedIds = [];
-      this.selectedRows.forEach(item => {
-        selectedIds.push(item.id);
-      });
-      this.$store.dispatch("dbMultiDiscontinueRecommendationsInSM", {
-        selectedIds: selectedIds,
-        notify: this.$notify,
-        selectedDatas: this.selectedRows
-      });
-    },
-
-    handleClickOnDInDataRow(data) {
-      this.$store.dispatch("dbDiscontinueRecommendationInSM", {
-        data: data,
-        notify: this.$notify
-      });
-    },
-
-    // TODO: Rename this to handleUpdatePriority()
     async updatePriority(changedDatas) {
       const TOKEN = localStorage.getItem("token");
 
