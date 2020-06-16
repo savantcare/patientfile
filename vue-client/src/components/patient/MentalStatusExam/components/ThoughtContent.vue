@@ -2,33 +2,22 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Attitude</span>
+        <span>Thought content</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
-      <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
-      </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
   </div>
 </template>
 
 <script>
-const attitudeOptions = [
-  "Pleasant and cooperative",
-  "Uncooperative",
-  "Hostile or defiant",
-  "Guarded",
-  "Evasive",
-  "Apathetic",
-  "Disorganized behavior"
-];
+const eyeContactOptions = ["Appropriate", "Downcast", "Intense", "Fleeting"];
 
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      attitude: attitudeOptions,
+      eyeContact: eyeContactOptions,
       textarea: ""
     };
   },

@@ -3,26 +3,20 @@
     <el-col>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>Constitutional</span>
+          <span>Psychomotor</span>
           <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
         </div>
-        <el-checkbox-group v-model="checkboxGroup4" size="mini">
-          <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
-        </el-checkbox-group>
         <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
       </el-card>
     </el-col>
   </div>
 </template>
- 
-<script>
-const constitutionalOptions = ["Vitals signs stable"];
 
+<script>
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      consitutional: constitutionalOptions,
       textarea: ""
     };
   },

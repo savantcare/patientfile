@@ -1,178 +1,70 @@
 <template>
-<div>
+  <div>
     <el-row :gutter="12">
-      
       <el-col>
-          <Appearance></Appearance>
+        <Appearance></Appearance>
       </el-col>
 
       <el-col>
-          <ThoughtProcess></ThoughtProcess>
+        <ThoughtProcess></ThoughtProcess>
       </el-col>
 
       <el-col>
-           <Attitude></Attitude>
+        <Attitude></Attitude>
       </el-col>
-    
     </el-row>
 
     <el-row>
       <el-col>
-           <Constitutional></Constitutional>
+        <Constitutional></Constitutional>
       </el-col>
       <el-col>
-           <EyeContact></EyeContact>
+        <EyeContact></EyeContact>
       </el-col>
       <el-col>
-           <Cognition></Cognition>
+        <Cognition></Cognition>
       </el-col>
-    
-    </el-row>
-    
-    <el-row>
-    
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Psychomotor</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-    
-    </el-row>
-    
-    <el-row>
-      <el-col>
-      </el-col>
-    
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Insight</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-    
     </el-row>
 
     <el-row>
-
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Judgement</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Mood / affect</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-
+      <Psychomotor></Psychomotor>
     </el-row>
 
     <el-row>
       <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Impulse control</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
+        <Insight></Insight>
       </el-col>
 
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Thought content</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Neurological</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
-
+      <el-col></el-col>
     </el-row>
 
     <el-row>
       <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Preception</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
+        <Judgement></Judgement>
+      </el-col>
+
+      <el-col>
+        <MoodAffect></MoodAffect>
+      </el-col>
+    </el-row>
+
+    <el-row>
+      <el-col>
+        <ImpulseControl></ImpulseControl>
+      </el-col>
+
+      <el-col>
+        <ThoughtContent></ThoughtContent>
+      </el-col>
+
+      <el-col>
+        <Neurological></Neurological>
+      </el-col>
+    </el-row>
+
+    <el-row>
+      <el-col>
+        <Perception></Perception>
       </el-col>
       <el-col></el-col>
     </el-row>
@@ -180,18 +72,20 @@
 </template>
 
 <script>
-
-
-
-
-
-
 import Appearance from "@/components/patient/MentalStatusExam/components/Appearance";
 import ThoughtProcess from "@/components/patient/MentalStatusExam/components/ThoughtProcess";
 import Attitude from "@/components/patient/MentalStatusExam/components/Attitude";
 import Cognition from "@/components/patient/MentalStatusExam/components/Cognition";
 import Constitutional from "@/components/patient/MentalStatusExam/components/Constitutional";
 import EyeContact from "@/components/patient/MentalStatusExam/components/EyeContact";
+import ImpulseControl from "@/components/patient/MentalStatusExam/components/ImpulseControl";
+import Insight from "@/components/patient/MentalStatusExam/components/Insight";
+import Judgement from "@/components/patient/MentalStatusExam/components/Judgement";
+import MoodAffect from "@/components/patient/MentalStatusExam/components/MoodAffect";
+import Neurological from "@/components/patient/MentalStatusExam/components/Neurological";
+import Perception from "@/components/patient/MentalStatusExam/components/Perception";
+import Psychomotor from "@/components/patient/MentalStatusExam/components/Psychomotor";
+import ThoughtContent from "@/components/patient/MentalStatusExam/components/ThoughtContent";
 
 export default {
   data() {
@@ -206,7 +100,15 @@ export default {
     Attitude,
     Cognition,
     Constitutional,
-    EyeContact
+    EyeContact,
+    ImpulseControl,
+    Insight,
+    Judgement,
+    MoodAffect,
+    Neurological,
+    Perception,
+    Psychomotor,
+    ThoughtContent
   },
   methods: {
     onClickSave(rec) {
