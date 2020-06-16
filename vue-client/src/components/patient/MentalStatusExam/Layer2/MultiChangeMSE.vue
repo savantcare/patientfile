@@ -17,23 +17,14 @@
     </el-row>
 
     <el-row>
-          <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Constitutional</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
+      <el-col>
+           <Constitutional></Constitutional>
+      </el-col>
+      <el-col>
+           <EyeContact></EyeContact>
+      </el-col>
+      <el-col>
+           <Cognition></Cognition>
       </el-col>
     
     </el-row>
@@ -56,44 +47,10 @@
         </el-card>
       </el-col>
     
-      <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Cognition</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in cognition" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
-      </el-col>
     </el-row>
     
     <el-row>
       <el-col>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>Eye-contact</span>
-            <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-          </div>
-          <el-checkbox-group v-model="checkboxGroup4" size="mini">
-            <el-checkbox-button v-for="app in eyeContact" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <el-input
-            type="textarea"
-            autosize
-            :rows="2"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-card>
       </el-col>
     
       <el-col>
@@ -225,37 +182,31 @@
 <script>
 
 
-const cognitionOptions = [
-  "Grossly intact",
-  "no memory impairment",
-  "adequate fund of knowledge",
-  "no language deficit",
-  "normal attention",
-  "Impaired",
-  "Fluctuating"
-];
 
-const constitutionalOptions = ["Vitals signs stable"];
 
-const eyeContactOptions = ["Appropriate", "Downcast", "Intense", "Fleeting"];
+
 
 import Appearance from "@/components/patient/MentalStatusExam/components/Appearance";
 import ThoughtProcess from "@/components/patient/MentalStatusExam/components/ThoughtProcess";
 import Attitude from "@/components/patient/MentalStatusExam/components/Attitude";
+import Cognition from "@/components/patient/MentalStatusExam/components/Cognition";
+import Constitutional from "@/components/patient/MentalStatusExam/components/Constitutional";
+import EyeContact from "@/components/patient/MentalStatusExam/components/EyeContact";
+
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      cognition: cognitionOptions,
-      consitutional: constitutionalOptions,
-      eyeContact: eyeContactOptions,
       textarea: ""
     };
   },
   components: {
     Appearance,
     ThoughtProcess,
-    Attitude
+    Attitude,
+    Cognition,
+    Constitutional,
+    EyeContact
   },
   methods: {
     onClickSave(rec) {
