@@ -65,17 +65,29 @@ export default {
           const myId = this.$store.state.userId;
           this.bmElementForm.elements.forEach(element => {
             const measurementDate = new Date(element.date).toDateString();
-            elementList.push({
+            let data = {
               patientUUID: patientId,
-              weightInPounds: element.value,
               measurementDate: measurementDate,
               Notes: element.notes,
               recordChangedByUUID: myId,
               recordChangedFromIPAddress: ipAddress
-            });
+            };
+            if (this.type == "weight") {
+              data["weightInPounds"] = element.value;
+            } else if (this.type == "bmi") {
+              data["bmiValue"] = element.value;
+            }
+            elementList.push(data);
           });
 
-          await this.$store.dispatch("bodyMeasurement/dbAddWeightInSM", {
+          let dispatchName = "";
+          if (this.type == "weight") {
+            dispatchName = "bodyMeasurement/dbAddWeightInSM";
+          } else if (this.type == "bmi") {
+            dispatchName = "bodyMeasurement/dbAddBmiInSM";
+          }
+
+          await this.$store.dispatch(dispatchName, {
             data: elementList,
             notify: this.$notify
           });
@@ -89,7 +101,11 @@ export default {
       });
     }
   },
-  computed: {},
+  computed: {
+    type() {
+      return this.$store.state.multiTabDialogLayer2.bmElementType;
+    }
+  },
   mounted() {},
   watch: {},
   components: {}
