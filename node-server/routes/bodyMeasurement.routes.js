@@ -4,6 +4,7 @@ const Weight = db.bodyMeasurementDB.weight
 const BMI = db.bodyMeasurementDB.bmi
 const WaistCircumference = db.bodyMeasurementDB.waistCircumference
 const BloodSugar = db.bodyMeasurementDB.bloodSugar
+const Height = db.bodyMeasurementDB.height
 
 router.post('/addWeight', async (req, res) => {
   try {
@@ -101,6 +102,31 @@ router.get('/getBloodSugar', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while fetching the bloodsugar"
+    })
+  }
+})
+
+router.post('/addHeight', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Add Height Data____')
+    console.log(data)
+    const newHeight = await Height.bulkCreate(data)
+    res.send(newHeight)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Height"
+    })
+  }
+})
+
+router.get('/getHeight', async (req, res) => {
+  try {
+    const queryResult = await Height.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the height"
     })
   }
 })

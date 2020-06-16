@@ -43,7 +43,8 @@ export default {
         { label: "Weight", value: "weight" },
         { label: "BMI", value: "bmi" },
         { label: "Waist Circumference", value: "waistCircumference" },
-        { label: "Blood Sugar", value: "bloodSugar" }
+        { label: "Blood Sugar", value: "bloodSugar" },
+        { label: "Height", value: "height" }
       ],
       tab: ""
     };

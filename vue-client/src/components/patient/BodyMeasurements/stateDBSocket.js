@@ -5,7 +5,8 @@ const state = {
   weights: [],
   bmis: [],
   waistCircumferences: [],
-  bloodSugars: []
+  bloodSugars: [],
+  heights: []
 }
 const mutations = {
   setWeights(state, value) {
@@ -19,6 +20,9 @@ const mutations = {
   },
   setBloodSugars(state, value) {
     state.bloodSugars = value
+  },
+  setHeights(state, value) {
+    state.heights = value
   }
 }
 const actions = {
@@ -181,7 +185,7 @@ const actions = {
       } else {
         notify({
           title: "Error",
-          message: "Failed to add waist circumferences"
+          message: "Failed to add blood sugar"
         })
       }
     } catch (ex) {
@@ -200,7 +204,53 @@ const actions = {
         const json = await response.json()
         commit("setBloodSugars", json)
       } else {
-        console.log("Failed to fetch waist circumferences")
+        console.log("Failed to fetch blood sugar")
+      }
+    } catch (ex) {
+      console.log("Server connection error")
+    }
+  },
+  async dbAddHeightInSM({ state, commit }, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addHeight`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+        let heights = [...state.heights, ...data]
+        commit("setHeights", heights)
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add height"
+        })
+      }
+    } catch (ex) {
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getHeight({ commit },) {
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getHeight`, {
+        headers: { "Authorization": "Bearer " + TOKEN, }
+      })
+      if (response.ok) {
+        const json = await response.json()
+        commit("setHeights", json)
+      } else {
+        console.log("Failed to fetch heights")
       }
     } catch (ex) {
       console.log("Server connection error")

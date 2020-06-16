@@ -28,6 +28,8 @@ export default {
         chartData = [...this.$store.state.bodyMeasurement.waistCircumferences];
       } else if (this.type == "bloodSugar") {
         chartData = [...this.$store.state.bodyMeasurement.bloodSugars];
+      } else if (this.type == "height") {
+        chartData = [...this.$store.state.bodyMeasurement.heights];
       }
 
       chartData = chartData.sort((data1, data2) => {
@@ -51,6 +53,8 @@ export default {
           value = item.waistCircumferenceInInches;
         } else if (this.type == "bloodSugar") {
           value = item.bloodSugar;
+        } else if (this.type == "height") {
+          value = item.heightInInch;
         }
 
         rows.push({
@@ -74,6 +78,8 @@ export default {
       this.getWaistCircumference();
     } else if (this.type == "bloodSugar") {
       this.getBloodSugar();
+    } else if (this.type == "height") {
+      this.getHeight();
     }
   },
   methods: {
@@ -94,6 +100,9 @@ export default {
     },
     getBloodSugar() {
       this.$store.dispatch("bodyMeasurement/getBloodSugar");
+    },
+    getHeight() {
+      this.$store.dispatch("bodyMeasurement/getHeight");
     }
   },
   watch: {
