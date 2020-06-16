@@ -213,23 +213,32 @@ router.get('/getBloodPressure', async (req, res) => {
   }
 })
 
-router.post('/addOxygenSaturation', async (req, res) => {
+router.post('/updateOxygenSaturation', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add OxygenSaturation Data____')
+    console.log('___Update OxygenSaturation Data____')
     console.log(data)
-    const newOxygenSaturation = await OxygenSaturation.bulkCreate(data)
-    res.send(newOxygenSaturation)
+
+    const oxygenSaturations = await OxygenSaturation.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (oxygenSaturations.length > 0) {
+      result = await OxygenSaturation.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await OxygenSaturation.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the oxygen saturation"
+      message: err.message || "Some error occurred while update the oxygen saturation"
     })
   }
 })
 
 router.get('/getOxygenSaturation', async (req, res) => {
   try {
-    const queryResult = await OxygenSaturation.findAll()
+    const queryResult = await OxygenSaturation.sequelize.query('SELECT * FROM oxygenSaturation FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({

@@ -327,10 +327,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddOxygenSaturationInSM({ state, commit }, params) {
+  async dbUpdateOxygenSaturationInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addOxygenSaturation`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateOxygenSaturation`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -343,12 +343,13 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let oxygenSaturations = [...state.oxygenSaturations, ...data]
+        let oxygenSaturations = state.oxygenSaturations
+        oxygenSaturations.push(data)
         commit("setOxygenSaturations", oxygenSaturations)
       } else {
         notify({
           title: "Error",
-          message: "Failed to add oxygen saturations"
+          message: "Failed to update oxygen saturations"
         })
       }
     } catch (ex) {
