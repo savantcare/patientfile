@@ -42,7 +42,8 @@ export default {
       bmElements: [
         { label: "Weight", value: "weight" },
         { label: "BMI", value: "bmi" },
-        { label: "Waist Circumference", value: "waistCircumference" }
+        { label: "Waist Circumference", value: "waistCircumference" },
+        { label: "Blood Sugar", value: "bloodSugar" }
       ],
       tab: ""
     };

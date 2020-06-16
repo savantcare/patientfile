@@ -78,6 +78,8 @@ export default {
               data["bmiValue"] = element.value;
             } else if (this.type == "waistCircumference") {
               data["waistCircumferenceInInches"] = element.value;
+            } else if (this.type == "bloodSugar") {
+              data["bloodSugar"] = element.value;
             }
             elementList.push(data);
           });
@@ -89,6 +91,8 @@ export default {
             dispatchName = "bodyMeasurement/dbAddBmiInSM";
           } else if (this.type == "waistCircumference") {
             dispatchName = "bodyMeasurement/dbAddWaistCircumferenceInSM";
+          } else if (this.type == "bloodSugar") {
+            dispatchName = "bodyMeasurement/dbAddBloodSugarInSM";
           }
 
           await this.$store.dispatch(dispatchName, {

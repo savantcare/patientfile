@@ -4,7 +4,8 @@ import { BODY_MEASUREMENT_API_URL } from "@/const/others.js"
 const state = {
   weights: [],
   bmis: [],
-  waistCircumferences: []
+  waistCircumferences: [],
+  bloodSugars: []
 }
 const mutations = {
   setWeights(state, value) {
@@ -15,6 +16,9 @@ const mutations = {
   },
   setWaistCircumferences(state, value) {
     state.waistCircumferences = value
+  },
+  setBloodSugars(state, value) {
+    state.bloodSugars = value
   }
 }
 const actions = {
@@ -156,6 +160,52 @@ const actions = {
       console.log("Server connection error")
     }
   },
+  async dbAddBloodSugarInSM({ state, commit }, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addBloodSugar`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+        let bloodSugars = [...state.bloodSugars, ...data]
+        commit("setBloodSugars", bloodSugars)
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add waist circumferences"
+        })
+      }
+    } catch (ex) {
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getBloodSugar({ commit },) {
+    try {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getBloodSugar`, {
+        headers: { "Authorization": "Bearer " + TOKEN, }
+      })
+      if (response.ok) {
+        const json = await response.json()
+        commit("setBloodSugars", json)
+      } else {
+        console.log("Failed to fetch waist circumferences")
+      }
+    } catch (ex) {
+      console.log("Server connection error")
+    }
+  }
 }
 
 export default {

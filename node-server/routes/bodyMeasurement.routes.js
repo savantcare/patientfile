@@ -2,7 +2,8 @@ const router = require('express').Router()
 const db = require('../models')
 const Weight = db.bodyMeasurementDB.weight
 const BMI = db.bodyMeasurementDB.bmi
-const waistCircumference = db.bodyMeasurementDB.waistCircumference
+const WaistCircumference = db.bodyMeasurementDB.waistCircumference
+const BloodSugar = db.bodyMeasurementDB.bloodSugar
 
 router.post('/addWeight', async (req, res) => {
   try {
@@ -59,7 +60,7 @@ router.post('/addWaistCircumference', async (req, res) => {
     const { data } = req.body
     console.log('___Add waistCircumference Data____')
     console.log(data)
-    const newWaistCircumference = await waistCircumference.bulkCreate(data)
+    const newWaistCircumference = await WaistCircumference.bulkCreate(data)
     res.send(newWaistCircumference)
   } catch (err) {
     res.status(500).send({
@@ -70,11 +71,36 @@ router.post('/addWaistCircumference', async (req, res) => {
 
 router.get('/getWaistCircumferences', async (req, res) => {
   try {
-    const queryResult = await waistCircumference.findAll()
+    const queryResult = await WaistCircumference.findAll()
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while fetching the circumference"
+      message: err.message || "Some error occurred while fetching the wasit circumference"
+    })
+  }
+})
+
+router.post('/addBloodSugar', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Add BloodSugar Data____')
+    console.log(data)
+    const newBloodSugar = await BloodSugar.bulkCreate(data)
+    res.send(newBloodSugar)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the blood sugar"
+    })
+  }
+})
+
+router.get('/getBloodSugar', async (req, res) => {
+  try {
+    const queryResult = await BloodSugar.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the bloodsugar"
     })
   }
 })
