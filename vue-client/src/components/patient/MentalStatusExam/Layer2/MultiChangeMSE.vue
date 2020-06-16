@@ -27,7 +27,7 @@
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
       <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
+        <el-checkbox-button v-for="app in attitude" :label="app" :key="app">{{app}}</el-checkbox-button>
       </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
@@ -53,6 +53,9 @@
         <span>Cognition</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
+      <el-checkbox-group v-model="checkboxGroup4" size="mini">
+        <el-checkbox-button v-for="app in cognition" :label="app" :key="app">{{app}}</el-checkbox-button>
+      </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
 
