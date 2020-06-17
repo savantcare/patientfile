@@ -5,16 +5,24 @@
         <span>Neurological</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
+      <el-checkbox-group v-model="checkboxGroup4" size="mini">
+        <el-checkbox-button v-for="neu in neurological" :label="neu" :key="neu">{{neu}}</el-checkbox-button>
+      </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
   </div>
 </template>
  
 <script>
+const neurologicalOptions = [
+  "Gait and station normal",
+  "Gait and station abnormal"
+];
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
+      neurological:neurologicalOptions,
       textarea: ""
     };
   },

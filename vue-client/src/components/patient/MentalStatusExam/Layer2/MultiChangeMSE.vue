@@ -35,7 +35,9 @@
         <Insight></Insight>
       </el-col>
 
-      <el-col></el-col>
+      <el-col>
+        <Speech></Speech>
+      </el-col>
     </el-row>
 
     <el-row>
@@ -85,6 +87,7 @@ import MoodAffect from "@/components/patient/MentalStatusExam/components/MoodAff
 import Neurological from "@/components/patient/MentalStatusExam/components/Neurological";
 import Perception from "@/components/patient/MentalStatusExam/components/Perception";
 import Psychomotor from "@/components/patient/MentalStatusExam/components/Psychomotor";
+import Speech from "@/components/patient/MentalStatusExam/components/Speech";
 import ThoughtContent from "@/components/patient/MentalStatusExam/components/ThoughtContent";
 
 export default {
@@ -108,6 +111,7 @@ export default {
     Neurological,
     Perception,
     Psychomotor,
+    Speech,
     ThoughtContent
   },
   methods: {

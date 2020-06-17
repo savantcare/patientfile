@@ -6,10 +6,29 @@
           <span>Appearence</span>
           <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
         </div>
-        <el-checkbox-group v-model="checkboxGroup4" size="mini">
-          <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
-        </el-checkbox-group>
-        <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
+        <el-form :model="appearenceForm" ref="appearenceForm" class="demo-dynamic">
+          <el-form-item>
+            <el-checkbox-group v-model="checkboxAppearence">
+              <!--  When opened in multi change format size="small" 
+                Ref: https://element.eleme.io/#/en-US/component/checkbox
+              -->
+              <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
+            </el-checkbox-group>
+            <!--  When opened in multi change min-rows=1 -->
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 4}"
+              placeholder="Please input"
+              v-model="textarea"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <!-- When opened in multi change format the Save button will not be there.
+            Since the whole form will be controlled by one Save button
+            -->
+            <el-button type="success" @click="submitForm('appearenceForm')" size="small">Save</el-button>
+          </el-form-item>
+        </el-form>
       </el-card>
     </el-col>
   </div>
@@ -20,10 +39,10 @@ const appearenceOptions = [
   "Good grooming and hyegine",
   "No apparent distree",
   "Well developed, well nourished",
-  "appears stated age",
+  "Appears stated age",
   "Appears younger than stated age",
   "Appears older than stated age",
-  "obese",
+  "Obese",
   "Thin or cachetic",
   "Disheveled, unkempt",
   "Malodorous"
@@ -32,7 +51,9 @@ const appearenceOptions = [
 export default {
   data() {
     return {
-      checkboxGroup4: ["Shanghai"],
+      appearenceForm: { recs: [{ description: "" }] },
+      // When form loads this will have the currently selected values from the DB
+      checkboxAppearence: [""],
       appearence: appearenceOptions,
       textarea: ""
     };
@@ -40,7 +61,7 @@ export default {
   methods: {
     onClickSave(rec) {
       // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateRecommendationInSM", {
+      this.$store.dispatch("dbUpdateAppearenceInSM", {
         data: rec,
         notify: this.$notify
       });
