@@ -1,74 +1,67 @@
 <template>
   <div>
-    <el-row :gutter="12">
-      <el-col>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
         <Appearance></Appearance>
       </el-col>
-
-      <el-col>
-        <ThoughtProcess></ThoughtProcess>
-      </el-col>
-
-      <el-col>
-        <Attitude></Attitude>
+      <el-col :span="12">
+        <ThoughtContent></ThoughtContent>
       </el-col>
     </el-row>
 
-    <el-row>
-      <el-col>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
+        <Attitude></Attitude>
+      </el-col>
+      <el-col :span="12">
         <Constitutional></Constitutional>
       </el-col>
-      <el-col>
+    </el-row>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
         <EyeContact></EyeContact>
       </el-col>
-      <el-col>
+      <el-col :span="12">
         <Cognition></Cognition>
       </el-col>
     </el-row>
-
-    <el-row>
-      <Psychomotor></Psychomotor>
-    </el-row>
-
-    <el-row>
-      <el-col>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
+        <Psychomotor></Psychomotor>
+      </el-col>
+      <el-col :span="12">
         <Insight></Insight>
       </el-col>
-
-      <el-col>
+    </el-row>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
         <Speech></Speech>
       </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col>
+      <el-col :span="12">
         <Judgement></Judgement>
       </el-col>
-
-      <el-col>
+    </el-row>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
+        <ImpulseControl></ImpulseControl>
+      </el-col>
+      <el-col :span="12">
         <MoodAffect></MoodAffect>
       </el-col>
     </el-row>
-
-    <el-row>
-      <el-col>
-        <ImpulseControl></ImpulseControl>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
+        <ThoughtProcess></ThoughtProcess>
       </el-col>
-
-      <el-col>
-        <ThoughtContent></ThoughtContent>
-      </el-col>
-
-      <el-col>
+      <el-col :span="12">
         <Neurological></Neurological>
       </el-col>
     </el-row>
-
-    <el-row>
-      <el-col>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
         <Perception></Perception>
       </el-col>
-      <el-col></el-col>
+      <el-col :span="12"></el-col>
     </el-row>
   </div>
 </template>
@@ -133,6 +126,8 @@ export default {
 
 <style>
 .box-card {
-  width: 700px;
+  width: 500px;
+  min-width: 500px;
+  min-height: 300px;
 }
 </style>
