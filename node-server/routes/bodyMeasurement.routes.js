@@ -18,15 +18,7 @@ router.post('/updateWeight', async (req, res) => {
     const { data } = req.body
     console.log('___Update Weight Data____')
     console.log(data)
-    const weights = await Weight.findAll({ where: { patientUUID: data.patientUUID } })
-    let result = null
-    if (weights.length > 0) {
-      result = await Weight.update(data, {
-        where: { patientUUID: data.patientUUID }
-      })
-    } else {
-      result = await Weight.create(data)
-    }
+    const result = await updateWeight(data)
     res.send(result)
   } catch (err) {
     res.status(500).send({
@@ -34,6 +26,19 @@ router.post('/updateWeight', async (req, res) => {
     })
   }
 })
+
+const updateWeight = async (data) => {
+  const weights = await Weight.findAll({ where: { patientUUID: data.patientUUID } })
+  let result = null
+  if (weights.length > 0) {
+    result = await Weight.update(data, {
+      where: { patientUUID: data.patientUUID }
+    })
+  } else {
+    result = await Weight.create(data)
+  }
+  return result
+}
 
 router.get('/getWeight', async (req, res) => {
   try {
@@ -213,23 +218,32 @@ router.get('/getBloodPressure', async (req, res) => {
   }
 })
 
-router.post('/addOxygenSaturation', async (req, res) => {
+router.post('/updateOxygenSaturation', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add OxygenSaturation Data____')
+    console.log('___Update OxygenSaturation Data____')
     console.log(data)
-    const newOxygenSaturation = await OxygenSaturation.bulkCreate(data)
-    res.send(newOxygenSaturation)
+
+    const oxygenSaturations = await OxygenSaturation.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (oxygenSaturations.length > 0) {
+      result = await OxygenSaturation.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await OxygenSaturation.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the oxygen saturation"
+      message: err.message || "Some error occurred while update the oxygen saturation"
     })
   }
 })
 
 router.get('/getOxygenSaturation', async (req, res) => {
   try {
-    const queryResult = await OxygenSaturation.findAll()
+    const queryResult = await OxygenSaturation.sequelize.query('SELECT * FROM oxygenSaturation FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -238,23 +252,32 @@ router.get('/getOxygenSaturation', async (req, res) => {
   }
 })
 
-router.post('/addPulse', async (req, res) => {
+router.post('/updatePulse', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add Pulse Data____')
+    console.log('___Update Pulse Data____')
     console.log(data)
-    const newPulse = await Pulse.bulkCreate(data)
-    res.send(newPulse)
+
+    const pulse = await Pulse.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (pulse.length > 0) {
+      result = await Pulse.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Pulse.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the pulse"
+      message: err.message || "Some error occurred while update the pulse"
     })
   }
 })
 
 router.get('/getPulse', async (req, res) => {
   try {
-    const queryResult = await Pulse.findAll()
+    const queryResult = await Pulse.sequelize.query('SELECT * FROM pulse FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -263,23 +286,32 @@ router.get('/getPulse', async (req, res) => {
   }
 })
 
-router.post('/addTemperature', async (req, res) => {
+router.post('/updateTemperature', async (req, res) => {
   try {
     const { data } = req.body
-    console.log('___Add Temperature Data____')
+    console.log('___Update Temperature Data____')
     console.log(data)
-    const newTemperature = await Temperature.bulkCreate(data)
-    res.send(newTemperature)
+
+    const temperature = await Temperature.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (temperature.length > 0) {
+      result = await Temperature.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Temperature.create(data)
+    }
+    res.send(result)
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the temperature"
+      message: err.message || "Some error occurred while update the temperature"
     })
   }
 })
 
 router.get('/getTemperature', async (req, res) => {
   try {
-    const queryResult = await Temperature.findAll()
+    const queryResult = await Temperature.sequelize.query('SELECT * FROM temperature FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -288,5 +320,19 @@ router.get('/getTemperature', async (req, res) => {
   }
 })
 
+router.post('/updateBodyMeasurements', async (req, res) => {
+  try {
+    const { patientUUID, recordChangedByUUID, recordChangedFromIPAddress } = req.body
+    if (req.body.waist) {
+      const waist = { ...req.body.waist, patientUUID, recordChangedByUUID, recordChangedFromIPAddress }
+      await updateWeight(waist)
+    }
+    res.send('success')
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while add the body measurements"
+    })
+  }
+})
 
 module.exports = router

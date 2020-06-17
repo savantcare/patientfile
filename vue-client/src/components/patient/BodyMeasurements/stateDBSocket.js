@@ -327,10 +327,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddOxygenSaturationInSM({ state, commit }, params) {
+  async dbUpdateOxygenSaturationInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addOxygenSaturation`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateOxygenSaturation`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -343,12 +343,13 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let oxygenSaturations = [...state.oxygenSaturations, ...data]
+        let oxygenSaturations = state.oxygenSaturations
+        oxygenSaturations.push(data)
         commit("setOxygenSaturations", oxygenSaturations)
       } else {
         notify({
           title: "Error",
-          message: "Failed to add oxygen saturations"
+          message: "Failed to update oxygen saturations"
         })
       }
     } catch (ex) {
@@ -373,10 +374,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddPulseInSM({ state, commit }, params) {
+  async dbUpdatePulseInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addPulse`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updatePulse`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -389,15 +390,18 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let pulse = [...state.pulse, ...data]
+        let pulse = state.pulse
+        pulse.push(data)
+
         commit("setPulse", pulse)
       } else {
         notify({
           title: "Error",
-          message: "Failed to add pulse"
+          message: "Failed to update pulse"
         })
       }
     } catch (ex) {
+      console.log(ex)
       notify({
         title: "Error",
         message: "Server connection error"
@@ -419,10 +423,10 @@ const actions = {
       console.log("Server connection error")
     }
   },
-  async dbAddTemperatureInSM({ state, commit }, params) {
+  async dbUpdateTemperatureInSM({ state, commit }, params) {
     const { data, notify } = params
     try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/addTemperature`, {
+      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/updateTemperature`, {
         headers: {
           "Authorization": "Bearer " + TOKEN,
           "Content-Type": "application/json;charset=utf-8",
@@ -435,7 +439,8 @@ const actions = {
           title: "Success",
           message: "Saved!"
         })
-        let temperature = [...state.temperature, ...data]
+        let temperature = state.temperature
+        temperature.push(data)
         commit("setTemperature", temperature)
       } else {
         notify({
