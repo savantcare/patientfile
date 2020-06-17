@@ -17,8 +17,9 @@ export default {
       })
     },
     setScreeningDetail(state, data) {
+      console.log(data);
       if(data.screentype == 'PHQ9') {
-        state.screenPHQ9AnswerDetail = data
+        state.screenPHQ9AnswerDetail = data.record
       }
     },
     /**
@@ -183,7 +184,7 @@ export default {
         })
       }
     },
-
+  
 
     async getScreeningDetail({ commit }, json) {
       const { patientUUID, screentype, notify  } = json
@@ -200,7 +201,7 @@ export default {
         });
         if (response.ok) {
           let json = await response.json();
-          //console.log(json)
+          console.log(json)
           commit('setScreeningDetail', json)
         } else {
           if (response.status == '401') {
@@ -227,13 +228,13 @@ export default {
     },
 
      // this api store all new screen in db and fetch all latest screen data from db.
-     async addScreeningDetail({commit }, json) {
-      const { data, notify, screentype, date } = json
+     async storeScreeningDetail({commit }, json) {
+      const { data, notify, patientUUID, screentype, updateFlag } = json
       //const originList = state.list
 
       try {
         const response = await fetch(
-          `${SCREENING_API_URL}/addScreeningDetail`, {
+          `${SCREENING_API_URL}/storeScreeningDetail`, {
           headers: {
             "Authorization": "Bearer " + TOKEN,
             "Content-Type": "application/json;charset=utf-8",
@@ -241,14 +242,15 @@ export default {
           method: "POST",
           body: JSON.stringify({
             screentype: screentype,
+            patientUUID:patientUUID,
             data: data,
-            date: date
+            updateFlag: updateFlag
           })
         })
         if (response.ok) {
 
           let json = await response.json();
-          commit('setPatientScreeningList', json)
+          commit('setScreeningDetail', json)
           notify({title: "Success", message: "Saved!"})
         } else {
           notify({title: "Error", message: "Failed to add screening data"})
