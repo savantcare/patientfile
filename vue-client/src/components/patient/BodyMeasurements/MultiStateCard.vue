@@ -248,7 +248,35 @@ export default {
       ];
     }
   },
-  mounted() {}
+  mounted() {
+    if (this.currentWeight == "-") {
+      this.getWeightInfomation();
+    }
+    if (this.type == "-") {
+      this.getBMIInformation();
+    }
+    if (this.type == "-") {
+      this.getWaistCircumference();
+    }
+    if (this.type == "-") {
+      this.getBloodSugar();
+    }
+    if (this.type == "-") {
+      this.getHeight();
+    }
+    if (this.type == "-") {
+      this.getBloodPressure();
+    }
+    if (this.type == "-") {
+      this.getOxygenSaturation();
+    }
+    if (this.type == "-") {
+      this.getPulse();
+    }
+    if (this.type == "-") {
+      this.getTemperature();
+    }
+  }
 };
 </script>
 
