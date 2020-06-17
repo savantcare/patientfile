@@ -31,6 +31,24 @@
               <el-button type="success" @click="submitForm('bmElementForm')" size="small">Save</el-button>
             </el-form-item>
           </el-form>
+
+          <el-timeline>
+            <el-timeline-item
+              v-for="(log, index) in pageChangeLog"
+              :key="`log-${index}`"
+              type="primary"
+              size="large"
+              :timestamp="log.date"
+            >{{log.value}}</el-timeline-item>
+          </el-timeline>
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :page-size="5"
+            :total="changeLog.length"
+            :current-page.sync="currentPage"
+            hide-on-single-page
+          ></el-pagination>
         </el-card>
       </el-col>
     </el-row>
@@ -41,7 +59,9 @@
 export default {
   data() {
     return {
-      bmElementForm: { value: 1, date: new Date(), notes: "" }
+      bmElementForm: { value: 1, date: new Date(), notes: "" },
+      changeLog: [],
+      currentPage: 0
     };
   },
   methods: {
@@ -132,6 +152,7 @@ export default {
     },
 
     getCurrentValue() {
+      this.changeLog = [];
       if (this.type == "weight") {
         let weights = [...this.$store.state.bodyMeasurement.weights];
         weights = this.sortByDate(weights);
@@ -142,6 +163,13 @@ export default {
             notes: currentWeight.Notes,
             date: currentWeight.measurementDate
           };
+
+          for (var weight of weights.slice(0, weights.length - 2)) {
+            this.changeLog.push({
+              date: weight.measurementDate,
+              value: weight.weightInPounds
+            });
+          }
         }
         return;
       } else if (this.type == "bmi") {
@@ -154,6 +182,13 @@ export default {
             notes: currentBmi.Notes,
             date: currentBmi.measurementDate
           };
+
+          for (var bmi of bmis.slice(0, bmis.length - 2)) {
+            this.changeLog.push({
+              date: bmi.measurementDate,
+              value: bmi.bmiValue
+            });
+          }
         }
         return;
       } else if (this.type == "waistCircumference") {
@@ -169,6 +204,16 @@ export default {
             notes: currentValue.Notes,
             date: currentValue.measurementDate
           };
+
+          for (var waistCircumference of waistCircumferences.slice(
+            0,
+            waistCircumferences.length - 2
+          )) {
+            this.changeLog.push({
+              date: waistCircumference.measurementDate,
+              value: waistCircumference.waistCircumferenceInInches
+            });
+          }
         }
         return;
       } else if (this.type == "bloodSugar") {
@@ -181,6 +226,13 @@ export default {
             notes: currentBloodSugar.Notes,
             date: currentBloodSugar.measurementDate
           };
+
+          for (var bs of bloodSugars.slice(0, bloodSugars.length - 2)) {
+            this.changeLog.push({
+              date: bs.measurementDate,
+              value: bs.bloodSugar
+            });
+          }
         }
         return;
       } else if (this.type == "height") {
@@ -193,6 +245,13 @@ export default {
             notes: currentHeight.Notes,
             date: currentHeight.measurementDate
           };
+
+          for (var h of heights.slice(0, heights.length - 2)) {
+            this.changeLog.push({
+              date: h.measurementDate,
+              value: h.heightInInch
+            });
+          }
         }
         return;
       } else if (this.type == "bloodPressure") {
@@ -208,6 +267,13 @@ export default {
             notes: currentBloodPresure.Notes,
             date: currentBloodPresure.measurementDate
           };
+
+          for (var bp of bloodPressures.slice(0, bloodPressures.length - 2)) {
+            this.changeLog.push({
+              date: bp.measurementDate,
+              value: bp.systolicValue + "/" + bp.diastolicValue
+            });
+          }
         }
         return;
       } else if (this.type == "oxygenSaturation") {
@@ -223,6 +289,16 @@ export default {
             notes: currentOxygenSaturation.Notes,
             date: currentOxygenSaturation.measurementDate
           };
+
+          for (var os of oxygenSaturations.slice(
+            0,
+            oxygenSaturations.length - 2
+          )) {
+            this.changeLog.push({
+              date: os.measurementDate,
+              value: os.oxygenSaturation
+            });
+          }
         }
         return;
       } else if (this.type == "pulse") {
@@ -235,6 +311,13 @@ export default {
             notes: currentPulse.Notes,
             date: currentPulse.measurementDate
           };
+
+          for (var p of pulse.slice(0, pulse.length - 2)) {
+            this.changeLog.push({
+              date: p.measurementDate,
+              value: p.beatsPerMinuteValue
+            });
+          }
         }
         return;
       } else if (this.type == "temperature") {
@@ -247,6 +330,12 @@ export default {
             notes: currentTemperature.Notes,
             date: currentTemperature.measurementDate
           };
+          for (var t of temperature.slice(0, temperature.length - 2)) {
+            this.changeLog.push({
+              date: t.measurementDate,
+              value: t.temperatureInFarehnite
+            });
+          }
         }
         return;
       }
@@ -261,6 +350,15 @@ export default {
     },
     dialogVisibility() {
       return this.$store.state.multiTabDialogLayer2.visibility;
+    },
+    pageChangeLog() {
+      let result = [];
+      for (var i = (this.currentPage - 1) * 5; i < this.currentPage * 5; i++) {
+        if (this.changeLog[i] != null) {
+          result.push(this.changeLog[i]);
+        }
+      }
+      return result;
     }
   },
   mounted() {
