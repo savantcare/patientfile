@@ -33,91 +33,91 @@
       <el-tab-pane label="Attitude">
         Attitude
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleAttitudeChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Constitutional">
         Constitutional
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleConstitutionalChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Psychomotor">
         Psychomotor
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handlePsychomotorChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Cognition">
         Cognition
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleCognitionChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Eye-contact">
         Eye-contact
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleEyeContactChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Insight">
         Insight
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleInsightChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Speech">
         Speech
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSpeechChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Judgement">
         Judgement
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleJudgementChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Mood / affect">
         Mood / affect
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleMoodAffectChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Impulse control">
         Impulse control
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleImpulseControlChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Thought content">
         Thought content
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleThoughtContentChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Neurological">
         Neurological
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleNeurologicalChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Perception">
         Perception
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleClickChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -169,6 +169,84 @@ export default {
     },
     handleThoughtProcessChangeButton() {
       this.$store.commit("showChangeMSEThoughtProcessTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleAttitudeChangeButton() {
+      this.$store.commit("showChangeMSEAttitudeTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleConstitutionalChangeButton() {
+      this.$store.commit("showChangeMSEConstitutionalTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handlePsychomotorChangeButton() {
+      this.$store.commit("showChangeMSEPsychomotorTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleCognitionChangeButton() {
+      this.$store.commit("showChangeMSECognitionTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleEyeContactChangeButton() {
+      this.$store.commit("showChangeMSEEyeContactTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleInsightChangeButton() {
+      this.$store.commit("showChangeMSEInsightTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleSpeechChangeButton() {
+      this.$store.commit("showChangeMSESpeechTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleJudgementChangeButton() {
+      this.$store.commit("showChangeMSEJudgementTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleMoodAffectChangeButton() {
+      this.$store.commit("showChangeMSEMoodAffectTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleImpulseControlChangeButton() {
+      this.$store.commit("showChangeMSEImpulseControlTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleThoughtContentChangeButton() {
+      this.$store.commit("showChangeMSEThoughtContentTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleNeurologicalChangeButton() {
+      this.$store.commit("showChangeMSENeurologicalTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handlePerceptionChangeButton() {
+      this.$store.commit("showChangeMSEPerceptionTabInLayer2", {
         label: this.label,
         type: this.type
       });

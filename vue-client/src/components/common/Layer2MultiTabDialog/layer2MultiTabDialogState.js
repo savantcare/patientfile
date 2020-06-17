@@ -166,10 +166,154 @@ export default {
       state.tabValue = tab.name;
     },
 
+    showChangeMSEAttitudeTabInLayer2(state) {
+      const tab = {
+        label: "Change Attitude (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Attitude.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+
+    showChangeMSECognitionTabInLayer2(state) {
+      const tab = {
+        label: "Change Cognition (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Cognition.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEConstitutionalTabInLayer2(state) {
+      const tab = {
+        label: "Change Constitutional (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Constitutional.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEEyeContactTabInLayer2(state) {
+      const tab = {
+        label: "Change Eye Contact (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/EyeContact.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEImpulseControlTabInLayer2(state) {
+      const tab = {
+        label: "Change Impulse Control (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/ImpulseControl.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEInsightTabInLayer2(state) {
+      const tab = {
+        label: "Change Insight (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Insight.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEJudgementTabInLayer2(state) {
+      const tab = {
+        label: "Change Judgement (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Judgement.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEMoodAffectTabInLayer2(state) {
+      const tab = {
+        label: "Change Mood Affect (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/MoodAffect.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSENeurologicalTabInLayer2(state) {
+      const tab = {
+        label: "Change Neurological (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Neurological.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEPerceptionTabInLayer2(state) {
+      const tab = {
+        label: "Change Perception (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Perception.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEPsychomotorTabInLayer2(state) {
+      const tab = {
+        label: "Change Psychomotor (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Psychomotor.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSEThoughtContentTabInLayer2(state) {
+      const tab = {
+        label: "Change Thought Content (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/ThoughtContent.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
     showChangeMSEThoughtProcessTabInLayer2(state) {
       const tab = {
         label: "Change Thought Process (MSE)",
         value: require("@/components/patient/MentalStatusExam/components/ThoughtProcess.vue")
+          .default,
+        name: "tab-change-mse",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangeMSESpeechTabInLayer2(state) {
+      const tab = {
+        label: "Change Speech (MSE)",
+        value: require("@/components/patient/MentalStatusExam/components/Speech.vue")
           .default,
         name: "tab-change-mse",
       };

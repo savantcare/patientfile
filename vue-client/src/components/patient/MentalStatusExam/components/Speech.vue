@@ -2,31 +2,32 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Impulse control</span>
+        <span>Speech</span>
         <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
       </div>
       <el-checkbox-group v-model="checkboxGroup4" size="mini">
-        <el-checkbox-button v-for="impulse in impulseControl" :label="impulse" :key="impulse">{{impulse}}</el-checkbox-button>
+        <el-checkbox-button v-for="spe in speech" :label="spe" :key="spe">{{spe}}</el-checkbox-button>
       </el-checkbox-group>
       <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
     </el-card>
   </div>
 </template>
-
+ 
 <script>
-const impulseControlOptions = [
-  "Good",
-  "Fair",
-  "Questionable",
-  "Poor",
-  "Impaired",
-  "Limited"
+const speechOptions = [
+  "Regular, rate and rhythm",
+  "Fluent",
+  "Incoherent",
+  "Talkative",
+  "Pressured",
+  "Mumbling"
 ];
+
 export default {
   data() {
     return {
       checkboxGroup4: ["Shanghai"],
-      impulseControl: impulseControlOptions,
+      speech: speechOptions,
       textarea: ""
     };
   },
