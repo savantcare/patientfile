@@ -47,9 +47,10 @@ export default {
       let waistCircumferences = this.sortByDate([
         ...this.$store.state.bodyMeasurement.waistCircumferences
       ]);
+
       for (const waistCircumference of waistCircumferences) {
         rows.push({
-          date: this.formatDate(waistCircumferences.measurementDate),
+          date: this.formatDate(waistCircumference.measurementDate),
           waistCircumference: waistCircumference.waistCircumferenceInInches
         });
       }
@@ -59,7 +60,7 @@ export default {
       ]);
       for (const bloodSugar of bloodSugars) {
         rows.push({
-          date: this.formatDate(bloodSugars.measurementDate),
+          date: this.formatDate(bloodSugar.measurementDate),
           bloodSugar: bloodSugar.bloodSugar
         });
       }
