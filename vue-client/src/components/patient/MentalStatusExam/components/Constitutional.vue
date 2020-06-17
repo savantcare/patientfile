@@ -6,10 +6,29 @@
           <span>Constitutional</span>
           <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
         </div>
-        <el-checkbox-group v-model="checkboxGroup4" size="mini">
-          <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
-        </el-checkbox-group>
-        <el-input type="textarea" autosize :rows="2" placeholder="Please input" v-model="textarea"></el-input>
+        <el-form :model="consitutionalForm" ref="consitutionalForm" class="demo-dynamic">
+          <el-form-item>
+            <el-checkbox-group v-model="checkboxConsitutional">
+              <!--  When opened in multi change format size="small" 
+                Ref: https://element.eleme.io/#/en-US/component/checkbox
+              -->
+              <el-checkbox-button v-for="app in consitutional" :label="app" :key="app">{{app}}</el-checkbox-button>
+            </el-checkbox-group>
+            <!--  When opened in multi change min-rows=1 -->
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 4}"
+              placeholder="Please input"
+              v-model="textarea"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <!-- When opened in multi change format the Save button will not be there.
+            Since the whole form will be controlled by one Save button
+            -->
+            <el-button type="success" @click="submitForm('consitutionalForm')" size="small">Save</el-button>
+          </el-form-item>
+        </el-form>
       </el-card>
     </el-col>
   </div>
@@ -21,7 +40,9 @@ const constitutionalOptions = ["Vitals signs stable"];
 export default {
   data() {
     return {
-      checkboxGroup4: ["Shanghai"],
+      consitutionalForm: { recs: [{ description: "" }] },
+      // When form loads this will have the currently selected values from the DB
+      checkboxConsitutional: [""],
       consitutional: constitutionalOptions,
       textarea: ""
     };

@@ -31,7 +31,7 @@ module.exports = (io) => {
 
       //const { patientUUID } = req.query
       const queryResult = await screensListMaster.sequelize.query(
-        'SELECT * FROM  screensListMasters where 1', {
+        'SELECT * FROM  screensListMasters ', {
         //replacements: { patientUUID: patientId },
         type: screensListMaster.sequelize.QueryTypes.SELECT
       })
@@ -66,6 +66,10 @@ module.exports = (io) => {
     try {
     
        const { screentype, patientUUID } = req.query
+       let returnData = {
+        screentype: screentype,
+        record:{}
+      }
 
       if(screentype == 'PHQ9') {
 
@@ -73,8 +77,12 @@ module.exports = (io) => {
           replacements: { patientUUID: patientUUID },
           type: phq9PatientResponse.sequelize.QueryTypes.SELECT
         })
+
+        if (queryResult.length > 0) {
+          returnData.record = queryResult[0]
+        }
         
-      res.send(newScreening)
+        res.send(returnData)
       }
 
     } catch (err) {
@@ -84,21 +92,35 @@ module.exports = (io) => {
     }
   })
 
-  router.post('/addScreeningDetail', async (req, res) => {
+  router.post('/storeScreeningDetail', async (req, res) => {
     try {
-      const { data, screentype, date } = req.body
-
+      const { data, patientUUID, screentype, updateFlag } = req.body
+      let returnData = {
+        screentype: screentype,
+        record:{}
+      }
 
       if(screentype == 'PHQ9') {
-
-        const newScreening = await phq9PatientResponse.bulkCreate(data)
-
-        /*queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses   where patientUUID=:patientUUID', {
-          replacements: { patientUUID: data.patientUUID },
+        if(updateFlag == true) {
+          await phq9PatientResponse.update(data[0], {
+            where: {
+              patientUUID: patientUUID
+            }
+          })
+        }
+        else {
+          await phq9PatientResponse.bulkCreate(data)
+        }
+        queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses   where patientUUID=:patientUUID', {
+          replacements: { patientUUID: patientUUID },
           type: phq9PatientResponse.sequelize.QueryTypes.SELECT
-        })*/
-        
-      res.send(newScreening)
+        })
+
+        if (queryResult.length > 0) {
+          returnData.record = queryResult[0]
+        }
+
+        res.send(returnData)
       }
 
     } catch (err) {
