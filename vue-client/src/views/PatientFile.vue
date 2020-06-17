@@ -136,13 +136,15 @@ src/router/index.js sends control here if the / route is given by the user
         ></component>
       </SplitArea>
       <SplitArea :size="30" :minSize="100" id="currentStateDisplayArea">
-        <transition-group name="list" tag="div">
-          <component
-            v-for="(component, index) in CurrentStateDisplayAreaComponents"
-            :key="`current-state-display-area-component-${index}`"
-            :is="component.value"
-          ></component>
-        </transition-group>
+        <keep-alive>
+          <transition-group name="list" tag="div">
+            <component
+              v-for="(component, index) in CurrentStateDisplayAreaComponents"
+              :key="`current-state-display-area-component-${index}`"
+              :is="component.value"
+            ></component>
+          </transition-group>
+        </keep-alive>
         <search-box-for-commands-from-user ref="search_box"></search-box-for-commands-from-user>
       </SplitArea>
     </Split>
@@ -161,7 +163,8 @@ const TheMultiStateDisplayAreaHeader = () =>
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/common/SearchBoxForCommandsFromUser.vue");
 
-const Layer2MultiTabDialog = () => import("@/components/common/Layer2MultiTabDialog/");
+const Layer2MultiTabDialog = () =>
+  import("@/components/common/Layer2MultiTabDialog/");
 
 // TODO: Rename this to Recommendations/Layer1Card
 const Recommendation = () =>
@@ -239,7 +242,7 @@ export default {
     // setTimeout(() => {
     //   this.$store.dispatch("updateCurrentStateDisplayAreaRow");
     // }, 1000);
-    
+
     // KT: Actions are triggered with the store.dispatch method. Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
     // This changes only once in a long time. When this value is changed on the server DB I expect the doctor to clear their cache on the browser.
     // store.cache.dispatch Dispatches an action if it's not cached and sets it in cache, otherwise it returns cached Promise.
@@ -247,7 +250,7 @@ export default {
     // TODO: The fn call is not getting cached.
     this.$store.cache.dispatch("loadComponents", {
       notify: this.$notify,
-      timeout: 1000000000           // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
+      timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
     // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
