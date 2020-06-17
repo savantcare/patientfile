@@ -361,6 +361,16 @@ export default {
       state.tabList = [tab]
       state.visibility = true
       state.tabValue = tab.name
+    },
+    showUpdateAllBMElementTabInLayer2(state) {
+      const tab = {
+        label: `Change Body Measurement`,
+        value: require("@/components/patient/BodyMeasurements/Layer2/ChangeAllBMElement.vue").default,
+        name: "tab-change-all-bm-element"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.tabValue = tab.name
     }
   }
 }

@@ -391,8 +391,8 @@ const actions = {
           message: "Saved!"
         })
         let pulse = state.pulse
-        pulse.add(data)
-        console.log(pulse)
+        pulse.push(data)
+
         commit("setPulse", pulse)
       } else {
         notify({

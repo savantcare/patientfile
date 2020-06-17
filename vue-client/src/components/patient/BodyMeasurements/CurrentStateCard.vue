@@ -4,10 +4,11 @@
       <div slot="header" class="clearfix">
         <CardHeader
           ctName="Body measurement"
-          actions="F,G"
+          actions="F,M,G"
           :typeOfStateDisplayArea="typeOfStateDisplayArea"
           @handleClickOnGInCardHeader="handleClickOnGInCardHeader"
           @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
+          @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
           ref="card_header"
         />
       </div>
@@ -70,6 +71,9 @@ export default {
       };
       const element = "#body-measurement-multi-state";
       this.$scrollTo(element, 500, options);
+    },
+    handleClickOnMInCardHeader() {
+      this.$store.commit("showUpdateAllBMElementTabInLayer2");
     }
   }
 };

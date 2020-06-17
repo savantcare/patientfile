@@ -18,15 +18,7 @@ router.post('/updateWeight', async (req, res) => {
     const { data } = req.body
     console.log('___Update Weight Data____')
     console.log(data)
-    const weights = await Weight.findAll({ where: { patientUUID: data.patientUUID } })
-    let result = null
-    if (weights.length > 0) {
-      result = await Weight.update(data, {
-        where: { patientUUID: data.patientUUID }
-      })
-    } else {
-      result = await Weight.create(data)
-    }
+    const result = await updateWeight(data)
     res.send(result)
   } catch (err) {
     res.status(500).send({
@@ -34,6 +26,19 @@ router.post('/updateWeight', async (req, res) => {
     })
   }
 })
+
+const updateWeight = async (data) => {
+  const weights = await Weight.findAll({ where: { patientUUID: data.patientUUID } })
+  let result = null
+  if (weights.length > 0) {
+    result = await Weight.update(data, {
+      where: { patientUUID: data.patientUUID }
+    })
+  } else {
+    result = await Weight.create(data)
+  }
+  return result
+}
 
 router.get('/getWeight', async (req, res) => {
   try {
@@ -311,6 +316,21 @@ router.get('/getTemperature', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while fetching the temperature"
+    })
+  }
+})
+
+router.post('/updateBodyMeasurements', async (req, res) => {
+  try {
+    const { patientUUID, recordChangedByUUID, recordChangedFromIPAddress } = req.body
+    if (req.body.waist) {
+      const waist = { ...req.body.waist, patientUUID, recordChangedByUUID, recordChangedFromIPAddress }
+      await updateWeight(waist)
+    }
+    res.send('success')
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while add the body measurements"
     })
   }
 })
