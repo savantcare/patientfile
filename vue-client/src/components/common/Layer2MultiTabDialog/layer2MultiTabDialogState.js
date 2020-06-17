@@ -29,7 +29,7 @@ export default {
     goalData: null,
     tabValue: "",
     bmElementType: "",
-    bmElement: null
+    bmElement: null,
   },
   mutations: {
     setTabDialogVisibility(state, value) {
