@@ -109,7 +109,6 @@ export default {
       notify: this.$notify
     };
     this.$store.dispatch("getScreeningDetail", params);
-    //console.log(this.$store.state);
 
     let dbLastScreenAnswerDetail =  this.$store.state.screening.screenPHQ9AnswerDetail;
     //console.log(Object.keys(dbLastScreenAnswerDetail).length)
@@ -140,7 +139,6 @@ export default {
       let screenDetailData = {};
 
       // create screen data rowSet
-      // responseUUID: uniqid(),
       screenDetailData.patientUUID = this.$route.query.patient_id;
       screenDetailData.recordChangedByUUID = this.getUserId;
       screenDetailData.recordChangedFromIPAddress = '';
@@ -151,11 +149,7 @@ export default {
         screenDetailData[key] =  (row.selectedAnswer == null)? null : String(row.selectedAnswer)
       });
 
-      console.log(screenDetailData);
-
-      //let aaa = JSON.parse(JSON.stringify(screenDetailData));
-
-      //console.log(aaa);
+      // console.log(screenDetailData);
       await this.$store.dispatch("storeScreeningDetail", {
         data: [screenDetailData],
         notify: this.$notify,
