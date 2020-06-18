@@ -11,7 +11,8 @@ const state = {
   oxygenSaturations: [],
   pulse: [],
   temperature: [],
-  objectToUpdate: null
+  objectToUpdate: null, // Used on the Change Dialog
+  selectedDate: null // Used on the Multi-Change dialog and MultiStateCard
 }
 const mutations = {
   setWeights(state, value) {
@@ -43,6 +44,9 @@ const mutations = {
   },
   setObjectToUpdate(state, value) {
     state.objectToUpdate = value
+  },
+  setSelectedDate(state, value) {
+    state.selectedDate = value
   }
 }
 const actions = {
@@ -479,9 +483,142 @@ const actions = {
   }
 }
 
+// Expect result
+// const measurements = {
+//   weight: {
+//     value: 10,
+//     unit: " lb",
+//     notes: "My notes",
+//     date: "2020-06-18"
+//   }
+// }
+
+const getters = {
+  measurementsByDate(state) {
+    let result = {}
+    const selectedDate = state.selectedDate
+
+    let weights = [...state.weights]
+    weights = weights.filter(weight => weight.measurementDate == selectedDate);
+
+    if (weights.length > 0) {
+      result['weight'] = {
+        value: weights[weights.length - 1].weightInPounds,
+        unit: " lb",
+        notes: weights[weights.length - 1].Notes,
+        date: weights[weights.length - 1].measurementDate
+      }
+    }
+
+    let bmis = [...state.bmis]
+    bmis = bmis.filter(bmi => bmi.measurementDate == selectedDate)
+
+    if (bmis.length > 0) {
+      result['bmi'] = {
+        value: bmis[bmis.length - 1].bmiValue,
+        unit: "",
+        notes: bmis[bmis.length - 1].Notes,
+        date: bmis[bmis.length - 1].measurementDate
+      }
+    }
+
+    let waistCircumferences = [...state.waistCircumferences]
+    waistCircumferences = waistCircumferences.filter(wc => wc.measurementDate == selectedDate)
+
+    if (waistCircumferences.length > 0) {
+      result['waistCircumference'] = {
+        value:
+          waistCircumferences[waistCircumferences.length - 1]
+            .waistCircumferenceInInches,
+        unit: " in",
+        notes: waistCircumferences[waistCircumferences.length - 1].Notes,
+        date:
+          waistCircumferences[waistCircumferences.length - 1].measurementDate
+      }
+    }
+
+    let bloodSugars = [...state.bloodSugars]
+    bloodSugars = bloodSugars.filter(bs => bs.measurementDate == selectedDate)
+
+    if (bloodSugars.length > 0) {
+      result['bloodSugar'] = {
+        value: bloodSugars[bloodSugars.length - 1].bloodSugar,
+        unit: " mg/dL",
+        notes: bloodSugars[bloodSugars.length - 1].Notes,
+        date: bloodSugars[bloodSugars.length - 1].measurementDate
+      }
+    }
+
+    let heights = [...state.heights]
+    heights = heights.filter(height => height.measurementDate == selectedDate)
+
+    if (heights.length > 0) {
+      result['height'] = {
+        value: heights[heights.length - 1].heightInInch,
+        unit: " inches",
+        notes: heights[heights.length - 1].Notes,
+        date: heights[heights.length - 1].measurementDate
+      }
+    }
+
+    let bloodPressures = [...state.bloodPressures]
+    bloodPressures = bloodPressures.filter(bp => bp.measurementDate == selectedDate)
+
+    if (bloodPressures.length > 0) {
+      result['bloodPressure'] = {
+        systolicValue:
+          bloodPressures[bloodPressures.length - 1].systolicValue,
+        diastolicValue:
+          bloodPressures[bloodPressures.length - 1].diastolicValue,
+        notes: bloodPressures[bloodPressures.length - 1].Notes,
+        date: bloodPressures[bloodPressures.length - 1].measurementDate,
+        unit: " mmHg"
+      }
+    }
+
+    let oxygenSaturations = [...state.oxygenSaturations]
+    oxygenSaturations = oxygenSaturations.filter(os => os.measurementDate == selectedDate)
+
+    if (oxygenSaturations.length > 0) {
+      result['oxygenSaturation'] = {
+        value:
+          oxygenSaturations[oxygenSaturations.length - 1].oxygenSaturation,
+        unit: " mmHg",
+        notes: oxygenSaturations[oxygenSaturations.length - 1].Notes,
+        date: oxygenSaturations[oxygenSaturations.length - 1].measurementDate
+      }
+    }
+
+    let pulse = [...state.pulse]
+    pulse = pulse.filter(p => p.measurementDate == selectedDate)
+    if (pulse.length > 0) {
+      result['pulse'] = {
+        value: pulse[pulse.length - 1].beatsPerMinuteValue,
+        unit: " bpm",
+        notes: pulse[pulse.length - 1].Notes,
+        date: pulse[pulse.length - 1].measurementDate
+      }
+    }
+
+    let temperature = [...state.temperature]
+    temperature = temperature.filter(t => t.measurementDate == selectedDate)
+    if (temperature.length > 0) {
+      result['temperature'] = {
+        value: temperature[temperature.length - 1].temperatureInFarehnite,
+        unit: " F",
+        notes: temperature[temperature.length - 1].Notes,
+        date: temperature[temperature.length - 1].measurementDate
+      }
+    }
+
+    return result
+  }
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

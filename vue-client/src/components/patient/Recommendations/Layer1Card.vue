@@ -203,15 +203,14 @@ export default {
   computed: {
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
-        const timeOfStateDate = new Date(this.timeOfState);
-        const today = new Date();
-        let isToday = false;
-
-        if (
-          today.toLocaleDateString() == timeOfStateDate.toLocaleDateString()
-        ) {
-          isToday = true;
-        }
+        const today = new Date().toISOString().split("T")[0];
+        const isToday = today == this.timeOfState;
+        // let isToday = false;
+        // if (
+        //   today == this.timeOfState
+        // ) {
+        //   isToday = true;
+        // }
         // if (
         //   timeOfStateDate.getFullYear() == today.getFullYear() &&
         //   timeOfStateDate.getMonth() == today.getMonth() &&

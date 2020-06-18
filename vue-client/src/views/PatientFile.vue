@@ -254,7 +254,8 @@ export default {
     });
 
     // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
-    let timeOfState = new Date().toLocaleDateString();
+    let timeOfState = new Date().toISOString().split("T")[0];
+    console.log(timeOfState);
     this.$store.commit("setTimeOfState", timeOfState);
   },
   methods: {

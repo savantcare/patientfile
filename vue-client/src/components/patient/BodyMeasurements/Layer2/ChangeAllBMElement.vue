@@ -16,7 +16,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="weight.Notes"
               />
@@ -40,7 +40,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="bmi.Notes"
               />
@@ -68,7 +68,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="waistCircumference.Notes"
               />
@@ -96,7 +96,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="bloodSugar.Notes"
               />
@@ -120,7 +120,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="height.Notes"
               />
@@ -152,7 +152,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="bloodPressure.Notes"
               />
@@ -180,7 +180,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="oxygenSaturation.Notes"
               />
@@ -204,7 +204,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="pulse.Notes"
               />
@@ -232,7 +232,7 @@
               <div>Notes</div>
               <el-input
                 type="textarea"
-                :rows="4"
+                :rows="1"
                 placeholder="Please input notes"
                 v-model="temperature.Notes"
               />
@@ -247,6 +247,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -297,6 +298,12 @@ export default {
         measurementDate: new Date()
       }
     };
+  },
+  computed: {
+    ...mapGetters("bodyMeasurement", ["measurementsByDate"])
+  },
+  mounted() {
+    this.getValuesOnDate();
   },
   methods: {
     async onClickSave() {
@@ -421,6 +428,84 @@ export default {
           temperatureInFarehnite: 0,
           measurementDate: new Date(),
           Notes: ""
+        };
+      }
+    },
+    getValuesOnDate() {
+      console.log(this.measurementsByDate);
+      const {
+        weight,
+        bmi,
+        waistCircumference,
+        bloodSugar,
+        height,
+        bloodPressure,
+        oxygenSaturation,
+        pulse,
+        temperature
+      } = this.measurementsByDate;
+      if (weight) {
+        this.weight = {
+          weightInPounds: weight.value,
+          Notes: weight.notes,
+          measurementDate: weight.date
+        };
+      }
+      if (bmi) {
+        this.bmi = {
+          bmiValue: bmi.value,
+          Notes: bmi.notes,
+          measurementDate: bmi.date
+        };
+      }
+      if (waistCircumference) {
+        this.waistCircumference = {
+          waistCircumferenceInInches: waistCircumference.value,
+          Notes: waistCircumference.notes,
+          measurementDate: waistCircumference.date
+        };
+      }
+      if (bloodSugar) {
+        this.bloodSugar = {
+          bloodSugar: bloodSugar.value,
+          Notes: bloodSugar.notes,
+          measurementDate: bloodSugar.date
+        };
+      }
+      if (height) {
+        this.height = {
+          heightInInch: height.value,
+          Notes: height.notes,
+          measurementDate: height.date
+        };
+      }
+      if (bloodPressure) {
+        this.bloodPressure = {
+          systolicValue: bloodPressure.systolicValue,
+          diastolicValue: bloodPressure.diastolicValue,
+          Notes: bloodPressure.notes,
+          measurementDate: bloodPressure.date
+        };
+      }
+      if (oxygenSaturation) {
+        this.oxygenSaturation = {
+          oxygenSaturation: oxygenSaturation.value,
+          Notes: oxygenSaturation.notes,
+          measurementDate: oxygenSaturation.date
+        };
+      }
+      if (pulse) {
+        this.pulse = {
+          beatsPerMinuteValue: pulse.value,
+          Notes: pulse.notes,
+          measurementDate: pulse.date
+        };
+      }
+      if (temperature) {
+        this.temperature = {
+          temperatureInFarehnite: temperature.value,
+          Notes: temperature.notes,
+          measurementDate: temperature.date
         };
       }
     }
