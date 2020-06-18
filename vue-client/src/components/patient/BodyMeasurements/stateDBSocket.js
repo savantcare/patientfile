@@ -10,7 +10,8 @@ const state = {
   bloodPressures: [],
   oxygenSaturations: [],
   pulse: [],
-  temperature: []
+  temperature: [],
+  objectToUpdate: null
 }
 const mutations = {
   setWeights(state, value) {
@@ -39,6 +40,9 @@ const mutations = {
   },
   setTemperature(state, value) {
     state.temperature = value
+  },
+  setObjectToUpdate(state, value) {
+    state.objectToUpdate = value
   }
 }
 const actions = {
@@ -60,7 +64,10 @@ const actions = {
           message: "Saved!"
         })
         let weights = state.weights
+        data["date"] = new Date().toISOString().split("T")[0]
+        console.log(data)
         weights.push(data)
+        console.log(weights)
         commit("setWeights", weights)
       } else {
         notify({

@@ -15,7 +15,7 @@
           <template slot-scope="scope">{{scope.row.label}}</template>
         </el-table-column>
         <el-table-column label="Current Value">
-          <template slot-scope="scope">{{scope.row.currentValue}}</template>
+          <template slot-scope="scope">{{formatBodyMeasurementValue(scope.row)}}</template>
         </el-table-column>
         <el-table-column label="Actions">
           <template slot-scope="scope">
@@ -49,6 +49,7 @@ export default {
       this.$store.commit("showGraphAllBMTabInLayer2");
     },
     openChangeDialog(item) {
+      this.$store.commit("bodyMeasurement/setObjectToUpdate", item);
       this.$store.commit("showAddBMElementTabInLayer2", {
         label: item.label,
         type: item.type
@@ -87,6 +88,16 @@ export default {
     },
     getTemperature() {
       this.$store.dispatch("bodyMeasurement/getTemperature");
+    },
+    formatBodyMeasurementValue(bm) {
+      if (bm[0]) {
+        return bm[0];
+      }
+
+      if (bm.type == "bloodPressure") {
+        return bm.systolicValue + "/" + bm.diastolicValue + bm.unit;
+      }
+      return bm.value + bm.unit;
     }
   },
   data() {
@@ -108,7 +119,12 @@ export default {
       );
 
       if (weights.length > 0) {
-        return weights[0].weightInPounds + " lb";
+        return {
+          value: weights[weights.length - 1].weightInPounds,
+          unit: " lb",
+          notes: weights[weights.length - 1].Notes,
+          date: weights[weights.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -124,7 +140,12 @@ export default {
       });
 
       if (bmis.length > 0) {
-        return bmis[0].bmiValue;
+        return {
+          value: bmis[bmis.length - 1].bmiValue,
+          unit: "",
+          notes: bmis[bmis.length - 1].Notes,
+          date: bmis[bmis.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -142,7 +163,15 @@ export default {
       );
 
       if (waistCircumferences.length > 0) {
-        return waistCircumferences[0].waistCircumferenceInInches + " in";
+        return {
+          value:
+            waistCircumferences[waistCircumferences.length - 1]
+              .waistCircumferenceInInches,
+          unit: " in",
+          notes: waistCircumferences[waistCircumferences.length - 1].Notes,
+          date:
+            waistCircumferences[waistCircumferences.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -160,7 +189,12 @@ export default {
       );
 
       if (bloodSugars.length > 0) {
-        return bloodSugars[0].bloodSugar + " mg/dL";
+        return {
+          value: bloodSugars[bloodSugars.length - 1].bloodSugar,
+          unit: " mg/dL",
+          notes: bloodSugars[bloodSugars.length - 1].Notes,
+          date: bloodSugars[bloodSugars.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -178,7 +212,12 @@ export default {
       );
 
       if (heights.length > 0) {
-        return heights[0].heightInInch + " inches";
+        return {
+          value: heights[heights.length - 1].heightInInch,
+          unit: " inches",
+          notes: heights[heights.length - 1].Notes,
+          date: heights[heights.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -196,12 +235,15 @@ export default {
       );
 
       if (bloodPressures.length > 0) {
-        return (
-          bloodPressures[0].systolicValue +
-          "/" +
-          bloodPressures[0].diastolicValue +
-          " mmHg"
-        );
+        return {
+          systolicValue:
+            bloodPressures[bloodPressures.length - 1].systolicValue,
+          diastolicValue:
+            bloodPressures[bloodPressures.length - 1].diastolicValue,
+          notes: bloodPressures[bloodPressures.length - 1].Notes,
+          date: bloodPressures[bloodPressures.length - 1].measurementDate,
+          unit: " mmHg"
+        };
       }
 
       return "-";
@@ -219,7 +261,13 @@ export default {
       );
 
       if (oxygenSaturations.length > 0) {
-        return oxygenSaturations[0].oxygenSaturation + " mmHg";
+        return {
+          value:
+            oxygenSaturations[oxygenSaturations.length - 1].oxygenSaturation,
+          unit: " mmHg",
+          notes: oxygenSaturations[oxygenSaturations.length - 1].Notes,
+          date: oxygenSaturations[oxygenSaturations.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -235,7 +283,12 @@ export default {
       });
 
       if (pulse.length > 0) {
-        return pulse[0].beatsPerMinuteValue + " bpm";
+        return {
+          value: pulse[pulse.length - 1].beatsPerMinuteValue,
+          unit: " bpm",
+          notes: pulse[pulse.length - 1].Notes,
+          date: pulse[pulse.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -253,7 +306,12 @@ export default {
       );
 
       if (temperature.length > 0) {
-        return temperature[0].temperatureInFarehnite + " F";
+        return {
+          value: temperature[temperature.length - 1].temperatureInFarehnite,
+          unit: " F",
+          notes: temperature[temperature.length - 1].Notes,
+          date: temperature[temperature.length - 1].measurementDate
+        };
       }
 
       return "-";
@@ -262,53 +320,52 @@ export default {
       return [
         {
           label: "Weight",
-          currentValue: this.currentWeight,
-          type: "weight"
+          type: "weight",
+          ...this.currentWeight
         },
         {
           label: "BMI",
-          currentValue: this.currentBMI,
-          type: "bmi"
+          type: "bmi",
+          ...this.currentBMI
         },
         {
           label: "Waist circumference",
-          currentValue: this.currentWaistCircumference,
-          type: "waistCircumference"
+          type: "waistCircumference",
+          ...this.currentWaistCircumference
         },
         {
           label: "Blood sugar",
-          currentValue: this.currentBloodSugar,
-          type: "bloodSugar"
+          type: "bloodSugar",
+          ...this.currentBloodSugar
         },
         {
           label: "Height",
-          currentValue: this.currentHeight,
-          type: "height"
+          type: "height",
+          ...this.currentHeight
         },
         {
           label: "Blood pressure",
-          currentValue: this.currentBloodPressure,
-          type: "bloodPressure"
+          type: "bloodPressure",
+          ...this.currentBloodPressure
         },
         {
           label: "Oxygen saturation",
-          currentValue: this.currentOxygenSaturation,
-          type: "oxygenSaturation"
+          type: "oxygenSaturation",
+          ...this.currentOxygenSaturation
         },
         {
           label: "Pulse",
-          currentValue: this.currentPulse,
-          type: "pulse"
+          type: "pulse",
+          ...this.currentPulse
         },
         {
           label: "Temperature",
-          currentValue: this.currentTemperature,
-          type: "temperature"
+          type: "temperature",
+          ...this.currentTemperature
         }
       ];
     },
     timeOfState() {
-      console.log("....timeOfState");
       return this.$store.state.stateAtSelectedTime.timeOfState;
     }
   },

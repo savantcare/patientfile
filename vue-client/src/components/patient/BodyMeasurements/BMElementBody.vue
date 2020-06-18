@@ -3,7 +3,7 @@
     <div style="text-align: right;">
       <el-button type="text" size="mini" @click="handleClickAddButton">C</el-button>
     </div>
-    <ve-line :data="chartData" :legend-visible="false" ref="chart"></ve-line>
+    <ve-line :data="chartData" :legend-visible="true" ref="chart"></ve-line>
   </div>
 </template>
 
@@ -43,9 +43,26 @@ export default {
         );
       });
 
-      let columns = ["date", "value"];
-      if (this.type == "bloodPressure") {
-        columns = ["date", "systolicValue", "diastolicValue"];
+      let columns = ["date"];
+      if (this.type == "weight") {
+        columns.push("weightInPounds");
+      } else if (this.type == "bmi") {
+        columns.push("bmiValue");
+      } else if (this.type == "waistCircumference") {
+        columns.push("waistCircumferenceInInches");
+      } else if (this.type == "bloodSugar") {
+        columns.push("bloodSugar");
+      } else if (this.type == "height") {
+        columns.push("heightInInch");
+      } else if (this.type == "bloodPressure") {
+        columns.push("systolicValue");
+        columns.push("diastolicValue");
+      } else if (this.type == "oxygenSaturation") {
+        columns.push("oxygenSaturation");
+      } else if (this.type == "pulse") {
+        columns.push("bpm");
+      } else if (this.type == "temperature") {
+        columns.push("temperatureInFarehnite");
       }
 
       let rows = [];
@@ -53,18 +70,31 @@ export default {
         let date = new Date(item.measurementDate);
         const formatDate = date.getMonth() + 1 + "-" + date.getDate();
 
-        let value = 0;
-
         if (this.type == "weight") {
-          value = item.weightInPounds;
+          rows.push({
+            weightInPounds: item.weightInPounds,
+            date: formatDate
+          });
         } else if (this.type == "bmi") {
-          value = item.bmiValue;
+          rows.push({
+            bmiValue: item.bmiValue,
+            date: formatDate
+          });
         } else if (this.type == "waistCircumference") {
-          value = item.waistCircumferenceInInches;
+          rows.push({
+            waistCircumferenceInInches: item.waistCircumferenceInInches,
+            date: formatDate
+          });
         } else if (this.type == "bloodSugar") {
-          value = item.bloodSugar;
+          rows.push({
+            bloodSugar: item.bloodSugar,
+            date: formatDate
+          });
         } else if (this.type == "height") {
-          value = item.heightInInch;
+          rows.push({
+            heightInInch: item.heightInInch,
+            date: formatDate
+          });
         } else if (this.type == "bloodPressure") {
           const systolicValue = item.systolicValue;
           const diastolicValue = item.diastolicValue;
@@ -74,17 +104,19 @@ export default {
             diastolicValue: diastolicValue
           });
         } else if (this.type == "oxygenSaturation") {
-          value = item.oxygenSaturation;
-        } else if (this.type == "pulse") {
-          value = item.beatsPerMinuteValue;
-        } else if (this.type == "temperature") {
-          value = item.temperatureInFarehnite;
-        }
-
-        if (this.type != "bloodPressure") {
           rows.push({
-            date: formatDate,
-            value: value
+            oxygenSaturation: item.oxygenSaturation,
+            date: formatDate
+          });
+        } else if (this.type == "pulse") {
+          rows.push({
+            bpm: item.beatsPerMinuteValue,
+            date: formatDate
+          });
+        } else if (this.type == "temperature") {
+          rows.push({
+            temperatureInFarehnite: item.temperatureInFarehnite,
+            date: formatDate
           });
         }
       });
