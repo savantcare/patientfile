@@ -24,7 +24,8 @@
           </el-form-item>
           <el-form-item>
             <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button
+            Since the whole form will be controlled by one Save button.
+            Pass a prop: typeOfForm =PartOfLargerForm or OwnForm
             -->
             <el-button type="success" @click="submitForm('appearenceForm')" size="small">Save</el-button>
           </el-form-item>
