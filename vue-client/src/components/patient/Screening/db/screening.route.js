@@ -102,14 +102,14 @@ module.exports = (io) => {
 
       if(screentype == 'PHQ9') {
         if(updateFlag == true) {
-          await phq9PatientResponse.update(data[0], {
+          const updateScreening = await phq9PatientResponse.update(data[0], {
             where: {
               patientUUID: patientUUID
             }
           })
         }
         else {
-          await phq9PatientResponse.bulkCreate(data)
+          const newScreening = await phq9PatientResponse.bulkCreate(data)
         }
         queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses   where patientUUID=:patientUUID', {
           replacements: { patientUUID: patientUUID },
@@ -134,4 +134,3 @@ module.exports = (io) => {
 
   return router
 }
-

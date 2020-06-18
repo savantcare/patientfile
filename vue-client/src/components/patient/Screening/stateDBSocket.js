@@ -11,11 +11,6 @@ export default {
     setMasterScreenList(state, data) {
       state.screenMasterList = data
     },
-    addNewScreening(state, newList) {
-      newList.forEach(item => {
-        state.list.push(item)
-      })
-    },
     setScreeningDetail(state, data) {
       console.log(data);
       if(data.screentype == 'PHQ9') {
