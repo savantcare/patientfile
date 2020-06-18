@@ -4,10 +4,11 @@
       <div slot="header" class="clearfix">
         <CardHeader
           ctName="Body measurement"
-          actions="G,M"
+          actions="G,M,F"
           typeOfStateDisplayArea="MultiStateDisplayArea"
           @handleClickOnGInCardHeader="handleClickOnGInCardHeader"
           @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
+          @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
           ref="card_header"
         />
       </div>
@@ -80,6 +81,19 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit("bodyMeasurement/setSelectedDate", this.timeOfState);
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
+    },
+    handleClickOnFInCardHeader() {
+      var options = {
+        container: "#currentStateDisplayArea",
+        easing: "ease-in",
+        offset: -60,
+        force: true,
+        cancelable: true,
+        x: false,
+        y: true
+      };
+      const element = "#body-measurement-current-state";
+      this.$scrollTo(element, 500, options);
     }
   },
   data() {

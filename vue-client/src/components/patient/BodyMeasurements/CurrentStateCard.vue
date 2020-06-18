@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="body-measurement-current-state">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <CardHeader
