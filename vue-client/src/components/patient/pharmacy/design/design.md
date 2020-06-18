@@ -15,17 +15,17 @@ Layer 1 card:
 │  Pharmacy 1 name and address                         │  │ D │    │  │D -> Discontinue           │                
 │ │                                                       │   │    │  │                           │                
 │  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘  └───┘    │  └───────────────────────────┘                
-│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐   ┌───┐    │                                               
-│  Pharmacy 2 name and address                            │ D │    │                                               
-│ │                                                   │   │   │    │                                               
-│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─    └───┘    │                                               
-│                                                                  │                                               
-│                                                                  │                                               
-│                                                                  │                                               
-│                                                                  │                                               
-│                                                                  │                                               
-│                                                                  │                                               
-│                                                                  │                                               
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ┌───┐    │                                               
+│  Pharmacy 2 name and address                         │  │ D │    │                                               
+│ │                                                       │   │    │   ┌────────────────────────────────────────┐  
+│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘  └───┘    │   │Special feature:                        │  
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ┌───┐    │   │================                        │  
+│  Pharmacy 2 name and address                         │  │ D │    │   │These list of pharmacies are drag and   │  
+│ │                                                       │   │    │   │droppable. After such operation only the│  
+│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘  └───┘    │   │first pharmacy will be set as default   │  
+│                                                                  │   │for that patient and rest of the        │  
+│                                                                  │   │pharmacies will be marked as secondary. │  
+│                                                                  │   └────────────────────────────────────────┘  
 └──────────────────────────────────────────────────────────────────┘                                               
                                                                                                                    
 Layer 2:
