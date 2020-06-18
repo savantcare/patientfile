@@ -206,13 +206,19 @@ export default {
         const timeOfStateDate = new Date(this.timeOfState);
         const today = new Date();
         let isToday = false;
+
         if (
-          timeOfStateDate.getFullYear() == today.getFullYear() &&
-          timeOfStateDate.getMonth() == today.getMonth() &&
-          timeOfStateDate.getDate() == today.getDate()
+          today.toLocaleDateString() == timeOfStateDate.toLocaleDateString()
         ) {
           isToday = true;
         }
+        // if (
+        //   timeOfStateDate.getFullYear() == today.getFullYear() &&
+        //   timeOfStateDate.getMonth() == today.getMonth() &&
+        //   timeOfStateDate.getDate() == today.getDate()
+        // ) {
+        //   isToday = true;
+        // }
 
         let val = "";
         if (
@@ -236,6 +242,7 @@ export default {
   watch: {
     timeOfState() {
       const timeOfState = this.timeOfState.split(" ")[0];
+      console.log(timeOfState);
       if (
         this.$store.state.recommendation.multiStateYourRecommendationsList[
           timeOfState

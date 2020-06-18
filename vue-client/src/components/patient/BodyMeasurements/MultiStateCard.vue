@@ -60,6 +60,33 @@ export default {
         type: item.type,
         index: index
       });
+    },
+    getWeightInfomation() {
+      this.$store.dispatch("bodyMeasurement/getWeight");
+    },
+    getBMIInformation() {
+      this.$store.dispatch("bodyMeasurement/getBmi");
+    },
+    getWaistCircumference() {
+      this.$store.dispatch("bodyMeasurement/getWaistCircumferences");
+    },
+    getBloodSugar() {
+      this.$store.dispatch("bodyMeasurement/getBloodSugar");
+    },
+    getHeight() {
+      this.$store.dispatch("bodyMeasurement/getHeight");
+    },
+    getBloodPressure() {
+      this.$store.dispatch("bodyMeasurement/getBloodPressure");
+    },
+    getOxygenSaturation() {
+      this.$store.dispatch("bodyMeasurement/getOxygenSaturation");
+    },
+    getPulse() {
+      this.$store.dispatch("bodyMeasurement/getPulse");
+    },
+    getTemperature() {
+      this.$store.dispatch("bodyMeasurement/getTemperature");
     }
   },
   data() {
@@ -69,133 +96,166 @@ export default {
   },
   computed: {
     currentWeight() {
-      let weights = this.$store.state.bodyMeasurement.weights;
+      const weights = this.$store.state.bodyMeasurement.weights.filter(
+        weight => {
+          const measurementDate = weight.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
       if (weights.length > 0) {
-        weights = weights.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentWeight = weights[weights.length - 1];
-        return currentWeight.weightInPounds + " lb";
+        return weights[0].weightInPounds + " lb";
       }
+
       return "-";
     },
     currentBMI() {
-      let bmis = this.$store.state.bodyMeasurement.bmis;
-      if (bmis.length > 0) {
-        bmis = bmis.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
+      const bmis = this.$store.state.bodyMeasurement.bmis.filter(bmi => {
+        const measurementDate = bmi.measurementDate;
+        const timeOfState = new Date(this.timeOfState)
+          .toISOString()
+          .split("T")[0];
 
-        const currentBmi = bmis[bmis.length - 1];
-        return currentBmi.bmiValue;
+        return measurementDate == timeOfState;
+      });
+
+      if (bmis.length > 0) {
+        return bmis[0].bmiValue;
       }
+
       return "-";
     },
     currentWaistCircumference() {
-      let waistCircumferences = this.$store.state.bodyMeasurement
-        .waistCircumferences;
-      if (waistCircumferences.length > 0) {
-        waistCircumferences = waistCircumferences.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
+      const waistCircumferences = this.$store.state.bodyMeasurement.waistCircumferences.filter(
+        waistCircumference => {
+          const measurementDate = waistCircumference.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
 
-        const currentWaistCircumference =
-          waistCircumferences[waistCircumferences.length - 1];
-        return currentWaistCircumference.waistCircumferenceInInches + " in";
+          return measurementDate == timeOfState;
+        }
+      );
+
+      if (waistCircumferences.length > 0) {
+        return waistCircumferences[0].waistCircumferenceInInches + " in";
       }
+
       return "-";
     },
     currentBloodSugar() {
-      let bloodSugars = this.$store.state.bodyMeasurement.bloodSugars;
+      const bloodSugars = this.$store.state.bodyMeasurement.bloodSugars.filter(
+        bloodSugar => {
+          const measurementDate = bloodSugar.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
       if (bloodSugars.length > 0) {
-        bloodSugars = bloodSugars.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentBloodSugar = bloodSugars[bloodSugars.length - 1];
-        return currentBloodSugar.bloodSugar + " mg/dL";
+        return bloodSugars[0].bloodSugar + " mg/dL";
       }
 
       return "-";
     },
     currentHeight() {
-      let heights = this.$store.state.bodyMeasurement.heights;
+      const heights = this.$store.state.bodyMeasurement.heights.filter(
+        height => {
+          const measurementDate = height.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
       if (heights.length > 0) {
-        heights = heights.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentHeight = heights[heights.length - 1];
-        return currentHeight.heightInInch + " inches";
+        return heights[0].heightInInch + " inches";
       }
 
       return "-";
     },
     currentBloodPressure() {
-      let bloodPressures = this.$store.state.bodyMeasurement.bloodPressures;
+      const bloodPressures = this.$store.state.bodyMeasurement.bloodPressures.filter(
+        bloodPressure => {
+          const measurementDate = bloodPressure.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
       if (bloodPressures.length > 0) {
-        bloodPressures = bloodPressures.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentBloodPressure = bloodPressures[bloodPressures.length - 1];
         return (
-          currentBloodPressure.systolicValue +
+          bloodPressures[0].systolicValue +
           "/" +
-          currentBloodPressure.diastolicValue +
+          bloodPressures[0].diastolicValue +
           " mmHg"
         );
       }
+
       return "-";
     },
     currentOxygenSaturation() {
-      let oxygenSaturations = this.$store.state.bodyMeasurement
-        .oxygenSaturations;
+      const oxygenSaturations = this.$store.state.bodyMeasurement.oxygenSaturations.filter(
+        oxygenSaturation => {
+          const measurementDate = oxygenSaturation.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
       if (oxygenSaturations.length > 0) {
-        oxygenSaturations = oxygenSaturations.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentOxygenSaturation =
-          oxygenSaturations[oxygenSaturations.length - 1];
-        return currentOxygenSaturation.oxygenSaturation + " mmHg";
+        return oxygenSaturations[0].oxygenSaturation + " mmHg";
       }
+
       return "-";
     },
     currentPulse() {
-      let pulse = this.$store.state.bodyMeasurement.pulse;
+      const pulse = this.$store.state.bodyMeasurement.pulse.filter(p => {
+        const measurementDate = p.measurementDate;
+        const timeOfState = new Date(this.timeOfState)
+          .toISOString()
+          .split("T")[0];
+
+        return measurementDate == timeOfState;
+      });
+
       if (pulse.length > 0) {
-        pulse = pulse.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentPulse = pulse[pulse.length - 1];
-        return currentPulse.beatsPerMinuteValue + " bpm";
+        return pulse[0].beatsPerMinuteValue + " bpm";
       }
+
       return "-";
     },
     currentTemperature() {
-      let temperatures = this.$store.state.bodyMeasurement.temperature;
-      if (temperatures.length > 0) {
-        temperatures = temperatures.sort((data1, data2) => {
-          return (
-            new Date(data1.measurementDate) - new Date(data2.measurementDate)
-          );
-        });
-        const currentTemperature = temperatures[temperatures.length - 1];
-        return currentTemperature.temperatureInFarehnite + " F";
+      const temperature = this.$store.state.bodyMeasurement.temperature.filter(
+        t => {
+          const measurementDate = t.measurementDate;
+          const timeOfState = new Date(this.timeOfState)
+            .toISOString()
+            .split("T")[0];
+
+          return measurementDate == timeOfState;
+        }
+      );
+
+      if (temperature.length > 0) {
+        return temperature[0].temperatureInFarehnite + " F";
       }
+
       return "-";
     },
     tableData() {
@@ -246,36 +306,46 @@ export default {
           type: "temperature"
         }
       ];
+    },
+    timeOfState() {
+      console.log("....timeOfState");
+      return this.$store.state.stateAtSelectedTime.timeOfState;
     }
   },
   mounted() {
     if (this.currentWeight == "-") {
       this.getWeightInfomation();
     }
-    if (this.type == "-") {
+    if (this.currentBMI == "-") {
       this.getBMIInformation();
     }
-    if (this.type == "-") {
+    if (this.currentWaistCircumference == "-") {
       this.getWaistCircumference();
     }
-    if (this.type == "-") {
+    if (this.currentBloodSugar == "-") {
       this.getBloodSugar();
     }
-    if (this.type == "-") {
+    if (this.currentHeight == "-") {
       this.getHeight();
     }
-    if (this.type == "-") {
+    if (this.currentBloodPressure == "-") {
       this.getBloodPressure();
     }
-    if (this.type == "-") {
+    if (this.currentOxygenSaturation == "-") {
       this.getOxygenSaturation();
     }
-    if (this.type == "-") {
+    if (this.currentPulse == "-") {
       this.getPulse();
     }
-    if (this.type == "-") {
+    if (this.currentTemperature == "-") {
       this.getTemperature();
     }
+  },
+  watch: {
+    // timeOfState() {
+    //   const timeOfState = this.timeOfState.split(" ")[0];
+    //   console.log(timeOfState);
+    // }
   }
 };
 </script>

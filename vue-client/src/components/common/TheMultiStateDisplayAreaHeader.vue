@@ -253,10 +253,12 @@ export default {
       const percent = Math.floor(100 / (this.timeOfStates.length + 1));
       let index = this.sliderInitialValue / percent;
       // let timeOfState = new Date().toISOString().split("T")[0];
-      let timeOfState = new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+      // let timeOfState = new Date()
+      //   .toISOString()
+      //   .slice(0, 19)
+      //   .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+
+      let timeOfState = new Date().toLocaleDateString();
       if (index < this.timeOfStates.length + 1) {
         timeOfState = this.timeOfStates[index].dateTimeOfAppt
           .slice(0, 19)

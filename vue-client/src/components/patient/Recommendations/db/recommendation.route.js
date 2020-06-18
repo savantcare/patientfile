@@ -51,9 +51,10 @@ module.exports = (io) => {
 
   router.post('/getMyRecommendations', async (req, res) => {
     try {
-      const { patientId, userId, date } = req.body
+      const { patientId, userId } = req.body
       // all recs that have been discontinued will not show up in the select * query
-      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` WHERE uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
+      const date = new Date(req.body.date)
+      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME AS OF TIMESTAMP :date WHERE uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
         replacements: { date: date, patientId: patientId, userId: userId },
         type: QueryTypes.SELECT
       })
@@ -101,7 +102,7 @@ module.exports = (io) => {
       })
 
       io.to(`room-${req.body.uuidOfRecommendationMadeFor}-Doctor`).emit("UPDATE_RECOMMENDATION", req.body)
-      res.send("ok") 
+      res.send("ok")
     } catch (err) {
       res.status(500).send({
         message: err.message || "Some error occured while update the Recommendation"
@@ -240,16 +241,17 @@ module.exports = (io) => {
   })
 
   router.post('/getByDate', async (req, res) => {
-    const { date, patientId } = req.body
+    const { patientId } = req.body
     // patientId: patientId,
     //       discontinue: {
     //         [Op.ne]: 1
     //       }
-    
-     // "AS OF" is provided by Temporal DB 
+
+    // "AS OF" is provided by Temporal DB 
+    let date = new Date(req.body.date)
     try {
-      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME AS OF TIMESTAMP :date WHERE uuidOfRecommendationMadeFor=:patientId",{  
-        replacements: { date: date, patientId: patientId },   
+      const histories = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME AS OF TIMESTAMP :date WHERE uuidOfRecommendationMadeFor=:patientId", {
+        replacements: { date: date, patientId: patientId },
         type: QueryTypes.SELECT
       })
       res.send(histories)

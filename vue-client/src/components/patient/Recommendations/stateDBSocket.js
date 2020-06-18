@@ -196,6 +196,7 @@ export default {
     },
     async dbGetMultiStateMyRecommendationsInSM({ commit, rootState }, params) {
       const { date, patientId, userId } = params
+      console.log(date)
       const response = await fetch(
         `${RECOMMENDATION_API_URL}/getByDate`, {
         headers: {

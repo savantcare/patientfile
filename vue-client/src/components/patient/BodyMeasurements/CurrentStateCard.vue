@@ -12,7 +12,7 @@
           ref="card_header"
         />
       </div>
-
+      <el-button type="primary" @click="gotoNextTab">Change Tab</el-button>
       <el-tabs tab-position="left" v-model="tab">
         <el-tab-pane v-for="(element, index) in bmElements" :key="`bm-element-${index}`">
           <span slot="label">{{element.label}}</span>
@@ -52,7 +52,7 @@ export default {
         { label: "Pulse", value: "pulse" },
         { label: "Temperature", value: "temperature" }
       ],
-      tab: ""
+      tab: 0
     };
   },
   methods: {
@@ -74,6 +74,10 @@ export default {
     },
     handleClickOnMInCardHeader() {
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
+    },
+    gotoNextTab() {
+      console.log(this.tab);
+      this.tab = "1";
     }
   }
 };
