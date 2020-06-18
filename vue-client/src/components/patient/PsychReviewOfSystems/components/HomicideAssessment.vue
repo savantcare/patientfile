@@ -3,16 +3,16 @@
     <el-col>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>Appearence</span>
+          <span>Homicide Assessment</span>
           <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
         </div>
-        <el-form :model="appearenceForm" ref="appearenceForm" class="demo-dynamic">
+        <el-form :model="homicideAssessmentForm" ref="homicideAssessmentForm" class="demo-dynamic">
           <el-form-item>
-            <el-checkbox-group v-model="checkboxAppearence">
+            <el-checkbox-group v-model="checkboxHomicideAssessment">
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in homicideAssessment" :label="app" :key="app">{{app}}</el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -26,7 +26,11 @@
             <!-- When opened in multi change format the Save button will not be there.
             Since the whole form will be controlled by one Save button
             -->
-            <el-button type="success" @click="submitForm('appearenceForm')" size="small">Save</el-button>
+            <el-button
+              type="success"
+              @click="submitForm('homicideAssessmentForm')"
+              size="small"
+            >Save</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -35,33 +39,22 @@
 </template>
 
 <script>
-const appearenceOptions = [
-  "Good grooming and hyegine",
-  "No apparent distree",
-  "Well developed, well nourished",
-  "Appears stated age",
-  "Appears younger than stated age",
-  "Appears older than stated age",
-  "Obese",
-  "Thin or cachetic",
-  "Disheveled, unkempt",
-  "Malodorous"
-];
+const homicideAssessmentOptions = ["Does patient report homicidal ideations ?"];
 
 export default {
   data() {
     return {
-      appearenceForm: { recs: [{ description: "" }] },
+      homicideAssessmentForm: { recs: [{ description: "" }] },
       // When form loads this will have the currently selected values from the DB
-      checkboxAppearence: [""],
-      appearence: appearenceOptions,
+      checkboxHomicideAssessment: [""],
+      homicideAssessment: homicideAssessmentOptions,
       textarea: ""
     };
   },
   methods: {
     onClickSave(rec) {
       // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateAppearenceInSM", {
+      this.$store.dispatch("dbUpdateHomicideAssessmentInSM", {
         data: rec,
         notify: this.$notify
       });

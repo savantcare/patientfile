@@ -20,125 +20,125 @@
       <el-tab-pane label="ADHD">
         Good grooming and heigine
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleAppearenceChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleADHDChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
       <el-tab-pane label="Anorexia">
         Lniear, logical and goal directed
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleThoughtProcessChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleAnorexiaChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Bulimia">
         Attitude
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleAttitudeChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleBulimiaChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Dementia">
         Constitutional
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleConstitutionalChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleDementiaChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Depression">
         Psychomotor
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handlePsychomotorChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleDepressionChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="GAD">
         Cognition
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleCognitionChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleGADChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="HomicideAssessment">
         Eye-contact
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleEyeContactChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleHomicideAssessmentChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Mania/Hypo mania">
         Insight
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleInsightChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleManiaHypomaniaChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="OCD">
         Speech
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleSpeechChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleOCDChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Panic Attacks">
         Judgement
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleJudgementChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handlePanicAttacksChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Psychosis">
         Mood / affect
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleMoodAffectChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handlePsychosisChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="PTSD">
         Impulse control
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleImpulseControlChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handlePTSDChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Sleep">
         Thought content
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleThoughtContentChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSleepChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Social anxiety">
-        Neurological
+        SocialAnxiety
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handleNeurologicalChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSocialAnxietyChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Subjective">
-        Perception
+        Subjective
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSubjectiveChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Substance Use">
-        Perception
+        Substance Use
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSubstanceUseChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Suicide Assessment">
-        Perception
+        Suicide Assessment
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleSuicideAssessmentChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
       <el-tab-pane label="Gateway mood symptoms">
-        Perception
+        Gateway mood symptoms
         <div style="text-align: right;">
-          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+          <el-button type="text" size="mini" @click="handleGatewayMoodSymptomsChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -174,100 +174,100 @@ export default {
   },
   methods: {
     handleClickOnMInCardHeader() {
-      this.$store.commit("showMultiChangeMSETabInLayer2");
+      this.$store.commit("showMultiChangePROSTabInLayer2");
     },
     handleClickChangeButton() {
-      this.$store.commit("showChangeMSEElementTabInLayer2", {
+      this.$store.commit("showChangePROSElementTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleAppearenceChangeButton() {
-      this.$store.commit("showChangeMSEAppearenceTabInLayer2", {
+    handleADHDChangeButton() {
+      this.$store.commit("showChangePROSADHDTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleThoughtProcessChangeButton() {
-      this.$store.commit("showChangeMSEThoughtProcessTabInLayer2", {
+    handleAnorexiaChangeButton() {
+      this.$store.commit("showChangePROSAnorexiaTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleAttitudeChangeButton() {
-      this.$store.commit("showChangeMSEAttitudeTabInLayer2", {
+    handleBulimiaChangeButton() {
+      this.$store.commit("showChangePROSBulimiaTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleConstitutionalChangeButton() {
-      this.$store.commit("showChangeMSEConstitutionalTabInLayer2", {
+    handleDementiaChangeButton() {
+      this.$store.commit("showChangePROSDementiaTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handlePsychomotorChangeButton() {
-      this.$store.commit("showChangeMSEPsychomotorTabInLayer2", {
+    handleDepressionChangeButton() {
+      this.$store.commit("showChangePROSDepressionTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleCognitionChangeButton() {
-      this.$store.commit("showChangeMSECognitionTabInLayer2", {
+    handleGADChangeButton() {
+      this.$store.commit("showChangePROSGADTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleEyeContactChangeButton() {
-      this.$store.commit("showChangeMSEEyeContactTabInLayer2", {
+    handleHomicideAssessmentChangeButton() {
+      this.$store.commit("showChangePROSHomicideAssessmentTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleInsightChangeButton() {
-      this.$store.commit("showChangeMSEInsightTabInLayer2", {
+    handleManiaHypomaniaChangeButton() {
+      this.$store.commit("showChangePROSManiaHypomaniaTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleSpeechChangeButton() {
-      this.$store.commit("showChangeMSESpeechTabInLayer2", {
+    handleOCDChangeButton() {
+      this.$store.commit("showChangePROSOCDTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleJudgementChangeButton() {
-      this.$store.commit("showChangeMSEJudgementTabInLayer2", {
+    handlePanicAttacksChangeButton() {
+      this.$store.commit("showChangePROSPanicAttacksTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleMoodAffectChangeButton() {
-      this.$store.commit("showChangeMSEMoodAffectTabInLayer2", {
+    handlePsychosisChangeButton() {
+      this.$store.commit("showChangePROSPsychosisTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleImpulseControlChangeButton() {
-      this.$store.commit("showChangeMSEImpulseControlTabInLayer2", {
+    handlePTSDChangeButton() {
+      this.$store.commit("showChangePROSPTSDTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleThoughtContentChangeButton() {
-      this.$store.commit("showChangeMSEThoughtContentTabInLayer2", {
+    handleSleepChangeButton() {
+      this.$store.commit("showChangePROSSleepTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
-    handleNeurologicalChangeButton() {
-      this.$store.commit("showChangeMSENeurologicalTabInLayer2", {
+    handleSocialAnxietyChangeButton() {
+      this.$store.commit("showChangePROSSocialAnxietyTabInLayer2", {
         label: this.label,
         type: this.type
       });
     },
     handlePerceptionChangeButton() {
-      this.$store.commit("showChangeMSEPerceptionTabInLayer2", {
+      this.$store.commit("showChangePROSPerceptionTabInLayer2", {
         label: this.label,
         type: this.type
       });

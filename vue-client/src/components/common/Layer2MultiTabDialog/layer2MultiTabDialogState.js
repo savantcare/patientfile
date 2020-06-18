@@ -322,6 +322,206 @@ export default {
       state.tabValue = tab.name;
     },
 
+    showMultiChangePROSTabInLayer2(state) {
+      const tab = {
+        label: "Multi change PROS",
+        value: require("@/components/patient/PsychReviewOfSystems/Layer2/MultiChangePROS.vue")
+          .default,
+        name: "tab-multi-change-pros",
+      };
+      state.tabList = [tab];
+      state.recommendationTabType = MULTIPLE_CHANGE_RECOMMENDATION;
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSADHDTabInLayer2(state) {
+      const tab = {
+        label: "Change ADHD (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/ADHD.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSAnorexiaTabInLayer2(state) {
+      const tab = {
+        label: "Change Anorexia (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Anorexia.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSBulimiaTabInLayer2(state) {
+      const tab = {
+        label: "Change Bulimia (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Bulimia.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSDementiaTabInLayer2(state) {
+      const tab = {
+        label: "Change Dementia (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Dementia.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSDepressionTabInLayer2(state) {
+      const tab = {
+        label: "Change Depression (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Depression.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSGADTabInLayer2(state) {
+      const tab = {
+        label: "Change GAD (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/GAD.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSGatewayMoodSymptomsTabInLayer2(state) {
+      const tab = {
+        label: "Change Gateway Mood Symptoms (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/GatewayMoodSymptoms.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSHomicideAssessmentTabInLayer2(state) {
+      const tab = {
+        label: "Change Homicide Assessment (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/HomicideAssessment.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSManiaHypoManiaTabInLayer2(state) {
+      const tab = {
+        label: "Change Mania/Hypo Mania (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/ManiaHypoMania.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSOCDTabInLayer2(state) {
+      const tab = {
+        label: "Change OCD (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/OCD.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSPanicAttacksTabInLayer2(state) {
+      const tab = {
+        label: "Change Panic Attacks (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/PanicAttacks.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSPsychosisTabInLayer2(state) {
+      const tab = {
+        label: "Change Psychosis (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Psychosis.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSPTSDTabInLayer2(state) {
+      const tab = {
+        label: "Change PTSD (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/PTSD.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSSleepTabInLayer2(state) {
+      const tab = {
+        label: "Change Sleep (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Sleep.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSSocialAnxietyTabInLayer2(state) {
+      const tab = {
+        label: "Change Social Anxiety (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/SocialAnxiety.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSSubjectiveTabInLayer2(state) {
+      const tab = {
+        label: "Change Subjective (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/Subjective.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },//SuicideAssessment
+    showChangePROSSuicideAssessmentTabInLayer2(state) {
+      const tab = {
+        label: "Change Suicide Assessment (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/SuicideAssessment.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+
     showRecommendationDiscontinueHistoryTabInLayer2(state) {
       const tab = {
         label: "Recommendation Discontinue History",
