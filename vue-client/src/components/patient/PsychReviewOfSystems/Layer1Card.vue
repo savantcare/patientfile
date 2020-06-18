@@ -1,15 +1,15 @@
  <template>
   <el-card
     class="box-card"
-    :id="`mentalStatusExam-${typeOfStateDisplayArea}`"
+    :id="`psychReviewOfSystems-${typeOfStateDisplayArea}`"
     :style="typeOfStateDisplayAreaSpecificStyleToApply"
   >
     <div slot="header" class="clearfix">
       <CardHeader
-        ctName="Mental status exam"
+        ctName="Psych review of systems"
         actions="M,F,R"
         ref="card_header"
-        keyId="mental_status_exam"
+        keyId="psych_review_of_systems"
         :typeOfStateDisplayArea="typeOfStateDisplayArea"
         @handleClickOnMInCardHeader="handleClickOnMInCardHeader"
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
@@ -17,104 +17,125 @@
       />
     </div>
     <el-tabs tab-position="left">
-      <el-tab-pane label="Appearence">
+      <el-tab-pane label="ADHD">
         Good grooming and heigine
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleAppearenceChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Thought process">
+      <el-tab-pane label="Anorexia">
         Lniear, logical and goal directed
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleThoughtProcessChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Attitude">
+      <el-tab-pane label="Bulimia">
         Attitude
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleAttitudeChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Constitutional">
+      <el-tab-pane label="Dementia">
         Constitutional
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleConstitutionalChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Psychomotor">
+      <el-tab-pane label="Depression">
         Psychomotor
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handlePsychomotorChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Cognition">
+      <el-tab-pane label="GAD">
         Cognition
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleCognitionChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Eye-contact">
+      <el-tab-pane label="HomicideAssessment">
         Eye-contact
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleEyeContactChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Insight">
+      <el-tab-pane label="Mania/Hypo mania">
         Insight
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleInsightChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Speech">
+      <el-tab-pane label="OCD">
         Speech
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleSpeechChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Judgement">
+      <el-tab-pane label="Panic Attacks">
         Judgement
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleJudgementChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Mood / affect">
+      <el-tab-pane label="Psychosis">
         Mood / affect
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleMoodAffectChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Impulse control">
+      <el-tab-pane label="PTSD">
         Impulse control
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleImpulseControlChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Thought content">
+      <el-tab-pane label="Sleep">
         Thought content
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleThoughtContentChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Neurological">
+      <el-tab-pane label="Social anxiety">
         Neurological
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleNeurologicalChangeButton">Change</el-button>
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="Perception">
+      <el-tab-pane label="Subjective">
+        Perception
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Substance Use">
+        Perception
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Suicide Assessment">
+        Perception
+        <div style="text-align: right;">
+          <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
+        </div>
+      </el-tab-pane>
+
+      <el-tab-pane label="Gateway mood symptoms">
         Perception
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handlePerceptionChangeButton">Change</el-button>
