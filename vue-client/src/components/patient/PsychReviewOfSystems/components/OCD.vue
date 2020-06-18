@@ -12,7 +12,22 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in ocd" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in ocd" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxOCD.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,10 +51,38 @@
 
 <script>
 const ocdOptions = [
-  "Obsessions",
-  "Compulsions",
-  "Insight",
-  "Distressing or Impairing or Time-Consuming ( > 1 hr/day)"
+  {
+    label: "Obsessions",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Compulsions",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Insight",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Distressing or Impairing or Time-Consuming ( > 1 hr/day)",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  }
 ];
 
 export default {

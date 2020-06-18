@@ -12,7 +12,10 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in sleep" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in sleep" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-input-number v-model="checkboxSleep.value" :min="0" :max="24"></el-input-number>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,7 +39,10 @@
 
 <script>
 const sleepOptions = [
-  "Average number of hours slept per night (doctors assessment)"
+  {
+    label: "Average number of hours slept per night (doctors assessment)",
+    value: ""
+  }
 ];
 
 export default {

@@ -12,7 +12,26 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in homicideAssessment" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button
+                v-for="app in homicideAssessment"
+                :label="app.label"
+                :key="app.label"
+              >
+                {{app.label}}
+                <el-select
+                  v-model="checkboxHomicideAssessment.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -39,7 +58,15 @@
 </template>
 
 <script>
-const homicideAssessmentOptions = ["Does patient report homicidal ideations ?"];
+const homicideAssessmentOptions = [
+  {
+    label: "Does patient report homicidal ideations ?",
+    options: [
+      { label: "No", value: 0 },
+      { label: "Yes", value: 1 }
+    ]
+  }
+];
 
 export default {
   data() {

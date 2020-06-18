@@ -422,7 +422,18 @@ export default {
       state.visibility = true;
       state.tabValue = tab.name;
     },
-    showChangePROSManiaHypoManiaTabInLayer2(state) {
+    showChangePROSSubstanceUseTabInLayer2(state) {
+      const tab = {
+        label: "Change Substance use (PROS)",
+        value: require("@/components/patient/PsychReviewOfSystems/components/SubstanceUse.vue")
+          .default,
+        name: "tab-change-pros",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+    showChangePROSManiaHypomaniaTabInLayer2(state) {
       const tab = {
         label: "Change Mania/Hypo Mania (PROS)",
         value: require("@/components/patient/PsychReviewOfSystems/components/ManiaHypoMania.vue")

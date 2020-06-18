@@ -12,7 +12,22 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in depression" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in depression" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxDepression.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,15 +51,78 @@
 
 <script>
 const depressionOptions = [
-  "Depressive mood",
-  "Interest",
-  "Sleep",
-  "Guilt / Self Esteem",
-  "Energy",
-  "Conc/Distr",
-  "Appetite",
-  "PMR/PMA",
-  "Sl"
+  {
+    label: "Depressive mood",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Interest",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Sleep",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Guilt / Self Esteem",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Energy",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Conc/Distr",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Appetite",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "PMR/PMA",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Sl",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  }
 ];
 
 export default {

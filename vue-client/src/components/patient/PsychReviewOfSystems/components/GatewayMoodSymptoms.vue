@@ -16,7 +16,26 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in gatewayMoodSymptoms" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button
+                v-for="app in gatewayMoodSymptoms"
+                :label="app.label"
+                :key="app.label"
+              >
+                {{app.label}}
+                <el-select
+                  v-model="checkboxGatewayMoodSymptoms.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -44,12 +63,101 @@
 
 <script>
 const gatewayMoodSymptomsOptions = [
-  "Q. In the past 10 days, how many days have you felt depressed for most of the day?",
-  "Q. In the past 10 days, how many days have you felt low interest or motivation throughout most of the day?",
-  "Q. In the past 10 days, how many days have you been abnormally irritable throughout most of the day?",
-  "Q. In the past 10 days, how many days have you been abnormally energetic or high energy throughout most of the day?",
-  "Q. In the past 10 days, how many days have you felt abnormal mood elevation throughout most of the day?",
-  "Q. How difficult to the above symptoms make your day to day life?"
+  {
+    label:
+      "Q. In the past 10 days, how many days have you felt depressed for most of the day?",
+    options: [
+      { label: "0", value: 0 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 },
+      { label: "6", value: 6 },
+      { label: "7", value: 7 },
+      { label: "8", value: 8 },
+      { label: "9", value: 9 },
+      { label: "10", value: 10 }
+    ]
+  },
+  {
+    label:
+      "Q. In the past 10 days, how many days have you felt low interest or motivation throughout most of the day?",
+    options: [
+      { label: "0", value: 0 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 },
+      { label: "6", value: 6 },
+      { label: "7", value: 7 },
+      { label: "8", value: 8 },
+      { label: "9", value: 9 },
+      { label: "10", value: 10 }
+    ]
+  },
+  {
+    label:
+      "Q. In the past 10 days, how many days have you been abnormally irritable throughout most of the day?",
+    options: [
+      { label: "0", value: 0 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 },
+      { label: "6", value: 6 },
+      { label: "7", value: 7 },
+      { label: "8", value: 8 },
+      { label: "9", value: 9 },
+      { label: "10", value: 10 }
+    ]
+  },
+  {
+    label:
+      "Q. In the past 10 days, how many days have you been abnormally energetic or high energy throughout most of the day?",
+    options: [
+      { label: "0", value: 0 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 },
+      { label: "6", value: 6 },
+      { label: "7", value: 7 },
+      { label: "8", value: 8 },
+      { label: "9", value: 9 },
+      { label: "10", value: 10 }
+    ]
+  },
+  {
+    label:
+      "Q. In the past 10 days, how many days have you felt abnormal mood elevation throughout most of the day?",
+    options: [
+      { label: "0", value: 0 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 },
+      { label: "6", value: 6 },
+      { label: "7", value: 7 },
+      { label: "8", value: 8 },
+      { label: "9", value: 9 },
+      { label: "10", value: 10 }
+    ]
+  },
+  {
+    label: "Q. How difficult to the above symptoms make your day to day life?",
+    options: [
+      { label: "Not at all", value: 0 },
+      { label: "Somewhat difficult", value: 1 },
+      { label: "Very difficult", value: 2 },
+      { label: "Extremely difficult", value: 3 },
+      { label: "Incapacitating", value: 4 }
+    ]
+  }
 ];
 
 export default {
@@ -81,6 +189,6 @@ export default {
 
 <style>
 .box-card {
-  width: 700px;
+  width: 1000px;
 }
 </style>

@@ -12,7 +12,22 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in maniaHypoMania" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in maniaHypoMania" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxManiaHypoMania.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,14 +51,70 @@
 
 <script>
 const maniaHypoManiaOptions = [
-  "Mood elevation",
-  "Irritable",
-  "Energy/GDA/PMA",
-  "Sleep need",
-  "Talking",
-  "Racing Thoughts/FOI",
-  "Distractibility",
-  "High Risk Behaviour"
+  {
+    label: "Mood elevation",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Irritable",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Energy/GDA/PMA",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Sleep need",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Talking",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Racing Thoughts/FOI",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Distractibility",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "High Risk Behaviour",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  }
 ];
 
 export default {

@@ -12,7 +12,23 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in bulimia" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in bulimia" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxBulimia.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                  v-if="app.options"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,9 +52,33 @@
 
 <script>
 const bulimiaOptions = [
-  "Binge eating (large quantity and lack of control of eating)",
-  "Compensatory behaviors (vomiting, laxatives, fasting, exercise)",
-  "Self evaluation highly influenced by shape"
+  {
+    label: "Binge eating (large quantity and lack of control of eating)",
+    options: [
+      { label: "0", value: 0 },
+      { label: "0.5", value: 0.5 },
+      { label: "1", value: 1 }
+    ]
+  },
+  {
+    label: "Compensatory behaviors (vomiting, laxatives, fasting, exercise)",
+    options: [
+      { label: "0", value: 0 },
+      { label: "0.5", value: 0.5 },
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 }
+    ]
+  },
+  {
+    label: "Self evaluation highly influenced by shape",
+    options: [
+      { label: "0", value: 0 },
+      { label: "0.5", value: 0.5 },
+      { label: "1", value: 1 }
+    ]
+  }
 ];
 
 export default {

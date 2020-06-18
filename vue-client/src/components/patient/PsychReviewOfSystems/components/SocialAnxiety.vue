@@ -12,7 +12,22 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in socialAnxiety" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in socialAnxiety" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxSocialAnxiety.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,11 +51,46 @@
 
 <script>
 const socialAnxietyOptions = [
-  "Marked anxiety about 1 or more social situations",
-  "Fear that will act in a way that will be negatively evaluated",
-  "Social situation(s) almost always provokes anxiety",
-  "Social situation(s) is avoided or endured with intense anxiety",
-  "Anxiety is out of proportion to actual threat of the situation"
+  {
+    label: "Marked anxiety about 1 or more social situations",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Fear that will act in a way that will be negatively evaluated",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Social situation(s) almost always provokes anxiety",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Social situation(s) is avoided or endured with intense anxiety",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Anxiety is out of proportion to actual threat of the situation",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  }
 ];
 
 export default {

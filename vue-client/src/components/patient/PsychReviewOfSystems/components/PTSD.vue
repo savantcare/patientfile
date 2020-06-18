@@ -12,7 +12,22 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in ptsd" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in ptsd" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxPTSD.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,10 +51,38 @@
 
 <script>
 const ptsdOptions = [
-  "Re-experiencing Symptoms",
-  "Avoidance Symptoms",
-  "Arousal Symptoms",
-  "Negative Mood or Cognitions"
+  {
+    label: "Re-experiencing Symptoms",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Avoidance Symptoms",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Arousal Symptoms",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Negative Mood or Cognition",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  }
 ];
 
 export default {

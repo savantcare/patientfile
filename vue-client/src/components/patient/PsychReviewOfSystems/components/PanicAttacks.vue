@@ -12,7 +12,15 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in panicAttacks" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in panicAttacks" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-input
+                  size="mini"
+                  placeholder="Please input"
+                  v-model="checkboxPanicAttacks.value"
+                  style="width:100px"
+                ></el-input>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,9 +44,18 @@
 
 <script>
 const panicAttacksOptions = [
-  "Panic Attacks Per Month",
-  "Impairment Caused by Panic Attacks",
-  "Intensity of Panic Attacks"
+  {
+    label: "Panic Attacks Per Month",
+    value: ""
+  },
+  {
+    label: "Impairment Caused by Panic Attacks",
+    value: ""
+  },
+  {
+    label: "Intensity of Panic Attacks",
+    value: ""
+  }
 ];
 
 export default {

@@ -2,6 +2,14 @@
   <div>
     <el-row :gutter="24" style="margin-top:10px">
       <el-col :span="12">
+        <Subjective></Subjective>
+      </el-col>
+      <el-col :span="12">
+        <Dementia></Dementia>
+      </el-col>
+    </el-row>
+    <el-row :gutter="24" style="margin-top:10px">
+      <el-col :span="12">
         <ADHD></ADHD>
       </el-col>
       <el-col :span="12">
@@ -17,14 +25,7 @@
         <Depression></Depression>
       </el-col>
     </el-row>
-    <el-row :gutter="24" style="margin-top:10px">
-      <el-col :span="12">
-        <GAD></GAD>
-      </el-col>
-      <el-col :span="12">
-        <Dementia></Dementia>
-      </el-col>
-    </el-row>
+
     <el-row :gutter="24" style="margin-top:10px">
       <el-col :span="12">
         <PTSD></PTSD>
@@ -59,7 +60,7 @@
     </el-row>
     <el-row :gutter="24" style="margin-top:10px">
       <el-col :span="12">
-        <Subjective></Subjective>
+        <GAD></GAD>
       </el-col>
       <el-col :span="12">
         <SubstanceUse></SubstanceUse>

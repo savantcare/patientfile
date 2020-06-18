@@ -266,8 +266,26 @@ export default {
         type: this.type
       });
     },
-    handlePerceptionChangeButton() {
-      this.$store.commit("showChangePROSPerceptionTabInLayer2", {
+    handleSubjectiveChangeButton() {
+      this.$store.commit("showChangePROSSubjectiveTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleSubstanceUseChangeButton() {
+      this.$store.commit("showChangePROSSubstanceUseTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleSuicideAssessmentChangeButton() {
+      this.$store.commit("showChangePROSSuicideAssessmentTabInLayer2", {
+        label: this.label,
+        type: this.type
+      });
+    },
+    handleGatewayMoodSymptomsChangeButton() {
+      this.$store.commit("showChangePROSGatewayMoodSymptomsTabInLayer2", {
         label: this.label,
         type: this.type
       });

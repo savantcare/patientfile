@@ -12,7 +12,30 @@
               <!--  When opened in multi change format size="small" 
                 Ref: https://element.eleme.io/#/en-US/component/checkbox
               -->
-              <el-checkbox-button v-for="app in anorexia" :label="app" :key="app">{{app}}</el-checkbox-button>
+              <el-checkbox-button v-for="app in anorexia" :label="app.label" :key="app.label">
+                {{app.label}}
+                <el-select
+                  v-model="checkboxAnorexia.selected"
+                  clearable
+                  placeholder="Select"
+                  size="mini"
+                  v-if="app.options"
+                >
+                  <el-option
+                    v-for="item in app.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+                <el-input
+                  v-if="!app.options"
+                  size="mini"
+                  placeholder="Please input"
+                  v-model="checkboxAnorexia.value"
+                  style="width:100px"
+                ></el-input>
+              </el-checkbox-button>
             </el-checkbox-group>
             <!--  When opened in multi change min-rows=1 -->
             <el-input
@@ -36,10 +59,36 @@
 
 <script>
 const anorexiaOptions = [
-  "Food restriction leading to significantly low weight",
-  "Intense fear of gaining weight or behavior that interferes with wt gain",
-  "Body image disturbance, or excess influence of shape on self evaluation, or denial of seriousness of low body weight",
-  "Latest BMI"
+  {
+    label: "Food restriction leading to significantly low weight",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label:
+      "Intense fear of gaining weight or behavior that interferes with wt gain",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label:
+      "Body image disturbance, or excess influence of shape on self evaluation, or denial of seriousness of low body weight",
+    options: [
+      { label: "Not present", value: 0 },
+      { label: "Subsyndromal", value: 0.5 },
+      { label: "Syndromal", value: 1 }
+    ]
+  },
+  {
+    label: "Latest BMI",
+    value: ""
+  }
 ];
 /*
 "Food restriction leading to significantly low weight",
@@ -76,6 +125,6 @@ export default {
 
 <style>
 .box-card {
-  width: 700px;
+  width: 1000px;
 }
 </style>
