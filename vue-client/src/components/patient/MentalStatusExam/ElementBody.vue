@@ -203,6 +203,48 @@ export default {
             data: disorganizedData
           }
         );
+      } else if (this.type == "cognition") {
+        const cognitions = this.$store.state.mse.cognitionList;
+        let grosslyIntactData = [];
+        let impairedData = [];
+        let fluctuatingData = [];
+
+        for (const cognition of cognitions) {
+          const { createDate } = cognition;
+          grosslyIntactData.push({
+            x: createDate,
+            y:
+              cognition[
+                "grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n"
+              ] == "yes"
+                ? 1
+                : 0
+          });
+          impairedData.push({
+            x: createDate,
+            y: cognition["impaired"] == "yes" ? 1 : 0
+          });
+          fluctuatingData.push({
+            x: createDate,
+            y: cognition["fluctuating"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name:
+              "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention",
+            data: grosslyIntactData
+          },
+          {
+            name: "Impaired",
+            data: impairedData
+          },
+          {
+            name: "Fluctuating",
+            data: fluctuatingData
+          }
+        );
       }
       return series;
     }
@@ -213,6 +255,8 @@ export default {
       this.$store.dispatch("mse/getAppearence", params);
     } else if (this.type == "attitude") {
       this.$store.dispatch("mse/getAttitude", params);
+    } else if (this.type == "cognition") {
+      this.$store.dispatch("mse/getCognition", params);
     }
   },
   methods: {

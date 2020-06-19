@@ -34,10 +34,10 @@ export default {
       mseElements: [
         { label: "Appearence", value: "appearence" },
         { label: "Attitude", value: "attitude" },
+        { label: "Cognition", value: "cognition" },
         { label: "Thought process", value: "thoughtProcess" },
         { label: "Constitutional", value: "constitutional" },
         { label: "Psychomotor", value: "psychomotor" },
-        { label: "Cognition", value: "cognition" },
         { label: "Eye-contact", value: "eyeContact" },
         { label: "Insight", value: "insight" },
         { label: "Speech", value: "speech" },

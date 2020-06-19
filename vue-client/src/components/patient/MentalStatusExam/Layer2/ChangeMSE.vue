@@ -56,6 +56,12 @@ export default {
           "Apathetic",
           "Disorganized behavior"
         ];
+      } else if (this.type == "cognition") {
+        return [
+          "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention",
+          "Impaired",
+          "Fluctuating"
+        ];
       }
       return [];
     },
@@ -152,6 +158,30 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateAttitudeInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "cognition") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (
+            status ==
+            "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention"
+          ) {
+            request[
+              "grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n"
+            ] = value;
+          } else if (status == "Impaired") {
+            request["impaired"] = value;
+          } else if (status == "Fluctuating") {
+            request["fluctuating"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateCognitionInSM", {
           data: request,
           notify: this.$notify
         });
