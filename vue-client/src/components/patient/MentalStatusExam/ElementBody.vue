@@ -245,6 +245,22 @@ export default {
             data: fluctuatingData
           }
         );
+      } else if (this.type == "constitutional") {
+        const constitutionals = this.$store.state.mse.constitutionalList;
+        let vitalData = [];
+
+        for (const constitutional of constitutionals) {
+          const { createDate } = constitutional;
+          vitalData.push({
+            x: createDate,
+            y: constitutional["vitals-signs-stable"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push({
+          name: "Vitals signs stable",
+          data: vitalData
+        });
       }
       return series;
     }
@@ -257,6 +273,8 @@ export default {
       this.$store.dispatch("mse/getAttitude", params);
     } else if (this.type == "cognition") {
       this.$store.dispatch("mse/getCognition", params);
+    } else if (this.type == "constitutional") {
+      this.$store.dispatch("mse/getConstitutional", params);
     }
   },
   methods: {

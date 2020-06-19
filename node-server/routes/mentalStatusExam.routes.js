@@ -1,9 +1,11 @@
 const router = require('express').Router()
 const db = require('../models')
 const { QueryTypes } = require('sequelize')
+
 const Appearence = db.mentalStatusExamDB.appearence
 const Attitude = db.mentalStatusExamDB.attitude
 const Cognition = db.mentalStatusExamDB.cognition
+const Constitutional = db.mentalStatusExamDB.constitutional
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -124,6 +126,47 @@ router.post('/getCognition', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get cognition"
+    })
+  }
+})
+
+router.post('/updateConstitutional', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update Constitutional Data____')
+    console.log(data)
+
+    const existingList = await Constitutional.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await Constitutional.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Constitutional.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Constitutional"
+    })
+  }
+})
+
+router.post('/getConstitutional', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await Constitutional.sequelize.query('SELECT *, DATE(ROW_START) createDate FROM constitutional FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get constitutional"
     })
   }
 })

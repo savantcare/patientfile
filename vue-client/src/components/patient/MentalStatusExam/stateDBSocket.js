@@ -2,7 +2,8 @@ const state = {
   selectedType: '',
   appearenceList: [],
   attitudeList: [],
-  cognitionList: []
+  cognitionList: [],
+  constitutionalList: []
 }
 
 const mutations = {
@@ -17,6 +18,9 @@ const mutations = {
   },
   setCognitionList(state, value) {
     state.cognitionList = value
+  },
+  setConstitutionalList(state, value) {
+    state.constitutionalList = value
   }
 }
 
@@ -160,6 +164,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setCognitionList", json)
+    }
+  },
+  async dbUpdateConstitutionalInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateConstitutional`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add constitutional"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getConstitutional({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getConstitutional`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setConstitutionalList", json)
     }
   }
 }

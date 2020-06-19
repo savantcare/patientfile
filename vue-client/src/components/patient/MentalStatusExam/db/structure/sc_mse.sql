@@ -176,10 +176,10 @@ WITH SYSTEM VERSIONING;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `constituional`
+-- Table structure for table `constitutional`
 --
 
-CREATE TABLE `constituional`
+CREATE TABLE `constitutional`
 (
   `patientUUID` varchar
 (36) NOT NULL,

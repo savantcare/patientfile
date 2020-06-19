@@ -62,6 +62,8 @@ export default {
           "Impaired",
           "Fluctuating"
         ];
+      } else if (this.type == "constitutional") {
+        return ["Vitals signs stable"];
       }
       return [];
     },
@@ -182,6 +184,21 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateCognitionInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "constitutional") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Vitals signs stable") {
+            request["vitals-signs-stable"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateConstitutionalInSM", {
           data: request,
           notify: this.$notify
         });
