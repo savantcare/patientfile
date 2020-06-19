@@ -46,6 +46,16 @@ export default {
           "Disheveled, unkempt",
           "Malodorous"
         ];
+      } else if (this.type == "attitude") {
+        return [
+          "Pleasant and cooperative",
+          "Uncooperative",
+          "Hostile or defiant",
+          "Guarded",
+          "Evasive",
+          "Apathetic",
+          "Disorganized behavior"
+        ];
       }
       return [];
     },
@@ -65,6 +75,8 @@ export default {
           "Well-developed, well-nourished",
           "Appears stated age"
         ];
+      } else if (this.type == "attitude") {
+        this.checkList = ["Pleasant and cooperative"];
       }
     },
     async saveChanges() {
@@ -80,7 +92,8 @@ export default {
       let request = {
         patientUUID: this.$route.query.patient_id,
         recordChangedByUUID: this.$store.state.userId,
-        recordChangedFromIPAddress: ipAddress
+        recordChangedFromIPAddress: ipAddress,
+        other: this.others
       };
       if (this.type == "appearence") {
         for (const status of this.statusList) {
@@ -111,8 +124,34 @@ export default {
           }
         }
 
-        request["others"] = this.others;
         this.$store.dispatch("mse/dbUpdateAppearenceInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "attitude") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Pleasant and cooperative") {
+            request["pleasant-and-cooperative"] = value;
+          } else if (status == "Uncooperative") {
+            request["uncooperative"] = value;
+          } else if (status == "Hostile or defiant") {
+            request["hostile-or-defiant"] = value;
+          } else if (status == "Guarded") {
+            request["guarded"] = value;
+          } else if (status == "Evasive") {
+            request["evasive"] = value;
+          } else if (status == "Apathetic") {
+            request["apathetic"] = value;
+          } else if (status == "Disorganized behavior") {
+            request["disorganized-behavior"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateAttitudeInSM", {
           data: request,
           notify: this.$notify
         });

@@ -33,8 +33,8 @@ export default {
       selectedRows: [],
       mseElements: [
         { label: "Appearence", value: "appearence" },
-        { label: "Thought process", value: "thoughtProcess" },
         { label: "Attitude", value: "attitude" },
+        { label: "Thought process", value: "thoughtProcess" },
         { label: "Constitutional", value: "constitutional" },
         { label: "Psychomotor", value: "psychomotor" },
         { label: "Cognition", value: "cognition" },

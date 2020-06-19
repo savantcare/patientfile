@@ -432,10 +432,10 @@ WITH SYSTEM VERSIONING;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thaught-content`
+-- Table structure for table `thought-content`
 --
 
-CREATE TABLE `thaught-content`
+CREATE TABLE `thought-content`
 (
   `patientUUID` varchar
 (36) NOT NULL,
@@ -478,10 +478,10 @@ WITH SYSTEM VERSIONING;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thaught-process`
+-- Table structure for table `thought-process`
 --
 
-CREATE TABLE `thaught-process`
+CREATE TABLE `thought-process`
 (
   `patientUUID` varchar
 (36) NOT NULL,

@@ -2,7 +2,13 @@
   <div>
     <div style="text-align: right;">
       <el-button type="text" size="mini" @click="handleClickChangeButton">C</el-button>
-      <apexchart type="heatmap" height="350" :options="chartOptions" :series="series"></apexchart>
+      <apexchart
+        type="heatmap"
+        height="350"
+        :options="chartOptions"
+        :series="series"
+        v-if="series.length > 0"
+      ></apexchart>
     </div>
   </div>
 </template>
@@ -28,9 +34,9 @@ export default {
   },
   computed: {
     series() {
-      const appearences = this.$store.state.mse.appearenceList;
       let series = [];
       if (this.type == "appearence") {
+        const appearences = this.$store.state.mse.appearenceList;
         let goodGrommingAndHygieneData = [];
         let noApparentDistressData = [];
         let wellDevelopedData = [];
@@ -126,6 +132,77 @@ export default {
             data: malodorousData
           }
         );
+      } else if (this.type == "attitude") {
+        const attitudes = this.$store.state.mse.attitudeList;
+        let pleasantData = [];
+        let uncooperativeData = [];
+        let hostileData = [];
+        let guardedData = [];
+        let evasiveData = [];
+        let apatheticData = [];
+        let disorganizedData = [];
+        for (const attitude of attitudes) {
+          const { createDate } = attitude;
+          pleasantData.push({
+            x: createDate,
+            y: attitude["pleasant-and-cooperative"] == "yes" ? 1 : 0
+          });
+          uncooperativeData.push({
+            x: createDate,
+            y: attitude["uncooperative"] == "yes" ? 1 : 0
+          });
+          hostileData.push({
+            x: createDate,
+            y: attitude["hostile-or-defiant"] == "yes" ? 1 : 0
+          });
+          guardedData.push({
+            x: createDate,
+            y: attitude["guarded"] == "yes" ? 1 : 0
+          });
+          evasiveData.push({
+            x: createDate,
+            y: attitude["evasive"] == "yes" ? 1 : 0
+          });
+          apatheticData.push({
+            x: createDate,
+            y: attitude["apathetic"] == "yes" ? 1 : 0
+          });
+          disorganizedData.push({
+            x: createDate,
+            y: attitude["disorganized-behavior"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Pleasant and cooperative",
+            data: pleasantData
+          },
+          {
+            name: "Uncooperative",
+            data: uncooperativeData
+          },
+          {
+            name: "Hostile or defiant",
+            data: hostileData
+          },
+          {
+            name: "Guarded",
+            data: guardedData
+          },
+          {
+            name: "Evasive",
+            data: evasiveData
+          },
+          {
+            name: "Apathetic",
+            data: apatheticData
+          },
+          {
+            name: "Disorganized behavior",
+            data: disorganizedData
+          }
+        );
       }
       return series;
     }
@@ -134,6 +211,8 @@ export default {
     const params = { patientId: this.$route.query.patient_id };
     if (this.type == "appearence") {
       this.$store.dispatch("mse/getAppearence", params);
+    } else if (this.type == "attitude") {
+      this.$store.dispatch("mse/getAttitude", params);
     }
   },
   methods: {

@@ -20,6 +20,7 @@ mentalStatusExam.Sequelize = Sequelize
 mentalStatusExam.sequelize = mentalStatusExamSequelize
 
 mentalStatusExam.appearence = require('../mentalStatusExam/appearence.model')(mentalStatusExamSequelize, Sequelize)
+mentalStatusExam.attitude = require('../mentalStatusExam/attitude.model')(mentalStatusExamSequelize, Sequelize)
 
 mentalStatusExam.sequelize.sync()
 
