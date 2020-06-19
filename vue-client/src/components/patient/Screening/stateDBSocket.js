@@ -2,7 +2,10 @@ import { SCREENING_API_URL } from "@/const/others.js"
 let TOKEN = localStorage.getItem("token")
 export default {
   state: {                       // Cannot be changed directly. Can only be changed through mutation
-    screeningList: []
+    screeningList: [],
+    screenMasterList: [],
+    screenPHQ9AnswerDetail: [],
+    screenPHQ9AnswerHistoryDetail: []
   },
   mutations: {
     setPatientScreeningList(state, data) {
@@ -13,8 +16,14 @@ export default {
     },
     setScreeningDetail(state, data) {
       console.log(data);
-      if(data.screentype == 'PHQ9') {
+      if (data.screentype == 'PHQ9') {
         state.screenPHQ9AnswerDetail = data.record
+      }
+    },
+    setScreenHistory(state, data) {
+      //console.log(data);
+      if (data.screentype == 'PHQ9') {
+        state.screenPHQ9AnswerHistoryDetail = data.record
       }
     },
     /**
@@ -103,7 +112,7 @@ export default {
 
       }
     },
-    
+
     async dbGetMasterScreeningList({ commit }, json) {
       const { patientId, notify, userId, date } = json
       console.log(patientId, userId, date);
@@ -146,7 +155,7 @@ export default {
     },
 
     // this api store all new screen in db and fetch all latest screen data from db.
-    async addPatientScreen({commit }, json) {
+    async addPatientScreen({ commit }, json) {
       const { data, notify, patientUUID, date } = json
       //const originList = state.list
 
@@ -168,9 +177,9 @@ export default {
 
           let json = await response.json();
           commit('setPatientScreeningList', json)
-          notify({title: "Success", message: "Saved!"})
+          notify({ title: "Success", message: "Saved!" })
         } else {
-          notify({title: "Error", message: "Failed to add screening data"})
+          notify({ title: "Error", message: "Failed to add screening data" })
         }
       } catch (ex) {
         notify({
@@ -179,10 +188,10 @@ export default {
         })
       }
     },
-  
+
 
     async getScreeningDetail({ commit }, json) {
-      const { patientUUID, screentype, notify  } = json
+      const { patientUUID, screentype, notify } = json
       console.log(patientUUID);
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token")
@@ -222,8 +231,8 @@ export default {
       }
     },
 
-     // this api store all new screen in db and fetch all latest screen data from db.
-     async storeScreeningDetail({commit }, json) {
+    // this api store all new screen in db and fetch all latest screen data from db.
+    async storeScreeningDetail({ commit }, json) {
       const { data, notify, patientUUID, screentype, updateFlag } = json
       //const originList = state.list
 
@@ -237,7 +246,7 @@ export default {
           method: "POST",
           body: JSON.stringify({
             screentype: screentype,
-            patientUUID:patientUUID,
+            patientUUID: patientUUID,
             data: data,
             updateFlag: updateFlag
           })
@@ -246,9 +255,9 @@ export default {
 
           let json = await response.json();
           commit('setScreeningDetail', json)
-          notify({title: "Success", message: "Saved!"})
+          notify({ title: "Success", message: "Saved!" })
         } else {
-          notify({title: "Error", message: "Failed to add screening data"})
+          notify({ title: "Error", message: "Failed to add screening data" })
         }
       } catch (ex) {
         notify({
@@ -257,6 +266,33 @@ export default {
         })
       }
     },
+
+    // this api get all history data for PHQ9 screen to show on graph
+    async getScreeningAnswerHistory({ commit }, json) {
+      const { patientUUID, screentype, notify } = json
+
+      try {
+        const response = await fetch(
+          `${SCREENING_API_URL}/getScreenHistoryDetail?patientUUID=${patientUUID}&screentype=${screentype}`, {
+          headers: { "Authorization": "Bearer " + TOKEN }
+        });
+        if (response.ok) {
+          let json = await response.json();
+          console.log(json)
+          commit('setScreenHistory', json)
+        } else {
+          if (response.status == '401') {
+            notify({ title: "Error", message: "Token is expired." })
+          } else {
+            notify({ title: "Error", message: "Failed to get my screening history data" })
+          }
+        }
+      } catch (ex) {
+        notify({ title: "Error", message: "Server connection error" })
+      }
+
+    }
+
   },
   getters: {
     screening(state) {
