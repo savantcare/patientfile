@@ -68,6 +68,7 @@ CREATE TABLE `affect`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -108,6 +109,7 @@ CREATE TABLE `appearence`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -142,6 +144,7 @@ CREATE TABLE `attitude`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -168,6 +171,7 @@ CREATE TABLE `cognition`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -190,6 +194,7 @@ CREATE TABLE `constitutional`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -218,6 +223,7 @@ CREATE TABLE `eye-contact`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -250,6 +256,7 @@ CREATE TABLE `impulse-control`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -282,6 +289,7 @@ CREATE TABLE `insight`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -314,6 +322,7 @@ CREATE TABLE `judgement`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -338,6 +347,7 @@ CREATE TABLE `neurological`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -366,6 +376,7 @@ CREATE TABLE `perception`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -392,6 +403,7 @@ CREATE TABLE `psychomotor`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -424,6 +436,7 @@ CREATE TABLE `speech`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -470,6 +483,7 @@ CREATE TABLE `thought-content`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -504,6 +518,7 @@ CREATE TABLE `thought-process`
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
+`measurementDate` date NOT NULL,
   PRIMARY KEY
 (`patientUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

@@ -46,6 +46,10 @@ module.exports = (sequelize, Sequelize) => {
     recordChangedFromIPAddress: {
       type: Sequelize.STRING,
       defaultValue: ''
+    },
+    measurementDate: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
   }, {
     timestamps: false,

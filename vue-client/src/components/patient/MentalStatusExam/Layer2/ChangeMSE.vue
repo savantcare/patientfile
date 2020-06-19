@@ -9,9 +9,14 @@
 
       <el-input type="textarea" placeholder="Others (optional)" v-model="others"></el-input>
 
+      <div style="margin-top: 6px;">
+        <label style="margin-right: 6px">Measurement date:</label>
+        <el-date-picker v-model="date" type="date" placeholder="Pick a day"></el-date-picker>
+      </div>
+
       <el-button
         type="primary"
-        style="margin-top: 6px"
+        style="margin-top: 12px"
         @click="saveChanges"
         :disabled="validateSaveButton"
       >Save</el-button>
@@ -25,7 +30,8 @@ export default {
   data() {
     return {
       checkList: [],
-      others: ""
+      others: "",
+      date: new Date()
     };
   },
   computed: {
@@ -88,7 +94,7 @@ export default {
       } else if (this.type == "attitude") {
         this.checkList = ["Pleasant and cooperative"];
       } else if (this.type == "eyeContact") {
-        this.checkList = "Appropriate";
+        this.checkList = ["Appropriate"];
       }
     },
     async saveChanges() {
@@ -105,7 +111,8 @@ export default {
         patientUUID: this.$route.query.patient_id,
         recordChangedByUUID: this.$store.state.userId,
         recordChangedFromIPAddress: ipAddress,
-        other: this.others
+        other: this.others,
+        measurementDate: new Date(this.date).toISOString().split("T")[0]
       };
       if (this.type == "appearence") {
         for (const status of this.statusList) {
@@ -231,6 +238,7 @@ export default {
 
       this.checkList = [];
       this.others = "";
+      this.date = new Date();
     }
   }
 };
