@@ -64,14 +64,14 @@ module.exports = (io) => {
 
   router.get('/getScreeningDetail', async (req, res) => {
     try {
-    
-       const { screentype, patientUUID } = req.query
-       let returnData = {
+
+      const { screentype, patientUUID } = req.query
+      let returnData = {
         screentype: screentype,
-        record:{}
+        record: {}
       }
 
-      if(screentype == 'PHQ9') {
+      if (screentype == 'PHQ9') {
 
         queryResult = await phq9PatientResponse.sequelize.query('SELECT * FROM phq9PatientResponses  where patientUUID=:patientUUID', {
           replacements: { patientUUID: patientUUID },
@@ -81,7 +81,7 @@ module.exports = (io) => {
         if (queryResult.length > 0) {
           returnData.record = queryResult[0]
         }
-        
+
         res.send(returnData)
       }
 
@@ -97,11 +97,11 @@ module.exports = (io) => {
       const { data, patientUUID, screentype, updateFlag } = req.body
       let returnData = {
         screentype: screentype,
-        record:{}
+        record: {}
       }
 
-      if(screentype == 'PHQ9') {
-        if(updateFlag == true) {
+      if (screentype == 'PHQ9') {
+        if (updateFlag == true) {
           const updateScreening = await phq9PatientResponse.update(data[0], {
             where: {
               patientUUID: patientUUID
@@ -130,7 +130,38 @@ module.exports = (io) => {
     }
   })
 
-  
+  router.get('/getScreenHistoryDetail', async (req, res) => {
+    try {
+
+      const { screentype, patientUUID } = req.query
+      let returnData = {
+        screentype: screentype,
+        record: {}
+      }
+
+      if (screentype == 'PHQ9') {
+        queryResult = await phq9PatientResponse.sequelize.query('SELECT *, row_start, row_end  FROM phq9PatientResponses  FOR SYSTEM_TIME ALL where patientUUID=:patientUUID', {
+          replacements: { patientUUID: patientUUID },
+          type: phq9PatientResponse.sequelize.QueryTypes.SELECT
+        })
+
+        if (queryResult.length > 0) {
+          returnData.record = queryResult
+        }
+
+        res.send(returnData)
+      }
+
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occured while fetching the Screening"
+      })
+    }
+  })
+
+
+
+
 
   return router
 }

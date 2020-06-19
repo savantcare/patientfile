@@ -16,7 +16,9 @@
       />
     </div>
 
-    <DataTableWithoutTab
+    <ScreeningChart />
+
+    <!-- <DataTableWithoutTab
       :tabData="tabData"
       :selectedColumns="selectedColumns"
       ctName="screening"
@@ -25,19 +27,19 @@
       @handleClickOnTInDataRow="handleClickOnTInDataRow"
       @handleClickOnGInDataRow="handleClickOnGInDataRow"
       @handleUpdateColumns="handleUpdateColumns"
-    />
-
-
+    />-->
   </el-card>
 </template>
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
+import ScreeningChart from "@/components/patient/Screening/ScreeningChart";
+//import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 export default {
   components: {
     CardHeader,
-    DataTableWithoutTab
+    ScreeningChart
+    //DataTableWithoutTab
   },
   props: {
     typeOfStateDisplayArea: {
@@ -49,12 +51,12 @@ export default {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["scientificName"] ,
+      selectedColumns: ["scientificName"]
     };
   },
   methods: {
-     // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
-    
+    // -------------- Category 2/4: Functions to manage UI changes from Card Header ---------------------
+
     handleClickOnAInCardHeader() {
       console.log("show add dialog");
       this.$store.commit("showAddScreenTabInLayer2");
@@ -78,7 +80,7 @@ export default {
       });
     },
 
-     // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
+    // -------------- Category 3/4: Functions to manage UI changes from data row ---------------------
 
     handleSelectionChange(value) {
       this.$refs.card_header.selected = value;
@@ -92,7 +94,6 @@ export default {
     },
     handleClickOnGInDataRow(value) {
       console.log("show screen graph dialog" + value);
-      
     },
     handleClickOnCInDataRow(data) {
       console.log("show change dialog");
@@ -106,19 +107,18 @@ export default {
     },
     handleUpdateColumns(value) {
       this.columns = value;
-    },
+    }
 
-      //-------------- Category 4/4: Functions to manage DB changes -----------------------
-
+    //-------------- Category 4/4: Functions to manage DB changes -----------------------
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
 
-//     let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+    //     let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ') // Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify,
-      userId: this.$store.state.userId,
+      userId: this.$store.state.userId
     };
     this.$store.dispatch("dbGetPatientScreeningListInSM", params);
   },
@@ -127,11 +127,11 @@ export default {
       const screeningList = this.$store.state.screening.screeningList;
       //console.log(screeningList);
       return {
-          label: "Yours",
-          tableData: screeningList,
-          rowActions: ["T", "G"],
-          selectedColumn: ["sciendftificName"]
-        };
+        label: "Yours",
+        tableData: screeningList,
+        rowActions: ["T", "G"],
+        selectedColumn: ["sciendftificName"]
+      };
     }
   }
 };
