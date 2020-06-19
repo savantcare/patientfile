@@ -68,10 +68,17 @@ Vue.use(new VueSocketIO({
 import './registerServiceWorker'
 
 // v-chartjs
-// import VeLine from 'v-charts/lib/line.common'
-// Vue.component(VeLine.name, VeLine)
 import VCharts from 'v-charts'
 Vue.use(VCharts)
+
+// vue-apex chart
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
+import CardHeader from "./components/common/CardHeader";
+Vue.component('card-header', CardHeader)
 
 Vue.config.productionTip = false
 

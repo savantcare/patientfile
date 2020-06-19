@@ -106,7 +106,7 @@ export default [
   },
   {
     key: "mentalStatusExamCard",
-    value: require("@/components/patient/MentalStatusExam/Layer1Card").default,
+    value: require("@/components/patient/MentalStatusExam/CurrentStateCard").default,
     abbreviation: "mse",
   },
   {

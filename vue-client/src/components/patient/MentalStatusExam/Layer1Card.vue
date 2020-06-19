@@ -18,7 +18,8 @@
     </div>
     <el-tabs tab-position="left">
       <el-tab-pane label="Appearence">
-        Good grooming and heigine
+        <!-- Good grooming and heigine -->
+        <apexchart type="heatmap" height="350" :options="chartOptions" :series="series"></apexchart>
         <div style="text-align: right;">
           <el-button type="text" size="mini" @click="handleAppearenceChangeButton">Change</el-button>
         </div>
@@ -148,10 +149,55 @@ export default {
         }
       ],
       patientId: this.$route.query.patient_id,
-      userId: this.$store.state.userId
+      userId: this.$store.state.userId,
+      chartOptions: {
+        dataLabels: {
+          enabled: false
+        },
+        colors: ["#008000"],
+        xaxis: {
+          type: "category"
+        },
+        title: {
+          text: "HeatMap Chart (Single color)"
+        }
+      },
+      series: [
+        {
+          name: "Good grooming and hygiene",
+          data: this.generateData()
+        },
+        {
+          name: "No apparent distress",
+          data: [
+            { x: "2020-06-01", y: 0 },
+            { x: "2020-06-02", y: 1 },
+            { x: "2020-06-19", y: 0 }
+          ]
+        }
+      ]
     };
   },
   methods: {
+    generateData() {
+      const series = [
+        {
+          x: "2020-06-01",
+          y: 1
+        },
+        {
+          x: "2020-06-02",
+          y: 0
+        },
+        {
+          x: "2020-06-19",
+          y: 1
+        }
+      ];
+
+      return series;
+    },
+
     handleClickOnMInCardHeader() {
       this.$store.commit("showMultiChangeMSETabInLayer2");
     },

@@ -15,6 +15,7 @@ module.exports = (io) => {
   const appointmentRoutes = require('./appointment.routes')
   const screeningRoutes = require('./screening.route')(io)
   const bodyMeasurementRoutes = require('./bodyMeasurement.routes')
+  const mentalStatusExamRoutes = require('./mentalStatusExam.routes')
 
   router.use('/auth', authRoutes)
   router.use('/recommendations', recommendationRoutes)
@@ -29,6 +30,7 @@ module.exports = (io) => {
   router.use('/appointments', appointmentRoutes)
   router.use('/screening', screeningRoutes)
   router.use('/body-measurements', bodyMeasurementRoutes)
+  router.use('/mental-status-exam', mentalStatusExamRoutes)
 
   return router
 }

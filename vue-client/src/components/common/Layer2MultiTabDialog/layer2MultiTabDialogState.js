@@ -726,6 +726,16 @@ export default {
       state.tabList = [tab]
       state.visibility = true
       state.tabValue = tab.name
+    },
+    showChangeMSETabInLayer2(state) {
+      const tab = {
+        label: 'Change Mental Status Exam',
+        value: require("@/components/patient/MentalStatusExam/Layer2/ChangeMSE.vue").default,
+        name: "tab-change-mental-status-exam"
+      }
+      state.tabList = [tab]
+      state.visibility = true
+      state.tabValue = tab.name
     }
   }
 }
