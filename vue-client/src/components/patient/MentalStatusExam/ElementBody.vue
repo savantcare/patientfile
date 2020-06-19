@@ -261,6 +261,53 @@ export default {
           name: "Vitals signs stable",
           data: vitalData
         });
+      } else if (this.type == "eyeContact") {
+        const eyeContacts = this.$store.state.mse.eyeContactList;
+
+        let appropriateData = [];
+        let downcastData = [];
+        let intenseData = [];
+        let fleetingData = [];
+
+        for (const eyeContact of eyeContacts) {
+          const { createDate } = eyeContact;
+
+          appropriateData.push({
+            x: createDate,
+            y: eyeContact["appropriate"] == "yes" ? 1 : 0
+          });
+          downcastData.push({
+            x: createDate,
+            y: eyeContact["downcast"] == "yes" ? 1 : 0
+          });
+          intenseData.push({
+            x: createDate,
+            y: eyeContact["intense"] == "yes" ? 1 : 0
+          });
+          fleetingData.push({
+            x: createDate,
+            y: eyeContact["fleeting"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Appropriate",
+            data: appropriateData
+          },
+          {
+            name: "Downcast",
+            data: downcastData
+          },
+          {
+            name: "Intense",
+            data: intenseData
+          },
+          {
+            name: "Fleeting",
+            data: fleetingData
+          }
+        );
       }
       return series;
     }
@@ -275,6 +322,8 @@ export default {
       this.$store.dispatch("mse/getCognition", params);
     } else if (this.type == "constitutional") {
       this.$store.dispatch("mse/getConstitutional", params);
+    } else if (this.type == "eyeContact") {
+      this.$store.dispatch("mse/getEyeContact", params);
     }
   },
   methods: {

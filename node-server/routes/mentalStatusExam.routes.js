@@ -6,6 +6,7 @@ const Appearence = db.mentalStatusExamDB.appearence
 const Attitude = db.mentalStatusExamDB.attitude
 const Cognition = db.mentalStatusExamDB.cognition
 const Constitutional = db.mentalStatusExamDB.constitutional
+const EyeContact = db.mentalStatusExamDB.eyeContact
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -167,6 +168,47 @@ router.post('/getConstitutional', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get constitutional"
+    })
+  }
+})
+
+router.post('/updateEyeContact', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update EyeContact Data____')
+    console.log(data)
+
+    const existingList = await EyeContact.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await EyeContact.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await EyeContact.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the EyeContact"
+    })
+  }
+})
+
+router.post('/getEyeContact', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await EyeContact.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`eye-contact\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get eye-contact"
     })
   }
 })

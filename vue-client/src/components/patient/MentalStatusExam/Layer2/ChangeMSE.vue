@@ -64,6 +64,8 @@ export default {
         ];
       } else if (this.type == "constitutional") {
         return ["Vitals signs stable"];
+      } else if (this.type == "eyeContact") {
+        return ["Appropriate", "Downcast", "Intense", "Fleeting"];
       }
       return [];
     },
@@ -85,6 +87,8 @@ export default {
         ];
       } else if (this.type == "attitude") {
         this.checkList = ["Pleasant and cooperative"];
+      } else if (this.type == "eyeContact") {
+        this.checkList = "Appropriate";
       }
     },
     async saveChanges() {
@@ -199,6 +203,27 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateConstitutionalInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "eyeContact") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Appropriate") {
+            request["appropriate"] = value;
+          } else if (status == "Downcast") {
+            request["downcast"] = value;
+          } else if (status == "Intense") {
+            request["intense"] = value;
+          } else if (status == "Fleeting") {
+            request["fleeting"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateEyeContactInSM", {
           data: request,
           notify: this.$notify
         });
