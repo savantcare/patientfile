@@ -86,13 +86,13 @@ export default {
       });
 
       let columns = ["date"];
-      columns.push("phq9");
+      columns.push("phq9Point");
       let rows = [];
       chartData.forEach(item => {
         let date = new Date(item.date);
         const formatDate = date.getDate() + "-" + date.getHours(); // date.getMonth() + 1 + "-" + date.getDate();
         rows.push({
-          phq9: item.points,
+          phq9Point: item.points,
           date: formatDate
         });
       });
