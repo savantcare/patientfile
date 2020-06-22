@@ -66,9 +66,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
 
       Q5) How is timeOfApptLock managed?
       ==================================
-      sc_appointments -> patientAppointment
-                        stateOfAppt => 'apptScheduled','apptCancelled','apptNoteNotLocked','apptNoteLocked'
-                        timeOfApptLock is the ROW_START when stateOfAppt changes to 'apptNoteLocked'
+      DB -> sc_appointments -> table -> patientAppointment -> Field -> stateOfAppt => enum -> 'apptScheduled','apptCancelled','apptNoteNotLocked','apptNoteLocked'
+          timeOfApptLock is the ROW_START when stateOfAppt changes to 'apptNoteLocked'
 
       Q6) How do different components store data on client side?
       ==========================================================
@@ -78,7 +77,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
             1. When the same component is loaded twice from the search box on the currentStateDisplayArea server side query is not run 2nd time
             2. Once data comes on component being mounted the view changes instantly when the slider in the header is moved. API query is not run.
             3. Query is only run when the component is visible. So if a component is never visible the query is never run.
-            4. left and right side should not use 2 different data sets.
+            4. left and right side should not use 2 different data sets. How to do it? if data exists in state do not run the API
             5. Historical data once loaded is kept till the time Browser cache is cleaned.
             6. To show historical values of weight or recommendations the data loaded at start is used.
 
