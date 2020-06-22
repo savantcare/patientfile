@@ -1014,6 +1014,53 @@ export default {
             data: abnormalData
           }
         );
+      } else if (this.type == "perception") {
+        const perceptions = this.$store.state.mse.perceptionList;
+
+        let noAvhData = [];
+        let ahData = [];
+        let commandAhData = [];
+        let vhData = [];
+
+        for (const perception of perceptions) {
+          const { createDate } = perception;
+
+          noAvhData.push({
+            x: createDate,
+            y: perception["no-avh"] == "yes" ? 1 : 0
+          });
+          ahData.push({
+            x: createDate,
+            y: perception["ahData"] == "yes" ? 1 : 0
+          });
+          commandAhData.push({
+            x: createDate,
+            y: perception["command-ah"] == "yes" ? 1 : 0
+          });
+          vhData.push({
+            x: createDate,
+            y: perception["vh"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "No AVH",
+            data: noAvhData
+          },
+          {
+            name: "+AH",
+            data: ahData
+          },
+          {
+            name: "+Command AH",
+            data: commandAhData
+          },
+          {
+            name: "+VH",
+            data: vhData
+          }
+        );
       }
       return series;
     }
@@ -1048,6 +1095,8 @@ export default {
       this.$store.dispatch("mse/getThoughtContent", params);
     } else if (this.type == "neurological") {
       this.$store.dispatch("mse/getNeurological", params);
+    } else if (this.type == "perception") {
+      this.$store.dispatch("mse/getPerception", params);
     }
   },
   methods: {

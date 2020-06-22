@@ -138,6 +138,8 @@ export default {
         ];
       } else if (this.type == "neurological") {
         return ["Gait and station normal", "Gait and station abnormal"];
+      } else if (this.type == "perception") {
+        return ["No AVH", "+AH", "+Command AH", "+VH"];
       }
       return [];
     },
@@ -183,6 +185,8 @@ export default {
           "No delusional thinking observed",
           "No obsessive thinking observed"
         ];
+      } else if (this.type == "perception") {
+        this.checkList = ["No AVH"];
       }
     },
     async saveChanges() {
@@ -570,6 +574,27 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateNeurologicalInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "perception") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "No AVH") {
+            request["no-avh"] = value;
+          } else if (status == "+AH") {
+            request["ah"] = value;
+          } else if (status == "+Command AH") {
+            request["command-ah"] = value;
+          } else if (status == "+VH") {
+            request["vh"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdatePerceptionInSM", {
           data: request,
           notify: this.$notify
         });
