@@ -157,7 +157,7 @@ src/router/index.js sends control here if the / route is given by the user
 
 <script>
 const TheMultiStateDisplayAreaHeader = () =>
-  import("@/components/common/TheMultiStateDisplayAreaHeader.vue");
+  import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>

@@ -20,7 +20,7 @@ import goalStateModule from "../components/patient/goal/stateDBSocket";
 import settingStateModule from "./modules/settingState";
 import currentStateDisplayAreaModule from "./modules/currentStateDisplayArea";
 import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
-import multiStateDisplayAreaModule from "./modules/multiStateDisplayArea";
+import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
 import socialHistoryStateModule from "../components/patient/social-history/stateDBSocket";
 import familyHistoryStateModule from "../components/patient/FamilyHistory/stateDBSocket";
 import componentModule from "./modules/component";
