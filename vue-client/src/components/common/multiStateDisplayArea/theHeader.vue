@@ -109,7 +109,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                       mts(2nd Jan 10:30 AM)       =  190
                 Key insight -> On graph doctors want to see data on eval time and not on entry time
 
-                To show data for an appointment note (timeOfStateToShow):
+                To show data for an appointment note (timeOfStateToShow is set as timeOfApptLock from the slider in the MULTI_STATE_HEADER):
                 weightsEvalAtEachRowEnd filter where (index / ROW_END) >(if after) timeOfStateToShow (use nearest value) and ROW_START < (is before) timeOfStateToShow  
                     So the data set will be
                       For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM    -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
