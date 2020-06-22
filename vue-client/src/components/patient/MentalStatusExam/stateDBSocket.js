@@ -6,7 +6,8 @@ const state = {
   constitutionalList: [],
   eyeContactList: [],
   impulseControlList: [],
-  thoughtProcessList: []
+  thoughtProcessList: [],
+  psychomotorList: []
 }
 
 const mutations = {
@@ -33,6 +34,9 @@ const mutations = {
   },
   setThoughtProcessList(state, value) {
     state.thoughtProcessList = value
+  },
+  setPsychomotorList(state, value) {
+    state.psychomotorList = value
   }
 }
 
@@ -360,6 +364,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setThoughtProcessList", json)
+    }
+  },
+  async dbUpdatePsychomotorInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updatePsychomotor`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add psychomotor"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getPsychomotor({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getPsychomotor`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setPsychomotorList", json)
     }
   }
 }

@@ -9,6 +9,7 @@ const Constitutional = db.mentalStatusExamDB.constitutional
 const EyeContact = db.mentalStatusExamDB.eyeContact
 const ImpulseControl = db.mentalStatusExamDB.impulseControl
 const ThoughtProcess = db.mentalStatusExamDB.thoughtProcess
+const Psychomotor = db.mentalStatusExamDB.psychomotor
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -293,6 +294,47 @@ router.post('/getThoughtProcess', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get thought-process"
+    })
+  }
+})
+
+router.post('/updatePsychomotor', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update Psychomotor Data____')
+    console.log(data)
+
+    const existingList = await Psychomotor.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await Psychomotor.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Psychomotor.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Psychomotor"
+    })
+  }
+})
+
+router.post('/getPsychomotor', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await Psychomotor.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`psychomotor\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get psychomotor"
     })
   }
 })

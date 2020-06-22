@@ -450,6 +450,44 @@ export default {
             data: povertyData
           }
         );
+      } else if (this.type == "psychomotor") {
+        const psychomotors = this.$store.state.mse.psychomotorList;
+
+        let normalData = [];
+        let agitatedData = [];
+        let retardedData = [];
+
+        for (const psychomotor of psychomotors) {
+          const { createDate } = psychomotor;
+
+          normalData.push({
+            x: createDate,
+            y: psychomotor["normal"] == "yes" ? 1 : 0
+          });
+          agitatedData.push({
+            x: createDate,
+            y: psychomotor["agitated"] == "yes" ? 1 : 0
+          });
+          retardedData.push({
+            x: createDate,
+            y: psychomotor["retarded"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Normal",
+            data: normalData
+          },
+          {
+            name: "Agitated",
+            data: agitatedData
+          },
+          {
+            name: "Retarded",
+            data: retardedData
+          }
+        );
       }
       return series;
     }
@@ -470,6 +508,8 @@ export default {
       this.$store.dispatch("mse/getImpulseControl", params);
     } else if (this.type == "thoughtProcess") {
       this.$store.dispatch("mse/getThoughtProcess", params);
+    } else if (this.type == "psychomotor") {
+      this.$store.dispatch("mse/getPsychomotor", params);
     }
   },
   methods: {
