@@ -112,7 +112,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 To show data for an appointment note (timeOfStateToShow is set as timeOfApptLock from the slider in the MULTI_STATE_HEADER) on the MULTI_STATE_DISPLAY_AREA
                 weightsEvalAtEachRowEnd array filter where (index / ROW_END) >(is after) timeOfStateToShow (use nearest value) and ROW_START < (is before) timeOfStateToShow  
                     So the data set will be
-                      For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM    -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
+                      For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM   -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
                       For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> data for ROW_END > 21st March 1 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
 
               For data that can be N at a given time
