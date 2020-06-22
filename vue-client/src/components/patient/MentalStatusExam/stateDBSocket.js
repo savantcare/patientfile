@@ -12,7 +12,8 @@ const state = {
   speechList: [],
   judgementList: [],
   affectList: [],
-  thoughtContentList: []
+  thoughtContentList: [],
+  neurologicalList: []
 }
 
 const mutations = {
@@ -57,6 +58,9 @@ const mutations = {
   },
   setThoughtContentList(state, value) {
     state.thoughtContentList = value
+  },
+  setNeurologicalList(state, value) {
+    state.neurologicalList = value
   }
 }
 
@@ -660,6 +664,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setThoughtContentList", json)
+    }
+  },
+  async dbUpdateNeurologicalInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateNeurological`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add neurological"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getNeurological({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getNeurological`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setNeurologicalList", json)
     }
   }
 }

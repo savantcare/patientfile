@@ -136,6 +136,8 @@ export default {
           "+obsessions",
           "Passive death wish"
         ];
+      } else if (this.type == "neurological") {
+        return ["Gait and station normal", "Gait and station abnormal"];
       }
       return [];
     },
@@ -551,6 +553,23 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateThoughtContentInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "neurological") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Gait and station normal") {
+            request["gait-and-station-normal"] = value;
+          } else if (status == "Gait and station abnormal") {
+            request["gait-and-station-abnormal"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateNeurologicalInSM", {
           data: request,
           notify: this.$notify
         });

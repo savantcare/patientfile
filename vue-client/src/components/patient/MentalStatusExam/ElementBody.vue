@@ -985,6 +985,35 @@ export default {
             data: passiveData
           }
         );
+      } else if (this.type == "neurological") {
+        const neurologicals = this.$store.state.mse.neurologicalList;
+
+        let normalData = [];
+        let abnormalData = [];
+
+        for (const neurological of neurologicals) {
+          const { createDate } = neurological;
+
+          normalData.push({
+            x: createDate,
+            y: neurological["gait-and-station-normal"] == "yes" ? 1 : 0
+          });
+          abnormalData.push({
+            x: createDate,
+            y: neurological["gait-and-station-abnormal"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Gait and station normal",
+            data: normalData
+          },
+          {
+            name: "Gait and station abnormal",
+            data: abnormalData
+          }
+        );
       }
       return series;
     }
@@ -1017,6 +1046,8 @@ export default {
       this.$store.dispatch("mse/getAffect", params);
     } else if (this.type == "thoughtContent") {
       this.$store.dispatch("mse/getThoughtContent", params);
+    } else if (this.type == "neurological") {
+      this.$store.dispatch("mse/getNeurological", params);
     }
   },
   methods: {
