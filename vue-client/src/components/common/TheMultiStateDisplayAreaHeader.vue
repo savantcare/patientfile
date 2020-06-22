@@ -354,7 +354,7 @@ export default {
           .slice(0, 19)
           .replace("T", " ");
       }
-      this.$store.commit("setTimeOfState", timeOfStateToShow);
+      this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
     },
     handleSliderEndEvent() {
       // console.log(this.sliderInitialValue);

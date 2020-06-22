@@ -256,7 +256,7 @@ export default {
     // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfStateToShow should be null if the user has not chosen a value.
     let timeOfStateToShow = new Date().toISOString().split("T")[0];
     console.log(timeOfStateToShow);
-    this.$store.commit("setTimeOfState", timeOfStateToShow);
+    this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
   },
   methods: {
     onDrag(size) {
