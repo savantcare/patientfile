@@ -64,7 +64,13 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
         
           Ref: https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
 
-      Q5) How do different components store data on client side?
+      Q5) How is timeOfApptLock managed?
+      ==================================
+      sc_appointments -> patientAppointment
+                        stateOfAppt => 'apptScheduled','apptCancelled','apptNoteNotLocked','apptNoteLocked'
+                        timeOfApptLock is the ROW_START when stateOfAppt changes to 'apptNoteLocked'
+
+      Q6) How do different components store data on client side?
       ==========================================================
         (mts => mysql time staamp)
 
@@ -125,7 +131,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 recommendationsEvalAtEachRowEnd[xdcf][2038-01-19 03:14:07.999999] = loose weight,mts(5th Feb 10AM)
                 recommendationsEvalAtEachRowEnd[erfg][2038-01-19 03:14:07.999999] = sleep more,mts(20th Feb 10AM)
 
-      Q6) How does component data caching work?
+      Q7) How does component data caching work?
       =========================================
             The above object is retained till the time the browser cache is cleared. 
             When page is refreshed new data is fetched where row_end is > row_end stored in object index.
@@ -134,7 +140,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               Option1: Each patient gets a state of their own.
                         Ref: https://github.com/vuejs/vuex/issues/414
 
-      Q7) What are some previous data patterns evaluated and rejected?
+      Q8) What are some previous data patterns evaluated and rejected?
       ===============================================================
             
             When a component is mounted they create a array called
