@@ -43,7 +43,7 @@ export default {
         { label: "Insight", value: "insight" },
         { label: "Speech", value: "speech" },
         { label: "Judgement", value: "judgement" },
-        { label: "Mood / affect", value: "moodAffect" },
+        { label: "Mood / affect", value: "affect" },
         { label: "Thought content", value: "thoughtContent" },
         { label: "Neurological", value: "neurological" },
         { label: "Perception", value: "perception" }

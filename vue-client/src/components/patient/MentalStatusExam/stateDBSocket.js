@@ -10,7 +10,8 @@ const state = {
   psychomotorList: [],
   insightList: [],
   speechList: [],
-  judgementList: []
+  judgementList: [],
+  affectList: []
 }
 
 const mutations = {
@@ -49,6 +50,9 @@ const mutations = {
   },
   setJudgementList(state, value) {
     state.judgementList = value
+  },
+  setAffectList(state, value) {
+    state.affectList = value
   }
 }
 
@@ -560,6 +564,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setJudgementList", json)
+    }
+  },
+  async dbUpdateAffectInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateAffect`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add affect"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getAffect({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getAffect`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setAffectList", json)
     }
   }
 }

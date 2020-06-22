@@ -99,6 +99,27 @@ export default {
         ];
       } else if (this.type == "judgement") {
         return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
+      } else if (this.type == "affect") {
+        return [
+          "Euthymic",
+          "Dysphoric",
+          "Irritable",
+          "Angry",
+          "Bright",
+          "Euphoric",
+          "Labile",
+          "Stable",
+          "Mood congruent",
+          "Mood incongruent",
+          "Expansive",
+          "Constricted",
+          "Blunted",
+          "Flat",
+          "Anxious",
+          "Tearful",
+          "Dysthymic",
+          "Full-range"
+        ];
       }
       return [];
     },
@@ -134,6 +155,8 @@ export default {
         this.checkList = ["Regular, rate and rhythm"];
       } else if (this.type == "judgement") {
         this.checkList = ["Good"];
+      } else if (this.type == "affect") {
+        this.checkList = ["Euthymic", "Stable", "Full-range", "Mood congruent"];
       }
     },
     async saveChanges() {
@@ -416,6 +439,55 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateJudgementInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "affect") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Euthymic") {
+            request["euthymic"] = value;
+          } else if (status == "Dysphoric") {
+            request["dysphoric"] = value;
+          } else if (status == "Irritable") {
+            request["irritable"] = value;
+          } else if (status == "Angry") {
+            request["angry"] = value;
+          } else if (status == "Bright") {
+            request["bright"] = value;
+          } else if (status == "Euphoric") {
+            request["euphoric"] = value;
+          } else if (status == "Labile") {
+            request["labile"] = value;
+          } else if (status == "Stable") {
+            request["stable"] = value;
+          } else if (status == "Mood congruent") {
+            request["mood-congruent"] = value;
+          } else if (status == "Mood incongruent") {
+            request["mood-incongruent"] = value;
+          } else if (status == "Expansive") {
+            request["expansive"] = value;
+          } else if (status == "Constricted") {
+            request["constricted"] = value;
+          } else if (status == "Blunted") {
+            request["blunted"] = value;
+          } else if (status == "Flat") {
+            request["flat"] = value;
+          } else if (status == "Anxious") {
+            request["anxious"] = value;
+          } else if (status == "Tearful") {
+            request["tearful"] = value;
+          } else if (status == "Dysthymic") {
+            request["dysthymic"] = value;
+          } else if (status == "Full-range") {
+            request["full-range"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateAffectInSM", {
           data: request,
           notify: this.$notify
         });
