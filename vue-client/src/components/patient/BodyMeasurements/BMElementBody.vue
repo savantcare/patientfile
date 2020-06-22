@@ -18,6 +18,10 @@ export default {
     chartData() {
       let chartData = [];
       if (this.type == "weight") {
+        /* ...this is a spread operator.
+           Copies enumerable properties from a provided object to another newly created object.
+           Refr: https://medium.com/js-dojo/a-beginners-guide-to-using-the-spread-operator-in-javascript-3efd72c18879
+        */
         chartData = [...this.$store.state.bodyMeasurement.weights];
       } else if (this.type == "bmi") {
         chartData = [...this.$store.state.bodyMeasurement.bmis];

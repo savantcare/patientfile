@@ -195,7 +195,7 @@ export default {
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
-      date: this.timeOfState,
+      date: this.timeOfStateToShow,
       patientId: this.patientId,
       userId: this.userId
     });
@@ -204,10 +204,10 @@ export default {
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
         const today = new Date().toISOString().split("T")[0];
-        const isToday = today == this.timeOfState;
+        const isToday = today == this.timeOfStateToShow;
         // let isToday = false;
         // if (
-        //   today == this.timeOfState
+        //   today == this.timeOfStateToShow
         // ) {
         //   isToday = true;
         // }
@@ -234,21 +234,21 @@ export default {
         this.doSomethingWith(newValue);
       }
     },
-    timeOfState() {
-      return this.$store.state.stateAtSelectedTime.timeOfState;
+    timeOfStateToShow() {
+      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     }
   },
   watch: {
-    timeOfState() {
-      const timeOfState = this.timeOfState.split(" ")[0];
-      console.log(timeOfState);
+    timeOfStateToShow() {
+      const timeOfStateToShow = this.timeOfStateToShow.split(" ")[0];
+      console.log(timeOfStateToShow);
       if (
         this.$store.state.recommendation.multiStateYourRecommendationsList[
-          timeOfState
+          timeOfStateToShow
         ] == null
       ) {
         const params = {
-          date: this.timeOfState,
+          date: this.timeOfStateToShow,
           patientId: this.patientId,
           userId: this.userId
         };

@@ -4,11 +4,11 @@ For architrecture read core 3 at /src/views/PatientFile.vue
 
 A card header needs to deal with 3 situations:
 1. typeOfStateDisplayArea == "CurrentStateDisplayArea"
-2. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfState=null
-3. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfState=value
+2. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfStateToShow=2038-01-19 03:14:07.999999 (In future this is value of ROW_END stored by MariaDB for current row)
+3. typeOfStateDisplayArea == "MultiStateDisplayArea"   timeOfStateToShow=value
 
 A component needs to know whther it is being used in "MultiStateDisplayArea"  or "CurrentStateDisplayArea"
-If the component is being used in "MultiStateDisplayArea" then the component needs to know "timeOfState"
+If the component is being used in "MultiStateDisplayArea" then the component needs to know "timeOfStateToShow"
 -->
 
 <template>
@@ -82,7 +82,7 @@ export default {
     return {
       mouseOver: false,
       selected: [],
-      timeOfState: this.$route.query.timeOfState // If this value is NULL it means currentStateDisplayArea is being shown.
+      timeOfStateToShow: this.$route.query.timeOfStateToShow // If this value is 2038-01-19 03:14:07.999999 it means currentState is being shown.
     };
   },
   computed: {
@@ -103,7 +103,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == "2038-01-19 03:14:07.999999" // value stored by MariaDB in ROW_END
       ) {
         return (
           this.actions.split(",").filter(action => action == "A").length > 0 &&
@@ -118,7 +118,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "G").length > 0 &&
@@ -133,7 +133,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "R").length > 0 &&
@@ -148,7 +148,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "M").length > 0 &&
@@ -163,7 +163,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "F").length > 0 &&
@@ -178,7 +178,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState == null
+        this.timeOfStateToShow == null
       ) {
         return (
           this.actions.split(",").filter(action => action == "X").length > 0 &&
@@ -194,7 +194,7 @@ export default {
       }
       if (
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea" ||
-        this.timeOfState != null
+        this.timeOfStateToShow != null
       ) {
         return (
           this.actions.split(",").filter(action => action == "D").length > 0 &&
@@ -217,7 +217,7 @@ export default {
       }
       // if (
       //   this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
-      //   this.timeOfState != null
+      //   this.timeOfStateToShow != 2038-01-19 03:14:07.999999
       // ) {
       //   return true;
       // }

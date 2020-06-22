@@ -79,7 +79,10 @@ export default {
       return bm.value + bm.unit;
     },
     handleClickOnMInCardHeader() {
-      this.$store.commit("bodyMeasurement/setSelectedDate", this.timeOfState);
+      this.$store.commit(
+        "bodyMeasurement/setSelectedDate",
+        this.timeOfStateToShow
+      );
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
     },
     handleClickOnFInCardHeader() {
@@ -163,16 +166,22 @@ export default {
         }
       ];
     },
-    timeOfState() {
-      return this.$store.state.stateAtSelectedTime.timeOfState;
+    timeOfStateToShow() {
+      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     }
   },
   mounted() {
-    this.$store.commit("bodyMeasurement/setSelectedDate", this.timeOfState);
+    this.$store.commit(
+      "bodyMeasurement/setSelectedDate",
+      this.timeOfStateToShow
+    );
   },
   watch: {
-    timeOfState() {
-      this.$store.commit("bodyMeasurement/setSelectedDate", this.timeOfState);
+    timeOfStateToShow() {
+      this.$store.commit(
+        "bodyMeasurement/setSelectedDate",
+        this.timeOfStateToShow
+      );
     }
   }
 };

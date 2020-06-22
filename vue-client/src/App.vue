@@ -1,5 +1,5 @@
 /* 
- KT: This is first file imported by src/main.js
+ KT: This is first file imported by src/main.js hence this is the 2nd file in the app.
 */
 
 <template>

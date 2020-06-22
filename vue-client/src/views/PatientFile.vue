@@ -16,13 +16,13 @@ Core 1/6. Page design
 |                                         |                              |  This var contains 1 of: 
 |This has list of compomponents.          |This has list of Components   |  multiStateDisplayArea  
 |Data of each component depends on        |                              |            OR
-|timeOfState ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
-|timeOfState has 2 possibilities          |                              |
+|timeOfStateToShow ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
+|timeOfStateToShow has 2 possibilities          |                              |
 |                                         |On right side I do not care   |
-|1. timeOfState=null                      |about timeOfState             |
-|2. timeOfState=value                     |                              |       
+|1. timeOfStateToShow=null                      |about timeOfStateToShow             |
+|2. timeOfStateToShow=value                     |                              |       
 |                                         |                              |
-| If timeOfState==null then data of       |                              |
+| If timeOfStateToShow==null then data of       |                              |
 | component is from currentTime           |                              |
 |                                         |                              |
 |                                         +------------------------------+
@@ -128,12 +128,15 @@ src/router/index.js sends control here if the / route is given by the user
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minSize="100" id="multiStateDisplayArea">
         <TheMultiStateDisplayAreaHeader></TheMultiStateDisplayAreaHeader>
-        <component
-          v-for="(component, index) in multiStateDisplayAreaComponents"
-          :key="`multi-state-display-area-component-${index}`"
-          :is="component.value"
-          v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
-        ></component>
+        <keep-alive>
+          <!-- TODO: keep alive is not working. The sql query is still being called when rex command is given twice -->
+          <component
+            v-for="(component, index) in multiStateDisplayAreaComponents"
+            :key="`multi-state-display-area-component-${index}`"
+            :is="component.value"
+            v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
+          ></component>
+        </keep-alive>
       </SplitArea>
       <SplitArea :size="30" :minSize="100" id="currentStateDisplayArea">
         <keep-alive>
@@ -157,7 +160,7 @@ src/router/index.js sends control here if the / route is given by the user
 
 <script>
 const TheMultiStateDisplayAreaHeader = () =>
-  import("@/components/common/TheMultiStateDisplayAreaHeader.vue");
+  import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
@@ -206,7 +209,8 @@ export default {
       return this.$store.getters.currentStateDisplayAreaList;
     },
     multiStateDisplayAreaComponents() {
-      const componentType = this.$store.state.stateAtSelectedTime.componentType;
+      const componentType = this.$store.state.multiStateDisplayArea
+        .componentType;
       const components = this.$store.state.component.list.filter(
         item => item.tag == componentType
       );
@@ -253,10 +257,10 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
-    let timeOfState = new Date().toISOString().split("T")[0];
-    console.log(timeOfState);
-    this.$store.commit("setTimeOfState", timeOfState);
+    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfStateToShow should be null if the user has not chosen a value.
+    let timeOfStateToShow = new Date().toISOString().split("T")[0];
+    console.log(timeOfStateToShow);
+    this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
   },
   methods: {
     onDrag(size) {
