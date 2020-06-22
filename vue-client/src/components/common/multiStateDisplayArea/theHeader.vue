@@ -48,11 +48,12 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       ==========================================================
         (mts => mysql time staamp)
 
-            Four goals: 
+            Five goals: 
             1. When the same component is loaded twice from the search box on the currentStateDisplayArea server side query is not run 2nd time
-            2. Once data comes on component being mounted the view changes instantly when the slider in the header is moved.
-            3. Query is only run when the component is mounted. So if a component is never mounted the query is never run.
+            2. Once data comes on component being mounted the view changes instantly when the slider in the header is moved. API query is not run.
+            3. Query is only run when the component is visible. So if a component is never visible the query is never run.
             4. left and right side should not use 2 different data sets.
+            5. Historical data once loaded is kept till the time Browser cache is cleaned.
 
             When a component is mounted they create a array called
               componentNameEvalAtEachRowEnd
@@ -64,6 +65,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               | appt start times | appt lock times  | 
               | 20th Feb 10AM    | 25th Feb 2 PM    |      
               | 16th March 3 pm  | 21st March 1 PM  |
+
+              slider will have markers at 20th Feb 10AM and 16th March 3 pm. When marker on "20th Feb 10AM" is clicked timeOfStateToShow is set as "25thFeb 2 PM"
 
               For data that can only be 1 at a given time
               -------------------------------------------
@@ -83,12 +86,13 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                     So the data set will be
                       mts(5th Feb 10AM)           =  185
                       mts(2nd Jan 10:30 AM)       =  190
+                Key insight -> On graph doctors want to see data on eval time and not on entry time
 
-                To show data for timeOfStateToShow:
-                weightsEvalAtEachRowEnd filter where min(index) > timeOfStateToShow  
+                To show data for an appointment note (timeOfStateToShow):
+                weightsEvalAtEachRowEnd filter where min(index / ROW_END) > timeOfStateToShow   
                     So the data set will be
-                      For appt time 20th Feb 10Am    -> need to show data for 25th Feb 2PM    -> 185
-                      For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> 185
+                      For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM    -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
+                      For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> data for ROW_END > 21st March 1 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
 
               For data that can be N at a given time
               --------------------------------------
