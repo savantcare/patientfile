@@ -11,6 +11,7 @@ const ImpulseControl = db.mentalStatusExamDB.impulseControl
 const ThoughtProcess = db.mentalStatusExamDB.thoughtProcess
 const Psychomotor = db.mentalStatusExamDB.psychomotor
 const Insight = db.mentalStatusExamDB.insight
+const Speech = db.mentalStatusExamDB.speech
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -377,6 +378,47 @@ router.post('/getInsight', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get insight"
+    })
+  }
+})
+
+router.post('/updateSpeech', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update Speech Data____')
+    console.log(data)
+
+    const existingList = await Speech.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await Speech.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Speech.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Speech"
+    })
+  }
+})
+
+router.post('/getSpeech', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await Speech.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`speech\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get speech"
     })
   }
 })

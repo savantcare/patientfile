@@ -553,6 +553,71 @@ export default {
             data: limitedData
           }
         );
+      } else if (this.type == "speech") {
+        const speeches = this.$store.state.mse.speechList;
+
+        let regularData = [];
+        let fluentData = [];
+        let incoherentData = [];
+        let talkNativeData = [];
+        let pressuredData = [];
+        let mumblingData = [];
+
+        for (const speech of speeches) {
+          const { createDate } = speech;
+
+          regularData.push({
+            x: createDate,
+            y: speech["regular-rate-and-rhythm"] == "yes" ? 1 : 0
+          });
+          fluentData.push({
+            x: createDate,
+            y: speech["fluent"] == "yes" ? 1 : 0
+          });
+          incoherentData.push({
+            x: createDate,
+            y: speech["incoherent"] == "yes" ? 1 : 0
+          });
+          talkNativeData.push({
+            x: createDate,
+            y: speech["talkative"] == "yes" ? 1 : 0
+          });
+          pressuredData.push({
+            x: createDate,
+            y: speech["pressured"] == "yes" ? 1 : 0
+          });
+          mumblingData.push({
+            x: createDate,
+            y: speech["mumbling"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Regular, rate and rhythm",
+            data: regularData
+          },
+          {
+            name: "Fluent",
+            data: fluentData
+          },
+          {
+            name: "Incoherent",
+            data: incoherentData
+          },
+          {
+            name: "Talkative",
+            data: talkNativeData
+          },
+          {
+            name: "Pressured",
+            data: pressuredData
+          },
+          {
+            name: "Mumbling",
+            data: mumblingData
+          }
+        );
       }
       return series;
     }
@@ -577,6 +642,8 @@ export default {
       this.$store.dispatch("mse/getPsychomotor", params);
     } else if (this.type == "insight") {
       this.$store.dispatch("mse/getInsight", params);
+    } else if (this.type == "speech") {
+      this.$store.dispatch("mse/getSpeech", params);
     }
   },
   methods: {

@@ -88,6 +88,15 @@ export default {
         return ["Normal", "Agitated", "Retarded"];
       } else if (this.type == "insight") {
         return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
+      } else if (this.type == "speech") {
+        return [
+          "Regular, rate and rhythm",
+          "Fluent",
+          "Incoherent",
+          "Talkative",
+          "Pressured",
+          "Mumbling"
+        ];
       }
       return [];
     },
@@ -119,6 +128,8 @@ export default {
         this.checkList = ["Normal"];
       } else if (this.type == "insight") {
         this.checkList = ["Good"];
+      } else if (this.type == "speech") {
+        this.checkList = ["Regular, rate and rhythm"];
       }
     },
     async saveChanges() {
@@ -351,6 +362,31 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateInsightInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "speech") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Regular, rate and rhythm") {
+            request["regular-rate-and-rhythm"] = value;
+          } else if (status == "Fluent") {
+            request["fluent"] = value;
+          } else if (status == "Incoherent") {
+            request["incoherent"] = value;
+          } else if (status == "Talkative") {
+            request["talkative"] = value;
+          } else if (status == "Pressured") {
+            request["pressured"] = value;
+          } else if (status == "Mumbling") {
+            request["mumbling"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateSpeechInSM", {
           data: request,
           notify: this.$notify
         });
