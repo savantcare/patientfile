@@ -48,6 +48,11 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       ==========================================================
         (mts => mysql time staamp)
 
+            Three goals: 
+            1. When the same component is loaded twice from the search box on the currentStateDisplayArea server side query is not run 2nd time
+            2. Once data comes on component being mounted the view changes instantly when the slider in the header is moved.
+            3. Query is only run when the component is mounted. So if a component is never mounted the query is never run.
+
             When a component is mounted they create a array called
               componentNameEvalAtEachRowEnd
                 For e.g.  recommendationsEvalAtEachRowEnd
