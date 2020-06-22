@@ -1,40 +1,40 @@
-import CurrentStateDisplayAreaCards from "@/const/allComponentsList.js"
+import CurrentStateDisplayAreaCards from "@/const/allComponentsList.js";
 
 export default {
   state: {
-    width: '29%',
+    width: "29%",
     CardsList: [],
     rows: [],
     focusRowIndex: -1,
-    searchKeyword: ""
+    searchKeyword: "",
   },
   mutations: {
     setCurrentStateDisplayAreaSplitAreaWidth(state, value) {
-      state.width = value
+      state.width = value;
     },
     setCurrentStateDisplayAreaCardsList(state, newList) {
-      state.CardsList = newList
+      state.CardsList = newList;
     },
     setCurrentStateDisplayAreaFocusRowIndex(state, index) {
-      state.focusRowIndex = index
+      state.focusRowIndex = index;
     },
     setCurrentStateDisplayAreaRows(state, rows) {
       state.rows = rows;
     },
     setCurrentStateDisplayAreaSearchKeyword(state, keyword) {
-      state.searchKeyword = keyword
+      state.searchKeyword = keyword;
     },
     updateCurrentStateDisplayAreaCards(state, action) {
       if (action == "clear") {
-        state.focusRowIndex = -1
-        state.CardsList = []
+        state.focusRowIndex = -1;
+        state.CardsList = [];
       } else {
-        console.log(action)
-        let newList = []
-        newList = state.CardsList.filter(item => {
-          return action.search(item.toLowerCase()) > -1
-        })
-        newList.push()
+        console.log(action);
+        let newList = [];
+        newList = state.CardsList.filter((item) => {
+          return action.search(item.toLowerCase()) > -1;
+        });
+        newList.push();
         // const card = CurrentStateDisplayAreaCards.filter(item => {
         //   return action.search(item.key) > -1
         // })
@@ -49,24 +49,24 @@ export default {
         // }
         // state.CardsList = newList
       }
-    }
+    },
   },
   getters: {
     CurrentStateDisplayAreaFocusRow(state) {
-      return state.rows[state.focusRowIndex]
+      return state.rows[state.focusRowIndex];
     },
     currentStateDisplayAreaList(state) {
-      let list = []
-      state.CardsList.forEach(item => {
-        const result = CurrentStateDisplayAreaCards.filter(card => {
-          return card.abbreviation == item.toLowerCase()
-        })
+      let list = [];
+      state.CardsList.forEach((item) => {
+        const result = CurrentStateDisplayAreaCards.filter((card) => {
+          return card.abbreviation == item.toLowerCase();
+        });
         if (result.length > 0) {
-          list.push(result[0])
+          list.push(result[0]);
         }
-      })
-      return list
-    }
+      });
+      return list;
+    },
   },
   actions: {
     updateCurrentStateDisplayAreaRow({ rootState, commit, rootGetters }) {
@@ -74,11 +74,19 @@ export default {
        * Indicate the right-panel rows with ${keyword}-${index}, e.g recommendation-0
        */
       let CurrentStateDisplayAreaRows = [];
-      const CurrentStateDisplayAreaComponents = rootGetters.currentStateDisplayAreaList
-      CurrentStateDisplayAreaComponents.forEach(item => {
+      // if you want to use global state and getters, rootState and rootGetters are passed as the 3rd and 4th arguments to getter functions
+      // Ref: https://vuex.vuejs.org/guide/modules.html#accessing-global-assets-in-namespaced-modules
+      const CurrentStateDisplayAreaComponents =
+        rootGetters.currentStateDisplayAreaList;
+
+      // The value of currentStateDisplayAreaList is available inside chrome -> developers tools -> Vue -> Vuex
+
+      console.log("====" + JSON.stringify(rootState, null, 4));
+
+      CurrentStateDisplayAreaComponents.forEach((item) => {
         if (rootState[item.key] && rootState[item.key]["tableList"]) {
           const componentRows = rootState[item.key]["tableList"].filter(
-            data => {
+            (data) => {
               return data.discontinue != true;
             }
           );
@@ -91,8 +99,8 @@ export default {
       });
       // Add search-box-for-commands-from-user component at the last
       CurrentStateDisplayAreaRows.push("search-box-for-commands-from-user");
-      console.log(CurrentStateDisplayAreaRows)
-      commit("setCurrentStateDisplayAreaRows", CurrentStateDisplayAreaRows)
-    }
-  }
-}
+      console.log(CurrentStateDisplayAreaRows);
+      commit("setCurrentStateDisplayAreaRows", CurrentStateDisplayAreaRows);
+    },
+  },
+};
