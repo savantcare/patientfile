@@ -7,7 +7,7 @@ import allComponentsList from "@/const/allComponentsList.js";
 
 export default {
   state: {
-    list: [],
+    ctList: [],
     timeOfStateToShow: "2038-01-19 03:14:07.999999", // All components on render in multiStateDisplayArea use this value. This is value of ROW_END in mariaDB when row is active
     zoomValue: 1,
     originSize: null,
@@ -15,7 +15,7 @@ export default {
   },
   mutations: {
     setMultiStateDisplayAreaCtList(state, value) {
-      state.list = value;
+      state.ctList = value;
     },
     setTimeOfStateToShow(state, value) {
       state.timeOfStateToShow = value;
@@ -90,7 +90,7 @@ export default {
   getters: {
     multiStateDisplayAreaCtList(state) {
       let list = [];
-      state.list.forEach((item) => {
+      state.ctList.forEach((item) => {
         console.log(item);
         if (item == "Bm") {
           list.push({
