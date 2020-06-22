@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, Sequelize) => {
   const model = sequelize.define("thought-process", {
     patientUUID: {

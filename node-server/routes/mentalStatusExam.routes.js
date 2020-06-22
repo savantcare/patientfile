@@ -7,6 +7,7 @@ const Attitude = db.mentalStatusExamDB.attitude
 const Cognition = db.mentalStatusExamDB.cognition
 const Constitutional = db.mentalStatusExamDB.constitutional
 const EyeContact = db.mentalStatusExamDB.eyeContact
+const ImpulseControl = db.mentalStatusExamDB.impulseControl
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -209,6 +210,47 @@ router.post('/getEyeContact', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get eye-contact"
+    })
+  }
+})
+
+router.post('/updateImpulseControl', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update ImpulseControl Data____')
+    console.log(data)
+
+    const existingList = await ImpulseControl.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await ImpulseControl.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await ImpulseControl.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the ImpulseControl"
+    })
+  }
+})
+
+router.post('/getImpulseControl', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await ImpulseControl.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`impulse-control\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get impulse-control"
     })
   }
 })

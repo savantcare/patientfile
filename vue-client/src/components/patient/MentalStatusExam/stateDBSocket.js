@@ -4,7 +4,8 @@ const state = {
   attitudeList: [],
   cognitionList: [],
   constitutionalList: [],
-  eyeContactList: []
+  eyeContactList: [],
+  impulseControlList: []
 }
 
 const mutations = {
@@ -25,6 +26,9 @@ const mutations = {
   },
   setEyeContactList(state, value) {
     state.eyeContactList = value
+  },
+  setImpulseControlList(state, value) {
+    state.impulseControlList = value
   }
 }
 
@@ -260,6 +264,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setEyeContactList", json)
+    }
+  },
+  async dbUpdateImpulseControlInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateImpulseControl`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add impulse-control"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getImpulseControl({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getImpulseControl`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setImpulseControlList", json)
     }
   }
 }

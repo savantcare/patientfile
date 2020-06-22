@@ -72,6 +72,8 @@ export default {
         return ["Vitals signs stable"];
       } else if (this.type == "eyeContact") {
         return ["Appropriate", "Downcast", "Intense", "Fleeting"];
+      } else if (this.type == "impulseControl") {
+        return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
       }
       return [];
     },
@@ -95,6 +97,8 @@ export default {
         this.checkList = ["Pleasant and cooperative"];
       } else if (this.type == "eyeContact") {
         this.checkList = ["Appropriate"];
+      } else if (this.type == "impulseControl") {
+        this.checkList = ["Good"];
       }
     },
     async saveChanges() {
@@ -231,6 +235,31 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateEyeContactInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "impulseControl") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Good") {
+            request["good"] = value;
+          } else if (status == "Fair") {
+            request["fair"] = value;
+          } else if (status == "Questionable") {
+            request["questionable"] = value;
+          } else if (status == "Poor") {
+            request["poor"] = value;
+          } else if (status == "Impaired") {
+            request["impaired"] = value;
+          } else if (status == "Limited") {
+            request["limited"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateImpulseControlInSM", {
           data: request,
           notify: this.$notify
         });

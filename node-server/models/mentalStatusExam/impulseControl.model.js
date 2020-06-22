@@ -1,19 +1,26 @@
+
 module.exports = (sequelize, Sequelize) => {
-  const model = sequelize.define("eye-contact", {
+  const model = sequelize.define("impulse-control", {
     patientUUID: {
       type: Sequelize.STRING,
       primaryKey: true,
     },
-    'appropriate': {
+    'good': {
       type: Sequelize.ENUM('yes', 'no')
     },
-    'downcast': {
+    'fair': {
       type: Sequelize.ENUM('yes', 'no')
     },
-    'intense': {
+    'questionable': {
       type: Sequelize.ENUM('yes', 'no')
     },
-    'fleeting': {
+    'poor': {
+      type: Sequelize.ENUM('yes', 'no')
+    },
+    'impaired': {
+      type: Sequelize.ENUM('yes', 'no')
+    },
+    'limited': {
       type: Sequelize.ENUM('yes', 'no')
     },
     other: {

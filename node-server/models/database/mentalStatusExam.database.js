@@ -24,6 +24,7 @@ mentalStatusExam.attitude = require('../mentalStatusExam/attitude.model')(mental
 mentalStatusExam.cognition = require('../mentalStatusExam/cognition.model')(mentalStatusExamSequelize, Sequelize)
 mentalStatusExam.constitutional = require('../mentalStatusExam/constitutional.model')(mentalStatusExamSequelize, Sequelize)
 mentalStatusExam.eyeContact = require('../mentalStatusExam/eyeContact.model')(mentalStatusExamSequelize, Sequelize)
+mentalStatusExam.impulseControl = require('../mentalStatusExam/impulseControl.model')(mentalStatusExamSequelize, Sequelize)
 
 mentalStatusExam.sequelize.sync()
 
