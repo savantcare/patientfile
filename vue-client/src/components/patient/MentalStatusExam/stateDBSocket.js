@@ -11,7 +11,8 @@ const state = {
   insightList: [],
   speechList: [],
   judgementList: [],
-  affectList: []
+  affectList: [],
+  thoughtContentList: []
 }
 
 const mutations = {
@@ -53,6 +54,9 @@ const mutations = {
   },
   setAffectList(state, value) {
     state.affectList = value
+  },
+  setThoughtContentList(state, value) {
+    state.thoughtContentList = value
   }
 }
 
@@ -610,6 +614,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setAffectList", json)
+    }
+  },
+  async dbUpdateThoughtContentInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateThoughtContent`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add thought-content"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getThoughtContent({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtContent`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setThoughtContentList", json)
     }
   }
 }
