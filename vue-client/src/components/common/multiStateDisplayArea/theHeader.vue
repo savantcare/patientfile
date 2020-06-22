@@ -147,11 +147,12 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
             The above object is retained till the time the browser cache is cleared. 
             When page is refreshed new data is fetched where row_end is > row_end stored in object index.
 
-            How does this work for multiple patients?
-              Option1: Each patient gets a state of their own.
-                        Ref: https://github.com/vuejs/vuex/issues/414
+      Q9) How does this work for multiple patients?
+      =============================================
+          Each patient gets a state of their own.
+          Ref: https://github.com/vuejs/vuex/issues/414
 
-      Q9) What are some previous data patterns evaluated and rejected?
+      Q10) What are some previous data patterns evaluated and rejected?
       ===============================================================
             
             When a component is mounted they create a array called
