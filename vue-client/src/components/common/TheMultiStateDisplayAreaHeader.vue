@@ -20,22 +20,112 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
     </el-col>
     <el-col :span="16">
       <!-- 
-      Q) Why use a different slider instead of slider from elemenet.io?
-      Requirement: The user can only click on marks and not at other locations on slider.
+      Q1) Why use a different slider instead of slider from elemenet.io?
+      =================================================================
+          Requirement: The user can only click on marks and not at other locations on slider.
 
-      I (VK in June 20) did not find a way to do it on element.io slider. 
+          I (VK in June 20) did not find a way to do it on element.io slider. 
 
-      I tried using element io -> steps component (https://element.eleme.io/#/en-US/component/steps)
-      But with stepsComponent I could not make 2 steps far away from each other and other 2 steps close to each other. Since each steps represents 
-      an appt date. When a patient has 3 appts. The first 2 may be 100 days apaprt and the 2nd and 3rd may be 10 days apart.
+          I tried using element io -> steps component (https://element.eleme.io/#/en-US/component/steps)
+          But with stepsComponent I could not make 2 steps far away from each other and other 2 steps close to each other. Since each steps represents 
+          an appt date. When a patient has 3 appts. The first 2 may be 100 days apaprt and the 2nd and 3rd may be 10 days apart.
 
-      Hence decided to use: https://nightcatsama.github.io/vue-slider-component/#/
+          Hence decided to use: https://nightcatsama.github.io/vue-slider-component/#/
 
-      TODO:
-      1. Once the user clicks on a point on slider timeOfState needs to set and all Components should update themselves.
-      The only change in query is: Ref: https://mariadb.com/kb/en/temporal-data-tables/#querying-historical-data
-      timeOfState = '2016-10-09 08:07:06'
-      SELECT * FROM recommendations FOR SYSTEM_TIME AS OF TIMESTAMP timeOfState;
+      Q2) What is the core conceptual understanding?
+      =============================================
+          There are 6 important variables:
+          1. timeOfApptStart       | Each gets a point on slider
+          2. timeOfApptLock        | When point is clicked timeOfStateToShow is set as timeOfApptLock and NOT timeOfApptStart
+          3. timeOfStateToShow     | When 0 then current data is shown. When > 0 then all components REACT and show data "AS OF" "timeOfStateToShow"
+          4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value.
+          5. ROW_START             | Maria DB hidden field
+          6. ROW_END               | Maria DB hidden field
+        
+          Ref: https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
+
+      Q3) How do different components store data on client side?
+      ==========================================================
+        (mts => mysql time staamp)
+
+            When a component is mounted they create a array called
+              componentNameEvalAtEachRowEnd
+                For e.g.  recommendationsEvalAtEachRowEnd
+                          weightsEvalAtEachRowEnd the structure is weightsEvalAtEachRowEnd[row_end] = data,time_of_eval
+
+              From appt table:
+
+              | appt start times | appt lock times  | 
+              | 20th Feb 10AM    | 25th Feb 2 PM    |      
+              | 16th March 3 pm  | 21st March 1 PM  |
+
+              For data that can only be 1 at a given time
+              -------------------------------------------
+                From weight table
+                | Value           | timeOfEval    | ROW_START          | ROW_END          
+                | 185             | 5th Feb 10AM  | 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
+                | 190             | 2th Jan 11AM  | 10th Jan 10:30 AM  | 20th Feb 10:30 AM
+
+                weightsEvalAtEachRowEnd[2038-01-19 03:14:07.999999] = 185,mts(5th Feb 10AM)
+                weightsEvalAtEachRowEnd[mts(20th Feb 10:30 AM)] = 190,mts(2nd Jan 11AM)
+
+                To generate the above array the query executed is:
+                SELECT *,ROW_END FROM weights FOR SYSTEM_TIME ALL;
+
+                To show data on graph:
+                Take all values from weightsEvalAtEachRowEnd as the Y axis and all EvalTime as X axis.
+                    So the data set will be
+                      mts(5th Feb 10AM)           =  185
+                      mts(2nd Jan 10:30 AM)       =  190
+
+                To show data for timeOfStateToShow:
+                weightsEvalAtEachRowEnd filter where min(index) > timeOfStateToShow  
+                    So the data set will be
+                      For appt time 20th Feb 10Am    -> need to show data for 25th Feb 2PM    -> 185
+                      For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> 185
+
+              For data that can be N at a given time
+              --------------------------------------
+                From recommendations table
+                |  uuid of rec  | Value           | timeOfEval       | ROW_START          | ROW_END          
+                |   xdcf        | Loose weight    | 5th Feb 10AM     | 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999
+                |   erfg        | sleep more      | 20th Feb 10:10 AM| 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999
+
+                recommendationsEvalAtEachRowEnd[xdcf][2038-01-19 03:14:07.999999] = loose weight,mts(5th Feb 10AM)
+                recommendationsEvalAtEachRowEnd[erfg][2038-01-19 03:14:07.999999] = sleep more,mts(20th Feb 10AM)
+
+      Q4) How does component data caching work?
+      =========================================
+            The above object is retained till the time the browser cache is cleared. 
+            When page is refreshed new data is fetched where row_end is > row_end stored in object index.
+
+            How does this work for multiple patients?
+              Option1: Each patient gets a state of their own.
+                        Ref: https://github.com/vuejs/vuex/issues/414
+
+      Q5) What are some previous data patterns evaluated and rejected?
+      ===============================================================
+            
+            When a component is mounted they create a array called
+              componentNameAtDiffApptLockTimes
+                For e.g.  recommendationsAtDiffApptLockTimes
+                          weightsAtDiffLockTimes
+
+              Say the appt lock times are:
+                25th Feb 2 PM 
+                21st March 1 PM
+
+              weightsAtDiffApptLockTimes[0] = current weight
+              weightsAtDiffApptLockTimes[mts(25th Feb 2 PM)] = weight
+              weightsAtDiffApptLockTimes[mts(21st March 1 PM)] = weight
+
+              To generate the above array the query executed is:
+              SELECT * FROM weights FOR SYSTEM_TIME AS OF mts(25th Feb 2 PM);
+              SELECT * FROM weights FOR SYSTEM_TIME AS OF mts(21st March 1 PM);
+              SELECT * FROM weights FOR SYSTEM_TIME AS OF mts(CURRENT_TIME);
+
+              Problems:
+                When drawing a graph if there were 5 evaluations done between last appt and this appt then those 4 evaluations will not be on the graph.
       -->
       <vue-slider
         v-model="sliderInitialValue"
