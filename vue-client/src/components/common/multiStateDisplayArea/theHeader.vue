@@ -87,7 +87,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               | 20th Feb 10AM    | 25th Feb 2 PM    |      
               | 16th March 3 pm  | 21st March 1 PM  |
 
-              slider will have markers at 20th Feb 10AM and 16th March 3 pm. When marker on "20th Feb 10AM" is clicked timeOfStateToShow is set as "25thFeb 2 PM"
+              slider will have markers at (appt start times) 20th Feb 10AM and 16th March 3 pm. When marker on "20th Feb 10AM" is clicked timeOfStateToShow is set as "25thFeb 2 PM" (appt lock time)
 
               For data that can only be 1 at a given time
               -------------------------------------------
