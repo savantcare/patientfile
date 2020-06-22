@@ -84,6 +84,8 @@ export default {
           "Flight of ideas",
           "Poverty of thought"
         ];
+      } else if (this.type == "psychomotor") {
+        return ["Normal", "Agitated", "Retarded"];
       }
       return [];
     },
@@ -111,6 +113,8 @@ export default {
         this.checkList = ["Good"];
       } else if (this.type == "thoughtProcess") {
         this.checkList = ["Linear, logical and goal-directed"];
+      } else if (this.type == "psychomotor") {
+        this.checkList = ["Normal"];
       }
     },
     async saveChanges() {
@@ -299,6 +303,25 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateThoughtProcessInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "psychomotor") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Normal") {
+            request["normal"] = value;
+          } else if (status == "Agitated") {
+            request["agitated"] = value;
+          } else if (status == "Retarded") {
+            request["retarded"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdatePsychomotorInSM", {
           data: request,
           notify: this.$notify
         });
