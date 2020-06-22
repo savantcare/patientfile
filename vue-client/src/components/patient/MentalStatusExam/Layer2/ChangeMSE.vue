@@ -86,6 +86,8 @@ export default {
         ];
       } else if (this.type == "psychomotor") {
         return ["Normal", "Agitated", "Retarded"];
+      } else if (this.type == "insight") {
+        return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
       }
       return [];
     },
@@ -115,6 +117,8 @@ export default {
         this.checkList = ["Linear, logical and goal-directed"];
       } else if (this.type == "psychomotor") {
         this.checkList = ["Normal"];
+      } else if (this.type == "insight") {
+        this.checkList = ["Good"];
       }
     },
     async saveChanges() {
@@ -322,6 +326,31 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdatePsychomotorInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "insight") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Good") {
+            request["good"] = value;
+          } else if (status == "Fair") {
+            request["fair"] = value;
+          } else if (status == "Questionable") {
+            request["questionable"] = value;
+          } else if (status == "Poor") {
+            request["poor"] = value;
+          } else if (status == "Impaired") {
+            request["impaired"] = value;
+          } else if (status == "Limited") {
+            request["limited"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateInsightInSM", {
           data: request,
           notify: this.$notify
         });

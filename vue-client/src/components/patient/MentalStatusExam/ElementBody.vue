@@ -488,6 +488,71 @@ export default {
             data: retardedData
           }
         );
+      } else if (this.type == "insight") {
+        const insights = this.$store.state.mse.insightList;
+
+        let goodData = [];
+        let fairData = [];
+        let questionData = [];
+        let poorData = [];
+        let impairedData = [];
+        let limitedData = [];
+
+        for (const insight of insights) {
+          const { createDate } = insight;
+
+          goodData.push({
+            x: createDate,
+            y: insight["good"] == "yes" ? 1 : 0
+          });
+          fairData.push({
+            x: createDate,
+            y: insight["fair"] == "yes" ? 1 : 0
+          });
+          questionData.push({
+            x: createDate,
+            y: insight["questionable"] == "yes" ? 1 : 0
+          });
+          poorData.push({
+            x: createDate,
+            y: insight["poor"] == "yes" ? 1 : 0
+          });
+          impairedData.push({
+            x: createDate,
+            y: insight["impaired"] == "yes" ? 1 : 0
+          });
+          limitedData.push({
+            x: createDate,
+            y: insight["limited"] == "yes" ? 1 : 0
+          });
+        }
+
+        series.push(
+          {
+            name: "Good",
+            data: goodData
+          },
+          {
+            name: "Fair",
+            data: fairData
+          },
+          {
+            name: "Questionable",
+            data: questionData
+          },
+          {
+            name: "Poor",
+            data: poorData
+          },
+          {
+            name: "Impaired",
+            data: impairedData
+          },
+          {
+            name: "Limited",
+            data: limitedData
+          }
+        );
       }
       return series;
     }
@@ -510,6 +575,8 @@ export default {
       this.$store.dispatch("mse/getThoughtProcess", params);
     } else if (this.type == "psychomotor") {
       this.$store.dispatch("mse/getPsychomotor", params);
+    } else if (this.type == "insight") {
+      this.$store.dispatch("mse/getInsight", params);
     }
   },
   methods: {
