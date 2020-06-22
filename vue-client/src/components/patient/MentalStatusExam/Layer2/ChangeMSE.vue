@@ -97,6 +97,8 @@ export default {
           "Pressured",
           "Mumbling"
         ];
+      } else if (this.type == "judgement") {
+        return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
       }
       return [];
     },
@@ -130,6 +132,8 @@ export default {
         this.checkList = ["Good"];
       } else if (this.type == "speech") {
         this.checkList = ["Regular, rate and rhythm"];
+      } else if (this.type == "judgement") {
+        this.checkList = ["Good"];
       }
     },
     async saveChanges() {
@@ -387,6 +391,31 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateSpeechInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "judgement") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Good") {
+            request["good"] = value;
+          } else if (status == "Fair") {
+            request["fair"] = value;
+          } else if (status == "Questionable") {
+            request["questionable"] = value;
+          } else if (status == "Poor") {
+            request["poor"] = value;
+          } else if (status == "Impaired") {
+            request["impaired"] = value;
+          } else if (status == "Limited") {
+            request["limited"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateJudgementInSM", {
           data: request,
           notify: this.$notify
         });

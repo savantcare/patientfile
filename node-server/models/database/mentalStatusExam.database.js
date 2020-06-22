@@ -29,6 +29,7 @@ mentalStatusExam.thoughtProcess = require('../mentalStatusExam/thoughtProcess.mo
 mentalStatusExam.psychomotor = require('../mentalStatusExam/psychomotor.model')(mentalStatusExamSequelize, Sequelize)
 mentalStatusExam.insight = require('../mentalStatusExam/insight.model')(mentalStatusExamSequelize, Sequelize)
 mentalStatusExam.speech = require('../mentalStatusExam/speech.model')(mentalStatusExamSequelize, Sequelize)
+mentalStatusExam.judgement = require('../mentalStatusExam/judgement.model')(mentalStatusExamSequelize, Sequelize)
 
 mentalStatusExam.sequelize.sync()
 

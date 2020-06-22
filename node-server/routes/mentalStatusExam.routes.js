@@ -12,6 +12,7 @@ const ThoughtProcess = db.mentalStatusExamDB.thoughtProcess
 const Psychomotor = db.mentalStatusExamDB.psychomotor
 const Insight = db.mentalStatusExamDB.insight
 const Speech = db.mentalStatusExamDB.speech
+const Judgement = db.mentalStatusExamDB.judgement
 
 router.post('/updateAppearence', async (req, res) => {
   try {
@@ -419,6 +420,47 @@ router.post('/getSpeech', async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occured while get speech"
+    })
+  }
+})
+
+router.post('/updateJudgement', async (req, res) => {
+  try {
+    const { data } = req.body
+    console.log('___Update Judgement Data____')
+    console.log(data)
+
+    const existingList = await Judgement.findAll({ where: { patientUUID: data.patientUUID } })
+    let result = null
+    if (existingList.length > 0) {
+      result = await Judgement.update(data, {
+        where: { patientUUID: data.patientUUID }
+      })
+    } else {
+      result = await Judgement.create(data)
+    }
+
+    res.send(result)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Judgement"
+    })
+  }
+})
+
+router.post('/getJudgement', async (req, res) => {
+  try {
+    const { patientId } = req.body
+    const queryResult = await Judgement.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`judgement\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while get judgement"
     })
   }
 })
