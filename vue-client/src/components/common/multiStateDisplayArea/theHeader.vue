@@ -21,7 +21,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
     <el-col :span="16">
       <!-- 
       Q1)  How complex can the code be?
-          High school student with 3 moinths experience should be able to read it.
+          High school student with 1 mointh experience should be able to read it.
 
 
       Q2) Why use a different slider instead of slider from elemenet.io?
@@ -36,8 +36,21 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
 
           Hence decided to use: https://nightcatsama.github.io/vue-slider-component/#/
 
-      Q3) What is the core conceptual understanding?
+      Q3) What is the difference between "appt start time" and "appt lock time"?
+          Say Patient John has an appointment with Dr. Savant at 10AM on 5th Feb 2020. 
+          At 10AM john is sitting infront of Dr. Savant in her clinic. Hence 10Am is the appt start time.
+          Support the appt is for 30 minutes.
+
+          At 10:30 Dr. Savant has another appointment.
+
+          In the evening at 6PM Dr. Savant finally gets time to finalize the medications for John and lock her note.
+          
+          timeOfApptStart is "5th Feb 2020 10AM"
+          timeOfApptLock is "5th Feb 2020 6 PM"
+     
+      Q4) What is the core conceptual understanding?
       =============================================
+      
           There are 6 important variables:
           1. timeOfApptStart       | Each gets a point on slider
           2. timeOfApptLock        | When point is clicked timeOfStateToShow is set as timeOfApptLock and NOT timeOfApptStart
@@ -50,7 +63,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
         
           Ref: https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
 
-      Q4) How do different components store data on client side?
+      Q5) How do different components store data on client side?
       ==========================================================
         (mts => mysql time staamp)
 
@@ -111,7 +124,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 recommendationsEvalAtEachRowEnd[xdcf][2038-01-19 03:14:07.999999] = loose weight,mts(5th Feb 10AM)
                 recommendationsEvalAtEachRowEnd[erfg][2038-01-19 03:14:07.999999] = sleep more,mts(20th Feb 10AM)
 
-      Q5) How does component data caching work?
+      Q6) How does component data caching work?
       =========================================
             The above object is retained till the time the browser cache is cleared. 
             When page is refreshed new data is fetched where row_end is > row_end stored in object index.
@@ -120,7 +133,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               Option1: Each patient gets a state of their own.
                         Ref: https://github.com/vuejs/vuex/issues/414
 
-      Q6) What are some previous data patterns evaluated and rejected?
+      Q7) What are some previous data patterns evaluated and rejected?
       ===============================================================
             
             When a component is mounted they create a array called
