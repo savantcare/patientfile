@@ -79,7 +79,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
             When a component is mounted they create a array called
               componentNameEvalAtEachRowEnd
                 For e.g.  recommendationsEvalAtEachRowEnd
-                          weightsEvalAtEachRowEnd the structure is weightsEvalAtEachRowEnd[row_end] = data,time_of_eval
+                          weightsEvalAtEachRowEnd the structure is weightsEvalAtEachRowEnd[ROW_END_TIME] = data,time_of_eval
 
               From appt table:
 
