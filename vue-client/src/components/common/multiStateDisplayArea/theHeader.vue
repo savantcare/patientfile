@@ -20,7 +20,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
     </el-col>
     <el-col :span="16">
       <!-- 
-      Q1)  How complex can the code be?
+      Q1) How complex can the code be?
+      =================================
           High school student with 1 mointh experience should be able to read it.
 
 
