@@ -37,8 +37,9 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
           Hence decided to use: https://nightcatsama.github.io/vue-slider-component/#/
 
       Q3) What is the difference between "appt start time" and "appt lock time"?
+      ==========================================================================
           Say Patient John has an appointment with Dr. Savant at 10AM on 5th Feb 2020. 
-          At 10AM john is sitting infront of Dr. Savant in her clinic. Hence 10Am is the appt start time.
+          At 10AM John is sitting infront of Dr. Savant in her clinic. Hence 10Am is the appt start time.
           Support the appt is for 30 minutes.
 
           At 10:30 Dr. Savant has another appointment.
@@ -58,8 +59,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
           4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value. 
                                    | For e.g. when adding weight the user can give measurement time that is different from current time. 
                                    | If no value is provided this is set to ROW_START
-          5. ROW_START             | Maria DB hidden field
-          6. ROW_END               | Maria DB hidden field
+          5. ROW_START_TIME        | Maria DB hidden field
+          6. ROW_END_TIME          | Maria DB hidden field
         
           Ref: https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
 
@@ -67,7 +68,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       ==========================================================
         (mts => mysql time staamp)
 
-            Five goals: 
+            Six goals: 
             1. When the same component is loaded twice from the search box on the currentStateDisplayArea server side query is not run 2nd time
             2. Once data comes on component being mounted the view changes instantly when the slider in the header is moved. API query is not run.
             3. Query is only run when the component is visible. So if a component is never visible the query is never run.
@@ -91,7 +92,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               For data that can only be 1 at a given time
               -------------------------------------------
                 From weight table
-                | Value           | timeOfEval    | ROW_START          | ROW_END          
+                | Value           | timeOfEval    | ROW_START_TIME     | ROW_END_TIME          
                 | 185             | 5th Feb 10AM  | 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
                 | 190             | 2th Jan 11AM  | 10th Jan 10:30 AM  | 20th Feb 10:30 AM
 
