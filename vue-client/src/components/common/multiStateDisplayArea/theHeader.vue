@@ -56,6 +56,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
             3. Query is only run when the component is visible. So if a component is never visible the query is never run.
             4. left and right side should not use 2 different data sets.
             5. Historical data once loaded is kept till the time Browser cache is cleaned.
+            6. To show historical values of weight or recommendations the data loaded at start is used.
 
             When a component is mounted they create a array called
               componentNameEvalAtEachRowEnd
@@ -81,7 +82,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 weightsEvalAtEachRowEnd[mts(20th Feb 10:30 AM)] = 190,mts(2nd Jan 11AM)
 
                 To generate the above array the query executed is:
-                SELECT *,ROW_END FROM weights FOR SYSTEM_TIME ALL;
+                SELECT *,ROW_END FROM weights FOR SYSTEM_TIME ALL where patientUUID=current_patient_UUID;
 
                 To show data on graph:
                 Take all values from weightsEvalAtEachRowEnd as the Y axis and all EvalTime as X axis.
@@ -91,7 +92,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 Key insight -> On graph doctors want to see data on eval time and not on entry time
 
                 To show data for an appointment note (timeOfStateToShow):
-                weightsEvalAtEachRowEnd filter where min(index / ROW_END) > timeOfStateToShow   
+                weightsEvalAtEachRowEnd filter where (index / ROW_END) > timeOfStateToShow (use nearest value) and ROW_START < timeOfStateToShow  
                     So the data set will be
                       For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM    -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
                       For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> data for ROW_END > 21st March 1 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
