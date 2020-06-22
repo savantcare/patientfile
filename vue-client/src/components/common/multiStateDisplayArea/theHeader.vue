@@ -151,6 +151,15 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
           Each patient gets a state of their own.
           Ref: https://github.com/vuejs/vuex/issues/414
 
+          When the page loads for first time we look inside the map called "patientStateMap"
+
+          if there is an existing patientUUID then we use the corresponding stateUUID
+          If there is no patientUUID then we create the stateUUID and make a new entry in "patientStateMap"
+
+          patientUUID  | stateUUID
+          zxcv         | state_for_zxcv  
+          swed         | state_for_swed
+
       Q10) What are some previous data patterns evaluated and rejected?
       ===============================================================
             
