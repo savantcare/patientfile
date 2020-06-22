@@ -131,7 +131,18 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 recommendationsEvalAtEachRowEnd[xdcf][2038-01-19 03:14:07.999999] = loose weight,mts(5th Feb 10AM)
                 recommendationsEvalAtEachRowEnd[erfg][2038-01-19 03:14:07.999999] = sleep more,mts(20th Feb 10AM)
 
-      Q7) How does component data caching work?
+      Q7) Why the index should be ROW_END_TIME?
+      =========================================
+      Two features of index:
+        1. Index should be something that is unique
+        2. Most often used
+
+        ROW_END_TIME
+        1. Will always be unique
+        2. Most often displayed data is current data. To find the current data current time < ROW_END_TIME
+
+
+      Q8) How does component data caching work?
       =========================================
             The above object is retained till the time the browser cache is cleared. 
             When page is refreshed new data is fetched where row_end is > row_end stored in object index.
@@ -140,7 +151,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               Option1: Each patient gets a state of their own.
                         Ref: https://github.com/vuejs/vuex/issues/414
 
-      Q8) What are some previous data patterns evaluated and rejected?
+      Q9) What are some previous data patterns evaluated and rejected?
       ===============================================================
             
             When a component is mounted they create a array called
