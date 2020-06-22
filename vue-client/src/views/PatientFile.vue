@@ -16,13 +16,13 @@ Core 1/6. Page design
 |                                         |                              |  This var contains 1 of: 
 |This has list of compomponents.          |This has list of Components   |  multiStateDisplayArea  
 |Data of each component depends on        |                              |            OR
-|timeOfState ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
-|timeOfState has 2 possibilities          |                              |
+|timeOfStateToShow ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
+|timeOfStateToShow has 2 possibilities          |                              |
 |                                         |On right side I do not care   |
-|1. timeOfState=null                      |about timeOfState             |
-|2. timeOfState=value                     |                              |       
+|1. timeOfStateToShow=null                      |about timeOfStateToShow             |
+|2. timeOfStateToShow=value                     |                              |       
 |                                         |                              |
-| If timeOfState==null then data of       |                              |
+| If timeOfStateToShow==null then data of       |                              |
 | component is from currentTime           |                              |
 |                                         |                              |
 |                                         +------------------------------+
@@ -253,10 +253,10 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfState should be null if the user has not chosen a value.
-    let timeOfState = new Date().toISOString().split("T")[0];
-    console.log(timeOfState);
-    this.$store.commit("setTimeOfState", timeOfState);
+    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfStateToShow should be null if the user has not chosen a value.
+    let timeOfStateToShow = new Date().toISOString().split("T")[0];
+    console.log(timeOfStateToShow);
+    this.$store.commit("setTimeOfState", timeOfStateToShow);
   },
   methods: {
     onDrag(size) {

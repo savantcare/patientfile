@@ -169,8 +169,8 @@ export default {
     activityStatus() {
       return this.$store.state.connectionStatus;
     },
-    timeOfState() {
-      return this.$store.state.multiStateDisplayArea.timeOfState;
+    timeOfStateToShow() {
+      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     },
     zoomValue() {
       return this.$store.state.multiStateDisplayArea.zoomValue;
@@ -339,22 +339,22 @@ export default {
       }
     },
     handleSliderChangeEvent() {
-      // TODO: This needs to set a global variable timeOfState and all components need to react on that
+      // TODO: This needs to set a global variable timeOfStateToShow and all components need to react on that
       const percent = Math.floor(100 / (this.timeOfStates.length + 1));
       let index = this.sliderInitialValue / percent;
-      let timeOfState = new Date().toISOString().split("T")[0];
-      // let timeOfState = new Date()
+      let timeOfStateToShow = new Date().toISOString().split("T")[0];
+      // let timeOfStateToShow = new Date()
       //   .toISOString()
       //   .slice(0, 19)
       //   .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
 
-      // let timeOfState = new Date().toLocaleDateString();
+      // let timeOfStateToShow = new Date().toLocaleDateString();
       if (index < this.timeOfStates.length + 1) {
-        timeOfState = this.timeOfStates[index].dateTimeOfAppt
+        timeOfStateToShow = this.timeOfStates[index].dateTimeOfAppt
           .slice(0, 19)
           .replace("T", " ");
       }
-      this.$store.commit("setTimeOfState", timeOfState);
+      this.$store.commit("setTimeOfState", timeOfStateToShow);
     },
     handleSliderEndEvent() {
       // console.log(this.sliderInitialValue);
