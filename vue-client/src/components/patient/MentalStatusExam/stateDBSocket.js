@@ -5,7 +5,8 @@ const state = {
   cognitionList: [],
   constitutionalList: [],
   eyeContactList: [],
-  impulseControlList: []
+  impulseControlList: [],
+  thoughtProcessList: []
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   },
   setImpulseControlList(state, value) {
     state.impulseControlList = value
+  },
+  setThoughtProcessList(state, value) {
+    state.thoughtProcessList = value
   }
 }
 
@@ -310,6 +314,52 @@ const actions = {
     if (response.ok) {
       const json = await response.json()
       commit("setImpulseControlList", json)
+    }
+  },
+  async dbUpdateThoughtProcessInSM(_, params) {
+    const { data, notify } = params
+    try {
+      const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/updateThoughtProcess`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify({ data: data })
+      })
+      console.log(response)
+      if (response.ok) {
+        notify({
+          title: "Success",
+          message: "Saved!"
+        })
+
+      } else {
+        notify({
+          title: "Error",
+          message: "Failed to add thought-process"
+        })
+      }
+    } catch (ex) {
+      console.log(ex)
+      notify({
+        title: "Error",
+        message: "Server connection error"
+      })
+    }
+  },
+  async getThoughtProcess({ commit }, params) {
+    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtProcess`, {
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
+    if (response.ok) {
+      const json = await response.json()
+      commit("setThoughtProcessList", json)
     }
   }
 }

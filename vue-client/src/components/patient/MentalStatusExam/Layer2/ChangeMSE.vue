@@ -74,6 +74,16 @@ export default {
         return ["Appropriate", "Downcast", "Intense", "Fleeting"];
       } else if (this.type == "impulseControl") {
         return ["Good", "Fair", "Questionable", "Poor", "Impaired", "Limited"];
+      } else if (this.type == "thoughtProcess") {
+        return [
+          "Linear, logical and goal-directed",
+          "Disorganized",
+          "Circumstantial",
+          "Tangential",
+          "Looseness of associations",
+          "Flight of ideas",
+          "Poverty of thought"
+        ];
       }
       return [];
     },
@@ -99,6 +109,8 @@ export default {
         this.checkList = ["Appropriate"];
       } else if (this.type == "impulseControl") {
         this.checkList = ["Good"];
+      } else if (this.type == "thoughtProcess") {
+        this.checkList = ["Linear, logical and goal-directed"];
       }
     },
     async saveChanges() {
@@ -260,6 +272,33 @@ export default {
         }
 
         this.$store.dispatch("mse/dbUpdateImpulseControlInSM", {
+          data: request,
+          notify: this.$notify
+        });
+      } else if (this.type == "thoughtProcess") {
+        for (const status of this.statusList) {
+          const value =
+            this.checkList.filter(item => item == status).length > 0
+              ? "yes"
+              : "no";
+          if (status == "Linear, logical and goal-directed") {
+            request["linear-logical-and-goal-directed"] = value;
+          } else if (status == "Disorganized") {
+            request["disorganized"] = value;
+          } else if (status == "Circumstantial") {
+            request["circumstantial"] = value;
+          } else if (status == "Tangential") {
+            request["tangential"] = value;
+          } else if (status == "Looseness of associations") {
+            request["looseness-of-associations"] = value;
+          } else if (status == "Flight of ideas") {
+            request["flight-of-ideas"] = value;
+          } else if (status == "Poverty of thought") {
+            request["poverty-of-thought"] = value;
+          }
+        }
+
+        this.$store.dispatch("mse/dbUpdateThoughtProcessInSM", {
           data: request,
           notify: this.$notify
         });

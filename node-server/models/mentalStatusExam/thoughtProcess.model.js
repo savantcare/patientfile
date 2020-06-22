@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
     'poverty-of-thought': {
       type: Sequelize.ENUM('yes', 'no')
     },
-    others: {
+    other: {
       type: Sequelize.STRING,
       defaultValue: ''
     },
