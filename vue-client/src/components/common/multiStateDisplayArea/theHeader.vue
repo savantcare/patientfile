@@ -38,7 +38,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
           1. timeOfApptStart       | Each gets a point on slider
           2. timeOfApptLock        | When point is clicked timeOfStateToShow is set as timeOfApptLock and NOT timeOfApptStart
           3. timeOfStateToShow     | When 0 then current data is shown. When > 0 then all components REACT and show data "AS OF" "timeOfStateToShow"
-          4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value.
+          4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value. For e.g. when adding weight the user can give measurement time that is different from current time
           5. ROW_START             | Maria DB hidden field
           6. ROW_END               | Maria DB hidden field
         
