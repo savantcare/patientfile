@@ -206,7 +206,8 @@ export default {
       return this.$store.getters.currentStateDisplayAreaList;
     },
     multiStateDisplayAreaComponents() {
-      const componentType = this.$store.state.stateAtSelectedTime.componentType;
+      const componentType = this.$store.state.multiStateDisplayArea
+        .componentType;
       const components = this.$store.state.component.list.filter(
         item => item.tag == componentType
       );

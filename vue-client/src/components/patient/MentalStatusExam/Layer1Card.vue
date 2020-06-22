@@ -395,7 +395,7 @@ export default {
       }
     },
     timeOfStateToShow() {
-      return this.$store.state.stateAtSelectedTime.timeOfStateToShow;
+      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     }
   },
   watch: {

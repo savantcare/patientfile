@@ -221,7 +221,7 @@ export default {
       });
       if (response.ok) {
         const json = await response.json();
-        const timeOfStateToShow = rootState.stateAtSelectedTime.timeOfStateToShow.split(
+        const timeOfStateToShow = rootState.multiStateDisplayArea.timeOfStateToShow.split(
           " "
         )[0];
         const params = {
