@@ -99,6 +99,12 @@ export default {
               .default,
             abbreviation: "Bm",
           });
+        } else if (item == "mse") {
+          list.push({
+            key: "mentalStatusExamCard",
+            value: require("@/components/patient/MentalStatusExam/MultiStateCard").default,
+            abbreviation: "mse"
+          })
         } else {
           const result = allComponentsList.filter((card) => {
             return card.abbreviation == item.toLowerCase();

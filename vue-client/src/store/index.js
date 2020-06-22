@@ -109,6 +109,8 @@ export default new Vuex.Store({
         const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(
           ","
         );
+        console.log('LeftComponents_____________')
+        console.log(leftComponents)
         commit("setMultiStateDisplayAreaCtList", leftComponents, {
           root: true,
         });

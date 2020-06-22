@@ -53,7 +53,9 @@ export default {
   },
   methods: {
     handleClickOnFInCardHeader() {},
-    handleClickOnMInCardHeader() {}
+    handleClickOnMInCardHeader() {
+      this.$store.commit("showMultiChangeMSETabInLayer2");
+    }
   }
 };
 </script>

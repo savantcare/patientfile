@@ -128,15 +128,14 @@ src/router/index.js sends control here if the / route is given by the user
       <!-- Starting with 70% and 100px minimum -->
       <SplitArea :size="70" :minSize="100" id="multiStateDisplayArea">
         <TheMultiStateDisplayAreaHeader></TheMultiStateDisplayAreaHeader>
-        <keep-alive>
-          <!-- TODO: keep alive is not working. The sql query is still being called when rex command is given twice -->
-          <component
-            v-for="(component, index) in multiStateDisplayAreaComponents"
-            :key="`multi-state-display-area-component-${index}`"
-            :is="component.value"
-            v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
-          ></component>
-        </keep-alive>
+
+        <!-- TODO: keep alive is not working. The sql query is still being called when rex command is given twice -->
+        <component
+          v-for="(component, index) in multiStateDisplayAreaComponents"
+          :key="`multi-state-display-area-component-${index}`"
+          :is="component.value"
+          v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
+        ></component>
       </SplitArea>
       <SplitArea :size="30" :minSize="100" id="currentStateDisplayArea">
         <keep-alive>
@@ -225,6 +224,7 @@ export default {
           return verifyComponent;
         }
       );
+
       return list;
     }
   },
