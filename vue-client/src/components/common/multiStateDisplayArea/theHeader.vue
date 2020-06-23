@@ -22,7 +22,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       <!-- 
       Q1) How complex can the code be?
       =================================
-          High school student with 1 mointh experience should be able to read it.
+          High school student with 1 month experience should be able to read and understand the code.
 
 
       Q2) Why use a different slider instead of slider from elemenet.io?
@@ -188,7 +188,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       <vue-slider
         v-model="sliderInitialValue"
         @change="handleSliderChangeEvent"
-        :marks="timeOfStatesToMarkOnSlider"
+        :marks="timeOfApptsStartToMarkOnSlider"
         :included="true"
       ></vue-slider>
     </el-col>
@@ -219,7 +219,7 @@ export default {
       patientInfo: null,
       sliderInitialValue: 100,
       componentType: true,
-      timeOfStates: [],
+      timeOfApptsStart: [],
       patientId: this.$route.query.patient_id
     };
   },
@@ -236,14 +236,14 @@ export default {
     connectionStatus() {
       return this.$store.state.connectionStatus;
     },
-    timeOfStatesToMarkOnSlider() {
+    timeOfApptsStartToMarkOnSlider() {
       /*
       The first date is at 0 and todays date is at 100. 
       
       The middle points get proprotionate space based on the distance between appts.
       
       The data returned looks like
-      timeOfStatesToMarkOnSlider: {
+      timeOfApptsStartToMarkOnSlider: {
          0: "1/15/20", // Here I want to show -> this.timeOfStateTime.date1
          20: "2/15/20",
          40: "4/25/20",
@@ -257,9 +257,9 @@ export default {
 */
 
       let result = {};
-      if (this.timeOfStates.length > 0) {
-        const percent = Math.floor(100 / (this.timeOfStates.length + 1));
-        this.timeOfStates.forEach((data, index) => {
+      if (this.timeOfApptsStart.length > 0) {
+        const percent = Math.floor(100 / (this.timeOfApptsStart.length + 1));
+        this.timeOfApptsStart.forEach((data, index) => {
           const { dateTimeOfAppt } = data;
 
           result[index * percent] = dateTimeOfAppt.split("T")[0];
@@ -286,7 +286,7 @@ export default {
     this.apiGetAppointments();
   },
   methods: {
-    // TODO: This should take data from timeOfStatesToMarkOnSlider
+    // TODO: This should take data from timeOfApptsStartToMarkOnSlider
     formatTooltip(val) {
       if (val == 0) {
         return "First appointment on 5th Jan 2020";
@@ -382,7 +382,7 @@ export default {
         if (response.ok) {
           const json = await response.json();
           console.log(json);
-          this.timeOfStates = json;
+          this.timeOfApptsStart = json;
         } else {
           this.$notify({
             title: "Error",
@@ -398,7 +398,7 @@ export default {
     },
     handleSliderChangeEvent() {
       // TODO: This needs to set a global variable timeOfStateToShow and all components need to react on that
-      const percent = Math.floor(100 / (this.timeOfStates.length + 1));
+      const percent = Math.floor(100 / (this.timeOfApptsStart.length + 1));
       let index = this.sliderInitialValue / percent;
       let timeOfStateToShow = new Date().toISOString().split("T")[0];
       // let timeOfStateToShow = new Date()
@@ -407,8 +407,8 @@ export default {
       //   .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
 
       // let timeOfStateToShow = new Date().toLocaleDateString();
-      if (index < this.timeOfStates.length + 1) {
-        timeOfStateToShow = this.timeOfStates[index].dateTimeOfAppt
+      if (index < this.timeOfApptsStart.length + 1) {
+        timeOfStateToShow = this.timeOfApptsStart[index].dateTimeOfAppt
           .slice(0, 19)
           .replace("T", " ");
       }
