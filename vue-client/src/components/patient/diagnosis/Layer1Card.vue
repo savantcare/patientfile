@@ -44,7 +44,7 @@ export default {
     return {
       selectedRows: [],
       columns: [],
-      selectedColumns: ["diagnosisName"]        // The user can select there own columns. The user selected columns are saved in the local storage. 
+      selectedColumns: ["diagnosisName"] // The user can select there own columns. The user selected columns are saved in the local storage.
     };
   },
   methods: {
@@ -90,7 +90,73 @@ export default {
       this.selectedColumns = value;
     }
   },
-  mounted() { // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+  mounted() {
+    // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+
+    /*
+      One dx can not have multiple row ends
+      For a discontinued DX a delete query is run and new row is not inserted.
+
+      UUIDs are:
+        sxsxz -> current 
+        sdfsdf -> discontinued on 6th Jan at 10AM
+
+      Why assessments are not stored with UUID like DX?
+        Below a DX only 1 assessment is possible at a time.
+
+        Decxision about convention to be followed:
+          1:1 Use ROW_END (This is always preferred since simpler code)
+          1:N Use UUID[ROW_END]
+
+  */
+
+    this.$store.diagnosisEvalAtEachRowEnd = [
+      {
+        sxsxz: [
+          {
+            "2039": {
+              Dx: "ADHD",
+              ROW_START: "15th Jan at 10AM",
+              ASSESSMENTS: {
+                "2039": {
+                  text: "Doing good",
+                  ROW_START: "17th Jan at 11AM"
+                },
+                "15th Jan at 10AM": {
+                  text: "Doing bad",
+                  ROW_START: "14th Jan at 9AM"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        sdfsdf: [
+          {
+            "6th Jan at 10AM": {
+              Dx: "Depression",
+              ROW_START: "5th Jan at 10AM",
+              ASSESSMENTS: {
+                "2039": {
+                  text: "Doing good",
+                  ROW_START: "17th Jan at 11AM"
+                },
+                "15th Jan at 10AM": {
+                  text: "Doing bad",
+                  ROW_START: "14th Jan at 9AM"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ];
+
+    console.log(
+      "====" + JSON.stringify(this.$store.diagnosisEvalAtEachRowEnd, null, 4)
+    );
+
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify
@@ -99,15 +165,18 @@ export default {
   },
   computed: {
     tabData() {
+      /*
       const dxList = this.$store.state.diagnosis.diagnosisList;
       console.log(dxList);
       return {
-          label: "Yours",
-          tableData: dxList,
-          rowActions: ["C", "D"],
-          selectedColumn: ["diagnosisName"]
-        }
-      ;
+        label: "Yours",
+        tableData: dxList,
+        rowActions: ["C", "D"],
+        selectedColumn: ["diagnosisName"]
+      };
+      */
+
+      const dxList = this.$store.state.diagnosis.diagnosisEvalAtEachRowEnd;
     }
   }
 };

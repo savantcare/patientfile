@@ -256,10 +256,11 @@ export default {
       }
     ];
 
+    /*
     console.log(
       "====" + JSON.stringify(this.$store.yourRecsEvalAtEachRowEnd, null, 4)
     );
-
+*/
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
       date: this.timeOfStateToShow,
       patientId: this.patientId,
