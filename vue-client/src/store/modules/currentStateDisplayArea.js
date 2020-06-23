@@ -81,7 +81,7 @@ export default {
 
       // The value of currentStateDisplayAreaList is available inside chrome -> developers tools -> Vue -> Vuex
 
-      console.log("====" + JSON.stringify(rootState, null, 4));
+      // console.log("====" + JSON.stringify(rootState, null, 4));
 
       CurrentStateDisplayAreaComponents.forEach((item) => {
         if (rootState[item.key] && rootState[item.key]["tableList"]) {

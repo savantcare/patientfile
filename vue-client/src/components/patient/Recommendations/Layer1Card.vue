@@ -194,6 +194,30 @@ export default {
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
+
+    /* In the following example 
+      [] creates array and {} creates object
+      When to use array and when to use object? 1. Use array when you dont need key names 2. Arrays are passed by value and objects are passed by reference
+      uuids are sxsxz and sdfsdf
+      this.$store.recsEvalAtEachRowEnd is a array.
+        The array does not have a key specified so it asumed 0 1 and so on.
+
+    this.$store.recsEvalAtEachRowEnd = [
+      { sxsxz: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
+      { sdfsdf: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } }
+    ];
+
+*/
+
+    this.$store.recsEvalAtEachRowEnd = [
+      { sxsxz: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
+      { sdfsdf: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } }
+    ];
+
+    console.log(
+      "====" + JSON.stringify(this.$store.recsEvalAtEachRowEnd, null, 4)
+    );
+
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
       date: this.timeOfStateToShow,
       patientId: this.patientId,
