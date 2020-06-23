@@ -153,10 +153,10 @@ export default {
       }
     ];
 
-    console.log(
+    /*    console.log(
       "====" + JSON.stringify(this.$store.diagnosisEvalAtEachRowEnd, null, 4)
     );
-
+*/
     const params = {
       patientId: this.$route.query.patient_id,
       notify: this.$notify
@@ -166,6 +166,17 @@ export default {
   computed: {
     tabData() {
       /*
+       */
+
+      const dxEvalList = this.$store.diagnosisEvalAtEachRowEnd;
+      console.log("====" + JSON.stringify(dxEvalList, null, 4));
+
+      let key = null;
+      for (key in Object.keys(dxEvalList)) {
+        let currentObject = dxEvalList[key];
+        console.log("****" + Object.keys(currentObject));
+      }
+
       const dxList = this.$store.state.diagnosis.diagnosisList;
       console.log(dxList);
       return {
@@ -174,9 +185,6 @@ export default {
         rowActions: ["C", "D"],
         selectedColumn: ["diagnosisName"]
       };
-      */
-
-      const dxList = this.$store.state.diagnosis.diagnosisEvalAtEachRowEnd;
     }
   }
 };
