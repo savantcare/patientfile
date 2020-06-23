@@ -15,6 +15,8 @@ Vue.use(Vuex);
 import recommendationStateModule from "../components/patient/Recommendations/stateDBSocket";
 import screeningStateModule from "../components/patient/Screening/stateDBSocket";
 import diagnosisStateModule from "../components/patient/diagnosis/stateDBSocket";
+import diagnosisState from "../components/patient/diagnosis/stateDB";
+
 import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import goalStateModule from "../components/patient/goal/stateDBSocket";
 import settingStateModule from "./modules/settingState";
@@ -109,8 +111,8 @@ export default new Vuex.Store({
         const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(
           ","
         );
-        console.log('LeftComponents_____________')
-        console.log(leftComponents)
+        console.log("LeftComponents_____________");
+        console.log(leftComponents);
         commit("setMultiStateDisplayAreaCtList", leftComponents, {
           root: true,
         });
@@ -133,6 +135,7 @@ export default new Vuex.Store({
     multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     recommendation: recommendationStateModule,
     diagnosis: diagnosisStateModule,
+    dx: diagnosisState,
     reminder: reminderStateModule,
     goal: goalStateModule,
     setting: settingStateModule,

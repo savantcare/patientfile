@@ -1,5 +1,6 @@
 import { DIAGNOSIS_API_URL } from "@/const/others.js";
 let TOKEN = localStorage.getItem("token");
+
 export default {
   state: {
     // Cannot be changed directly. Can only be changed through mutation
