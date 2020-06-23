@@ -123,6 +123,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                       For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM   -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
                       For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> data for ROW_END > 21st March 1 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
 
+              To store data on the client side use vuex-orm
+
               For data that can be N at a given time
               --------------------------------------
                 From recommendations table
