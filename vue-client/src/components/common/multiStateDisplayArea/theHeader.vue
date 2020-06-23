@@ -188,7 +188,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 When drawing a graph if there were 5 evaluations done between last appt and this appt then those 4 evaluations will not be on the graph.
       -->
       <vue-slider
-        v-model="sliderInitialValue"
+        v-model="sliderCurrentValue"
         @change="handleSliderChangeEvent"
         :marks="timeOfApptsStartToMarkOnSlider"
         :included="true"
@@ -219,7 +219,7 @@ export default {
     return {
       tabMode: true,
       patientInfo: null,
-      sliderInitialValue: 100,
+      sliderCurrentValue: 100,
       componentType: true,
       timeOfApptsStart: [],
       patientId: this.$route.query.patient_id
@@ -413,11 +413,11 @@ export default {
       const percent = Math.floor(100 / (this.timeOfApptsStart.length + 1));
 
       /* 
-        sliderInitialValue is 100. So when percent is 100 the index is 1
+        sliderCurrentValue is 100. So when percent is 100 the index is 1
                                       When percent is 50 the index is 2
                                       When percent is 33 the index is 3          
       */
-      let index = this.sliderInitialValue / percent;
+      let index = this.sliderCurrentValue / percent;
 
       // Default value of timeOfStateToShow = 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
       let timeOfStateToShow = "2038-01-19 03:14:07.999999";
@@ -438,7 +438,7 @@ export default {
       this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
     },
     handleSliderEndEvent() {
-      // console.log(this.sliderInitialValue);
+      // console.log(this.sliderCurrentValue);
     }
   }
 };
