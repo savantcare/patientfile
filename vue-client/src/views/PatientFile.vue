@@ -7,24 +7,24 @@ Core 1/6. Page design
 ===================
 
 ┌────────────────────────────────────────────────────────────────────────┐  
-|    MultiStateDisplayAreaHeader = 7      |                              |  
+|    MultiStateDisplayAreaHeader = 9      |                              |  
 +-----------------------------------------+                              |     
 |                                         |                              |    
-|   multiStateDisplayArea = 74            | currentStateDisplayArea = 93 |  
+|   multiStateDisplayArea = 102           | currentStateDisplayArea = 137|  
 |                                         |                              |  
-|                                         |                              |  typeOfStateDisplayArea =  72  
+|                                         |                              |  typeOfStateDisplayArea = 122  
 |                                         |                              |  This var contains 1 of: 
 |This has list of compomponents.          |This has list of Components   |  multiStateDisplayArea  
 |Data of each component depends on        |                              |            OR
-|timeOfStateToShow ( = 41 )                     |Data is from currentTime      |  currentStateDisplayArea
-|timeOfStateToShow has 2 possibilities          |                              |
+|timeOfStateToShow ( = 99 )               |Data is from currentTime      |  currentStateDisplayArea
+|timeOfStateToShow has 2 possibilities    |                              |
 |                                         |On right side I do not care   |
-|1. timeOfStateToShow=null                      |about timeOfStateToShow             |
-|2. timeOfStateToShow=value                     |                              |       
+|1. timeOfStateToShow=2038-01-19 03:14:07 |about timeOfStateToShow       |
+|2. timeOfStateToShow=value               |                              |       
 |                                         |                              |
-| If timeOfStateToShow==null then data of       |                              |
-| component is from currentTime           |                              |
-|                                         |                              |
+|If timeOfStateToShow=2038-01-19 03:14:07 |                              |
+| then data of component is from          |                              |
+| current time.                           |                              |
 |                                         +------------------------------+
 |                                         |SearchBoxForCommandsFromUser=4|
 └────────────────────────────────────────────────────────────────────────┘
@@ -46,15 +46,15 @@ Core 2/6. Multi state display area header design
 ┌────────────────────CardHeader = 86────────────────────┐   ┌─────────────────────────────────────────┐
 │ ┌───────────────┐               ┌────────────────────┐│   │         Card header actions             │
 │ │  CtName = 35  │               │Card header actions ││   ├──┬─────────────────────────────────┬────┤
-│ └───────────────┘               └────────────────────┘│   │A │handleClickOnAInCardHeader()     │ 60 │
+│ └───────────────┘               └────────────────────┘│   │A │handleClickOnAInCardHeader()     │ 55 │
 ┣━━━━━━━━━━━━━━━━━━━DataTable = 28━━━━━━━━━━━━━━━━━━━━━━┫   ├──┼─────────────────────────────────┼────┤
-│                                                       │   │M │handleClickOnMInCardHeader()     │ 59 │
+│                                                       │   │M │handleClickOnMInCardHeader()     │ 73 │
 │ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
-│  Data row 1                         Data row actions ││   │F │handleClickOnFInCardHeader()     │ 61 │
+│  Data row 1                         Data row actions ││   │F │handleClickOnFInCardHeader()     │ 77 │
 │ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │   ├──┼─────────────────────────────────┼────┤
-│                                                       │   │D │handleClickOnDInCardHeader()     │ 74 │
+│                                                       │   │D │handleClickOnDInCardHeader()     │ 56 │
 │ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │   ├──┼─────────────────────────────────┼────┤
-│  Column 1              Column 2         C D           │   │X │handleClickOnXInCardHeader       │ 4  │
+│  Column 1              Column 2         C D           │   │X │handleClickOnXInCardHeader       │ 5  │
 │ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │   ├──┼─────────────────────────────────┼────┤
 │                                                       │   │R │Review                           │    │
 └───────────────────────────────────────────────────────┘   ├──┼─────────────────────────────────┼────┤
