@@ -202,6 +202,11 @@ export default {
       this.$store.recsEvalAtEachRowEnd is a array.
         The array does not have a key specified so it asumed 0 1 and so on.
 
+      sxsxz ROW_ENDS are
+        "2039" -> Hence current data
+        "21st Jan at 11AM"
+        "3rd Feb at 8AM"
+    
     this.$store.recsEvalAtEachRowEnd = [
       { sxsxz: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
       { sdfsdf: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } }
@@ -209,27 +214,50 @@ export default {
 
 */
 
-    this.$store.recsEvalAtEachRowEnd = [
+    this.$store.yourRecsEvalAtEachRowEnd = [
       {
         sxsxz: [
-          { mst1: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
-          { mst2: { Recs: "sleep 10 hours", ROW_START: "20th Jan at 11AM" } },
-          { mst3: { Recs: "sleep 9 hours", ROW_START: "2nd Feb at 8AM" } }
+          { "2039": { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
+          {
+            "3rd Feb at 8AM": {
+              Recs: "sleep 9 hours",
+              ROW_START: "2nd Feb at 8AM"
+            }
+          },
+          {
+            "21st Jan at 11AM": {
+              Recs: "sleep 10 hours",
+              ROW_START: "20th Jan at 11AM"
+            }
+          }
         ]
       },
       {
         sdfsdf: [
-          { mst1: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } },
           {
-            mst2: { Recs: "excercize 20 mins", ROW_START: "20th Jan at 10AM" }
+            "6th Jan at 10AM": {
+              Recs: "excercize 15 mins",
+              ROW_START: "5th Jan at 10AM"
+            }
           },
-          { mst3: { Recs: "excercize 20 mins", ROW_START: "5th Feb at 10AM" } }
+          {
+            "21st Jan at 10AM": {
+              Recs: "excercize 20 mins",
+              ROW_START: "20th Jan at 10AM"
+            }
+          },
+          {
+            "6th Feb at 10AM": {
+              Recs: "excercize 20 mins",
+              ROW_START: "5th Feb at 10AM"
+            }
+          }
         ]
       }
     ];
 
     console.log(
-      "====" + JSON.stringify(this.$store.recsEvalAtEachRowEnd, null, 4)
+      "====" + JSON.stringify(this.$store.yourRecsEvalAtEachRowEnd, null, 4)
     );
 
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {

@@ -12,7 +12,8 @@ export default {
     tableList: [], // TODO: Needs better name. I have no idea what tableList means or does.
     multiStateYourRecommendationsList: {}, // Suppose there are 10 historical appointments. When Doctor uses slider to go from appt A to B and then goes back to A the data of A is not in cache.
     multiStateOtherRecommendationsList: [],
-    recsEvalAtEachRowEnd: {},
+    yourRecsEvalAtEachRowEnd: {},
+    othersRecsEvalAtEachRowEnd: {},
   },
 
   // More info
