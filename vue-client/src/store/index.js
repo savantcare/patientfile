@@ -8,6 +8,8 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import createCache from "vuex-cache";
+import VuexORM from "@vuex-orm/core";
+
 
 Vue.use(Vuex);
 
@@ -15,7 +17,7 @@ Vue.use(Vuex);
 import recommendationStateModule from "../components/patient/Recommendations/stateDBSocket";
 import screeningStateModule from "../components/patient/Screening/stateDBSocket";
 import diagnosisStateModule from "../components/patient/diagnosis/stateDBSocket";
-import diagnosisState from "../components/patient/diagnosis/stateDB";
+//import diagnosisState from "../components/patient/diagnosis/stateDB";
 
 import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import goalStateModule from "../components/patient/goal/stateDBSocket";
@@ -29,8 +31,13 @@ import componentModule from "./modules/component";
 import bodyMeasurementModule from "../components/patient/BodyMeasurements/stateDBSocket";
 import mentalStatusExamModule from "../components/patient/MentalStatusExam/stateDBSocket";
 
+import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
+
 import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
+
+const database = new VuexORM.Database()
+database.register(Diagnosis)
 
 export default new Vuex.Store({
   state: {
@@ -135,7 +142,7 @@ export default new Vuex.Store({
     multiTabDialogLayer2: layer2MultiTabDialogStateModule,
     recommendation: recommendationStateModule,
     diagnosis: diagnosisStateModule,
-    dx: diagnosisState,
+    //dx: diagnosisState,
     reminder: reminderStateModule,
     goal: goalStateModule,
     setting: settingStateModule,
@@ -146,5 +153,5 @@ export default new Vuex.Store({
     bodyMeasurement: bodyMeasurementModule,
     mse: mentalStatusExamModule,
   },
-  plugins: [createPersistedState(), createCache({ timeout: 1000000 })],
+  plugins: [createPersistedState(), createCache({ timeout: 1000000 }), VuexORM.install(database)],
 });

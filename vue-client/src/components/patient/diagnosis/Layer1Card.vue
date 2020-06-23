@@ -29,6 +29,7 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
+import Diagnosis from "./models/Diagnosis";
 export default {
   components: {
     CardHeader,
@@ -110,6 +111,7 @@ export default {
 
   */
 
+    //Proposed structure
     this.$store.diagnosisEvalAtEachRowEnd = [
       {
         sxsxz: [
@@ -153,6 +155,51 @@ export default {
       }
     ];
 
+    //Structure that has been implemented with Vuex-ORM model
+    let dxListFromApiCall = [
+      {
+        uuid: "sxsxz",
+        rowStart: "15th Jan at 10AM",
+        rowEnd: "2039",
+        diagnosis: { name: "ADHD" },
+        assessment: [
+          {
+            text: "Doing bad",
+            ROW_START: "14th Jan at 9AM",
+            ROW_END: "15th Jan at 10AM"
+          },
+          {
+            text: "Doing good",
+            ROW_START: "17th Jan at 11AM",
+            ROW_END: "2039"
+          }
+        ]
+      },
+      {
+        uuid: "sdfsdf",
+        rowStart: "5th Jan at 10AM",
+        rowEnd: "6th Jan at 10AM",
+        diagnosis: { name: "Depression" },
+        assessment: [
+          {
+            text: "Doing bad",
+            ROW_START: "5th Jan at 10PM",
+            ROW_END: "6th Jan at 10AM"
+          },
+          {
+            text: "Doing good",
+            ROW_START: "5th Jan at 11AM",
+            ROW_END: "5th Jan at 10PM"
+          }
+        ]
+      }
+    ];
+
+    console.log("====" + JSON.stringify(dxListFromApiCall, null, 4));
+    Diagnosis.insert({
+      data: dxListFromApiCall
+    });
+
     /*    console.log(
       "====" + JSON.stringify(this.$store.diagnosisEvalAtEachRowEnd, null, 4)
     );
@@ -168,9 +215,15 @@ export default {
       /*
        */
 
-      const dxEvalList = this.$store.diagnosisEvalAtEachRowEnd;
-      console.log("====" + JSON.stringify(dxEvalList, null, 4));
+      //const dxEvalList = this.$store.diagnosisEvalAtEachRowEnd;
+      const dxEvalList = Diagnosis.all();
 
+      const dxConditionalData = Diagnosis.query()
+        .where("uuid", "sxsxz")
+        .where("rowEnd", "2038")
+        .get();
+      console.log("######", dxEvalList);
+      console.log("&&&&&&&", dxConditionalData);
       let key = null;
       for (key in Object.keys(dxEvalList)) {
         let currentObject = dxEvalList[key];
