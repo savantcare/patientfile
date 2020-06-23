@@ -399,8 +399,24 @@ export default {
       }
     },
     handleSliderChangeEvent() {
-      // TODO: This needs to set a global variable timeOfStateToShow and all components need to react on that
+      /* timeOfStateToShow is watched by all components and they react when timeOfStateToShow changes
+         For e.g. in components/patient/recommendations/layer1Card.vue:241 
+            watch: {
+             timeOfStateToShow() {
+      */
+
+      /* 
+        if this.timeOfApptsStart.length is 0 then percent = 100
+        if this.timeOfApptsStart.length is 1 then percent = 50
+        if this.timeOfApptsStart.length is 2 then percent = 33
+      */
       const percent = Math.floor(100 / (this.timeOfApptsStart.length + 1));
+
+      /* 
+        sliderInitialValue is 100. So when percent is 100 the index is 1
+                                      When percent is 50 the index is 2
+                                      When percent is 33 the index is 3          
+      */
       let index = this.sliderInitialValue / percent;
 
       // Default value of timeOfStateToShow = 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)

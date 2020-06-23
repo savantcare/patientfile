@@ -257,8 +257,8 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    // Initialize the TimeOfState TOOD: Not sure if this a good idea. timeOfStateToShow should be null if the user has not chosen a value.
-    let timeOfStateToShow = new Date().toISOString().split("T")[0];
+    // Initialize the TimeOfStateToShow. 2038-01-19 03:14:07.999999 is default value stored by MariaDB
+    let timeOfStateToShow = "2038-01-19 03:14:07.999999";
     console.log(timeOfStateToShow);
     this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
   },
