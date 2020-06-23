@@ -56,14 +56,16 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
           There are 6 important variables:
           1. timeOfApptStart       | Each gets a point on slider
           2. timeOfApptLock        | When point is clicked timeOfStateToShow is set as timeOfApptLock and NOT timeOfApptStart
-          3. timeOfStateToShow     | When 0 then current data is shown. When > 0 then all components REACT and show data "AS OF" "timeOfStateToShow"
+          3. timeOfStateToShow     | When in future (2038-01-19 03:14:07.999999) then current data is shown. When < current_time then all components REACT and show data "AS OF" "timeOfStateToShow"
           4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value. 
                                    | For e.g. when adding weight the user can give measurement time that is different from current time. 
                                    | If no value is provided this is set to ROW_START
           5. ROW_START_TIME        | Maria DB hidden field
           6. ROW_END_TIME          | Maria DB hidden field
         
-          Ref: https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
+          Ref: 
+          1. https://docs.google.com/spreadsheets/d/1X_WMi5kpADxVWtBnxZ2-yJbNArcnLwqmhJ1JWqr1h9g/edit#gid=0
+          2. 2038-01-19 03:14:07.999999 -> This is default value stored by MariaDB
 
       Q5) How is timeOfApptLock managed?
       ==================================
@@ -99,7 +101,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               -------------------------------------------
                 From weight table
                 | Value           | timeOfEval    | ROW_START_TIME     | ROW_END_TIME          
-                | 185             | 5th Feb 10AM  | 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
+                | 185             | 5th Feb 10AM  | 20th Feb 10:30 AM  | 2038-01-19 03:14:07.999999 (Explained in Q4 Ref 2)
                 | 190             | 2th Jan 11AM  | 10th Jan 10:30 AM  | 20th Feb 10:30 AM
 
                 weightsEvalAtEachRowEnd[2038-01-19 03:14:07.999999] = 185,mts(5th Feb 10AM)
@@ -400,13 +402,18 @@ export default {
       // TODO: This needs to set a global variable timeOfStateToShow and all components need to react on that
       const percent = Math.floor(100 / (this.timeOfApptsStart.length + 1));
       let index = this.sliderInitialValue / percent;
-      let timeOfStateToShow = new Date().toISOString().split("T")[0];
-      // let timeOfStateToShow = new Date()
-      //   .toISOString()
-      //   .slice(0, 19)
-      //   .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
 
-      // let timeOfStateToShow = new Date().toLocaleDateString();
+      // Default value of timeOfStateToShow = 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
+      let timeOfStateToShow = "2038-01-19 03:14:07.999999";
+
+      /*
+      How to convert a date to Mysql time stamp format? 
+      let timeOfStateToShow = new Date()
+         .toISOString()
+         .slice(0, 19)
+         .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+      */
+
       if (index < this.timeOfApptsStart.length + 1) {
         timeOfStateToShow = this.timeOfApptsStart[index].dateTimeOfAppt
           .slice(0, 19)
