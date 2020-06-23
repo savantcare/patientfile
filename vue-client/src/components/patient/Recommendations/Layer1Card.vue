@@ -210,8 +210,22 @@ export default {
 */
 
     this.$store.recsEvalAtEachRowEnd = [
-      { sxsxz: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
-      { sdfsdf: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } }
+      {
+        sxsxz: [
+          { mst1: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
+          { mst2: { Recs: "sleep 10 hours", ROW_START: "20th Jan at 11AM" } },
+          { mst3: { Recs: "sleep 9 hours", ROW_START: "2nd Feb at 8AM" } }
+        ]
+      },
+      {
+        sdfsdf: [
+          { mst1: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } },
+          {
+            mst2: { Recs: "excercize 20 mins", ROW_START: "20th Jan at 10AM" }
+          },
+          { mst3: { Recs: "excercize 20 mins", ROW_START: "5th Feb at 10AM" } }
+        ]
+      }
     ];
 
     console.log(
