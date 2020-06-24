@@ -12,7 +12,7 @@
   <el-card
     class="box-card"
     :id="`recommendation-${typeOfStateDisplayArea}`"
-    :style="typeOfStateDisplayAreaSpecificStyleToApply"
+    :style="multiStateDisplayAreaStyleToApplyForPastTime"
   >
     <div slot="header" class="clearfix">
       <CardHeader
@@ -26,7 +26,7 @@
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
-        :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
+        :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
       />
     </div>
     <DataTableWithoutTab
@@ -41,7 +41,7 @@
       @updateTableList="updateTableList"
       :selectedColumns="selectedColumns"
       :columns="columns"
-      :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
+      :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
@@ -243,7 +243,7 @@ export default {
       };
     },
 
-    typeOfStateDisplayAreaSpecificStyleToApply: {
+    multiStateDisplayAreaStyleToApplyForPastTime: {
       get() {
         let val = null;
 
@@ -258,9 +258,6 @@ export default {
             "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);";
 
         return val;
-      },
-      set(newValue) {
-        this.doSomethingWith(newValue);
       }
     }
   }
