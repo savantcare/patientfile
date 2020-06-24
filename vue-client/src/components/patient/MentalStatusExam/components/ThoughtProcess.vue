@@ -1,77 +1,99 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Thought process</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-form :model="thoughtProcessForm" ref="thoughtProcessForm" class="demo-dynamic">
-        <el-form-item>
-          <el-checkbox-group v-model="checkboxThoughtProcess">
-            <!--  When opened in multi change format size="small" 
-                Ref: https://element.eleme.io/#/en-US/component/checkbox
-            -->
-            <el-checkbox-button v-for="app in thoughtProcess" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <!--  When opened in multi change min-rows=1 -->
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 4}"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button
-          -->
-          <el-button type="success" @click="submitForm('thoughtProcessForm')" size="small">Save</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </div>
+  <Graph :series="series" />
 </template>
- 
-<script>
-const thoughtProcessOptions = [
-  "Linear, logical and goal-directed",
-  "Disorganized",
-  "Circumstantial",
-  "Tangential",
-  "Looseness of associations",
-  "Flight of ideas",
-  "Poverty of thought"
-];
 
+<script>
+import Graph from "./_BaseGraph";
 export default {
-  data() {
-    return {
-      thoughtProcessForm: { recs: [{ description: "" }] },
-      // When form loads this will have the currently selected values from the DB
-      checkboxThoughtProcess: [""],
-      thoughtProcess: thoughtProcessOptions,
-      textarea: ""
-    };
-  },
-  methods: {
-    onClickSave(rec) {
-      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateRecommendationInSM", {
-        data: rec,
-        notify: this.$notify
-      });
+  components: { Graph },
+
+  computed: {
+    series() {
+      let series = [];
+
+      const thoughtProceses = this.$store.state.mse.thoughtProcessList;
+
+      let linearData = [];
+      let disorganizedData = [];
+      let circumstantialData = [];
+      let tangentialData = [];
+      let looseData = [];
+      let flightData = [];
+      let povertyData = [];
+
+      for (const thoughtProcess of thoughtProceses) {
+        const { createDate } = thoughtProcess;
+
+        linearData.push({
+          x: createDate,
+          y: thoughtProcess["linear-logical-and-goal-directed"] == "yes" ? 1 : 0
+        });
+        disorganizedData.push({
+          x: createDate,
+          y: thoughtProcess["disorganized"] == "yes" ? 1 : 0
+        });
+        circumstantialData.push({
+          x: createDate,
+          y: thoughtProcess["circumstantial"] == "yes" ? 1 : 0
+        });
+        tangentialData.push({
+          x: createDate,
+          y: thoughtProcess["tangential"] == "yes" ? 1 : 0
+        });
+        looseData.push({
+          x: createDate,
+          y: thoughtProcess["looseness-of-associations"] == "yes" ? 1 : 0
+        });
+        flightData.push({
+          x: createDate,
+          y: thoughtProcess["flight-of-ideas"] == "yes" ? 1 : 0
+        });
+        povertyData.push({
+          x: createDate,
+          y: thoughtProcess["poverty-of-thought"] == "yes" ? 1 : 0
+        });
+      }
+
+      series.push(
+        {
+          name: "Linear, logical and goal-directed",
+          data: linearData
+        },
+        {
+          name: "Disorganized",
+          data: disorganizedData
+        },
+        {
+          name: "Circumstantial",
+          data: circumstantialData
+        },
+        {
+          name: "Tangential",
+          data: tangentialData
+        },
+        {
+          name: "Looseness of associations",
+          data: looseData
+        },
+        {
+          name: "Flight of ideas",
+          data: flightData
+        },
+        {
+          name: "Poverty of thought",
+          data: povertyData
+        }
+      );
+
+      return series;
     }
   },
-  computed: {},
-  mounted() {},
-  watch: {
-    tabDialogVisibility() {}
+  mounted() {
+    const params = { patientId: this.$route.query.patient_id };
+    this.$store.dispatch("mse/getThoughtProcess", params);
   }
 };
 </script>
 
 <style>
-.box-card {
-  width: 700px;
-}
 </style>

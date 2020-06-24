@@ -16,8 +16,6 @@
           <span slot="label">{{element.label}}</span>
 
           <ElementBody :type="element.value" :tab="tab" :label="element.label" />
-
-          <!-- <BMElementBody :type="element.value" :label="element.label" :tab="tab" /> -->
         </el-tab-pane>
       </el-tabs>
     </el-card>

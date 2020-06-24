@@ -1,83 +1,119 @@
 <template>
-  <div>
-    <el-col>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>Appearence</span>
-          <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-        </div>
-        <el-form :model="appearenceForm" ref="appearenceForm" class="demo-dynamic">
-          <el-form-item>
-            <el-checkbox-group v-model="checkboxAppearence">
-              <!--  When opened in multi change format size="small" 
-                Ref: https://element.eleme.io/#/en-US/component/checkbox
-              -->
-              <el-checkbox-button v-for="app in appearence" :label="app" :key="app">{{app}}</el-checkbox-button>
-            </el-checkbox-group>
-            <!--  When opened in multi change min-rows=1 -->
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 4}"
-              placeholder="Please input"
-              v-model="textarea"
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button.
-            Pass a prop: typeOfForm =PartOfLargerForm or OwnForm
-            -->
-            <el-button type="success" @click="submitForm('appearenceForm')" size="small">Save</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
-    </el-col>
-  </div>
+  <Graph :series="series" />
 </template>
 
 <script>
-const appearenceOptions = [
-  "Good grooming and hyegine",
-  "No apparent distree",
-  "Well developed, well nourished",
-  "Appears stated age",
-  "Appears younger than stated age",
-  "Appears older than stated age",
-  "Obese",
-  "Thin or cachetic",
-  "Disheveled, unkempt",
-  "Malodorous"
-];
-
+import Graph from "./_BaseGraph";
 export default {
-  data() {
-    return {
-      appearenceForm: { recs: [{ description: "" }] },
-      // When form loads this will have the currently selected values from the DB
-      checkboxAppearence: [""],
-      appearence: appearenceOptions,
-      textarea: ""
-    };
-  },
-  methods: {
-    onClickSave(rec) {
-      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateAppearenceInSM", {
-        data: rec,
-        notify: this.$notify
-      });
+  components: { Graph },
+  computed: {
+    series() {
+      let series = [];
+      const appearences = this.$store.state.mse.appearenceList;
+      let goodGrommingAndHygieneData = [];
+      let noApparentDistressData = [];
+      let wellDevelopedData = [];
+      let statedAgeData = [];
+      let yougnerAgeData = [];
+      let olderAgeData = [];
+      let obeseData = [];
+      let thinData = [];
+      let disheveledData = [];
+      let malodorousData = [];
+      for (const appearence of appearences) {
+        const { createDate } = appearence;
+        goodGrommingAndHygieneData.push({
+          x: createDate,
+          y: appearence["good-grooming-and-hygiene"] == "yes" ? 1 : 0
+        });
+        noApparentDistressData.push({
+          x: createDate,
+          y: appearence["no-apparent-distress"] == "yes" ? 1 : 0
+        });
+        wellDevelopedData.push({
+          x: createDate,
+          y: appearence["well-developed-well-nourished"] == "yes" ? 1 : 0
+        });
+        statedAgeData.push({
+          x: createDate,
+          y: appearence["appears-stated-age"] == "yes" ? 1 : 0
+        });
+        yougnerAgeData.push({
+          x: createDate,
+          y: appearence["appears-younger-then-stated-age"] == "yes" ? 1 : 0
+        });
+        olderAgeData.push({
+          x: createDate,
+          y: appearence["appears-older-then-stated-age"] == "yes" ? 1 : 0
+        });
+        obeseData.push({
+          x: createDate,
+          y: appearence["obese"] == "yes" ? 1 : 0
+        });
+        thinData.push({
+          x: createDate,
+          y: appearence["thin-or-cachetic"] == "yes" ? 1 : 0
+        });
+        disheveledData.push({
+          x: createDate,
+          y: appearence["disheveled-unkempt"] == "yes" ? 1 : 0
+        });
+        malodorousData.push({
+          x: createDate,
+          y: appearence["malodorus"] == "yes" ? 1 : 0
+        });
+      }
+      series.push(
+        {
+          name: "Good grooming and hygiene",
+          data: goodGrommingAndHygieneData
+        },
+        {
+          name: "No apparent distress",
+          data: noApparentDistressData
+        },
+        {
+          name: "Well-developed, well-nourished",
+          data: wellDevelopedData
+        },
+        {
+          name: "Appears stated age",
+          data: statedAgeData
+        },
+        {
+          name: "Appears younger than stated age",
+          data: yougnerAgeData
+        },
+        {
+          name: "Appears older than stated age",
+          data: olderAgeData
+        },
+        {
+          name: "Obese",
+          data: obeseData
+        },
+        {
+          name: "Thin or cachectic",
+          data: thinData
+        },
+        {
+          name: "Disheveled, unkempt",
+          data: disheveledData
+        },
+        {
+          name: "Malodorous",
+          data: malodorousData
+        }
+      );
+      return series;
     }
   },
-  computed: {},
-  mounted() {},
-  watch: {
-    tabDialogVisibility() {}
+  mounted() {
+    const params = { patientId: this.$route.query.patient_id };
+    this.$store.dispatch("mse/getAppearence", params);
   }
 };
 </script>
 
 <style>
-.box-card {
-  width: 700px;
-}
 </style>

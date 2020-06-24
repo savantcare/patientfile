@@ -1,83 +1,153 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Thought content</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-form :model="thoughtContentForm" ref="thoughtContentForm" class="demo-dynamic">
-        <el-form-item>
-          <el-checkbox-group v-model="checkboxThoughtContent">
-            <!--  When opened in multi change format size="small" 
-                Ref: https://element.eleme.io/#/en-US/component/checkbox
-            -->
-            <el-checkbox-button v-for="app in thoughtContent" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <!--  When opened in multi change min-rows=1 -->
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 4}"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button
-          -->
-          <el-button type="success" @click="submitForm('thoughtContentForm')" size="small">Save</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </div>
+  <Graph :series="series" />
 </template>
 
 <script>
-const thoughtContentOptions = [
-  "No SI, intent or plan",
-  "No passive death wish",
-  "No HI, intent or plan",
-  "No delusional thinking observed",
-  "No obsessive thinking observed",
-  "+ruminations",
-  "+SI without intent or plan",
-  "+SI as detailed below",
-  "+HI as detailed below",
-  "+delusions",
-  "+IOR",
-  "+obsessions",
-  "Passive death wish"
-];
-
+import Graph from "./_BaseGraph";
 export default {
-  data() {
-    return {
-      thoughtContentForm: { recs: [{ description: "" }] },
-      // When form loads this will have the currently selected values from the DB
-      checkboxThoughtContent: [""],
-      thoughtContent: thoughtContentOptions,
-      textarea: ""
-    };
-  },
-  methods: {
-    onClickSave(rec) {
-      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateRecommendationInSM", {
-        data: rec,
-        notify: this.$notify
-      });
+  components: { Graph },
+
+  computed: {
+    series() {
+      let series = [];
+
+      const thoughtContents = this.$store.state.mse.thoughtContentList;
+
+      let noSiIntentData = [];
+      let noPassiveDeathData = [];
+      let noHiIntentData = [];
+      let noDelusionalData = [];
+      let noObessiveData = [];
+      let ruminationData = [];
+      let siWithoutData = [];
+      let siAsData = [];
+      let hiAsData = [];
+      let delusionData = [];
+      let iorData = [];
+      let obessionData = [];
+      let passiveData = [];
+
+      for (const thoughtContent of thoughtContents) {
+        const { createDate } = thoughtContent;
+
+        noSiIntentData.push({
+          x: createDate,
+          y: thoughtContent["no-si-intent-or-plan"] == "yes" ? 1 : 0
+        });
+        noPassiveDeathData.push({
+          x: createDate,
+          y: thoughtContent["no-passive-death-wish"] == "yes" ? 1 : 0
+        });
+        noHiIntentData.push({
+          x: createDate,
+          y: thoughtContent["no-hi-intent-or-plan"] == "yes" ? 1 : 0
+        });
+        noDelusionalData.push({
+          x: createDate,
+          y: thoughtContent["no-delusional-thinking-observed"] == "yes" ? 1 : 0
+        });
+        noObessiveData.push({
+          x: createDate,
+          y: thoughtContent["no-obsessive-thinking-observed"] == "yes" ? 1 : 0
+        });
+        ruminationData.push({
+          x: createDate,
+          y: thoughtContent["ruminations"] == "yes" ? 1 : 0
+        });
+        siWithoutData.push({
+          x: createDate,
+          y: thoughtContent["si-without-intent-or-plan"] == "yes" ? 1 : 0
+        });
+        siAsData.push({
+          x: createDate,
+          y: thoughtContent["si-as-detailed-below"] == "yes" ? 1 : 0
+        });
+        hiAsData.push({
+          x: createDate,
+          y: thoughtContent["hi-as-detailed-below"] == "yes" ? 1 : 0
+        });
+        delusionData.push({
+          x: createDate,
+          y: thoughtContent["delusions"] == "yes" ? 1 : 0
+        });
+        iorData.push({
+          x: createDate,
+          y: thoughtContent["ior"] == "yes" ? 1 : 0
+        });
+        obessionData.push({
+          x: createDate,
+          y: thoughtContent["obsessions"] == "yes" ? 1 : 0
+        });
+        passiveData.push({
+          x: createDate,
+          y: thoughtContent["passive-death-wish"] == "yes" ? 1 : 0
+        });
+      }
+
+      series.push(
+        {
+          name: "No SI, intent or plan",
+          data: noSiIntentData
+        },
+        {
+          name: "No passive death wish",
+          data: noPassiveDeathData
+        },
+        {
+          name: "No HI, intent or plan",
+          data: noHiIntentData
+        },
+        {
+          name: "No delusional thinking observed",
+          data: noDelusionalData
+        },
+        {
+          name: "No obsessive thinking observed",
+          data: noObessiveData
+        },
+        {
+          name: "+ruminations",
+          data: ruminationData
+        },
+        {
+          name: "+SI without intent or plan",
+          data: siWithoutData
+        },
+        {
+          name: "+SI as detailed below",
+          data: siAsData
+        },
+        {
+          name: "+HI as detailed below",
+          data: hiAsData
+        },
+        {
+          name: "+delusions",
+          data: delusionData
+        },
+        {
+          name: "+IOR",
+          data: iorData
+        },
+        {
+          name: "+obsessions",
+          data: obessionData
+        },
+        {
+          name: "Passive death wish",
+          data: passiveData
+        }
+      );
+
+      return series;
     }
   },
-  computed: {},
-  mounted() {},
-  watch: {
-    tabDialogVisibility() {}
+  mounted() {
+    const params = { patientId: this.$route.query.patient_id };
+    this.$store.dispatch("mse/getThoughtContent", params);
   }
 };
 </script>
 
 <style>
-.box-card {
-  width: 700px;
-}
 </style>

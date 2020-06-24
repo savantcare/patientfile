@@ -1,77 +1,94 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Attitude</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-form :model="attitudeForm" ref="attitudeForm" class="demo-dynamic">
-        <el-form-item>
-          <el-checkbox-group v-model="checkboxAttitude">
-            <!--  When opened in multi change format size="small" 
-                Ref: https://element.eleme.io/#/en-US/component/checkbox
-            -->
-            <el-checkbox-button v-for="app in attitude" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <!--  When opened in multi change min-rows=1 -->
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 4}"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button
-          -->
-          <el-button type="success" @click="submitForm('attitudeForm')" size="small">Save</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </div>
+  <Graph :series="series" />
 </template>
 
 <script>
-const attitudeOptions = [
-  "Pleasant and cooperative",
-  "Uncooperative",
-  "Hostile or defiant",
-  "Guarded",
-  "Evasive",
-  "Apathetic",
-  "Disorganized behavior"
-];
-
+import Graph from "./_BaseGraph";
 export default {
-  data() {
-    return {
-      attitudeForm: { recs: [{ description: "" }] },
-      // When form loads this will have the currently selected values from the DB
-      checkboxAttitude: [""],
-      attitude: attitudeOptions,
-      textarea: ""
-    };
-  },
-  methods: {
-    onClickSave(rec) {
-      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateRecommendationInSM", {
-        data: rec,
-        notify: this.$notify
-      });
+  components: { Graph },
+
+  computed: {
+    series() {
+      let series = [];
+      const attitudes = this.$store.state.mse.attitudeList;
+      let pleasantData = [];
+      let uncooperativeData = [];
+      let hostileData = [];
+      let guardedData = [];
+      let evasiveData = [];
+      let apatheticData = [];
+      let disorganizedData = [];
+      for (const attitude of attitudes) {
+        const { createDate } = attitude;
+        pleasantData.push({
+          x: createDate,
+          y: attitude["pleasant-and-cooperative"] == "yes" ? 1 : 0
+        });
+        uncooperativeData.push({
+          x: createDate,
+          y: attitude["uncooperative"] == "yes" ? 1 : 0
+        });
+        hostileData.push({
+          x: createDate,
+          y: attitude["hostile-or-defiant"] == "yes" ? 1 : 0
+        });
+        guardedData.push({
+          x: createDate,
+          y: attitude["guarded"] == "yes" ? 1 : 0
+        });
+        evasiveData.push({
+          x: createDate,
+          y: attitude["evasive"] == "yes" ? 1 : 0
+        });
+        apatheticData.push({
+          x: createDate,
+          y: attitude["apathetic"] == "yes" ? 1 : 0
+        });
+        disorganizedData.push({
+          x: createDate,
+          y: attitude["disorganized-behavior"] == "yes" ? 1 : 0
+        });
+      }
+
+      series.push(
+        {
+          name: "Pleasant and cooperative",
+          data: pleasantData
+        },
+        {
+          name: "Uncooperative",
+          data: uncooperativeData
+        },
+        {
+          name: "Hostile or defiant",
+          data: hostileData
+        },
+        {
+          name: "Guarded",
+          data: guardedData
+        },
+        {
+          name: "Evasive",
+          data: evasiveData
+        },
+        {
+          name: "Apathetic",
+          data: apatheticData
+        },
+        {
+          name: "Disorganized behavior",
+          data: disorganizedData
+        }
+      );
+      return series;
     }
   },
-  computed: {},
-  mounted() {},
-  watch: {
-    tabDialogVisibility() {}
+  mounted() {
+    const params = { patientId: this.$route.query.patient_id };
+    this.$store.dispatch("mse/getAttitude", params);
   }
 };
 </script>
 
 <style>
-.box-card {
-  width: 700px;
-}
 </style>

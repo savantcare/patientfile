@@ -1,93 +1,198 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>Mood / affect</span>
-        <el-button style="float: right; padding: 3px 0" type="text">All normal</el-button>
-      </div>
-      <el-form :model="moodAffectForm" ref="moodAffectForm" class="demo-dynamic">
-        <el-form-item>
-          <el-checkbox-group v-model="checkboxMoodAffect">
-            <!--  When opened in multi change format size="small" 
-                Ref: https://element.eleme.io/#/en-US/component/checkbox
-            -->
-            <el-checkbox-button v-for="app in moodAffect" :label="app" :key="app">{{app}}</el-checkbox-button>
-          </el-checkbox-group>
-          <!--  When opened in multi change min-rows=1 -->
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 4}"
-            placeholder="Please input"
-            v-model="textarea"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- When opened in multi change format the Save button will not be there.
-            Since the whole form will be controlled by one Save button
-          -->
-          <el-button type="success" @click="submitForm('moodAffectForm')" size="small">Save</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </div>
-</template> 
+  <Graph :series="series" />
+</template>
 
 <script>
-const moodAffectOptions = [
-  "Euthymic",
-  "Dysphoric",
-  "Irritable",
-  "Angry",
-  "Bright",
-  "Euphoric",
-  "Labile",
-  "Stable",
-  "Mood congruent",
-  "Mood incongruent",
-  "Expansive",
-  "Full range",
-  "Constricted",
-  "Blunted",
-  "Flat",
-  "Anxious",
-  "Tearful",
-  "Dysthymic"
-];
-
-/** These were found repeated in existing system
- * "Stable"
- * "Full-range",
- * "Mood congruent",
- */
+import Graph from "./_BaseGraph";
 export default {
-  data() {
-    return {
-      moodAffectForm: { recs: [{ description: "" }] },
-      // When form loads this will have the currently selected values from the DB
-      checkboxMoodAffect: [""],
-      moodAffect: moodAffectOptions,
-      textarea: ""
-    };
-  },
-  methods: {
-    onClickSave(rec) {
-      // Actions are triggered with the store.dispatch method Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
-      this.$store.dispatch("dbUpdateRecommendationInSM", {
-        data: rec,
-        notify: this.$notify
-      });
+  components: { Graph },
+
+  computed: {
+    series() {
+      let series = [];
+
+      const affects = this.$store.state.mse.affectList;
+
+      let euthymicData = [];
+      let dysphoricData = [];
+      let irritableData = [];
+      let angryData = [];
+      let brightData = [];
+      let euphoricData = [];
+      let labileData = [];
+      let stableData = [];
+      let moodCongruentData = [];
+      let moodIncogruentData = [];
+      let expansiveData = [];
+      let fullRangeData = [];
+      let constrictedData = [];
+      let bluntedData = [];
+      let flatData = [];
+      let anxiousData = [];
+      let tearfulData = [];
+      let dysthymicData = [];
+
+      for (const affect of affects) {
+        const { createDate } = affect;
+
+        euthymicData.push({
+          x: createDate,
+          y: affect["euthymic"] == "yes" ? 1 : 0
+        });
+        dysphoricData.push({
+          x: createDate,
+          y: affect["dysphoric"] == "yes" ? 1 : 0
+        });
+        irritableData.push({
+          x: createDate,
+          y: affect["irritable"] == "yes" ? 1 : 0
+        });
+        angryData.push({
+          x: createDate,
+          y: affect["angry"] == "yes" ? 1 : 0
+        });
+        brightData.push({
+          x: createDate,
+          y: affect["bright"] == "yes" ? 1 : 0
+        });
+        euphoricData.push({
+          x: createDate,
+          y: affect["euphoric"] == "yes" ? 1 : 0
+        });
+        labileData.push({
+          x: createDate,
+          y: affect["labile"] == "yes" ? 1 : 0
+        });
+        stableData.push({
+          x: createDate,
+          y: affect["stable"] == "yes" ? 1 : 0
+        });
+        moodCongruentData.push({
+          x: createDate,
+          y: affect["mood-congruent"] == "yes" ? 1 : 0
+        });
+        moodIncogruentData.push({
+          x: createDate,
+          y: affect["mood-incongruent"] == "yes" ? 1 : 0
+        });
+        expansiveData.push({
+          x: createDate,
+          y: affect["expansive"] == "yes" ? 1 : 0
+        });
+        fullRangeData.push({
+          x: createDate,
+          y: affect["full-range"] == "yes" ? 1 : 0
+        });
+        constrictedData.push({
+          x: createDate,
+          y: affect["constricted"] == "yes" ? 1 : 0
+        });
+        bluntedData.push({
+          x: createDate,
+          y: affect["blunted"] == "yes" ? 1 : 0
+        });
+        flatData.push({
+          x: createDate,
+          y: affect["flat"] == "yes" ? 1 : 0
+        });
+        anxiousData.push({
+          x: createDate,
+          y: affect["anxious"] == "yes" ? 1 : 0
+        });
+        tearfulData.push({
+          x: createDate,
+          y: affect["tearful"] == "yes" ? 1 : 0
+        });
+        dysthymicData.push({
+          x: createDate,
+          y: affect["dysthymic"] == "yes" ? 1 : 0
+        });
+      }
+
+      series.push(
+        {
+          name: "Euthymic",
+          data: euthymicData
+        },
+        {
+          name: "Dysphoric",
+          data: dysphoricData
+        },
+        {
+          name: "Irritable",
+          data: irritableData
+        },
+        {
+          name: "Angry",
+          data: angryData
+        },
+        {
+          name: "Bright",
+          data: brightData
+        },
+        {
+          name: "Euphoric",
+          data: euphoricData
+        },
+        {
+          name: "Labile",
+          data: labileData
+        },
+        {
+          name: "Stable",
+          data: stableData
+        },
+        {
+          name: "Mood congruent",
+          data: moodCongruentData
+        },
+        {
+          name: "Mood incongruent",
+          data: moodIncogruentData
+        },
+        {
+          name: "Expansive",
+          data: expansiveData
+        },
+        {
+          name: "Constricted",
+          data: constrictedData
+        },
+        {
+          name: "Blunted",
+          data: bluntedData
+        },
+        {
+          name: "Flat",
+          data: flatData
+        },
+        {
+          name: "Anxious",
+          data: anxiousData
+        },
+        {
+          name: "Tearful",
+          data: tearfulData
+        },
+        {
+          name: "Dysthymic",
+          data: dysthymicData
+        },
+        {
+          name: "Full-range",
+          data: fullRangeData
+        }
+      );
+
+      return series;
     }
   },
-  computed: {},
-  mounted() {},
-  watch: {
-    tabDialogVisibility() {}
+  mounted() {
+    const params = { patientId: this.$route.query.patient_id };
+    this.$store.dispatch("mse/getAffect", params);
   }
 };
 </script>
 
 <style>
-.box-card {
-  width: 700px;
-}
 </style>
