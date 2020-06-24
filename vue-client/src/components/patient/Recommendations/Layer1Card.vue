@@ -215,7 +215,9 @@ export default {
       let selectedTimestampInSlider = Math.round(
         new Date(this.timeOfStateToShow).getTime() / 1000
       );
-
+      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
+      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
+      //1592837534.474419 "05cc862b-9fb3-4e0e-9918-926944fbf5f8"
       /*console.log(
         "time of state to show == ",
         this.timeOfStateToShow,
@@ -223,14 +225,11 @@ export default {
       );*/
       const rexEvalList = Recommendation.query()
         .where("ROW_END", value => value > selectedTimestampInSlider)
+        .orderBy("uuid")
+        .orderBy("ROW_START", "desc")
         .get();
 
-      const rexEvalCount = Recommendation.query()
-        .where("ROW_END", value => value > selectedTimestampInSlider)
-        .count();
-      console.log("total rx count ", rexEvalCount, selectedTimestampInSlider);
-      //console.log("===3" + JSON.stringify(rexEvalList, null, 4));
-
+      console.log(rexEvalList, rexEvalList.length);
       return {
         label: "Yours",
         tableData: rexEvalList,

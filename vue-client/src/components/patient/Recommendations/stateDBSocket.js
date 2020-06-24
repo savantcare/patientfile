@@ -17,6 +17,9 @@ export default {
     othersRecsEvalAtEachRowEnd: {},
   },
 
+  data: {
+    oneQueryIsRunningGate: false
+  },
   // More info
   // It should be noted that properties in data are only reactive if they existed when the instance was created. Ref: https://vuejs.org/v2/guide/instance.html
 
@@ -131,22 +134,29 @@ export default {
         TOKEN = localStorage.getItem("token");
       }
       try {
-        let countRex = await Recommendation.query().count();
-        console.log(" count rex ====", countRex)
-        if (countRex == 0) {
-          await Recommendation.api().post(
-            RECOMMENDATION_API_URL + "/getMyRecommendations", {
-            headers: {
-              Authorization: "Bearer " + TOKEN,
-              "Content-Type": "application/json;charset=utf-8",
-            },
-            patientId: patientId,
-            userId: userId,
-            date: date,
+
+        if (!this.oneQueryIsRunningGate) {
+          this.oneQueryIsRunningGate = true;
+          let countRex = await Recommendation.query().count();
+
+          console.log(" count rex ====", countRex)
+          if (countRex == 0) {
+            await Recommendation.api().post(
+              RECOMMENDATION_API_URL + "/getMyRecommendations", {
+              headers: {
+                Authorization: "Bearer " + TOKEN,
+                "Content-Type": "application/json;charset=utf-8",
+              },
+              patientId: patientId,
+              userId: userId,
+              date: date,
+            }
+            );
+            console.log("Inserting rex", Recommendation.query().count());
           }
-          );
-          console.log("Inserting rex", Recommendation.query().count());
+          this.oneQueryIsRunningGate = false;
         }
+
       } catch (ex) {
         notify({
           title: "Error",
