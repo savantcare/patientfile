@@ -48,6 +48,9 @@
 </template>
 
 <script>
+// 1. remove selected column feature
+// 2. Need to send a better name for column to display
+
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
