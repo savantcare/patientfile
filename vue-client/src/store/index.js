@@ -10,7 +10,6 @@ import createPersistedState from "vuex-persistedstate";
 import createCache from "vuex-cache";
 import VuexORM from "@vuex-orm/core";
 
-
 Vue.use(Vuex);
 
 // modules
@@ -31,13 +30,16 @@ import componentModule from "./modules/component";
 import bodyMeasurementModule from "../components/patient/BodyMeasurements/stateDBSocket";
 import mentalStatusExamModule from "../components/patient/MentalStatusExam/stateDBSocket";
 
+// vuex-orm models.
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
+import Recommendation from "../components/patient/Recommendations/models/recommendation";
 
 import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
 
-const database = new VuexORM.Database()
-database.register(Diagnosis)
+const database = new VuexORM.Database();
+database.register(Diagnosis);
+database.register(Recommendation);
 
 export default new Vuex.Store({
   state: {
@@ -153,5 +155,9 @@ export default new Vuex.Store({
     bodyMeasurement: bodyMeasurementModule,
     mse: mentalStatusExamModule,
   },
-  plugins: [createPersistedState(), createCache({ timeout: 1000000 }), VuexORM.install(database)],
+  plugins: [
+    createPersistedState(),
+    createCache({ timeout: 1000000 }),
+    VuexORM.install(database),
+  ],
 });

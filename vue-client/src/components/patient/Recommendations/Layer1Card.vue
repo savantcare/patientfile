@@ -49,6 +49,8 @@
 import CardHeader from "@/components/common/CardHeader";
 import DataTable from "@/components/common/DataTable";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
+import Recommendation from "./models/recommendation";
+
 export default {
   components: {
     CardHeader,
@@ -261,6 +263,28 @@ export default {
       "====" + JSON.stringify(this.$store.yourRecsEvalAtEachRowEnd, null, 4)
     );
 */
+
+    //Structure that has been implemented with Vuex-ORM model
+    let rexListFromApiCall = [
+      {
+        uuid: "sxsxz",
+        rowStart: "15th Jan at 10AM",
+        rowEnd: "2039",
+        recs: { name: "ADHD" }
+      },
+      {
+        uuid: "sdfsdf",
+        rowStart: "5th Jan at 10AM",
+        rowEnd: "6th Jan at 10AM",
+        recs: { name: "Depression" }
+      }
+    ];
+
+    console.log("====" + JSON.stringify(rexListFromApiCall, null, 4));
+    Recommendation.insert({
+      data: rexListFromApiCall
+    });
+
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
       date: this.timeOfStateToShow,
       patientId: this.patientId,
