@@ -212,24 +212,28 @@ export default {
     tabData() {
       //      const rexEvalList = Recommendation.all();
       //let dateTimeNow = Math.floor(Date.now() / 1000);
+
       let selectedTimestampInSlider = Math.round(
         new Date(this.timeOfStateToShow).getTime() / 1000
       );
-      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
-      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
-      //1592837534.474419 "05cc862b-9fb3-4e0e-9918-926944fbf5f8"
-      /*console.log(
-        "time of state to show == ",
-        this.timeOfStateToShow,
-        dateNowInSlider
-      );*/
+
+      if (this.timeOfStateToShow === "2038-01-19 03:14:07.999999") {
+        selectedTimestampInSlider = Math.round(new Date().getTime() / 1000);
+        console.log("recasting to current time");
+      }
+
       const rexEvalList = Recommendation.query()
+        .where("ROW_START", value => value < selectedTimestampInSlider)
         .where("ROW_END", value => value > selectedTimestampInSlider)
         .orderBy("uuid")
         .orderBy("ROW_START", "desc")
         .get();
 
-      console.log("length after order by === ", rexEvalList.length);
+      console.log(
+        "length after order by === ",
+        selectedTimestampInSlider,
+        rexEvalList.length
+      );
       return {
         label: "Yours",
         tableData: rexEvalList,
@@ -273,49 +277,6 @@ export default {
     },
     timeOfStateToShow() {
       return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
-    }
-  },
-  watch: {
-    timeOfStateToShow() {
-      const timeOfStateToShow = this.timeOfStateToShow.split(" ")[0];
-      console.log(timeOfStateToShow);
-
-      let selectedTimestampInSlider = Math.round(
-        new Date(this.timeOfStateToShow).getTime() / 1000
-      );
-      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
-      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
-      //1592837534.474419 "05cc862b-9fb3-4e0e-9918-926944fbf5f8"
-      /*console.log(
-        "time of state to show == ",
-        this.timeOfStateToShow,
-        dateNowInSlider
-      );*/
-      const rexEvalList = Recommendation.query()
-        .where("ROW_END", value => value > selectedTimestampInSlider)
-        .orderBy("uuid")
-        .orderBy("ROW_START", "desc")
-        .get();
-
-      console.log("length after order by === ", rexEvalList.length);
-      //this.tabData();
-
-      /*
-      if (
-        this.$store.state.recommendation.multiStateYourRecommendationsList[
-          timeOfStateToShow
-        ] == null
-      ) {
-        const params = {
-          date: this.timeOfStateToShow,
-          patientId: this.patientId,
-          userId: this.userId
-        };
-
-        this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
-        this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
-        
-      }*/
     }
   }
 };
