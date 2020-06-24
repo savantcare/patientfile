@@ -107,7 +107,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                 weightsEvalAtEachRowEnd[2038-01-19 03:14:07.999999] = 185,mts(5th Feb 10AM)
                 weightsEvalAtEachRowEnd[mts(20th Feb 10:30 AM)] = 190,mts(2nd Jan 11AM)
 
-                To generate the above array the query executed is:
+                To generate the above array the query executed on the mariaDB server is:
                 SELECT *,ROW_END FROM weights FOR SYSTEM_TIME ALL where patientUUID=current_patient_UUID;
 
                 To show data on graph:
