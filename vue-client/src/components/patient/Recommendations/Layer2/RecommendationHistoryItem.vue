@@ -28,37 +28,20 @@
 </template>
 
 <script>
-import { RECOMMENDATION_API_URL } from "@/const/others.js";
 export default {
   props: ["rec"],
   data() {
     return {
-      histories: []
+      histories: [
+        {
+          content: "sxsxz",
+          index: "1"
+        }
+      ]
     };
   },
-  mounted() {
-    this.getHistory();
-  },
-  methods: {
-    async getHistory() {
-      const TOKEN = localStorage.getItem("token");
-
-      const response = await fetch(
-        `${RECOMMENDATION_API_URL}/getHistory/${this.rec.uuid}`,
-        {
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            Authorization: "Bearer " + TOKEN
-          }
-        }
-      );
-      if (response.ok) {
-        const json = await response.json();
-
-        this.histories = json;
-      }
-    }
-  },
+  mounted() {},
+  methods: {},
   watch: {
     rec() {
       if (this.rec.uuid != null) {

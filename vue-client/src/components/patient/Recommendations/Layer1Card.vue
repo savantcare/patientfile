@@ -29,7 +29,8 @@
         :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
       />
     </div>
-    <DataTable
+    <DataTableWithoutTab
+      :tabData="tabData"
       ctName="Recommendation"
       keyId="recommendation"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
@@ -38,6 +39,7 @@
       @handleClickOnDInDataRow="handleClickOnDInDataRow"
       @updatePriority="updatePriority"
       @updateTableList="updateTableList"
+      :selectedColumns="selectedColumns"
       :columns="columns"
       :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
     />
@@ -47,12 +49,14 @@
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import DataTable from "@/components/common/DataTable";
+import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
+import Recommendation from "./models/recommendation";
+
 export default {
   components: {
     CardHeader,
-    DataTable
+    DataTableWithoutTab
   },
   props: {
     typeOfStateDisplayArea: {
@@ -71,7 +75,8 @@ export default {
         }
       ],
       patientId: this.$route.query.patient_id,
-      userId: this.$store.state.userId
+      userId: this.$store.state.userId,
+      selectedColumns: ["recommendation"] // The user can select there own columns. The user selected columns are saved in the local storage.
     };
   },
   methods: {
@@ -193,81 +198,56 @@ export default {
     }
   },
   mounted() {
-    // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
-
-    /* In the following example 
-      [] creates array and {} creates object
-      When to use array and when to use object? 1. Use array when you dont need key names 2. Arrays are passed by value and objects are passed by reference
-      uuids are sxsxz and sdfsdf
-      this.$store.recsEvalAtEachRowEnd is a array.
-        The array does not have a key specified so it asumed 0 1 and so on.
-
-      sxsxz ROW_ENDS are
-        "2039" -> Hence current data
-        "21st Jan at 11AM"
-        "3rd Feb at 8AM"
-    
-    this.$store.recsEvalAtEachRowEnd = [
-      { sxsxz: { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
-      { sdfsdf: { Recs: "excercize 15 mins", ROW_START: "5th Jan at 10AM" } }
-    ];
-
-*/
-
-    this.$store.yourRecsEvalAtEachRowEnd = [
+    // Vuex-ORM model
+    let rexListFromApiCall = [
       {
-        sxsxz: [
-          { "2039": { Recs: "sleep 8 hours", ROW_START: "15th Jan at 10AM" } },
-          {
-            "3rd Feb at 8AM": {
-              Recs: "sleep 9 hours",
-              ROW_START: "2nd Feb at 8AM"
-            }
-          },
-          {
-            "21st Jan at 11AM": {
-              Recs: "sleep 10 hours",
-              ROW_START: "20th Jan at 11AM"
-            }
-          }
-        ]
+        uuid: "sxsxz",
+        rowStart: 10,
+        rowEnd: 2039,
+        recommendation: "excercise for 10 mins"
       },
       {
-        sdfsdf: [
-          {
-            "6th Jan at 10AM": {
-              Recs: "excercize 15 mins",
-              ROW_START: "5th Jan at 10AM"
-            }
-          },
-          {
-            "21st Jan at 10AM": {
-              Recs: "excercize 20 mins",
-              ROW_START: "20th Jan at 10AM"
-            }
-          },
-          {
-            "6th Feb at 10AM": {
-              Recs: "excercize 20 mins",
-              ROW_START: "5th Feb at 10AM"
-            }
-          }
-        ]
+        uuid: "sxsxz",
+        rowStart: 9,
+        rowEnd: 10,
+        recommendation: "excercise for 10 mins"
+      },
+      {
+        uuid: "sdfsdf",
+        rowStart: 7,
+        rowEnd: 8,
+        recommendation: "walk for 10 mins"
       }
     ];
 
-    /*
-    console.log(
-      "====" + JSON.stringify(this.$store.yourRecsEvalAtEachRowEnd, null, 4)
-    );
-*/
+    console.log("===1" + JSON.stringify(rexListFromApiCall, null, 4));
+    Recommendation.insert({
+      data: rexListFromApiCall
+    });
+
     this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
       date: this.timeOfStateToShow,
       patientId: this.patientId,
       userId: this.userId
     });
   },
+
   computed: {
+    tabData() {
+      //      const rexEvalList = Recommendation.all();
+      const rexEvalList = Recommendation.query()
+        .where("rowEnd", value => value > 10)
+        .get();
+      console.log("===3" + JSON.stringify(rexEvalList, null, 4));
+
+      return {
+        label: "Yours",
+        tableData: rexEvalList,
+        rowActions: ["C", "D"],
+        selectedColumn: ["recommendation"]
+      };
+    },
+
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
         const today = new Date().toISOString().split("T")[0];
