@@ -204,34 +204,32 @@ export default {
       patientId: this.patientId,
       userId: this.userId
     });
-
-    // Vuex-ORM model
   },
 
   computed: {
     tabData() {
-      //      const rexEvalList = Recommendation.all();
-      //let dateTimeNow = Math.floor(Date.now() / 1000);
-
-      let selectedTimestampInSlider = Math.round(
-        new Date(this.timeOfStateToShow).getTime() / 1000
-      );
-
-      if (this.timeOfStateToShow === "2038-01-19 03:14:07.999999") {
-        selectedTimestampInSlider = Math.round(new Date().getTime() / 1000);
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.timeOfStateToShow === "2038-01-19 03:14:07.999999" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
+      ) {
         console.log("recasting to current time");
-      }
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(this.timeOfStateToShow).getTime() / 1000
+        );
 
       const rexEvalList = Recommendation.query()
-        .where("ROW_START", value => value < selectedTimestampInSlider)
-        .where("ROW_END", value => value > selectedTimestampInSlider)
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
         .orderBy("uuid")
         .orderBy("ROW_START", "desc")
         .get();
 
       console.log(
         "length after order by === ",
-        selectedTimestampInSlider,
+        timeStampOfStateInsideCt,
         rexEvalList.length
       );
       return {
