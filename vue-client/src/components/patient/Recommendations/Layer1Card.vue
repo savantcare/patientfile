@@ -245,31 +245,17 @@ export default {
 
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
-        const today = new Date().toISOString().split("T")[0];
-        const isToday =
-          today == this.$store.state.multiStateDisplayArea.timeOfStateToShow;
-        // let isToday = false;
-        // if (
-        //   today == this.$store.state.multiStateDisplayArea.timeOfStateToShow
-        // ) {
-        //   isToday = true;
-        // }
-        // if (
-        //   timeOfStateDate.getFullYear() == today.getFullYear() &&
-        //   timeOfStateDate.getMonth() == today.getMonth() &&
-        //   timeOfStateDate.getDate() == today.getDate()
-        // ) {
-        //   isToday = true;
-        // }
+        let val = null;
 
-        let val = "";
         if (
-          this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
-          !isToday
+          this.$store.state.multiStateDisplayArea.timeOfStateToShow ===
+            "2038-01-19 03:14:07.999999" ||
+          this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
         ) {
+          val = null;
+        } else
           val =
             "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);";
-        }
 
         return val;
       },
