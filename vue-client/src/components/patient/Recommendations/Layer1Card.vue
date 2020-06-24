@@ -200,7 +200,7 @@ export default {
   mounted() {
     /* Get data for vuex-orm  */
     this.$store.dispatch("dbGetMyRecommendationsInSM", {
-      date: this.timeOfStateToShow,
+      date: this.$store.state.multiStateDisplayArea.timeOfStateToShow,
       patientId: this.patientId,
       userId: this.userId
     });
@@ -210,14 +210,17 @@ export default {
     tabData() {
       let timeStampOfStateInsideCt = null;
       if (
-        this.timeOfStateToShow === "2038-01-19 03:14:07.999999" ||
+        this.$store.state.multiStateDisplayArea.timeOfStateToShow ===
+          "2038-01-19 03:14:07.999999" ||
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
       ) {
         console.log("recasting to current time");
         timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
       } else
         timeStampOfStateInsideCt = Math.round(
-          new Date(this.timeOfStateToShow).getTime() / 1000
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateToShow
+          ).getTime() / 1000
         );
 
       const rexEvalList = Recommendation.query()
@@ -243,10 +246,11 @@ export default {
     typeOfStateDisplayAreaSpecificStyleToApply: {
       get() {
         const today = new Date().toISOString().split("T")[0];
-        const isToday = today == this.timeOfStateToShow;
+        const isToday =
+          today == this.$store.state.multiStateDisplayArea.timeOfStateToShow;
         // let isToday = false;
         // if (
-        //   today == this.timeOfStateToShow
+        //   today == this.$store.state.multiStateDisplayArea.timeOfStateToShow
         // ) {
         //   isToday = true;
         // }
@@ -272,9 +276,6 @@ export default {
       set(newValue) {
         this.doSomethingWith(newValue);
       }
-    },
-    timeOfStateToShow() {
-      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     }
   }
 };
