@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, Sequelize) => {
   const model = sequelize.define("appearence", {
     patientUUID: {
@@ -47,7 +46,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       defaultValue: ''
     },
-    measurementDate: {
+    timeOfEvaluation: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     }

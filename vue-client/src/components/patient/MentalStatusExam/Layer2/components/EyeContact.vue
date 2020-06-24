@@ -36,7 +36,7 @@ export default {
         recordChangedByUUID: this.$store.state.userId,
         recordChangedFromIPAddress: ipAddress,
         other: others,
-        measurementDate: new Date(date).toISOString().split("T")[0]
+        timeOfEvaluation: date
       };
       for (const status of this.statusList) {
         const value =
