@@ -200,7 +200,7 @@ export default {
   mounted() {
     /* Get data for vuex-orm  */
     this.$store.dispatch("dbGetMyRecommendationsInSM", {
-      date: this.$store.state.multiStateDisplayArea.timeOfStateToShow,
+      date: this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader,
       patientId: this.patientId,
       userId: this.userId
     });
@@ -210,7 +210,7 @@ export default {
     tabData() {
       let timeStampOfStateInsideCt = null;
       if (
-        this.$store.state.multiStateDisplayArea.timeOfStateToShow ===
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
           "2038-01-19 03:14:07.999999" ||
         this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
       ) {
@@ -219,7 +219,7 @@ export default {
       } else
         timeStampOfStateInsideCt = Math.round(
           new Date(
-            this.$store.state.multiStateDisplayArea.timeOfStateToShow
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
           ).getTime() / 1000
         );
 
@@ -248,8 +248,8 @@ export default {
         let val = null;
 
         if (
-          this.$store.state.multiStateDisplayArea.timeOfStateToShow ===
-            "2038-01-19 03:14:07.999999" ||
+          this.$store.state.multiStateDisplayArea
+            .timeOfStateSelectedInHeader === "2038-01-19 03:14:07.999999" ||
           this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
         ) {
           val = null;

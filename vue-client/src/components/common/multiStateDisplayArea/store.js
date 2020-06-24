@@ -8,7 +8,7 @@ import allComponentsList from "@/const/allComponentsList.js";
 export default {
   state: {
     ctList: [],
-    timeOfStateToShow: "2038-01-19 03:14:07.999999", // All components on render in multiStateDisplayArea use this value. This is value of ROW_END in mariaDB when row is active
+    timeOfStateSelectedInHeader: "2038-01-19 03:14:07.999999", // All components on render in multiStateDisplayArea use this value. This is value of ROW_END in mariaDB when row is active
     zoomValue: 1,
     originSize: null,
     componentType: "health",
@@ -17,8 +17,8 @@ export default {
     setMultiStateDisplayAreaCtList(state, value) {
       state.ctList = value;
     },
-    setTimeOfStateToShow(state, value) {
-      state.timeOfStateToShow = value;
+    settimeOfStateSelectedInHeader(state, value) {
+      state.timeOfStateSelectedInHeader = value;
     },
     setMultiStateDisplayAreaZoomValue(state, value) {
       state.zoomValue = value;
@@ -102,9 +102,10 @@ export default {
         } else if (item == "mse") {
           list.push({
             key: "mentalStatusExamCard",
-            value: require("@/components/patient/MentalStatusExam/MultiStateCard").default,
-            abbreviation: "mse"
-          })
+            value: require("@/components/patient/MentalStatusExam/MultiStateCard")
+              .default,
+            abbreviation: "mse",
+          });
         } else {
           const result = allComponentsList.filter((card) => {
             return card.abbreviation == item.toLowerCase();

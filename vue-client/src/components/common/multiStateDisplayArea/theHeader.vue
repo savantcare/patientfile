@@ -55,8 +55,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
       
           There are 6 important variables:
           1. timeOfApptStart       | Each gets a point on slider
-          2. timeOfApptLock        | When point is clicked timeOfStateToShow is set as timeOfApptLock and NOT timeOfApptStart
-          3. timeOfStateToShow     | When in future (2038-01-19 03:14:07.999999) then current data is shown. When < current_time then all components REACT and show data "AS OF" "timeOfStateToShow"
+          2. timeOfApptLock        | When point is clicked timeOfStateSelectedInHeader is set as timeOfApptLock and NOT timeOfApptStart
+          3. timeOfStateSelectedInHeader     | When in future (2038-01-19 03:14:07.999999) then current data is shown. When < current_time then all components REACT and show data "AS OF" "timeOfStateSelectedInHeader"
           4. timeOfEvaluation      | Defaults to ROW_START but in the form user can provide a different value. 
                                    | For e.g. when adding weight the user can give measurement time that is different from current time. 
                                    | If no value is provided this is set to ROW_START
@@ -95,7 +95,7 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
               | 20th Feb 10AM    | 25th Feb 2 PM    |      
               | 16th March 3 pm  | 21st March 1 PM  |
 
-              slider will have markers at (appt start times) 20th Feb 10AM and 16th March 3 pm. When marker on "20th Feb 10AM" is clicked timeOfStateToShow is set as "25thFeb 2 PM" (appt lock time)
+              slider will have markers at (appt start times) 20th Feb 10AM and 16th March 3 pm. When marker on "20th Feb 10AM" is clicked timeOfStateSelectedInHeader is set as "25thFeb 2 PM" (appt lock time)
 
               For data that can only be 1 at a given time
               -------------------------------------------
@@ -117,8 +117,8 @@ Ref:  https://vuejs.org/v2/style-guide/#Single-instance-component-names-strongly
                       mts(2nd Jan 10:30 AM)       =  190
                 Key insight -> On graph doctors want to see data on eval time and not on entry time
 
-                To show data for an appointment note (timeOfStateToShow is set as timeOfApptLock from the slider in the MULTI_STATE_HEADER) on the MULTI_STATE_DISPLAY_AREA
-                weightsEvalAtEachRowEnd array filter where (index / ROW_END) >(is after) timeOfStateToShow (use nearest value) and ROW_START < (is before) timeOfStateToShow  
+                To show data for an appointment note (timeOfStateSelectedInHeader is set as timeOfApptLock from the slider in the MULTI_STATE_HEADER) on the MULTI_STATE_DISPLAY_AREA
+                weightsEvalAtEachRowEnd array filter where (index / ROW_END) >(is after) timeOfStateSelectedInHeader (use nearest value) and ROW_START < (is before) timeOfStateSelectedInHeader  
                     So the data set will be
                       For appt time 20th Feb 10AM    -> need to show data for 25th Feb 2 PM   -> data for ROW_END > 25th Feb 2 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
                       For appt time 16th March 3 pm  -> need to show data for 21st March 1 PM -> data for ROW_END > 21st March 1 PM -> Hence data for ROW_END = 2038-01-19 03:14:07.999999 -> 185
@@ -231,8 +231,9 @@ export default {
     activityStatus() {
       return this.$store.state.connectionStatus;
     },
-    timeOfStateToShow() {
-      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
+    timeOfStateSelectedInHeader() {
+      return this.$store.state.multiStateDisplayArea
+        .timeOfStateSelectedInHeader;
     },
     zoomValue() {
       return this.$store.state.multiStateDisplayArea.zoomValue;
@@ -401,10 +402,10 @@ export default {
       }
     },
     handleSliderChangeEvent() {
-      /* timeOfStateToShow is watched by all components and they react when timeOfStateToShow changes
+      /* timeOfStateSelectedInHeader is watched by all components and they react when timeOfStateSelectedInHeader changes
          For e.g. in components/patient/recommendations/layer1Card.vue:241 
             watch: {
-             timeOfStateToShow() {
+             timeOfStateSelectedInHeader() {
       */
 
       /* 
@@ -421,23 +422,28 @@ export default {
       */
       let index = this.sliderCurrentValue / percent;
 
-      // Default value of timeOfStateToShow = 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
-      let timeOfStateToShow = "2038-01-19 03:14:07.999999";
+      // Default value of timeOfStateSelectedInHeader = 2038-01-19 03:14:07.999999 (This is default value stored by MariaDB)
+      let timeOfStateSelectedInHeader = "2038-01-19 03:14:07.999999";
 
       /*
       How to convert a date to Mysql time stamp format? 
-      let timeOfStateToShow = new Date()
+      let timeOfStateSelectedInHeader = new Date()
          .toISOString()
          .slice(0, 19)
          .replace("T", " "); // DB expect date to be in TIMESTAMP format Ref: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
       */
 
       if (index < this.timeOfApptsStart.length + 1) {
-        timeOfStateToShow = this.timeOfApptsStart[index].dateTimeOfAppt
+        timeOfStateSelectedInHeader = this.timeOfApptsStart[
+          index
+        ].dateTimeOfAppt
           .slice(0, 19)
           .replace("T", " ");
       }
-      this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
+      this.$store.commit(
+        "settimeOfStateSelectedInHeader",
+        timeOfStateSelectedInHeader
+      );
     },
     handleSliderEndEvent() {
       // console.log(this.sliderCurrentValue);

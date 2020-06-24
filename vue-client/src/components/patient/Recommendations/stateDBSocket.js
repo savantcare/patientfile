@@ -5,7 +5,7 @@ export default {
   state: {
     // KT: Cannot be changed directly. Can only be changed through mutation
 
-    yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfStateToShow. When timeOfStateToShow is null that indicates current state.
+    yourRecommendationsList: [], // TODO: This should be stored with the key of timeOfStateSelectedInHeader. When timeOfStateSelectedInHeader is null that indicates current state.
     // This needs to be a 2 dimensional array. Right now it is a one dimensional array
     // How to do it? Use object-path-immutable Ref: https://stackoverflow.com/questions/52747205/multidimensional-arrays-vuex-mutations
     // Only addendums need to be reactive the remaining old data does not need to be reactive.
@@ -18,7 +18,7 @@ export default {
   },
 
   data: {
-    oneQueryIsRunningGate: false
+    oneQueryIsRunningGate: false,
   },
   // More info
   // It should be noted that properties in data are only reactive if they existed when the instance was created. Ref: https://vuejs.org/v2/guide/instance.html
@@ -47,8 +47,10 @@ export default {
       psuedo code will be:
             state.multiStateYourRecommendationsList = immutable.push(state.multiStateYourRecommendationsList, '0.children.0.children', { id, name, parent_id });
       */
-      const { data, timeOfStateToShow } = value;
-      state.multiStateYourRecommendationsList[timeOfStateToShow] = data;
+      const { data, timeOfStateSelectedInHeader } = value;
+      state.multiStateYourRecommendationsList[
+        timeOfStateSelectedInHeader
+      ] = data;
     },
     setMultiStateOtherRecommendationList(state, value) {
       state.multiStateOtherRecommendationsList = value;
@@ -79,7 +81,7 @@ export default {
       if (state.yourRecommendationsList.length > 0) {
         const lastData =
           state.yourRecommendationsList[
-          state.yourRecommendationsList.length - 1
+            state.yourRecommendationsList.length - 1
           ];
         // TODO: How will this work if there are multiple recommendations being added?
         // Is it a better idea to emit seperate messages for each add being done?
@@ -134,29 +136,28 @@ export default {
         TOKEN = localStorage.getItem("token");
       }
       try {
-
         if (!this.oneQueryIsRunningGate) {
           this.oneQueryIsRunningGate = true;
           let countRex = await Recommendation.query().count();
 
-          console.log(" count rex ====", countRex)
+          console.log(" count rex ====", countRex);
           if (countRex == 0) {
             await Recommendation.api().post(
-              RECOMMENDATION_API_URL + "/getMyRecommendations", {
-              headers: {
-                Authorization: "Bearer " + TOKEN,
-                "Content-Type": "application/json;charset=utf-8",
-              },
-              patientId: patientId,
-              userId: userId,
-              date: date,
-            }
+              RECOMMENDATION_API_URL + "/getMyRecommendations",
+              {
+                headers: {
+                  Authorization: "Bearer " + TOKEN,
+                  "Content-Type": "application/json;charset=utf-8",
+                },
+                patientId: patientId,
+                userId: userId,
+                date: date,
+              }
             );
             console.log("Inserting rex", Recommendation.query().count());
           }
           this.oneQueryIsRunningGate = false;
         }
-
       } catch (ex) {
         notify({
           title: "Error",
@@ -218,11 +219,11 @@ export default {
       });
       if (response.ok) {
         const json = await response.json();
-        const timeOfStateToShow = rootState.multiStateDisplayArea.timeOfStateToShow.split(
+        const timeOfStateSelectedInHeader = rootState.multiStateDisplayArea.timeOfStateSelectedInHeader.split(
           " "
         )[0];
         const params = {
-          timeOfStateToShow: timeOfStateToShow,
+          timeOfStateSelectedInHeader: timeOfStateSelectedInHeader,
           data: json,
         };
         commit("setMultiStateYourRecommendationList", params);
