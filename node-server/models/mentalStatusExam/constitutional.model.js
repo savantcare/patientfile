@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       defaultValue: ''
     },
-    measurementDate: {
+    timeOfEvaluation: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     }

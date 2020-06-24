@@ -9,8 +9,8 @@
     <el-input type="textarea" placeholder="Others (optional)" v-model="others"></el-input>
 
     <div style="margin-top: 6px;">
-      <label style="margin-right: 6px">Measurement date:</label>
-      <el-date-picker v-model="date" type="date" placeholder="Pick a day"></el-date-picker>
+      <label style="margin-right: 6px">Time of evaluation:</label>
+      <el-date-picker v-model="date" type="datetime" placeholder="Pick a day"></el-date-picker>
     </div>
 
     <el-button
