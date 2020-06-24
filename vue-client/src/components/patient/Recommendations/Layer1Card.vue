@@ -218,7 +218,7 @@ export default {
         uuid: "sxsxz",
         rowStart: 9,
         rowEnd: 10,
-        recommendation: "excercise for 10 mins"
+        recommendation: "excercise for 5 mins"
       },
       {
         uuid: "sdfsdf",

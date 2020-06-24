@@ -39,7 +39,7 @@ export default {
   },
   mounted() {
     this.histories = Recommendation.query()
-      .where("rowEnd", value => value > 10)
+      .where("uuid", "sxsxz")
       .get();
 
     console.log(this.histories);
