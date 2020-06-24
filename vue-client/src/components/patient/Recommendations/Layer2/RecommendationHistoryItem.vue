@@ -12,7 +12,7 @@
             :key="`history-${index}`"
             type="primary"
             size="large"
-            :timestamp="history.info"
+            :timestamp="new Date(history.ROW_START).toLocaleString()"
           >{{history.recommendationDescription}}</el-timeline-item>
         </el-timeline>
         <el-pagination
