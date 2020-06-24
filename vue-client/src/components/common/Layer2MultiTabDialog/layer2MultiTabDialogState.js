@@ -520,7 +520,7 @@ export default {
       state.tabList = [tab];
       state.visibility = true;
       state.tabValue = tab.name;
-    },//SuicideAssessment
+    }, //SuicideAssessment
     showChangePROSSuicideAssessmentTabInLayer2(state) {
       const tab = {
         label: "Change Suicide Assessment (PROS)",
@@ -558,6 +558,7 @@ export default {
       state.recommendationTabType = CHANGE_RECOMMENDATION;
       console.log(CHANGE_RECOMMENDATION);
       state.recommendationData = data;
+      //console.log("===3" + JSON.stringify(data, null, 4));
       state.tabValue = tab.name;
     },
     showAddDiagnosisTabInLayer2(state) {
@@ -688,54 +689,59 @@ export default {
       const { type, label } = params;
       const tab = {
         label: `Change ${label}`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/UpdateBMElement.vue").default,
-        name: "tab-change-bm-element"
-      }
-      state.tabList = [tab]
-      state.visibility = true
-      state.bmElementType = type
-      state.tabValue = tab.name
+        value: require("@/components/patient/BodyMeasurements/Layer2/UpdateBMElement.vue")
+          .default,
+        name: "tab-change-bm-element",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.bmElementType = type;
+      state.tabValue = tab.name;
     },
     showGraphBMElementTabInLayer2(state, params) {
-      state.bmElement = params
+      state.bmElement = params;
       const tab = {
         label: `Graph of ${params.label}`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMElement.vue").default,
-        name: "tab-graph-bm-element"
-      }
-      state.tabList = [tab]
-      state.visibility = true
-      state.tabValue = tab.name
+        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMElement.vue")
+          .default,
+        name: "tab-graph-bm-element",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
     },
     showGraphAllBMTabInLayer2(state) {
       const tab = {
         label: `Body Measurement Graph`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMAll.vue").default,
-        name: "tab-graph-bm-all"
-      }
-      state.tabList = [tab]
-      state.visibility = true
-      state.tabValue = tab.name
+        value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMAll.vue")
+          .default,
+        name: "tab-graph-bm-all",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
     },
     showUpdateAllBMElementTabInLayer2(state) {
       const tab = {
         label: `Change Body Measurement`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/ChangeAllBMElement.vue").default,
-        name: "tab-change-all-bm-element"
-      }
-      state.tabList = [tab]
-      state.visibility = true
-      state.tabValue = tab.name
+        value: require("@/components/patient/BodyMeasurements/Layer2/ChangeAllBMElement.vue")
+          .default,
+        name: "tab-change-all-bm-element",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
     },
     showChangeMSETabInLayer2(state) {
       const tab = {
-        label: 'Change Mental Status Exam',
-        value: require("@/components/patient/MentalStatusExam/Layer2/ChangeMSE.vue").default,
-        name: "tab-change-mental-status-exam"
-      }
-      state.tabList = [tab]
-      state.visibility = true
-      state.tabValue = tab.name
-    }
-  }
-}
+        label: "Change Mental Status Exam",
+        value: require("@/components/patient/MentalStatusExam/Layer2/ChangeMSE.vue")
+          .default,
+        name: "tab-change-mental-status-exam",
+      };
+      state.tabList = [tab];
+      state.visibility = true;
+      state.tabValue = tab.name;
+    },
+  },
+};

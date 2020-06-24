@@ -9,9 +9,10 @@ export default class Recommendations extends Model {
   static fields() {
     return {
       uuid: this.attr(null),
-      rowStart: this.attr(""),
-      rowEnd: this.attr(""),
       recommendation: this.attr({}),
+      // Why store time as a numbner? vuex-orm does not understand dates. Hence need to store as number. The data types that vuex-orm understands are given at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
+      rowStart: this.number(0),
+      rowEnd: this.number(0),
     };
   }
 }

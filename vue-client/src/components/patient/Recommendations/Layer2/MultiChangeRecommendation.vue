@@ -9,7 +9,7 @@
                 <el-input
                   :span="8"
                   type="textarea"
-                  v-model="rec.recommendationDescription"
+                  v-model="rec.recommendation"
                   :autosize="{minRows:4}"
                   autofocus
                   ref="input_box"
@@ -31,6 +31,7 @@
 <script>
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
 // import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const/others.js";
+import Recommendation from "../models/recommendation";
 export default {
   components: {
     RecommendationHistoryItem
@@ -60,7 +61,9 @@ export default {
   },
   computed: {
     recList() {
-      return this.$store.state.recommendation.yourRecommendationsList;
+      return Recommendation.query()
+        .where("rowEnd", value => value > 10)
+        .get();
     },
     carouselList() {
       let result = [];
