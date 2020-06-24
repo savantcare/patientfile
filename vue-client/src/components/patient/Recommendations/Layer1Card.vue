@@ -227,9 +227,14 @@ export default {
         recommendation: "walk for 10 mins"
       }
     ];
+    async function hello() {
+      await Recommendation.api().get(RECOMMENDATION_API_URL + "/api/users");
+    }
 
     console.log("===1" + JSON.stringify(rexListFromApiCall, null, 4));
     if (Recommendation.query().count() == 0) {
+      hello();
+
       Recommendation.insert({
         data: rexListFromApiCall
       });
