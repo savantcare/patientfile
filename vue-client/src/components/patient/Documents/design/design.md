@@ -20,8 +20,7 @@
  Lab Results,                                                                                                         
  Lab Order,                                                                                                           
  Disability Paperwork,                                                                                                
- Legal Paperwork (Subpoena etc),
-                                                                                     
+ Legal Paperwork (Subpoena etc),                                                                                      
  Official Letters,                                                                                                    
  ROI (External & Internal),                                                                                           
  Medical Records,                                                                                                     
