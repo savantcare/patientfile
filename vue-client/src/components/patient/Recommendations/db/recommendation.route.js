@@ -49,6 +49,23 @@ module.exports = (io) => {
     }
   })
 
+  router.get('/getAllRecommendationsWithHistory', async (req, res) => {
+    try {
+      const { patientId, userId } = req.query
+      const queryResult = await Recommendation.findAll({
+        where: {
+          uuidOfRecommendationMadeFor: patientId
+        }
+      })
+      res.send(queryResult)
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while fetching the Recommenation"
+      })
+    }
+  })
+
+
   router.post('/getMyRecommendations', async (req, res) => {
     try {
       const { patientId, userId } = req.body

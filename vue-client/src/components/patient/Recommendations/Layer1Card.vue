@@ -76,7 +76,7 @@ export default {
       ],
       patientId: this.$route.query.patient_id,
       userId: this.$store.state.userId,
-      selectedColumns: ["recommendation"] // The user can select there own columns. The user selected columns are saved in the local storage.
+      selectedColumns: ["recommendationDescription"] // The user can select there own columns. The user selected columns are saved in the local storage.
     };
   },
   methods: {
@@ -198,62 +198,29 @@ export default {
     }
   },
   mounted() {
-    /* Get data for vuex-orm  
-    this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
+    /* Get data for vuex-orm  */
+    this.$store.dispatch("dbGetMyRecommendationsInSM", {
       date: this.timeOfStateToShow,
       patientId: this.patientId,
       userId: this.userId
     });
-    */
 
     // Vuex-ORM model
-    let rexListFromApiCall = [
-      {
-        uuid: "sxsxz",
-        rowStart: 10,
-        rowEnd: 2039,
-        recommendation: "excercise for 10 mins"
-      },
-      {
-        uuid: "sxsxz",
-        rowStart: 9,
-        rowEnd: 10,
-        recommendation: "excercise for 5 mins"
-      },
-      {
-        uuid: "sdfsdf",
-        rowStart: 7,
-        rowEnd: 8,
-        recommendation: "walk for 10 mins"
-      }
-    ];
-    async function hello() {
-      await Recommendation.api().get(RECOMMENDATION_API_URL + "/api/users");
-    }
-
-    console.log("===1" + JSON.stringify(rexListFromApiCall, null, 4));
-    if (Recommendation.query().count() == 0) {
-      hello();
-
-      Recommendation.insert({
-        data: rexListFromApiCall
-      });
-    }
   },
 
   computed: {
     tabData() {
       //      const rexEvalList = Recommendation.all();
       const rexEvalList = Recommendation.query()
-        .where("rowEnd", value => value > 10)
+        //.where("rowEnd", value => value > 10)
         .get();
-      console.log("===3" + JSON.stringify(rexEvalList, null, 4));
+      //console.log("===3" + JSON.stringify(rexEvalList, null, 4));
 
       return {
         label: "Yours",
         tableData: rexEvalList,
         rowActions: ["C", "D"],
-        selectedColumn: ["recommendation"]
+        selectedColumn: ["recommendationDescription"]
       };
     },
 

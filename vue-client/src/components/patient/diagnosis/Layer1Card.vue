@@ -30,6 +30,7 @@
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import Diagnosis from "./models/Diagnosis";
+//import Assessment from "./models/Assessment";
 export default {
   components: {
     CardHeader,
@@ -162,16 +163,16 @@ export default {
         rowStart: "15th Jan at 10AM",
         rowEnd: "2039",
         diagnosis: { name: "ADHD" },
-        assessment: [
+        assessments: [
           {
-            text: "Doing bad",
-            ROW_START: "14th Jan at 9AM",
-            ROW_END: "15th Jan at 10AM"
+            slNo: 1,
+            uuid: "aawsse",
+            text: "Doing bad"
           },
           {
-            text: "Doing good",
-            ROW_START: "17th Jan at 11AM",
-            ROW_END: "2039"
+            slNo: 2,
+            uuid: "aawsse",
+            text: "Doing good"
           }
         ]
       },
@@ -180,16 +181,16 @@ export default {
         rowStart: "5th Jan at 10AM",
         rowEnd: "6th Jan at 10AM",
         diagnosis: { name: "Depression" },
-        assessment: [
+        assessments: [
           {
-            text: "Doing bad",
-            ROW_START: "5th Jan at 10PM",
-            ROW_END: "6th Jan at 10AM"
+            slNo: 3,
+            uuid: "afrers",
+            text: "Doing nice"
           },
           {
-            text: "Doing good",
-            ROW_START: "5th Jan at 11AM",
-            ROW_END: "5th Jan at 10PM"
+            slNo: 4,
+            uuid: "afrers",
+            text: "Doing ok"
           }
         ]
       }
@@ -216,22 +217,32 @@ export default {
        */
 
       //const dxEvalList = this.$store.diagnosisEvalAtEachRowEnd;
-      const dxEvalList = Diagnosis.all();
+      const dxEvalList = Diagnosis.query()
+        .with("assessment")
+        .get();
 
+      //const assmntList = Assessment.all();
+
+      /*const dxWithAssessmentList = Diagnosis.query()
+        .with("assessment")
+        .get();
       const dxConditionalData = Diagnosis.query()
         .where("uuid", "sxsxz")
-        .where("rowEnd", "2038")
-        .get();
+        .where("rowEnd", "2039")
+        .get();*/
       console.log("######", dxEvalList);
-      console.log("&&&&&&&", dxConditionalData);
-      let key = null;
+      //console.log("&&&&&&&", dxConditionalData);
+      //console.log(dxWithAssessmentList);
+      /*let key = null;
       for (key in Object.keys(dxEvalList)) {
         let currentObject = dxEvalList[key];
         console.log("****" + Object.keys(currentObject));
-      }
+      }*/
+
+      //console.log("%%%%%%%%", this.$store.state);
 
       const dxList = this.$store.state.diagnosis.diagnosisList;
-      console.log(dxList);
+      //console.log(dxList);
       return {
         label: "Yours",
         tableData: dxList,

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexORM from "@vuex-orm/core";
-import User from "./models/User";
+import User from "./models/Diagnosis";
 
 Vue.use(Vuex);
 

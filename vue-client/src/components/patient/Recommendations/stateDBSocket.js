@@ -1,4 +1,5 @@
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
+import Recommendation from "./models/recommendation";
 let TOKEN = localStorage.getItem("token");
 export default {
   state: {
@@ -75,7 +76,7 @@ export default {
       if (state.yourRecommendationsList.length > 0) {
         const lastData =
           state.yourRecommendationsList[
-            state.yourRecommendationsList.length - 1
+          state.yourRecommendationsList.length - 1
           ];
         // TODO: How will this work if there are multiple recommendations being added?
         // Is it a better idea to emit seperate messages for each add being done?
@@ -124,43 +125,28 @@ export default {
     // Category 1/2: Functions to get data
     async dbGetMyRecommendationsInSM({ commit }, json) {
       const { patientId, notify, userId, date } = json;
+
+      console.log(commit);
       if (TOKEN == null) {
         TOKEN = localStorage.getItem("token");
       }
       try {
-        const response = await fetch(
-          `${RECOMMENDATION_API_URL}/getMyRecommendations`,
-          {
+
+        if (Recommendation.query().count() == 0) {
+          let rexListFromApiCall = await Recommendation.api().post(
+            RECOMMENDATION_API_URL + "/getMyRecommendations", {
             headers: {
               Authorization: "Bearer " + TOKEN,
               "Content-Type": "application/json;charset=utf-8",
             },
-            method: "POST",
-            body: JSON.stringify({
-              patientId: patientId,
-              userId: userId,
-              date: date,
-            }),
+            patientId: patientId,
+            userId: userId,
+            date: date,
           }
-        );
-        if (response.ok) {
-          let json = await response.json();
-          console.log(json);
-          commit("setRecommendationList", json);
-        } else {
-          if (response.status == "401") {
-            notify({
-              title: "Error",
-              message: "Token is expired.",
-            });
-            localStorage.removeItem("token");
-            window.location = "/";
-          } else {
-            notify({
-              title: "Error",
-              message: "Failed to get my recommendation data",
-            });
-          }
+          );
+          Recommendation.insert({
+            data: rexListFromApiCall
+          });
         }
       } catch (ex) {
         notify({
