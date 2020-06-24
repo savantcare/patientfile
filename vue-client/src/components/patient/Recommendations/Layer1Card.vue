@@ -198,6 +198,14 @@ export default {
     }
   },
   mounted() {
+    /* Get data for vuex-orm  
+    this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
+      date: this.timeOfStateToShow,
+      patientId: this.patientId,
+      userId: this.userId
+    });
+    */
+
     // Vuex-ORM model
     let rexListFromApiCall = [
       {
@@ -210,7 +218,7 @@ export default {
         uuid: "sxsxz",
         rowStart: 9,
         rowEnd: 10,
-        recommendation: "excercise for 10 mins"
+        recommendation: "excercise for 5 mins"
       },
       {
         uuid: "sdfsdf",
@@ -219,17 +227,18 @@ export default {
         recommendation: "walk for 10 mins"
       }
     ];
+    async function hello() {
+      await Recommendation.api().get(RECOMMENDATION_API_URL + "/api/users");
+    }
 
     console.log("===1" + JSON.stringify(rexListFromApiCall, null, 4));
-    Recommendation.insert({
-      data: rexListFromApiCall
-    });
+    if (Recommendation.query().count() == 0) {
+      hello();
 
-    this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", {
-      date: this.timeOfStateToShow,
-      patientId: this.patientId,
-      userId: this.userId
-    });
+      Recommendation.insert({
+        data: rexListFromApiCall
+      });
+    }
   },
 
   computed: {

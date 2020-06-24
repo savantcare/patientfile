@@ -10,6 +10,11 @@ import createPersistedState from "vuex-persistedstate";
 import createCache from "vuex-cache";
 import VuexORM from "@vuex-orm/core";
 
+// Ref: https://vuex-orm.github.io/plugin-axios/guide/setup.html
+import axios from "axios";
+import VuexORMAxios from "@vuex-orm/plugin-axios";
+VuexORM.use(VuexORMAxios, { axios });
+
 Vue.use(Vuex);
 
 // modules

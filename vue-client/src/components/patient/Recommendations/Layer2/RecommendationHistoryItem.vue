@@ -13,7 +13,7 @@
             type="primary"
             size="large"
             :timestamp="history.info"
-          >{{history.content}}</el-timeline-item>
+          >{{history.recommendation}}</el-timeline-item>
         </el-timeline>
         <el-pagination
           small
@@ -28,19 +28,22 @@
 </template>
 
 <script>
+import Recommendation from "../models/recommendation";
+
 export default {
   props: ["rec"],
   data() {
     return {
-      histories: [
-        {
-          content: "sxsxz",
-          index: "1"
-        }
-      ]
+      histories: []
     };
   },
-  mounted() {},
+  mounted() {
+    this.histories = Recommendation.query()
+      .where("uuid", "sxsxz")
+      .get();
+
+    console.log(this.histories);
+  },
   methods: {},
   watch: {
     rec() {
