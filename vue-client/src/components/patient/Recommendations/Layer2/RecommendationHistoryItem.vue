@@ -13,7 +13,7 @@
             type="primary"
             size="large"
             :timestamp="history.info"
-          >{{history.recommendation}}</el-timeline-item>
+          >{{history.recommendationDescription}}</el-timeline-item>
         </el-timeline>
         <el-pagination
           small
@@ -39,7 +39,7 @@ export default {
   },
   mounted() {
     this.histories = Recommendation.query()
-      .where("uuid", "sxsxz")
+      .where("uuid", this.rec.uuid)
       .get();
 
     console.log(this.histories);
