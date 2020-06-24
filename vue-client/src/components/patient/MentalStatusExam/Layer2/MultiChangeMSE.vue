@@ -125,9 +125,9 @@ export default {
 </script>
 
 <style>
-/* .box-card {
+.box-card {
   width: 500px;
   min-width: 500px;
   min-height: 300px;
-} */
+}
 </style>
