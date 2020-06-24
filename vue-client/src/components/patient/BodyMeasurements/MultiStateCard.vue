@@ -81,7 +81,7 @@ export default {
     handleClickOnMInCardHeader() {
       this.$store.commit(
         "bodyMeasurement/setSelectedDate",
-        this.timeOfStateToShow
+        this.timeOfStateSelectedInHeader
       );
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
     },
@@ -166,21 +166,22 @@ export default {
         }
       ];
     },
-    timeOfStateToShow() {
-      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
+    timeOfStateSelectedInHeader() {
+      return this.$store.state.multiStateDisplayArea
+        .timeOfStateSelectedInHeader;
     }
   },
   mounted() {
     this.$store.commit(
       "bodyMeasurement/setSelectedDate",
-      this.timeOfStateToShow
+      this.timeOfStateSelectedInHeader
     );
   },
   watch: {
-    timeOfStateToShow() {
+    timeOfStateSelectedInHeader() {
       this.$store.commit(
         "bodyMeasurement/setSelectedDate",
-        this.timeOfStateToShow
+        this.timeOfStateSelectedInHeader
       );
     }
   }

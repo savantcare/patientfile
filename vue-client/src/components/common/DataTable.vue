@@ -226,9 +226,11 @@ export default {
         myList = this.$store.state.recommendation.yourRecommendationsList;
         othersList = this.$store.state.recommendation.othersList;
       } else {
-        const timeOfStateToShow = this.timeOfStateToShow.split(" ")[0];
+        const timeOfStateSelectedInHeader = this.timeOfStateSelectedInHeader.split(
+          " "
+        )[0];
         myList = this.$store.state.recommendation
-          .multiStateYourRecommendationsList[timeOfStateToShow];
+          .multiStateYourRecommendationsList[timeOfStateSelectedInHeader];
         othersList = this.$store.state.recommendation
           .multiStateOtherRecommendationsList;
       }
@@ -256,8 +258,9 @@ export default {
       }
       return true;
     },
-    timeOfStateToShow() {
-      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
+    timeOfStateSelectedInHeader() {
+      return this.$store.state.multiStateDisplayArea
+        .timeOfStateSelectedInHeader;
     }
   },
   watch: {

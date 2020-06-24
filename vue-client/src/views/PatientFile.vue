@@ -16,13 +16,13 @@ Core 1/6. Page design
 |                                         |                              |  This var contains 1 of: 
 |This has list of compomponents.          |This has list of Components   |  multiStateDisplayArea  
 |Data of each component depends on        |                              |            OR
-|timeOfStateToShow ( = 99 )               |Data is from currentTime      |  currentStateDisplayArea
-|timeOfStateToShow has 2 possibilities    |                              |
+|timeOfStateSelectedInHeader ( = 99 )               |Data is from currentTime      |  currentStateDisplayArea
+|timeOfStateSelectedInHeader has 2 possibilities    |                              |
 |                                         |On right side I do not care   |
-|1. timeOfStateToShow=2038-01-19 03:14:07 |about timeOfStateToShow       |
-|2. timeOfStateToShow=value               |                              |       
+|1. timeOfStateSelectedInHeader=2038-01-19 03:14:07 |about timeOfStateSelectedInHeader       |
+|2. timeOfStateSelectedInHeader=value               |                              |       
 |                                         |                              |
-|If timeOfStateToShow=2038-01-19 03:14:07 |                              |
+|If timeOfStateSelectedInHeader=2038-01-19 03:14:07 |                              |
 | then data of component is from          |                              |
 | current time.                           |                              |
 |                                         +------------------------------+
@@ -257,10 +257,13 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    // Initialize the TimeOfStateToShow. 2038-01-19 03:14:07.999999 is default value stored by MariaDB
-    let timeOfStateToShow = "2038-01-19 03:14:07.999999";
-    console.log(timeOfStateToShow);
-    this.$store.commit("setTimeOfStateToShow", timeOfStateToShow);
+    // Initialize the timeOfStateSelectedInHeader. 2038-01-19 03:14:07.999999 is default value stored by MariaDB
+    let timeOfStateSelectedInHeader = "2038-01-19 03:14:07.999999";
+    console.log(timeOfStateSelectedInHeader);
+    this.$store.commit(
+      "settimeOfStateSelectedInHeader",
+      timeOfStateSelectedInHeader
+    );
   },
   methods: {
     onDrag(size) {

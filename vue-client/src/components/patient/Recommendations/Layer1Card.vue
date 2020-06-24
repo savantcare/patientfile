@@ -12,7 +12,7 @@
   <el-card
     class="box-card"
     :id="`recommendation-${typeOfStateDisplayArea}`"
-    :style="typeOfStateDisplayAreaSpecificStyleToApply"
+    :style="multiStateDisplayAreaStyleToApplyForPastTime"
   >
     <div slot="header" class="clearfix">
       <CardHeader
@@ -26,7 +26,7 @@
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
-        :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
+        :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
       />
     </div>
     <DataTableWithoutTab
@@ -41,13 +41,16 @@
       @updateTableList="updateTableList"
       :selectedColumns="selectedColumns"
       :columns="columns"
-      :typeOfStateDisplayAreaSpecificStyleToApply="typeOfStateDisplayAreaSpecificStyleToApply"
+      :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
 </template>
 
 <script>
+// 1. remove selected column feature
+// 2. Need to send a better name for column to display
+
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
@@ -200,38 +203,39 @@ export default {
   mounted() {
     /* Get data for vuex-orm  */
     this.$store.dispatch("dbGetMyRecommendationsInSM", {
-      date: this.timeOfStateToShow,
+      date: this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader,
       patientId: this.patientId,
       userId: this.userId
     });
-
-    // Vuex-ORM model
   },
 
   computed: {
     tabData() {
-      //      const rexEvalList = Recommendation.all();
-      //let dateTimeNow = Math.floor(Date.now() / 1000);
-
-      let selectedTimestampInSlider = Math.round(
-        new Date(this.timeOfStateToShow).getTime() / 1000
-      );
-
-      if (this.timeOfStateToShow === "2038-01-19 03:14:07.999999") {
-        selectedTimestampInSlider = Math.round(new Date().getTime() / 1000);
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+          "2038-01-19 03:14:07.999999" ||
+        this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
+      ) {
         console.log("recasting to current time");
-      }
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
 
       const rexEvalList = Recommendation.query()
-        .where("ROW_START", value => value < selectedTimestampInSlider)
-        .where("ROW_END", value => value > selectedTimestampInSlider)
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
         .orderBy("uuid")
         .orderBy("ROW_START", "desc")
         .get();
 
       console.log(
         "length after order by === ",
-        selectedTimestampInSlider,
+        timeStampOfStateInsideCt,
         rexEvalList.length
       );
       return {
@@ -242,41 +246,22 @@ export default {
       };
     },
 
-    typeOfStateDisplayAreaSpecificStyleToApply: {
+    multiStateDisplayAreaStyleToApplyForPastTime: {
       get() {
-        const today = new Date().toISOString().split("T")[0];
-        const isToday = today == this.timeOfStateToShow;
-        // let isToday = false;
-        // if (
-        //   today == this.timeOfStateToShow
-        // ) {
-        //   isToday = true;
-        // }
-        // if (
-        //   timeOfStateDate.getFullYear() == today.getFullYear() &&
-        //   timeOfStateDate.getMonth() == today.getMonth() &&
-        //   timeOfStateDate.getDate() == today.getDate()
-        // ) {
-        //   isToday = true;
-        // }
+        let val = null;
 
-        let val = "";
         if (
-          this.typeOfStateDisplayArea == "multiStateDisplayArea" &&
-          !isToday
+          this.$store.state.multiStateDisplayArea
+            .timeOfStateSelectedInHeader === "2038-01-19 03:14:07.999999" ||
+          this.typeOfStateDisplayArea == "CurrentStateDisplayArea"
         ) {
+          val = null;
+        } else
           val =
             "background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);";
-        }
 
         return val;
-      },
-      set(newValue) {
-        this.doSomethingWith(newValue);
       }
-    },
-    timeOfStateToShow() {
-      return this.$store.state.multiStateDisplayArea.timeOfStateToShow;
     }
   }
 };
