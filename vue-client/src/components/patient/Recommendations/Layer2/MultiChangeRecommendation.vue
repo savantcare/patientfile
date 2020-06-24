@@ -9,7 +9,7 @@
                 <el-input
                   :span="8"
                   type="textarea"
-                  v-model="rec.recommendation"
+                  v-model="rec.recommendationDescription"
                   :autosize="{minRows:4}"
                   autofocus
                   ref="input_box"
@@ -61,9 +61,13 @@ export default {
   },
   computed: {
     recList() {
-      return Recommendation.query()
-        .where("rowEnd", value => value > 10)
+      let selectedTimestampInSlider = Math.round(new Date().getTime() / 1000);
+
+      let rexResultList = Recommendation.query()
+        .where("ROW_END", value => value > selectedTimestampInSlider)
         .get();
+      console.log("rex return ===", rexResultList);
+      return rexResultList;
     },
     carouselList() {
       let result = [];

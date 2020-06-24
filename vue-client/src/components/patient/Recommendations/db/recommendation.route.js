@@ -71,8 +71,8 @@ module.exports = (io) => {
       const { patientId, userId } = req.body
       // all recs that have been discontinued will not show up in the select * query
       const date = new Date(req.body.date)
-      const queryResult = await Recommendation.sequelize.query("SELECT * FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME AS OF TIMESTAMP :date WHERE uuidOfRecommendationMadeFor=:patientId AND recordChangedByUUID=:userId ORDER BY priority asc", {
-        replacements: { date: date, patientId: patientId, userId: userId },
+      const queryResult = await Recommendation.sequelize.query("SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME ALL WHERE uuidOfRecommendationMadeFor=:patientId ORDER BY priority asc", {
+        replacements: { patientId: patientId },
         type: QueryTypes.SELECT
       })
       res.send(queryResult)

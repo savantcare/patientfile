@@ -211,9 +211,24 @@ export default {
   computed: {
     tabData() {
       //      const rexEvalList = Recommendation.all();
+      //let dateTimeNow = Math.floor(Date.now() / 1000);
+      let selectedTimestampInSlider = Math.round(
+        new Date(this.timeOfStateToShow).getTime() / 1000
+      );
+
+      /*console.log(
+        "time of state to show == ",
+        this.timeOfStateToShow,
+        dateNowInSlider
+      );*/
       const rexEvalList = Recommendation.query()
-        //.where("rowEnd", value => value > 10)
+        .where("ROW_END", value => value > selectedTimestampInSlider)
         .get();
+
+      const rexEvalCount = Recommendation.query()
+        .where("ROW_END", value => value > selectedTimestampInSlider)
+        .count();
+      console.log("total rx count ", rexEvalCount, selectedTimestampInSlider);
       //console.log("===3" + JSON.stringify(rexEvalList, null, 4));
 
       return {

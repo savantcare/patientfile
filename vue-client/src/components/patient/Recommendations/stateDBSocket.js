@@ -131,9 +131,10 @@ export default {
         TOKEN = localStorage.getItem("token");
       }
       try {
-
-        if (Recommendation.query().count() == 0) {
-          let rexListFromApiCall = await Recommendation.api().post(
+        let countRex = await Recommendation.query().count();
+        console.log(" count rex ====", countRex)
+        if (countRex == 0) {
+          await Recommendation.api().post(
             RECOMMENDATION_API_URL + "/getMyRecommendations", {
             headers: {
               Authorization: "Bearer " + TOKEN,
@@ -144,9 +145,7 @@ export default {
             date: date,
           }
           );
-          Recommendation.insert({
-            data: rexListFromApiCall
-          });
+          console.log("Inserting rex", Recommendation.query().count());
         }
       } catch (ex) {
         notify({

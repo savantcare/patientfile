@@ -24,6 +24,8 @@ export default class Recommendations extends Model {
       recordChangedFromIPAddress: this.attr(null),
       uuid: this.attr(null),
       uuidOfRecommendationMadeFor: this.attr(null),
+      ROW_START: this.number(0),
+      ROW_END: this.number(0),
 
 
     };
