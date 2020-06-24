@@ -1,45 +1,27 @@
 <template>
-  <el-card>
-    <el-checkbox-group v-model="checkList">
-      <el-checkbox v-for="(status, index) in statusList" :key="`status-${index}`" :label="status"></el-checkbox>
-    </el-checkbox-group>
-
-    <el-input type="textarea" placeholder="Others (optional)" v-model="others"></el-input>
-
-    <div style="margin-top: 6px;">
-      <label style="margin-right: 6px">Measurement date:</label>
-      <el-date-picker v-model="date" type="date" placeholder="Pick a day"></el-date-picker>
-    </div>
-
-    <el-button
-      type="primary"
-      style="margin-top: 12px"
-      @click="saveChanges"
-      :disabled="validateSaveButton"
-    >Save</el-button>
-  </el-card>
+  <base-component
+    :statusList="statusList"
+    :showNormalButton="false"
+    @saveChanges="saveChanges"
+    ref="base_component"
+  ></base-component>
 </template>
 
 <script>
+import BaseComponent from "./_BaseMSEChange";
 export default {
+  components: {
+    BaseComponent
+  },
   data() {
     return {
-      statusList: ["Vitals signs stable"],
-      checkList: [],
-      others: "",
-      date: new Date()
+      statusList: ["Vitals signs stable"]
     };
   },
-  computed: {
-    validateSaveButton() {
-      if (this.checkList.length > 0 || this.others.length > 0) {
-        return false;
-      }
-      return true;
-    }
-  },
   methods: {
-    async saveChanges() {
+    async saveChanges(params) {
+      const { checkList, others, date } = params;
+
       let ipAddress = "";
       try {
         const ipResponse = await fetch("https://api.ipify.org?format=json");
@@ -53,14 +35,12 @@ export default {
         patientUUID: this.$route.query.patient_id,
         recordChangedByUUID: this.$store.state.userId,
         recordChangedFromIPAddress: ipAddress,
-        other: this.others,
-        measurementDate: new Date(this.date).toISOString().split("T")[0]
+        other: others,
+        measurementDate: new Date(date).toISOString().split("T")[0]
       };
       for (const status of this.statusList) {
         const value =
-          this.checkList.filter(item => item == status).length > 0
-            ? "yes"
-            : "no";
+          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
         if (status == "Vitals signs stable") {
           request["vitals-signs-stable"] = value;
         }
@@ -71,9 +51,7 @@ export default {
         notify: this.$notify
       });
 
-      this.checkList = [];
-      this.others = "";
-      this.date = new Date();
+      this.$refs.base_component.resetData();
     }
   }
 };
