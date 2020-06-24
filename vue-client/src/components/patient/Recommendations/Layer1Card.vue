@@ -229,7 +229,7 @@ export default {
         .orderBy("ROW_START", "desc")
         .get();
 
-      console.log(rexEvalList, rexEvalList.length);
+      console.log("length after order by === ", rexEvalList.length);
       return {
         label: "Yours",
         tableData: rexEvalList,
@@ -279,6 +279,28 @@ export default {
     timeOfStateToShow() {
       const timeOfStateToShow = this.timeOfStateToShow.split(" ")[0];
       console.log(timeOfStateToShow);
+
+      let selectedTimestampInSlider = Math.round(
+        new Date(this.timeOfStateToShow).getTime() / 1000
+      );
+      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
+      //1592837519.592857 "01d55fe2-ff61-4411-b6d4-386fbb373915" 2147483647.999999
+      //1592837534.474419 "05cc862b-9fb3-4e0e-9918-926944fbf5f8"
+      /*console.log(
+        "time of state to show == ",
+        this.timeOfStateToShow,
+        dateNowInSlider
+      );*/
+      const rexEvalList = Recommendation.query()
+        .where("ROW_END", value => value > selectedTimestampInSlider)
+        .orderBy("uuid")
+        .orderBy("ROW_START", "desc")
+        .get();
+
+      console.log("length after order by === ", rexEvalList.length);
+      //this.tabData();
+
+      /*
       if (
         this.$store.state.recommendation.multiStateYourRecommendationsList[
           timeOfStateToShow
@@ -292,7 +314,8 @@ export default {
 
         this.$store.dispatch("dbGetMultiStateMyRecommendationsInSM", params);
         this.$store.dispatch("dbGetMultiStateOtherRecommendationsInSM", params);
-      }
+        
+      }*/
     }
   }
 };
