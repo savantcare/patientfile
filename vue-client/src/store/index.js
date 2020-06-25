@@ -36,6 +36,8 @@ import bodyMeasurementModule from "../components/patient/BodyMeasurements/stateD
 import mentalStatusExamModule from "../components/patient/MentalStatusExam/stateDBSocket";
 
 // vuex-orm models.
+import Components from "../components/common/roleBasedAccess/vuex-orm-model/component"
+import UserRole from "../components/common/userRole/vuex-orm-model/userRole"
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
 import Assessment from "../components/patient/diagnosis/models/Assessment";
 import Recommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
@@ -44,6 +46,8 @@ import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
 
 const database = new VuexORM.Database();
+database.register(Components);
+database.register(UserRole);
 database.register(Diagnosis);
 database.register(Assessment);
 database.register(Recommendation);

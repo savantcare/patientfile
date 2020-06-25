@@ -266,10 +266,16 @@ export default {
     // store.cache.dispatch Dispatches an action if it's not cached and sets it in cache, otherwise it returns cached Promise.
     // Ref: https://www.npmjs.com/package/vuex-cache#storecachedispatch
     // TODO: The fn call is not getting cached.
-    this.$store.cache.dispatch("loadComponents", {
+
+    this.$store.cache.dispatch("loadComponentsInStateDisplayArea", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
+
+    /*this.$store.cache.dispatch("loadComponents", {
+      notify: this.$notify,
+      timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
+    });*/
 
     // Initialize the timeOfStateSelectedInHeader. 2038-01-19 03:14:07.999999 is default value stored by MariaDB
     let timeOfStateSelectedInHeader = "2038-01-19 03:14:07.999999";
