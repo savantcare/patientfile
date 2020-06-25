@@ -1,7 +1,7 @@
 import { Model } from "@vuex-orm/core";
 
-export default class Appearences extends Model {
-  static entity = "appearence";
+export default class Attitude extends Model {
+  static entity = "attitude";
 
   // List of all fields (schema) of the post model. `this.attr` is used
   // for the generic field type. The argument is the default value.

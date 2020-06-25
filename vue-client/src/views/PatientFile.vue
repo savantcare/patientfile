@@ -239,7 +239,7 @@ export default {
       This code needs to be refactored and made simpler. TODO: return list used to work earlier but it does not work now
     */
       //return list;
-      return this.$store.getters.currentStateDisplayAreaList;
+      return this.$store.getters.multiStateDisplayAreaCtList;
     }
   },
   beforeCreate() {},

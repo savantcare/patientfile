@@ -1,10 +1,9 @@
-// import Appearence from "./model/appearence"
 import Appearence from "./models/appearence"
+import Attitude from './models/attitude'
 
 const state = {
   selectedType: '',
 
-  attitudeList: [],
   cognitionList: [],
   constitutionalList: [],
   eyeContactList: [],
@@ -23,9 +22,6 @@ const state = {
 const mutations = {
   setSelectedType(state, value) {
     state.selectedType = value
-  },
-  setAttitudeList(state, value) {
-    state.attitudeList = value
   },
   setCognitionList(state, value) {
     state.cognitionList = value
@@ -152,18 +148,17 @@ const actions = {
       })
     }
   },
-  async getAttitude({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getAttitude`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setAttitudeList", json)
+  async getAttitude(_, params) {
+    const { patientId } = params
+    const countAttitude = await Attitude.query().count()
+    if (countAttitude == 0) {
+      await Attitude.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getAttitude`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateCognitionInSM(_, params) {

@@ -28,6 +28,7 @@ export default {
       let thinData = [];
       let disheveledData = [];
       let malodorousData = [];
+      console.log(appearences);
       for (const appearence of appearences) {
         let { timeOfEvaluation } = appearence;
         timeOfEvaluation = timeOfEvaluation.split("T")[0];
@@ -115,6 +116,8 @@ export default {
           data: malodorousData
         }
       );
+
+      console.log(series);
 
       return series;
     }

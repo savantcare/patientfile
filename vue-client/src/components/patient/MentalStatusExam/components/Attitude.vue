@@ -4,13 +4,22 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Attitude from "../models/attitude";
 export default {
   components: { Graph },
 
   computed: {
     series() {
       let series = [];
-      const attitudes = this.$store.state.mse.attitudeList;
+      // const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      // const attitudes = Attitude.query()
+      //   .where("ROW_START", value => value < currentUnixTimeStamp)
+      //   .where("ROW_END", value => value > currentUnixTimeStamp)
+      //   .orderBy("ROW_START", "desc")
+      //   .get();
+      const attitudes = Attitude.all();
+      console.log(attitudes);
+
       let pleasantData = [];
       let uncooperativeData = [];
       let hostileData = [];
@@ -19,33 +28,33 @@ export default {
       let apatheticData = [];
       let disorganizedData = [];
       for (const attitude of attitudes) {
-        const { createDate } = attitude;
+        const { timeOfEvaluation } = attitude;
         pleasantData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["pleasant-and-cooperative"] == "yes" ? 1 : 0
         });
         uncooperativeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["uncooperative"] == "yes" ? 1 : 0
         });
         hostileData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["hostile-or-defiant"] == "yes" ? 1 : 0
         });
         guardedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["guarded"] == "yes" ? 1 : 0
         });
         evasiveData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["evasive"] == "yes" ? 1 : 0
         });
         apatheticData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["apathetic"] == "yes" ? 1 : 0
         });
         disorganizedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: attitude["disorganized-behavior"] == "yes" ? 1 : 0
         });
       }
@@ -80,6 +89,7 @@ export default {
           data: disorganizedData
         }
       );
+      console.log(series);
       return series;
     }
   },

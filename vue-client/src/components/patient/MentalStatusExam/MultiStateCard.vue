@@ -37,6 +37,7 @@
 import CardHeader from "@/components/common/CardHeader";
 // import { mapGetters } from "vuex";
 import Appearence from "./models/appearence";
+import Attitude from "./models/attitude";
 export default {
   components: {
     CardHeader
@@ -78,7 +79,7 @@ export default {
     };
   },
   computed: {
-    tableData() {
+    appearence() {
       let timeStampOfStateInsideCt = null;
       if (
         this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
@@ -111,11 +112,50 @@ export default {
         appearenceString = "-";
       }
 
+      return appearenceString;
+    },
+    attitude() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const attitudeData = Attitude.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let attitudeString = "";
+      if (attitudeData) {
+        Object.keys(attitudeData).forEach(key => {
+          if (attitudeData[key] == "yes") {
+            attitudeString += key + ",";
+          }
+        });
+      }
+      if (attitudeString.length > 0) {
+        attitudeString = attitudeString.slice(0, -1);
+      } else {
+        attitudeString = "-";
+      }
+
+      return attitudeString;
+    },
+    tableData() {
+      console.log(this.attitude);
       return [
         {
           key: "appearence",
           label: "Appearence",
-          value: appearenceString
+          value: this.appearence
         },
         {
           label: "Mood/Affect",
@@ -123,7 +163,7 @@ export default {
         },
         {
           label: "Attitude",
-          value: "-"
+          value: this.attitude
         },
         {
           label: "Cognition",
