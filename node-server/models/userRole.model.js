@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const UserRole = sequelize.define("user_role", {
-    id: {
+    uuid: {
       type: Sequelize.STRING,
       primaryKey: true
     },
@@ -15,11 +15,13 @@ module.exports = (sequelize, Sequelize) => {
     },
     currentStateDisplayAreaComponentLoadSequence: {
       type: Sequelize.STRING
-    },
-    // Timestamps
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
-  });
+    }, 
+  },   
+    {
+      timestamps: false,
+      freezeTableName: true,
+    }
+  );
 
   UserRole.associate = function (models) {
     UserRole.hasMany(models.user, { as: 'users' })
