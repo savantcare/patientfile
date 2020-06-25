@@ -19,21 +19,22 @@ Vue.use(Vuex);
 
 // modules
 import recommendationStateModule from "../components/patient/Recommendations/stateDBSocket";
+import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import screeningStateModule from "../components/patient/Screening/stateDBSocket";
 import diagnosisStateModule from "../components/patient/diagnosis/stateDBSocket";
-//import diagnosisState from "../components/patient/diagnosis/stateDB";
-
-import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import goalStateModule from "../components/patient/goal/stateDBSocket";
-import settingStateModule from "./modules/settingState";
-import currentStateDisplayAreaModule from "./modules/currentStateDisplayArea";
-import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
-import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
 import socialHistoryStateModule from "../components/patient/social-history/stateDBSocket";
 import familyHistoryStateModule from "../components/patient/FamilyHistory/stateDBSocket";
-import componentModule from "./modules/component";
 import bodyMeasurementModule from "../components/patient/BodyMeasurements/stateDBSocket";
 import mentalStatusExamModule from "../components/patient/MentalStatusExam/stateDBSocket";
+
+import settingStateModule from "./modules/settingState";
+import currentStateDisplayAreaModule from "./modules/currentStateDisplayArea";
+import componentModule from "./modules/component";
+
+import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
+import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
+import userRoleModule from "../components/common/userRole/stateDBSocket"
 
 // vuex-orm models.
 import Components from "../components/common/roleBasedAccess/vuex-orm-model/component"
@@ -177,6 +178,7 @@ export default new Vuex.Store({
     screening: screeningStateModule,
     bodyMeasurement: bodyMeasurementModule,
     mse: mentalStatusExamModule,
+    userRole: userRoleModule,
   },
   plugins: [
     createPersistedState(),
