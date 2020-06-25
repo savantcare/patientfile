@@ -45,7 +45,7 @@ router.post('/updateAppearence', async (req, res) => {
 router.post('/getAppearence', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Appearence.sequelize.query('SELECT *, DATE(ROW_START) createDate FROM appearence FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()',
+    const queryResult = await Appearence.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM appearence FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT

@@ -40,6 +40,7 @@ import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
 import Assessment from "../components/patient/diagnosis/models/Assessment";
 import Recommendation from "../components/patient/Recommendations/models/recommendation";
 
+
 import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
 
@@ -47,6 +48,7 @@ const database = new VuexORM.Database();
 database.register(Diagnosis);
 database.register(Assessment);
 database.register(Recommendation);
+require('../components/patient/MentalStatusExam/models/index.js')(database)
 
 export default new Vuex.Store({
   state: {

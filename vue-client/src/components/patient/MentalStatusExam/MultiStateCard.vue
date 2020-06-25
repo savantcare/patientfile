@@ -36,13 +36,15 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 // import { mapGetters } from "vuex";
+import Appearence from "./models/appearence";
 export default {
   components: {
     CardHeader
   },
   methods: {
     openChangeDialog(item) {
-      console.log(item);
+      this.$store.commit("mse/setSelectedType", item.key);
+      this.$store.commit("showChangeMSETabInLayer2");
       // this.$store.commit("bodyMeasurement/setObjectToUpdate", item);
       // this.$store.commit("showAddBMElementTabInLayer2", {
       //   label: item.label,
@@ -77,10 +79,43 @@ export default {
   },
   computed: {
     tableData() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const appearenceData = Appearence.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let appearenceString = "";
+      if (appearenceData) {
+        Object.keys(appearenceData).forEach(key => {
+          if (appearenceData[key] == "yes") {
+            appearenceString += key + ",";
+          }
+        });
+      }
+      if (appearenceString.length > 0) {
+        appearenceString = appearenceString.slice(0, -1);
+      } else {
+        appearenceString = "-";
+      }
+
       return [
         {
+          key: "appearence",
           label: "Appearence",
-          value: "-"
+          value: appearenceString
         },
         {
           label: "Mood/Affect",

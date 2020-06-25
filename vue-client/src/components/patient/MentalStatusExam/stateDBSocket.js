@@ -1,6 +1,9 @@
+// import Appearence from "./model/appearence"
+import Appearence from "./models/appearence"
+
 const state = {
   selectedType: '',
-  appearenceList: [],
+
   attitudeList: [],
   cognitionList: [],
   constitutionalList: [],
@@ -20,9 +23,6 @@ const state = {
 const mutations = {
   setSelectedType(state, value) {
     state.selectedType = value
-  },
-  setAppearenceList(state, value) {
-    state.appearenceList = value
   },
   setAttitudeList(state, value) {
     state.attitudeList = value
@@ -104,18 +104,20 @@ const actions = {
       })
     }
   },
-  async getAppearence({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getAppearence`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setAppearenceList", json)
+  async getAppearence(_, params) {
+    const { patientId } = params
+    const countAppearence = await Appearence.query().count()
+    console.log('count of appearence:__ ', countAppearence)
+    if (countAppearence == 0) {
+      const response = await Appearence.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getAppearence`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
+      console.log('response from the getAppearence API')
+      console.log(response)
     }
   },
   async dbUpdateAttitudeInSM(_, params) {

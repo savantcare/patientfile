@@ -4,12 +4,20 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Appearence from "../models/appearence";
 export default {
   components: { Graph },
   computed: {
     series() {
       let series = [];
-      const appearences = this.$store.state.mse.appearenceList;
+
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const appearences = Appearence.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
+
       let goodGrommingAndHygieneData = [];
       let noApparentDistressData = [];
       let wellDevelopedData = [];
@@ -21,45 +29,47 @@ export default {
       let disheveledData = [];
       let malodorousData = [];
       for (const appearence of appearences) {
-        const { createDate } = appearence;
+        let { timeOfEvaluation } = appearence;
+        timeOfEvaluation = timeOfEvaluation.split("T")[0];
+
         goodGrommingAndHygieneData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["good-grooming-and-hygiene"] == "yes" ? 1 : 0
         });
         noApparentDistressData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["no-apparent-distress"] == "yes" ? 1 : 0
         });
         wellDevelopedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["well-developed-well-nourished"] == "yes" ? 1 : 0
         });
         statedAgeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["appears-stated-age"] == "yes" ? 1 : 0
         });
         yougnerAgeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["appears-younger-then-stated-age"] == "yes" ? 1 : 0
         });
         olderAgeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["appears-older-then-stated-age"] == "yes" ? 1 : 0
         });
         obeseData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["obese"] == "yes" ? 1 : 0
         });
         thinData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["thin-or-cachetic"] == "yes" ? 1 : 0
         });
         disheveledData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["disheveled-unkempt"] == "yes" ? 1 : 0
         });
         malodorousData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: appearence["malodorus"] == "yes" ? 1 : 0
         });
       }
@@ -105,6 +115,7 @@ export default {
           data: malodorousData
         }
       );
+
       return series;
     }
   },
