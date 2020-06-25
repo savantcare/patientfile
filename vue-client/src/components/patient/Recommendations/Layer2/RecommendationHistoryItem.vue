@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Recommendation from "../models/recommendation";
+import Recommendation from "../vuex-orm-models/recommendation";
 
 export default {
   props: ["rec"],

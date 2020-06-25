@@ -28,44 +28,25 @@ SET time_zone = "+00:00";
 -- Table structure for table `components`
 --
 
-CREATE TABLE `components` (
-  `id` int(11) NOT NULL,
-  `type` int(11) DEFAULT NULL,
+CREATE TABLE `componentMaster` (
+  `uuid` char(36) NOT NULL,
+  `tag` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` CHAR(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 --
 -- Dumping data for table `components`
 --
 
-INSERT INTO `components` (`id`, `type`, `name`, `createdAt`, `updatedAt`) VALUES
-(1, 1, 'recommendation', '2020-05-12 20:57:52', '2020-05-12 20:57:52'),
-(2, 1, 'reminder', '2020-05-12 20:58:09', '2020-05-12 20:58:09'),
-(3, 2, 'other', '2020-05-12 20:58:19', '2020-05-12 20:58:19');
+INSERT INTO `componentMaster` (`uuid`, `tag`, `name`, `recordChangedByUUID`, `recordChangedFromIPAddress`) VALUES
+(1, "health", 'recommendation', '1', '202.005.122.057'),
+(2, "other", 'reminder', '2', '202.005.122.057'),
+(3, "health", 'other', '3', '202.005.122.057');
 
 --
 -- Indexes for dumped tables
 --
 
---
--- Indexes for table `components`
---
-ALTER TABLE `components`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `components`
---
-ALTER TABLE `components`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

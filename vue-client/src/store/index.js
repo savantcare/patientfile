@@ -19,32 +19,37 @@ Vue.use(Vuex);
 
 // modules
 import recommendationStateModule from "../components/patient/Recommendations/stateDBSocket";
+import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import screeningStateModule from "../components/patient/Screening/stateDBSocket";
 import diagnosisStateModule from "../components/patient/diagnosis/stateDBSocket";
-//import diagnosisState from "../components/patient/diagnosis/stateDB";
-
-import reminderStateModule from "../components/patient/reminder/stateDBSocket";
 import goalStateModule from "../components/patient/goal/stateDBSocket";
-import settingStateModule from "./modules/settingState";
-import currentStateDisplayAreaModule from "./modules/currentStateDisplayArea";
-import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
-import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
 import socialHistoryStateModule from "../components/patient/social-history/stateDBSocket";
 import familyHistoryStateModule from "../components/patient/FamilyHistory/stateDBSocket";
-import componentModule from "./modules/component";
 import bodyMeasurementModule from "../components/patient/BodyMeasurements/stateDBSocket";
 import mentalStatusExamModule from "../components/patient/MentalStatusExam/stateDBSocket";
 
+import settingStateModule from "./modules/settingState";
+import currentStateDisplayAreaModule from "./modules/currentStateDisplayArea";
+import componentModule from "./modules/component";
+
+import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
+import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
+import userRoleModule from "../components/common/userRole/stateDBSocket"
+
 // vuex-orm models.
+import Components from "../components/common/roleBasedAccess/vuex-orm-model/component"
+import UserRole from "../components/common/userRole/vuex-orm-model/userRole"
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
 import Assessment from "../components/patient/diagnosis/models/Assessment";
-import Recommendation from "../components/patient/Recommendations/models/recommendation";
+import Recommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
 
 
 import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
 
 const database = new VuexORM.Database();
+database.register(Components);
+database.register(UserRole);
 database.register(Diagnosis);
 database.register(Assessment);
 database.register(Recommendation);
@@ -90,13 +95,25 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getRoleDetails({ commit }, roleId) {
+    async getRoleDetails({ commit }, roleUUID) {
       const token = localStorage.getItem("token");
+
+      console.log(roleUUID);
+      /* TODO: This hard code needs to be removed
       const response = await fetch(`${ROLE_API_URL}/${roleId}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
+      */
+      const response = await fetch(
+        `${ROLE_API_URL}/897d25c6-2c84-47fe-9236-2c3cc9c70bdf`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       if (response.ok) {
         const json = await response.json();
         console.log(json);
@@ -163,6 +180,7 @@ export default new Vuex.Store({
     screening: screeningStateModule,
     bodyMeasurement: bodyMeasurementModule,
     mse: mentalStatusExamModule,
+    userRole: userRoleModule,
   },
   plugins: [
     createPersistedState(),

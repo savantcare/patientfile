@@ -1,7 +1,7 @@
-use DB_SC_Recommendation_CT_V20;
+use sc_recommendation;
 -- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
--- Host: localhost    Database: DB_SC_Recommendation_CT_V20
+-- Host: localhost    Database: sc_recommendation
 -- ------------------------------------------------------
 -- Server version	5.7.26-0ubuntu0.18.04.1-log
 

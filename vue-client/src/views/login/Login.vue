@@ -54,9 +54,10 @@ export default {
         });
         if (response.ok) {
           const json = await response.json();
-          const { access_token, roleId, userId } = json;
+          console.log(json);
+          const { access_token, roleUUID, userId } = json;
           localStorage.setItem("token", access_token);
-          this.$store.dispatch("getRoleDetails", roleId);
+          this.$store.dispatch("getRoleDetails", roleUUID);
           // this.$store.commit("setUserRole", role);
           this.$router.push("/?patient_id=1");
           this.$store.commit("setUserId", userId);
