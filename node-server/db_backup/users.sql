@@ -29,24 +29,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `uuid` char(36) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `roleId` int(11) DEFAULT NULL,
+  `roleUUID` char(36) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `recordChangedByUUID` CHAR(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `roleId`, `name`, `age`, `createdAt`, `updatedAt`) VALUES
-(1, 'user1@mail.com', '123', 1, 'Doctor 1', 25, '2020-05-12 20:50:16', '2020-05-12 20:50:16'),
-(2, 'user2@mail.com', '123', 2, 'Receptionist 1', 25, '2020-05-12 20:50:37', '2020-05-12 20:50:37'),
-(3, 'patient1@mail.com', '123', 3, 'Patient 1', 25, '2020-05-12 20:51:00', '2020-05-12 20:51:00');
+INSERT INTO `users` (`uuid`, `email`, `password`, `roleUUID`, `name`, `age`, `recordChangedByUUID`, `recordChangedFromIPAddress` ) VALUES
+(1, 'user1@mail.com', '123', "897d25c6-2c84-47fe-9236-2c3cc9c70bdf", 'Doctor 1', 25, '1', '8.8.8.8'),
+(2, 'user2@mail.com', '123', "ae2f20c1-448b-4df0-b221-9b4c3d411f59", 'Doctor admin assistant', 25, '2', '4.4.4.4'),
+("bfe041fa-073b-4223-8c69-0540ee678ff8", 'patient1@mail.com', '123', "ae0ae9e7-545a-4783-ac83-84786839dcc1", 'Patient 1', 25, '3', '202.12.20.51');
 
 --
 -- Indexes for dumped tables
