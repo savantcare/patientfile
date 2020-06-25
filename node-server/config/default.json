@@ -10,7 +10,7 @@
     "acquire": 30000,
     "idle": 10000
   },
-  "DB_RECOMMENDATION": "DB_SC_Recommendation_CT_V20",
+  "DB_RECOMMENDATION": "sc_recommendation",
   "DB_REMINDER": "sc_reminder",
   "DB_GOAL": "sc_goal",
   "DB_DIAGNOSIS": "DB_SC_Diagnosis_CT_V20",
