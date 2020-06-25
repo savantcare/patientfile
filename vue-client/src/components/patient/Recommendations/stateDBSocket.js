@@ -140,7 +140,7 @@ export default {
           this.oneQueryIsRunningGate = true;
           let countRex = await Recommendation.query().count();
 
-          console.log(" count rex ====", countRex);
+          console.log("Number of recs before query =>", countRex);
           if (countRex == 0) {
             await Recommendation.api().post(
               RECOMMENDATION_API_URL + "/getMyRecommendations",
@@ -154,7 +154,10 @@ export default {
                 date: date,
               }
             );
-            console.log("Inserting rex", Recommendation.query().count());
+            console.log(
+              "Number of rex in model =>",
+              Recommendation.query().count()
+            );
           }
           this.oneQueryIsRunningGate = false;
         }
