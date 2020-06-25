@@ -168,7 +168,7 @@ router.post('/updateConstitutional', async (req, res) => {
 router.post('/getConstitutional', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Constitutional.sequelize.query('SELECT *, DATE(ROW_START) createDate FROM constitutional FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()',
+    const queryResult = await Constitutional.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM constitutional FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT

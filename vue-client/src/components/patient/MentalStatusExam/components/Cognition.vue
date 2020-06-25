@@ -24,9 +24,9 @@ export default {
       let fluctuatingData = [];
 
       for (const cognition of cognitions) {
-        const { createDate } = cognition;
+        const { timeOfEvaluation } = cognition;
         grosslyIntactData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y:
             cognition[
               "grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n"
@@ -35,11 +35,11 @@ export default {
               : 0
         });
         impairedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: cognition["impaired"] == "yes" ? 1 : 0
         });
         fluctuatingData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: cognition["fluctuating"] == "yes" ? 1 : 0
         });
       }

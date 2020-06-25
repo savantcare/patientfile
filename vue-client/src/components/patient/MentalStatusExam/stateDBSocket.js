@@ -1,6 +1,7 @@
 import Appearence from "./models/appearence"
 import Attitude from './models/attitude'
 import Cognition from './models/cognition'
+import Constitutional from './models/constitutional'
 
 const state = {
   selectedType: '',
@@ -239,18 +240,17 @@ const actions = {
       })
     }
   },
-  async getConstitutional({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getConstitutional`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setConstitutionalList", json)
+  async getConstitutional(_, params) {
+    const { patientId } = params
+    const count = await Constitutional.query().count()
+    if (count == 0) {
+      await Constitutional.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getConstitutional`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateEyeContactInSM(_, params) {

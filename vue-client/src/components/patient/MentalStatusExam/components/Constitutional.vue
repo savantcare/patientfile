@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Constitutional from "../models/constitutional";
 export default {
   components: { Graph },
 
@@ -11,13 +12,19 @@ export default {
     series() {
       let series = [];
 
-      const constitutionals = this.$store.state.mse.constitutionalList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const constitutionals = Constitutional.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
+
       let vitalData = [];
 
       for (const constitutional of constitutionals) {
-        const { createDate } = constitutional;
+        const { timeOfEvaluation } = constitutional;
         vitalData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: constitutional["vitals-signs-stable"] == "yes" ? 1 : 0
         });
       }
