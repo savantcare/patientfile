@@ -31,7 +31,7 @@
 <script>
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
 // import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const/others.js";
-import Recommendation from "../models/recommendation";
+import Recommendation from "../vuex-orm-models/recommendation";
 export default {
   components: {
     RecommendationHistoryItem

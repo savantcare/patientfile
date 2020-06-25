@@ -1,5 +1,5 @@
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
-import Recommendation from "./models/recommendation";
+import Recommendation from "./vuex-orm-models/recommendation";
 let TOKEN = localStorage.getItem("token");
 export default {
   state: {

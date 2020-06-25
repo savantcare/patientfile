@@ -54,7 +54,7 @@
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
-import Recommendation from "./models/recommendation";
+import Recommendation from "./vuex-orm-models/recommendation";
 
 export default {
   components: {

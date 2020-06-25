@@ -38,7 +38,7 @@ import mentalStatusExamModule from "../components/patient/MentalStatusExam/state
 // vuex-orm models.
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
 import Assessment from "../components/patient/diagnosis/models/Assessment";
-import Recommendation from "../components/patient/Recommendations/models/recommendation";
+import Recommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
 
 import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
