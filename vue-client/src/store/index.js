@@ -88,13 +88,25 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getRoleDetails({ commit }, roleId) {
+    async getRoleDetails({ commit }, roleUUID) {
       const token = localStorage.getItem("token");
+
+      console.log(roleUUID);
+      /* TODO: This hard code needs to be removed
       const response = await fetch(`${ROLE_API_URL}/${roleId}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
+      */
+      const response = await fetch(
+        `${ROLE_API_URL}/897d25c6-2c84-47fe-9236-2c3cc9c70bdf`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       if (response.ok) {
         const json = await response.json();
         console.log(json);
