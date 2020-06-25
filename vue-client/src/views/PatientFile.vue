@@ -205,12 +205,20 @@ export default {
       return this.$store.state.focusComponent;
     },
     CurrentStateDisplayAreaComponents() {
-      return this.$store.getters.currentStateDisplayAreaList;
+      return this.$store.getters.currentStateDisplayAreaList; // TODO: NAMING: When I read this line how do I know it goes to store/modules/currentStateDisplayArea.js/currentStateDisplayAreaList
     },
     multiStateDisplayAreaComponents() {
       const componentType = this.$store.state.multiStateDisplayArea
-        .componentType;
+        .componentType; // Possible values are health or other.
+
+      console.log(this.$store.state.component.list);
+
       const components = this.$store.state.component.list.filter(
+        // TODO: NAMING: How do I know where is the store.state.component.list
+        /* 
+          For each component the type of the component is stored in sc_component -> componentMaster -> tag
+          Tag is used since some components may belong to both health and other type.
+        */
         item => item.tag == componentType
       );
 
@@ -225,7 +233,13 @@ export default {
         }
       );
 
-      return list;
+      console.log(list);
+
+      /*
+      This code needs to be refactored and made simpler. TODO: return list used to work earlier but it does not work now
+    */
+      //return list;
+      return this.$store.getters.currentStateDisplayAreaList;
     }
   },
   beforeCreate() {},
