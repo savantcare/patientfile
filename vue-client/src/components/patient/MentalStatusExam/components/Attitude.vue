@@ -11,14 +11,13 @@ export default {
   computed: {
     series() {
       let series = [];
-      // const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
-      // const attitudes = Attitude.query()
-      //   .where("ROW_START", value => value < currentUnixTimeStamp)
-      //   .where("ROW_END", value => value > currentUnixTimeStamp)
-      //   .orderBy("ROW_START", "desc")
-      //   .get();
-      const attitudes = Attitude.all();
-      console.log(attitudes);
+
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const attitudes = Attitude.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let pleasantData = [];
       let uncooperativeData = [];

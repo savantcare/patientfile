@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Cognition from "../models/cognition";
 export default {
   components: { Graph },
 
@@ -11,7 +12,13 @@ export default {
     series() {
       let series = [];
 
-      const cognitions = this.$store.state.mse.cognitionList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const cognitions = Cognition.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
+
       let grosslyIntactData = [];
       let impairedData = [];
       let fluctuatingData = [];

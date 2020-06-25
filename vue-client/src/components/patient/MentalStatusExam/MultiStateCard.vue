@@ -38,6 +38,7 @@ import CardHeader from "@/components/common/CardHeader";
 // import { mapGetters } from "vuex";
 import Appearence from "./models/appearence";
 import Attitude from "./models/attitude";
+import Cognition from "./models/cognition";
 export default {
   components: {
     CardHeader
@@ -149,8 +150,42 @@ export default {
 
       return attitudeString;
     },
+    cognition() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const cognitionData = Cognition.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (cognitionData) {
+        Object.keys(cognitionData).forEach(key => {
+          if (cognitionData[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
     tableData() {
-      console.log(this.attitude);
       return [
         {
           key: "appearence",
@@ -167,7 +202,7 @@ export default {
         },
         {
           label: "Cognition",
-          value: "-"
+          value: this.cognition
         },
         {
           label: "Constitutional",
