@@ -1,4 +1,4 @@
-- name: First 5 minutes in new servers
+- name: Making sure packages are not insecure
   hosts: 127.0.0.1
   connection: local
   become: yes

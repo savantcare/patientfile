@@ -1,4 +1,5 @@
 #!/bin/bash
-ansible-playbook package-manager.yml
-ansible-playbook ssh-secure.yml
-ansible-playbook firewall-secure.yml
+ansible-playbook configure-package-manager.yml
+ansible-playbook configure-ssh-secure.yml
+ansible-playbook configure-firewall.yml
+ansible-playbook configure-docker.yml
