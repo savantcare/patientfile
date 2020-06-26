@@ -15,7 +15,7 @@
     :style="multiStateDisplayAreaStyleToApplyForPastTime"
   >
     <div slot="header" class="clearfix">
-      <CardHeader
+      <CtCardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
@@ -29,8 +29,8 @@
         :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
       />
     </div>
-    <DataTableWithoutTab
-      :tabData="tabData"
+    <CtDataTableWithoutTab
+      :tabData="cfTabData"
       ctName="Recommendation"
       keyId="recommendation"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
@@ -51,15 +51,15 @@
 // 1. remove selected column feature
 // 2. Need to send a better name for column to display
 
-import CardHeader from "@/components/common/CardHeader";
-import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
+import CtCardHeader from "@/components/common/CardHeader";
+import CtDataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
 import ormRecommendation from "./vuex-orm-models/recommendation";
 
 export default {
   components: {
-    CardHeader,
-    DataTableWithoutTab
+    CtCardHeader,
+    CtDataTableWithoutTab
   },
   props: {
     typeOfStateDisplayArea: {
@@ -210,7 +210,7 @@ export default {
   },
 
   computed: {
-    tabData() {
+    cfTabData() {
       let timeStampOfStateInsideCt = null;
       if (
         this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
