@@ -233,7 +233,7 @@ export default {
       const components = this.$store.state.component.list.filter(
         // TODO: NAMING: How do I know where is the store.state.component.list
         /* 
-          For each component the type of the component is stored in sc_component -> componentMaster -> tag
+          For each component the type of the component is stored in sc_component -> ctMaster -> tag
           Tag is used since some components may belong to both health and other type.
         */
         item => item.tag == componentType
