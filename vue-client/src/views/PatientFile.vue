@@ -168,7 +168,7 @@ import ormComponent from "../components/common/roleBasedAccess/vuex-orm-model/co
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
 
 const SearchBoxForCommandsFromUser = () =>
-  import("@/components/common/SearchBoxForCommandsFromUser.vue");
+  import("@/components/common/search/SearchBoxForCommandsFromUser.vue");
 
 const Layer2MultiTabDialog = () =>
   import("@/components/common/Layer2MultiTabDialog/");
