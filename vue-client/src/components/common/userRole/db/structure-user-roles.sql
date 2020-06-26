@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `user_roles`
 --
 
+use sc_user;
+
 CREATE TABLE `user_roles` (
   `uuid` char(36) NOT NULL,
   `name` varchar(255) DEFAULT NULL,

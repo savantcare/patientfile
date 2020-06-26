@@ -28,6 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 
+use sc_user;
+
+
 CREATE TABLE `users` (
   `uuid` char(36) NOT NULL,
   `email` varchar(255) DEFAULT NULL,

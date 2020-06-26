@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `components`
 --
+use sc_component;
+
 
 CREATE TABLE `componentMaster` (
   `uuid` char(36) NOT NULL,
