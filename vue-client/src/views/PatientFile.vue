@@ -167,7 +167,6 @@ import ormComponent from "../components/common/roleBasedAccess/vuex-orm-model/co
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
 
-// Right panel components
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/common/SearchBoxForCommandsFromUser.vue");
 
