@@ -1,0 +1,39 @@
+- name: First 5 minutes in new servers
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  become_user: root
+
+tasks:
+   ## Making network layer more secure
+  - name: Install a list of packages
+   apt:
+     pkg:
+       - python
+       - ufw
+       - fail2ban
+       - unattended-upgrades
+       - logwatch
+   
+    # VERIFY: > ufw status
+    #         > sudo netstat -ntlp | grep LISTEN
+  - name: Allow all access to tcp port 80
+     ufw:
+       rule: allow
+       port: "80"
+       proto: tcp
+
+  - name: Allow all access to tcp port 443
+      ufw:
+        rule: allow
+        port: "443"
+        proto: tcp
+
+  - name: Allow all access to tcp port 90
+      ufw:
+        rule: allow
+        port: "90"
+        proto: tcp
+
+  - name: Enable ufw/firewall
+      ufw: state=enabled policy=deny

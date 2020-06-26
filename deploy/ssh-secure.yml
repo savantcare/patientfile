@@ -5,15 +5,7 @@
   become_user: root
 
   tasks:
-    ## Step1/3: Making sure server has secure packages
-    - name: Update APT packages cache
-      apt: update_cache=yes
-
-    - name: Perform aptitude safe-upgrade
-      apt:
-        upgrade: dist
-
-    ## Step2/3: Making SSH secure
+    ## > ansible-galaxy install dev-sec.ssh-hardening
     - name: SSHD config
       vars:
         - ssh_permit_root_login: "no"
@@ -23,40 +15,3 @@
         - ssh_client_password_login: false # true to allow password-based authentication with the ssh client
         - ssh_server_password_login: false # true to allow password-based authentication with the ssh server
         - ssh_max_auth_retries: 10
-
-    ## Step3/3: Making network layer more secure
-    - name: Install a list of packages
-      apt:
-        pkg:
-          - python
-          - ufw
-          - fail2ban
-          - unattended-upgrades
-          - logwatch
-
-    # VERIFY: > ufw status
-    #         > sudo netstat -ntlp | grep LISTEN
-    - name: Allow all access to tcp port 80
-      ufw:
-        rule: allow
-        port: "80"
-        proto: tcp
-
-    - name: Allow all access to tcp port 443
-      ufw:
-        rule: allow
-        port: "443"
-        proto: tcp
-
-    - name: Allow all access to tcp port 90
-      ufw:
-        rule: allow
-        port: "90"
-        proto: tcp
-
-    - name: Enable ufw/firewall
-      ufw: state=enabled policy=deny
-
-  handlers:
-    - name: Restart ssh
-      service: name=ssh state=restarted
