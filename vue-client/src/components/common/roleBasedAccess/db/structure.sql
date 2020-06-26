@@ -1,7 +1,7 @@
 use sc_component;
 
 
-CREATE TABLE `componentMaster` (
+CREATE TABLE `ctMaster` (
   `uuid` char(36) NOT NULL,
   `tag` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -11,10 +11,12 @@ CREATE TABLE `componentMaster` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
-CREATE TABLE `userRoleComponentMapping` (
+CREATE TABLE `ctAllowedToAccessByEachUserRole` (
   `uuid` char(36) NOT NULL ,
   `roleUUID` char(36) NOT NULL,
   `componentUUID` char(36) NOT NULL,
+  `multiStateDisplayImportance` float NOT NULL COMMENT 'higher comes up on page',
+  `currentStateDisplayImportance` float NOT NULL
   `recordChangedByUUID` char(36) NOT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
