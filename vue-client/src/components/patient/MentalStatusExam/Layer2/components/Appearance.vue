@@ -14,16 +14,46 @@ export default {
   data() {
     return {
       statusList: [
-        "Good grooming and hygiene",
-        "No apparent distress",
-        "Well-developed, well-nourished",
-        "Appears stated age",
-        "Appears younger than stated age",
-        "Appears older than stated age",
-        "Obese",
-        "Thin or cachectic",
-        "Disheveled, unkempt",
-        "Malodorous"
+        {
+          key: "good-grooming-and-hygiene",
+          value: "Good grooming and hygiene"
+        },
+        {
+          key: "no-apparent-distress",
+          value: "No apparent distress"
+        },
+        {
+          key: "well-developed-well-nourished",
+          value: "Well-developed, well-nourished"
+        },
+        {
+          key: "appears-stated-age",
+          value: "Appears stated age"
+        },
+        {
+          key: "appears-younger-then-stated-age",
+          value: "Appears younger than stated age"
+        },
+        {
+          key: "appears-older-then-stated-age",
+          value: "Appears older than stated age"
+        },
+        {
+          key: "obese",
+          value: "Obese"
+        },
+        {
+          key: "thin-or-cachetic",
+          value: "Thin or cachectic"
+        },
+        {
+          key: "disheveled-unkempt",
+          value: "Disheveled, unkempt"
+        },
+        {
+          key: "malodorus",
+          value: "Malodorous"
+        }
       ],
       normalStatusList: [
         "Good grooming and hygiene",
@@ -44,7 +74,7 @@ export default {
       } catch (ex) {
         console.log(ex);
       }
-      console.log(date);
+
       let request = {
         patientUUID: this.$route.query.patient_id,
         recordChangedByUUID: this.$store.state.userId,
@@ -54,28 +84,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Good grooming and hygiene") {
-          request["good-grooming-and-hygiene"] = value;
-        } else if (status == "No apparent distress") {
-          request["no-apparent-distress"] = value;
-        } else if (status == "Well-developed, well-nourished") {
-          request["well-developed-well-nourished"] = value;
-        } else if (status == "Appears stated age") {
-          request["appears-stated-age"] = value;
-        } else if (status == "Appears younger than stated age") {
-          request["appears-younger-then-stated-age"] = value;
-        } else if (status == "Appears older than stated age") {
-          request["appears-older-then-stated-age"] = value;
-        } else if (status == "Obese") {
-          request["obese"] = value;
-        } else if (status == "Thin or cachectic") {
-          request["thin-or-cachetic"] = value;
-        } else if (status == "Disheveled, unkempt") {
-          request["disheveled-unkempt"] = value;
-        } else if (status == "Malodorous") {
-          request["malodorus"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       await this.$store.dispatch("mse/dbUpdateAppearenceInSM", {

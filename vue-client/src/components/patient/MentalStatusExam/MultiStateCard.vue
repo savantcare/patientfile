@@ -58,13 +58,11 @@ export default {
   },
   methods: {
     openChangeDialog(item) {
+      const statusList = item.value.split(",");
+
       this.$store.commit("mse/setSelectedType", item.key);
       this.$store.commit("showChangeMSETabInLayer2");
-      // this.$store.commit("bodyMeasurement/setObjectToUpdate", item);
-      // this.$store.commit("showAddBMElementTabInLayer2", {
-      //   label: item.label,
-      //   type: item.type
-      // });
+      this.$store.commit("mse/setCheckedList", statusList);
     },
     handleClickOnMInCardHeader() {
       this.$store.commit(
@@ -627,57 +625,71 @@ export default {
         },
         {
           label: "Mood/Affect",
-          value: this.affect
+          value: this.affect,
+          key: "affect"
         },
         {
           label: "Attitude",
-          value: this.attitude
+          value: this.attitude,
+          key: "attitude"
         },
         {
+          key: "cognition",
           label: "Cognition",
           value: this.cognition
         },
         {
+          key: "constitutional",
           label: "Constitutional",
           value: this.constitutional
         },
         {
+          key: "eyeContact",
           label: "Eye Contact",
           value: this.eyeContact
         },
         {
+          key: "impulseControl",
           label: "Impulse Control",
           value: this.impulseControl
         },
         {
+          key: "insight",
           label: "Insight",
           value: this.insight
         },
         {
+          key: "judgement",
           label: "Judgement",
           value: this.judgement
         },
         {
+          key: "perception",
           label: "Perception",
           value: this.perception
         },
         {
+          key: "psychomotor",
           label: "Psychomotor",
           value: this.psychomotor
         },
         {
+          key: "speech",
           label: "Speech",
           value: this.speech
         },
         {
+          key: "thoughtContent",
           label: "Thought Content",
           value: this.thoughtContent
         },
         {
+          key: "thoughtProcess",
           label: "Thought Process",
           value: this.thoughtProcess
         },
         {
+          key: "neurological",
           label: "Neurological",
           value: this.neurological
         }

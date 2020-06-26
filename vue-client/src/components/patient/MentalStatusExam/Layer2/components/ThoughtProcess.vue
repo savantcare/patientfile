@@ -14,13 +14,34 @@ export default {
   data() {
     return {
       statusList: [
-        "Linear, logical and goal-directed",
-        "Disorganized",
-        "Circumstantial",
-        "Tangential",
-        "Looseness of associations",
-        "Flight of ideas",
-        "Poverty of thought"
+        {
+          key: "linear-logical-and-goal-directed",
+          value: "Linear, logical and goal-directed"
+        },
+        {
+          key: "disorganized",
+          value: "Disorganized"
+        },
+        {
+          key: "circumstantial",
+          value: "Circumstantial"
+        },
+        {
+          key: "tangential",
+          value: "Tangential"
+        },
+        {
+          key: "looseness-of-associations",
+          value: "Looseness of associations"
+        },
+        {
+          key: "flight-of-ideas",
+          value: "Flight of ideas"
+        },
+        {
+          key: "poverty-of-thought",
+          value: "Poverty of thought"
+        }
       ],
       normalStatusList: ["Linear, logical and goal-directed"]
     };
@@ -46,22 +67,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Linear, logical and goal-directed") {
-          request["linear-logical-and-goal-directed"] = value;
-        } else if (status == "Disorganized") {
-          request["disorganized"] = value;
-        } else if (status == "Circumstantial") {
-          request["circumstantial"] = value;
-        } else if (status == "Tangential") {
-          request["tangential"] = value;
-        } else if (status == "Looseness of associations") {
-          request["looseness-of-associations"] = value;
-        } else if (status == "Flight of ideas") {
-          request["flight-of-ideas"] = value;
-        } else if (status == "Poverty of thought") {
-          request["poverty-of-thought"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateThoughtProcessInSM", {

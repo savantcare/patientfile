@@ -14,12 +14,30 @@ export default {
   data() {
     return {
       statusList: [
-        "Regular, rate and rhythm",
-        "Fluent",
-        "Incoherent",
-        "Talkative",
-        "Pressured",
-        "Mumbling"
+        {
+          key: "regular-rate-and-rhythm",
+          value: "Regular, rate and rhythm"
+        },
+        {
+          key: "fluent",
+          value: "Fluent"
+        },
+        {
+          key: "incoherent",
+          value: "Incoherent"
+        },
+        {
+          key: "talkative",
+          value: "Talkative"
+        },
+        {
+          key: "pressured",
+          value: "Pressured"
+        },
+        {
+          key: "mumbling",
+          value: "Mumbling"
+        }
       ],
       normalStatusList: ["Regular, rate and rhythm"]
     };
@@ -45,20 +63,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Regular, rate and rhythm") {
-          request["regular-rate-and-rhythm"] = value;
-        } else if (status == "Fluent") {
-          request["fluent"] = value;
-        } else if (status == "Incoherent") {
-          request["incoherent"] = value;
-        } else if (status == "Talkative") {
-          request["talkative"] = value;
-        } else if (status == "Pressured") {
-          request["pressured"] = value;
-        } else if (status == "Mumbling") {
-          request["mumbling"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateSpeechInSM", {

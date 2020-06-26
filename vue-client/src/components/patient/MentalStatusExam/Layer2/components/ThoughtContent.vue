@@ -14,19 +14,58 @@ export default {
   data() {
     return {
       statusList: [
-        "No SI, intent or plan",
-        "No passive death wish",
-        "No HI, intent or plan",
-        "No delusional thinking observed",
-        "No obsessive thinking observed",
-        "+ruminations",
-        "+SI without intent or plan",
-        "+SI as detailed below",
-        "+HI as detailed below",
-        "+delusions",
-        "+IOR",
-        "+obsessions",
-        "Passive death wish"
+        {
+          key: "no-si-intent-or-plan",
+          value: "No SI, intent or plan"
+        },
+        {
+          key: "no-passive-death-wish",
+          value: "No passive death wish"
+        },
+        {
+          key: "no-hi-intent-or-plan",
+          value: "No HI, intent or plan"
+        },
+        {
+          key: "no-delusional-thinking-observed",
+          value: "No delusional thinking observed"
+        },
+        {
+          key: "no-obsessive-thinking-observed",
+          value: "No obsessive thinking observed"
+        },
+        {
+          key: "ruminations",
+          value: "+ruminations"
+        },
+        {
+          key: "si-without-intent-or-plan",
+          value: "+SI without intent or plan"
+        },
+        {
+          key: "si-as-detailed-below",
+          value: "+SI as detailed below"
+        },
+        {
+          key: "hi-as-detailed-below",
+          value: "+HI as detailed below"
+        },
+        {
+          key: "delusions",
+          value: "+delusions"
+        },
+        {
+          key: "ior",
+          value: "+IOR"
+        },
+        {
+          key: "obsessions",
+          value: "+obsessions"
+        },
+        {
+          key: "passive-death-wish",
+          value: "Passive death wish"
+        }
       ],
       normalStatusList: [
         "No SI, intent or plan",
@@ -58,34 +97,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "No SI, intent or plan") {
-          request["no-si-intent-or-plan"] = value;
-        } else if (status == "No passive death wish") {
-          request["no-passive-death-wish"] = value;
-        } else if (status == "No HI, intent or plan") {
-          request["no-hi-intent-or-plan"] = value;
-        } else if (status == "No delusional thinking observed") {
-          request["no-delusional-thinking-observed"] = value;
-        } else if (status == "No obsessive thinking observed") {
-          request["no-obsessive-thinking-observed"] = value;
-        } else if (status == "+ruminations") {
-          request["ruminations"] = value;
-        } else if (status == "+SI without intent or plan") {
-          request["si-without-intent-or-plan"] = value;
-        } else if (status == "+SI as detailed below") {
-          request["si-as-detailed-below"] = value;
-        } else if (status == "+HI as detailed below") {
-          request["hi-as-detailed-below"] = value;
-        } else if (status == "+delusions") {
-          request["delusions"] = value;
-        } else if (status == "+IOR") {
-          request["ior"] = value;
-        } else if (status == "+obsessions") {
-          request["obsessions"] = value;
-        } else if (status == "Passive death wish") {
-          request["passive-death-wish"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateThoughtContentInSM", {

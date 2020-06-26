@@ -14,12 +14,30 @@ export default {
   data() {
     return {
       statusList: [
-        "Good",
-        "Fair",
-        "Questionable",
-        "Poor",
-        "Impaired",
-        "Limited"
+        {
+          key: "good",
+          value: "Good"
+        },
+        {
+          key: "fair",
+          value: "Fair"
+        },
+        {
+          key: "questionable",
+          value: "Questionable"
+        },
+        {
+          key: "poor",
+          value: "Poor"
+        },
+        {
+          key: "impaired",
+          value: "Impaired"
+        },
+        {
+          key: "limited",
+          value: "Limited"
+        }
       ],
       normalStatusList: ["Good"]
     };
@@ -45,20 +63,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Good") {
-          request["good"] = value;
-        } else if (status == "Fair") {
-          request["fair"] = value;
-        } else if (status == "Questionable") {
-          request["questionable"] = value;
-        } else if (status == "Poor") {
-          request["poor"] = value;
-        } else if (status == "Impaired") {
-          request["impaired"] = value;
-        } else if (status == "Limited") {
-          request["limited"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateInsightInSM", {

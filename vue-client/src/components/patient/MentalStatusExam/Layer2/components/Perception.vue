@@ -13,7 +13,24 @@ export default {
   components: { BaseComponent },
   data() {
     return {
-      statusList: ["No AVH", "+AH", "+Command AH", "+VH"],
+      statusList: [
+        {
+          key: "no-avh",
+          value: "No AVH"
+        },
+        {
+          key: "ah",
+          value: "+AH"
+        },
+        {
+          key: "command-ah",
+          value: "+Command AH"
+        },
+        {
+          key: "vh",
+          value: "+VH"
+        }
+      ],
       normalStatusList: ["No AVH"]
     };
   },
@@ -38,16 +55,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "No AVH") {
-          request["no-avh"] = value;
-        } else if (status == "+AH") {
-          request["ah"] = value;
-        } else if (status == "+Command AH") {
-          request["command-ah"] = value;
-        } else if (status == "+VH") {
-          request["vh"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdatePerceptionInSM", {

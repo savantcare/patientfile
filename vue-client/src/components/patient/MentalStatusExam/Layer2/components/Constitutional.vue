@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      statusList: ["Vitals signs stable"]
+      statusList: [{ key: "vitals-signs-stable", value: "Vitals signs stable" }]
     };
   },
   methods: {
@@ -40,10 +40,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Vitals signs stable") {
-          request["vitals-signs-stable"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateConstitutionalInSM", {

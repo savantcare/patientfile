@@ -3,7 +3,12 @@
     <el-button type="text" @click="setNormalStatus" v-if="showNormalButton">Normal (Short code)</el-button>
 
     <el-checkbox-group v-model="checkList">
-      <el-checkbox v-for="(status, index) in statusList" :key="`status-${index}`" :label="status"></el-checkbox>
+      <el-checkbox
+        v-for="(status, index) in statusList"
+        :key="`status-${index}`"
+        :label="status.value"
+        :value="status.key"
+      ></el-checkbox>
     </el-checkbox-group>
 
     <el-input type="textarea" placeholder="Others (optional)" v-model="others"></el-input>
@@ -56,7 +61,18 @@ export default {
         return false;
       }
       return true;
+    },
+    updateCheckList() {
+      return this.$store.state.mse.checkedList;
     }
+  },
+  watch: {
+    updateCheckList() {
+      this.renderCheckedValues();
+    }
+  },
+  mounted() {
+    this.renderCheckedValues();
   },
   methods: {
     saveChanges() {
@@ -75,6 +91,22 @@ export default {
       this.checkList = [];
       this.others = "";
       this.date = new Date();
+    },
+    renderCheckedValues() {
+      this.checkList = [];
+      const checkList = this.statusList.filter(status => {
+        const checkedValues = this.updateCheckList.filter(updateItem => {
+          return updateItem == status.key;
+        });
+        if (checkedValues.length > 0) {
+          return true;
+        }
+      });
+      if (checkList.length > 0) {
+        checkList.forEach(item => {
+          this.checkList.push(item.value);
+        });
+      }
     }
   }
 };

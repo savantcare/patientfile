@@ -15,7 +15,24 @@ export default {
   },
   data() {
     return {
-      statusList: ["Appropriate", "Downcast", "Intense", "Fleeting"],
+      statusList: [
+        {
+          key: "appropriate",
+          value: "Appropriate"
+        },
+        {
+          key: "downcast",
+          value: "Downcast"
+        },
+        {
+          key: "intense",
+          value: "Intense"
+        },
+        {
+          key: "fleeting",
+          value: "Fleeting"
+        }
+      ],
       normalStatusList: ["Appropriate"]
     };
   },
@@ -40,16 +57,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Appropriate") {
-          request["appropriate"] = value;
-        } else if (status == "Downcast") {
-          request["downcast"] = value;
-        } else if (status == "Intense") {
-          request["intense"] = value;
-        } else if (status == "Fleeting") {
-          request["fleeting"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateEyeContactInSM", {

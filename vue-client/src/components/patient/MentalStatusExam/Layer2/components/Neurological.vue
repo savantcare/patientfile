@@ -13,7 +13,16 @@ export default {
   components: { BaseComponent },
   data() {
     return {
-      statusList: ["Gait and station normal", "Gait and station abnormal"]
+      statusList: [
+        {
+          key: "gait-and-station-normal",
+          value: "Gait and station normal"
+        },
+        {
+          key: "gait-and-station-abnormal",
+          value: "Gait and station abnormal"
+        }
+      ]
     };
   },
   methods: {
@@ -37,12 +46,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Gait and station normal") {
-          request["gait-and-station-normal"] = value;
-        } else if (status == "Gait and station abnormal") {
-          request["gait-and-station-abnormal"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateNeurologicalInSM", {
