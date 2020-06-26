@@ -3,6 +3,16 @@ import Attitude from './models/attitude'
 import Cognition from './models/cognition'
 import Constitutional from './models/constitutional'
 import EyeContact from './models/eyeContact'
+import ImpulseControl from './models/impulseControl'
+import ThoughtProcess from './models/thoughtProcess'
+import Psychomotor from './models/psychomotor'
+import Insight from './models/insight'
+import Speech from './models/speech'
+import Judgement from './models/judgement'
+import Affect from './models/affect'
+import ThoughtContent from './models/thoughtContent'
+import Neurological from './models/neurological'
+import Perception from './models/perception'
 
 const state = {
   selectedType: '',
@@ -331,18 +341,17 @@ const actions = {
       })
     }
   },
-  async getImpulseControl({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getImpulseControl`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setImpulseControlList", json)
+  async getImpulseControl(_, params) {
+    const { patientId } = params
+    const count = await ImpulseControl.query().count()
+    if (count == 0) {
+      await ImpulseControl.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getImpulseControl`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateThoughtProcessInSM(_, params) {
@@ -377,18 +386,17 @@ const actions = {
       })
     }
   },
-  async getThoughtProcess({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtProcess`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setThoughtProcessList", json)
+  async getThoughtProcess(_, params) {
+    const { patientId } = params
+    const count = await ThoughtProcess.query().count()
+    if (count == 0) {
+      await ThoughtProcess.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtProcess`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdatePsychomotorInSM(_, params) {
@@ -423,18 +431,17 @@ const actions = {
       })
     }
   },
-  async getPsychomotor({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getPsychomotor`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setPsychomotorList", json)
+  async getPsychomotor(_, params) {
+    const { patientId } = params
+    const count = await Psychomotor.query().count()
+    if (count == 0) {
+      await Psychomotor.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getPsychomotor`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateInsightInSM(_, params) {
@@ -469,18 +476,17 @@ const actions = {
       })
     }
   },
-  async getInsight({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getInsight`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setInsightList", json)
+  async getInsight(_, params) {
+    const { patientId } = params
+    const count = await Insight.query().count()
+    if (count == 0) {
+      await Insight.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getInsight`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateSpeechInSM(_, params) {
@@ -515,18 +521,17 @@ const actions = {
       })
     }
   },
-  async getSpeech({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getSpeech`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setSpeechList", json)
+  async getSpeech(_, params) {
+    const { patientId } = params
+    const count = await Speech.query().count()
+    if (count == 0) {
+      await Speech.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getSpeech`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateJudgementInSM(_, params) {
@@ -561,18 +566,17 @@ const actions = {
       })
     }
   },
-  async getJudgement({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getJudgement`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setJudgementList", json)
+  async getJudgement(_, params) {
+    const { patientId } = params
+    const count = await Judgement.query().count()
+    if (count == 0) {
+      await Judgement.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getJudgement`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateAffectInSM(_, params) {
@@ -607,18 +611,17 @@ const actions = {
       })
     }
   },
-  async getAffect({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getAffect`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setAffectList", json)
+  async getAffect(_, params) {
+    const { patientId } = params
+    const count = await Affect.query().count()
+    if (count == 0) {
+      await Affect.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getAffect`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateThoughtContentInSM(_, params) {
@@ -653,18 +656,17 @@ const actions = {
       })
     }
   },
-  async getThoughtContent({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtContent`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setThoughtContentList", json)
+  async getThoughtContent(_, params) {
+    const { patientId } = params
+    const count = await ThoughtContent.query().count()
+    if (count == 0) {
+      await ThoughtContent.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtContent`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateNeurologicalInSM(_, params) {
@@ -699,18 +701,17 @@ const actions = {
       })
     }
   },
-  async getNeurological({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getNeurological`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setNeurologicalList", json)
+  async getNeurological(_, params) {
+    const { patientId } = params
+    const count = await Neurological.query().count()
+    if (count == 0) {
+      await Neurological.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getNeurological`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdatePerceptionInSM(_, params) {
@@ -745,18 +746,17 @@ const actions = {
       })
     }
   },
-  async getPerception({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getPerception`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setPerceptionList", json)
+  async getPerception(_, params) {
+    const { patientId } = params
+    const count = await Perception.query().count()
+    if (count == 0) {
+      await Perception.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getPerception`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   }
 }
