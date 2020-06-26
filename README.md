@@ -17,4 +17,9 @@ Naming Goals:
 
 1. When I look at variable, array, function, object, component the name should tell me what it is
 2. Short names
-3. If a function call is a api call the name will tell me it is a API call. Since API is a subset of fn so you do not need to repeat fn
+3. How are the different function types distinguished?
+   apiGetAge -> This is api function
+   cfGetAge -> This is computed function
+   wfGetAge -> This is a watch function
+   mfGetAge -> This is method function
+   fnGetAge -> This is a non categorized function
