@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Neurological from "../models/neurological";
 export default {
   components: { Graph },
 
@@ -11,20 +12,25 @@ export default {
     series() {
       let series = [];
 
-      const neurologicals = this.$store.state.mse.neurologicalList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const neurologicals = Neurological.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let normalData = [];
       let abnormalData = [];
 
       for (const neurological of neurologicals) {
-        const { createDate } = neurological;
+        const { timeOfEvaluation } = neurological;
 
         normalData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: neurological["gait-and-station-normal"] == "yes" ? 1 : 0
         });
         abnormalData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: neurological["gait-and-station-abnormal"] == "yes" ? 1 : 0
         });
       }

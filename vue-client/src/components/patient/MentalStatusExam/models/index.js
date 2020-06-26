@@ -11,7 +11,7 @@ module.exports = (database) => {
   const speech = require('./speech').default
   const judgement = require('./judgement').default
   const affect = require('./affect').default
-  const thoughtContent = require('./affect').default
+  const thoughtContent = require('./thoughtContent').default
   const neurological = require('./neurological').default
   const perception = require('./perception').default
 

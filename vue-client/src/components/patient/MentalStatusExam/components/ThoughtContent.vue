@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import ThoughtContent from "../models/thoughtContent";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const thoughtContents = this.$store.state.mse.thoughtContentList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const thoughtContents = ThoughtContent.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let noSiIntentData = [];
       let noPassiveDeathData = [];
@@ -28,58 +34,58 @@ export default {
       let passiveData = [];
 
       for (const thoughtContent of thoughtContents) {
-        const { createDate } = thoughtContent;
+        const { timeOfEvaluation } = thoughtContent;
 
         noSiIntentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["no-si-intent-or-plan"] == "yes" ? 1 : 0
         });
         noPassiveDeathData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["no-passive-death-wish"] == "yes" ? 1 : 0
         });
         noHiIntentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["no-hi-intent-or-plan"] == "yes" ? 1 : 0
         });
         noDelusionalData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["no-delusional-thinking-observed"] == "yes" ? 1 : 0
         });
         noObessiveData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["no-obsessive-thinking-observed"] == "yes" ? 1 : 0
         });
         ruminationData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["ruminations"] == "yes" ? 1 : 0
         });
         siWithoutData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["si-without-intent-or-plan"] == "yes" ? 1 : 0
         });
         siAsData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["si-as-detailed-below"] == "yes" ? 1 : 0
         });
         hiAsData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["hi-as-detailed-below"] == "yes" ? 1 : 0
         });
         delusionData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["delusions"] == "yes" ? 1 : 0
         });
         iorData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["ior"] == "yes" ? 1 : 0
         });
         obessionData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["obsessions"] == "yes" ? 1 : 0
         });
         passiveData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtContent["passive-death-wish"] == "yes" ? 1 : 0
         });
       }

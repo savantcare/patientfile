@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import ThoughtProcess from "../models/thoughtProcess";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const thoughtProceses = this.$store.state.mse.thoughtProcessList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const thoughtProceses = ThoughtProcess.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let linearData = [];
       let disorganizedData = [];
@@ -22,34 +28,34 @@ export default {
       let povertyData = [];
 
       for (const thoughtProcess of thoughtProceses) {
-        const { createDate } = thoughtProcess;
+        const { timeOfEvaluation } = thoughtProcess;
 
         linearData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["linear-logical-and-goal-directed"] == "yes" ? 1 : 0
         });
         disorganizedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["disorganized"] == "yes" ? 1 : 0
         });
         circumstantialData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["circumstantial"] == "yes" ? 1 : 0
         });
         tangentialData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["tangential"] == "yes" ? 1 : 0
         });
         looseData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["looseness-of-associations"] == "yes" ? 1 : 0
         });
         flightData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["flight-of-ideas"] == "yes" ? 1 : 0
         });
         povertyData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: thoughtProcess["poverty-of-thought"] == "yes" ? 1 : 0
         });
       }

@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Perception from "../models/perception";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const perceptions = this.$store.state.mse.perceptionList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const perceptions = Perception.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let noAvhData = [];
       let ahData = [];
@@ -19,22 +25,22 @@ export default {
       let vhData = [];
 
       for (const perception of perceptions) {
-        const { createDate } = perception;
+        const { timeOfEvaluation } = perception;
 
         noAvhData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: perception["no-avh"] == "yes" ? 1 : 0
         });
         ahData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: perception["ahData"] == "yes" ? 1 : 0
         });
         commandAhData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: perception["command-ah"] == "yes" ? 1 : 0
         });
         vhData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: perception["vh"] == "yes" ? 1 : 0
         });
       }

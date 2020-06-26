@@ -41,6 +41,17 @@ import Attitude from "./models/attitude";
 import Cognition from "./models/cognition";
 import Constitutional from "./models/constitutional";
 import EyeContact from "./models/eyeContact";
+
+import ImpulseControl from "./models/impulseControl";
+import Insight from "./models/insight";
+import Judgement from "./models/judgement";
+import Affect from "./models/affect";
+import Neurological from "./models/neurological";
+import Perception from "./models/perception";
+import Psychomotor from "./models/psychomotor";
+import Speech from "./models/speech";
+import ThoughtContent from "./models/thoughtContent";
+import ThoughtProcess from "./models/thoughtProcess";
 export default {
   components: {
     CardHeader
@@ -257,6 +268,356 @@ export default {
 
       return string;
     },
+    impulseControl() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = ImpulseControl.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    insight() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Insight.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    judgement() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Judgement.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    affect() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Affect.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    neurological() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Neurological.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    perception() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Perception.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    psychomotor() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Psychomotor.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    speech() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Speech.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    thoughtContent() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = ThoughtContent.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
+    thoughtProcess() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = ThoughtProcess.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      let string = "";
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key] == "yes") {
+            string += key + ",";
+          }
+        });
+      }
+      if (string.length > 0) {
+        string = string.slice(0, -1);
+      } else {
+        string = "-";
+      }
+
+      return string;
+    },
     tableData() {
       return [
         {
@@ -266,7 +627,7 @@ export default {
         },
         {
           label: "Mood/Affect",
-          value: "-"
+          value: this.affect
         },
         {
           label: "Attitude",
@@ -286,39 +647,39 @@ export default {
         },
         {
           label: "Impulse Control",
-          value: "-"
+          value: this.impulseControl
         },
         {
           label: "Insight",
-          value: "-"
+          value: this.insight
         },
         {
           label: "Judgement",
-          value: "-"
+          value: this.judgement
         },
         {
           label: "Perception",
-          value: "-"
+          value: this.perception
         },
         {
           label: "Psychomotor",
-          value: "-"
+          value: this.psychomotor
         },
         {
           label: "Speech",
-          value: "-"
+          value: this.speech
         },
         {
           label: "Thought Content",
-          value: "-"
+          value: this.thoughtContent
         },
         {
           label: "Thought Process",
-          value: "-"
+          value: this.thoughtProcess
         },
         {
           label: "Neurological",
-          value: "-"
+          value: this.neurological
         }
       ];
     },

@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Judgement from "../models/judgement";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const judgements = this.$store.state.mse.judgementList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const judgements = Judgement.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let goodData = [];
       let fairData = [];
@@ -21,30 +27,30 @@ export default {
       let limitedData = [];
 
       for (const judgement of judgements) {
-        const { createDate } = judgement;
+        const { timeOfEvaluation } = judgement;
 
         goodData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["good"] == "yes" ? 1 : 0
         });
         fairData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["fair"] == "yes" ? 1 : 0
         });
         questionData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["questionable"] == "yes" ? 1 : 0
         });
         poorData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["poor"] == "yes" ? 1 : 0
         });
         impairedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["impaired"] == "yes" ? 1 : 0
         });
         limitedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: judgement["limited"] == "yes" ? 1 : 0
         });
       }

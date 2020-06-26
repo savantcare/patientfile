@@ -658,7 +658,9 @@ const actions = {
   },
   async getThoughtContent(_, params) {
     const { patientId } = params
+    console.log("getThoughtContent")
     const count = await ThoughtContent.query().count()
+    console.log('thought_content count: ', count)
     if (count == 0) {
       await ThoughtContent.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getThoughtContent`, {
         headers: {

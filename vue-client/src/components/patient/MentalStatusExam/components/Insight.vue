@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Insight from "../models/insight";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const insights = this.$store.state.mse.insightList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const insights = Insight.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let goodData = [];
       let fairData = [];
@@ -21,30 +27,30 @@ export default {
       let limitedData = [];
 
       for (const insight of insights) {
-        const { createDate } = insight;
+        const { timeOfEvaluation } = insight;
 
         goodData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["good"] == "yes" ? 1 : 0
         });
         fairData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["fair"] == "yes" ? 1 : 0
         });
         questionData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["questionable"] == "yes" ? 1 : 0
         });
         poorData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["poor"] == "yes" ? 1 : 0
         });
         impairedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["impaired"] == "yes" ? 1 : 0
         });
         limitedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: insight["limited"] == "yes" ? 1 : 0
         });
       }

@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Speech from "../models/speech";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const speeches = this.$store.state.mse.speechList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const speeches = Speech.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let regularData = [];
       let fluentData = [];
@@ -21,30 +27,30 @@ export default {
       let mumblingData = [];
 
       for (const speech of speeches) {
-        const { createDate } = speech;
+        const { timeOfEvaluation } = speech;
 
         regularData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["regular-rate-and-rhythm"] == "yes" ? 1 : 0
         });
         fluentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["fluent"] == "yes" ? 1 : 0
         });
         incoherentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["incoherent"] == "yes" ? 1 : 0
         });
         talkNativeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["talkative"] == "yes" ? 1 : 0
         });
         pressuredData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["pressured"] == "yes" ? 1 : 0
         });
         mumblingData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: speech["mumbling"] == "yes" ? 1 : 0
         });
       }

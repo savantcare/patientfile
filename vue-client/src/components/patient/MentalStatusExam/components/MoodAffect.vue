@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import Affect from "../models/affect";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const affects = this.$store.state.mse.affectList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const affects = Affect.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let euthymicData = [];
       let dysphoricData = [];
@@ -33,78 +39,78 @@ export default {
       let dysthymicData = [];
 
       for (const affect of affects) {
-        const { createDate } = affect;
+        const { timeOfEvaluation } = affect;
 
         euthymicData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["euthymic"] == "yes" ? 1 : 0
         });
         dysphoricData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["dysphoric"] == "yes" ? 1 : 0
         });
         irritableData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["irritable"] == "yes" ? 1 : 0
         });
         angryData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["angry"] == "yes" ? 1 : 0
         });
         brightData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["bright"] == "yes" ? 1 : 0
         });
         euphoricData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["euphoric"] == "yes" ? 1 : 0
         });
         labileData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["labile"] == "yes" ? 1 : 0
         });
         stableData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["stable"] == "yes" ? 1 : 0
         });
         moodCongruentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["mood-congruent"] == "yes" ? 1 : 0
         });
         moodIncogruentData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["mood-incongruent"] == "yes" ? 1 : 0
         });
         expansiveData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["expansive"] == "yes" ? 1 : 0
         });
         fullRangeData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["full-range"] == "yes" ? 1 : 0
         });
         constrictedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["constricted"] == "yes" ? 1 : 0
         });
         bluntedData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["blunted"] == "yes" ? 1 : 0
         });
         flatData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["flat"] == "yes" ? 1 : 0
         });
         anxiousData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["anxious"] == "yes" ? 1 : 0
         });
         tearfulData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["tearful"] == "yes" ? 1 : 0
         });
         dysthymicData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: affect["dysthymic"] == "yes" ? 1 : 0
         });
       }
