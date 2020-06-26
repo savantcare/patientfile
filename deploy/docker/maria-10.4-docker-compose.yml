@@ -26,9 +26,9 @@ services:
     restart: always
     volumes:
       - mariadb-data:/var/lib/mysql
-      - /gt/sc-prog-repos/patientfile/db/:/db
+      - /gt/sc-prog-repos/patientfile/:/gt/sc-prog-repos/patientfile/
     ports:
-      - 3306:3306
+      - 4000:3306
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
 
