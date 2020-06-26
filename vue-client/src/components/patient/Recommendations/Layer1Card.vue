@@ -54,7 +54,7 @@
 import CardHeader from "@/components/common/CardHeader";
 import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
-import Recommendation from "./vuex-orm-models/recommendation";
+import ormRecommendation from "./vuex-orm-models/recommendation";
 
 export default {
   components: {
@@ -226,7 +226,8 @@ export default {
           ).getTime() / 1000
         );
 
-      const rexEvalList = Recommendation.query()
+      const rexEvalList = ormRecommendation
+        .query()
         .where("ROW_START", value => value < timeStampOfStateInsideCt)
         .where("ROW_END", value => value > timeStampOfStateInsideCt)
         .orderBy("uuid")
