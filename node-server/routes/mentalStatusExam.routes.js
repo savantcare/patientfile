@@ -209,7 +209,7 @@ router.post('/updateEyeContact', async (req, res) => {
 router.post('/getEyeContact', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await EyeContact.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`eye-contact\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await EyeContact.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`eye-contact\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT

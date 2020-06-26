@@ -4,6 +4,7 @@
 
 <script>
 import Graph from "./_BaseGraph";
+import EyeContact from "../models/eyeContact";
 export default {
   components: { Graph },
 
@@ -11,7 +12,12 @@ export default {
     series() {
       let series = [];
 
-      const eyeContacts = this.$store.state.mse.eyeContactList;
+      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const eyeContacts = EyeContact.query()
+        .where("ROW_START", value => value < currentUnixTimeStamp)
+        .where("ROW_END", value => value > currentUnixTimeStamp)
+        .orderBy("ROW_START", "desc")
+        .get();
 
       let appropriateData = [];
       let downcastData = [];
@@ -19,22 +25,22 @@ export default {
       let fleetingData = [];
 
       for (const eyeContact of eyeContacts) {
-        const { createDate } = eyeContact;
+        const { timeOfEvaluation } = eyeContact;
 
         appropriateData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: eyeContact["appropriate"] == "yes" ? 1 : 0
         });
         downcastData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: eyeContact["downcast"] == "yes" ? 1 : 0
         });
         intenseData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: eyeContact["intense"] == "yes" ? 1 : 0
         });
         fleetingData.push({
-          x: createDate,
+          x: timeOfEvaluation,
           y: eyeContact["fleeting"] == "yes" ? 1 : 0
         });
       }
