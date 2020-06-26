@@ -1,20 +1,13 @@
-import { COMPONENT_API_URL } from "@/const/others.js"
-import Component from "../../components/common/roleBasedAccess/vuex-orm-model/component"
-import ComponentsAllowedForUserRole from "../../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole"
+import { COMPONENT_API_URL } from "@/const/others.js";
+import Component from "../../components/common/roleBasedAccess/vuex-orm-model/component";
+import ComponentsAllowedForUserRole from "../../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
 export default {
-  state: {
-    list: []
-  },
-  mutations: {
-    setComponentList(state, value) {
-      state.list = value
-    }
-  },
   data: {
     oneComponentQueryIsRunningGate: false,
     oneUserComponentQueryIsRunningGate: false,
   },
-  actions: {        // Question: Should all actions should begin with An so when I am reading the code and I see loadComponents I know it is an action ?
+  actions: {
+    // Question: Should all actions should begin with An so when I am reading the code and I see loadComponents I know it is an action ?
 
     // This function is only called once when / route is used for patientFile.vue to get loaded.
 
@@ -48,9 +41,9 @@ export default {
     },*/
 
     async loadComponentsInStateDisplayArea({ commit }, params) {
-      const { notify } = params
+      const { notify } = params;
       try {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
 
         if (!this.oneComponentQueryIsRunningGate) {
           console.log("Called loadComponentsInStateDisplayArea s ad asd");
@@ -62,9 +55,8 @@ export default {
               headers: {
                 Authorization: "Bearer " + token,
                 "Content-Type": "application/json;charset=utf-8",
-              }
-            }
-            );
+              },
+            });
             console.log(
               "Number of components in model =>",
               Component.query().count()
@@ -76,27 +68,31 @@ export default {
         console.log(commit);
         notify({
           title: "Error",
-          message: "Server connection error"
-        })
+          message: "Server connection error",
+        });
       }
     },
 
     async loadComponentsBasedOnUserRole({ commit }, params) {
-
-      const TOKEN = localStorage.getItem("token")
-      const { roleUUID, notify } = params
+      const TOKEN = localStorage.getItem("token");
+      const { roleUUID, notify } = params;
       try {
         if (!this.oneUserComponentQueryIsRunningGate) {
           this.oneUserComponentQueryIsRunningGate = true;
           let countusercomponent = await ComponentsAllowedForUserRole.query().count();
-          console.log("Number of ComponentsAllowedForUserRole before query =>", countusercomponent);
+          console.log(
+            "Number of ComponentsAllowedForUserRole before query =>",
+            countusercomponent
+          );
           if (countusercomponent == 0) {
-            await ComponentsAllowedForUserRole.api().get(`${COMPONENT_API_URL}/getComponentsAllowedForUserRole/?roleUUID=${roleUUID}`, {
-              headers: {
-                Authorization: "Bearer " + TOKEN,
-                "Content-Type": "application/json;charset=utf-8",
+            await ComponentsAllowedForUserRole.api().get(
+              `${COMPONENT_API_URL}/getComponentsAllowedForUserRole/?roleUUID=${roleUUID}`,
+              {
+                headers: {
+                  Authorization: "Bearer " + TOKEN,
+                  "Content-Type": "application/json;charset=utf-8",
+                },
               }
-            }
             );
             console.log(
               "Number of ComponentsAllowedForUserRole in model =>",
@@ -109,12 +105,9 @@ export default {
         console.log(commit);
         notify({
           title: "Error",
-          message: "Server connection error"
-        })
+          message: "Server connection error",
+        });
       }
-
-    }
-
-
-  }
-}
+    },
+  },
+};

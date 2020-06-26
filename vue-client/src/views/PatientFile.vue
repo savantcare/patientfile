@@ -133,7 +133,7 @@ src/router/index.js sends control here if the / route is given by the user
         <component
           v-for="(component, index) in multiStateDisplayAreaComponents"
           :key="`multi-state-display-area-component-${index}`"
-          :is="component.value"
+          :is="component.name"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
         ></component>
       </SplitArea>
@@ -158,10 +158,11 @@ src/router/index.js sends control here if the / route is given by the user
 </template>
 
 <script>
+// This is needed for this component to be referred in the template
 const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
-import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+//import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
 import Component from "../components/common/roleBasedAccess/vuex-orm-model/component";
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
@@ -210,58 +211,52 @@ export default {
       return this.$store.state.focusComponent;
     },
     CurrentStateDisplayAreaComponents() {
-      return this.$store.getters.currentStateDisplayAreaList; // TODO: NAMING: When I read this line how do I know it goes to store/modules/currentStateDisplayArea.js/currentStateDisplayAreaList
-    },
-    multiStateDisplayAreaComponents() {
-      ///  implement new code to fetch userComponent by oxm model and return it to show
-      // it in the template file , remove unwanted code.
-
-      let multiStateDisplayAreaComponents = [];
-      let currentStateDisplayAreaComponents = [];
       const arAllCtList = Component.all();
-      const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+      /*const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+      
       arCtListAllowedForUserRole.map(function(item) {
-        if (item.multiStateDisplayAreaImportance > 0)
-          multiStateDisplayAreaComponents.push(item.componentUUID);
-
         if (item.currentStateDisplayAreaImportance > 0)
           currentStateDisplayAreaComponents.push(item.componentUUID);
       });
-      //console.log("=======", usercomponentList);
 
       const componentType = this.$store.state.multiStateDisplayArea
         .componentType; // Possible values are health or other.
 
-      console.log(this.$store.state.component.list);
-
       const components = arAllCtList.filter(
-        // TODO: NAMING: How do I know where is the store.state.component.list
-        /* 
-          For each component the type of the component is stored in sc_component -> ctMaster -> tag
-          Tag is used since some components may belong to both health and other type.
-        */
+         
+         // For each component the type of the component is stored in sc_component -> ctMaster -> tag
+        //  Tag is used since some components may belong to both health and other type.
+        
         item => item.tag == componentType
       );
+*/
+      console.log(arAllCtList);
+      return arAllCtList;
+    },
 
-      const list = this.$store.getters.multiStateDisplayAreaCtList.filter(
-        item => {
-          const verifyComponent =
-            components.filter(
-              component =>
-                component.name.toLowerCase() == item.abbreviation.toLowerCase()
-            ).length > 0;
-          return verifyComponent;
-        }
-      );
-
-      console.log(list);
-
+    multiStateDisplayAreaComponents() {
+      const arAllCtList = Component.all();
       /*
-      This code needs to be refactored and made simpler. TODO: return list used to work earlier but it does not work now
-    */
-      //return list;
-      console.log(this.$store.getters.multiStateDisplayAreaCtList);
-      return this.$store.getters.multiStateDisplayAreaCtList;
+      const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+
+      arCtListAllowedForUserRole.map(function(item) {
+        if (item.multiStateDisplayAreaImportance > 0)
+          multiStateDisplayAreaComponents.push(item.componentUUID);
+      });
+
+      const componentType = this.$store.state.multiStateDisplayArea.componentType; // Possible values are health or other.
+
+      const components = arAllCtList.filter(
+         
+          // For each component the type of the component is stored in sc_component -> ctMaster -> tag
+          // Tag is used since some components may belong to both health and other type.
+        
+        item => item.tag == componentType
+      );
+      
+      */
+
+      return arAllCtList;
     }
   },
   beforeCreate() {},
@@ -287,9 +282,6 @@ export default {
 
     // KT: Actions are triggered with the store.dispatch method. Ref: https://vuex.vuejs.org/guide/actions.html#dispatching-actions
     // This changes only once in a long time. When this value is changed on the server DB I expect the doctor to clear their cache on the browser.
-    // store.cache.dispatch Dispatches an action if it's not cached and sets it in cache, otherwise it returns cached Promise.
-    // Ref: https://www.npmjs.com/package/vuex-cache#storecachedispatch
-    // TODO: The fn call is not getting cached.
 
     // get the user component based on user roleName
     this.$store.cache.dispatch("loadComponentsBasedOnUserRole", {
@@ -298,12 +290,12 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    /*
     this.$store.cache.dispatch("loadComponentsInStateDisplayArea", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
+    /*
     this.$store.cache.dispatch("loadUserRole", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
