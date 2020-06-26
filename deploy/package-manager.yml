@@ -1,0 +1,14 @@
+- name: First 5 minutes in new servers
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  become_user: root
+
+  tasks:
+    ## Step1/3: Making sure server has secure packages
+    - name: Update APT packages cache
+      apt: update_cache=yes
+
+    - name: Perform aptitude safe-upgrade
+      apt:
+        upgrade: dist
