@@ -25,7 +25,7 @@
     - name: Install required packages
       apt: state=installed pkg={{ item }}
       with_items:
-        - "{{ required_packages }}"
+        - "pkg: ['{{ required_packages }}']"
 
     # Allow only ssh and http(s) ports
     - name: Allow ssh and http(s) connections
