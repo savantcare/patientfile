@@ -3,6 +3,21 @@
 FILE=/etc/gt-releases
 if test -f "$FILE"; then
     echo "$FILE exists."
+    read -r dateOfCustomization<$FILE
+    echo $dateOfCustomization
+
+    minDate=$(date -d 2020-07-18 +%s)
+    customizeDate=$(date -d $dateOfCustomization)
+    
+    if [ "$$dateOfCustomization" > "$minDate" ];
+    then
+	break
+    else
+	echo "Run customize-ubuntu-server to update this servers security";
+	exit
+    fi  
+
+    
 else
     echo "Run customize-ubuntu-server before this"
     exit
