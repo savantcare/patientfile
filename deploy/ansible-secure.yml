@@ -22,11 +22,12 @@
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
       notify: Restart ssh
 
-    - name: Change ssh port to 8888
+    - name: Change ssh port to 90
       set_fact:
         ansible_port: 90
+      notify: Restart ssh
 
-    ## Step3/3: Making network layer more secure
+      ## Step3/3: Making network layer more secure
     - name: Install a list of packages
       apt:
         pkg:
@@ -36,7 +37,8 @@
           - unattended-upgrades
           - logwatch
 
-    # VERIFY: > ufw status        > sudo netstat -ntlp | grep LISTEN
+    # VERIFY: > ufw status
+    #         > sudo netstat -ntlp | grep LISTEN
     - name: Allow all access to tcp port 80
       ufw:
         rule: allow
