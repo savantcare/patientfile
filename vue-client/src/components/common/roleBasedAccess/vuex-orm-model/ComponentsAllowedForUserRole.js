@@ -9,9 +9,10 @@ export default class ComponentsAllowedForUserRole extends Model {
     static fields() {
         return {
             uuid: this.attr(null),
-            tag: this.attr(null),
-            name: this.attr(null),
-            abbreviation: this.attr(null)
+            roleUUID: this.attr(null),
+            componentUUID: this.attr(null),
+            multiStateDisplayAreaImportance: this.attr(null),
+            currentStateDisplayAreaImportance: this.attr(null)
         };
     }
 }
