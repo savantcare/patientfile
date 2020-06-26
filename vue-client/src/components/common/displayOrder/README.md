@@ -22,7 +22,7 @@ displayOrderInCurrentStateSide
 then for loop of displayOrderInMultiStateSide
 patientFile.vue:133
 <component
-          v-for="(component, index) in multiStateDisplayAreaComponents"
+          v-for="(component, index) in cfGetMultiStateDisplayAreaCts"
           :key="`multi-state-display-area-component-${index}`"
           :is="component.value"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
@@ -31,7 +31,7 @@ patientFile.vue:133
 and for loop of displayOrderInCurrentStateSide
 patientFile.vue:143
 <component
-              v-for="(component, index) in CurrentStateDisplayAreaComponents"
+              v-for="(component, index) in cfGetCurrentStateDisplayAreaCts"
               :key="`current-state-display-area-component-${index}`"
               :is="component.value"
             ></component>

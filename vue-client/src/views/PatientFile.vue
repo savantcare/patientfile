@@ -131,7 +131,7 @@ src/router/index.js sends control here if the / route is given by the user
 
         <!-- TODO: keep alive is not working. The sql query is still being called when rex command is given twice -->
         <component
-          v-for="(component, index) in multiStateDisplayAreaComponents"
+          v-for="(component, index) in cfGetMultiStateDisplayAreaCts"
           :key="`multi-state-display-area-component-${index}`"
           :is="component.name"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
@@ -141,7 +141,7 @@ src/router/index.js sends control here if the / route is given by the user
         <keep-alive>
           <transition-group name="list" tag="div">
             <component
-              v-for="(component, index) in CurrentStateDisplayAreaComponents"
+              v-for="(component, index) in cfGetCurrentStateDisplayAreaCts"
               :key="`current-state-display-area-component-${index}`"
               :is="component.name"
             ></component>
@@ -209,7 +209,7 @@ export default {
     focusComponent() {
       return this.$store.state.focusComponent;
     },
-    CurrentStateDisplayAreaComponents() {
+    cfGetCurrentStateDisplayAreaCts() {
       const arAllCtList = ormComponent.all();
 
       const arCtListAllowedForUserRole = ormComponentsAllowedForUserRole
@@ -260,7 +260,7 @@ export default {
       return arCtListOrderedByImportance;
     },
 
-    multiStateDisplayAreaComponents() {
+    cfGetMultiStateDisplayAreaCts() {
       const arAllCtList = ormComponent.all();
 
       const arCtListAllowedForUserRole = ormComponentsAllowedForUserRole
