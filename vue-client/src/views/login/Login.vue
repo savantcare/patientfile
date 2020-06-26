@@ -55,12 +55,14 @@ export default {
         if (response.ok) {
           const json = await response.json();
           console.log(json);
-          const { access_token, roleUUID, userId } = json;
+          const { access_token, roleUUID, userUUID } = json;
           localStorage.setItem("token", access_token);
           this.$store.dispatch("getRoleDetails", roleUUID);
           // this.$store.commit("setUserRole", role);
-          this.$router.push("/?patient_id=1");
-          this.$store.commit("setUserId", userId);
+          this.$router.push(
+            "/?patient_id=bfe041fa-073b-4223-8c69-0540ee678ff8"
+          );
+          this.$store.commit("setUserId", userUUID);
         } else {
           this.$bvToast.toast("Authentication failed", {
             title: "Error",
@@ -100,13 +102,13 @@ export default {
             });
             if (response.ok) {
               const json = await response.json();
-              const { access_token, roleId, userId } = json;
+              const { access_token, roleUUID, userUUID } = json;
               localStorage.setItem("token", access_token);
-              this.$store.dispatch("getRoleDetails", roleId);
+              this.$store.dispatch("getRoleDetails", roleUUID);
               this.$router.push(
                 "/?patient_id=bfe041fa-073b-4223-8c69-0540ee678ff8"
               );
-              this.$store.commit("setUserId", userId);
+              this.$store.commit("setUserId", userUUID);
             } else {
               this.$notify({
                 title: "Error",

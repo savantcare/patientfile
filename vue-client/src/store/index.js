@@ -37,6 +37,7 @@ import multiStateDisplayAreaModule from "../components/common/multiStateDisplayA
 import userRoleModule from "../components/common/userRole/stateDBSocket"
 
 // vuex-orm models.
+import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole"
 import Components from "../components/common/roleBasedAccess/vuex-orm-model/component"
 import UserRole from "../components/common/userRole/vuex-orm-model/userRole"
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
@@ -48,6 +49,7 @@ import { ROLE_API_URL } from "@/const/others.js";
 import searchCommandsList from "@/const/searchCommandsList.js";
 
 const database = new VuexORM.Database();
+database.register(ComponentsAllowedForUserRole);
 database.register(Components);
 database.register(UserRole);
 database.register(Diagnosis);
@@ -58,6 +60,7 @@ require('../components/patient/MentalStatusExam/models/index.js')(database)
 export default new Vuex.Store({
   state: {
     userRole: "",
+    userRoleUUID: "",
     searchCommandsList: [],
     focusComponent: "",
     connectionStatus: true, // true: online, false: offline
@@ -73,6 +76,9 @@ export default new Vuex.Store({
   mutations: {
     setUserRole(state, data) {
       state.userRole = data;
+    },
+    setUserRoleUUID(state, data) {
+      state.userRoleUUID = data;
     },
     setFocusComponent(state, value) {
       state.focusComponent = value;
@@ -98,7 +104,7 @@ export default new Vuex.Store({
     async getRoleDetails({ commit }, roleUUID) {
       const token = localStorage.getItem("token");
 
-      console.log(roleUUID);
+      console.log("-------------", roleUUID);
       /* TODO: This hard code needs to be removed
       const response = await fetch(`${ROLE_API_URL}/${roleId}`, {
         headers: {
@@ -106,13 +112,11 @@ export default new Vuex.Store({
         },
       });
       */
-      const response = await fetch(
-        `${ROLE_API_URL}/897d25c6-2c84-47fe-9236-2c3cc9c70bdf`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+      const response = await fetch(`${ROLE_API_URL}/${roleUUID}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
       );
       if (response.ok) {
         const json = await response.json();
@@ -124,6 +128,9 @@ export default new Vuex.Store({
           currentStateDisplayAreaComponentLoadSequence,
         } = json;
         commit("setUserRole", name);
+        commit("setUserRoleUUID", roleUUID);
+
+
 
         // Get AllowAccesedComponents
         const components = componentsAllowedToAccess.split(",");
@@ -147,7 +154,9 @@ export default new Vuex.Store({
           ","
         );
         console.log("LeftComponents_____________");
-        console.log(leftComponents);
+        console.log(leftComponents);        //0: "Rex" 1: "Rem"
+
+
         commit("setMultiStateDisplayAreaCtList", leftComponents, {
           root: true,
         });

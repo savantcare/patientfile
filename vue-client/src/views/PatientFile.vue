@@ -161,6 +161,10 @@ src/router/index.js sends control here if the / route is given by the user
 const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
+import ComponentsAllowedForUserRole from "@/components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+
+//vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
+
 // Right panel components
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/common/SearchBoxForCommandsFromUser.vue");
@@ -208,6 +212,19 @@ export default {
       return this.$store.getters.currentStateDisplayAreaList; // TODO: NAMING: When I read this line how do I know it goes to store/modules/currentStateDisplayArea.js/currentStateDisplayAreaList
     },
     multiStateDisplayAreaComponents() {
+      ///  implement new code to fetch userComponent by oxm model and return it to show
+      // it in the template file , remove unwanted code.
+
+      let leftComponents = [];
+      const usercomponentList = ComponentsAllowedForUserRole.all();
+      usercomponentList.map(function(item) {
+        leftComponents.push(item.abbreviation);
+      });
+      //console.log("=======", usercomponentList);
+      this.$store.commit("setMultiStateDisplayAreaCtList", leftComponents, {
+        root: true
+      });
+
       const componentType = this.$store.state.multiStateDisplayArea
         .componentType; // Possible values are health or other.
 
@@ -239,6 +256,7 @@ export default {
       This code needs to be refactored and made simpler. TODO: return list used to work earlier but it does not work now
     */
       //return list;
+      console.log(this.$store.getters.multiStateDisplayAreaCtList);
       return this.$store.getters.multiStateDisplayAreaCtList;
     }
   },
@@ -250,9 +268,11 @@ export default {
       this.$router.push("/login");
     }
 
-    const role = this.$store.state.userRole;
+    const roleName = this.$store.state.userRole;
+    const roleUUID = this.$store.state.userRoleUUID;
+    //console.log(roleName);
 
-    this.$socket.emit("CREATE_ROOM", `room-${patientId}-${role}`);
+    this.$socket.emit("CREATE_ROOM", `room-${patientId}-${roleName}`);
 
     this.$store.commit("setFocusComponent", "");
     this.$store.commit("setCurrentStateDisplayAreaFocusRowIndex", -1);
@@ -267,6 +287,14 @@ export default {
     // Ref: https://www.npmjs.com/package/vuex-cache#storecachedispatch
     // TODO: The fn call is not getting cached.
 
+    // get the user component based on user roleName
+    this.$store.cache.dispatch("loadComponentsBasedOnUserRole", {
+      roleUUID: roleUUID,
+      notify: this.$notify,
+      timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
+    });
+
+    /*
     this.$store.cache.dispatch("loadComponentsInStateDisplayArea", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
@@ -277,7 +305,7 @@ export default {
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    /*this.$store.cache.dispatch("loadComponents", {
+    this.$store.cache.dispatch("loadComponents", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });*/

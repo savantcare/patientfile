@@ -32,5 +32,25 @@ router.get('/', async (req, res) => {
 })
 
 
+// get user component based on user role from DB
+// fetch data from join query in user, userRole, component mapping, component
+router.get('/getComponentsAllowedForUserRole', async (req, res) => {
+  try {
+    const { roleUUID } = req.query
+    const queryResult = await Component.sequelize.query('SELECT cm.uuid, cm.name, cm.tag, cm.abbreviation from componentsAllowedToAccessByEachUserRole as ca LEFT JOIN componentMaster as cm ON  cm.uuid = ca.componentUUID where ca.roleUUID=:roleUUID', {
+      replacements: { roleUUID: roleUUID },
+      type: Component.sequelize.QueryTypes.SELECT
+    })
+
+    // const queryResult = await Component.findAll()
+    res.send(queryResult)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while fetching the Component"
+    })
+  }
+})
+
+
 
 module.exports = router

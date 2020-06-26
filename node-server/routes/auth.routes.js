@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
   if (queryResult.length > 0) {
     const user = queryResult[0]
     const access_token = createToken({ email })
-    res.status(200).json({ access_token: access_token, roleId: user.roleId, userId: user.id })
+    res.status(200).json({ access_token: access_token, roleUUID: user.roleUUID, userUUID: user.uuid })
   } else {
     const status = 401
     const message = 'Incorrect email or password'
