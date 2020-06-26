@@ -284,13 +284,13 @@ export default {
     // This changes only once in a long time. When this value is changed on the server DB I expect the doctor to clear their cache on the browser.
 
     // get the user component based on user roleName
-    this.$store.cache.dispatch("loadComponentsBasedOnUserRole", {
+    this.$store.cache.dispatch("apiLoadComponentsBasedOnUserRole", {
       roleUUID: roleUUID,
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    this.$store.cache.dispatch("loadComponentsInStateDisplayArea", {
+    this.$store.cache.dispatch("apiLoadComponentsInStateDisplayArea", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
