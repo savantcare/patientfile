@@ -15,8 +15,8 @@ CREATE TABLE `ctAllowedToAccessByEachUserRole` (
   `uuid` char(36) NOT NULL ,
   `roleUUID` char(36) NOT NULL,
   `componentUUID` char(36) NOT NULL,
-  `multiStateDisplayImportance` float NOT NULL COMMENT 'higher comes up on page',
-  `currentStateDisplayImportance` float NOT NULL
+  `multiStateDisplayAreaImportance` float NOT NULL COMMENT 'higher comes up on page',
+  `currentStateDisplayAreaImportance` float NOT NULL
   `recordChangedByUUID` char(36) NOT NULL,
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
