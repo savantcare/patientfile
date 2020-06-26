@@ -11,7 +11,11 @@ CREATE TABLE `componentMaster` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
-INSERT INTO `componentMaster` (`uuid`, `tag`, `name`, `recordChangedByUUID`, `recordChangedFromIPAddress`) VALUES
-(1, "health", 'recommendation', '1', '202.005.122.057'),
-(2, "other", 'reminder', '2', '202.005.122.057'),
-(3, "health", 'other', '3', '202.005.122.057');
+CREATE TABLE `userRoleComponentMapping` (
+  `uuid` char(36) NOT NULL ,
+  `roleUUID` char(36) NOT NULL,
+  `componentUUID` char(36) NOT NULL,
+  `recordChangedByUUID` char(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+)  ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
