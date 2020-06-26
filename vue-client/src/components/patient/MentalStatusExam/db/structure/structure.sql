@@ -1,27 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: mariadb
--- Generation Time: Jun 12, 2020 at 05:13 PM
--- Server version: 10.4.13-MariaDB-1:10.4.13+maria~bionic
--- PHP Version: 7.4.5
-
-SET SQL_MODE
-= "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone
-= "+00:00";
-
---
--- Database: `sc_mental_status_exam`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `affect`
---
+use sc_mental_status_exam
 
 CREATE TABLE `affect`
 (

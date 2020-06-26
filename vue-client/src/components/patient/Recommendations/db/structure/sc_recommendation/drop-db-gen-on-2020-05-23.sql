@@ -1,1 +1,1 @@
-create database sc_recommendation
+drop database sc_recommendation
