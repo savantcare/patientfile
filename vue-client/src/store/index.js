@@ -7,7 +7,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
-import createCache from "vuex-cache";
 import VuexORM from "@vuex-orm/core";
 
 // Ref: https://vuex-orm.github.io/plugin-axios/guide/setup.html
@@ -154,9 +153,5 @@ export default new Vuex.Store({
     mse: mentalStatusExamModule,
     userRole: userRoleModule,
   },
-  plugins: [
-    createPersistedState(),
-    createCache({ timeout: 1000000 }),
-    VuexORM.install(database),
-  ],
+  plugins: [createPersistedState(), VuexORM.install(database)],
 });
