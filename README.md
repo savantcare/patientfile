@@ -4,6 +4,8 @@ Docuemntation: https://savantcare.github.io/
 
 Code documentation is in: /styleguidist/
 
+Goal: When looking at a region of code I do not need to have expereince with other code
+
 Short forms in code:
 
 1. appt -> Appointment
