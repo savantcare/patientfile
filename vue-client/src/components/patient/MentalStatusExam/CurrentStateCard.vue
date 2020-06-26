@@ -62,6 +62,7 @@ export default {
   methods: {
     handleClickOnFInCardHeader() {},
     handleClickOnMInCardHeader() {
+      this.$store.commit("mse/setSelectedDate", new Date());
       this.$store.commit("showMultiChangeMSETabInLayer2");
     }
   }

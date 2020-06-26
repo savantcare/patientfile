@@ -4,15 +4,23 @@
     :normalStatusList="normalStatusList"
     @saveChanges="saveChanges"
     ref="base_component"
+    :oldList="oldList"
+    title="Eye Contact"
   ></base-component>
 </template>
 
 <script>
 import BaseComponent from "./_BaseMSEChange";
 export default {
-  components: {
-    BaseComponent
+  props: {
+    oldList: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
   },
+  components: { BaseComponent },
   data() {
     return {
       statusList: [

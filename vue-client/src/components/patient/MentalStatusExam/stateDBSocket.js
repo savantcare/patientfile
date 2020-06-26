@@ -16,7 +16,8 @@ import Perception from './models/perception'
 
 const state = {
   selectedType: '',
-  checkedList: []
+  checkedList: [],
+  selectedDate: new Date()
 }
 
 const mutations = {
@@ -25,6 +26,9 @@ const mutations = {
   },
   setCheckedList(state, value) {
     state.checkedList = value
+  },
+  setSelectedDate(state, value) {
+    state.selectedDate = value
   }
 }
 

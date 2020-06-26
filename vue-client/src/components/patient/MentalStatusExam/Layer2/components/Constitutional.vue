@@ -1,18 +1,25 @@
 <template>
   <base-component
     :statusList="statusList"
-    :showNormalButton="false"
     @saveChanges="saveChanges"
     ref="base_component"
+    :oldList="oldList"
+    title="Constitutional"
   ></base-component>
 </template>
 
 <script>
 import BaseComponent from "./_BaseMSEChange";
 export default {
-  components: {
-    BaseComponent
+  props: {
+    oldList: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
   },
+  components: { BaseComponent },
   data() {
     return {
       statusList: [{ key: "vitals-signs-stable", value: "Vitals signs stable" }]

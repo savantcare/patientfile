@@ -1,5 +1,5 @@
 <template>
-  <el-card v-loading="isLoading">
+  <el-card v-loading="isLoading" :header="title">
     <el-button type="text" @click="setNormalStatus" v-if="showNormalButton">Normal (Short code)</el-button>
 
     <el-checkbox-group v-model="checkList">
@@ -45,6 +45,16 @@ export default {
       default: () => {
         return [];
       }
+    },
+    oldList: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    title: {
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -68,6 +78,9 @@ export default {
   },
   watch: {
     updateCheckList() {
+      this.renderCheckedValues();
+    },
+    oldList() {
       this.renderCheckedValues();
     }
   },
@@ -94,8 +107,15 @@ export default {
     },
     renderCheckedValues() {
       this.checkList = [];
+      let existingList = [];
+      console.log(this.oldList);
+      if (this.oldList.length > 0) {
+        existingList = this.oldList;
+      } else {
+        existingList = this.updateCheckList;
+      }
       const checkList = this.statusList.filter(status => {
-        const checkedValues = this.updateCheckList.filter(updateItem => {
+        const checkedValues = existingList.filter(updateItem => {
           return updateItem == status.key;
         });
         if (checkedValues.length > 0) {

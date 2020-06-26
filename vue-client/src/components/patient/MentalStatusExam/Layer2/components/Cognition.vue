@@ -1,15 +1,24 @@
 <template>
   <base-component
     :statusList="statusList"
-    :showNormalButton="false"
     @saveChanges="saveChanges"
     ref="base_component"
+    :oldList="oldList"
+    title="Cognition"
   ></base-component>
 </template>
 
 <script>
 import BaseComponent from "./_BaseMSEChange";
 export default {
+  props: {
+    oldList: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
+  },
   components: { BaseComponent },
   data() {
     return {
