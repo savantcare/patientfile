@@ -1,6 +1,12 @@
-# VERIFY: > ufw status
-#         > sudo netstat -ntlp | grep LISTEN
-
+# VERIFY:
+# 1. > ufw status
+# 2. > sudo netstat -ntlp | grep LISTEN
+# 3. > ufw status verbose                # this will give the default policy
+# 4. > Server and client check: On server do: sudo nc -l 77
+#                          On client do: telnet ip 77
+#                          > ufw disable
+#                          Repeat above 2 commands
+#                          > ufw emable
 - name: Making network layer more secure
   hosts: 127.0.0.1
   connection: local
