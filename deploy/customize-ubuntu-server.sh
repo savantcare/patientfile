@@ -13,4 +13,4 @@ apt upgrade
 apt install -y emacs fish tmux
 
 
-echo "Script run on $(date)" > /etc/gt_releases
+echo "Script run on $(date)" > /etc/gt-releases

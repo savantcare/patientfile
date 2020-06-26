@@ -1,5 +1,14 @@
 #!/bin/bash
 
+FILE=/etc/gt-releases
+if test -f "$FILE"; then
+    echo "$FILE exists."
+else
+    echo "Run customize-ubuntu-server before this"
+    exit
+fi    
+
+
 mkdir /gt/sc-prog-repos
 
 cd /gt/sc-prog-repos/
