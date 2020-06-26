@@ -2,6 +2,7 @@ import Appearence from "./models/appearence"
 import Attitude from './models/attitude'
 import Cognition from './models/cognition'
 import Constitutional from './models/constitutional'
+import EyeContact from './models/eyeContact'
 
 const state = {
   selectedType: '',
@@ -285,18 +286,17 @@ const actions = {
       })
     }
   },
-  async getEyeContact({ commit }, params) {
-    const response = await fetch(`${MENTAL_STATUS_EXAM_API_URL}/getEyeContact`, {
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(params)
-    })
-    if (response.ok) {
-      const json = await response.json()
-      commit("setEyeContactList", json)
+  async getEyeContact(_, params) {
+    const { patientId } = params
+    const count = await EyeContact.query().count()
+    if (count == 0) {
+      await EyeContact.api().post(`${MENTAL_STATUS_EXAM_API_URL}/getEyeContact`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
+      })
     }
   },
   async dbUpdateImpulseControlInSM(_, params) {

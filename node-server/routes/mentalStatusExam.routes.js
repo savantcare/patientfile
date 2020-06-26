@@ -209,7 +209,7 @@ router.post('/updateEyeContact', async (req, res) => {
 router.post('/getEyeContact', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await EyeContact.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`eye-contact\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await EyeContact.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`eye-contact\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -250,7 +250,7 @@ router.post('/updateImpulseControl', async (req, res) => {
 router.post('/getImpulseControl', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await ImpulseControl.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`impulse-control\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await ImpulseControl.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`impulse-control\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -291,7 +291,7 @@ router.post('/updateThoughtProcess', async (req, res) => {
 router.post('/getThoughtProcess', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await ThoughtProcess.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`thought-process\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await ThoughtProcess.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`thought-process\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -332,7 +332,7 @@ router.post('/updatePsychomotor', async (req, res) => {
 router.post('/getPsychomotor', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Psychomotor.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`psychomotor\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Psychomotor.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`psychomotor\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -373,7 +373,7 @@ router.post('/updateInsight', async (req, res) => {
 router.post('/getInsight', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Insight.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`insight\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Insight.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`insight\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -414,7 +414,7 @@ router.post('/updateSpeech', async (req, res) => {
 router.post('/getSpeech', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Speech.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`speech\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Speech.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`speech\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -455,7 +455,7 @@ router.post('/updateJudgement', async (req, res) => {
 router.post('/getJudgement', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Judgement.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`judgement\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Judgement.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`judgement\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -496,7 +496,7 @@ router.post('/updateAffect', async (req, res) => {
 router.post('/getAffect', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Affect.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`affect\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Affect.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`affect\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -537,7 +537,7 @@ router.post('/updateThoughtContent', async (req, res) => {
 router.post('/getThoughtContent', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await ThoughtContent.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`thought-content\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await ThoughtContent.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`thought-content\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -578,7 +578,7 @@ router.post('/updateNeurological', async (req, res) => {
 router.post('/getNeurological', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Neurological.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`neurological\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Neurological.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`neurological\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
@@ -619,7 +619,7 @@ router.post('/updatePerception', async (req, res) => {
 router.post('/getPerception', async (req, res) => {
   try {
     const { patientId } = req.body
-    const queryResult = await Perception.sequelize.query(`SELECT *, DATE(ROW_START) createDate FROM \`perception\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId AND ROW_END > NOW()`,
+    const queryResult = await Perception.sequelize.query(`SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM \`perception\` FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId`,
       {
         replacements: { patientId: patientId },
         type: QueryTypes.SELECT
