@@ -1,4 +1,4 @@
-name: First 5 minutes in new servers
+- name: First 5 minutes in new servers
   hosts: webservers
   become: yes
   become_user: root
@@ -11,7 +11,7 @@ name: First 5 minutes in new servers
 
     - name: Perform aptitude safe-upgrade
       apt:
-          upgrade: dist
+        upgrade: dist
 
     - name: Disallow root SSH access
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
@@ -24,7 +24,7 @@ name: First 5 minutes in new servers
     - name: Install required packages
       apt: state=installed pkg={{ item }}
       with_items:
-      - "{{ required_packages }}"
+        - "{{ required_packages }}"
 
     # Allow only ssh and http(s) ports
     - name: Allow ssh and http(s) connections
