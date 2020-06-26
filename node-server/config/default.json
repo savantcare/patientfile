@@ -2,6 +2,7 @@
   "HOST": "127.0.0.1",
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
+  "DB_PORT": "3306",
   "DB": "health_brain",
   "dialect": "mysql",
   "pool": {
@@ -22,6 +23,6 @@
   "DB_SOCIALHISTORY": "DB_SC_SocialHistory_CT_V20",
   "DB_APPOINTMENT": "sc_appointments",
   "artificial_delay_in_reponse_from_node_server": "0",
-  "DB_BODYMEASUREMENT": "sc_bodyMeasurement",
+  "DB_BODYMEASUREMENT": "sc_body_measurement",
   "DB_MENTAL_STATUS_EXAM": "sc_mental_status_exam"
 }
