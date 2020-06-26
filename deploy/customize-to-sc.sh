@@ -1,12 +1,5 @@
 #!/bin/bash
 
-//assume ubuntu 20.04 LTS
-
-apt update
-apt upgrade
-
-apt install -y emacs fish tmux
-
 mkdir /gt/sc-prog-repos
 
 cd /gt/sc-prog-repos/
