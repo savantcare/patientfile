@@ -18,9 +18,9 @@
       #         > sudo netstat -ntlp | grep LISTEN
     - name: Allow all access to tcp port 80
         ufw:
-        rule: allow
-        port: "80"
-        proto: tcp
+          rule: allow
+          port: "80"
+          proto: tcp
 
     - name: Allow all access to tcp port 443
         ufw:
