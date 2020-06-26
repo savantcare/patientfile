@@ -39,7 +39,7 @@ router.get("/getComponentsAllowedForUserRole", async (req, res) => {
   try {
     const { roleUUID } = req.query;
     const queryResult = await Component.sequelize.query(
-      "SELECT cm.uuid, cm.name, cm.tag, cm.abbreviation from ctAllowedToAccessByEachUserRole as ca LEFT JOIN ctMaster as cm ON  cm.uuid = ca.componentUUID where ca.roleUUID=:roleUUID",
+      "SELECT uuid, roleUUID, componentUUID, multiStateDisplayAreaImportance,currentStateDisplayAreaImportance from ctAllowedToAccessByEachUserRole where roleUUID=:roleUUID and (multiStateDisplayAreaImportance>0 or currentStateDisplayAreaImportance>0)",
       {
         replacements: { roleUUID: roleUUID },
         type: Component.sequelize.QueryTypes.SELECT,
