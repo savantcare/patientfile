@@ -9,9 +9,6 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING,
       },
-      componentsAllowedToAccess: {
-        type: Sequelize.STRING,
-      },
       multiStateDisplayAreaComponentLoadSequence: {
         type: Sequelize.STRING,
       },
