@@ -26,7 +26,7 @@
 
     - name: Change ssh port to 8888
       set_fact:
-      ansible_port: 90
+        ansible_port: 90
 
     ## Step3/3: Making network layer more secure
     - name: Install a list of packages
@@ -38,10 +38,24 @@
           - unattended-upgrades
           - logwatch
 
-    - name: Allow ssh and http(s) connections # VERIFY: > ufw status        > sudo netstat -ntlp | grep LISTEN
-      ufw: rule=allow port={{ item }}
-      with_items:
-        - "{{ ufw_allowed_ports }}"
+    # VERIFY: > ufw status        > sudo netstat -ntlp | grep LISTEN
+    - name: Allow all access to tcp port 80
+      ufw:
+        rule: allow
+        port: "80"
+        proto: tcp
+
+    - name: Allow all access to tcp port 443
+      ufw:
+        rule: allow
+        port: "443"
+        proto: tcp
+
+    - name: Allow all access to tcp port 90
+      ufw:
+        rule: allow
+        port: "90"
+        proto: tcp
 
     - name: Enable ufw/firewall
       ufw: state=enabled policy=deny
