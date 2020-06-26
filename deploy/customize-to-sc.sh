@@ -1,11 +1,13 @@
 #!/bin/bash
 
-//assume ubuntu 20.04 LTS
+FILE=/etc/gt-releases
+if test -f "$FILE"; then
+    echo "$FILE exists."
+else
+    echo "Run customize-ubuntu-server before this"
+    exit
+fi    
 
-apt update
-apt upgrade
-
-apt install -y emacs fish tmux
 
 mkdir /gt/sc-prog-repos
 
