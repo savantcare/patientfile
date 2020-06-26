@@ -37,6 +37,7 @@ export default {
   mounted() {},
   methods: {
     handleClickChangeButton() {
+      this.$store.commit("mse/setCheckedList", []);
       this.$store.commit("mse/setSelectedType", this.type);
       this.$store.commit("showChangeMSETabInLayer2");
     }

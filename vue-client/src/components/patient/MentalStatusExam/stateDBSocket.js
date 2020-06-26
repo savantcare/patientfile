@@ -16,64 +16,15 @@ import Perception from './models/perception'
 
 const state = {
   selectedType: '',
-
-  cognitionList: [],
-  constitutionalList: [],
-  eyeContactList: [],
-  impulseControlList: [],
-  thoughtProcessList: [],
-  psychomotorList: [],
-  insightList: [],
-  speechList: [],
-  judgementList: [],
-  affectList: [],
-  thoughtContentList: [],
-  neurologicalList: [],
-  perceptionList: []
+  checkedList: []
 }
 
 const mutations = {
   setSelectedType(state, value) {
     state.selectedType = value
   },
-  setCognitionList(state, value) {
-    state.cognitionList = value
-  },
-  setConstitutionalList(state, value) {
-    state.constitutionalList = value
-  },
-  setEyeContactList(state, value) {
-    state.eyeContactList = value
-  },
-  setImpulseControlList(state, value) {
-    state.impulseControlList = value
-  },
-  setThoughtProcessList(state, value) {
-    state.thoughtProcessList = value
-  },
-  setPsychomotorList(state, value) {
-    state.psychomotorList = value
-  },
-  setInsightList(state, value) {
-    state.insightList = value
-  },
-  setSpeechList(state, value) {
-    state.speechList = value
-  },
-  setJudgementList(state, value) {
-    state.judgementList = value
-  },
-  setAffectList(state, value) {
-    state.affectList = value
-  },
-  setThoughtContentList(state, value) {
-    state.thoughtContentList = value
-  },
-  setNeurologicalList(state, value) {
-    state.neurologicalList = value
-  },
-  setPerceptionList(state, value) {
-    state.perceptionList = value
+  setCheckedList(state, value) {
+    state.checkedList = value
   }
 }
 

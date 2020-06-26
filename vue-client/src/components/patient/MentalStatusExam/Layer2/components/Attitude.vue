@@ -16,13 +16,34 @@ export default {
   data() {
     return {
       statusList: [
-        "Pleasant and cooperative",
-        "Uncooperative",
-        "Hostile or defiant",
-        "Guarded",
-        "Evasive",
-        "Apathetic",
-        "Disorganized behavior"
+        {
+          key: "pleasant-and-cooperative",
+          value: "Pleasant and cooperative"
+        },
+        {
+          key: "uncooperative",
+          value: "Uncooperative"
+        },
+        {
+          key: "hostile-or-defiant",
+          value: "Hostile or defiant"
+        },
+        {
+          key: "guarded",
+          value: "Guarded"
+        },
+        {
+          key: "evasive",
+          value: "Evasive"
+        },
+        {
+          key: "apathetic",
+          value: "Apathetic"
+        },
+        {
+          key: "disorganized-behavior",
+          value: "Disorganized behavior"
+        }
       ],
       normalStatusList: ["Pleasant and cooperative"]
     };
@@ -48,22 +69,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Pleasant and cooperative") {
-          request["pleasant-and-cooperative"] = value;
-        } else if (status == "Uncooperative") {
-          request["uncooperative"] = value;
-        } else if (status == "Hostile or defiant") {
-          request["hostile-or-defiant"] = value;
-        } else if (status == "Guarded") {
-          request["guarded"] = value;
-        } else if (status == "Evasive") {
-          request["evasive"] = value;
-        } else if (status == "Apathetic") {
-          request["apathetic"] = value;
-        } else if (status == "Disorganized behavior") {
-          request["disorganized-behavior"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateAttitudeInSM", {

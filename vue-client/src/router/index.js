@@ -62,6 +62,10 @@ const routes = [
   {
     path: '/search-box',
     component: () => import("@/views/SearchBox.vue")
+  },
+  {
+    path: '/mse',
+    component: () => import("@/components/patient/MentalStatusExam/Overview.vue")
   }
 ]
 

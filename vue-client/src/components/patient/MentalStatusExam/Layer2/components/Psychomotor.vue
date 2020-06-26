@@ -13,7 +13,20 @@ export default {
   components: { BaseComponent },
   data() {
     return {
-      statusList: ["Normal", "Agitated", "Retarded"],
+      statusList: [
+        {
+          key: "normal",
+          value: "Normal"
+        },
+        {
+          key: "agitated",
+          value: "Agitated"
+        },
+        {
+          key: "retarded",
+          value: "Retarded"
+        }
+      ],
       normalStatusList: ["Normal"]
     };
   },
@@ -38,14 +51,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Normal") {
-          request["normal"] = value;
-        } else if (status == "Agitated") {
-          request["agitated"] = value;
-        } else if (status == "Retarded") {
-          request["retarded"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdatePsychomotorInSM", {

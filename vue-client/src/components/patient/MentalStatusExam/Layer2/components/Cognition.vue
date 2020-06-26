@@ -14,9 +14,20 @@ export default {
   data() {
     return {
       statusList: [
-        "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention",
-        "Impaired",
-        "Fluctuating"
+        {
+          key:
+            "grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n",
+          value:
+            "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention"
+        },
+        {
+          key: "impaired",
+          value: "Impaired"
+        },
+        {
+          key: "fluctuating",
+          value: "Fluctuating"
+        }
       ]
     };
   },
@@ -41,19 +52,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (
-          status ==
-          "Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention"
-        ) {
-          request[
-            "grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n"
-          ] = value;
-        } else if (status == "Impaired") {
-          request["impaired"] = value;
-        } else if (status == "Fluctuating") {
-          request["fluctuating"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateCognitionInSM", {

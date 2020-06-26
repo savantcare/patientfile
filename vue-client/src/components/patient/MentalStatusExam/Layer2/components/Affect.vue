@@ -14,24 +14,78 @@ export default {
   data() {
     return {
       statusList: [
-        "Euthymic",
-        "Dysphoric",
-        "Irritable",
-        "Angry",
-        "Bright",
-        "Euphoric",
-        "Labile",
-        "Stable",
-        "Mood congruent",
-        "Mood incongruent",
-        "Expansive",
-        "Constricted",
-        "Blunted",
-        "Flat",
-        "Anxious",
-        "Tearful",
-        "Dysthymic",
-        "Full-range"
+        {
+          key: "euthymic",
+          value: "Euthymic"
+        },
+        {
+          key: "dysphoric",
+          value: "Dysphoric"
+        },
+        {
+          key: "irritable",
+          value: "Irritable"
+        },
+        {
+          key: "angry",
+          value: "Angry"
+        },
+        {
+          key: "bright",
+          value: "Bright"
+        },
+        {
+          key: "euphoric",
+          value: "Euphoric"
+        },
+        {
+          key: "labile",
+          value: "Labile"
+        },
+        {
+          key: "stable",
+          value: "Stable"
+        },
+        {
+          key: "mood-congruent",
+          value: "Mood congruent"
+        },
+        {
+          key: "mood-incongruent",
+          value: "Mood incongruent"
+        },
+        {
+          key: "expansive",
+          value: "Expansive"
+        },
+        {
+          key: "full-range",
+          value: "Full-range"
+        },
+        {
+          key: "blunted",
+          value: "Blunted"
+        },
+        {
+          key: "flat",
+          value: "Flat"
+        },
+        {
+          key: "anxious",
+          value: "Anxious"
+        },
+        {
+          key: "tearful",
+          value: "Tearful"
+        },
+        {
+          key: "dysthymic",
+          value: "Dysthymic"
+        },
+        {
+          key: "constricted",
+          value: "Constricted"
+        }
       ],
       normalStatusList: ["Euthymic", "Stable", "Full-range", "Mood congruent"]
     };
@@ -57,44 +111,10 @@ export default {
       };
       for (const status of this.statusList) {
         const value =
-          checkList.filter(item => item == status).length > 0 ? "yes" : "no";
-        if (status == "Euthymic") {
-          request["euthymic"] = value;
-        } else if (status == "Dysphoric") {
-          request["dysphoric"] = value;
-        } else if (status == "Irritable") {
-          request["irritable"] = value;
-        } else if (status == "Angry") {
-          request["angry"] = value;
-        } else if (status == "Bright") {
-          request["bright"] = value;
-        } else if (status == "Euphoric") {
-          request["euphoric"] = value;
-        } else if (status == "Labile") {
-          request["labile"] = value;
-        } else if (status == "Stable") {
-          request["stable"] = value;
-        } else if (status == "Mood congruent") {
-          request["mood-congruent"] = value;
-        } else if (status == "Mood incongruent") {
-          request["mood-incongruent"] = value;
-        } else if (status == "Expansive") {
-          request["expansive"] = value;
-        } else if (status == "Constricted") {
-          request["constricted"] = value;
-        } else if (status == "Blunted") {
-          request["blunted"] = value;
-        } else if (status == "Flat") {
-          request["flat"] = value;
-        } else if (status == "Anxious") {
-          request["anxious"] = value;
-        } else if (status == "Tearful") {
-          request["tearful"] = value;
-        } else if (status == "Dysthymic") {
-          request["dysthymic"] = value;
-        } else if (status == "Full-range") {
-          request["full-range"] = value;
-        }
+          checkList.filter(item => item == status.value).length > 0
+            ? "yes"
+            : "no";
+        request[status.key] = value;
       }
 
       this.$store.dispatch("mse/dbUpdateAffectInSM", {
