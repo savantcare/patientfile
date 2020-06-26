@@ -14,20 +14,18 @@
         upgrade: dist
 
     ## Step2/3: Making SSH secure
-    - name: Disallow root SSH access
-      action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
-      notify: Restart ssh
+    - name: SSHD config
+      hosts: all
+      vars:
+        - ssh_permit_root_login: "no"
+        - ssh_server_ports: ["90"]
+        - ssh_allow_root_with_key: no
+        - ssh_allow_users: "*@103.192.61.121 *@223.29.197.139 *@202.8.115.173 *@115.96.144.48 *@203.163.233.121 *@115.96.129.162 *@136.232.65.34 *@49.37.1.249 *@73.92.192.52 *@216.218.193.147 *@184.105.149.8 *@104.174.243.131 *@172.16.0.0/12 *@127.0.0.1 *@10.0.0.0/8 *@49.37.3.57 *@184.105.149.6 *@49.37.3.30 *@72.11.132.26 *@192.168.0.0/16 *@66.220.22.92 *@104.174.242.241 *@71.204.128.209 *@103.144.173.30 *@202.142.115.156 *@43.252.251.29 *@47.15.62.185 *@103.242.198.42 *@47.15.10.116 *@115.187.32.100 *@47.11.238.204 *@103.77.137.82 *@116.206.221.59 *@157.40.117.69 *@116.206.203.129 *@223.29.196.223 *@49.37.15.76 *@42.110.165.23"
+        - ssh_client_password_login: false # true to allow password-based authentication with the ssh client
+        - ssh_server_password_login: false # true to allow password-based authentication with the ssh server
+        - ssh_max_auth_retries: 10
 
-    - name: Disallow password authentication
-      action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
-      notify: Restart ssh
-
-    - name: Change ssh port to 90
-      set_fact:
-        ansible_port: 90
-      notify: Restart ssh
-
-      ## Step3/3: Making network layer more secure
+    ## Step3/3: Making network layer more secure
     - name: Install a list of packages
       apt:
         pkg:
