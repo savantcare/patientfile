@@ -163,7 +163,7 @@ const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
 //import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
-import Component from "../components/common/roleBasedAccess/vuex-orm-model/component";
+import ormComponent from "../components/common/roleBasedAccess/vuex-orm-model/component";
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
 
@@ -211,7 +211,7 @@ export default {
       return this.$store.state.focusComponent;
     },
     CurrentStateDisplayAreaComponents() {
-      const arAllCtList = Component.all();
+      const arAllCtList = ormComponent.all();
       /*const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
       
       arCtListAllowedForUserRole.map(function(item) {
@@ -235,7 +235,7 @@ export default {
     },
 
     multiStateDisplayAreaComponents() {
-      const arAllCtList = Component.all();
+      const arAllCtList = ormComponent.all();
       /*
       const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
 
