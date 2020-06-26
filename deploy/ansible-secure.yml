@@ -15,7 +15,6 @@
 
     ## Step2/3: Making SSH secure
     - name: SSHD config
-      hosts: all
       vars:
         - ssh_permit_root_login: "no"
         - ssh_server_ports: ["90"]
