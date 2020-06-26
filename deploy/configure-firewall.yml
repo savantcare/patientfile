@@ -45,3 +45,10 @@
         rule: allow
         port: "90"
         proto: tcp
+
+    # Goal: Docker cannot open a port and then change firewall to give access to that port
+    # https://stackoverflow.com/questions/30383845/what-is-the-best-practice-of-docker-ufw-under-ubuntu
+    # Ref: https://serverfault.com/questions/810845/how-can-i-set-ufw-default-forward-policy-using-ansible-ufw-module
+    
+    - name: 'Allow docker DEFAULT_FORWARD_POLICY=ACCEPT'
+      ufw: direction=routed default=allow route=yes
