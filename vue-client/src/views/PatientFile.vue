@@ -131,7 +131,7 @@ src/router/index.js sends control here if the / route is given by the user
 
         <!-- TODO: keep alive is not working. The sql query is still being called when rex command is given twice -->
         <component
-          v-for="(component, index) in multiStateDisplayAreaComponents"
+          v-for="(component, index) in cfGetMultiStateDisplayAreaCts"
           :key="`multi-state-display-area-component-${index}`"
           :is="component.name"
           v-bind="{typeOfStateDisplayArea: 'multiStateDisplayArea'}"
@@ -141,7 +141,7 @@ src/router/index.js sends control here if the / route is given by the user
         <keep-alive>
           <transition-group name="list" tag="div">
             <component
-              v-for="(component, index) in CurrentStateDisplayAreaComponents"
+              v-for="(component, index) in cfGetCurrentStateDisplayAreaCts"
               :key="`current-state-display-area-component-${index}`"
               :is="component.name"
             ></component>
@@ -162,7 +162,7 @@ src/router/index.js sends control here if the / route is given by the user
 const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
-//import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+import ormComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
 import ormComponent from "../components/common/roleBasedAccess/vuex-orm-model/component";
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
@@ -206,12 +206,39 @@ export default {
     };
   },
   computed: {
-    focusComponent() {
-      return this.$store.state.focusComponent;
+    cfFocusCt() {
+      return this.$store.state.cfFocusCt;
     },
-    CurrentStateDisplayAreaComponents() {
+    cfGetCurrentStateDisplayAreaCts() {
       const arAllCtList = ormComponent.all();
-      /*const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+
+      const arCtListAllowedForUserRole = ormComponentsAllowedForUserRole
+        .query()
+        .where("currentStateDisplayAreaImportance", value => value > 0)
+        .orderBy("currentStateDisplayAreaImportance", "desc")
+        .get();
+
+      console.log(arCtListAllowedForUserRole);
+      let arCurrentStateDisplayAreaComponents = [];
+
+      arCtListAllowedForUserRole.map(function(item) {
+        arCurrentStateDisplayAreaComponents.push(item);
+      });
+
+      console.log(arCurrentStateDisplayAreaComponents);
+      let arCtListOrderedByImportance = [];
+      arCurrentStateDisplayAreaComponents.forEach(element => {
+        const eachComponent = arAllCtList.filter(
+          item => item.uuid == element.componentUUID
+        );
+
+        if (eachComponent[0]) {
+          eachComponent[0].name = eachComponent[0].name.split(" ").join("-");
+          arCtListOrderedByImportance.push(eachComponent[0]);
+        }
+      });
+
+      /*const arCtListAllowedForUserRole = ormComponentsAllowedForUserRole.all();
       
       arCtListAllowedForUserRole.map(function(item) {
         if (item.currentStateDisplayAreaImportance > 0)
@@ -229,33 +256,40 @@ export default {
         item => item.tag == componentType
       );
 */
-      console.log(arAllCtList);
-      return arAllCtList;
+      console.log(arCtListOrderedByImportance);
+      return arCtListOrderedByImportance;
     },
 
-    multiStateDisplayAreaComponents() {
+    cfGetMultiStateDisplayAreaCts() {
       const arAllCtList = ormComponent.all();
-      /*
-      const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+
+      const arCtListAllowedForUserRole = ormComponentsAllowedForUserRole
+        .query()
+        .where("multiStateDisplayAreaImportance", value => value > 0)
+        .orderBy("multiStateDisplayAreaImportance", "desc")
+        .get();
+
+      console.log(arCtListAllowedForUserRole);
+      let arMultiStateDisplayAreaComponents = [];
 
       arCtListAllowedForUserRole.map(function(item) {
-        if (item.multiStateDisplayAreaImportance > 0)
-          multiStateDisplayAreaComponents.push(item.componentUUID);
+        arMultiStateDisplayAreaComponents.push(item);
       });
 
-      const componentType = this.$store.state.multiStateDisplayArea.componentType; // Possible values are health or other.
+      console.log(arMultiStateDisplayAreaComponents);
+      let arCtListOrderedByImportance = [];
+      arMultiStateDisplayAreaComponents.forEach(element => {
+        const eachComponent = arAllCtList.filter(
+          item => item.uuid == element.componentUUID
+        );
+        //eachComponent[0].name = eachComponent[0].name.split(" ").join("-");
+        if (eachComponent[0]) {
+          eachComponent[0].name = eachComponent[0].name.split(" ").join("-");
+          arCtListOrderedByImportance.push(eachComponent[0]);
+        }
+      });
 
-      const components = arAllCtList.filter(
-         
-          // For each component the type of the component is stored in sc_component -> ctMaster -> tag
-          // Tag is used since some components may belong to both health and other type.
-        
-        item => item.tag == componentType
-      );
-      
-      */
-
-      return arAllCtList;
+      return arCtListOrderedByImportance;
     }
   },
   beforeCreate() {},

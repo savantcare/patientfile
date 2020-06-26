@@ -76,14 +76,14 @@ export default {
       let CurrentStateDisplayAreaRows = [];
       // if you want to use global state and getters, rootState and rootGetters are passed as the 3rd and 4th arguments to getter functions
       // Ref: https://vuex.vuejs.org/guide/modules.html#accessing-global-assets-in-namespaced-modules
-      const CurrentStateDisplayAreaComponents =
+      const cfGetCurrentStateDisplayAreaCts =
         rootGetters.currentStateDisplayAreaList;
 
       // The value of currentStateDisplayAreaList is available inside chrome -> developers tools -> Vue -> Vuex
 
       // console.log("====" + JSON.stringify(rootState, null, 4));
 
-      CurrentStateDisplayAreaComponents.forEach((item) => {
+      cfGetCurrentStateDisplayAreaCts.forEach((item) => {
         if (rootState[item.key] && rootState[item.key]["tableList"]) {
           const componentRows = rootState[item.key]["tableList"].filter(
             (data) => {
