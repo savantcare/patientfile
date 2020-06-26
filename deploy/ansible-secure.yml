@@ -7,6 +7,7 @@
     - ansible-vars.yml
 
   tasks:
+    ## Step1/3: Making sure server has secure packages
     - name: Update APT packages cache
       apt: update_cache=yes
 
@@ -14,6 +15,7 @@
       apt:
         upgrade: dist
 
+    ## Step2/3: Making SSH secure
     - name: Disallow root SSH access
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
       notify: Restart ssh
@@ -22,6 +24,11 @@
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
       notify: Restart ssh
 
+    - name: Change ssh port to 8888
+      set_fact:
+      ansible_port: 90
+
+    ## Step3/3: Making network layer more secure
     - name: Install a list of packages
       apt:
         pkg:
@@ -31,8 +38,7 @@
           - unattended-upgrades
           - logwatch
 
-    # Allow only ssh and http(s) ports
-    - name: Allow ssh and http(s) connections
+    - name: Allow ssh and http(s) connections # VERIFY: > ufw status        > sudo netstat -ntlp | grep LISTEN
       ufw: rule=allow port={{ item }}
       with_items:
         - "{{ ufw_allowed_ports }}"
