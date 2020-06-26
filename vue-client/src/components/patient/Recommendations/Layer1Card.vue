@@ -12,7 +12,7 @@
   <el-card
     class="box-card"
     :id="`recommendation-${typeOfStateDisplayArea}`"
-    :style="multiStateDisplayAreaStyleToApplyForPastTime"
+    :style="cfmultiStateDisplayAreaStyleToApplyForPastTime"
   >
     <div slot="header" class="clearfix">
       <CtCardHeader
@@ -26,7 +26,7 @@
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
-        :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
+        :multiStateDisplayAreaStyleToApplyForPastTime="cfmultiStateDisplayAreaStyleToApplyForPastTime"
       />
     </div>
     <CtDataTableWithoutTab
@@ -41,7 +41,7 @@
       @updateTableList="updateTableList"
       :selectedColumns="selectedColumns"
       :columns="columns"
-      :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
+      :multiStateDisplayAreaStyleToApplyForPastTime="cfmultiStateDisplayAreaStyleToApplyForPastTime"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
@@ -247,7 +247,7 @@ export default {
       };
     },
 
-    multiStateDisplayAreaStyleToApplyForPastTime: {
+    cfmultiStateDisplayAreaStyleToApplyForPastTime: {
       get() {
         let val = null;
 
