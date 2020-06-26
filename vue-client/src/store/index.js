@@ -37,23 +37,23 @@ import multiStateDisplayAreaModule from "../components/common/multiStateDisplayA
 import userRoleModule from "../components/common/userRole/stateDBSocket";
 
 // vuex-orm models.
-import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
-import Components from "../components/common/roleBasedAccess/vuex-orm-model/component";
-import UserRole from "../components/common/userRole/vuex-orm-model/userRole";
-import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
-import Assessment from "../components/patient/diagnosis/models/Assessment";
-import Recommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
+import ormComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+import ormComponents from "../components/common/roleBasedAccess/vuex-orm-model/component";
+import ormUserRole from "../components/common/userRole/vuex-orm-model/userRole";
+import ormDiagnosis from "../components/patient/diagnosis/models/Diagnosis";
+import ormAssessment from "../components/patient/diagnosis/models/Assessment";
+import ormRecommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
 
 import { ROLE_API_URL } from "@/const/others.js";
 // import searchCommandsList from "@/const/searchCommandsList.js"; Will come from DB
 
 const database = new VuexORM.Database();
-database.register(ComponentsAllowedForUserRole);
-database.register(Components);
-database.register(UserRole);
-database.register(Diagnosis);
-database.register(Assessment);
-database.register(Recommendation);
+database.register(ormComponentsAllowedForUserRole);
+database.register(ormComponents);
+database.register(ormUserRole);
+database.register(ormDiagnosis);
+database.register(ormAssessment);
+database.register(ormRecommendation);
 require("../components/patient/MentalStatusExam/models/index.js")(database);
 
 export default new Vuex.Store({

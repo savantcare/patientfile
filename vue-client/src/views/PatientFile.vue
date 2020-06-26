@@ -143,7 +143,7 @@ src/router/index.js sends control here if the / route is given by the user
             <component
               v-for="(component, index) in CurrentStateDisplayAreaComponents"
               :key="`current-state-display-area-component-${index}`"
-              :is="component.value"
+              :is="component.name"
             ></component>
           </transition-group>
         </keep-alive>
@@ -163,11 +163,10 @@ const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
 //import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
-import Component from "../components/common/roleBasedAccess/vuex-orm-model/component";
+import ormComponent from "../components/common/roleBasedAccess/vuex-orm-model/component";
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
 
-// Right panel components
 const SearchBoxForCommandsFromUser = () =>
   import("@/components/common/SearchBoxForCommandsFromUser.vue");
 
@@ -211,7 +210,7 @@ export default {
       return this.$store.state.focusComponent;
     },
     CurrentStateDisplayAreaComponents() {
-      const arAllCtList = Component.all();
+      const arAllCtList = ormComponent.all();
       /*const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
       
       arCtListAllowedForUserRole.map(function(item) {
@@ -235,7 +234,7 @@ export default {
     },
 
     multiStateDisplayAreaComponents() {
-      const arAllCtList = Component.all();
+      const arAllCtList = ormComponent.all();
       /*
       const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
 
@@ -284,13 +283,13 @@ export default {
     // This changes only once in a long time. When this value is changed on the server DB I expect the doctor to clear their cache on the browser.
 
     // get the user component based on user roleName
-    this.$store.cache.dispatch("loadComponentsBasedOnUserRole", {
+    this.$store.cache.dispatch("apiLoadComponentsBasedOnUserRole", {
       roleUUID: roleUUID,
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });
 
-    this.$store.cache.dispatch("loadComponentsInStateDisplayArea", {
+    this.$store.cache.dispatch("apiLoadComponentsInStateDisplayArea", {
       notify: this.$notify,
       timeout: 1000000000 // Store's timeout can be overwritten by dispatch timeout option in Dispatch Options or in payload. Ref: https://www.npmjs.com/package/vuex-cache#cacheaction
     });

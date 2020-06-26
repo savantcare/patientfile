@@ -12,10 +12,10 @@
   <el-card
     class="box-card"
     :id="`recommendation-${typeOfStateDisplayArea}`"
-    :style="multiStateDisplayAreaStyleToApplyForPastTime"
+    :style="cfmultiStateDisplayAreaStyleToApplyForPastTime"
   >
     <div slot="header" class="clearfix">
-      <CardHeader
+      <CtCardHeader
         ctName="Recommendation"
         actions="A,M,F,D,X,R"
         ref="card_header"
@@ -26,11 +26,11 @@
         @handleClickOnFInCardHeader="handleClickOnFInCardHeader"
         @handleClickOnDInCardHeader="handleClickOnDInCardHeader"
         @handleClickOnXInCardHeader="handleClickOnXInCardHeader"
-        :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
+        :multiStateDisplayAreaStyleToApplyForPastTime="cfmultiStateDisplayAreaStyleToApplyForPastTime"
       />
     </div>
-    <DataTableWithoutTab
-      :tabData="tabData"
+    <CtDataTableWithoutTab
+      :tabData="cfTabData"
       ctName="Recommendation"
       keyId="recommendation"
       :typeOfStateDisplayArea="typeOfStateDisplayArea"
@@ -41,7 +41,7 @@
       @updateTableList="updateTableList"
       :selectedColumns="selectedColumns"
       :columns="columns"
-      :multiStateDisplayAreaStyleToApplyForPastTime="multiStateDisplayAreaStyleToApplyForPastTime"
+      :multiStateDisplayAreaStyleToApplyForPastTime="cfmultiStateDisplayAreaStyleToApplyForPastTime"
     />
     <!-- TODO: Not clear what updateTableList does -->
   </el-card>
@@ -51,15 +51,15 @@
 // 1. remove selected column feature
 // 2. Need to send a better name for column to display
 
-import CardHeader from "@/components/common/CardHeader";
-import DataTableWithoutTab from "@/components/common/DataTableWithoutTab";
+import CtCardHeader from "@/components/common/CardHeader";
+import CtDataTableWithoutTab from "@/components/common/DataTableWithoutTab";
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
-import Recommendation from "./vuex-orm-models/recommendation";
+import ormRecommendation from "./vuex-orm-models/recommendation";
 
 export default {
   components: {
-    CardHeader,
-    DataTableWithoutTab
+    CtCardHeader,
+    CtDataTableWithoutTab
   },
   props: {
     typeOfStateDisplayArea: {
@@ -210,7 +210,7 @@ export default {
   },
 
   computed: {
-    tabData() {
+    cfTabData() {
       let timeStampOfStateInsideCt = null;
       if (
         this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
@@ -226,7 +226,8 @@ export default {
           ).getTime() / 1000
         );
 
-      const rexEvalList = Recommendation.query()
+      const rexEvalList = ormRecommendation
+        .query()
         .where("ROW_START", value => value < timeStampOfStateInsideCt)
         .where("ROW_END", value => value > timeStampOfStateInsideCt)
         .orderBy("uuid")
@@ -246,7 +247,7 @@ export default {
       };
     },
 
-    multiStateDisplayAreaStyleToApplyForPastTime: {
+    cfmultiStateDisplayAreaStyleToApplyForPastTime: {
       get() {
         let val = null;
 

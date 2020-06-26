@@ -1,5 +1,5 @@
 import { RECOMMENDATION_API_URL } from "@/const/others.js";
-import Recommendation from "./vuex-orm-models/recommendation";
+import ormRecommendation from "./vuex-orm-models/recommendation";
 let TOKEN = localStorage.getItem("token");
 export default {
   state: {
@@ -138,13 +138,13 @@ export default {
       try {
         if (!this.oneQueryIsRunningGate) {
           this.oneQueryIsRunningGate = true;
-          let countRex = await Recommendation.query().count();
+          let countRex = await ormRecommendation.query().count();
 
           console.log("Number of recs before query =>", countRex);
           if (countRex == 0) {
-            await Recommendation.api().post(
-              RECOMMENDATION_API_URL + "/getMyRecommendations",
-              {
+            await ormRecommendation
+              .api()
+              .post(RECOMMENDATION_API_URL + "/getMyRecommendations", {
                 headers: {
                   Authorization: "Bearer " + TOKEN,
                   "Content-Type": "application/json;charset=utf-8",
@@ -152,11 +152,10 @@ export default {
                 patientId: patientId,
                 userId: userId,
                 date: date,
-              }
-            );
+              });
             console.log(
               "Number of rex in model =>",
-              Recommendation.query().count()
+              ormRecommendation.query().count()
             );
           }
           this.oneQueryIsRunningGate = false;

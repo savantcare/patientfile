@@ -21,3 +21,15 @@ CREATE TABLE `ctAllowedToAccessByEachUserRole` (
   `recordChangedFromIPAddress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 )  ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
+
+CREATE TABLE `search` (
+  `uuid` char(36) NOT NULL,
+  `componentUUID` char(36) DEFAULT NULL,
+  `searchText` varchar(255) DEFAULT NULL,
+  `action` varchar(255) NOT NULL,
+  `recordChangedByUUID` char(36) NOT NULL,
+  `recordChangedFromIPAddress` varchar(20) NOT NULL
+  PRIMARY KEY (`uuid`)
+)  ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
+
+

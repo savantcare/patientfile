@@ -40,13 +40,13 @@ export default {
       }
     },*/
 
-    async loadComponentsInStateDisplayArea({ commit }, params) {
+    async apiLoadComponentsInStateDisplayArea({ commit }, params) {
       const { notify } = params;
       try {
         const token = localStorage.getItem("token");
 
         if (!this.oneComponentQueryIsRunningGate) {
-          console.log("Called loadComponentsInStateDisplayArea s ad asd");
+          console.log("Called apiLoadComponentsInStateDisplayArea s ad asd");
           this.oneComponentQueryIsRunningGate = true;
           let countComponent = await Component.query().count();
           console.log("Number of components before query =>", countComponent);
@@ -73,7 +73,7 @@ export default {
       }
     },
 
-    async loadComponentsBasedOnUserRole({ commit }, params) {
+    async apiLoadComponentsBasedOnUserRole({ commit }, params) {
       const TOKEN = localStorage.getItem("token");
       const { roleUUID, notify } = params;
       try {

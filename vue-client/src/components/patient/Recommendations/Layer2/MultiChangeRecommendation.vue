@@ -31,7 +31,7 @@
 <script>
 import RecommendationHistoryItem from "./RecommendationHistoryItem";
 // import { MULTIPLE_CHANGE_RECOMMENDATION } from "@/const/others.js";
-import Recommendation from "../vuex-orm-models/recommendation";
+import ormRecommendation from "../vuex-orm-models/recommendation";
 export default {
   components: {
     RecommendationHistoryItem
@@ -63,7 +63,8 @@ export default {
     recList() {
       let selectedTimestampInSlider = Math.round(new Date().getTime() / 1000);
 
-      let rexResultList = Recommendation.query()
+      let rexResultList = ormRecommendation
+        .query()
         .where("ROW_END", value => value > selectedTimestampInSlider)
         .get();
       console.log("rex return ===", rexResultList);
