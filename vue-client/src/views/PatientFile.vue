@@ -143,7 +143,7 @@ src/router/index.js sends control here if the / route is given by the user
             <component
               v-for="(component, index) in CurrentStateDisplayAreaComponents"
               :key="`current-state-display-area-component-${index}`"
-              :is="component.value"
+              :is="component.name"
             ></component>
           </transition-group>
         </keep-alive>
