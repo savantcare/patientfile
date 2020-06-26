@@ -23,3 +23,7 @@ Naming Goals:
    wfGetAge -> This is a watch function
    mfGetAge -> This is method function
    fnGetAge -> This is a non categorized function
+4. How are different variable types distinguished?
+   vsAge -> This is variable of type string
+   vnAge -> This is variable of type int
+   vbAge -> This is variable of type bool
