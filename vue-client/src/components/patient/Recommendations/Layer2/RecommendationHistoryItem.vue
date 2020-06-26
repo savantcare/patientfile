@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Recommendation from "../vuex-orm-models/recommendation";
+import ormRecommendation from "../vuex-orm-models/recommendation";
 
 export default {
   props: ["rec"],
@@ -38,7 +38,8 @@ export default {
     };
   },
   mounted() {
-    this.histories = Recommendation.query()
+    this.histories = ormRecommendation
+      .query()
       .where("uuid", this.rec.uuid)
       .get();
 
