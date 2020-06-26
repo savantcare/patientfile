@@ -1,1 +1,1 @@
-create database DB_SC_Recommendation_CT_V20
+create database sc_recommendation
