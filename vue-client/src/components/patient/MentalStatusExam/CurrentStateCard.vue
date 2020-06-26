@@ -11,13 +11,23 @@
           ref="card_header"
         />
       </div>
-      <el-tabs tab-position="left" v-model="tab">
+      <el-collapse>
+        <el-collapse-item
+          v-for="(element, index) in mseElements"
+          :key="`mse-element-${index}`"
+          :title="element.label"
+          :name="index"
+        >
+          <ElementBody :type="element.value" :label="element.label" />
+        </el-collapse-item>
+      </el-collapse>
+      <!-- <el-tabs tab-position="left" v-model="tab">
         <el-tab-pane v-for="(element, index) in mseElements" :key="`mse-element-${index}`">
           <span slot="label">{{element.label}}</span>
 
           <ElementBody :type="element.value" :tab="tab" :label="element.label" />
         </el-tab-pane>
-      </el-tabs>
+      </el-tabs>-->
     </el-card>
   </div>
 </template>

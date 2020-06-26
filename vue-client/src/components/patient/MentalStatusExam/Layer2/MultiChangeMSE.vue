@@ -67,21 +67,21 @@
 </template>
 
 <script>
-import Appearance from "@/components/patient/MentalStatusExam/components/Appearance";
-import ThoughtProcess from "@/components/patient/MentalStatusExam/components/ThoughtProcess";
-import Attitude from "@/components/patient/MentalStatusExam/components/Attitude";
-import Cognition from "@/components/patient/MentalStatusExam/components/Cognition";
-import Constitutional from "@/components/patient/MentalStatusExam/components/Constitutional";
-import EyeContact from "@/components/patient/MentalStatusExam/components/EyeContact";
-import ImpulseControl from "@/components/patient/MentalStatusExam/components/ImpulseControl";
-import Insight from "@/components/patient/MentalStatusExam/components/Insight";
-import Judgement from "@/components/patient/MentalStatusExam/components/Judgement";
-import MoodAffect from "@/components/patient/MentalStatusExam/components/MoodAffect";
-import Neurological from "@/components/patient/MentalStatusExam/components/Neurological";
-import Perception from "@/components/patient/MentalStatusExam/components/Perception";
-import Psychomotor from "@/components/patient/MentalStatusExam/components/Psychomotor";
-import Speech from "@/components/patient/MentalStatusExam/components/Speech";
-import ThoughtContent from "@/components/patient/MentalStatusExam/components/ThoughtContent";
+import Appearance from "./components/Appearance";
+import ThoughtProcess from "./components/ThoughtProcess";
+import Attitude from "./components/Attitude";
+import Cognition from "./components/Cognition";
+import Constitutional from "./components/Constitutional";
+import EyeContact from "./components/EyeContact";
+import ImpulseControl from "./components/ImpulseControl";
+import Insight from "./components/Insight";
+import Judgement from "./components/Judgement";
+import MoodAffect from "./components/Affect";
+import Neurological from "./components/Neurological";
+import Perception from "./components/Perception";
+import Psychomotor from "./components/Psychomotor";
+import Speech from "./components/Speech";
+import ThoughtContent from "./components/ThoughtContent";
 
 export default {
   data() {
@@ -125,9 +125,9 @@ export default {
 </script>
 
 <style>
-.box-card {
+/* .box-card {
   width: 500px;
   min-width: 500px;
   min-height: 300px;
-}
+} */
 </style>
