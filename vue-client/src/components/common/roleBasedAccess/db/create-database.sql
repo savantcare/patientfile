@@ -1,2 +1,1 @@
-drop database sc_component
 create database sc_component
