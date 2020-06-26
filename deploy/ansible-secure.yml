@@ -3,8 +3,6 @@
   connection: local
   become: yes
   become_user: root
-  vars_files:
-    - ansible-vars.yml
 
   tasks:
     ## Step1/3: Making sure server has secure packages
