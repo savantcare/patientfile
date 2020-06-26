@@ -206,8 +206,8 @@ export default {
     };
   },
   computed: {
-    focusComponent() {
-      return this.$store.state.focusComponent;
+    cfFocusCt() {
+      return this.$store.state.cfFocusCt;
     },
     cfGetCurrentStateDisplayAreaCts() {
       const arAllCtList = ormComponent.all();

@@ -61,7 +61,7 @@ export default new Vuex.Store({
     userRole: "",
     userRoleUUID: "",
     searchCommandsList: [],
-    focusComponent: "",
+    cfFocusCt: "",
     connectionStatus: true, // true: online, false: offline
     userId: -1,
     selectedColumns: {
@@ -80,7 +80,7 @@ export default new Vuex.Store({
       state.userRoleUUID = data;
     },
     setFocusComponent(state, value) {
-      state.focusComponent = value;
+      state.cfFocusCt = value;
     },
     setSearchCommandsList(state, list) {
       state.searchCommandsList = list;
