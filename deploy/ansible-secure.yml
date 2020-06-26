@@ -22,10 +22,14 @@
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
       notify: Restart ssh
 
-    - name: Install required packages
-      apt: state=installed pkg={{ item }}
-      with_items:
-        - "pkg: ['{{ required_packages }}']"
+    - name: Install a list of packages
+      apt:
+        pkg:
+          - python
+          - ufw
+          - fail2ban
+          - unattended-upgrades
+          - logwatch
 
     # Allow only ssh and http(s) ports
     - name: Allow ssh and http(s) connections

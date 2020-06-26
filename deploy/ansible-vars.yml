@@ -1,10 +1,3 @@
-required_packages:
-  - python
-  - ufw
-  - fail2ban
-  - unattended-upgrades
-  - logwatch
-
 ufw_allowed_ports:
   - 90
   - 80
