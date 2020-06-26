@@ -161,7 +161,8 @@ src/router/index.js sends control here if the / route is given by the user
 const TheMultiStateDisplayAreaHeader = () =>
   import("@/components/common/multiStateDisplayArea/theHeader.vue");
 
-import ComponentsAllowedForUserRole from "@/components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+import Component from "../components/common/roleBasedAccess/vuex-orm-model/component";
 
 //vue-client/src/components/common/roleBasedAccess/vuex-orm-model/userComponent.js
 
@@ -215,25 +216,28 @@ export default {
       ///  implement new code to fetch userComponent by oxm model and return it to show
       // it in the template file , remove unwanted code.
 
-      let leftComponents = [];
-      const usercomponentList = ComponentsAllowedForUserRole.all();
-      usercomponentList.map(function(item) {
-        leftComponents.push(item.abbreviation);
+      let multiStateDisplayAreaComponents = [];
+      let currentStateDisplayAreaComponents = [];
+      const arAllCtList = Component.all();
+      const arCtListAllowedForUserRole = ComponentsAllowedForUserRole.all();
+      arCtListAllowedForUserRole.map(function(item) {
+        if (item.multiStateDisplayAreaImportance > 0)
+          multiStateDisplayAreaComponents.push(item.componentUUID);
+
+        if (item.currentStateDisplayAreaImportance > 0)
+          currentStateDisplayAreaComponents.push(item.componentUUID);
       });
       //console.log("=======", usercomponentList);
-      this.$store.commit("setMultiStateDisplayAreaCtList", leftComponents, {
-        root: true
-      });
 
       const componentType = this.$store.state.multiStateDisplayArea
         .componentType; // Possible values are health or other.
 
       console.log(this.$store.state.component.list);
 
-      const components = this.$store.state.component.list.filter(
+      const components = arAllCtList.filter(
         // TODO: NAMING: How do I know where is the store.state.component.list
         /* 
-          For each component the type of the component is stored in sc_component -> componentMaster -> tag
+          For each component the type of the component is stored in sc_component -> ctMaster -> tag
           Tag is used since some components may belong to both health and other type.
         */
         item => item.tag == componentType

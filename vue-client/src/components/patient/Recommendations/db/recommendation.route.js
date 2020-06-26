@@ -68,7 +68,8 @@ module.exports = (io) => {
 
   router.post('/getMyRecommendations', async (req, res) => {
     try {
-      const { patientId, userId } = req.body
+      const { patientId } = req.body
+      // console.log("Show patient id ".patientId)
       // all recs that have been discontinued will not show up in the select * query
       const date = new Date(req.body.date)
       const queryResult = await Recommendation.sequelize.query("SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM `doctorRecommendationsForPatients` FOR SYSTEM_TIME ALL WHERE uuidOfRecommendationMadeFor=:patientId ORDER BY priority asc", {

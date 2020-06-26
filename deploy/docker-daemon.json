@@ -1,4 +1,0 @@
-{
-  // Ref: https://stackoverflow.com/questions/30383845/what-is-the-best-practice-of-docker-ufw-under-ubuntu
-  "iptables": false
-}

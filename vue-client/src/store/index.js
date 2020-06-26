@@ -34,19 +34,18 @@ import componentModule from "./modules/component";
 
 import layer2MultiTabDialogStateModule from "../components/common/Layer2MultiTabDialog/layer2MultiTabDialogState";
 import multiStateDisplayAreaModule from "../components/common/multiStateDisplayArea/store";
-import userRoleModule from "../components/common/userRole/stateDBSocket"
+import userRoleModule from "../components/common/userRole/stateDBSocket";
 
 // vuex-orm models.
-import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole"
-import Components from "../components/common/roleBasedAccess/vuex-orm-model/component"
-import UserRole from "../components/common/userRole/vuex-orm-model/userRole"
+import ComponentsAllowedForUserRole from "../components/common/roleBasedAccess/vuex-orm-model/ComponentsAllowedForUserRole";
+import Components from "../components/common/roleBasedAccess/vuex-orm-model/component";
+import UserRole from "../components/common/userRole/vuex-orm-model/userRole";
 import Diagnosis from "../components/patient/diagnosis/models/Diagnosis";
 import Assessment from "../components/patient/diagnosis/models/Assessment";
 import Recommendation from "../components/patient/Recommendations/vuex-orm-models/recommendation";
 
-
 import { ROLE_API_URL } from "@/const/others.js";
-import searchCommandsList from "@/const/searchCommandsList.js";
+// import searchCommandsList from "@/const/searchCommandsList.js"; Will come from DB
 
 const database = new VuexORM.Database();
 database.register(ComponentsAllowedForUserRole);
@@ -55,7 +54,7 @@ database.register(UserRole);
 database.register(Diagnosis);
 database.register(Assessment);
 database.register(Recommendation);
-require('../components/patient/MentalStatusExam/models/index.js')(database)
+require("../components/patient/MentalStatusExam/models/index.js")(database);
 
 export default new Vuex.Store({
   state: {
@@ -116,58 +115,22 @@ export default new Vuex.Store({
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
-      );
+      });
       if (response.ok) {
         const json = await response.json();
         console.log(json);
-        const {
-          name,
-          componentsAllowedToAccess,
-          multiStateDisplayAreaComponentLoadSequence,
-          currentStateDisplayAreaComponentLoadSequence,
-        } = json;
+        const { name } = json;
         commit("setUserRole", name);
         commit("setUserRoleUUID", roleUUID);
 
+        const commandList = []; // Will come from DB
 
-
-        // Get AllowAccesedComponents
-        const components = componentsAllowedToAccess.split(",");
-        commit("setComponentsAllowedToAccess", components);
-        const commandList = searchCommandsList.filter((item) => {
-          return (
-            components.filter((component) => {
-              return component.trim().toLowerCase() == item.abbreviation;
-            }).length > 0
-          );
-        });
         commandList.push({
           label: "clear",
           action: "",
           abbreviation: "",
         });
         commit("setSearchCommandsList", commandList);
-
-        // Get multiStateDisplayArea Side components
-        const leftComponents = multiStateDisplayAreaComponentLoadSequence.split(
-          ","
-        );
-        console.log("LeftComponents_____________");
-        console.log(leftComponents);        //0: "Rex" 1: "Rem"
-
-
-        commit("setMultiStateDisplayAreaCtList", leftComponents, {
-          root: true,
-        });
-
-        // Get CurrentStateDisplayAreaSide components
-        const rightComponents = currentStateDisplayAreaComponentLoadSequence.split(
-          ","
-        );
-        commit("setCurrentStateDisplayAreaCardsList", rightComponents, {
-          root: true,
-        });
       }
     },
   },
