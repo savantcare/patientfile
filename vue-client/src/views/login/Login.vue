@@ -3,7 +3,7 @@
     <el-col :span="6">
       <span v-if="isLoggedIn">
         You are already logged in. Click
-        <router-link to="/?patient_id=bfe041fa-073b-4223-8c69-0540ee678ff8">here</router-link>to search to opne a patient file
+        <router-link to="/?patient_id=bfe041fa-073b-4223-8c69-0540ee678ff8">here</router-link>to search to open a patient file
       </span>
       <el-card class="box-card" shadow="hover" style="width: 500px;" v-else>
         <div slot="header" class="clearfix">
