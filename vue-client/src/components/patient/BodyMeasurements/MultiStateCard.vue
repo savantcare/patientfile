@@ -43,6 +43,17 @@
 <script>
 import CardHeader from "@/components/common/CardHeader";
 import { mapGetters } from "vuex";
+
+import Weight from "./models/weight";
+import BloodPressure from "./models/bloodPressure";
+import BloodSugar from "./models/bloodSugar";
+import Bmi from "./models/bmi";
+import Height from "./models/height";
+import OxygenSaturation from "./models/oxygenSaturation";
+import Pulse from "./models/pulse";
+import Temperature from "./models/temperature";
+import WaistCircumference from "./models/waistCircumference";
+
 export default {
   components: {
     CardHeader
@@ -66,16 +77,6 @@ export default {
       });
     },
     formatBodyMeasurementValue(bm) {
-      if (!bm.value && bm.type != "bloodPressure") {
-        return "-";
-      }
-
-      if (bm.type == "bloodPressure") {
-        if (!bm.systolicValue) {
-          return "-";
-        }
-        return bm.systolicValue + "/" + bm.diastolicValue + bm.unit;
-      }
       return bm.value + bm.unit;
     },
     handleClickOnMInCardHeader() {
@@ -106,63 +107,295 @@ export default {
   },
   computed: {
     ...mapGetters("bodyMeasurement", ["measurementsByDate"]),
+    weight() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Weight.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.weightInPounds,
+          unit: "lb"
+        };
+      }
+      return "-";
+    },
+    bmi() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Bmi.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.bmiValue,
+          unit: ""
+        };
+      }
+      return "-";
+    },
+    waistCircumference() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = WaistCircumference.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.waistCircumferenceInInches,
+          unit: " in"
+        };
+      }
+      return "-";
+    },
+    bloodSugar() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = BloodSugar.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.bloodSugar,
+          unit: " mg/dL"
+        };
+      }
+      return "-";
+    },
+    height() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Height.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.heightInInch,
+          unit: " inches"
+        };
+      }
+      return "-";
+    },
+    bloodPressure() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = BloodPressure.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.systolicValue + "/" + data.diastolicValue,
+          unit: " mmHg"
+        };
+      }
+      return "-";
+    },
+    oxygenSaturation() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = OxygenSaturation.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.oxygenSaturation,
+          unit: " mmHg"
+        };
+      }
+      return "-";
+    },
+    pulse() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Pulse.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.beatsPerMinuteValue,
+          unit: " bpm"
+        };
+      }
+      return "-";
+    },
+    temperature() {
+      let timeStampOfStateInsideCt = null;
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader ===
+        "2038-01-19 03:14:07.999999"
+      ) {
+        timeStampOfStateInsideCt = Math.round(new Date().getTime() / 1000);
+      } else
+        timeStampOfStateInsideCt = Math.round(
+          new Date(
+            this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+          ).getTime() / 1000
+        );
+      const data = Temperature.query()
+        .where("ROW_START", value => value < timeStampOfStateInsideCt)
+        .where("ROW_END", value => value > timeStampOfStateInsideCt)
+        .orderBy("ROW_START", "desc")
+        .last();
+
+      if (data) {
+        return {
+          value: data.temperatureInFarehnite,
+          unit: " F"
+        };
+      }
+      return "-";
+    },
     tableData() {
-      const {
-        weight,
-        bmi,
-        waistCircumference,
-        bloodSugar,
-        height,
-        bloodPressure,
-        oxygenSaturation,
-        pulse,
-        temperature
-      } = this.measurementsByDate;
       return [
         {
           label: "Weight",
           type: "weight",
-          ...weight
+          ...this.weight
         },
         {
           label: "BMI",
           type: "bmi",
-          ...bmi
+          ...this.bmi
         },
         {
           label: "Waist circumference",
           type: "waistCircumference",
-          ...waistCircumference
+          ...this.waistCircumference
         },
         {
           label: "Blood sugar",
           type: "bloodSugar",
-          ...bloodSugar
+          ...this.bloodSugar
         },
         {
           label: "Height",
           type: "height",
-          ...height
+          ...this.height
         },
         {
           label: "Blood pressure",
           type: "bloodPressure",
-          ...bloodPressure
+          ...this.bloodPressure
         },
         {
           label: "Oxygen saturation",
           type: "oxygenSaturation",
-          ...oxygenSaturation
+          ...this.oxygenSaturation
         },
         {
           label: "Pulse",
           type: "pulse",
-          ...pulse
+          ...this.pulse
         },
         {
           label: "Temperature",
           type: "temperature",
-          ...temperature
+          ...this.temperature
         }
       ];
     },
