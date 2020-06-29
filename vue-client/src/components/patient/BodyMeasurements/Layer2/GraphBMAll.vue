@@ -5,6 +5,16 @@
 </template>
 
 <script>
+import Weight from "../models/weight";
+import BloodPressure from "../models/bloodPressure";
+import BloodSugar from "../models/bloodSugar";
+import Bmi from "../models/bmi";
+import Height from "../models/height";
+import OxygenSaturation from "../models/oxygenSaturation";
+import Pulse from "../models/pulse";
+import Temperature from "../models/temperature";
+import WaistCircumference from "../models/waistCircumference";
+
 export default {
   data() {
     return {};
@@ -26,90 +36,95 @@ export default {
       ];
       let rows = [];
 
-      let weights = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.weights
-      ]);
+      let weights = Weight.query()
+        .orderBy("timeOfEvaluation")
+        .get();
+
       for (const weight of weights) {
         rows.push({
-          date: this.formatDate(weight.measurementDate),
+          date: this.formatDate(weight.timeOfEvaluation),
           weight: weight.weightInPounds
         });
       }
 
-      let bmis = this.sortByDate([...this.$store.state.bodyMeasurement.bmis]);
+      let bmis = Bmi.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const bmi of bmis) {
         rows.push({
-          date: this.formatDate(bmi.measurementDate),
+          date: this.formatDate(bmi.timeOfEvaluation),
           bmi: bmi.bmiValue
         });
       }
 
-      let waistCircumferences = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.waistCircumferences
-      ]);
+      let waistCircumferences = WaistCircumference.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
 
       for (const waistCircumference of waistCircumferences) {
         rows.push({
-          date: this.formatDate(waistCircumference.measurementDate),
+          date: this.formatDate(waistCircumference.timeOfEvaluation),
           waistCircumference: waistCircumference.waistCircumferenceInInches
         });
       }
 
-      let bloodSugars = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.bloodSugars
-      ]);
+      let bloodSugars = BloodSugar.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const bloodSugar of bloodSugars) {
         rows.push({
-          date: this.formatDate(bloodSugar.measurementDate),
+          date: this.formatDate(bloodSugar.timeOfEvaluation),
           bloodSugar: bloodSugar.bloodSugar
         });
       }
 
-      let heights = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.heights
-      ]);
+      let heights = Height.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const height of heights) {
         rows.push({
-          date: this.formatDate(height.measurementDate),
+          date: this.formatDate(height.timeOfEvaluation),
           height: height.heightInInch
         });
       }
 
-      let bloodPressures = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.bloodPressures
-      ]);
+      let bloodPressures = BloodPressure.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const bloodPressure of bloodPressures) {
         rows.push({
-          date: this.formatDate(bloodPressure.measurementDate),
+          date: this.formatDate(bloodPressure.timeOfEvaluation),
           systolicValue: bloodPressure.systolicValue,
           diastolicValue: bloodPressure.diastolicValue
         });
       }
 
-      let oxygenSaturations = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.oxygenSaturations
-      ]);
+      let oxygenSaturations = OxygenSaturation.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const oxygenSaturation of oxygenSaturations) {
         rows.push({
-          date: this.formatDate(oxygenSaturation.measurementDate),
+          date: this.formatDate(oxygenSaturation.timeOfEvaluation),
           oxygenSaturation: oxygenSaturation.oxygenSaturation
         });
       }
 
-      let pulse = this.sortByDate([...this.$store.state.bodyMeasurement.pulse]);
+      let pulse = Pulse.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const p of pulse) {
         rows.push({
-          date: this.formatDate(p.measurementDate),
+          date: this.formatDate(p.timeOfEvaluation),
           pulse: p.beatsPerMinuteValue
         });
       }
 
-      let temperature = this.sortByDate([
-        ...this.$store.state.bodyMeasurement.temperature
-      ]);
+      let temperature = Temperature.query()
+        .orderBy("timeOfEvalutaion")
+        .get();
       for (const t of temperature) {
         rows.push({
-          date: this.formatDate(t.measurementDate),
+          date: this.formatDate(t.timeOfEvaluation),
           temperature: t.temperatureInFarehnite
         });
       }
@@ -124,7 +139,7 @@ export default {
     sortByDate(array) {
       return array.sort((data1, data2) => {
         return (
-          new Date(data1.measurementDate) - new Date(data2.measurementDate)
+          new Date(data1.timeOfEvaluation) - new Date(data2.timeOfEvaluation)
         );
       });
     },

@@ -11,6 +11,7 @@ export default {
   computed: {
     chartData() {
       const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+
       let chartData = Weight.query()
         .where("ROW_START", value => value < currentUnixTimeStamp)
         .where("ROW_END", value => value > currentUnixTimeStamp)
