@@ -16,13 +16,13 @@
         <el-tab-pane v-for="(element, index) in bmElements" :key="`bm-element-${index}`">
           <span slot="label">{{element.label}}</span>
 
-          <BMElementBody :type="element.type" :label="element.label" :tab="tab" />
-          <!-- <component
+          <!-- <BMElementBody :type="element.type" :label="element.label" :tab="tab" /> -->
+          <component
             :is="element.component"
             :type="element.type"
             :label="element.label"
             :tab="tab"
-          />-->
+          />
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -52,14 +52,46 @@ export default {
           type: "weight",
           component: require("./components/Weight").default
         },
-        { label: "BMI", type: "bmi" },
-        { label: "Waist Circumference", type: "waistCircumference" },
-        { label: "Blood Sugar", type: "bloodSugar" },
-        { label: "Height", type: "height" },
-        { label: "Blood Pressure", type: "bloodPressure" },
-        { label: "Oxygen Saturation", type: "oxygenSaturation" },
-        { label: "Pulse", type: "pulse" },
-        { label: "Temperature", type: "temperature" }
+        {
+          label: "BMI",
+          type: "bmi",
+          component: require("./components/BMI").default
+        },
+        {
+          label: "Waist Circumference",
+          type: "waistCircumference",
+          component: require("./components/WaistCircumference").default
+        },
+        {
+          label: "Blood Sugar",
+          type: "bloodSugar",
+          component: require("./components/BloodSugar").default
+        },
+        {
+          label: "Height",
+          type: "height",
+          component: require("./components/Height").default
+        },
+        {
+          label: "Blood Pressure",
+          type: "bloodPressure",
+          component: require("./components/BloodPressure").default
+        },
+        {
+          label: "Oxygen Saturation",
+          type: "oxygenSaturation",
+          component: require("./components/OxygenSaturation").default
+        },
+        {
+          label: "Pulse",
+          type: "pulse",
+          component: require("./components/Pulse").default
+        },
+        {
+          label: "Temperature",
+          type: "temperature",
+          component: require("./components/Temperature").default
+        }
       ],
       tab: 0
     };
@@ -86,10 +118,6 @@ export default {
       this.$store.commit("bodyMeasurement/setSelectedDate", today);
       console.log(today);
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
-    },
-    gotoNextTab() {
-      console.log(this.tab);
-      this.tab = "1";
     }
   }
 };

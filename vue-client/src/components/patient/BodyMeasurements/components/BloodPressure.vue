@@ -4,14 +4,14 @@
 
 <script>
 import Graph from "./_BaseGraph";
-import Weight from "../models/weight";
+import BloodPressure from "../models/bloodPressure";
 export default {
   props: ["type", "label", "tab"],
   components: { Graph },
   computed: {
     chartData() {
       const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
-      let chartData = Weight.query()
+      let chartData = BloodPressure.query()
         .where("ROW_START", value => value < currentUnixTimeStamp)
         .where("ROW_END", value => value > currentUnixTimeStamp)
         .orderBy("ROW_START", "desc")
@@ -22,7 +22,7 @@ export default {
         );
       });
 
-      let columns = ["date", "weightInPounds"];
+      let columns = ["date", "systolicValue", "diastolicValue"];
 
       let rows = [];
       chartData.forEach(item => {
@@ -30,7 +30,8 @@ export default {
         const formatDate = date.getMonth() + 1 + "-" + date.getDate();
 
         rows.push({
-          weightInPounds: item.weightInPounds,
+          systolicValue: item.systolicValue,
+          diastolicValue: item.diastolicValue,
           date: formatDate
         });
       });
@@ -43,7 +44,7 @@ export default {
   },
   mounted() {
     const params = { patientId: this.$route.query.patient_id };
-    this.$store.dispatch("bodyMeasurement/getWeight", params);
+    this.$store.dispatch("bodyMeasurement/getBloodPressure", params);
   }
 };
 </script>

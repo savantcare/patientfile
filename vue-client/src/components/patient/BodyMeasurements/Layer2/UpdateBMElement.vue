@@ -76,10 +76,10 @@ export default {
           const myId = this.$store.state.userId;
           const element = this.bmElementForm;
 
-          const measurementDate = new Date(element.date).toLocaleDateString();
+          const timeOfEvaluation = new Date(element.date).toLocaleDateString();
           let data = {
             patientUUID: patientId,
-            measurementDate: measurementDate,
+            timeOfEvaluation: timeOfEvaluation,
             Notes: element.notes,
             recordChangedByUUID: myId,
             recordChangedFromIPAddress: ipAddress
@@ -146,7 +146,7 @@ export default {
     sortByDate(array) {
       return array.sort((data1, data2) => {
         return (
-          new Date(data1.measurementDate) - new Date(data2.measurementDate)
+          new Date(data1.timeOfEvaluation) - new Date(data2.timeOfEvaluation)
         );
       });
     },
@@ -173,12 +173,12 @@ export default {
         weights = weights.filter(
           weight =>
             weight.weightInPounds != this.objectToUpdate.value &&
-            weight.measurementDate != this.objectToUpdate.date
+            weight.timeOfEvaluation != this.objectToUpdate.date
         );
         if (weights.length > 0) {
           for (var weight of weights) {
             this.changeLog.push({
-              date: weight.measurementDate,
+              date: weight.timeOfEvaluation,
               value: weight.weightInPounds
             });
           }
@@ -190,12 +190,12 @@ export default {
         bmis = bmis.filter(
           bmi =>
             bmi.bmiValue != this.objectToUpdate.value &&
-            bmi.measurementDate != this.objectToUpdate.date
+            bmi.timeOfEvaluation != this.objectToUpdate.date
         );
         if (bmis.length > 0) {
           for (var bmi of bmis) {
             this.changeLog.push({
-              date: bmi.measurementDate,
+              date: bmi.timeOfEvaluation,
               value: bmi.bmiValue
             });
           }
@@ -210,12 +210,12 @@ export default {
           waistCircumference =>
             waistCircumference.waistCircumferenceInInches !=
               this.objectToUpdate.value &&
-            waistCircumference.measurementDate != this.objectToUpdate.date
+            waistCircumference.timeOfEvaluation != this.objectToUpdate.date
         );
         if (waistCircumferences.length > 0) {
           for (var waistCircumference of waistCircumferences) {
             this.changeLog.push({
-              date: waistCircumference.measurementDate,
+              date: waistCircumference.timeOfEvaluation,
               value: waistCircumference.waistCircumferenceInInches
             });
           }
@@ -227,12 +227,12 @@ export default {
         bloodSugars = bloodSugars.filter(
           bloodSugar =>
             bloodSugar.bloodSugar != this.objectToUpdate.value &&
-            bloodSugar.measurementDate != this.objectToUpdate.date
+            bloodSugar.timeOfEvaluation != this.objectToUpdate.date
         );
         if (bloodSugars.length > 0) {
           for (var bloodSugar of bloodSugars) {
             this.changeLog.push({
-              date: bloodSugar.measurementDate,
+              date: bloodSugar.timeOfEvaluation,
               value: bloodSugar.bloodSugar
             });
           }
@@ -244,12 +244,12 @@ export default {
         heights = heights.filter(
           height =>
             height.heightInInch != this.objectToUpdate.value &&
-            height.measurementDate != this.objectToUpdate.date
+            height.timeOfEvaluation != this.objectToUpdate.date
         );
         if (heights.length > 0) {
           for (var height of heights) {
             this.changeLog.push({
-              date: height.measurementDate,
+              date: height.timeOfEvaluation,
               value: height.heightInInch
             });
           }
@@ -265,12 +265,12 @@ export default {
             bloodPressure.systolicValue != this.objectToUpdate.systolicValue &&
             bloodPressure.diastolicValue !=
               this.objectToUpdate.diastolicValue &&
-            bloodPressure.measurementDate != this.objectToUpdate.date
+            bloodPressure.timeOfEvaluation != this.objectToUpdate.date
         );
         if (bloodPressures.length > 0) {
           for (var bloodPressure of bloodPressures) {
             this.changeLog.push({
-              date: bloodPressure.measurementDate,
+              date: bloodPressure.timeOfEvaluation,
               value:
                 bloodPressure.systolicValue + "/" + bloodPressure.diastolicValue
             });
@@ -285,12 +285,12 @@ export default {
         oxygenSaturations = oxygenSaturations.filter(
           oxygenSaturation =>
             oxygenSaturation.oxygenSaturation != this.objectToUpdate.value &&
-            oxygenSaturation.measurementDate != this.objectToUpdate.date
+            oxygenSaturation.timeOfEvaluation != this.objectToUpdate.date
         );
         if (oxygenSaturations.length > 0) {
           for (var oxygenSaturation of oxygenSaturations) {
             this.changeLog.push({
-              date: oxygenSaturation.measurementDate,
+              date: oxygenSaturation.timeOfEvaluation,
               value: oxygenSaturation.oxygenSaturation
             });
           }
@@ -302,12 +302,12 @@ export default {
         pulse = pulse.filter(
           p =>
             p.beatsPerMinuteValue != this.objectToUpdate.value &&
-            p.measurementDate != this.objectToUpdate.date
+            p.timeOfEvaluation != this.objectToUpdate.date
         );
         if (pulse.length > 0) {
           for (var p of pulse) {
             this.changeLog.push({
-              date: p.measurementDate,
+              date: p.timeOfEvaluation,
               value: p.beatsPerMinuteValue
             });
           }
@@ -319,12 +319,12 @@ export default {
         temperature = temperature.filter(
           t =>
             t.temperatureInFarehnite != this.objectToUpdate.value &&
-            t.measurementDate != this.objectToUpdate.date
+            t.timeOfEvaluation != this.objectToUpdate.date
         );
         if (temperature.length > 0) {
           for (var t of temperature) {
             this.changeLog.push({
-              date: t.measurementDate,
+              date: t.timeOfEvaluation,
               value: t.temperatureInFarehnite
             });
           }

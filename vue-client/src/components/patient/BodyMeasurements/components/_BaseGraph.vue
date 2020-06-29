@@ -17,6 +17,13 @@ export default {
         type: this.type
       });
     }
+  },
+  watch: {
+    tab() {
+      this.$nextTick(() => {
+        this.$refs["chart"].echarts.resize();
+      });
+    }
   }
 };
 </script>

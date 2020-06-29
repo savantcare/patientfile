@@ -54,6 +54,7 @@ database.register(ormDiagnosis);
 database.register(ormAssessment);
 database.register(ormRecommendation);
 require("../components/patient/MentalStatusExam/models/index.js")(database);
+require("../components/patient/BodyMeasurements/models/index.js")(database)
 
 export default new Vuex.Store({
   state: {

@@ -1,6 +1,16 @@
 const TOKEN = localStorage.getItem("token")
 import { BODY_MEASUREMENT_API_URL } from "@/const/others.js"
 
+import BloodPressure from './models/bloodPressure'
+import BloodSugar from './models/bloodSugar'
+import BMI from './models/bmi'
+import Height from './models/height'
+import OxygenSaturation from './models/oxygenSaturation'
+import Pulse from './models/pulse'
+import Temperature from './models/temperature'
+import WaistCircumference from './models/waistCircumference'
+import Weight from './models/weight'
+
 const state = {
   weights: [],
   bmis: [],
@@ -87,19 +97,18 @@ const actions = {
       })
     }
   },
-  async getWeight({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getWeight`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getWeight(_, params) {
+    const { patientId } = params
+    const count = await Weight.query().count()
+
+    if (count == 0) {
+      await Weight.api().post(`${BODY_MEASUREMENT_API_URL}/getWeight`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setWeights", json)
-      } else {
-        console.log("Failed to fetch weight")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateBmiInSM({ state, commit }, params) {
@@ -134,19 +143,18 @@ const actions = {
       })
     }
   },
-  async getBmi({ commit }) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getBmi`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getBmi(_, params) {
+    const { patientId } = params
+    const count = await BMI.query().count()
+
+    if (count == 0) {
+      await BMI.api().post(`${BODY_MEASUREMENT_API_URL}/getBmi`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setBmis", json)
-      } else {
-        console.log("Failed to fetch weight")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateWaistCircumferenceInSM({ state, commit }, params) {
@@ -181,19 +189,18 @@ const actions = {
       })
     }
   },
-  async getWaistCircumferences({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getWaistCircumferences`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getWaistCircumference(_, params) {
+    const { patientId } = params
+    const count = await WaistCircumference.query().count()
+
+    if (count == 0) {
+      await WaistCircumference.api().post(`${BODY_MEASUREMENT_API_URL}/getWaistCircumference`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setWaistCircumferences", json)
-      } else {
-        console.log("Failed to fetch waist circumferences")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateBloodSugarInSM({ state, commit }, params) {
@@ -228,19 +235,18 @@ const actions = {
       })
     }
   },
-  async getBloodSugar({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getBloodSugar`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getBloodSugar(_, params) {
+    const { patientId } = params
+    const count = await BloodSugar.query().count()
+
+    if (count == 0) {
+      await BloodSugar.api().post(`${BODY_MEASUREMENT_API_URL}/getBloodSugar`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setBloodSugars", json)
-      } else {
-        console.log("Failed to fetch blood sugar")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateHeightInSM({ state, commit }, params) {
@@ -275,19 +281,18 @@ const actions = {
       })
     }
   },
-  async getHeight({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getHeight`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getHeight(_, params) {
+    const { patientId } = params
+    const count = await Height.query().count()
+
+    if (count == 0) {
+      await Height.api().post(`${BODY_MEASUREMENT_API_URL}/getHeight`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setHeights", json)
-      } else {
-        console.log("Failed to fetch heights")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateBloodPressureInSM({ state, commit }, params) {
@@ -323,19 +328,18 @@ const actions = {
       })
     }
   },
-  async getBloodPressure({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getBloodPressure`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getBloodPressure(_, params) {
+    const { patientId } = params
+    const count = await BloodPressure.query().count()
+
+    if (count == 0) {
+      await BloodPressure.api().post(`${BODY_MEASUREMENT_API_URL}/getBloodPressure`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setBloodPressures", json)
-      } else {
-        console.log("Failed to fetch blood pressure")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateOxygenSaturationInSM({ state, commit }, params) {
@@ -370,20 +374,20 @@ const actions = {
       })
     }
   },
-  async getOxygenSaturation({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getOxygenSaturation`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getOxygenSaturation(_, params) {
+    const { patientId } = params
+    const count = await OxygenSaturation.query().count()
+
+    if (count == 0) {
+      await OxygenSaturation.api().post(`${BODY_MEASUREMENT_API_URL}/getOxygenSaturation`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setOxygenSaturations", json)
-      } else {
-        console.log("Failed to fetch oxygen saturation")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
+
   },
   async dbUpdatePulseInSM({ state, commit }, params) {
     const { data, notify } = params
@@ -419,19 +423,18 @@ const actions = {
       })
     }
   },
-  async getPulse({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getPulse`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getPulse(_, params) {
+    const { patientId } = params
+    const count = await Pulse.query().count()
+
+    if (count == 0) {
+      await Pulse.api().post(`${BODY_MEASUREMENT_API_URL}/getPulse`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setPulse", json)
-      } else {
-        console.log("Failed to fetch pulse")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   },
   async dbUpdateTemperatureInSM({ state, commit }, params) {
@@ -466,19 +469,18 @@ const actions = {
       })
     }
   },
-  async getTemperature({ commit },) {
-    try {
-      const response = await fetch(`${BODY_MEASUREMENT_API_URL}/getTemperature`, {
-        headers: { "Authorization": "Bearer " + TOKEN, }
+  async getTemperature(_, params) {
+    const { patientId } = params
+    const count = await Temperature.query().count()
+
+    if (count == 0) {
+      await Temperature.api().post(`${BODY_MEASUREMENT_API_URL}/getTemperature`, {
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        patientId
       })
-      if (response.ok) {
-        const json = await response.json()
-        commit("setTemperature", json)
-      } else {
-        console.log("Failed to fetch temperature")
-      }
-    } catch (ex) {
-      console.log("Server connection error")
     }
   }
 }

@@ -4,14 +4,14 @@
 
 <script>
 import Graph from "./_BaseGraph";
-import Weight from "../models/weight";
+import OxygenSaturation from "../models/oxygenSaturation";
 export default {
   props: ["type", "label", "tab"],
   components: { Graph },
   computed: {
     chartData() {
       const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
-      let chartData = Weight.query()
+      let chartData = OxygenSaturation.query()
         .where("ROW_START", value => value < currentUnixTimeStamp)
         .where("ROW_END", value => value > currentUnixTimeStamp)
         .orderBy("ROW_START", "desc")
@@ -22,7 +22,7 @@ export default {
         );
       });
 
-      let columns = ["date", "weightInPounds"];
+      let columns = ["date", "oxygenSaturation"];
 
       let rows = [];
       chartData.forEach(item => {
@@ -30,7 +30,7 @@ export default {
         const formatDate = date.getMonth() + 1 + "-" + date.getDate();
 
         rows.push({
-          weightInPounds: item.weightInPounds,
+          oxygenSaturation: item.oxygenSaturation,
           date: formatDate
         });
       });
@@ -43,7 +43,7 @@ export default {
   },
   mounted() {
     const params = { patientId: this.$route.query.patient_id };
-    this.$store.dispatch("bodyMeasurement/getWeight", params);
+    this.$store.dispatch("bodyMeasurement/getOxygenSaturation", params);
   }
 };
 </script>

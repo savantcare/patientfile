@@ -40,9 +40,15 @@ const updateWeight = async (data) => {
   return result
 }
 
-router.get('/getWeight', async (req, res) => {
+router.post('/getWeight', async (req, res) => {
   try {
-    const queryResult = await Weight.sequelize.query('SELECT * FROM weight FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await Weight.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM weight FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -73,9 +79,15 @@ router.post('/updateBmi', async (req, res) => {
   }
 })
 
-router.get('/getBmi', async (req, res) => {
+router.post('/getBmi', async (req, res) => {
   try {
-    const queryResult = await BMI.sequelize.query('SELECT * FROM BMI FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await BMI.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM BMI FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -107,9 +119,15 @@ router.post('/updateWaistCircumference', async (req, res) => {
   }
 })
 
-router.get('/getWaistCircumferences', async (req, res) => {
+router.post('/getWaistCircumference', async (req, res) => {
   try {
-    const queryResult = await WaistCircumference.sequelize.query('SELECT * FROM waistCircumference FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await WaistCircumference.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM waistCircumference FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -140,9 +158,16 @@ router.post('/updateBloodSugar', async (req, res) => {
   }
 })
 
-router.get('/getBloodSugar', async (req, res) => {
+router.post('/getBloodSugar', async (req, res) => {
   try {
-    const queryResult = await BloodSugar.sequelize.query('SELECT * FROM bloodSugar FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await BloodSugar.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM bloodSugar FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -173,9 +198,16 @@ router.post('/updateHeight', async (req, res) => {
   }
 })
 
-router.get('/getHeight', async (req, res) => {
+router.post('/getHeight', async (req, res) => {
   try {
-    const queryResult = await Height.sequelize.query('SELECT * FROM height FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await Height.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM height FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -207,9 +239,16 @@ router.post('/updateBloodPressure', async (req, res) => {
   }
 })
 
-router.get('/getBloodPressure', async (req, res) => {
+router.post('/getBloodPressure', async (req, res) => {
   try {
-    const queryResult = await BloodPressure.sequelize.query('SELECT * FROM bloodPressure FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await BloodPressure.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM bloodPressure FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -241,9 +280,16 @@ router.post('/updateOxygenSaturation', async (req, res) => {
   }
 })
 
-router.get('/getOxygenSaturation', async (req, res) => {
+router.post('/getOxygenSaturation', async (req, res) => {
   try {
-    const queryResult = await OxygenSaturation.sequelize.query('SELECT * FROM oxygenSaturation FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await OxygenSaturation.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM oxygenSaturation FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -275,9 +321,16 @@ router.post('/updatePulse', async (req, res) => {
   }
 })
 
-router.get('/getPulse', async (req, res) => {
+router.post('/getPulse', async (req, res) => {
   try {
-    const queryResult = await Pulse.sequelize.query('SELECT * FROM pulse FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await Pulse.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM pulse FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
@@ -309,9 +362,16 @@ router.post('/updateTemperature', async (req, res) => {
   }
 })
 
-router.get('/getTemperature', async (req, res) => {
+router.post('/getTemperature', async (req, res) => {
   try {
-    const queryResult = await Temperature.sequelize.query('SELECT * FROM temperature FOR SYSTEM_TIME ALL', { type: QueryTypes.SELECT })
+    const { patientId } = req.body
+    const queryResult = await Temperature.sequelize.query('SELECT *, UNIX_TIMESTAMP(ROW_START) AS ROW_START, UNIX_TIMESTAMP(ROW_END) AS ROW_END FROM temperature FOR SYSTEM_TIME ALL WHERE patientUUID=:patientId',
+      {
+        replacements: { patientId: patientId },
+        type: QueryTypes.SELECT
+      }
+    )
+
     res.send(queryResult)
   } catch (err) {
     res.status(500).send({
