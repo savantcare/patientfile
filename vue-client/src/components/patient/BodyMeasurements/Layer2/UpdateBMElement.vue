@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <el-row :gutter="12">
       <el-col :span="24">
         <el-card class="box-card">
@@ -52,16 +52,28 @@
         </el-card>
       </el-col>
     </el-row>
-  </div>
+  </div>-->
+  <component :is="currentComponent" />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      bmElementForm: { value: 1, date: new Date(), notes: "" },
-      changeLog: [],
-      currentPage: 0
+      // bmElementForm: { value: 1, date: new Date(), notes: "" },
+      // changeLog: [],
+      // currentPage: 0
+      components: {
+        weight: require("./components/Weight").default,
+        bmi: require("./components/BMI").default,
+        waistCircumference: require("./components/WaistCircumference").default,
+        bloodSugar: require("./components/BloodSugar").default,
+        height: require("./components/Height").default,
+        bloodPressure: require("./components/BloodPressure").default,
+        oxygenSaturation: require("./components/OxygenSaturation").default,
+        pulse: require("./components/Pulse").default,
+        temperature: require("./components/Temperature").default
+      }
     };
   },
   methods: {
@@ -351,14 +363,17 @@ export default {
     },
     objectToUpdate() {
       return this.$store.state.bodyMeasurement.objectToUpdate;
+    },
+    currentComponent() {
+      return this.components[this.type];
     }
   },
   mounted() {
-    this.getSelectedValue();
+    // this.getSelectedValue();
   },
   watch: {
     dialogVisibility() {
-      this.getSelectedValue();
+      // this.getSelectedValue();
     }
   },
   components: {}

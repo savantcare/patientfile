@@ -1,7 +1,7 @@
 import { Model } from "@vuex-orm/core";
 
-export default class Weight extends Model {
-  static entity = "weight";
+export default class BloodPressure extends Model {
+  static entity = "blood-pressure";
 
   static fields() {
     return {
