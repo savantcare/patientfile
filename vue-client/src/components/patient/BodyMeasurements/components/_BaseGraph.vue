@@ -12,6 +12,7 @@ export default {
   props: ["chartData", "type", "label", "tab"],
   methods: {
     handleClickAddButton() {
+      this.$store.commit("bodyMeasurement/setSelectedDate", new Date());
       this.$store.commit("showAddBMElementTabInLayer2", {
         label: this.label,
         type: this.type

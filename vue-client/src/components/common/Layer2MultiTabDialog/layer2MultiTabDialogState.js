@@ -699,9 +699,9 @@ export default {
       state.tabValue = tab.name;
     },
     showGraphBMElementTabInLayer2(state, params) {
-      state.bmElement = params;
+      const { type, label } = params
       const tab = {
-        label: `Graph of ${params.label}`,
+        label: `Graph of ${label}`,
         value: require("@/components/patient/BodyMeasurements/Layer2/GraphBMElement.vue")
           .default,
         name: "tab-graph-bm-element",
@@ -709,6 +709,7 @@ export default {
       state.tabList = [tab];
       state.visibility = true;
       state.tabValue = tab.name;
+      state.bmElementType = type
     },
     showGraphAllBMTabInLayer2(state) {
       const tab = {

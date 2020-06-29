@@ -22,7 +22,8 @@ export default {
   methods: {},
   computed: {
     currentComponent() {
-      return this.components[this.type];
+      const type = this.$store.state.multiTabDialogLayer2.bmElementType;
+      return this.components[type];
     }
   },
   mounted() {},

@@ -49,7 +49,8 @@ export default {
       this.$refs.base_component.reset();
     },
     getChangeLog() {
-      const currentUnixTimeStamp = Math.round(new Date().getTime() / 1000);
+      const date = this.$store.state.bodyMeasurement.selectedDate;
+      const currentUnixTimeStamp = Math.round(date.getTime() / 1000);
       const currentValue = BMI.query()
         .where("ROW_END", value => value > currentUnixTimeStamp)
         .get();

@@ -31,7 +31,7 @@
               size="mini"
               type="text"
               style="padding: 0px;"
-              @click="openGraphDialog(scope.row, scope.$index)"
+              @click="openGraphDialog(scope.row)"
             >G</el-button>
           </template>
         </el-table-column>
@@ -42,7 +42,6 @@
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import { mapGetters } from "vuex";
 
 import Weight from "./models/weight";
 import BloodPressure from "./models/bloodPressure";
@@ -63,17 +62,27 @@ export default {
       this.$store.commit("showGraphAllBMTabInLayer2");
     },
     openChangeDialog(item) {
-      this.$store.commit("bodyMeasurement/setObjectToUpdate", item);
+      let date = new Date();
+      if (
+        this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader !=
+        "2038-01-19 03:14:07.999999"
+      ) {
+        date = new Date(
+          this.$store.state.multiStateDisplayArea.timeOfStateSelectedInHeader
+        );
+      }
+
+      this.$store.commit("bodyMeasurement/setSelectedDate", date);
+
       this.$store.commit("showAddBMElementTabInLayer2", {
         label: item.label,
         type: item.type
       });
     },
-    openGraphDialog(item, index) {
+    openGraphDialog(item) {
       this.$store.commit("showGraphBMElementTabInLayer2", {
         label: item.label,
-        type: item.type,
-        index: index
+        type: item.type
       });
     },
     formatBodyMeasurementValue(bm) {
@@ -106,7 +115,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("bodyMeasurement", ["measurementsByDate"]),
     weight() {
       let timeStampOfStateInsideCt = null;
       if (
