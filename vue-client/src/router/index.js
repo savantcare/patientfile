@@ -66,6 +66,10 @@ const routes = [
   {
     path: '/mse',
     component: () => import("@/components/patient/MentalStatusExam/Overview.vue")
+  },
+  {
+    path: '/bm',
+    component: () => import("@/components/patient/BodyMeasurements/Overview.vue")
   }
 ]
 
