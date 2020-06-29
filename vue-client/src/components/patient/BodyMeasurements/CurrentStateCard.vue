@@ -111,9 +111,8 @@ export default {
       this.$scrollTo(element, 500, options);
     },
     handleClickOnMInCardHeader() {
-      const today = new Date().toISOString().split("T")[0];
+      const today = new Date();
       this.$store.commit("bodyMeasurement/setSelectedDate", today);
-      console.log(today);
       this.$store.commit("showUpdateAllBMElementTabInLayer2");
     }
   }

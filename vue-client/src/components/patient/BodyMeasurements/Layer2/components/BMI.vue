@@ -4,6 +4,8 @@
     ref="base_component"
     :updateObject="currentValue"
     :pageChangeLog="changeLog"
+    header="BMI"
+    type="bmi"
   />
 </template>
 

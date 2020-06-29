@@ -4,6 +4,8 @@
     ref="base_component"
     :updateObject="currentValue"
     :pageChangeLog="changeLog"
+    header="Blood Sugar"
+    type="bloodSugar"
   />
 </template>
 

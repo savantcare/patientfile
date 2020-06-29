@@ -724,8 +724,8 @@ export default {
     },
     showUpdateAllBMElementTabInLayer2(state) {
       const tab = {
-        label: `Change Body Measurement`,
-        value: require("@/components/patient/BodyMeasurements/Layer2/ChangeAllBMElement.vue")
+        label: `MultiChange Body Measurement`,
+        value: require("@/components/patient/BodyMeasurements/Layer2/MultiChangeBM.vue")
           .default,
         name: "tab-change-all-bm-element",
       };

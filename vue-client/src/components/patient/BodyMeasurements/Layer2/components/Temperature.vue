@@ -4,6 +4,8 @@
     ref="base_component"
     :updateObject="currentValue"
     :pageChangeLog="changeLog"
+    header="Temperature"
+    type="temperature"
   />
 </template>
 

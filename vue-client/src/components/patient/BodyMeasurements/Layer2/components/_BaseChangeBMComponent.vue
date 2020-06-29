@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="24">
-      <el-card class="box-card" v-loading="isLoading">
+      <el-card class="box-card" v-loading="isLoading" :header="header">
         <el-form :model="bmElementForm" ref="bmElementForm" class="demo-dynamic">
           <el-form-item>
             <el-card class="box-card" shadow="hover">
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  props: ["updateObject", "pageChangeLog"],
+  props: ["updateObject", "pageChangeLog", "header", "type"],
   data() {
     return {
       bmElementForm: {},
@@ -63,11 +63,6 @@ export default {
       currentPage: 0,
       isLoading: false
     };
-  },
-  computed: {
-    type() {
-      return this.$store.state.multiTabDialogLayer2.bmElementType;
-    }
   },
   mounted() {
     if (this.updateObject) {
