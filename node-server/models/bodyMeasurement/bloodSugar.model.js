@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     bloodSugar: {
       type: Sequelize.INTEGER
     },
-    measurementDate: {
+    timeOfEvaluation: {
       type: Sequelize.DATE
     },
     Notes: {

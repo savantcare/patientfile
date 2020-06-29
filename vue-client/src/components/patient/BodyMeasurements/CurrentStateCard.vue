@@ -16,7 +16,13 @@
         <el-tab-pane v-for="(element, index) in bmElements" :key="`bm-element-${index}`">
           <span slot="label">{{element.label}}</span>
 
-          <BMElementBody :type="element.value" :label="element.label" :tab="tab" />
+          <BMElementBody :type="element.type" :label="element.label" :tab="tab" />
+          <!-- <component
+            :is="element.component"
+            :type="element.type"
+            :label="element.label"
+            :tab="tab"
+          />-->
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -30,7 +36,7 @@ export default {
   props: {
     typeOfStateDisplayArea: {
       type: String,
-      default: "CurrentStateDisplayArea" // Other possible value: MultiStateDisplayArea For logic:Top of CardHeader.vue
+      default: "CurrentStateDisplayArea" // Other possible type: MultiStateDisplayArea For logic:Top of CardHeader.vue
     }
   },
   components: {
@@ -41,15 +47,19 @@ export default {
     return {
       selectedRows: [],
       bmElements: [
-        { label: "Weight", value: "weight" },
-        { label: "BMI", value: "bmi" },
-        { label: "Waist Circumference", value: "waistCircumference" },
-        { label: "Blood Sugar", value: "bloodSugar" },
-        { label: "Height", value: "height" },
-        { label: "Blood Pressure", value: "bloodPressure" },
-        { label: "Oxygen Saturation", value: "oxygenSaturation" },
-        { label: "Pulse", value: "pulse" },
-        { label: "Temperature", value: "temperature" }
+        {
+          label: "Weight",
+          type: "weight",
+          component: require("./components/Weight").default
+        },
+        { label: "BMI", type: "bmi" },
+        { label: "Waist Circumference", type: "waistCircumference" },
+        { label: "Blood Sugar", type: "bloodSugar" },
+        { label: "Height", type: "height" },
+        { label: "Blood Pressure", type: "bloodPressure" },
+        { label: "Oxygen Saturation", type: "oxygenSaturation" },
+        { label: "Pulse", type: "pulse" },
+        { label: "Temperature", type: "temperature" }
       ],
       tab: 0
     };

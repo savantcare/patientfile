@@ -153,14 +153,14 @@ export default {
 
     getSelectedValue() {
       this.changeLog = [];
-      if (this.type == "bloodPressure") {
+      if (this.type == "bloodPressure" && this.objectToUpdate) {
         this.bmElementForm = {
           systolicValue: this.objectToUpdate.systolicValue,
           diastolicValue: this.objectToUpdate.diastolicValue,
           notes: this.objectToUpdate.notes,
           date: this.objectToUpdate.date
         };
-      } else {
+      } else if (this.objectToUpdate) {
         this.bmElementForm = {
           value: this.objectToUpdate.value,
           notes: this.objectToUpdate.notes,

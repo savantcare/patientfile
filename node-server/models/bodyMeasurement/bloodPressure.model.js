@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
     diastolicValue: {
       type: Sequelize.INTEGER
     },
-    measurementDate: {
+    timeOfEvaluation: {
       type: Sequelize.DATE
     },
     Notes: {
