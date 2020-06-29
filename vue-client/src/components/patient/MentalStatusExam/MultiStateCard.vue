@@ -81,7 +81,7 @@ export default {
         x: false,
         y: true
       };
-      const element = "#body-measurement-current-state";
+      const element = "#mse-current-state";
       this.$scrollTo(element, 500, options);
     }
   },

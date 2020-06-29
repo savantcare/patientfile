@@ -60,7 +60,19 @@ export default {
     };
   },
   methods: {
-    handleClickOnFInCardHeader() {},
+    handleClickOnFInCardHeader() {
+      var options = {
+        container: "#multiStateDisplayArea",
+        easing: "ease-in",
+        offset: -60,
+        force: true,
+        cancelable: true,
+        x: false,
+        y: true
+      };
+      const element = "#mse-multi-state";
+      this.$scrollTo(element, 500, options);
+    },
     handleClickOnMInCardHeader() {
       this.$store.commit("mse/setSelectedDate", new Date());
       this.$store.commit("showMultiChangeMSETabInLayer2");
