@@ -16,7 +16,6 @@
         <el-tab-pane v-for="(element, index) in bmElements" :key="`bm-element-${index}`">
           <span slot="label">{{element.label}}</span>
 
-          <!-- <BMElementBody :type="element.type" :label="element.label" :tab="tab" /> -->
           <component
             :is="element.component"
             :type="element.type"
@@ -31,7 +30,6 @@
 
 <script>
 import CardHeader from "@/components/common/CardHeader";
-import BMElementBody from "./BMElementBody";
 export default {
   props: {
     typeOfStateDisplayArea: {
@@ -40,8 +38,7 @@ export default {
     }
   },
   components: {
-    CardHeader,
-    BMElementBody
+    CardHeader
   },
   data() {
     return {
