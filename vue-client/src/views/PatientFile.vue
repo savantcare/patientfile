@@ -182,6 +182,10 @@ const Diagnosis = () => import("@/components/patient/diagnosis/Layer1Card");
 const FamilyHistory = () =>
   import("@/components/patient/FamilyHistory/FamilyHistoryCard");
 const KeyboardHandler = () => import("@/components/common/KeyboardHandler");
+const BM = () =>
+  import("@/components/patient/BodyMeasurements/CurrentStateCard");
+const MSE = () =>
+  import("@/components/patient/MentalStatusExam/Layer1Card");  
 
 export default {
   name: "Home",
@@ -196,7 +200,9 @@ export default {
     Goal,
     Diagnosis,
     FamilyHistory,
-    KeyboardHandler
+    KeyboardHandler,
+    BM,
+    MSE
   },
   data() {
     // KT: Why is this a function and not a object? Ref: https://vuejs.org/v2/style-guide/#Component-data-essential
