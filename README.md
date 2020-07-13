@@ -8,7 +8,7 @@ Goal: When looking at a region of code I do not need to have expereince with oth
 
 1. When I look at variable, array, function, object, component the name should tell me what it is
 
-   1. How are the different function types distinguished?
+   1. How are the different function types distinguished ?
       apiGetAge -> This is api function
       cfGetAge -> This is computed function
       wfGetAge -> This is a watch function
