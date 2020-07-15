@@ -4,7 +4,7 @@ Docuemntation: https://savantcare.github.io/
 
 Code documentation is in: /styleguidist/
 
-Goal:  When looking at a region of code I do not need to have expereince with other code
+Goal: When looking at a region of code I do not need to have expereince with other code
 
 1. When I look at variable, array, function, object, component the name should tell me what it is
 
