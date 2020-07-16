@@ -27,12 +27,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
+      - name: Build server side
+        run: |
+          cd node-server
+          npm install
+          npm run start
+      - name: Build client side
         run: |
           cd vue-client
           npm install
-          npm ci
-          npm run build --if-present
+          npm run serve
           npx jest
         env:
           CI: true
