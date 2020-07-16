@@ -27,11 +27,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build server side
-        run: |
-          cd node-server
-          npm install
-          npm run start
       - name: Build client side
         run: |
           cd vue-client
