@@ -30,8 +30,7 @@ jobs:
       - name: Build client side
         run: |
           cd vue-client
-          npm install
-          npm run serve
+          npm build
           npm test-inside-cli
         env:
           CI: true
