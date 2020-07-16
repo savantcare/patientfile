@@ -32,6 +32,6 @@ jobs:
           cd vue-client
           npm install
           npm run serve
-          npx jest
+          npm test-inside-cli
         env:
           CI: true
