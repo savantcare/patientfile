@@ -39,6 +39,18 @@ jobs:
       - name: Build client side
         run: |
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS health_brain;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_recommendation;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_reminder;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_goal;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_setting;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_component;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_user;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS DB_SC_Diagnosis_CT_V20;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS DB_SC_SocialHistory_CT_V20;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_appointments;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_screen;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_body_measurement;'
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_mental_status_exam;'
           cd node-server
           npm install
           npm run start
