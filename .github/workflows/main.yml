@@ -55,7 +55,7 @@ jobs:
       - name: Build client side
         run: |
           cd node-server
-          npm install
-          npm start
+          sudo npm install
+          sudo npm start
         env:
           CI: true
