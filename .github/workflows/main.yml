@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build client side
+      - name: Build server side
         run: |
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS health_brain;'
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_recommendation;'
@@ -54,5 +54,11 @@ jobs:
           cd node-server
           npm install
           npm run start
+      - name: Build server side
+        run: |
+          cd vue-client
+          npm install
+          npm run serve
+          npm test-inside-cli
         env:
           CI: true
