@@ -2,7 +2,7 @@
   "HOST": "127.0.0.1",
   "USER": "root",
   "PASSWORD": "jaidurgama",
-  "DB_PORT": "3306",
+  "DB_PORT": "8888",
   "DB": "health_brain",
   "dialect": "mysql",
   "pool": {
