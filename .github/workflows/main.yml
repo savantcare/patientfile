@@ -42,9 +42,10 @@ jobs:
           mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
           mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Of course you can use secrets, too
           mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"      - name: Connect Ubuntu MySQL (SUDO)
-          run: |
-            sudo service mysql start
-            mysql –host 127.0.0.1 --port 3800 -u root -p root
+      - name: Start & connect mysql 
+        run: |
+          sudo service mysql start
+          mysql –host 127.0.0.1 --port 3800 -u root -p root
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
