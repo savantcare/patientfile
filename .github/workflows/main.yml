@@ -16,7 +16,7 @@ jobs:
   build:
     env:
       DB_USER: root
-      DB_PASS: rootpass
+      DB_PASS: jaidurgama
       DB_HOST: 127.0.0.1
       DB_DB: test
     # The type of runner that the job will run on
@@ -32,10 +32,10 @@ jobs:
         run: sudo service mysql stop
 
       - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Connect Ubuntu MySQL (SUDO)
-        run: mysql –host 127.0.0.1 --port 3306 -u root -p jaidurgama
+        run: |
+          sudo service mysql start
+          mysql –host 127.0.0.1 --port 3306 -u root -p jaidurgama
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
