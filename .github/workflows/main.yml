@@ -17,7 +17,7 @@ jobs:
     env:
       DB_USER: root
       DB_PASS: rootpass
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
       DB_DB: test
       NODE_ENV: github
     # The type of runner that the job will run on
@@ -40,10 +40,7 @@ jobs:
           mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Shutdown Ubuntu MySQL (SUDO)
-        run: | 
-          sudo service mysql start
-          mysql -uroot -pjaidurgama
-          "SHOW databases;"
+        run: mysql --port 3306 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS test;'
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
