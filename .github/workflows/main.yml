@@ -36,9 +36,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build server side
-        id: wait-for-server-build
-        run: |
+      - run: |
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS health_brain;'
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_recommendation;'
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_reminder;'
@@ -55,12 +53,8 @@ jobs:
           cd node-server
           npm install
           npm run start
-      - name: Build server side
-        if: steps.wait-for-server-build.outputs.conclusion == 'timed_out'
-        run: |
-          cd vue-client
-          npm install
-          npm run serve
-          npm test-inside-cli
+      - run: cd vue-client && npm install
+      - run: cd vue-client && npm run serve
+      - run: cd vue-client && npm test-inside-cli
         env:
           CI: true
