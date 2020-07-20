@@ -39,8 +39,8 @@ jobs:
           collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
           mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: mysql –host 127.0.0.1 --port 3306 -u root -pjaidurgama
+      - name: Connect Ubuntu MySQL (SUDO)
+        run: mysql –host 127.0.0.1 --port 3306 -u root -p jaidurgama
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
