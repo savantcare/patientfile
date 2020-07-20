@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Build server side
+        id: wait-for-server-build
         run: |
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS health_brain;'
           mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS sc_recommendation;'
@@ -55,6 +56,7 @@ jobs:
           npm install
           npm run start
       - name: Build server side
+        if: steps.wait-for-server-build.outputs.conclusion == 'neutral'
         run: |
           cd vue-client
           npm install
