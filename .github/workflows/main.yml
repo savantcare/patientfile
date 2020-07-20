@@ -45,7 +45,6 @@ jobs:
       - name: Start & connect mysql 
         run: |
           sudo service mysql start
-          mysql –host 127.0.0.1 --port 3800 -u root -p root
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
