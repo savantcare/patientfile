@@ -40,7 +40,7 @@ jobs:
           mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Shutdown Ubuntu MySQL (SUDO)
-        run: mysql –host 127.0.0.1 --port 3306 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS test;'
+        run: mysql –host 127.0.0.1 --port 3306 -u root -pjaidurgama
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
