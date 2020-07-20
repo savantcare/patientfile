@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     env:
-      DB_USER: stanford2008
+      DB_USER: root
       DB_PASS: jaidurgama
       DB_HOST: 127.0.0.1
       DB_DB: health_brain
@@ -41,8 +41,6 @@ jobs:
           mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql database: 'health_brain' # Optional, default value is "test". The specified database which will be create
           mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql user: 'stanford2008' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Of course you can use secrets, too
-          mysql password: 'jaidurgama' # Required if "mysql user" exists. The password for the "mysql user"      - name: Connect Ubuntu MySQL (SUDO)
       - name: Start & connect mysql 
         run: |
           sudo service mysql start
