@@ -14,14 +14,16 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    env:
-      DB_USER: root
-      DB_PASS: jaidurgama
-      DB_HOST: 127.0.0.1
-      DB_DB: health_brain
-      NODE_ENV: development
-    # The type of runner that the job will run on
     runs-on: ubuntu-18.04
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: jaidurgama
+          MYSQL_DATABASE: health_brain
+        ports:
+            - '8888:3306'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
       matrix:
@@ -29,22 +31,6 @@ jobs:
 
 
     steps:
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
-
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          host port: 3307 # Optional, default value is 3306. The port of host
-          container port: 3307 # Optional, default value is 3306. The port of container
-          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-          mysql database: 'health_brain' # Optional, default value is "test". The specified database which will be create
-          mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
-      - name: Start & connect mysql 
-        run: |
-          sudo service mysql start
-      
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -52,8 +38,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Build client side
         run: |
+          mysql -h 127.0.0.1 --port 8888 -u root -pjaidurgama -e 'CREATE DATABASE IF NOT EXISTS health_brain;'
           cd node-server
-          sudo npm install
-          sudo npm start
+          npm install
+          npm run start
         env:
           CI: true
