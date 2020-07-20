@@ -40,7 +40,8 @@ jobs:
       - name: Shutdown Ubuntu MySQL (SUDO)
         run: | 
           sudo service mysql start
-          mysql -uroot -psuperuser -e "SHOW databases;"
+          mysqladmin -u root password jaidurgama
+          mysql -uroot -pjaidurgama -e "SHOW databases;"
       
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
