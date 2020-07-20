@@ -19,9 +19,8 @@ jobs:
       DB_PASS: rootpass
       DB_HOST: 127.0.0.1
       DB_DB: test
-      NODE_ENV: github
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     strategy:
       matrix:
@@ -34,10 +33,6 @@ jobs:
 
       - uses: mirromutth/mysql-action@v1.1
         with:
-          host port: 3306 # Optional, default value is 3306. The port of host
-          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql root password: 'jaidurgama' # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Connect Ubuntu MySQL (SUDO)
         run: mysql –host 127.0.0.1 --port 3306 -u root -p jaidurgama
