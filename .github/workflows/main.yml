@@ -19,6 +19,7 @@ jobs:
       DB_PASS: jaidurgama
       DB_HOST: 127.0.0.1
       DB_DB: health_brain
+      NODE_ENV: development
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
 
