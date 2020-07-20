@@ -40,7 +40,7 @@ jobs:
       - name: Shutdown Ubuntu MySQL (SUDO)
         run: | 
           sudo service mysql start
-          mysql -u root -p jaidurgama
+          mysql -uroot -pjaidurgama
           "SHOW databases;"
       
       - uses: actions/checkout@v1
