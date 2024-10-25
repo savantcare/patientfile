@@ -34,7 +34,7 @@
     "uuidv4": "^6.1.0",
     "v-charts": "^1.19.0",
     "v-offline": "^1.2.1",
-    "vue": "^2.6.11",
+    "vue": "^3.0.0",
     "vue-apexcharts": "^1.5.3",
     "vue-element-resize-event": "^0.1.0",
     "vue-good-table": "^2.19.3",
